@@ -109,7 +109,8 @@
     "typecheck": "tsc --noEmit --pretty",
     "fix": "eslint --fix 'src/**/*.{ts,tsx}'; prettier --config .prettierrc.json --check 'src/**/*.{ts,tsx}'",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "publishStorybook": "storybook-to-ghpages --out=.out"
+    "publishStorybook": "storybook-to-ghpages --out=.out",
+    "prepack": "yarn build"
   },
   "resolutions": {
     "immer": "^9.0.6",
