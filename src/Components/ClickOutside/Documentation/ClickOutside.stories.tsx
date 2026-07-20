@@ -1,5 +1,4 @@
 // Libraries
-import * as React from 'react'
 import marked from 'marked'
 
 // Storybook

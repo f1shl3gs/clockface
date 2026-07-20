@@ -1,5 +1,5 @@
 // Libraries
-import React, {useState} from 'react'
+import {useState} from 'react'
 import marked from 'marked'
 
 // Storybook

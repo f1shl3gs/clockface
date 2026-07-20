@@ -10,7 +10,10 @@ import React, {
 import classnames from 'classnames'
 
 // Components
-import {DraggableResizerPanel} from './DraggableResizerPanel'
+import {
+  DraggableResizerPanel,
+  DraggableResizerPanelProps,
+} from './DraggableResizerPanel'
 import {DraggableResizerHandle} from './DraggableResizerHandle'
 
 // Types
@@ -63,6 +66,7 @@ export const DraggableResizerRoot: FunctionComponent<DraggableResizerProps> = ({
   }, [dragIndex])
 
   const panelsCount = React.Children.count(children)
+  const childArray = React.Children.toArray(children)
 
   const isDragging = dragIndex !== NULL_DRAG
 
@@ -193,16 +197,22 @@ export const DraggableResizerRoot: FunctionComponent<DraggableResizerProps> = ({
       id={id}
       style={style}
     >
-      {React.Children.map(children, (child: JSX.Element, i: number) => {
-        if (child.type !== DraggableResizerPanel) {
+      {React.Children.map(children, (child, i: number) => {
+        if (
+          !React.isValidElement<DraggableResizerPanelProps>(child) ||
+          child.type !== DraggableResizerPanel
+        ) {
           return null
         }
         const isLastPanel = i === panelsCount - 1
         const dragging = i === dragIndex
 
         const isCollapsibleToLower = child.props.isCollapsible
+        const nextChild = childArray[i + 1]
         const isCollapsibleToUpper =
-          !isLastPanel && children && children[i + 1].props.isCollapsible
+          !isLastPanel &&
+          React.isValidElement<DraggableResizerPanelProps>(nextChild) &&
+          nextChild.props.isCollapsible
 
         return (
           <>

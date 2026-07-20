@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef, RefObject} from 'react'
+import {createRef, RefObject} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -78,10 +78,10 @@ const resourceCardMeta = ['Created by Bob', 'Updated 25m ago']
 resourceListCardStories.add(
   'ResourceCard',
   () => {
-    const resourceCardRef: RefObject<ResourceCardRef> = createRef()
-    const resourceCardNameRef: RefObject<ResourceCardNameRef> = createRef()
-    const resourceCardMetaRef: RefObject<ResourceCardMetaRef> = createRef()
-    const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef> = createRef()
+    const resourceCardRef: RefObject<ResourceCardRef | null> = createRef()
+    const resourceCardNameRef: RefObject<ResourceCardNameRef | null> = createRef()
+    const resourceCardMetaRef: RefObject<ResourceCardMetaRef | null> = createRef()
+    const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> = createRef()
 
     const [name, setName] = useState<string>('Edit my name!')
     const [description, setDescription] = useState<string>(
@@ -145,15 +145,17 @@ resourceListCardStories.add(
           }
           highlightOnHover={boolean('highlightOnHover', true)}
           direction={
-            FlexDirection[
+            (FlexDirection as Record<string, any>)[
               select('direction', mapEnumKeys(FlexDirection), 'Column')
             ]
           }
           alignItems={
-            AlignItems[select('alignItems', mapEnumKeys(AlignItems), 'Stretch')]
+            (AlignItems as Record<string, any>)[
+              select('alignItems', mapEnumKeys(AlignItems), 'Stretch')
+            ]
           }
           justifyContent={
-            JustifyContent[
+            (JustifyContent as Record<string, any>)[
               select(
                 'justifyContent ',
                 mapEnumKeys(JustifyContent),
@@ -162,7 +164,9 @@ resourceListCardStories.add(
             ]
           }
           margin={
-            ComponentSize[select('margin', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('margin', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <ResourceCard.EditableName
@@ -196,7 +200,7 @@ resourceListCardStories.add(
 resourceListCardStories.add(
   'ResourceCardDescription',
   () => {
-    const resourceCardDescriptionRef: RefObject<ResourceCardDescriptionRef> = createRef()
+    const resourceCardDescriptionRef: RefObject<ResourceCardDescriptionRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -229,7 +233,7 @@ resourceListCardStories.add(
 resourceListCardStories.add(
   'ResourceCardEditableDescription',
   () => {
-    const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef> = createRef()
+    const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> = createRef()
 
     const logRefs = (): void => {
       /* eslint-disable */
@@ -269,8 +273,8 @@ resourceListCardStories.add(
 resourceListCardStories.add(
   'ResourceCardName',
   () => {
-    const resourceCardNameRef1: RefObject<ResourceCardNameRef> = createRef()
-    const resourceCardNameRef2: RefObject<ResourceCardNameRef> = createRef()
+    const resourceCardNameRef1: RefObject<ResourceCardNameRef | null> = createRef()
+    const resourceCardNameRef2: RefObject<ResourceCardNameRef | null> = createRef()
 
     const logRefs = (): void => {
       /* eslint-disable */
@@ -322,8 +326,8 @@ resourceListCardStories.add(
 resourceListCardStories.add(
   'ResourceCardEditableName',
   () => {
-    const resourceCardEditableNameRef1: RefObject<ResourceCardEditableNameRef> = createRef()
-    const resourceCardEditableNameRef2: RefObject<ResourceCardEditableNameRef> = createRef()
+    const resourceCardEditableNameRef1: RefObject<ResourceCardEditableNameRef | null> = createRef()
+    const resourceCardEditableNameRef2: RefObject<ResourceCardEditableNameRef | null> = createRef()
 
     const logRefs = (): void => {
       /* eslint-disable */
@@ -369,7 +373,7 @@ resourceListCardStories.add(
 resourceListCardStories.add(
   'ResourceCardMeta',
   () => {
-    const resourceCardMeta: RefObject<ResourceCardMetaRef> = createRef()
+    const resourceCardMeta: RefObject<ResourceCardMetaRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -385,15 +389,17 @@ resourceListCardStories.add(
         <ResourceCardMeta
           ref={resourceCardMeta}
           direction={
-            FlexDirection[
+            (FlexDirection as Record<string, any>)[
               select('direction', mapEnumKeys(FlexDirection), 'Row')
             ]
           }
           alignItems={
-            AlignItems[select('alignItems', mapEnumKeys(AlignItems), 'Center')]
+            (AlignItems as Record<string, any>)[
+              select('alignItems', mapEnumKeys(AlignItems), 'Center')
+            ]
           }
           justifyContent={
-            JustifyContent[
+            (JustifyContent as Record<string, any>)[
               select(
                 'justifyContent ',
                 mapEnumKeys(JustifyContent),
@@ -420,7 +426,7 @@ resourceListCardStories.add(
 resourceListExampleStories.add(
   'Toggleable Card',
   () => {
-    const settingsRef: RefObject<HTMLButtonElement> = createRef()
+    const settingsRef: RefObject<HTMLButtonElement | null> = createRef()
 
     return (
       <div className="story--example">

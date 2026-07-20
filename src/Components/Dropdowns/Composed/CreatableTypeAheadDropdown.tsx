@@ -40,7 +40,7 @@ export interface CreatableTypeAheadDropdownProps extends StandardFunctionProps {
   menuTheme?: DropdownMenuTheme
   menuMaxHeight?: number
   /** Customize the layout of dropdown items */
-  customizedDropdownItem?: (displayText: string) => JSX.Element
+  customizedDropdownItem?: (displayText: string) => React.ReactElement
 }
 
 export type CreatableTypeAheadDropdownReadmeRef = DropdownRef
@@ -159,7 +159,7 @@ export const CreatableTypeAheadDropdown = forwardRef<
 
     const button = (
       active: boolean,
-      onClick: (e: MouseEvent<HTMLElement>) => void
+      onClick: (e?: MouseEvent<HTMLElement>) => void
     ) => (
       <DropdownHeader
         active={active}
@@ -176,7 +176,7 @@ export const CreatableTypeAheadDropdown = forwardRef<
       onSelect(option)
     }
 
-    const menu = (onCollapse: () => void) => (
+    const menu = (onCollapse?: () => void) => (
       <Dropdown.Menu
         onCollapse={onCollapse}
         theme={menuTheme}

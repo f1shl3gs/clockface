@@ -95,7 +95,7 @@ export interface ToggleProps extends Omit<StandardFunctionProps, 'id'> {
   /** Whether or not the input receives autofocus when mounted */
   autoFocus?: boolean
   /** Refers to the visible element rather than the hidden input that ref refers to */
-  containerRef?: RefObject<ToggleContainerRef>
+  containerRef?: RefObject<ToggleContainerRef | null>
   /** Controls color of toggle */
   color?: ComponentColor
   /** Deprecated */

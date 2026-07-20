@@ -46,8 +46,8 @@ const spinnerTextStories = storiesOf(
 spinnerContainerStories.add(
   'SpinnerContainer',
   () => {
-    const technoSpinnerRef: React.RefObject<TechnoSpinnerRef> = React.createRef()
-    const spinnerContainerRef: React.RefObject<SpinnerContainerRef> = React.createRef()
+    const technoSpinnerRef: React.RefObject<TechnoSpinnerRef | null> = React.createRef()
+    const spinnerContainerRef: React.RefObject<SpinnerContainerRef | null> = React.createRef()
 
     const handleLogRefs = (): void => {
       /* eslint-disable */
@@ -61,7 +61,7 @@ spinnerContainerStories.add(
         <SpinnerContainer
           ref={spinnerContainerRef}
           loading={
-            RemoteDataState[
+            (RemoteDataState as Record<string, any>)[
               select('loading', mapEnumKeys(RemoteDataState), 'Loading')
             ]
           }
@@ -93,7 +93,7 @@ spinnerContainerStories.add(
 spinnerVisualStories.add(
   'TechnoSpinner',
   () => {
-    const technoSpinnerRef: React.RefObject<TechnoSpinnerRef> = React.createRef()
+    const technoSpinnerRef: React.RefObject<TechnoSpinnerRef | null> = React.createRef()
 
     const handleLogRef = (): void => {
       /* eslint-disable */
@@ -107,7 +107,7 @@ spinnerVisualStories.add(
           ref={technoSpinnerRef}
           diameterPixels={number('diameterPixels', 100)}
           strokeWidth={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('strokeWidth', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
@@ -128,7 +128,7 @@ spinnerVisualStories.add(
 spinnerVisualStories.add(
   'SparkleSpinner',
   () => {
-    const sparkleSpinnerRef: React.RefObject<SparkleSpinnerRef> = React.createRef()
+    const sparkleSpinnerRef: React.RefObject<SparkleSpinnerRef | null> = React.createRef()
 
     const handleLogRef = (): void => {
       /* eslint-disable */
@@ -142,7 +142,7 @@ spinnerVisualStories.add(
           ref={sparkleSpinnerRef}
           sizePixels={number('sizePixels', 200)}
           loading={
-            RemoteDataState[
+            (RemoteDataState as Record<string, any>)[
               select('loading', mapEnumKeys(RemoteDataState), 'Loading')
             ]
           }
@@ -163,7 +163,7 @@ spinnerVisualStories.add(
 spinnerTextStories.add(
   'WaitingText',
   () => {
-    const waitingTextRef: React.RefObject<WaitingTextRef> = React.createRef()
+    const waitingTextRef: React.RefObject<WaitingTextRef | null> = React.createRef()
 
     const handleLogRef = (): void => {
       /* eslint-disable */

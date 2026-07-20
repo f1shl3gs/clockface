@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -42,12 +42,12 @@ alertStories.add(
         <Alert
           ref={alertRef}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedAlertColorEnum), 'Primary')
             ]
           }
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'icon',
                 {None: 'none', ...mapEnumKeys(IconFont)},

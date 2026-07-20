@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -23,9 +23,9 @@ const gridStories = storiesOf('Layout/12 Column Grid', module).addDecorator(
 gridStories.add(
   'Grid',
   () => {
-    const gridRef: RefObject<GridRef> = createRef()
-    const gridRowRef: RefObject<GridRowRef> = createRef()
-    const gridColumnRef: RefObject<GridColumnRef> = createRef()
+    const gridRef: RefObject<GridRef | null> = createRef()
+    const gridRowRef: RefObject<GridRowRef | null> = createRef()
+    const gridColumnRef: RefObject<GridColumnRef | null> = createRef()
 
     const logRefs = (): void => {
       /* eslint-disable */
@@ -333,19 +333,27 @@ gridStories.add(
             <Grid.Column
               ref={gridColumnRef}
               widthXS={
-                Columns[select('widthXS', mapEnumKeys(Columns), 'Twelve')]
+                (Columns as Record<string, any>)[
+                  select('widthXS', mapEnumKeys(Columns), 'Twelve')
+                ]
               }
               widthSM={
-                Columns[select('widthSM', mapEnumKeys(Columns), 'Twelve')]
+                (Columns as Record<string, any>)[
+                  select('widthSM', mapEnumKeys(Columns), 'Twelve')
+                ]
               }
               widthMD={
-                Columns[select('widthMD', mapEnumKeys(Columns), 'Twelve')]
+                (Columns as Record<string, any>)[
+                  select('widthMD', mapEnumKeys(Columns), 'Twelve')
+                ]
               }
               widthLG={
-                Columns[select('widthLG', mapEnumKeys(Columns), 'Twelve')]
+                (Columns as Record<string, any>)[
+                  select('widthLG', mapEnumKeys(Columns), 'Twelve')
+                ]
               }
               offsetXS={
-                Columns[
+                (Columns as Record<string, any>)[
                   select(
                     'offsetXS',
                     {None: 'None', ...mapEnumKeys(Columns)},
@@ -354,7 +362,7 @@ gridStories.add(
                 ]
               }
               offsetSM={
-                Columns[
+                (Columns as Record<string, any>)[
                   select(
                     'offsetSM',
                     {None: 'None', ...mapEnumKeys(Columns)},
@@ -363,7 +371,7 @@ gridStories.add(
                 ]
               }
               offsetMD={
-                Columns[
+                (Columns as Record<string, any>)[
                   select(
                     'offsetMD',
                     {None: 'None', ...mapEnumKeys(Columns)},
@@ -372,7 +380,7 @@ gridStories.add(
                 ]
               }
               offsetLG={
-                Columns[
+                (Columns as Record<string, any>)[
                   select(
                     'offsetLG',
                     {None: 'None', ...mapEnumKeys(Columns)},
@@ -383,19 +391,27 @@ gridStories.add(
             >
               <div className="mockComponent stretch grid-example alt-color">
                 {`XS ${
-                  Columns[select('widthXS', mapEnumKeys(Columns), 'Twelve')]
+                  (Columns as Record<string, any>)[
+                    select('widthXS', mapEnumKeys(Columns), 'Twelve')
+                  ]
                 }/12`}
                 <br />
                 {`SM ${
-                  Columns[select('widthSM', mapEnumKeys(Columns), 'Twelve')]
+                  (Columns as Record<string, any>)[
+                    select('widthSM', mapEnumKeys(Columns), 'Twelve')
+                  ]
                 }/12`}
                 <br />
                 {`MD ${
-                  Columns[select('widthMD', mapEnumKeys(Columns), 'Twelve')]
+                  (Columns as Record<string, any>)[
+                    select('widthMD', mapEnumKeys(Columns), 'Twelve')
+                  ]
                 }/12`}
                 <br />
                 {`LG ${
-                  Columns[select('widthLG', mapEnumKeys(Columns), 'Twelve')]
+                  (Columns as Record<string, any>)[
+                    select('widthLG', mapEnumKeys(Columns), 'Twelve')
+                  ]
                 }/12`}
               </div>
             </Grid.Column>

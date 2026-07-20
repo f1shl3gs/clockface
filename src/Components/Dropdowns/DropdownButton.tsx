@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, MouseEvent} from 'react'
+import {forwardRef, MouseEvent} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -23,7 +23,7 @@ import './DropdownButton.scss'
 
 export interface DropdownButtonProps extends StandardFunctionProps {
   /** Function to be called on click of dropdown button */
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void
+  onClick?: (e?: MouseEvent<HTMLElement>) => void
   /** Button status state default, loading, or disabled */
   status?: ComponentStatus
   /** Button color */

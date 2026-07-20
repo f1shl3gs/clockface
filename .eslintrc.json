@@ -54,6 +54,7 @@
     "no-useless-escape": "off",
     "react/display-name": "off",
     "react/jsx-no-target-blank": "off",
+    "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "error",
     "react/no-find-dom-node": "off",
     "react/no-unescaped-entities": "off",

@@ -13,7 +13,7 @@ export interface TabProps extends StandardFunctionProps {
   /** Text label of tab */
   text: string
   /** Icon to appear left of the text label */
-  icon?: JSX.Element
+  icon?: React.ReactElement
   /** Function to call when tab is clicked, id of tab is passed in */
   onClick?: (id?: string) => void
   /** If a function is passed in a dismiss button is rendered in the right of the tab */

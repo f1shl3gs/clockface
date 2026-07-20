@@ -168,7 +168,7 @@ export const generateRangeSliderTrackFillStyle = (
     return {background: InfluxColors.Castle}
   }
 
-  const fillColor = {
+  const fillColor: Record<string, InfluxColors> = {
     default: InfluxColors.Graphite,
     primary: InfluxColors.Pool,
     secondary: InfluxColors.Star,
@@ -251,12 +251,12 @@ export const getRandomIcon = (): IconFont => {
   const iconKeys = Object.keys(IconFont)
   const randomIconKey = iconKeys[random(0, iconKeys.length)]
 
-  return IconFont[randomIconKey]
+  return (IconFont as Record<string, any>)[randomIconKey]
 }
 
 export const getRandomGradient = (): Gradients => {
   const gradientKeys = Object.keys(Gradients)
   const randomGradientKey = gradientKeys[random(0, gradientKeys.length)]
 
-  return Gradients[randomGradientKey]
+  return (Gradients as Record<string, any>)[randomGradientKey]
 }

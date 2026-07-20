@@ -11,7 +11,10 @@ import {dropdownScrollColors, influxGradients} from '../Constants/colors'
 export const getColorsFromGradient = (
   gradient: Gradients | DropdownMenuTheme | string
 ): Gradient => {
-  return dropdownScrollColors[gradient] || influxGradients[gradient]
+  const dropdownColors = dropdownScrollColors as Record<string, Gradient>
+  const gradients = influxGradients as Record<string, Gradient>
+
+  return dropdownColors[gradient] || gradients[gradient]
 }
 
 export interface CSSGradientColor {

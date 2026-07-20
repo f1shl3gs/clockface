@@ -24,9 +24,9 @@ const labelStories = storiesOf(
 labelStories.add(
   'Variants',
   () => {
-    const labelReadOnlyRef: React.RefObject<LabelRef> = React.createRef()
-    const labelClickableRef: React.RefObject<LabelRef> = React.createRef()
-    const labelDeletableRef: React.RefObject<LabelRef> = React.createRef()
+    const labelReadOnlyRef: React.RefObject<LabelRef | null> = React.createRef()
+    const labelClickableRef: React.RefObject<LabelRef | null> = React.createRef()
+    const labelDeletableRef: React.RefObject<LabelRef | null> = React.createRef()
 
     const logLabelRefs = (): void => {
       /* eslint-disable */
@@ -55,7 +55,7 @@ labelStories.add(
                   )}
                   color={color('backgroundColor', `${InfluxColors.Star}`)}
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select('size', mapEnumKeys(ComponentSize), 'Small')
                     ]
                   }
@@ -77,7 +77,7 @@ labelStories.add(
                   )}
                   color={color('backgroundColor', `${InfluxColors.Star}`)}
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select('size', mapEnumKeys(ComponentSize), 'Small')
                     ]
                   }
@@ -102,7 +102,7 @@ labelStories.add(
                   )}
                   color={color('backgroundColor', `${InfluxColors.Star}`)}
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select('size', mapEnumKeys(ComponentSize), 'Small')
                     ]
                   }

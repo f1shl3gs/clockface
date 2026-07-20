@@ -1,9 +1,4 @@
-import React, {
-  ChangeEvent,
-  forwardRef,
-  FunctionComponent,
-  CSSProperties,
-} from 'react'
+import {ChangeEvent, forwardRef, FunctionComponent, CSSProperties} from 'react'
 import classnames from 'classnames'
 
 // Components

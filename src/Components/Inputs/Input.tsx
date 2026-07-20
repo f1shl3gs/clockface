@@ -90,7 +90,7 @@ export interface InputProps extends StandardFunctionProps {
   /** Pass in a RegEx matcher for best results */
   pattern?: string
   /** Pass through for container ref */
-  containerRef?: RefObject<InputContainerRef>
+  containerRef?: RefObject<InputContainerRef | null>
   /** Render input using monospace font */
   monospace?: boolean
   /** Color preview to be displayed to the left of text.
@@ -191,7 +191,7 @@ export const Input = forwardRef<InputRef, InputProps>(
       max === max ? max : ''
 
     /** If both icon and colorPreview are set in props, icon has higher priority */
-    let iconElement = null
+    let iconElement: React.ReactElement | null = null
     if (icon) {
       iconElement = <Icon glyph={icon} className="cf-input-icon" />
     } else if (colorPreview) {

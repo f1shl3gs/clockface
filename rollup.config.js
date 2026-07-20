@@ -2,26 +2,30 @@ import {writeFileSync} from 'fs'
 
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import sourceMaps from 'rollup-plugin-sourcemaps'
 import {terser} from 'rollup-plugin-terser'
-import gzip from 'rollup-plugin-gzip'
-import ts from '@wessberg/rollup-plugin-ts'
+import gzipModule from 'rollup-plugin-gzip'
+import typescript from '@rollup/plugin-typescript'
 import sass from 'rollup-plugin-sass'
 import copy from 'rollup-plugin-copy'
 
 const pkg = require('./package.json')
 const isProductionBuild = process.env.NODE_ENV === 'production'
+const gzip = gzipModule.default || gzipModule
 
 let plugins = [
   nodeResolve(),
   commonjs(),
-  ts(),
+  typescript({
+    include: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
+  }),
   sass({
+    api: 'modern',
+    options: {
+      silenceDeprecations: ['import', 'global-builtin'],
+      style: isProductionBuild ? 'compressed' : 'expanded',
+    },
     output: (styles) => {
       writeFileSync('dist/index.css', `@charset "UTF-8"; ${styles}`)
-    },
-    options: {
-      outputStyle: isProductionBuild ? 'compressed' : 'expanded',
     },
   }),
   copy({
@@ -31,7 +35,6 @@ let plugins = [
       {src: 'src/**/Images/*', dest: 'dist/Images'},
     ],
   }),
-  sourceMaps(),
 ]
 
 // Minify and compress output when in production
@@ -63,6 +66,16 @@ export default [
       format: 'umd',
       sourcemap: true,
       globals,
+    },
+    onwarn(warning, warn) {
+      if (
+        warning.code === 'CIRCULAR_DEPENDENCY' &&
+        warning.ids?.every((id) => id.includes('/chroma-js/'))
+      ) {
+        return
+      }
+
+      warn(warning)
     },
   },
 ]

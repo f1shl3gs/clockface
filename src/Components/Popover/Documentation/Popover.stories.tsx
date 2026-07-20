@@ -1,5 +1,5 @@
 // Libraries
-import React, {useRef, ChangeEvent, Fragment} from 'react'
+import {useRef, ChangeEvent, Fragment} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -167,7 +167,7 @@ popoverStories.add(
               <Popover.DismissButton
                 onClick={onHide}
                 color={
-                  ComponentColor[
+                  (ComponentColor as Record<string, any>)[
                     select('color', mapEnumKeys(ComponentColor), 'Primary')
                   ]
                 }
@@ -184,17 +184,19 @@ popoverStories.add(
           showEvent={PopoverInteraction.Click}
           hideEvent={PopoverInteraction.Click}
           position={
-            PopoverPosition[
+            (PopoverPosition as Record<string, any>)[
               select('position', mapEnumKeys(PopoverPosition), 'Below')
             ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
           appearance={
-            Appearance[select('appearance', mapEnumKeys(Appearance), 'Outline')]
+            (Appearance as Record<string, any>)[
+              select('appearance', mapEnumKeys(Appearance), 'Outline')
+            ]
           }
         />
         <Popover.Popover
@@ -300,17 +302,19 @@ composedPopoverStories.add(
         showEvent={PopoverInteraction.Click}
         hideEvent={PopoverInteraction.Click}
         position={
-          PopoverPosition[
+          (PopoverPosition as Record<string, any>)[
             select('position', mapEnumKeys(PopoverPosition), 'Below')
           ]
         }
         color={
-          ComponentColor[
+          (ComponentColor as Record<string, any>)[
             select('color', mapEnumKeys(ComponentColor), 'Primary')
           ]
         }
         appearance={
-          Appearance[select('appearance', mapEnumKeys(Appearance), 'Outline')]
+          (Appearance as Record<string, any>)[
+            select('appearance', mapEnumKeys(Appearance), 'Outline')
+          ]
         }
       >
         <div className="mockComponent mockButton">Popover Trigger Element</div>
@@ -345,7 +349,7 @@ composedPopoverStories.add(
           style={object('style', {})}
           tooltipStyle={object('tooltipStyle', {})}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
@@ -522,7 +526,7 @@ testPopoverStories.add('Popover + Autofocus Child', () => {
 
 testPopoverStories.add('200 Popovers + Filtering', () => {
   const [searchTerm, updateSearchTerm] = useState<string>('')
-  const words = []
+  const words: {name: string}[] = []
   const dictionary = getDictionary()
 
   for (let i = 0; i < 200; i++) {

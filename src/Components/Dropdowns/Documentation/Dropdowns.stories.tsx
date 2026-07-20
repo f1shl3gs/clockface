@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef, RefObject} from 'react'
+import {createRef, RefObject} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -87,7 +87,7 @@ const defaultDropdownStyle = {width: '250px', marginRight: '45px'}
 dropdownFamilyStories.add(
   'Dropdown',
   () => {
-    const dropdownRef: RefObject<DropdownRef> = createRef()
+    const dropdownRef: RefObject<DropdownRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -105,7 +105,7 @@ dropdownFamilyStories.add(
               active={active}
               onClick={onClick}
               status={
-                ComponentStatus[
+                (ComponentStatus as Record<string, any>)[
                   select('status', mapEnumKeys(ComponentStatus), 'Default')
                 ]
               }
@@ -138,7 +138,7 @@ dropdownFamilyStories.add(
 dropdownFamilyStories.add(
   'DropdownButton',
   () => {
-    const dropdownButtonRef: RefObject<DropdownButtonRef> = createRef()
+    const dropdownButtonRef: RefObject<DropdownButtonRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -158,21 +158,23 @@ dropdownFamilyStories.add(
               // do nothing
             }}
             status={
-              ComponentStatus[
+              (ComponentStatus as Record<string, any>)[
                 select('status', mapEnumKeys(ComponentStatus), 'Default')
               ]
             }
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(ComponentColor), 'Primary')
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             active={boolean('active', false)}
             icon={
-              IconFont[
+              (IconFont as Record<string, any>)[
                 select(
                   'icon',
                   {None: 'none', ...mapEnumKeys(IconFont)},
@@ -181,7 +183,7 @@ dropdownFamilyStories.add(
               ]
             }
             trailingIcon={
-              IconFont[
+              (IconFont as Record<string, any>)[
                 select(
                   'trailingIcon',
                   {None: 'none', ...mapEnumKeys(IconFont)},
@@ -208,7 +210,7 @@ dropdownFamilyStories.add(
 dropdownFamilyStories.add(
   'DropdownDivider',
   () => {
-    const dropdownDividerRef: RefObject<DropdownDividerRef> = createRef()
+    const dropdownDividerRef: RefObject<DropdownDividerRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -238,7 +240,7 @@ dropdownFamilyStories.add(
 dropdownFamilyStories.add(
   'DropdownItem',
   () => {
-    const dropdownItemRef: RefObject<DropdownItemRef> = createRef()
+    const dropdownItemRef: RefObject<DropdownItemRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -257,7 +259,7 @@ dropdownFamilyStories.add(
             alert(`onClick returned: ${value}`)
           }}
           type={
-            DropdownItemType[
+            (DropdownItemType as Record<string, any>)[
               select('type', mapEnumKeys(DropdownItemType), 'None')
             ]
           }
@@ -281,7 +283,7 @@ dropdownFamilyStories.add(
 dropdownFamilyStories.add(
   'DropdownItemEmpty',
   () => {
-    const dropdownItemEmptyRef: RefObject<DropdownItemEmptyRef> = createRef()
+    const dropdownItemEmptyRef: RefObject<DropdownItemEmptyRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -313,7 +315,7 @@ dropdownFamilyStories.add(
 dropdownFamilyStories.add(
   'DropdownLinkItem',
   () => {
-    const dropdownLinkItemRef: RefObject<DropdownLinkItemRef> = createRef()
+    const dropdownLinkItemRef: RefObject<DropdownLinkItemRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -328,7 +330,7 @@ dropdownFamilyStories.add(
           selected={boolean('selected', false)}
           wrapText={boolean('wrapText', false)}
           type={
-            DropdownItemType[
+            (DropdownItemType as Record<string, any>)[
               select('type', mapEnumKeys(DropdownItemType), 'None')
             ]
           }
@@ -362,8 +364,8 @@ interface ExampleDropdownItem {
 dropdownFamilyStories.add(
   'DropdownMenu',
   () => {
-    const dropdownMenuRef: RefObject<DropdownMenuRef> = createRef()
-    const dropdownMenuContentsRef: RefObject<DropdownMenuContentsRef> = createRef()
+    const dropdownMenuRef: RefObject<DropdownMenuRef | null> = createRef()
+    const dropdownMenuContentsRef: RefObject<DropdownMenuContentsRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -455,7 +457,7 @@ dropdownFamilyStories.add(
           style={object('style', menuStyle)}
           contentsRef={dropdownMenuContentsRef}
           theme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('theme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
@@ -477,7 +479,7 @@ dropdownFamilyStories.add(
                 selected={selectedItems.includes(item.text)}
                 disabled={disabledItems.includes(item.text)}
                 type={
-                  DropdownItemType[
+                  (DropdownItemType as Record<string, any>)[
                     select('item type', mapEnumKeys(DropdownItemType), 'None')
                   ]
                 }
@@ -523,7 +525,7 @@ dropdownComposedStories.add(
       'Strawberry',
     ]
 
-    const selectDropdownRef: RefObject<SelectDropdownRef> = createRef()
+    const selectDropdownRef: RefObject<SelectDropdownRef | null> = createRef()
     const [selected, changeSelected] = useState('Celery')
 
     const logRef = (): void => {
@@ -540,33 +542,33 @@ dropdownComposedStories.add(
           menuMaxHeight={number('menuMaxHeight', 250)}
           dropUp={boolean('dropUp', false)}
           indicator={
-            DropdownItemType[
+            (DropdownItemType as Record<string, any>)[
               select('indicator', mapEnumKeys(DropdownItemType), 'Dot')
             ]
           }
           menuTheme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
           onSelect={changeSelected}
           buttonStatus={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('buttonStatus', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           buttonColor={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('buttonColor', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
           buttonSize={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('buttonSize', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
           buttonIcon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'buttonIcon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -617,7 +619,7 @@ dropdownComposedStories.add(
       return {name: i.toString(), id: i.toString()}
     })
 
-    const onSelect = (item: SelectableItem) => {
+    const onSelect = (item: SelectableItem | null) => {
       /* eslint-disable */
       console.log('ooh! selected item: ', item)
       /* eslint-enable */
@@ -638,7 +640,7 @@ dropdownComposedStories.add(
           items={selectDropdownOptions}
           menuTestID={text('menu test id', 'menuTest')}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
@@ -648,7 +650,7 @@ dropdownComposedStories.add(
             'default empty name here'
           )}
           menuTheme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
@@ -669,12 +671,12 @@ dropdownComposedStories.add(
             'default empty name here'
           )}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status2', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           menuTheme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('menuTheme 2', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
@@ -694,12 +696,12 @@ dropdownComposedStories.add(
             'default empty name here'
           )}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status2', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           menuTheme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('menuTheme 2', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
@@ -738,7 +740,7 @@ dropdownComposedStories.add(
       defaultColorOptions[1]
     )
 
-    const creatableTypeAheadDropdownReadmeRef: RefObject<CreatableTypeAheadDropdownReadmeRef> = createRef()
+    const creatableTypeAheadDropdownReadmeRef: RefObject<CreatableTypeAheadDropdownReadmeRef | null> = createRef()
     const logRef = (): void => {
       /* eslint-disable */
       console.log(creatableTypeAheadDropdownReadmeRef.current)
@@ -754,17 +756,17 @@ dropdownComposedStories.add(
           onSelect={changeSelected}
           placeholder={text('placeholder', 'Placeholder Text')}
           inputStatus={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('inputStatus', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           inputSize={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('inputSize', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
           inputIcon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'inputIcon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -773,7 +775,7 @@ dropdownComposedStories.add(
             ]
           }
           menuTheme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
@@ -788,17 +790,17 @@ dropdownComposedStories.add(
           onSelect={changeSelectedColor}
           placeholder={text('placeholder', 'Placeholder Text')}
           inputStatus={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('inputStatus', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           inputSize={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('inputSize', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
           inputIcon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'inputIcon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -808,7 +810,7 @@ dropdownComposedStories.add(
           }
           inputColorPreviewOn={true}
           menuTheme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
@@ -847,7 +849,7 @@ dropdownComposedStories.add(
     ]
     const [selectedOptions, setSelectedOptions] = useState(['Celery', 'Onion'])
 
-    const multiSelectDropdownRef: RefObject<MultiSelectDropdownRef> = createRef()
+    const multiSelectDropdownRef: RefObject<MultiSelectDropdownRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -863,12 +865,12 @@ dropdownComposedStories.add(
           menuMaxHeight={number('menuMaxHeight', 250)}
           dropUp={boolean('dropUp', false)}
           indicator={
-            DropdownItemType[
+            (DropdownItemType as Record<string, any>)[
               select('indicator', mapEnumKeys(DropdownItemType), 'Checkbox')
             ]
           }
           menuTheme={
-            DropdownMenuTheme[
+            (DropdownMenuTheme as Record<string, any>)[
               select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
             ]
           }
@@ -880,22 +882,22 @@ dropdownComposedStories.add(
             }
           }}
           buttonStatus={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('buttonStatus', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           buttonColor={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('buttonColor', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
           buttonSize={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('buttonSize', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
           buttonIcon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'buttonIcon',
                 {None: 'none', ...mapEnumKeys(IconFont)},

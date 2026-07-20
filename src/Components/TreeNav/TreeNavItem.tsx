@@ -9,7 +9,7 @@ export interface TreeNavItemProps extends Omit<StandardFunctionProps, 'id'> {
   /** Unique identifier for nav item */
   id: string
   /** Icon or Image to appear in the square */
-  icon: JSX.Element
+  icon: React.ReactElement
   /** Label to appear to the right of the icon, only visible when expanded */
   label: string
   /** Optional label displayed when the TreeNav is collapsed */

@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef, KeyboardEvent, useEffect, useState} from 'react'
+import {createRef, KeyboardEvent, useEffect, useState} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -127,13 +127,15 @@ accordionStories.add(
       setChecked(!checked)
     }
 
+    type AccessStates = Record<string, Record<string, boolean>>
+
     const handleArrayToggleChange = (
       name: string,
       actionType: string,
-      stateObject: object,
+      stateObject: AccessStates,
       setter: Function
     ): void => {
-      const object = Object.assign({}, stateObject)
+      const object = Object.assign({}, stateObject) as AccessStates
       const newState = {
         [name]: {
           [actionType]: !object[name][`${actionType}`],
@@ -147,10 +149,10 @@ accordionStories.add(
     const toggleAllIndividualAccessStates = (
       actionType: string,
       state: boolean,
-      stateObject: object,
+      stateObject: AccessStates,
       setter: Function
     ): void => {
-      const object = Object.assign({}, stateObject)
+      const object = Object.assign({}, stateObject) as AccessStates
       Object.keys(object).forEach(element => {
         const newState = {[actionType]: state}
         const value = object[element]
@@ -214,7 +216,7 @@ accordionStories.add(
       title: string,
       name: string,
       setter: Function,
-      stateObject: object
+      stateObject: AccessStates
     ) => (
       <FlexBox
         margin={ComponentSize.Small}
@@ -284,7 +286,9 @@ accordionStories.add(
       >
         <Accordion
           iconPlacement={
-            Direction[select('Icon Placement', mapEnumKeys(Direction), 'Left')]
+            (Direction as Record<string, any>)[
+              select('Icon Placement', mapEnumKeys(Direction), 'Left')
+            ]
           }
           expanded={boolean('expanded', false)}
           disabled={disabled}
@@ -329,7 +333,7 @@ accordionStories.add(
         </Accordion>
         <Accordion
           iconPlacement={
-            Direction[select('Icon Placement', mapEnumKeys(Direction), 'Left')]
+            (Direction as Record<string, any>)[select('Icon Placement', mapEnumKeys(Direction), 'Left')]
           }
           expanded={boolean('expanded', false)}
           disabled={disabled}
@@ -400,7 +404,9 @@ accordionStories.add(
         {' '}
         <Accordion
           iconPlacement={
-            Direction[select('Icon Placement', mapEnumKeys(Direction), 'Left')]
+            (Direction as Record<string, any>)[
+              select('Icon Placement', mapEnumKeys(Direction), 'Left')
+            ]
           }
           expanded={boolean('expanded', false)}
           disabled={disabled}
@@ -449,7 +455,9 @@ accordionFamilyStories.add(
       >
         <Accordion
           iconPlacement={
-            Direction[select('Icon Placement', mapEnumKeys(Direction), 'Left')]
+            (Direction as Record<string, any>)[
+              select('Icon Placement', mapEnumKeys(Direction), 'Left')
+            ]
           }
           expanded={boolean('expanded', false)}
           disabled={disabled}

@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -24,8 +24,8 @@ const squareGridStories = storiesOf(
 squareGridStories.add(
   'SquareGrid',
   () => {
-    const squareGridRef: RefObject<SquareGridRef> = createRef()
-    const squareGridCardRef: RefObject<SquareGridCardRef> = createRef()
+    const squareGridRef: RefObject<SquareGridRef | null> = createRef()
+    const squareGridCardRef: RefObject<SquareGridCardRef | null> = createRef()
 
     const logRefs = (): void => {
       /* eslint-disable */
@@ -40,7 +40,7 @@ squareGridStories.add(
           ref={squareGridRef}
           cardSize={text('cardSize', '100px')}
           gutter={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select(
                 'gutter',
                 {None: '', ...mapEnumKeys(ComponentSize)},

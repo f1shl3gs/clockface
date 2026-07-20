@@ -49,7 +49,7 @@ export const StatusIndicator = forwardRef<
       [`${className}`]: className,
     })
 
-    let statusElement: JSX.Element = <></>
+    let statusElement: React.ReactElement = <></>
     const shadowElement = shadow && (
       <div className="cf-status-indicator--shadow" />
     )

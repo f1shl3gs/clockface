@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef, RefObject} from 'react'
+import {createRef, RefObject} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -52,12 +52,15 @@ selectGroupStories.add(
     const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([
       mirepoix[0],
     ])
-    const selectGroupRef: RefObject<SelectGroupRef> = createRef()
-    const selectGroupButtonCeleryRef: RefObject<SelectGroupOptionRef> = createRef()
-    const selectGroupButtonCarrotRef: RefObject<SelectGroupOptionRef> = createRef()
-    const selectGroupButtonOnionRef: RefObject<SelectGroupOptionRef> = createRef()
+    const selectGroupRef: RefObject<SelectGroupRef | null> = createRef()
+    const selectGroupButtonCeleryRef: RefObject<SelectGroupOptionRef | null> = createRef()
+    const selectGroupButtonCarrotRef: RefObject<SelectGroupOptionRef | null> = createRef()
+    const selectGroupButtonOnionRef: RefObject<SelectGroupOptionRef | null> = createRef()
 
-    const selectGroupButtonRefs = {
+    const selectGroupButtonRefs: Record<
+      string,
+      RefObject<SelectGroupOptionRef | null>
+    > = {
       Celery: selectGroupButtonCeleryRef,
       Carrot: selectGroupButtonCarrotRef,
       Onion: selectGroupButtonOnionRef,
@@ -78,15 +81,17 @@ selectGroupStories.add(
           ref={selectGroupRef}
           style={object('style', {width: '400px'})}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Default')
             ]
           }
           shape={
-            ButtonShape[
+            (ButtonShape as Record<string, any>)[
               select('shape', mapEnumKeys(ButtonShape), 'StretchToFit')
             ]
           }
@@ -120,7 +125,7 @@ selectGroupStories.add(
             return (
               <SelectGroup.Option
                 type={
-                  InputToggleType[
+                  (InputToggleType as Record<string, any>)[
                     select('type', mapEnumKeys(InputToggleType), 'SelectGroup')
                   ]
                 }
@@ -163,7 +168,7 @@ selectGroupStories.add(
 selectGroupStories.add(
   'SelectGroupOption',
   () => {
-    const selectGroupButtonRef: RefObject<SelectGroupOptionRef> = createRef()
+    const selectGroupButtonRef: RefObject<SelectGroupOptionRef | null> = createRef()
 
     const logSelectGroupOptionRef = (): void => {
       /* eslint-disable */
@@ -213,10 +218,12 @@ selectGroupExampleStories.add(
         <div style={{width: `${number('Parent width', 240)}px`}}>
           <SelectGroup
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(ComponentColor), 'Default')
               ]
             }

@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -54,7 +54,9 @@ navMenuStories.add(
               <a className={className} href="#">
                 <Icon
                   glyph={
-                    IconFont[select('1 - icon', mapEnumKeys(IconFont), 'Disks')]
+                    (IconFont as Record<string, any>)[
+                      select('1 - icon', mapEnumKeys(IconFont), 'Disks')
+                    ]
                   }
                 />
               </a>
@@ -79,7 +81,9 @@ navMenuStories.add(
               <a className={className} href="#">
                 <Icon
                   glyph={
-                    IconFont[select('2 - icon', mapEnumKeys(IconFont), 'Zap')]
+                    (IconFont as Record<string, any>)[
+                      select('2 - icon', mapEnumKeys(IconFont), 'Zap')
+                    ]
                   }
                 />
               </a>
@@ -129,7 +133,9 @@ navMenuStories.add(
               <a className={className} href="#">
                 <Icon
                   glyph={
-                    IconFont[select('3 - icon', mapEnumKeys(IconFont), 'Group')]
+                    (IconFont as Record<string, any>)[
+                      select('3 - icon', mapEnumKeys(IconFont), 'Group')
+                    ]
                   }
                 />
               </a>
@@ -181,7 +187,11 @@ navMenuStories.add(
           iconLink={className => (
             <a className={className} href="#">
               <Icon
-                glyph={IconFont[select('icon', mapEnumKeys(IconFont), 'Star')]}
+                glyph={
+                  (IconFont as Record<string, any>)[
+                    select('icon', mapEnumKeys(IconFont), 'Star')
+                  ]
+                }
               />
             </a>
           )}

@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, MouseEvent} from 'react'
+import {forwardRef, MouseEvent} from 'react'
 
 // Components
 import {Dropdown, DropdownRef} from '../'
@@ -71,7 +71,7 @@ export const SelectDropdown = forwardRef<
   ) => {
     const button = (
       active: boolean,
-      onClick: (e: MouseEvent<HTMLElement>) => void
+      onClick: (e?: MouseEvent<HTMLElement>) => void
     ) => (
       <Dropdown.Button
         active={active}
@@ -85,7 +85,7 @@ export const SelectDropdown = forwardRef<
       </Dropdown.Button>
     )
 
-    const menu = (onCollapse: () => void) => (
+    const menu = (onCollapse?: () => void) => (
       <Dropdown.Menu
         theme={menuTheme}
         maxHeight={menuMaxHeight}

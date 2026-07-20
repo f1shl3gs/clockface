@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -124,9 +124,13 @@ indexListStories.add(
                 ref={indexListHeaderCellRef}
                 width={text('width', '100px')}
                 columnName={text('columnName', 'Name')}
-                sort={Sort[select('sort', mapEnumKeys(Sort), 'None')]}
+                sort={
+                  (Sort as Record<string, any>)[
+                    select('sort', mapEnumKeys(Sort), 'None')
+                  ]
+                }
                 sortKey={text('sortKey', 'name')}
-                onClick={(nextSort: string, sortKey: string) =>
+                onClick={(nextSort: string, sortKey?: string) =>
                   alert(
                     `Header clicked! nextSort: ${nextSort}, sortKey: ${sortKey}`
                   )
@@ -236,7 +240,9 @@ indexListStories.add(
                 ref={indexListRowCellRef}
                 revealOnHover={boolean('revealOnHover', false)}
                 alignment={
-                  Alignment[select('alignment', mapEnumKeys(Alignment), 'Left')]
+                  (Alignment as Record<string, any>)[
+                    select('alignment', mapEnumKeys(Alignment), 'Left')
+                  ]
                 }
               >
                 <span>

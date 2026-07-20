@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -58,7 +58,9 @@ PaginationStories.add(
           hideDirectionIcon={boolean('hideDirectionIcon', false)}
           enablePageInput={boolean('enablePageInput', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Medium')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Medium')
+            ]
           }
           enableArrowPaginate={true}
         ></PaginationNav.PaginationNav>
@@ -95,7 +97,9 @@ PaginationStories.add(
           page={number('value', 10).toString()}
           isActive={boolean('active', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Medium')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Medium')
+            ]
           }
         />
         <div className="story--test-buttons">
@@ -127,10 +131,14 @@ PaginationStories.add(
         <PaginationNav.DirectionItem
           ref={paginationDirectionItemRef}
           direction={
-            Direction[select('direction', mapEnumKeys(Direction), 'Left')]
+            (Direction as Record<string, any>)[
+              select('direction', mapEnumKeys(Direction), 'Left')
+            ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           isActive={boolean('active', false)}
         />
@@ -162,7 +170,9 @@ PaginationStories.add(
         <PaginationNav.TruncationItem
           ref={paginationTruncationItemRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         />
         <div className="story--test-buttons">
@@ -194,7 +204,9 @@ PaginationStories.add(
           ref={paginationInputRef}
           currentPage={1}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         />
         <div className="story--test-buttons">

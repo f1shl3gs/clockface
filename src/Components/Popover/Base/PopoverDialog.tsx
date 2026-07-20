@@ -26,7 +26,7 @@ import {
 
 export interface PopoverDialogProps extends StandardFunctionProps {
   /** Bounding rectangle of trigger element */
-  triggerRef: RefObject<any>
+  triggerRef: RefObject<any | null>
   /** Pixel distance between trigger and popover dialog */
   distanceFromTrigger: number
   /** Where to position the popover relative to the trigger (assuming it fits there) */
@@ -36,7 +36,7 @@ export interface PopoverDialogProps extends StandardFunctionProps {
   /** Means of applying color to popover */
   appearance?: Appearance
   /** Popover dialog contents */
-  contents: JSX.Element
+  contents: React.ReactElement
   /** Handles clicks detected outside the popover dialog element */
   onClickOutside: (e: MouseEvent) => void
   /** Handles mouseleave events */

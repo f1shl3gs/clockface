@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -45,7 +45,7 @@ const resourceListExampleStories = storiesOf(
 resourceListStories.add(
   'ResourceList',
   () => {
-    const resourceListRef: RefObject<ResourceListRef> = createRef()
+    const resourceListRef: RefObject<ResourceListRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -87,10 +87,10 @@ const exampleHeaderSorts = [
 resourceListStories.add(
   'ResourceListHeader',
   () => {
-    const resourceListHeaderRef: RefObject<ResourceListHeaderRef> = createRef()
-    const resourceListSorterNameRef: RefObject<ResourceListSorterRef> = createRef()
-    const resourceListSorterCreatedRef: RefObject<ResourceListSorterRef> = createRef()
-    const resourceListSorterColorRef: RefObject<ResourceListSorterRef> = createRef()
+    const resourceListHeaderRef: RefObject<ResourceListHeaderRef | null> = createRef()
+    const resourceListSorterNameRef: RefObject<ResourceListSorterRef | null> = createRef()
+    const resourceListSorterCreatedRef: RefObject<ResourceListSorterRef | null> = createRef()
+    const resourceListSorterColorRef: RefObject<ResourceListSorterRef | null> = createRef()
 
     const sorterRefs = [
       resourceListSorterNameRef,
@@ -155,7 +155,7 @@ resourceListStories.add(
 resourceListStories.add(
   'ResourceListBody',
   () => {
-    const resourceListBodyRef: RefObject<ResourceListBodyRef> = createRef()
+    const resourceListBodyRef: RefObject<ResourceListBodyRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -199,7 +199,7 @@ resourceListStories.add(
 resourceListStories.add(
   'ResourceListSorter',
   () => {
-    const resourceListSorterRef: RefObject<ResourceListSorterRef> = createRef()
+    const resourceListSorterRef: RefObject<ResourceListSorterRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -218,7 +218,11 @@ resourceListStories.add(
           onClick={nextSort =>
             alert(`onClick fired! Next sort is: "${nextSort}"`)
           }
-          sort={Sort[select('sort', mapEnumKeys(Sort), 'None')]}
+          sort={
+            (Sort as Record<string, any>)[
+              select('sort', mapEnumKeys(Sort), 'None')
+            ]
+          }
           sortKey={text('sortKey', 'created_at')}
         />
       </div>

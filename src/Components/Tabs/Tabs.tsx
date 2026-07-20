@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useState, useEffect} from 'react'
+import {forwardRef, useState, useEffect} from 'react'
 import classnames from 'classnames'
 
 // Components

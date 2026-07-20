@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -78,7 +78,7 @@ funnelPageStories.add(
               logo={logo}
               enableGraphic={boolean('enableGraphic', false)}
               backgroundColor={
-                InfluxColors[
+                (InfluxColors as Record<string, any>)[
                   select(
                     'backgroundColor',
                     mapEnumKeys(InfluxColors),
@@ -87,12 +87,12 @@ funnelPageStories.add(
                 ]
               }
               accentColorA={
-                InfluxColors[
+                (InfluxColors as Record<string, any>)[
                   select('accentColorA', mapEnumKeys(InfluxColors), 'PurpleX')
                 ]
               }
               accentColorB={
-                InfluxColors[
+                (InfluxColors as Record<string, any>)[
                   select(
                     'accentColorB',
                     mapEnumKeys(InfluxColors),

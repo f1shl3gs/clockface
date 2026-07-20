@@ -14,9 +14,9 @@ export interface TreeNavHeaderProps extends Omit<StandardFunctionProps, 'id'> {
   /** Unique identifier for nav item */
   id: string
   /** Icon or Image to appear in the square */
-  icon?: JSX.Element
+  icon?: React.ReactElement
   /** Label to appear to the right of the icon, only visible when expanded */
-  label: JSX.Element
+  label: React.ReactElement
   /** Coloration of the Header */
   color?: ComponentColor
   /** Controls state of item */

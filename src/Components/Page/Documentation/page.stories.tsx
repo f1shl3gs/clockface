@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -99,7 +99,7 @@ pageStories.add(
           ref={pageControlBarRef}
           fullWidth={boolean('fullWidth', false)}
           gutters={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('gutters', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
@@ -151,7 +151,7 @@ pageStories.add(
           fullWidth={boolean('fullWidth', false)}
           scrollable={boolean('scrollable', false)}
           gutters={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('gutters', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
@@ -228,7 +228,7 @@ pageExampleStories.add(
           <Page.Header
             fullWidth={boolean('fullWidth', false)}
             gutters={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('gutters', mapEnumKeys(ComponentSize), 'Small')
               ]
             }
@@ -239,7 +239,7 @@ pageExampleStories.add(
           <Page.ControlBar
             fullWidth={boolean('fullWidth', false)}
             gutters={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('gutters', mapEnumKeys(ComponentSize), 'Small')
               ]
             }
@@ -296,7 +296,7 @@ pageExampleStories.add(
             scrollable={boolean('scrollable', false)}
             autoHideScrollbar={boolean('autoHideScrollbar', false)}
             gutters={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('gutters', mapEnumKeys(ComponentSize), 'Small')
               ]
             }

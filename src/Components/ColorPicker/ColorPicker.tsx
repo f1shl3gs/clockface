@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, ChangeEvent, FunctionComponent} from 'react'
+import {forwardRef, ChangeEvent, FunctionComponent} from 'react'
 import classnames from 'classnames'
 import _ from 'lodash'
 
@@ -101,8 +101,8 @@ export const ColorPicker = forwardRef<ColorPickerSwatchRef, ColorPickerProps>(
       onChange(nextColor, nextStatus)
     }
 
-    const handleInputBlur = (e: ChangeEvent<HTMLInputElement>): void => {
-      if (maintainInputFocus) {
+    const handleInputBlur = (e?: ChangeEvent<HTMLInputElement>): void => {
+      if (maintainInputFocus && e) {
         e.target.focus()
       }
     }

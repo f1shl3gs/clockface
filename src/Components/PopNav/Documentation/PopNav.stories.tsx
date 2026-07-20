@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -37,10 +37,12 @@ popNavStories.add(
         <PopNav.PopNav
           ref={popNavRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           buttonColor={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select(
                 'button color',
                 {None: 'none', ...mapEnumKeys(ComponentColor)},
@@ -49,7 +51,9 @@ popNavStories.add(
             ]
           }
           align={
-            Alignment[select('alignment', mapEnumKeys(Alignment), 'Right')]
+            (Alignment as Record<string, any>)[
+              select('alignment', mapEnumKeys(Alignment), 'Right')
+            ]
           }
         >
           <div

@@ -1,5 +1,4 @@
 // Libraries
-import React from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -28,7 +27,7 @@ gradientBoxStories.add(
       <div className="story--example">
         <GradientBox
           borderGradient={
-            Gradients[
+            (Gradients as Record<string, any>)[
               select(
                 'borderGradient',
                 {None: 'none', ...mapEnumKeys(Gradients)},

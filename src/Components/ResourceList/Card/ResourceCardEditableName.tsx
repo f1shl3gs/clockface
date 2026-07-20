@@ -1,5 +1,5 @@
 // Libraries
-import React, {
+import {
   forwardRef,
   KeyboardEvent,
   ChangeEvent,
@@ -43,7 +43,7 @@ export interface ResourceCardEditableNameProps extends StandardFunctionProps {
   /** TestID for input sub-component */
   inputTestID?: string
   /** Pass through to assign a ref to the Input present in edit mode */
-  inputRef?: RefObject<InputRef>
+  inputRef?: RefObject<InputRef | null>
   /** For the anchor tag in the resource card - needed for browsers to show the proper context menu */
   href?: string
 }
@@ -119,8 +119,8 @@ export const ResourceCardEditableName = forwardRef<
       setWorkingName(e.target.value)
     }
 
-    const handleInputFocus = (e: ChangeEvent<HTMLInputElement>): void => {
-      e.currentTarget.select()
+    const handleInputFocus = (e?: ChangeEvent<HTMLInputElement>): void => {
+      e?.currentTarget.select()
     }
 
     const handleKeyDown = async (

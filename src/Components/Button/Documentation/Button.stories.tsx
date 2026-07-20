@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -86,30 +86,38 @@ buttonComposedStories.add(
           text={text('text', 'Button Text')}
           onClick={() => alert('clicked')}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
           titleText={text('titleText', 'Title Text')}
           disabledTitleText={text('disabledTitleText', 'Disabled Text')}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           shape={
-            ButtonShape[select('shape', mapEnumKeys(ButtonShape), 'Default')]
+            (ButtonShape as Record<string, any>)[
+              select('shape', mapEnumKeys(ButtonShape), 'Default')
+            ]
           }
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           active={boolean('active', false)}
-          type={ButtonType[select('type', mapEnumKeys(ButtonType), 'Button')]}
+          type={
+            (ButtonType as Record<string, any>)[
+              select('type', mapEnumKeys(ButtonType), 'Button')
+            ]
+          }
           placeIconAfterText={boolean('placeIconAfterText', false)}
         />
         <div className="story--test-buttons">
@@ -157,24 +165,34 @@ buttonComposedStories.add(
         <SquareButton
           ref={buttonRef}
           onClick={() => alert('clicked')}
-          icon={IconFont[select('icon', mapEnumKeys(IconFont), 'Zap')]}
+          icon={
+            (IconFont as Record<string, any>)[
+              select('icon', mapEnumKeys(IconFont), 'Zap')
+            ]
+          }
           titleText={text('titleText', 'Title Text')}
           disabledTitleText={text('disabledTitleText', 'Disabled Text')}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           active={boolean('active', false)}
-          type={ButtonType[select('type', mapEnumKeys(ButtonType), 'Button')]}
+          type={
+            (ButtonType as Record<string, any>)[
+              select('type', mapEnumKeys(ButtonType), 'Button')
+            ]
+          }
         />
         <div className="story--test-buttons">
           <button onClick={logRef}>Log Ref</button>
@@ -214,7 +232,7 @@ buttonComposedStories.add(
           onShow={onShow}
           onHide={onHide}
           confirmationButtonColor={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select(
                 'confirmationColor',
                 mapEnumKeys(reducedButtonColorEnum),
@@ -227,7 +245,7 @@ buttonComposedStories.add(
             'Really delete your soul?'
           )}
           popoverColor={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select(
                 'popoverColor',
                 mapEnumKeys(reducedButtonColorEnum),
@@ -236,27 +254,37 @@ buttonComposedStories.add(
             ]
           }
           popoverAppearance={
-            Appearance[select('appearance', mapEnumKeys(Appearance), 'Outline')]
+            (Appearance as Record<string, any>)[
+              select('appearance', mapEnumKeys(Appearance), 'Outline')
+            ]
           }
           onConfirm={value => alert(`returnValue: ${value}`)}
           returnValue={text('returnValue', '')}
-          icon={IconFont[select('icon', mapEnumKeys(IconFont), 'Trash_New')]}
+          icon={
+            (IconFont as Record<string, any>)[
+              select('icon', mapEnumKeys(IconFont), 'Trash_New')
+            ]
+          }
           disabledTitleText={text('disabledTitleText', 'Disabled Text')}
           titleText={text('titleText', 'Title Text')}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedButtonColorEnum), 'Danger')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           shape={
-            ButtonShape[select('shape', mapEnumKeys(ButtonShape), 'Default')]
+            (ButtonShape as Record<string, any>)[
+              select('shape', mapEnumKeys(ButtonShape), 'Default')
+            ]
           }
           text={text('text', 'Delete Soul')}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
@@ -297,17 +325,17 @@ buttonComposedStories.add(
             onClick={() => alert('Clicked!')}
             disabledTitleText={text('disabledTitleText', 'Disabled Text')}
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(reducedButtonColorEnum), 'Danger')
               ]
             }
             size={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('size', mapEnumKeys(ComponentSize), 'ExtraSmall')
               ]
             }
             status={
-              ComponentStatus[
+              (ComponentStatus as Record<string, any>)[
                 select('status', mapEnumKeys(ComponentStatus), 'Default')
               ]
             }
@@ -347,21 +375,23 @@ buttonComposedStories.add(
           onClick={() => alert('Clicked!')}
           disabledTitleText={text('disabledTitleText', 'Disabled Text')}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedButtonColorEnum), 'Success')
             ]
           }
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           shape={
-            ButtonShape[select('shape', mapEnumKeys(ButtonShape), 'Default')]
+            (ButtonShape as Record<string, any>)[
+              select('shape', mapEnumKeys(ButtonShape), 'Default')
+            ]
           }
           text={text('text', 'Buy Now')}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
@@ -396,23 +426,31 @@ buttonBaseStories.add(
           titleText={text('titleText', 'Title Text')}
           disabledTitleText={text('disabledTitleText', 'Disabled Text')}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           shape={
-            ButtonShape[select('shape', mapEnumKeys(ButtonShape), 'Default')]
+            (ButtonShape as Record<string, any>)[
+              select('shape', mapEnumKeys(ButtonShape), 'Default')
+            ]
           }
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           active={boolean('active', false)}
-          type={ButtonType[select('type', mapEnumKeys(ButtonType), 'Button')]}
+          type={
+            (ButtonType as Record<string, any>)[
+              select('type', mapEnumKeys(ButtonType), 'Button')
+            ]
+          }
         >
           {text('text', 'Button Text')}
         </ButtonBase>
@@ -445,33 +483,43 @@ buttonComposedStories.add(
         <LinkButton
           href={text('href', 'http://www.example.com')}
           target={
-            LinkTarget[select('target', mapEnumKeys(LinkTarget), 'Blank')]
+            (LinkTarget as Record<string, any>)[
+              select('target', mapEnumKeys(LinkTarget), 'Blank')
+            ]
           }
           rel={
-            LinkRel[
+            (LinkRel as Record<string, any>)[
               select('rel', {None: 'none', ...mapEnumKeys(LinkRel)}, 'None')
             ]
           }
           ref={buttonRef}
-          icon={IconFont[select('icon', mapEnumKeys(IconFont), 'Zap')]}
+          icon={
+            (IconFont as Record<string, any>)[
+              select('icon', mapEnumKeys(IconFont), 'Zap')
+            ]
+          }
           text={text('text', 'Yeehaw')}
           titleText={text('titleText', 'Title Text')}
           disabledTitleText={text('disabledTitleText', 'Disabled Text')}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           shape={
-            ButtonShape[select('shape', mapEnumKeys(ButtonShape), 'Default')]
+            (ButtonShape as Record<string, any>)[
+              select('shape', mapEnumKeys(ButtonShape), 'Default')
+            ]
           }
           active={boolean('active', false)}
         />
@@ -504,16 +552,18 @@ buttonComposedStories.add(
         <CTALinkButton
           href={text('href', 'http://www.example.com')}
           target={
-            LinkTarget[select('target', mapEnumKeys(LinkTarget), 'Blank')]
+            (LinkTarget as Record<string, any>)[
+              select('target', mapEnumKeys(LinkTarget), 'Blank')
+            ]
           }
           rel={
-            LinkRel[
+            (LinkRel as Record<string, any>)[
               select('rel', {None: 'none', ...mapEnumKeys(LinkRel)}, 'None')
             ]
           }
           ref={buttonRef}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: '', ...mapEnumKeys(IconFont)}, 'Zap')
             ]
           }
@@ -521,17 +571,19 @@ buttonComposedStories.add(
           titleText={text('titleText', 'Title Text')}
           disabledTitleText={text('disabledTitleText', 'Disabled Text')}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(reducedButtonColorEnum), 'Success')
             ]
           }
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           shape={
-            ButtonShape[select('shape', mapEnumKeys(ButtonShape), 'Default')]
+            (ButtonShape as Record<string, any>)[
+              select('shape', mapEnumKeys(ButtonShape), 'Default')
+            ]
           }
           active={boolean('active', false)}
         />
@@ -570,7 +622,7 @@ buttonComposedStories.add(
         <ButtonGroup
           ref={buttonGroupRef}
           orientation={
-            Orientation[
+            (Orientation as Record<string, any>)[
               select('orientation', mapEnumKeys(Orientation), 'Horizontal')
             ]
           }
@@ -581,56 +633,66 @@ buttonComposedStories.add(
             selectedOption={selectedOption}
             style={{width: '100px'}}
             buttonColor={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
               ]
             }
             buttonSize={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           />
           <Button
             text="Pineapple"
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(ComponentColor), 'Default')
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           />
           <Button
             text="Coconut"
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(ComponentColor), 'Default')
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           />
           <SquareButton
             icon={IconFont.CrownSolid_New}
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           />
           <SquareButton
             icon={IconFont.Flask}
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           />
           <ConfirmationButton
@@ -639,7 +701,7 @@ buttonComposedStories.add(
               'Yes, Delete it'
             )}
             confirmationButtonColor={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select(
                   'confirmationColor',
                   mapEnumKeys(reducedButtonColorEnum),
@@ -652,7 +714,7 @@ buttonComposedStories.add(
               'Really delete your soul?'
             )}
             popoverColor={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select(
                   'popoverColor',
                   mapEnumKeys(reducedButtonColorEnum),
@@ -661,7 +723,7 @@ buttonComposedStories.add(
               ]
             }
             popoverAppearance={
-              Appearance[
+              (Appearance as Record<string, any>)[
                 select('appearance', mapEnumKeys(Appearance), 'Outline')
               ]
             }
@@ -670,12 +732,14 @@ buttonComposedStories.add(
             titleText={text('titleText', 'Title Text')}
             disabledTitleText={text('disabledTitleText', 'Disabled Text')}
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(reducedButtonColorEnum), 'Default')
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             text="Delete"
             returnValue="Piña Colada"

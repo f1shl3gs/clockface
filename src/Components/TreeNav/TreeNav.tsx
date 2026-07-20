@@ -19,11 +19,11 @@ export interface TreeNavProps extends StandardFunctionProps {
   /** Callback for handling toggle clicks */
   onToggleClick?: () => void
   /** Element to appear at the top of the nav menu */
-  headerElement?: JSX.Element
+  headerElement?: React.ReactElement
   /** Banner to appear in expanded menu */
-  bannerElement?: JSX.Element
+  bannerElement?: React.ReactElement
   /** User widget to appear below the header element */
-  userElement?: JSX.Element
+  userElement?: React.ReactElement
   /** Controls how the Banner element renders when in collapsed state */
   hideBannerWhenCollapsed?: boolean
 }

@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -37,13 +37,13 @@ const tableStories = storiesOf('Components/Table/Family', module).addDecorator(
 tableStories.add(
   'Table',
   () => {
-    const tableRef: RefObject<TableRef> = createRef()
-    const tableHeaderRef: RefObject<TableHeaderRef> = createRef()
-    const tableHeaderCellRef: RefObject<TableHeaderCellRef> = createRef()
-    const tableBodyRef: RefObject<TableBodyRef> = createRef()
-    const tableRowRef: RefObject<TableRowRef> = createRef()
-    const tableCellRef: RefObject<TableCellRef> = createRef()
-    const tableFooterRef: RefObject<TableFooterRef> = createRef()
+    const tableRef: RefObject<TableRef | null> = createRef()
+    const tableHeaderRef: RefObject<TableHeaderRef | null> = createRef()
+    const tableHeaderCellRef: RefObject<TableHeaderCellRef | null> = createRef()
+    const tableBodyRef: RefObject<TableBodyRef | null> = createRef()
+    const tableRowRef: RefObject<TableRowRef | null> = createRef()
+    const tableCellRef: RefObject<TableCellRef | null> = createRef()
+    const tableFooterRef: RefObject<TableFooterRef | null> = createRef()
 
     const logRefs = (): void => {
       /* eslint-disable */
@@ -65,17 +65,19 @@ tableStories.add(
         <Table.Table
           ref={tableRef}
           cellPadding={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('cellPadding', mapEnumKeys(ComponentSize), 'Small')
             ]
           }
           fontSize={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('fontSize', mapEnumKeys(ComponentSize), 'Medium')
             ]
           }
           borders={
-            BorderType[select('borders', mapEnumKeys(BorderType), 'Horizontal')]
+            (BorderType as Record<string, any>)[
+              select('borders', mapEnumKeys(BorderType), 'Horizontal')
+            ]
           }
           striped={boolean('striped', false)}
           highlight={boolean('highlight', false)}
@@ -87,7 +89,7 @@ tableStories.add(
                 ref={tableHeaderCellRef}
                 style={{width: `${text('Name - width', '30%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Name - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -101,7 +103,7 @@ tableStories.add(
               <Table.HeaderCell
                 style={{width: `${text('Description - width', '50%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Description - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -115,7 +117,7 @@ tableStories.add(
               <Table.HeaderCell
                 style={{width: `${text('Price - width', '20%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Price - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -131,7 +133,7 @@ tableStories.add(
           <Table.Body ref={tableBodyRef}>
             <Table.Row
               color={
-                ComponentColor[
+                (ComponentColor as Record<string, any>)[
                   select(
                     'Peach - row color',
                     mapEnumKeys(ComponentColor),
@@ -144,7 +146,7 @@ tableStories.add(
                 ref={tableCellRef}
                 style={{width: `${text('Name - width', '30%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Name - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -158,7 +160,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Description - width', '50%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Description - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -172,7 +174,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Price - width', '20%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Price - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -186,7 +188,7 @@ tableStories.add(
             </Table.Row>
             <Table.Row
               color={
-                ComponentColor[
+                (ComponentColor as Record<string, any>)[
                   select(
                     'Pineapple - row color',
                     mapEnumKeys(ComponentColor),
@@ -198,7 +200,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Name - width', '30%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Name - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -212,7 +214,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Description - width', '50%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Description - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -227,7 +229,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Price - width', '20%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Price - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -241,7 +243,7 @@ tableStories.add(
             </Table.Row>
             <Table.Row
               color={
-                ComponentColor[
+                (ComponentColor as Record<string, any>)[
                   select(
                     'Yuzu - row color',
                     mapEnumKeys(ComponentColor),
@@ -253,7 +255,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Name - width', '30%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Name - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -267,7 +269,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Description - width', '50%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Description - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -281,7 +283,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Price - width', '20%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Price - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -295,7 +297,7 @@ tableStories.add(
             </Table.Row>
             <Table.Row
               color={
-                ComponentColor[
+                (ComponentColor as Record<string, any>)[
                   select(
                     'Lychee - row color',
                     mapEnumKeys(ComponentColor),
@@ -307,7 +309,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Name - width', '30%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Name - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -321,7 +323,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Description - width', '50%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Description - horizontalAlignment',
                       mapEnumKeys(Alignment),
@@ -335,7 +337,7 @@ tableStories.add(
               <Table.Cell
                 style={{width: `${text('Price - width', '20%')}`}}
                 horizontalAlignment={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select(
                       'Price - horizontalAlignment',
                       mapEnumKeys(Alignment),

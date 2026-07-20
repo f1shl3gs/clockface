@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, MouseEvent, useState, forwardRef} from 'react'
+import {FunctionComponent, MouseEvent, useState, forwardRef} from 'react'
 import classnames from 'classnames'
 
 // Types

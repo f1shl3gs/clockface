@@ -26,7 +26,7 @@ export interface DropdownMenuProps extends StandardFunctionProps {
   /** Function to handle closing the menu when a child item is clicked */
   onCollapse?: () => void
   /** Pass through ref for contents element within scrollbars */
-  contentsRef?: RefObject<DropdownMenuContentsRef>
+  contentsRef?: RefObject<DropdownMenuContentsRef | null>
   /** Useful for customizing appearance of the contents element within scrollbars */
   contentsStyle?: CSSProperties
   /** Controls autoHide behavior of scrollbars within the menu */

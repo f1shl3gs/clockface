@@ -1,5 +1,4 @@
 // Libraries
-import React from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -36,7 +35,7 @@ ProgressBarStories.add(
         <ProgressBar
           style={{width: '300px'}}
           barGradient={
-            Gradients[
+            (Gradients as Record<string, any>)[
               select(
                 'gradient',
                 {None: 'none', ...mapEnumKeys(Gradients)},

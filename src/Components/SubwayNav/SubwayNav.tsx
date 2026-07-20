@@ -17,7 +17,7 @@ interface OwnProps {
   currentStep: number
   navigationSteps: SubwayNavModel[]
   onStepClick: (step: number) => void
-  settingUpIcon: JSX.Element
+  settingUpIcon: React.ReactElement
   settingUpText: string
   setupTime?: string
   settingUpHeader?: string

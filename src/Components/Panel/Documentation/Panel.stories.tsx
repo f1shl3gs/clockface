@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -67,7 +67,7 @@ const panelExampleStories = storiesOf(
 panelStories.add(
   'Panel',
   () => {
-    const panelRef: RefObject<PanelRef> = createRef()
+    const panelRef: RefObject<PanelRef | null> = createRef()
 
     const logPanelRef = (): void => {
       /* eslint-disable */
@@ -80,7 +80,7 @@ panelStories.add(
         <Panel.Panel
           ref={panelRef}
           gradient={
-            Gradients[
+            (Gradients as Record<string, any>)[
               select(
                 'gradient',
                 {None: 'none', ...mapEnumKeys(Gradients)},
@@ -106,7 +106,7 @@ panelStories.add(
 panelStories.add(
   'PanelHeader',
   () => {
-    const panelHeaderRef: RefObject<PanelHeaderRef> = createRef()
+    const panelHeaderRef: RefObject<PanelHeaderRef | null> = createRef()
 
     const logPanelRefs = (): void => {
       /* eslint-disable */
@@ -121,18 +121,22 @@ panelStories.add(
         <Panel.Header
           ref={panelHeaderRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           direction={
-            FlexDirection[
+            (FlexDirection as Record<string, any>)[
               select('direction', mapEnumKeys(FlexDirection), 'Row')
             ]
           }
           alignItems={
-            AlignItems[select('alignItems', mapEnumKeys(AlignItems), 'Center')]
+            (AlignItems as Record<string, any>)[
+              select('alignItems', mapEnumKeys(AlignItems), 'Center')
+            ]
           }
           justifyContent={
-            JustifyContent[
+            (JustifyContent as Record<string, any>)[
               select(
                 'justifyContent ',
                 mapEnumKeys(JustifyContent),
@@ -141,7 +145,7 @@ panelStories.add(
             ]
           }
           margin={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select(
                 'margin',
                 {None: '', ...mapEnumKeys(ComponentSize)},
@@ -179,7 +183,7 @@ panelStories.add(
 panelStories.add(
   'PanelBody',
   () => {
-    const panelBodyRef: RefObject<PanelBodyRef> = createRef()
+    const panelBodyRef: RefObject<PanelBodyRef | null> = createRef()
 
     const logPanelRef = (): void => {
       /* eslint-disable */
@@ -192,18 +196,22 @@ panelStories.add(
         <Panel.Body
           ref={panelBodyRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           direction={
-            FlexDirection[
+            (FlexDirection as Record<string, any>)[
               select('direction', mapEnumKeys(FlexDirection), 'Column')
             ]
           }
           alignItems={
-            AlignItems[select('alignItems', mapEnumKeys(AlignItems), 'Stretch')]
+            (AlignItems as Record<string, any>)[
+              select('alignItems', mapEnumKeys(AlignItems), 'Stretch')
+            ]
           }
           justifyContent={
-            JustifyContent[
+            (JustifyContent as Record<string, any>)[
               select(
                 'justifyContent ',
                 mapEnumKeys(JustifyContent),
@@ -212,7 +220,7 @@ panelStories.add(
             ]
           }
           margin={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select(
                 'margin',
                 {None: '', ...mapEnumKeys(ComponentSize)},
@@ -244,7 +252,7 @@ panelStories.add(
 panelStories.add(
   'PanelFooter',
   () => {
-    const panelFooterRef: RefObject<PanelFooterRef> = createRef()
+    const panelFooterRef: RefObject<PanelFooterRef | null> = createRef()
 
     const logPanelRef = (): void => {
       /* eslint-disable */
@@ -257,23 +265,27 @@ panelStories.add(
         <Panel.Footer
           ref={panelFooterRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           direction={
-            FlexDirection[
+            (FlexDirection as Record<string, any>)[
               select('direction', mapEnumKeys(FlexDirection), 'Row')
             ]
           }
           alignItems={
-            AlignItems[select('alignItems', mapEnumKeys(AlignItems), 'Center')]
+            (AlignItems as Record<string, any>)[
+              select('alignItems', mapEnumKeys(AlignItems), 'Center')
+            ]
           }
           justifyContent={
-            JustifyContent[
+            (JustifyContent as Record<string, any>)[
               select('justifyContent ', mapEnumKeys(JustifyContent), 'Center')
             ]
           }
           margin={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select(
                 'margin',
                 {None: '', ...mapEnumKeys(ComponentSize)},
@@ -301,7 +313,7 @@ panelStories.add(
 panelComposedStories.add(
   'PanelSymbolHeader',
   () => {
-    const panelSymbolHeaderRef: RefObject<PanelSymbolHeaderRef> = createRef()
+    const panelSymbolHeaderRef: RefObject<PanelSymbolHeaderRef | null> = createRef()
 
     const logPanelSymbolHeaderRef = (): void => {
       /* eslint-disable */
@@ -332,7 +344,7 @@ panelComposedStories.add(
 panelComposedStories.add(
   'BannerPanel',
   () => {
-    const bannerPanelRef: RefObject<BannerPanelRef> = createRef()
+    const bannerPanelRef: RefObject<BannerPanelRef | null> = createRef()
 
     const logBannerPanelRef = (): void => {
       /* eslint-disable */
@@ -346,17 +358,17 @@ panelComposedStories.add(
           ref={bannerPanelRef}
           hideMobileIcon={true}
           size={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('size', mapEnumKeys(ComponentSize), 'ExtraSmall')
             ]
           }
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'Cloud')
             ]
           }
           gradient={
-            Gradients[
+            (Gradients as Record<string, any>)[
               select(
                 'gradient',
                 {None: 'none', ...mapEnumKeys(Gradients)},
@@ -403,7 +415,7 @@ panelExampleStories.add(
     <div className="story--example">
       <Panel
         gradient={
-          Gradients[
+          (Gradients as Record<string, any>)[
             select(
               'gradient',
               {None: 'none', ...mapEnumKeys(Gradients)},
@@ -416,14 +428,18 @@ panelExampleStories.add(
       >
         <Panel.Header
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <h4>Welcome!</h4>
         </Panel.Header>
         <Panel.Body
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <p>We've built a lot of cool new things to make your life easier</p>
@@ -448,14 +464,18 @@ panelExampleStories.add(
       <Panel>
         <Panel.Header
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <h5>Getting started with InfluxDB 2.0</h5>
         </Panel.Header>
         <Panel.Body
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <Grid>
@@ -486,7 +506,9 @@ panelExampleStories.add(
         </Panel.Body>
         <Panel.Footer
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <p>
@@ -510,14 +532,18 @@ panelExampleStories.add(
       <Panel gradient={Gradients.DocScott}>
         <Panel.Header
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <h3>Danger Zone!</h3>
         </Panel.Header>
         <Panel.Body
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           <p>These actions can have unintended wide-reaching consequences</p>
@@ -542,7 +568,7 @@ panelExampleStories.add(
             <Bullet
               text={1}
               size={
-                ComponentSize[
+                (ComponentSize as Record<string, any>)[
                   select('symbol size', mapEnumKeys(ComponentSize), 'Medium')
                 ]
               }
@@ -550,21 +576,27 @@ panelExampleStories.add(
           }
           title={<h5>Panel Title</h5>}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           Panel Header Content
         </Panel.SymbolHeader>
         <Panel.Body
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           Panel Body Content
         </Panel.Body>
         <Panel.Footer
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           justifyContent={JustifyContent.FlexStart}
         >
@@ -586,7 +618,7 @@ panelExampleStories.add(
     <div className="story--example">
       <GradientBox
         borderGradient={
-          Gradients[
+          (Gradients as Record<string, any>)[
             select(
               'border gradient',
               {None: 'none', ...mapEnumKeys(Gradients)},
@@ -598,7 +630,7 @@ panelExampleStories.add(
       >
         <Panel
           gradient={
-            Gradients[
+            (Gradients as Record<string, any>)[
               select(
                 'background gradient',
                 {None: 'none', ...mapEnumKeys(Gradients)},
@@ -611,17 +643,19 @@ panelExampleStories.add(
         >
           <Panel.Header
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           >
             <Heading
               element={
-                HeadingElement[
+                (HeadingElement as Record<string, any>)[
                   select('header element', mapEnumKeys(HeadingElement), 'H3')
                 ]
               }
               appearance={
-                HeadingElement[
+                (HeadingElement as Record<string, any>)[
                   select(
                     'header appearance',
                     {Inherit: '', ...mapEnumKeys(HeadingElement)},
@@ -630,10 +664,14 @@ panelExampleStories.add(
                 ]
               }
               type={
-                Typeface[select('type', mapEnumKeys(Typeface), 'ProximaNova')]
+                (Typeface as Record<string, any>)[
+                  select('type', mapEnumKeys(Typeface), 'ProximaNova')
+                ]
               }
               weight={
-                FontWeight[select('weight', mapEnumKeys(FontWeight), 'Medium')]
+                (FontWeight as Record<string, any>)[
+                  select('weight', mapEnumKeys(FontWeight), 'Medium')
+                ]
               }
               underline={boolean('underline', false)}
               selectable={boolean('selectable', false)}
@@ -643,7 +681,9 @@ panelExampleStories.add(
           </Panel.Header>
           <Panel.Body
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           >
             <p>{text('body text', 'Body rock')}</p>

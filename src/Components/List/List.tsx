@@ -46,7 +46,7 @@ export interface ListProps extends StandardFunctionProps {
   /** Automatically scroll to selected item when dropdown is opened */
   scrollToSelected?: boolean
   /** Pass through ref for contents element within scrollbars */
-  contentsRef?: RefObject<ListContentsRef>
+  contentsRef?: RefObject<ListContentsRef | null>
   /** Useful for customizing appearance of the contents element within scrollbars */
   contentsStyle?: CSSProperties
   /** Controls autoHide behavior of scrollbars within the menu */
@@ -165,7 +165,7 @@ const SMALL_LIST_ITEM_HEIGHT = 36
 const MEDIUM_LIST_ITEM_HEIGHT = 48
 const LARGE_LIST_ITEM_HEIGHT = 56
 
-const LIST_ITEM_HEIGHTS_MAP = {
+const LIST_ITEM_HEIGHTS_MAP: Record<string, number> = {
   xs: EXTRASMALL_LIST_ITEM_HEIGHT,
   sm: SMALL_LIST_ITEM_HEIGHT,
   md: MEDIUM_LIST_ITEM_HEIGHT,

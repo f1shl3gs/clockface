@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import {cleanup, fireEvent, render} from '@testing-library/react'
+import {useState} from 'react'
+import {fireEvent} from '@testing-library/dom'
+import {cleanup, render} from '@testing-library/react'
 import {ClickOutside} from '../ClickOutside'
 
 const textInsideOfComponent = "Don't click here, click outside of here, family"
@@ -75,5 +76,20 @@ describe('the Click Outside component', () => {
     fireEvent.click(getByText(toggleVisibilityText))
     fireEvent.mouseDown(getByText(siblingTextOfComponent))
     expect(mockClickOutside).toHaveBeenCalledTimes(0)
+  })
+
+  it('tracks the rendered child through a DOM ref', () => {
+    const mockClickOutside = jest.fn()
+    const {getByText} = render(
+      <ClickOutside onClickOutside={mockClickOutside}>
+        <button>Inside button</button>
+      </ClickOutside>
+    )
+
+    fireEvent.mouseDown(getByText('Inside button'))
+    expect(mockClickOutside).not.toHaveBeenCalled()
+
+    fireEvent.mouseDown(document.body)
+    expect(mockClickOutside).toHaveBeenCalledTimes(1)
   })
 })

@@ -10,11 +10,13 @@ import {FormHelpText} from './FormHelpText'
 // Types
 import {
   StandardFunctionProps,
+  Omit,
   ComponentStatus,
   ValidationFunction,
 } from '../../Types'
 
-export interface FormValidationElementProps extends StandardFunctionProps {
+export interface FormValidationElementProps
+  extends Omit<StandardFunctionProps, 'children'> {
   /** Child components */
   children: (status: ComponentStatus) => React.ReactNode
   /** Function used for validation check */
@@ -22,7 +24,7 @@ export interface FormValidationElementProps extends StandardFunctionProps {
   /** Function called when validation status */
   onStatusChange?: (newStatus: ComponentStatus) => void
   /** Element to be displayed along with label */
-  labelAddOn?: () => JSX.Element
+  labelAddOn?: () => React.ReactElement
   /** Label Text */
   label: string
   /** Field value */
@@ -65,7 +67,7 @@ export const FormValidationElement = forwardRef<
     const shouldPerformValidation = useRef<boolean>(prevalidate)
     const originalValue = useRef(value)
 
-    let errorMessage = null
+    let errorMessage: string | null = null
     let status = ComponentStatus.Default
 
     useEffect(() => {

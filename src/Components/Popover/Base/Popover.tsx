@@ -30,7 +30,7 @@ export interface PopoverProps extends StandardFunctionProps {
   /** Popover dialog color */
   color?: ComponentColor
   /** Popover dialog contents */
-  contents: (onHide?: () => void) => JSX.Element
+  contents: (onHide?: () => void) => React.ReactElement
   /** Type of interaction to show the popover dialog */
   showEvent?: PopoverInteraction
   /** Type of interaction to hide the popover dialog */
@@ -52,7 +52,7 @@ export interface PopoverProps extends StandardFunctionProps {
   /** Disables the popover's show interaction */
   disabled?: boolean
   /** Reference to trigger element */
-  triggerRef: RefObject<any>
+  triggerRef: RefObject<any | null>
   /** Adds reasonable styles to popover dialog contents so you do not have to */
   enableDefaultStyles?: boolean
   /** Ensures the popover appears above all other portal elements */

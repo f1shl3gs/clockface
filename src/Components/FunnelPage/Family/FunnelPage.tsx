@@ -17,7 +17,7 @@ import {InfluxColors, StandardFunctionProps} from '../../../Types'
 
 export interface FunnelPageProps extends StandardFunctionProps {
   /** Places a logo in the top left corner */
-  logo?: JSX.Element
+  logo?: React.ReactElement
   /** Primary page background color */
   backgroundColor?: InfluxColors | string
   /** First background accent color */

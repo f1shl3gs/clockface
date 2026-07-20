@@ -7,7 +7,7 @@ import {StandardFunctionProps} from '../../../Types'
 
 export interface ResourceListHeaderProps extends StandardFunctionProps {
   /** Used for rendering a filter input above the list, opposite the sort headers */
-  filterComponent?: JSX.Element
+  filterComponent?: React.ReactElement
 }
 
 export type ResourceListHeaderRef = HTMLDivElement

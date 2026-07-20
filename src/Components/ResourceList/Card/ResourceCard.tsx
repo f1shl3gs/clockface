@@ -23,7 +23,7 @@ export interface ResourceCardProps
   /** Renders the card with disabled styles */
   disabled?: boolean
   /** Renders the context menu component in its designated place */
-  contextMenu?: JSX.Element
+  contextMenu?: React.ReactElement
   /** Controls the interaction style for the contextMenu */
   contextMenuInteraction?: 'alwaysVisible' | 'showOnHover'
   /** If true the card will highlight on mouse over */
@@ -31,7 +31,7 @@ export interface ResourceCardProps
   /** Tracks when card is selected **/
   cardSelected?: boolean
   cardSelectable?: boolean
-  handleCardSelection?: (resourceId: string) => void
+  handleCardSelection?: (resourceId?: string) => void
 }
 
 export type ResourceCardRef = HTMLDivElement

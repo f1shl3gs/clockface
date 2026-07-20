@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -60,7 +60,7 @@ overlayStories.add(
           fullScreen={boolean('fullScreen', false)}
           maxWidth={400}
           margin={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select('margin', mapEnumKeys(ComponentSize), 'Medium')
             ]
           }
@@ -97,7 +97,7 @@ overlayStories.add(
 overlayStories.add(
   'OverlayContainer',
   () => {
-    const overlayContainerRef: RefObject<OverlayContainerRef> = createRef()
+    const overlayContainerRef: RefObject<OverlayContainerRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -135,7 +135,7 @@ overlayStories.add(
 overlayStories.add(
   'OverlayMask',
   () => {
-    const overlayMaskRef: RefObject<OverlayMaskRef> = createRef()
+    const overlayMaskRef: RefObject<OverlayMaskRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -152,8 +152,8 @@ overlayStories.add(
         <OverlayMask
           ref={overlayMaskRef}
           gradient={
-            Gradients[
-              Gradients[
+            (Gradients as Record<string, any>)[
+              (Gradients as Record<string, any>)[
                 select('gradient', mapEnumKeys(Gradients), 'GundamPilot')
               ]
             ]
@@ -173,7 +173,7 @@ overlayStories.add(
 overlayStories.add(
   'OverlayHeader',
   () => {
-    const overlayHeaderRef: RefObject<OverlayHeaderRef> = createRef()
+    const overlayHeaderRef: RefObject<OverlayHeaderRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -208,7 +208,7 @@ overlayStories.add(
 overlayStories.add(
   'OverlayBody',
   () => {
-    const overlayBodyRef: RefObject<OverlayBodyRef> = createRef()
+    const overlayBodyRef: RefObject<OverlayBodyRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -242,7 +242,7 @@ overlayStories.add(
 overlayStories.add(
   'OverlayFooter',
   () => {
-    const overlayFooterRef: RefObject<OverlayFooterRef> = createRef()
+    const overlayFooterRef: RefObject<OverlayFooterRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */

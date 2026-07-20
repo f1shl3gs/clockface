@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useContext} from 'react'
+import {forwardRef, useContext} from 'react'
 import classnames from 'classnames'
 
 // Contexts

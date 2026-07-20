@@ -1,5 +1,5 @@
 // Libraries
-import React, {MouseEvent, forwardRef, useState} from 'react'
+import {MouseEvent, forwardRef, useState} from 'react'
 
 // Components
 import {Dropdown, DropdownRef} from '../'
@@ -86,7 +86,7 @@ export const MultiSelectDropdown = forwardRef<
 
     const button = (
       active: boolean,
-      onClick: (e: MouseEvent<HTMLElement>) => void
+      onClick: (e?: MouseEvent<HTMLElement>) => void
     ) => (
       <Dropdown.Button
         active={active}

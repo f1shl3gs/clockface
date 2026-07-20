@@ -1,5 +1,5 @@
 // Libraries
-import React, {ChangeEvent, KeyboardEvent, forwardRef, RefObject} from 'react'
+import {ChangeEvent, KeyboardEvent, forwardRef, RefObject} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -63,7 +63,7 @@ export interface TextAreaProps extends StandardFunctionProps {
   /** TextArea field value to be updated with 'on X' functions */
   value?: string
   /** Container ref */
-  containerRef?: RefObject<TextAreaContainerRef>
+  containerRef?: RefObject<TextAreaContainerRef | null>
   /** Use a monospace font */
   monospace?: boolean
 }

@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -43,13 +43,13 @@ draggableResizerStories.add(
     <div className="mockPage padded">
       <DraggableResizer
         handleOrientation={
-          Orientation[
+          (Orientation as Record<string, any>)[
             select('handleOrientation', mapEnumKeys(Orientation), 'Vertical')
           ]
         }
         handleGradient={
-          Gradients[
-            Gradients[
+          (Gradients as Record<string, any>)[
+            (Gradients as Record<string, any>)[
               select('handleGradient', mapEnumKeys(Gradients), 'PastelGothic')
             ]
           ]
@@ -132,13 +132,13 @@ draggableResizerExamplesStories.add(
       <div className="mockPage padded">
         <DraggableResizer
           handleOrientation={
-            Orientation[
+            (Orientation as Record<string, any>)[
               select('handleOrientation', mapEnumKeys(Orientation), 'Vertical')
             ]
           }
           handleGradient={
-            Gradients[
-              Gradients[
+            (Gradients as Record<string, any>)[
+              (Gradients as Record<string, any>)[
                 select('handleGradient', mapEnumKeys(Gradients), 'PastelGothic')
               ]
             ]
@@ -209,13 +209,13 @@ draggableResizerExamplesStories.add(
       <div className="mockPage padded">
         <DraggableResizer
           handleOrientation={
-            Orientation[
+            (Orientation as Record<string, any>)[
               select('handleOrientation', mapEnumKeys(Orientation), 'Vertical')
             ]
           }
           handleGradient={
-            Gradients[
-              Gradients[
+            (Gradients as Record<string, any>)[
+              (Gradients as Record<string, any>)[
                 select('handleGradient', mapEnumKeys(Gradients), 'PastelGothic')
               ]
             ]

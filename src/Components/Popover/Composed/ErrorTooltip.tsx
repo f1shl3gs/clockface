@@ -23,7 +23,7 @@ export interface ErrorTooltipProps extends StandardFunctionProps {
   /** Controls the size of the question mark circle */
   diameter?: number
   /** Contents to display in tooltip */
-  tooltipContents: JSX.Element | string
+  tooltipContents: React.ReactElement | string
   /** Useful for customizing the tooltip itself */
   tooltipStyle?: CSSProperties
   /** Useful for defining where tooltip should appear relative to the icon */
@@ -46,7 +46,7 @@ export const ErrorTooltip = forwardRef<ErrorTooltipRef, ErrorTooltipProps>(
     },
     ref
   ) => {
-    const triggerRef: RefObject<HTMLDivElement> = useRef(null)
+    const triggerRef: RefObject<HTMLDivElement | null> = useRef(null)
     const color = ComponentColor.Danger
     const circleClassName = classnames('cf-error-tooltip', {
       [`${className}`]: className,

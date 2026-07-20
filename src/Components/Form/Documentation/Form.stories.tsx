@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -563,7 +563,7 @@ formExampleStories.add(
           />
           <Panel.Body
             size={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('Panel: size', mapEnumKeys(ComponentSize), 'Small')
               ]
             }
@@ -571,7 +571,7 @@ formExampleStories.add(
             <FlexBox
               direction={FlexDirection.Column}
               margin={
-                ComponentSize[
+                (ComponentSize as Record<string, any>)[
                   select('margin', mapEnumKeys(ComponentSize), 'Small')
                 ]
               }
@@ -580,14 +580,14 @@ formExampleStories.add(
                 stretchToFitWidth={true}
                 direction={FlexDirection.Row}
                 margin={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('margin', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
               >
                 <TextBlock
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select(
                         'TextBlock, Input, Dropdown: size',
                         mapEnumKeys(ComponentSize),
@@ -605,7 +605,7 @@ formExampleStories.add(
                       // do nothing
                     }}
                     buttonSize={
-                      ComponentSize[
+                      (ComponentSize as Record<string, any>)[
                         select(
                           'TextBlock, Input, Dropdown: size',
                           mapEnumKeys(ComponentSize),
@@ -628,7 +628,7 @@ formExampleStories.add(
                       // do nothing
                     }}
                     buttonSize={
-                      ComponentSize[
+                      (ComponentSize as Record<string, any>)[
                         select(
                           'TextBlock, Input, Dropdown: size',
                           mapEnumKeys(ComponentSize),
@@ -643,7 +643,7 @@ formExampleStories.add(
                 stretchToFitWidth={true}
                 direction={FlexDirection.Row}
                 margin={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('margin', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -653,7 +653,7 @@ formExampleStories.add(
                     type={InputType.Number}
                     value="90"
                     size={
-                      ComponentSize[
+                      (ComponentSize as Record<string, any>)[
                         select(
                           'TextBlock, Input, Dropdown: size',
                           mapEnumKeys(ComponentSize),
@@ -665,7 +665,7 @@ formExampleStories.add(
                 </FlexBox.Child>
                 <TextBlock
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select(
                         'TextBlock, Input, Dropdown: size',
                         mapEnumKeys(ComponentSize),
@@ -680,7 +680,7 @@ formExampleStories.add(
                     type={InputType.Number}
                     value="100"
                     size={
-                      ComponentSize[
+                      (ComponentSize as Record<string, any>)[
                         select(
                           'TextBlock, Input, Dropdown: size',
                           mapEnumKeys(ComponentSize),
@@ -692,7 +692,7 @@ formExampleStories.add(
                 </FlexBox.Child>
                 <TextBlock
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select(
                         'TextBlock, Input, Dropdown: size',
                         mapEnumKeys(ComponentSize),
@@ -704,7 +704,7 @@ formExampleStories.add(
                 />
                 <TextBlock
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select(
                         'TextBlock, Input, Dropdown: size',
                         mapEnumKeys(ComponentSize),

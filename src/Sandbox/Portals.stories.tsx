@@ -1,5 +1,5 @@
 // Libraries
-import React, {useRef} from 'react'
+import {useRef} from 'react'
 import marked from 'marked'
 import {startsWith} from 'lodash'
 

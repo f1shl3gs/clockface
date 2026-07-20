@@ -1,5 +1,4 @@
 // Libraries
-import React from 'react'
 
 // Storybook
 import {storiesOf} from '@storybook/react'

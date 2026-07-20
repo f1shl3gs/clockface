@@ -13,11 +13,11 @@ export interface PopoverStyles {
 
 const calculateDialogPosition = (
   position: PopoverPosition,
-  triggerRef: RefObject<any>,
-  dialogRef: RefObject<HTMLDivElement>,
+  triggerRef: RefObject<any | null>,
+  dialogRef: RefObject<HTMLDivElement | null>,
   distanceFromTrigger: number
 ): PopoverPosition => {
-  const acceptablePopoverPositions = []
+  const acceptablePopoverPositions: PopoverPosition[] = []
 
   if (!triggerRef.current || !dialogRef.current) {
     return position
@@ -65,8 +65,8 @@ const calculateDialogPosition = (
 
 const isDialogFlush = (
   position: PopoverPosition,
-  triggerRef: RefObject<any>,
-  dialogRef: RefObject<any>
+  triggerRef: RefObject<any | null>,
+  dialogRef: RefObject<any | null>
 ): PopoverFlush => {
   if (!triggerRef.current || !dialogRef.current) {
     return {
@@ -120,8 +120,8 @@ const isDialogFlush = (
 
 export const calculatePopoverStyles = (
   position: PopoverPosition,
-  triggerRef: RefObject<any>,
-  dialogRef: RefObject<HTMLDivElement>,
+  triggerRef: RefObject<any | null>,
+  dialogRef: RefObject<HTMLDivElement | null>,
   caretSize: number,
   distanceFromTrigger: number
 ): PopoverStyles => {

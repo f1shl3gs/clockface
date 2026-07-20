@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -29,7 +29,7 @@ const componentSpacerStories = storiesOf('Layout/FlexBox', module).addDecorator(
 componentSpacerStories.add(
   'FlexBox',
   () => {
-    const flexBoxRef: RefObject<FlexBoxRef> = createRef()
+    const flexBoxRef: RefObject<FlexBoxRef | null> = createRef()
 
     const handleLogRef = (): void => {
       /* eslint-disable */
@@ -42,15 +42,17 @@ componentSpacerStories.add(
         <FlexBox.FlexBox
           ref={flexBoxRef}
           direction={
-            FlexDirection[
+            (FlexDirection as Record<string, any>)[
               select('direction', mapEnumKeys(FlexDirection), 'Row')
             ]
           }
           alignItems={
-            AlignItems[select('alignItems', mapEnumKeys(AlignItems), 'Center')]
+            (AlignItems as Record<string, any>)[
+              select('alignItems', mapEnumKeys(AlignItems), 'Center')
+            ]
           }
           justifyContent={
-            JustifyContent[
+            (JustifyContent as Record<string, any>)[
               select(
                 'justifyContent ',
                 mapEnumKeys(JustifyContent),
@@ -59,7 +61,7 @@ componentSpacerStories.add(
             ]
           }
           margin={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select(
                 'margin',
                 {None: '', ...mapEnumKeys(ComponentSize)},
@@ -107,11 +109,11 @@ componentSpacerStories.add(
 componentSpacerStories.add(
   'FlexChild',
   () => {
-    const flexBoxRef: RefObject<FlexBoxRef> = createRef()
-    const flexBoxChildARef: RefObject<FlexBoxChildRef> = createRef()
-    const flexBoxChildBRef: RefObject<FlexBoxChildRef> = createRef()
-    const flexBoxChildCRef: RefObject<FlexBoxChildRef> = createRef()
-    const flexBoxChildDRef: RefObject<FlexBoxChildRef> = createRef()
+    const flexBoxRef: RefObject<FlexBoxRef | null> = createRef()
+    const flexBoxChildARef: RefObject<FlexBoxChildRef | null> = createRef()
+    const flexBoxChildBRef: RefObject<FlexBoxChildRef | null> = createRef()
+    const flexBoxChildCRef: RefObject<FlexBoxChildRef | null> = createRef()
+    const flexBoxChildDRef: RefObject<FlexBoxChildRef | null> = createRef()
 
     const handleLogRefs = (): void => {
       /* eslint-disable */
@@ -131,7 +133,7 @@ componentSpacerStories.add(
           alignItems={AlignItems.Center}
           justifyContent={JustifyContent.FlexStart}
           margin={
-            ComponentSize[
+            (ComponentSize as Record<string, any>)[
               select(
                 'margin',
                 {None: '', ...mapEnumKeys(ComponentSize)},

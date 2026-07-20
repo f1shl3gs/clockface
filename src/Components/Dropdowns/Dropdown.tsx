@@ -21,10 +21,10 @@ export interface DropdownProps extends StandardFunctionProps {
   /** Component to render as the button (use Dropdown.Button) */
   button: (
     active: boolean,
-    onClick: (e: MouseEvent<HTMLElement>) => void
-  ) => JSX.Element
+    onClick: (e?: MouseEvent<HTMLElement>) => void
+  ) => React.ReactElement
   /** Component to render as the menu (use Dropdown.Menu) */
-  menu: (onCollapse?: () => void) => JSX.Element
+  menu: (onCollapse?: () => void) => React.ReactElement
   /** Renders the menu element above the button instead of below */
   dropUp?: boolean
   /** Disable Dropdown's out of the box focus behavior if you have a custom behavior */
@@ -69,8 +69,8 @@ export const DropdownRoot = forwardRef<DropdownRef, DropdownProps>(
     const defaultRef = useRef<DropdownRef>(null)
     const internalRef = ref || defaultRef
 
-    const handleToggleMenu = (e: MouseEvent<HTMLElement>): void => {
-      e.preventDefault()
+    const handleToggleMenu = (e?: MouseEvent<HTMLElement>): void => {
+      e?.preventDefault()
       setExpandedState(!expanded)
     }
 

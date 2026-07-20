@@ -1,5 +1,4 @@
 // Libraries
-import React from 'react'
 
 type Test = ((...args: any[]) => boolean) | undefined
 

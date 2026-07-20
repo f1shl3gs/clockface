@@ -1,11 +1,5 @@
 // Libraries
-import React, {
-  FunctionComponent,
-  useRef,
-  useState,
-  useEffect,
-  UIEvent,
-} from 'react'
+import {FunctionComponent, useRef, useState, useEffect, UIEvent} from 'react'
 import _ from 'lodash'
 import classnames from 'classnames'
 import Scrollbar from 'react-scrollbars-custom'
@@ -19,13 +13,13 @@ import {StandardFunctionProps, InfluxColors, ComponentSize} from '../../Types'
 
 // react-scrollbars-custom uses a highly unusual type
 // to presumably handle touch and mouse events simultaneously
-export type FusionScrollEvent = UIEvent<HTMLDivElement> & ScrollState
+export type FusionScrollEvent = ScrollState | UIEvent<HTMLDivElement>
 // Using this custom type makes typescript happy
 // and exposes enough typing to properly interface
 // with the onScroll and onUpdate props
 export type FusionScrollHandler = (
   scrollValues: FusionScrollEvent,
-  prevScrollValues?: ScrollState
+  prevScrollValues?: FusionScrollEvent
 ) => void
 
 interface DapperScrollbarsProps extends StandardFunctionProps {
@@ -127,7 +121,14 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
       onScroll(scrollValues, prevScrollValues)
     }
 
-    const {scrollTop, scrollLeft} = scrollValues
+    const scrollState =
+      'scrollTop' in scrollValues
+        ? scrollValues
+        : {
+            scrollTop: scrollValues.currentTarget.scrollTop,
+            scrollLeft: scrollValues.currentTarget.scrollLeft,
+          }
+    const {scrollTop, scrollLeft} = scrollState
     setScrollTopPos(scrollTop)
     setScrollLeftPos(scrollLeft)
   }

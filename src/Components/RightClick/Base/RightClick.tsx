@@ -1,5 +1,5 @@
 // Libraries
-import React, {
+import {
   useState,
   useEffect,
   useRef,
@@ -34,7 +34,7 @@ export interface RightClickProps extends StandardFunctionProps {
   /** Prevents the right click menu from firing */
   disabled?: boolean
   /** Reference to trigger element */
-  triggerRef: RefObject<any>
+  triggerRef: RefObject<any | null>
 }
 
 export type RightClickRef = RightClickMenuRef

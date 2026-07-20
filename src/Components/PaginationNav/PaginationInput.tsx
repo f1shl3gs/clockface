@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, ChangeEvent, MouseEvent} from 'react'
+import {forwardRef, ChangeEvent, MouseEvent} from 'react'
 
 // Components
 import {Input} from '../Inputs/Input'
@@ -51,7 +51,7 @@ export const PaginationInput = forwardRef<
         color={ComponentColor.Tertiary}
         onClick={onClick}
         placeIconAfterText={true}
-        icon={IconFont[iconFont]}
+        icon={(IconFont as Record<string, any>)[iconFont]}
         text={'Go'}
       />
     </div>

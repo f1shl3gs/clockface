@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, RefObject, KeyboardEvent} from 'react'
+import {forwardRef, RefObject, KeyboardEvent} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -30,7 +30,7 @@ export interface SelectGroupOptionProps
   /** Choose either "SelectGroup" or "Checkbox" */
   type?: InputToggleType
   /** Refers to the visible element rather than the hidden input that ref refers to */
-  containerRef?: RefObject<SelectGroupOptionContainerRef>
+  containerRef?: RefObject<SelectGroupOptionContainerRef | null>
 }
 
 export type SelectGroupOptionRef = HTMLInputElement

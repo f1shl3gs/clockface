@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useEffect} from 'react'
+import {forwardRef, useEffect} from 'react'
 import {Transition} from 'react-spring/renderprops'
 import * as easings from 'd3-ease'
 

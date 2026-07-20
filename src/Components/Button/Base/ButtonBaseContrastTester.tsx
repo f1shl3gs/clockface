@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, useRef, useEffect, useState} from 'react'
+import {FunctionComponent, useRef, useEffect, useState} from 'react'
 import chroma from 'chroma-js'
 
 // Components

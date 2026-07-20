@@ -21,7 +21,7 @@ export interface OverlayProps extends StandardFunctionProps {
   /** Controls visibility of the overlay */
   visible: boolean
   /** Will replace the mask element with a custom element, useful for customizing the mask appearance */
-  renderMaskElement?: (style: CSSProperties) => JSX.Element
+  renderMaskElement?: (style: CSSProperties) => React.ReactElement
   /** Controls the transition timing */
   transitionDuration?: number
   /** Accepts state handler for visible prop to enable escape press functionality */

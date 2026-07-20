@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef, RefObject, useRef} from 'react'
+import {createRef, RefObject, useRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -267,7 +267,7 @@ listFamilyStories.add(
   'List',
   () => {
     const [selectedItem, setSelectedItem] = useState<string>('Grapefruit')
-    const listRef: RefObject<ListRef> = createRef()
+    const listRef: RefObject<ListRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -285,7 +285,7 @@ listFamilyStories.add(
           ref={listRef}
           style={object('style', defaultListStyle)}
           gradient={
-            Gradients[
+            (Gradients as Record<string, any>)[
               select(
                 'gradient',
                 {None: 'none', ...mapEnumKeys(Gradients)},
@@ -294,7 +294,7 @@ listFamilyStories.add(
             ]
           }
           backgroundColor={
-            InfluxColors[
+            (InfluxColors as Record<string, any>)[
               select(
                 'backgroundColor',
                 {None: '', ...mapEnumKeys(InfluxColors)},
@@ -311,7 +311,7 @@ listFamilyStories.add(
                   backgroundColor={item.backgroundColor}
                   gradient={item.gradient}
                   size={
-                    ComponentSize[
+                    (ComponentSize as Record<string, any>)[
                       select('size', mapEnumKeys(ComponentSize), 'Small')
                     ]
                   }
@@ -341,7 +341,7 @@ listFamilyStories.add(
                 key={item.text}
                 text={item.text}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -365,7 +365,7 @@ listFamilyStories.add(
 listFamilyStories.add(
   'ListDivider',
   () => {
-    const dropdownDividerRef: RefObject<ListDividerRef> = createRef()
+    const dropdownDividerRef: RefObject<ListDividerRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -395,7 +395,7 @@ listFamilyStories.add(
 listFamilyStories.add(
   'ListItem',
   () => {
-    const listItemRef: RefObject<ListItemRef> = createRef()
+    const listItemRef: RefObject<ListItemRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -415,7 +415,9 @@ listFamilyStories.add(
           }}
           backgroundColor={color('color', InfluxColors.Pool)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           disabled={boolean('disabled', false)}
         >
@@ -437,7 +439,7 @@ listFamilyStories.add(
 listFamilyStories.add(
   'ListEmptyState',
   () => {
-    const listEmptyStateRef: RefObject<ListEmptyStateRef> = createRef()
+    const listEmptyStateRef: RefObject<ListEmptyStateRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -450,7 +452,9 @@ listFamilyStories.add(
         <List.EmptyState
           wrapText={boolean('wrapText', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           ref={listEmptyStateRef}
         >
@@ -472,7 +476,7 @@ listFamilyStories.add(
 listExamplesStories.add(
   'Using LinkElement Prop',
   () => {
-    const linkElementRef: RefObject<HTMLAnchorElement> = createRef()
+    const linkElementRef: RefObject<HTMLAnchorElement | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -488,7 +492,9 @@ listExamplesStories.add(
           disabled={boolean('disabled', false)}
           backgroundColor={color('color', InfluxColors.Star)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           linkElement={
             <a
@@ -519,7 +525,7 @@ listExamplesStories.add(
 listExamplesStories.add(
   'Icons & Indicators',
   () => {
-    const listItemRef: RefObject<ListItemRef> = createRef()
+    const listItemRef: RefObject<ListItemRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -539,7 +545,9 @@ listExamplesStories.add(
           }}
           backgroundColor={color('color', InfluxColors.Pool)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           disabled={boolean('disabled', false)}
         >
@@ -548,7 +556,11 @@ listExamplesStories.add(
           />
           {text('children (text)', 'I am a dropdown item!')}
           <List.Icon
-            glyph={IconFont[select('glyph', mapEnumKeys(IconFont), 'Bell')]}
+            glyph={
+              (IconFont as Record<string, any>)[
+                select('glyph', mapEnumKeys(IconFont), 'Bell')
+              ]
+            }
           />
         </List.Item>
         <List.Item
@@ -561,12 +573,18 @@ listExamplesStories.add(
           }}
           backgroundColor={color('color', InfluxColors.Pool)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           disabled={boolean('disabled', false)}
         >
           <List.Icon
-            glyph={IconFont[select('glyph', mapEnumKeys(IconFont), 'Bell')]}
+            glyph={
+              (IconFont as Record<string, any>)[
+                select('glyph', mapEnumKeys(IconFont), 'Bell')
+              ]
+            }
           />
           {text('children (text)', 'I am a dropdown item!')}
           <List.Indicator
@@ -618,7 +636,7 @@ listExamplesStories.add(
               <List.Divider
                 text="Actions"
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -630,7 +648,7 @@ listExamplesStories.add(
                 onClick={onHide}
                 backgroundColor={InfluxColors.Pool}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -645,7 +663,7 @@ listExamplesStories.add(
                 onClick={onHide}
                 backgroundColor={InfluxColors.Rainforest}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -660,7 +678,7 @@ listExamplesStories.add(
                 onClick={onHide}
                 backgroundColor={InfluxColors.Pineapple}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -675,7 +693,7 @@ listExamplesStories.add(
                 onClick={onHide}
                 backgroundColor={InfluxColors.Star}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -686,7 +704,7 @@ listExamplesStories.add(
               <List.Divider
                 text="Hat"
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -697,7 +715,7 @@ listExamplesStories.add(
                 wrapText={false}
                 onClick={handleToggleHat(onHide || noop)}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -713,7 +731,7 @@ listExamplesStories.add(
                 wrapText={false}
                 onClick={handleToggleHat(onHide || noop)}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -729,7 +747,7 @@ listExamplesStories.add(
                 wrapText={false}
                 onClick={handleToggleHat(onHide || noop)}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -745,7 +763,7 @@ listExamplesStories.add(
                 wrapText={false}
                 onClick={handleToggleHat(onHide || noop)}
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }

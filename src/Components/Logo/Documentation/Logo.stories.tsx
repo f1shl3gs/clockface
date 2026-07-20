@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -51,7 +51,7 @@ logoStories.add(
         <InfluxLogo
           ref={logoRef}
           auxiliaryText={
-            LogoAuxiliaryText[
+            (LogoAuxiliaryText as Record<string, any>)[
               select(
                 'auxiliary',
                 mapEnumKeys(LogoAuxiliaryText),
@@ -60,22 +60,22 @@ logoStories.add(
             ]
           }
           baseText={
-            LogoBaseText[
+            (LogoBaseText as Record<string, any>)[
               select('base', mapEnumKeys(LogoBaseText), LogoBaseText.InfluxData)
             ]
           }
           logoMark={
-            LogoMarks[
+            (LogoMarks as Record<string, any>)[
               select('logomark', mapEnumKeys(LogoMarks), LogoMarks.Kubo)
             ]
           }
           symbol={
-            LogoSymbols[
+            (LogoSymbols as Record<string, any>)[
               select('symbol', mapEnumKeys(LogoSymbols), LogoSymbols.Registered)
             ]
           }
           fill={
-            InfluxColors[
+            (InfluxColors as Record<string, any>)[
               select('fill', mapEnumKeys(InfluxColors), InfluxColors.White)
             ]
           }
@@ -111,7 +111,9 @@ logoStories.add(
           ref={logoRef}
           simplified={boolean('simplified', false)}
           fill={
-            InfluxColors[select('fill', mapEnumKeys(InfluxColors), 'White')]
+            (InfluxColors as Record<string, any>)[
+              select('fill', mapEnumKeys(InfluxColors), 'White')
+            ]
           }
         />
         <div className="story--test-buttons">
@@ -143,7 +145,9 @@ logoStories.add(
         <InfluxDBCloudLogo
           ref={logoRef}
           fill={
-            InfluxColors[select('fill', mapEnumKeys(InfluxColors), 'White')]
+            (InfluxColors as Record<string, any>)[
+              select('fill', mapEnumKeys(InfluxColors), 'White')
+            ]
           }
           cloud={boolean('cloud', true)}
         />

@@ -1,6 +1,4 @@
 // Libraries
-import * as React from 'react'
-
 // Storybook
 import {storiesOf} from '@storybook/react'
 import {useState} from '@storybook/addons'
@@ -139,7 +137,10 @@ scrollbarStories.add('Synchronized Scrolling', () => {
   }
 
   const handleUpdate: FusionScrollHandler = (scrollValues): void => {
-    const {scrollTop} = scrollValues
+    const scrollTop =
+      'scrollTop' in scrollValues
+        ? scrollValues.scrollTop
+        : scrollValues.currentTarget.scrollTop
 
     setScrollbarState(scrollTop)
   }

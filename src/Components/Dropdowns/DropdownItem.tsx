@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, MouseEvent} from 'react'
+import {forwardRef, MouseEvent} from 'react'
 import classnames from 'classnames'
 
 // Types

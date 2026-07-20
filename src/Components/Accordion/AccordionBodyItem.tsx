@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react' // Styles
+import {forwardRef} from 'react' // Styles
 import classnames from 'classnames'
 
 // Types

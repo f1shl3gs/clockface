@@ -7,7 +7,7 @@ import classnames from 'classnames'
 
 export interface IndexListBodyProps extends StandardFunctionProps {
   /** Rendered when no children are passed in */
-  emptyState: JSX.Element
+  emptyState: React.ReactElement
   /** Used to ensure the empty state takes up the full width of the table */
   columnCount: number
 }

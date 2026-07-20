@@ -1,5 +1,5 @@
 // Libraries
-import React, {
+import {
   forwardRef,
   KeyboardEvent,
   ChangeEvent,
@@ -28,7 +28,7 @@ export interface ResourceCardEditableDescriptionProps
   /** Placeholder text to display in input during editing */
   placeholder?: string
   /** Pass through to assign a ref to the Input present in edit mode */
-  inputRef?: RefObject<InputRef>
+  inputRef?: RefObject<InputRef | null>
 }
 
 export type ResourceCardEditableDescriptionRef = HTMLDivElement
@@ -96,8 +96,8 @@ export const ResourceCardEditableDescription = forwardRef<
       }
     }
 
-    const handleInputFocus = (e: ChangeEvent<HTMLInputElement>): void => {
-      e.currentTarget.select()
+    const handleInputFocus = (e?: ChangeEvent<HTMLInputElement>): void => {
+      e?.currentTarget.select()
     }
 
     let descriptionElement = (

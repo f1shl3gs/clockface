@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 import _ from 'lodash'
 import classnames from 'classnames'
 

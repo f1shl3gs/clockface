@@ -1,5 +1,5 @@
 // Libraries
-import React, {CSSProperties, RefObject, createRef} from 'react'
+import {CSSProperties, RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -36,10 +36,10 @@ const customTextBlockStyles: CSSProperties = {
 textBlockStories.add(
   'Example',
   () => {
-    const textBlock1Ref: RefObject<TextBlockRef> = createRef()
-    const textBlock2Ref: RefObject<TextBlockRef> = createRef()
-    const textBlock3Ref: RefObject<TextBlockRef> = createRef()
-    const textBlock4Ref: RefObject<TextBlockRef> = createRef()
+    const textBlock1Ref: RefObject<TextBlockRef | null> = createRef()
+    const textBlock2Ref: RefObject<TextBlockRef | null> = createRef()
+    const textBlock3Ref: RefObject<TextBlockRef | null> = createRef()
+    const textBlock4Ref: RefObject<TextBlockRef | null> = createRef()
 
     const logLabelRefs = (): void => {
       /* eslint-disable */
@@ -57,7 +57,9 @@ textBlockStories.add(
             ref={textBlock1Ref}
             text="No backgroundColor or textColor"
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             monospace={boolean('monospace', false)}
           />
@@ -67,7 +69,9 @@ textBlockStories.add(
             ref={textBlock2Ref}
             text={text('text', 'I am customizable!')}
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             backgroundColor={color('backgroundColor', '')}
             monospace={boolean('monospace', false)}
@@ -78,7 +82,9 @@ textBlockStories.add(
             ref={textBlock3Ref}
             text={text('text', 'I am customizable!')}
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             backgroundColor={color('backgroundColor', '')}
             textColor={color('textColor', '')}
@@ -90,7 +96,9 @@ textBlockStories.add(
             ref={textBlock4Ref}
             text="I can be styled"
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             backgroundColor={color('backgroundColor', '')}
             textColor={color('textColor', '')}

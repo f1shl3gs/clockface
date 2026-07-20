@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react'
+import {Component} from 'react'
 
 // Components
 import {Pagination, PaginationNavProps} from './PaginationNav'

@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -39,7 +39,7 @@ const slideToggleExampleStories = storiesOf(
 slideToggleStories.add(
   'SlideToggle',
   () => {
-    const slideToggleRef: RefObject<SlideToggleRef> = createRef()
+    const slideToggleRef: RefObject<SlideToggleRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -55,10 +55,12 @@ slideToggleStories.add(
           active={boolean('active', false)}
           disabled={boolean('disabled', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Default')
             ]
           }
@@ -90,7 +92,9 @@ slideToggleExampleStories.add(
           wrapText={boolean('Left Label: wrapText', true)}
           active={!boolean('active', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           {text('Left Label: text', 'Apples')}
@@ -99,10 +103,12 @@ slideToggleExampleStories.add(
           onChange={() => alert('clicked')}
           active={boolean('active', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
@@ -111,7 +117,9 @@ slideToggleExampleStories.add(
           wrapText={boolean('Right Label: wrapText', true)}
           active={boolean('active', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           {text('Right Label: text', 'Oranges')}
@@ -152,7 +160,7 @@ slideToggleExampleStories.add(
                 active={optionA}
                 size={ComponentSize.ExtraSmall}
                 color={
-                  ComponentColor[
+                  (ComponentColor as Record<string, any>)[
                     select('color', mapEnumKeys(ComponentColor), 'Secondary')
                   ]
                 }
@@ -170,7 +178,7 @@ slideToggleExampleStories.add(
                 active={optionA}
                 size={ComponentSize.Small}
                 color={
-                  ComponentColor[
+                  (ComponentColor as Record<string, any>)[
                     select('color', mapEnumKeys(ComponentColor), 'Secondary')
                   ]
                 }
@@ -188,7 +196,7 @@ slideToggleExampleStories.add(
                 active={optionB}
                 size={ComponentSize.Medium}
                 color={
-                  ComponentColor[
+                  (ComponentColor as Record<string, any>)[
                     select('color', mapEnumKeys(ComponentColor), 'Secondary')
                   ]
                 }
@@ -206,7 +214,7 @@ slideToggleExampleStories.add(
                 active={optionC}
                 size={ComponentSize.Large}
                 color={
-                  ComponentColor[
+                  (ComponentColor as Record<string, any>)[
                     select('color', mapEnumKeys(ComponentColor), 'Secondary')
                   ]
                 }

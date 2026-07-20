@@ -23,7 +23,7 @@ import './AutoInput.scss'
 
 export interface AutoInputProps extends StandardFunctionProps {
   /** Pass in a component of type "Input" */
-  inputComponent: JSX.Element
+  inputComponent: React.ReactElement
   /** Fires when the radio is toggled and the mode changes */
   onChangeMode: (mode: AutoInputMode) => void
   /** Modality of radio, either "Auto" or "Custom" */
@@ -33,11 +33,11 @@ export interface AutoInputProps extends StandardFunctionProps {
   /** Controls size of SelectGroup & Input sub-components */
   size?: ComponentSize
   /** Pass through ref for SelectGroup */
-  radioRef?: RefObject<SelectGroupRef>
+  radioRef?: RefObject<SelectGroupRef | null>
   /** Pass through ref for "Auto" SelectGroupOption */
-  radioButtonAutoRef?: RefObject<SelectGroupOptionRef>
+  radioButtonAutoRef?: RefObject<SelectGroupOptionRef | null>
   /** Pass through ref for "Custom" SelectGroupOption */
-  radioButtonCustomRef?: RefObject<SelectGroupOptionRef>
+  radioButtonCustomRef?: RefObject<SelectGroupOptionRef | null>
 }
 
 export type AutoInputRef = HTMLDivElement

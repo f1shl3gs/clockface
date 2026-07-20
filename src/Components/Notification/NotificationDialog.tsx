@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -66,7 +66,7 @@ export const NotificationDialog = forwardRef<
   ) => {
     let internalGradient = gradient
     if (color) {
-      const notificationThemes = {
+      const notificationThemes: Record<string, Gradients> = {
         [ComponentColor.Primary]: Gradients.Info,
         [ComponentColor.Success]: Gradients.Success,
         [ComponentColor.Danger]: Gradients.Danger,

@@ -1,4 +1,4 @@
-import React, {ReactPortal, ReactNode} from 'react'
+import {ReactPortal, ReactNode} from 'react'
 import {createPortal} from 'react-dom'
 import {VerticalAlignment, Alignment} from '../Types'
 

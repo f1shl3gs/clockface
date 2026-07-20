@@ -1,4 +1,4 @@
-import React, {
+import {
   ChangeEvent,
   KeyboardEvent,
   MouseEvent,
@@ -121,7 +121,7 @@ export const VisibilityInput = forwardRef<
     const visibility = visible || mode === 'visible'
     const inputType = visibility ? InputType.Text : InputType.Password
 
-    const handleToggleClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    const handleToggleClick = (e?: MouseEvent<HTMLButtonElement>): void => {
       if (onToggleClick) {
         onToggleClick(e)
       } else if (mode === 'visible') {
@@ -179,7 +179,7 @@ interface VisibilityIconProps {
   visible: boolean
   status: ComponentStatus
   size: ComponentSize
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void
+  onClick: (e?: MouseEvent<HTMLButtonElement>) => void
 }
 
 const VisibilityIcon: FunctionComponent<VisibilityIconProps> = ({

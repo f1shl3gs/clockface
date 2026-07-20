@@ -1,5 +1,5 @@
 // Libraries
-import React, {CSSProperties} from 'react'
+import {CSSProperties} from 'react'
 import marked from 'marked'
 import chroma from 'chroma-js'
 
@@ -289,7 +289,7 @@ dataTypeStories.add(
 dataTypeStories.add(
   'Colors & Gradients',
   () => {
-    const convertEnumToObjArray = (enumerator: object) => {
+    const convertEnumToObjArray = (enumerator: Record<string, any>) => {
       const enumKeys = Object.keys(enumerator)
 
       return enumKeys.map(ek => ({
@@ -577,7 +577,8 @@ dataTypeStories.add(
 dataTypeStories.add(
   'Icon Font',
   () => {
-    const getIconValue = (icon: string): string => IconFont[icon]
+    const getIconValue = (icon: string): string =>
+      (IconFont as Record<string, any>)[icon]
 
     return (
       <div className="markdown-body">

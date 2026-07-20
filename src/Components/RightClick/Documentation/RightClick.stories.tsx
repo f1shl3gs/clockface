@@ -1,5 +1,5 @@
 // Libraries
-import React, {useRef} from 'react'
+import {useRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -45,7 +45,7 @@ rightClickStories.add(
           className={text('className', '')}
           style={object('style', {})}
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }

@@ -1,5 +1,5 @@
 // Libraries
-import React, {FC, useContext} from 'react'
+import {FC, useContext} from 'react'
 import classnames from 'classnames'
 
 // Contexts

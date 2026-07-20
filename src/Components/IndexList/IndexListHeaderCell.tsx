@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, FunctionComponent} from 'react'
+import {forwardRef, FunctionComponent} from 'react'
 import classnames from 'classnames'
 
 // Types

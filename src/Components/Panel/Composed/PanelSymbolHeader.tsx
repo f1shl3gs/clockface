@@ -22,9 +22,9 @@ import {
 
 export interface PanelSymbolHeaderProps extends PanelHeaderProps {
   /** Element to display before header text (Bullet or Icon) */
-  symbol?: JSX.Element
+  symbol?: React.ReactElement
   /** Panel title */
-  title?: JSX.Element
+  title?: React.ReactElement
 }
 
 export type PanelSymbolHeaderRef = PanelHeaderRef

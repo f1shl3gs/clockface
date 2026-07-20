@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -51,7 +51,9 @@ appHeaderFamilyStories.add(
         <AppHeader.AppHeader
           ref={appHeaderRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         />
         <div className="story--test-buttons">
@@ -84,7 +86,9 @@ appHeaderFamilyStories.add(
           ref={appHeaderLogoRef}
           src={text('src', '/static/media/.storybook/influxdata-logo.png')}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         />
         <div className="story--test-buttons">
@@ -108,13 +112,15 @@ appHeaderExampleStories.add(
         <div className="mockPage">
           <AppHeader
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
           >
             <AppHeader.Logo
               src={text('src', '/static/media/.storybook/influxdata-logo.png')}
               size={
-                ComponentSize[
+                (ComponentSize as Record<string, any>)[
                   select('size', mapEnumKeys(ComponentSize), 'Small')
                 ]
               }
@@ -125,7 +131,7 @@ appHeaderExampleStories.add(
             >
               <Button
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -134,12 +140,12 @@ appHeaderExampleStories.add(
               />
               <PopNav
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
                 buttonColor={
-                  ComponentColor[
+                  (ComponentColor as Record<string, any>)[
                     select(
                       'PopNav button color',
                       {None: 'none', ...mapEnumKeys(ComponentColor)},
@@ -148,7 +154,7 @@ appHeaderExampleStories.add(
                   ]
                 }
                 align={
-                  Alignment[
+                  (Alignment as Record<string, any>)[
                     select('alignment', mapEnumKeys(Alignment), 'Right')
                   ]
                 }

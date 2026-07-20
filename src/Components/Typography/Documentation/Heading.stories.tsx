@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef} from 'react'
+import {RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -30,7 +30,7 @@ const headingStories = storiesOf('Components/Heading', module).addDecorator(
 headingStories.add(
   'Base',
   () => {
-    const headingRef: RefObject<HeadingRef> = createRef()
+    const headingRef: RefObject<HeadingRef | null> = createRef()
 
     const logRef = (): void => {
       /* eslint-disable */
@@ -43,10 +43,12 @@ headingStories.add(
         <Heading
           ref={headingRef}
           element={
-            HeadingElement[select('element', mapEnumKeys(HeadingElement), 'H1')]
+            (HeadingElement as Record<string, any>)[
+              select('element', mapEnumKeys(HeadingElement), 'H1')
+            ]
           }
           appearance={
-            HeadingElement[
+            (HeadingElement as Record<string, any>)[
               select(
                 'appearance',
                 {Inherit: '', ...mapEnumKeys(HeadingElement)},
@@ -54,9 +56,15 @@ headingStories.add(
               )
             ]
           }
-          type={Typeface[select('type', mapEnumKeys(Typeface), 'ProximaNova')]}
+          type={
+            (Typeface as Record<string, any>)[
+              select('type', mapEnumKeys(Typeface), 'ProximaNova')
+            ]
+          }
           weight={
-            FontWeight[select('weight', mapEnumKeys(FontWeight), 'Medium')]
+            (FontWeight as Record<string, any>)[
+              select('weight', mapEnumKeys(FontWeight), 'Medium')
+            ]
           }
           underline={boolean('underline', false)}
           selectable={boolean('selectable', false)}

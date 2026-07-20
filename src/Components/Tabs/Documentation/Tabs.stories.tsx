@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 import {get} from 'lodash'
 
@@ -44,7 +44,10 @@ tabsStories.add(
       /* eslint-enable */
     }
 
-    const handleTabClick = (id: string): void => {
+    const handleTabClick = (id?: string): void => {
+      if (id === undefined) {
+        return
+      }
       setActiveTab(id)
     }
 
@@ -86,19 +89,23 @@ tabsStories.add(
         <Tabs.Tabs
           ref={tabsRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Medium')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Medium')
+            ]
           }
           alignment={
-            Alignment[select('alignment', mapEnumKeys(Alignment), 'Left')]
+            (Alignment as Record<string, any>)[
+              select('alignment', mapEnumKeys(Alignment), 'Left')
+            ]
           }
           dropdownAlignment={
-            Alignment[
+            (Alignment as Record<string, any>)[
               select('dropdownAlignment', mapEnumKeys(Alignment), 'Center')
             ]
           }
           dropdownLabel={dropdownLabel}
           orientation={
-            Orientation[
+            (Orientation as Record<string, any>)[
               select('orientation', mapEnumKeys(Orientation), 'Horizontal')
             ]
           }
@@ -141,7 +148,7 @@ tabsStories.add(
     return (
       <div
         className={`story--example cf-tabs__md cf-tabs__${
-          Orientation[
+          (Orientation as Record<string, any>)[
             select('orientation', mapEnumKeys(Orientation), 'Horizontal')
           ]
         }`}
@@ -150,7 +157,11 @@ tabsStories.add(
           ref={tabRef}
           icon={
             <Icon
-              glyph={IconFont[select('icon', mapEnumKeys(IconFont), 'Star')]}
+              glyph={
+                (IconFont as Record<string, any>)[
+                  select('icon', mapEnumKeys(IconFont), 'Star')
+                ]
+              }
             />
           }
           active={boolean('active', true)}
@@ -217,7 +228,7 @@ tabsStories.add(
         <Tabs.Container
           ref={tabContainerRef}
           orientation={
-            Orientation[
+            (Orientation as Record<string, any>)[
               select('orientation', mapEnumKeys(Orientation), 'Horizontal')
             ]
           }
@@ -226,10 +237,12 @@ tabsStories.add(
         >
           <Tabs
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Large')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Large')
+              ]
             }
             orientation={
-              Orientation[
+              (Orientation as Record<string, any>)[
                 select('orientation', mapEnumKeys(Orientation), 'Horizontal')
               ]
             }
@@ -280,11 +293,14 @@ tabsExampleStories.add(
       /* eslint-enable */
     }
 
-    const handleTabClick = (id: string): void => {
+    const handleTabClick = (id?: string): void => {
+      if (id === undefined) {
+        return
+      }
       setActiveTab(id)
     }
 
-    const handleTabDismiss = (id: string): void => {
+    const handleTabDismiss = (id?: string): void => {
       /* eslint-disable */
       console.log('dismissed tab: ', id)
       /* eslint-enable */
@@ -295,18 +311,22 @@ tabsExampleStories.add(
         <Tabs.Tabs
           ref={tabsRef}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Large')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Large')
+            ]
           }
           orientation={
-            Orientation[
+            (Orientation as Record<string, any>)[
               select('orientation', mapEnumKeys(Orientation), 'Horizontal')
             ]
           }
           alignment={
-            Alignment[select('alignment', mapEnumKeys(Alignment), 'Left')]
+            (Alignment as Record<string, any>)[
+              select('alignment', mapEnumKeys(Alignment), 'Left')
+            ]
           }
           dropdownAlignment={
-            Alignment[
+            (Alignment as Record<string, any>)[
               select('dropdownAlignment', mapEnumKeys(Alignment), 'Center')
             ]
           }

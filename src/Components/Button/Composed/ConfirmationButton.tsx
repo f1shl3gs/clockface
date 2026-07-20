@@ -1,5 +1,5 @@
 // Libraries
-import React, {
+import {
   FunctionComponent,
   useRef,
   RefObject,
@@ -87,7 +87,7 @@ export const ConfirmationButton: FunctionComponent<ConfirmationButtonProps> = ({
   confirmationButtonColor = ComponentColor.Danger,
 }) => {
   const [buttonState, setButtonState] = useState<boolean>(false)
-  const triggerRef: RefObject<HTMLButtonElement> = useRef(null)
+  const triggerRef: RefObject<HTMLButtonElement | null> = useRef(null)
 
   const isDisabled =
     status === ComponentStatus.Disabled || status === ComponentStatus.Loading

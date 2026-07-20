@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 import {startsWith} from 'lodash'
 
@@ -52,7 +52,7 @@ layoutStories.add(
         <div className="mockPage">
           <AppHeader
             size={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('header size', mapEnumKeys(ComponentSize), 'Small')
               ]
             }
@@ -60,7 +60,7 @@ layoutStories.add(
             <AppHeader.Logo
               src={text('src', '/static/media/.storybook/influxdata-logo.png')}
               size={
-                ComponentSize[
+                (ComponentSize as Record<string, any>)[
                   select('header size', mapEnumKeys(ComponentSize), 'Small')
                 ]
               }
@@ -71,7 +71,7 @@ layoutStories.add(
             >
               <Button
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('header size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -80,12 +80,12 @@ layoutStories.add(
               />
               <PopNav
                 size={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('header size', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
                 buttonColor={
-                  ComponentColor[
+                  (ComponentColor as Record<string, any>)[
                     select(
                       'PopNav button color',
                       {None: 'none', ...mapEnumKeys(ComponentColor)},
@@ -401,7 +401,7 @@ layoutStories.add(
               <Page.Header
                 fullWidth={boolean('fullWidth', false)}
                 gutters={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('gutters', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -413,7 +413,7 @@ layoutStories.add(
               <Page.ControlBar
                 fullWidth={boolean('fullWidth', false)}
                 gutters={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('gutters', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -440,7 +440,7 @@ layoutStories.add(
                 fullWidth={boolean('fullWidth', false)}
                 scrollable={boolean('scrollable', true)}
                 gutters={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('gutters', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -560,7 +560,7 @@ layoutStories.add(
                   active={isItemActive('home')}
                   icon={<Icon glyph={IconFont.CuboUniform} />}
                   color={
-                    ComponentColor[
+                    (ComponentColor as Record<string, any>)[
                       select('color', mapEnumKeys(ComponentColor), 'Primary')
                     ]
                   }
@@ -695,7 +695,7 @@ layoutStories.add(
               <Page.Header
                 fullWidth={boolean('fullWidth', false)}
                 gutters={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('gutters', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -705,7 +705,7 @@ layoutStories.add(
               <Page.ControlBar
                 fullWidth={boolean('fullWidth', false)}
                 gutters={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('gutters', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }
@@ -732,7 +732,7 @@ layoutStories.add(
                 fullWidth={boolean('fullWidth', false)}
                 scrollable={boolean('scrollable', true)}
                 gutters={
-                  ComponentSize[
+                  (ComponentSize as Record<string, any>)[
                     select('gutters', mapEnumKeys(ComponentSize), 'Small')
                   ]
                 }

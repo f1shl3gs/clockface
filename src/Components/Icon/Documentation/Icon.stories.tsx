@@ -1,5 +1,5 @@
 // Libraries
-import React, {CSSProperties, RefObject, createRef} from 'react'
+import {CSSProperties, RefObject, createRef} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -30,7 +30,7 @@ iconBaseStories.add(
   'Base Icon',
   () => {
     const iconStyleExample: CSSProperties = {color: '#6BDFFF', fontSize: '60px'}
-    const iconRef: RefObject<IconRef> = createRef()
+    const iconRef: RefObject<IconRef | null> = createRef()
 
     const logIconRef = (): void => {
       /* eslint-disable */
@@ -42,7 +42,11 @@ iconBaseStories.add(
       <div className="story--example">
         <Icon
           ref={iconRef}
-          glyph={IconFont[select('glyph', mapEnumKeys(IconFont), 'Bell')]}
+          glyph={
+            (IconFont as Record<string, any>)[
+              select('glyph', mapEnumKeys(IconFont), 'Bell')
+            ]
+          }
           style={object('style', iconStyleExample)}
         />
         <div className="story--test-buttons">
@@ -61,7 +65,7 @@ iconBaseStories.add(
 iconComposedStories.add(
   'Bullet',
   () => {
-    const bulletRef: RefObject<BulletRef> = createRef()
+    const bulletRef: RefObject<BulletRef | null> = createRef()
 
     const logbulletRef = (): void => {
       /* eslint-disable */
@@ -75,37 +79,43 @@ iconComposedStories.add(
           <Bullet
             ref={bulletRef}
             glyph={
-              IconFont[select('glyph', mapEnumKeys(IconFont), 'Checkmark_New')]
+              (IconFont as Record<string, any>)[
+                select('glyph', mapEnumKeys(IconFont), 'Checkmark_New')
+              ]
             }
             size={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('size', mapEnumKeys(ComponentSize), 'Medium')
               ]
             }
             backgroundColor={
-              InfluxColors[
+              (InfluxColors as Record<string, any>)[
                 select('backgroundColor', mapEnumKeys(InfluxColors), 'Pool')
               ]
             }
             color={
-              InfluxColors[select('color', mapEnumKeys(InfluxColors), 'Raven')]
+              (InfluxColors as Record<string, any>)[
+                select('color', mapEnumKeys(InfluxColors), 'Raven')
+              ]
             }
           />
           <Bullet
             ref={bulletRef}
             text={number('number', 1)}
             size={
-              ComponentSize[
+              (ComponentSize as Record<string, any>)[
                 select('size', mapEnumKeys(ComponentSize), 'Medium')
               ]
             }
             backgroundColor={
-              InfluxColors[
+              (InfluxColors as Record<string, any>)[
                 select('backgroundColor', mapEnumKeys(InfluxColors), 'Pool')
               ]
             }
             color={
-              InfluxColors[select('color', mapEnumKeys(InfluxColors), 'Raven')]
+              (InfluxColors as Record<string, any>)[
+                select('color', mapEnumKeys(InfluxColors), 'Raven')
+              ]
             }
           />
         </div>

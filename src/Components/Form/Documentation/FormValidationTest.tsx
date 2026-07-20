@@ -1,4 +1,4 @@
-import React, {Component, ChangeEvent} from 'react'
+import {Component, ChangeEvent} from 'react'
 
 // This component only exists to test FormValidationElement with a stateful wrapper
 // Our addon-state storybook plugin is currently broken

@@ -12,7 +12,7 @@ export interface SpinnerContainerProps extends StandardFunctionProps {
   /** Loading state */
   loading: RemoteDataState
   /** Spinner component */
-  spinnerComponent: JSX.Element
+  spinnerComponent: React.ReactElement
 }
 
 export type SpinnerContainerRef = HTMLDivElement

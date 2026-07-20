@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, ChangeEvent, useState} from 'react'
+import {forwardRef, ChangeEvent, useState} from 'react'
 import ReactDatePicker from 'react-datepicker'
 import moment from 'moment'
 

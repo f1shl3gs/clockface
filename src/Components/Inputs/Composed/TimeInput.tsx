@@ -1,5 +1,5 @@
 // Libraries
-import React, {FC, ChangeEvent, forwardRef} from 'react'
+import {FC, ChangeEvent, forwardRef} from 'react'
 
 // Components
 import {Input, InputProps, InputRef} from '../Input'

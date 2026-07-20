@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useState} from 'react'
+import {forwardRef, useState} from 'react'
 
 // Components
 import {DatePicker} from '../Base/DatePicker'

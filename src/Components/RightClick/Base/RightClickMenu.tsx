@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, RefObject, useLayoutEffect, useRef} from 'react'
+import {forwardRef, RefObject, useLayoutEffect, useRef} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -18,7 +18,7 @@ import {
 
 export interface RightClickMenuProps extends StandardFunctionProps {
   /** Bounding rectangle of trigger element */
-  triggerRef: RefObject<any>
+  triggerRef: RefObject<any | null>
   /** Menu dialog color */
   color: ComponentColor
   /** Dismisses the menu */

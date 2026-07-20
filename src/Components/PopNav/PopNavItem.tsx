@@ -13,7 +13,7 @@ export interface PopNavItemProps extends StandardFunctionProps {
     className: string,
     testID?: string,
     style?: CSSProperties
-  ) => JSX.Element
+  ) => React.ReactElement
 }
 
 export const PopNavItem: FunctionComponent<PopNavItemProps> = ({

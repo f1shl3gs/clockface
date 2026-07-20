@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef, KeyboardEvent} from 'react'
+import {RefObject, createRef, KeyboardEvent} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -40,11 +40,11 @@ const exampleStyle = {
 selectableCardStories.add(
   'SelectableCard',
   () => {
-    const selectableCard1Ref: RefObject<SelectableCardRef> = createRef()
-    const selectableCard2Ref: RefObject<SelectableCardRef> = createRef()
-    const selectableCard3Ref: RefObject<SelectableCardRef> = createRef()
-    const selectableCard4Ref: RefObject<SelectableCardRef> = createRef()
-    const selectableCard5Ref: RefObject<SelectableCardRef> = createRef()
+    const selectableCard1Ref: RefObject<SelectableCardRef | null> = createRef()
+    const selectableCard2Ref: RefObject<SelectableCardRef | null> = createRef()
+    const selectableCard3Ref: RefObject<SelectableCardRef | null> = createRef()
+    const selectableCard4Ref: RefObject<SelectableCardRef | null> = createRef()
+    const selectableCard5Ref: RefObject<SelectableCardRef | null> = createRef()
 
     const logRefs = (): void => {
       /* eslint-disable */
@@ -69,10 +69,12 @@ selectableCardStories.add(
           selected={false}
           disabled={boolean('disabled', false)}
           fontSize={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Success')
             ]
           }
@@ -88,10 +90,12 @@ selectableCardStories.add(
           selected={true}
           disabled={boolean('disabled', false)}
           fontSize={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Success')
             ]
           }
@@ -104,7 +108,7 @@ selectableCardStories.add(
           style={object('style', exampleStyle)}
           id="default-card"
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'icon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -116,10 +120,12 @@ selectableCardStories.add(
           selected={false}
           disabled={false}
           fontSize={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Success')
             ]
           }
@@ -134,7 +140,7 @@ selectableCardStories.add(
           style={object('style', exampleStyle)}
           id="selected-card"
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'icon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -146,10 +152,12 @@ selectableCardStories.add(
           selected={true}
           disabled={false}
           fontSize={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Success')
             ]
           }
@@ -164,7 +172,7 @@ selectableCardStories.add(
           style={object('style', exampleStyle)}
           id="disabled-card"
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'icon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -176,10 +184,12 @@ selectableCardStories.add(
           selected={false}
           disabled={true}
           fontSize={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Success')
             ]
           }
@@ -194,7 +204,7 @@ selectableCardStories.add(
           style={object('style', exampleStyle)}
           id="selected-disabled-card"
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'icon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -206,10 +216,12 @@ selectableCardStories.add(
           selected={true}
           disabled={true}
           fontSize={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Success')
             ]
           }
@@ -253,7 +265,10 @@ selectableCardStories.add(
       return disabledCards.includes(card)
     }
 
-    const handleCardClick = (card: string): void => {
+    const handleCardClick = (card?: string): void => {
+      if (card === undefined) {
+        return
+      }
       const cardCurrentlyActive = activeCardIDs.includes(card)
       let updatedActiveCardIDs = activeCardIDs
 
@@ -269,9 +284,12 @@ selectableCardStories.add(
     }
 
     const handleCardKeyDown = (
-      card: string,
-      e: KeyboardEvent<SelectableCardRef>
+      card?: string,
+      e?: KeyboardEvent<SelectableCardRef>
     ): void => {
+      if (card === undefined || e === undefined) {
+        return
+      }
       const spaceKey = e.keyCode === 32
       const cardCurrentlyActive = activeCardIDs.includes(card)
       let updatedActiveCardIDs = activeCardIDs

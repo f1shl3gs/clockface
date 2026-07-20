@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 
 // Components
 import {ButtonBase, ButtonBaseRef} from '../Base/ButtonBase'

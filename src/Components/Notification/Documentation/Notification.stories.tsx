@@ -1,5 +1,5 @@
 // Libraries
-import React, {createRef} from 'react'
+import {createRef} from 'react'
 import marked from 'marked'
 import uuid from 'uuid'
 
@@ -106,7 +106,10 @@ notificationStories.add(
       updateNotifications(updatedNotifications)
     }
 
-    const handleDismiss = (id: string): void => {
+    const handleDismiss = (id?: string): void => {
+      if (id === undefined) {
+        return
+      }
       const updatedNotifications = notifications.map(n => {
         if (n.id === id) {
           return {...n, visible: false}
@@ -274,10 +277,12 @@ notificationStories.add(
           ref={notificationDialogRef}
           visible={boolean('visible', true)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select(
                 'icon',
                 {None: 'none', ...mapEnumKeys(IconFont)},
@@ -286,7 +291,7 @@ notificationStories.add(
             ]
           }
           gradient={
-            Gradients[
+            (Gradients as Record<string, any>)[
               select(
                 'gradient',
                 {None: 'none', ...mapEnumKeys(Gradients)},
@@ -295,7 +300,7 @@ notificationStories.add(
             ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select(
                 'color',
                 {None: 'none', ...mapEnumKeys(reducedNotificationEnum)},

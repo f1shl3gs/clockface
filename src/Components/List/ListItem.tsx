@@ -52,7 +52,7 @@ export interface ListItemProps extends CombinedListItemProps {
   /** Prevents any interaction with this element, including the onClick function */
   disabled?: boolean
   /** Pass in an <a> or <Link> element as an alternative to onClick */
-  linkElement?: JSX.Element
+  linkElement?: React.ReactElement<any>
   /** Colorizes the background of the list item in hover and selected state */
   backgroundColor?: InfluxColors | string
   /** Overrides backgroundColor, fills background with gradient */

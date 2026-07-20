@@ -20,7 +20,7 @@ export interface QuestionMarkTooltipProps extends StandardFunctionProps {
   /** Controls the size of the question mark circle */
   diameter?: number
   /** Contents to display in tooltip */
-  tooltipContents: JSX.Element | string
+  tooltipContents: React.ReactElement | string
   /** Coloration of tooltip and question mark circle */
   color?: ComponentColor
   /** Useful for customizing the tooltip itself */
@@ -46,7 +46,7 @@ export const QuestionMarkTooltip = forwardRef<
     },
     ref
   ) => {
-    const triggerRef: RefObject<HTMLDivElement> = useRef(null)
+    const triggerRef: RefObject<HTMLDivElement | null> = useRef(null)
 
     const circleClassName = classnames('cf-question-mark-tooltip', {
       [`${className}`]: className,

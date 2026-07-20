@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, createRef, ChangeEvent} from 'react'
+import {RefObject, createRef, ChangeEvent} from 'react'
 import marked from 'marked'
 
 // Storybook
@@ -90,8 +90,8 @@ const defaultInputStyle = {
 inputsBaseStories.add(
   'Input (Text)',
   () => {
-    const inputRef: RefObject<InputRef> = createRef()
-    const inputContainerRef: RefObject<InputContainerRef> = createRef()
+    const inputRef: RefObject<InputRef | null> = createRef()
+    const inputContainerRef: RefObject<InputContainerRef | null> = createRef()
 
     const handleLogRefs = (): void => {
       /* eslint-disable */
@@ -116,21 +116,23 @@ inputsBaseStories.add(
           disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
           maxLength={number('maxLength', 24)}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
           style={object('style', defaultInputStyle)}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           autocomplete={
-            AutoComplete[
+            (AutoComplete as Record<string, any>)[
               radios<AutoComplete>(
                 'autocomplete',
                 mapEnumKeys(AutoComplete),
@@ -173,18 +175,20 @@ inputsBaseStories.add(
           disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
           maxLength={number('maxLength', 125)}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
           style={object('style', defaultInputStyle)}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           type={InputType.Text}
         />
@@ -218,18 +222,20 @@ inputsBaseStories.add(
           disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
           maxLength={number('maxLength', 24)}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
           style={object('style', defaultInputStyle)}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           type={InputType.Number}
         />
@@ -259,21 +265,23 @@ inputsBaseStories.add(
         disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
         maxLength={number('maxLength', 24)}
         icon={
-          IconFont[
+          (IconFont as Record<string, any>)[
             select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
           ]
         }
         style={object('style', defaultInputStyle)}
         status={
-          ComponentStatus[
+          (ComponentStatus as Record<string, any>)[
             select('status', mapEnumKeys(ComponentStatus), 'Default')
           ]
         }
         size={
-          ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+          (ComponentSize as Record<string, any>)[
+            select('size', mapEnumKeys(ComponentSize), 'Small')
+          ]
         }
         autocomplete={
-          AutoComplete[
+          (AutoComplete as Record<string, any>)[
             radios<AutoComplete>(
               'autocomplete',
               mapEnumKeys(AutoComplete),
@@ -308,21 +316,23 @@ inputsBaseStories.add(
         disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
         maxLength={number('maxLength', 24)}
         icon={
-          IconFont[
+          (IconFont as Record<string, any>)[
             select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
           ]
         }
         style={object('style', defaultInputStyle)}
         status={
-          ComponentStatus[
+          (ComponentStatus as Record<string, any>)[
             select('status', mapEnumKeys(ComponentStatus), 'Default')
           ]
         }
         size={
-          ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+          (ComponentSize as Record<string, any>)[
+            select('size', mapEnumKeys(ComponentSize), 'Small')
+          ]
         }
         autocomplete={
-          AutoComplete[
+          (AutoComplete as Record<string, any>)[
             radios<AutoComplete>(
               'autocomplete',
               mapEnumKeys(AutoComplete),
@@ -358,10 +368,12 @@ inputsBaseStories.add(
               // do nothing
             }}
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             status={
-              ComponentStatus[
+              (ComponentStatus as Record<string, any>)[
                 select('status', mapEnumKeys(ComponentStatus), 'Default')
               ]
             }
@@ -370,7 +382,9 @@ inputsBaseStories.add(
           />
           <InputLabel
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             active={boolean('checked', true)}
             wrapText={boolean('Label: wrapText', true)}
@@ -391,7 +405,7 @@ inputsBaseStories.add(
 inputsBaseStories.add(
   'InputLabel',
   () => {
-    const inputLabelRef: RefObject<InputLabelRef> = createRef()
+    const inputLabelRef: RefObject<InputLabelRef | null> = createRef()
 
     const handleLogRefs = (): void => {
       /* eslint-disable */
@@ -406,7 +420,9 @@ inputsBaseStories.add(
           style={object('style', {})}
           active={boolean('active', true)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         >
           {text('children', 'I am a label!')}
@@ -427,12 +443,12 @@ inputsBaseStories.add(
 inputsBaseStories.add(
   'Toggle',
   () => {
-    const toggleRef: RefObject<ToggleRef> = createRef()
-    const toggleContainerRef: RefObject<ToggleContainerRef> = createRef()
+    const toggleRef: RefObject<ToggleRef | null> = createRef()
+    const toggleContainerRef: RefObject<ToggleContainerRef | null> = createRef()
 
     const [checked, setChecked] = useState<boolean>(false)
 
-    const handleToggleChange = (value: string): void => {
+    const handleToggleChange = (value?: string): void => {
       /* eslint-disable */
       console.log('onChange fired!', value)
       /* eslint-enable */
@@ -459,22 +475,28 @@ inputsBaseStories.add(
           style={object('style', {})}
           tabIndex={number('tabIndex', 1)}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
           disabled={boolean('disabled', false)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
-          fill={Appearance[select('fill', ['None', 'Solid'], 'None')]}
+          fill={
+            (Appearance as Record<string, any>)[
+              select('fill', ['None', 'Solid'], 'None')
+            ]
+          }
           type={
-            InputToggleType[
+            (InputToggleType as Record<string, any>)[
               select('type', mapEnumKeys(InputToggleType), 'Checkbox')
             ]
           }
@@ -483,7 +505,7 @@ inputsBaseStories.add(
           {!!text('label', '') && (
             <InputLabel
               size={
-                ComponentSize[
+                (ComponentSize as Record<string, any>)[
                   select('size', mapEnumKeys(ComponentSize), 'Small')
                 ]
               }
@@ -510,12 +532,12 @@ inputsBaseStories.add(
 inputsBaseStories.add(
   'TextArea',
   () => {
-    const textAreaRefDefault: RefObject<TextAreaRef> = createRef()
-    const textAreaRefDisabled: RefObject<TextAreaRef> = createRef()
-    const textAreaRefValid: RefObject<TextAreaRef> = createRef()
-    const textAreaRefError: RefObject<TextAreaRef> = createRef()
-    const textAreaRefLoading: RefObject<TextAreaRef> = createRef()
-    const textAreaContainerRef: RefObject<TextAreaContainerRef> = createRef()
+    const textAreaRefDefault: RefObject<TextAreaRef | null> = createRef()
+    const textAreaRefDisabled: RefObject<TextAreaRef | null> = createRef()
+    const textAreaRefValid: RefObject<TextAreaRef | null> = createRef()
+    const textAreaRefError: RefObject<TextAreaRef | null> = createRef()
+    const textAreaRefLoading: RefObject<TextAreaRef | null> = createRef()
+    const textAreaContainerRef: RefObject<TextAreaContainerRef | null> = createRef()
 
     const handleLogRefs = (): void => {
       /* eslint-disable */
@@ -559,7 +581,7 @@ inputsBaseStories.add(
             }}
             monospace={boolean('monospace', false)}
             autocomplete={
-              AutoComplete[
+              (AutoComplete as Record<string, any>)[
                 radios<AutoComplete>(
                   'autocomplete',
                   mapEnumKeys(AutoComplete),
@@ -568,7 +590,9 @@ inputsBaseStories.add(
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             style={object('style', exampleTextAreaStyle)}
             cols={number('cols', 20)}
@@ -589,7 +613,7 @@ inputsBaseStories.add(
             }}
             monospace={boolean('monospace', false)}
             autocomplete={
-              AutoComplete[
+              (AutoComplete as Record<string, any>)[
                 radios<AutoComplete>(
                   'autocomplete',
                   mapEnumKeys(AutoComplete),
@@ -598,7 +622,9 @@ inputsBaseStories.add(
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             style={object('style', exampleTextAreaStyle)}
             cols={number('cols', 20)}
@@ -619,7 +645,7 @@ inputsBaseStories.add(
             }}
             monospace={boolean('monospace', false)}
             autocomplete={
-              AutoComplete[
+              (AutoComplete as Record<string, any>)[
                 radios<AutoComplete>(
                   'autocomplete',
                   mapEnumKeys(AutoComplete),
@@ -628,7 +654,9 @@ inputsBaseStories.add(
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             style={object('style', exampleTextAreaStyle)}
             cols={number('cols', 20)}
@@ -649,7 +677,7 @@ inputsBaseStories.add(
             }}
             monospace={boolean('monospace', false)}
             autocomplete={
-              AutoComplete[
+              (AutoComplete as Record<string, any>)[
                 radios<AutoComplete>(
                   'autocomplete',
                   mapEnumKeys(AutoComplete),
@@ -658,7 +686,9 @@ inputsBaseStories.add(
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             style={object('style', exampleTextAreaStyle)}
             cols={number('cols', 20)}
@@ -679,7 +709,7 @@ inputsBaseStories.add(
             }}
             monospace={boolean('monospace', false)}
             autocomplete={
-              AutoComplete[
+              (AutoComplete as Record<string, any>)[
                 radios<AutoComplete>(
                   'autocomplete',
                   mapEnumKeys(AutoComplete),
@@ -688,7 +718,9 @@ inputsBaseStories.add(
               ]
             }
             size={
-              ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+              (ComponentSize as Record<string, any>)[
+                select('size', mapEnumKeys(ComponentSize), 'Small')
+              ]
             }
             style={object('style', exampleTextAreaStyle)}
             cols={number('cols', 20)}
@@ -710,7 +742,7 @@ inputsComposedStories.add(
   'Visibility Input',
   () => {
     const [value, setValue] = useState<string>('Value text')
-    const visibilityInputRef: RefObject<VisibilityInputRef> = createRef()
+    const visibilityInputRef: RefObject<VisibilityInputRef | null> = createRef()
 
     const handleLogRefs = (): void => {
       /* eslint-disable */
@@ -734,21 +766,23 @@ inputsComposedStories.add(
           disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
           maxLength={number('maxLength', 24)}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
           style={object('style', defaultInputStyle)}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           autocomplete={
-            AutoComplete[
+            (AutoComplete as Record<string, any>)[
               radios<AutoComplete>(
                 'autocomplete',
                 mapEnumKeys(AutoComplete),
@@ -776,7 +810,7 @@ inputsComposedStories.add(
     const DEFAULT_UNITS = ['s', 'm', 'h', 'd', 'w', 'mo']
     const [value, setValue] = useState<string>('')
     const [unit, setUnit] = useState<string>(DEFAULT_UNITS[0])
-    const timeInputRef: RefObject<TimeInputRef> = createRef()
+    const timeInputRef: RefObject<TimeInputRef | null> = createRef()
 
     const handleLogRefs = (): void => {
       /* eslint-disable */
@@ -799,18 +833,20 @@ inputsComposedStories.add(
           titleText={text('titleText', 'Title Text')}
           disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
           icon={
-            IconFont[
+            (IconFont as Record<string, any>)[
               select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
             ]
           }
           style={object('style', defaultInputStyle)}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
         />
         <div className="story--test-buttons">
@@ -829,10 +865,10 @@ inputsComposedStories.add(
 inputsComposedStories.add(
   'AutoInput',
   () => {
-    const autoInputRef: RefObject<AutoInputRef> = createRef()
-    const autoInputSelectGroupRef: RefObject<SelectGroupRef> = createRef()
-    const autoInputSelectGroupAutoRef: RefObject<SelectGroupOptionRef> = createRef()
-    const autoInputSelectGroupCustomRef: RefObject<SelectGroupOptionRef> = createRef()
+    const autoInputRef: RefObject<AutoInputRef | null> = createRef()
+    const autoInputSelectGroupRef: RefObject<SelectGroupRef | null> = createRef()
+    const autoInputSelectGroupAutoRef: RefObject<SelectGroupOptionRef | null> = createRef()
+    const autoInputSelectGroupCustomRef: RefObject<SelectGroupOptionRef | null> = createRef()
 
     const handleLogRef = (): void => {
       /* eslint-disable */
@@ -860,13 +896,17 @@ inputsComposedStories.add(
           radioButtonCustomRef={autoInputSelectGroupCustomRef}
           style={object('style', exampleAutoInputStyle)}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           mode={
-            AutoInputMode[select('mode', mapEnumKeys(AutoInputMode), 'Auto')]
+            (AutoInputMode as Record<string, any>)[
+              select('mode', mapEnumKeys(AutoInputMode), 'Auto')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
@@ -879,12 +919,14 @@ inputsComposedStories.add(
                 'Enter a custom value...'
               )}
               size={
-                ComponentSize[
+                (ComponentSize as Record<string, any>)[
                   select('size', mapEnumKeys(ComponentSize), 'Small')
                 ]
               }
               type={
-                InputType[select('Input: type', mapEnumKeys(InputType), 'Text')]
+                (InputType as Record<string, any>)[
+                  select('Input: type', mapEnumKeys(InputType), 'Text')
+                ]
               }
               maxLength={number('Input: maxLength', 100)}
               min={number('Input: min', 0)}
@@ -909,7 +951,7 @@ inputsComposedStories.add(
   'Range Slider',
   () => {
     const [rangeSliderValue, setRangeSliderValue] = useState<number>(50)
-    const rangeSliderRef: RefObject<RangeSliderRef> = createRef()
+    const rangeSliderRef: RefObject<RangeSliderRef | null> = createRef()
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setRangeSliderValue(parseInt(e.target.value))
@@ -933,10 +975,12 @@ inputsComposedStories.add(
           step={number('step', 0)}
           onChange={handleInputChange}
           size={
-            ComponentSize[select('size', mapEnumKeys(ComponentSize), 'Small')]
+            (ComponentSize as Record<string, any>)[
+              select('size', mapEnumKeys(ComponentSize), 'Small')
+            ]
           }
           color={
-            ComponentColor[
+            (ComponentColor as Record<string, any>)[
               select('color', mapEnumKeys(ComponentColor), 'Primary')
             ]
           }
@@ -946,12 +990,12 @@ inputsComposedStories.add(
           hideLabels={boolean('hide labels', false)}
           style={object('style', exampleRangeSliderStyle)}
           status={
-            ComponentStatus[
+            (ComponentStatus as Record<string, any>)[
               select('status', mapEnumKeys(ComponentStatus), 'Default')
             ]
           }
           orientation={
-            ComponentOrientation[
+            (ComponentOrientation as Record<string, any>)[
               select(
                 'orientation',
                 mapEnumKeys(ComponentOrientation),
@@ -979,8 +1023,10 @@ inputsExampleStories.add(
   () => {
     const [weapon, setWeapon] = useState<string>('chainsaw')
 
-    const handleToggleChange = (value: string): void => {
-      setWeapon(value)
+    const handleToggleChange = (value?: string): void => {
+      if (value !== undefined) {
+        setWeapon(value)
+      }
     }
 
     return (
@@ -1001,11 +1047,15 @@ inputsExampleStories.add(
             type={InputToggleType.Radio}
             size={ComponentSize.ExtraSmall}
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(ComponentColor), 'Primary')
               ]
             }
-            fill={Appearance[select('fill', ['None', 'Solid'], 'None')]}
+            fill={
+              (Appearance as Record<string, any>)[
+                select('fill', ['None', 'Solid'], 'None')
+              ]
+            }
           >
             <InputLabel active={weapon === 'chainsaw'} htmlFor="chainsaw">
               Chainsaw
@@ -1021,11 +1071,15 @@ inputsExampleStories.add(
             type={InputToggleType.Radio}
             size={ComponentSize.ExtraSmall}
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(ComponentColor), 'Primary')
               ]
             }
-            fill={Appearance[select('fill', ['None', 'Solid'], 'None')]}
+            fill={
+              (Appearance as Record<string, any>)[
+                select('fill', ['None', 'Solid'], 'None')
+              ]
+            }
           >
             <InputLabel active={weapon === 'crowbar'} htmlFor="crowbar">
               Crowbar
@@ -1041,11 +1095,15 @@ inputsExampleStories.add(
             type={InputToggleType.Radio}
             size={ComponentSize.ExtraSmall}
             color={
-              ComponentColor[
+              (ComponentColor as Record<string, any>)[
                 select('color', mapEnumKeys(ComponentColor), 'Primary')
               ]
             }
-            fill={Appearance[select('fill', ['None', 'Solid'], 'None')]}
+            fill={
+              (Appearance as Record<string, any>)[
+                select('fill', ['None', 'Solid'], 'None')
+              ]
+            }
           >
             <InputLabel active={weapon === 'katana'} htmlFor="katana">
               Katana

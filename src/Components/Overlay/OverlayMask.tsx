@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, CSSProperties} from 'react'
+import {forwardRef, CSSProperties} from 'react'
 import classnames from 'classnames'
 
 // Types
