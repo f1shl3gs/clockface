@@ -1,21 +1,20 @@
 //Libraries
 import {CSSProperties} from 'react'
 import chroma from 'chroma-js'
-import {uniq, shuffle, capitalize, random} from 'lodash'
 
 // Constants
 import {getColorsFromGradient} from '../Utils/colors'
 
 // Types
 import {
-  Gradients,
-  InfluxColors,
-  ComponentSize,
   ComponentColor,
+  ComponentSize,
   ComponentStatus,
-  DropdownMenuTheme,
   DropdownMenuScrollbarColors,
+  DropdownMenuTheme,
+  Gradients,
   IconFont,
+  InfluxColors,
 } from '../Types'
 
 export const convertCSSPropertiesToString = (styles: CSSProperties): string =>
@@ -225,11 +224,20 @@ export const getDictionary = (): string[] => {
   const cleanedText = hipsterIpsum
     .replace(/[.,]+/g, ' ')
     .replace(/(\s-\s)/g, ' ')
-  const deDupedText = uniq(
-    cleanedText.split(' ').map(word => word.toLocaleLowerCase())
-  )
 
-  return deDupedText
+  return Array.from(
+    new Set<string>(
+      cleanedText.split(' ').map(word => word.toLocaleLowerCase())
+    )
+  )
+}
+
+function randomNumber(lower: number, upper: number) {
+  return lower + Math.random() * (upper - lower)
+}
+
+function capitalize(word: string) {
+  return word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : ''
 }
 
 export const generateRandomText = (
@@ -237,26 +245,25 @@ export const generateRandomText = (
   wordCountUpper: number
 ): string => {
   const dictionary = getDictionary()
-  const wordCount = random(wordCountLower, wordCountUpper)
+  const wordCount = randomNumber(wordCountLower, wordCountUpper)
 
-  const randomText = shuffle(dictionary)
+  return [...dictionary]
+    .sort(() => Math.random() - 0.5)
     .slice(0, wordCount)
     .map((text, i) => (i === 0 ? capitalize(text) : text))
     .join(' ')
-
-  return randomText
 }
 
 export const getRandomIcon = (): IconFont => {
   const iconKeys = Object.keys(IconFont)
-  const randomIconKey = iconKeys[random(0, iconKeys.length)]
+  const randomIconKey = iconKeys[randomNumber(0, iconKeys.length)]
 
   return (IconFont as Record<string, any>)[randomIconKey]
 }
 
 export const getRandomGradient = (): Gradients => {
   const gradientKeys = Object.keys(Gradients)
-  const randomGradientKey = gradientKeys[random(0, gradientKeys.length)]
+  const randomGradientKey = gradientKeys[randomNumber(0, gradientKeys.length)]
 
   return (Gradients as Record<string, any>)[randomGradientKey]
 }

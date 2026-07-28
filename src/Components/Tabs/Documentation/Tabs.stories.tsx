@@ -1,7 +1,6 @@
 // Libraries
 import {createRef} from 'react'
 import marked from 'marked'
-import {get} from 'lodash'
 
 // Storybook
 import {storiesOf} from '@storybook/react'
@@ -78,11 +77,8 @@ tabsStories.add(
       },
     ]
 
-    const dropdownLabel = get(
-      exampleTabs.find(tab => tab.id === activeTab),
-      'label',
-      'No active tab'
-    )
+    const dropdownLabel =
+      exampleTabs.find(tab => tab.id === activeTab)?.label ?? 'No active tab'
 
     return (
       <div className="story--example">

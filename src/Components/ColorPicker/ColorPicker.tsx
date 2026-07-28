@@ -1,7 +1,6 @@
 // Libraries
 import {forwardRef, ChangeEvent, FunctionComponent} from 'react'
 import classnames from 'classnames'
-import _ from 'lodash'
 
 // Components
 import {Input} from '../Inputs/Input'
@@ -108,8 +107,8 @@ export const ColorPicker = forwardRef<ColorPickerSwatchRef, ColorPickerProps>(
     }
 
     const handleRandomizeColor = (): void => {
-      const randomColor = _.sample(colors)
-      const hex = _.get(randomColor, 'hex') || ''
+      const index = Math.floor(Math.random() * colors.length)
+      const hex = colors[index].hex
 
       onChange(hex, ComponentStatus.Valid)
     }

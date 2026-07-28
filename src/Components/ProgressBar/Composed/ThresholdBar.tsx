@@ -1,7 +1,6 @@
 // Libraries
 import {forwardRef, useEffect, useState} from 'react'
 import classnames from 'classnames'
-import {get, orderBy, findLastIndex} from 'lodash'
 
 // Types
 import {Gradients, InfluxColors, Omit, ComponentSize} from '../../../Types'
@@ -64,7 +63,8 @@ export const ThresholdBar = forwardRef<ThresholdBarRef, ThresholdBarProps>(
     )
 
     useEffect(() => {
-      setSortedThresholds(orderBy(thresholds, ['floor'], 'asc'))
+      const sorted = [...thresholds].sort((a, b) => a.floor - b.floor)
+      setSortedThresholds(sorted)
     }, [])
 
     const thresholdBarClass = classnames('cf-threshold-bar', {
@@ -72,19 +72,24 @@ export const ThresholdBar = forwardRef<ThresholdBarRef, ThresholdBarProps>(
     })
 
     const thresholdColor = () => {
-      const i = findLastIndex(sortedThresholds, thresh => thresh.floor < value)
-      if (i < 0) {
+      const index = sortedThresholds.findLastIndex(
+        thresh => thresh.floor < value
+      )
+      if (index < 0) {
         return
       }
-      return get(sortedThresholds, [i, 'color'])
+      return sortedThresholds[index].color
     }
 
     const thresholdGradient = () => {
-      const i = findLastIndex(sortedThresholds, thresh => thresh.floor < value)
-      if (i < 0) {
+      const index = sortedThresholds.findLastIndex(
+        thresh => thresh.floor < value
+      )
+      if (index < 0) {
         return
       }
-      return get(sortedThresholds, [i, 'gradient'])
+
+      return sortedThresholds[index].gradient
     }
 
     return (

@@ -65,7 +65,6 @@ import CreatableTypeAheadDropdownReadme from './CreatableTypeAheadDropdown.md'
 import MultiSelectDropdownReadme from './MultiSelectDropdown.md'
 import {useState} from '@storybook/addons'
 import {FlexBox} from '../../FlexBox'
-import {range} from 'lodash'
 
 const dropdownFamilyStories = storiesOf(
   'Components/Dropdowns/Family',
@@ -615,9 +614,14 @@ dropdownComposedStories.add(
       {id: '1234.3.33'},
     ]
 
-    const oneHundredThousandItems = range(1, 100000).map(i => {
-      return {name: i.toString(), id: i.toString()}
-    })
+    const oneHundredThousandItems = new Array(100000)
+    for (let i = 0; i < 100000; i++) {
+      const value = (i + 1).toString()
+      oneHundredThousandItems[i] = {
+        name: value,
+        id: value,
+      }
+    }
 
     const onSelect = (item: SelectableItem | null) => {
       /* eslint-disable */

@@ -7,7 +7,6 @@ import React, {
   createContext,
 } from 'react'
 import classnames from 'classnames'
-import _ from 'lodash'
 
 // Components
 import {DapperScrollbars} from '../DapperScrollbars/DapperScrollbars'
@@ -180,13 +179,19 @@ const calculateSelectedPosition = (
     return 0
   }
 
-  const items = React.Children.map(children, child =>
-    _.get(child, 'props.selected', false)
-  )
+  const items = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return (child.props as any).selected ?? false
+    }
+    return false
+  })
 
-  const sizes = React.Children.map(children, child =>
-    _.get(child, 'props.size', 'xs')
-  ) as string[]
+  const sizes = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return (child.props as any).selected ?? 'xs'
+    }
+    return 'xs'
+  }) as string[]
 
   if (!items) {
     return 0

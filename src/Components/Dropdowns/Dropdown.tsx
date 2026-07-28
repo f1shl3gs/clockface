@@ -1,7 +1,6 @@
 // Libraries
 import React, {forwardRef, MouseEvent, useState, useEffect, useRef} from 'react'
 import classnames from 'classnames'
-import _ from 'lodash'
 
 // Components
 import {ClickOutside} from '../ClickOutside/ClickOutside'

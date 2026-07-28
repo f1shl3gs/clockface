@@ -1,7 +1,6 @@
 // Libraries
 import React, {forwardRef, useState} from 'react'
 import classnames from 'classnames'
-import _ from 'lodash'
 
 // Types
 import {StandardFunctionProps, IconFont} from '../../Types'

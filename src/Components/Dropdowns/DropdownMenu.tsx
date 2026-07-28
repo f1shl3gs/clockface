@@ -1,7 +1,6 @@
 // Libraries
 import React, {forwardRef, RefObject, CSSProperties, ReactNode} from 'react'
 import classnames from 'classnames'
-import _ from 'lodash'
 
 // Components
 import {DapperScrollbars} from '../DapperScrollbars/DapperScrollbars'
@@ -114,9 +113,13 @@ const calculateSelectedPosition = (
   }
 
   const itemHeight = 24
-  const items = React.Children.map(children, child =>
-    _.get(child, 'props.selected', false)
-  )
+  const items = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return (child.props as any).selected ?? false
+    }
+
+    return false
+  })
 
   if (!items) {
     return 0

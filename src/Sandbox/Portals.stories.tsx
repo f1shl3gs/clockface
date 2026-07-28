@@ -1,7 +1,6 @@
 // Libraries
 import {useRef} from 'react'
 import marked from 'marked'
-import {startsWith} from 'lodash'
 
 // Storybook
 import {storiesOf} from '@storybook/react'
@@ -73,7 +72,7 @@ alertStories.add(
     }
 
     const isItemActive = (id: string): boolean => {
-      if (id === navActiveItem || startsWith(navActiveItem, id)) {
+      if (id === navActiveItem || navActiveItem.startsWith(id)) {
         return true
       }
 

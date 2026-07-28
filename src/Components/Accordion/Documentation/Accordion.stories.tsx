@@ -333,7 +333,9 @@ accordionStories.add(
         </Accordion>
         <Accordion
           iconPlacement={
-            (Direction as Record<string, any>)[select('Icon Placement', mapEnumKeys(Direction), 'Left')]
+            (Direction as Record<string, any>)[
+              select('Icon Placement', mapEnumKeys(Direction), 'Left')
+            ]
           }
           expanded={boolean('expanded', false)}
           disabled={disabled}

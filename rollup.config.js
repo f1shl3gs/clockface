@@ -24,7 +24,7 @@ let plugins = [
       silenceDeprecations: ['import', 'global-builtin'],
       style: isProductionBuild ? 'compressed' : 'expanded',
     },
-    output: (styles) => {
+    output: styles => {
       writeFileSync('dist/index.css', `@charset "UTF-8"; ${styles}`)
     },
   }),
@@ -48,12 +48,11 @@ const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
   uuid: 'uuid',
-  lodash: '_',
   'prop-types': 'PropTypes',
 }
 
 // Do not bundle peer dependencies
-const external = ['react', 'react-dom', 'lodash', 'uuid', 'prop-types']
+const external = ['react', 'react-dom', 'uuid', 'prop-types']
 
 export default [
   {
@@ -70,7 +69,7 @@ export default [
     onwarn(warning, warn) {
       if (
         warning.code === 'CIRCULAR_DEPENDENCY' &&
-        warning.ids?.every((id) => id.includes('/chroma-js/'))
+        warning.ids?.every(id => id.includes('/chroma-js/'))
       ) {
         return
       }

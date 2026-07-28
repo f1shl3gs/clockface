@@ -1,6 +1,5 @@
 // Libraries
 import {FunctionComponent, useRef, useState, useEffect, UIEvent} from 'react'
-import _ from 'lodash'
 import classnames from 'classnames'
 import Scrollbar from 'react-scrollbars-custom'
 import {ScrollState} from 'react-scrollbars-custom/dist/types/types'
