@@ -1,39 +1,37 @@
-import React, {PureComponent} from 'react'
+import React, {FunctionComponent, useEffect, useRef} from 'react'
 
 interface Props {
   /** Function to call when click outside is detected */
-  onClickOutside: (e: any) => void
+  onClickOutside: (ev: MouseEvent) => void
   children: React.ReactElement
 }
 
-export class ClickOutside extends PureComponent<Props> {
-  public static readonly displayName = 'ClickOutside'
+export const ClickOutside: FunctionComponent<Props> = ({
+  onClickOutside,
+  children,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  private domNode: Element | null = null
-
-  public componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside, true)
-  }
-
-  public componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside, true)
-  }
-
-  public render() {
-    const child = React.Children.only(
-      this.props.children
-    ) as React.ReactElement<React.ClassAttributes<Element>>
-    return React.cloneElement(child, {ref: this.setDomNode})
-  }
-
-  private handleClickOutside = (e: any) => {
-    const domNode = this.domNode
-    if (!domNode || !domNode.contains(e.target as Node)) {
-      this.props.onClickOutside(e)
+  useEffect(() => {
+    const handleClickOutside = (ev: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(ev.target as Node)
+      ) {
+        onClickOutside(ev)
+      }
     }
-  }
 
-  private setDomNode = (node: Element | null) => {
-    this.domNode = node
-  }
+    document.addEventListener('mousedown', handleClickOutside, true)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside, true)
+    }
+  }, [onClickOutside])
+
+  return (
+    <div ref={containerRef} style={{display: 'contents'}}>
+      {children}
+    </div>
+  )
 }
