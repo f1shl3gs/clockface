@@ -1840,8 +1840,10 @@ __metadata:
   resolution: "@influxdata/clockface@workspace:."
   dependencies:
     "@babel/core": "npm:^7.28.0"
+    "@react-spring/web": "npm:^10.1.2"
     "@rollup/plugin-commonjs": "npm:^21.0.1"
     "@rollup/plugin-node-resolve": "npm:^13.0.6"
+    "@rollup/plugin-terser": "npm:^0.4.4"
     "@rollup/plugin-typescript": "npm:^12.1.2"
     "@storybook/addon-a11y": "npm:^6.3.6"
     "@storybook/addon-info": "npm:^5.3.21"
@@ -1893,14 +1895,12 @@ __metadata:
     react-docgen-typescript-loader: "npm:^3.3.0"
     react-dom: "npm:^19.2.0"
     react-scrollbars-custom: "npm:^4.0.20"
-    react-spring: "npm:^8.0.27"
     react-window: "npm:^1.8.7"
     resolve-url-loader: "npm:^3.0.1"
     rollup: "npm:^3.29.5"
     rollup-plugin-copy: "npm:^3.0.0"
     rollup-plugin-gzip: "npm:^2.2.0"
     rollup-plugin-sass: "npm:^1.12.16"
-    rollup-plugin-terser: "npm:^5.0.0"
     sass: "npm:^1.22.0"
     sass-loader: "npm:^7.1.0"
     storybook: "npm:^6.3.6"
@@ -2515,6 +2515,73 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-spring/animated@npm:~10.1.2":
+  version: 10.1.2
+  resolution: "@react-spring/animated@npm:10.1.2"
+  dependencies:
+    "@react-spring/shared": "npm:~10.1.2"
+    "@react-spring/types": "npm:~10.1.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/c5af2d6e292ef7b0873dad0c0640f21f8bc4c45c37ec8e85787cded5e26742456e3023cba717fa977c555e5583e10af41aef8501dc9f03a6fbd79a520c934b44
+  languageName: node
+  linkType: hard
+
+"@react-spring/core@npm:~10.1.2":
+  version: 10.1.2
+  resolution: "@react-spring/core@npm:10.1.2"
+  dependencies:
+    "@react-spring/animated": "npm:~10.1.2"
+    "@react-spring/shared": "npm:~10.1.2"
+    "@react-spring/types": "npm:~10.1.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/244e1a417d74cf201299798bb87d8280922fc6c2ee43ecf50ac063680484d59cf7fe4dd0874bef7425abec47b472932a6b045591619774bda8418b7e420e7dc3
+  languageName: node
+  linkType: hard
+
+"@react-spring/rafz@npm:~10.1.2":
+  version: 10.1.2
+  resolution: "@react-spring/rafz@npm:10.1.2"
+  checksum: 10c0/d019061af956a0320fab8a664f1470de5744f968a68b2d53cc609fcbfe4edf97e0d1bfc1d6ef1526e5d689745f2fe6bf7893fa242a3dd4f3b6bb3e34d67b3bb6
+  languageName: node
+  linkType: hard
+
+"@react-spring/shared@npm:~10.1.2":
+  version: 10.1.2
+  resolution: "@react-spring/shared@npm:10.1.2"
+  dependencies:
+    "@react-spring/rafz": "npm:~10.1.2"
+    "@react-spring/types": "npm:~10.1.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/444432f25362de8d05954e99e2f550acee49b0ab3b6d8ddf193809c6d2815f1b0d6cdce123c299e535078de534dee2fd3e3278c4aea5185df9aa74195831f297
+  languageName: node
+  linkType: hard
+
+"@react-spring/types@npm:~10.1.2":
+  version: 10.1.2
+  resolution: "@react-spring/types@npm:10.1.2"
+  checksum: 10c0/073f4ecd5e0cc18524ef36c8d28ef0fbd2582f8cbeb3e433680314d0df96a7a1279cbe7c13f2167132fe42f4e7bb68f50d24744b2b0d1e6c55c5eba8b6e643c2
+  languageName: node
+  linkType: hard
+
+"@react-spring/web@npm:^10.1.2":
+  version: 10.1.2
+  resolution: "@react-spring/web@npm:10.1.2"
+  dependencies:
+    "@react-spring/animated": "npm:~10.1.2"
+    "@react-spring/core": "npm:~10.1.2"
+    "@react-spring/shared": "npm:~10.1.2"
+    "@react-spring/types": "npm:~10.1.2"
+    csstype: "npm:^3.2.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/e6f518ba53ec87fe542876e6c7662170672f4890f72d186f0aef42ade503cafd2e69fe6a50aacb8a9747b9b310b49a72da86c74cd269c2ee3955c2d4f825df8e
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-commonjs@npm:^21.0.1":
   version: 21.1.0
   resolution: "@rollup/plugin-commonjs@npm:21.1.0"
@@ -2545,6 +2612,22 @@ __metadata:
   peerDependencies:
     rollup: ^2.42.0
   checksum: 10c0/6caa32a8304a20f1c9953111b25e9543f4de7d254958d81ce0158ad909e4493946bc2060c4ace23d9748b560ebc84c920ee7bc1b7d50dbf8ba852ef13c91af58
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-terser@npm:^0.4.4":
+  version: 0.4.4
+  resolution: "@rollup/plugin-terser@npm:0.4.4"
+  dependencies:
+    serialize-javascript: "npm:^6.0.1"
+    smob: "npm:^1.0.0"
+    terser: "npm:^5.17.4"
+  peerDependencies:
+    rollup: ^2.0.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 10c0/b9cb6c8f02ac1c1344019e9fb854321b74f880efebc41b6bdd84f18331fce0f4a2aadcdb481042245cd3f409b429ac363af71f9efec4a2024731d67d32af36ee
   languageName: node
   linkType: hard
 
@@ -7406,7 +7489,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.2, csstype@npm:^3.2.2":
+"csstype@npm:^3.0.2, csstype@npm:^3.2.2, csstype@npm:^3.2.3":
   version: 3.2.3
   resolution: "csstype@npm:3.2.3"
   checksum: 10c0/cd29c51e70fa822f1cecd8641a1445bed7063697469d35633b516e60fe8c1bde04b08f6c5b6022136bb669b64c63d4173af54864510fbb4ee23281801841a3ce
@@ -8745,13 +8828,6 @@ __metadata:
     "@babel/types": "npm:^7.2.0"
     c8: "npm:^7.6.0"
   checksum: 10c0/c7949b141f569528b2608ab715d593a04f7e2e529df04e0b595d0a7dea819b410e71d1f04716e43ac1480942afc5701cb5151ad2906ee8402969651a389881bb
-  languageName: node
-  linkType: hard
-
-"estree-walker@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "estree-walker@npm:0.6.1"
-  checksum: 10c0/6dabc855faa04a1ffb17b6a9121b6008ba75ab5a163ad9dc3d7fca05cfda374c5f5e91418d783496620ca75e99a73c40874d8b75f23b4117508cc8bde78e7b41
   languageName: node
   linkType: hard
 
@@ -12019,16 +12095,6 @@ __metadata:
     jest-util: "npm:^29.7.0"
     string-length: "npm:^4.0.1"
   checksum: 10c0/ec6c75030562fc8f8c727cb8f3b94e75d831fc718785abfc196e1f2a2ebc9a2e38744a15147170039628a853d77a3b695561ce850375ede3a4ee6037a2574567
-  languageName: node
-  linkType: hard
-
-"jest-worker@npm:^24.9.0":
-  version: 24.9.0
-  resolution: "jest-worker@npm:24.9.0"
-  dependencies:
-    merge-stream: "npm:^2.0.0"
-    supports-color: "npm:^6.1.0"
-  checksum: 10c0/ea9f4751976d08807d33598244e6c3a60ce5889cdabf1f4e6f3e57dddcf2190978e6284f0865326f64e93677cebac53220d71a52e57d1205c467c6f09efa8bc2
   languageName: node
   linkType: hard
 
@@ -15421,19 +15487,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-spring@npm:^8.0.27":
-  version: 8.0.27
-  resolution: "react-spring@npm:8.0.27"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.1"
-    prop-types: "npm:^15.5.8"
-  peerDependencies:
-    react: ">= 16.8.0"
-    react-dom: ">= 16.8.0"
-  checksum: 10c0/fbd5f38dcaa066770b92ff60206e5e62dc6a9bda2fd811c7e542e601ad8f935b412139d2e29714f5c3424c94d59abbd82af8bbc6a1dca59cac7cce2d444967ab
-  languageName: node
-  linkType: hard
-
 "react-syntax-highlighter@npm:^11.0.2":
   version: 11.0.3
   resolution: "react-syntax-highlighter@npm:11.0.3"
@@ -16186,30 +16239,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-terser@npm:^5.0.0":
-  version: 5.3.1
-  resolution: "rollup-plugin-terser@npm:5.3.1"
-  dependencies:
-    "@babel/code-frame": "npm:^7.5.5"
-    jest-worker: "npm:^24.9.0"
-    rollup-pluginutils: "npm:^2.8.2"
-    serialize-javascript: "npm:^4.0.0"
-    terser: "npm:^4.6.2"
-  peerDependencies:
-    rollup: ">=0.66.0 <3"
-  checksum: 10c0/1350c0250cdc9c02c19c7c3a93895abc69b27af1d7f170df2d8bd34b44981b1f84090eef4c5b33174ac9c9cfd68e2dda37500859da75ef8963512e8e7919915e
-  languageName: node
-  linkType: hard
-
-"rollup-pluginutils@npm:^2.8.2":
-  version: 2.8.2
-  resolution: "rollup-pluginutils@npm:2.8.2"
-  dependencies:
-    estree-walker: "npm:^0.6.1"
-  checksum: 10c0/20947bec5a5dd68b5c5c8423911e6e7c0ad834c451f1a929b1f4e2bc08836ad3f1a722ef2bfcbeca921870a0a283f13f064a317dc7a6768496e98c9a641ba290
-  languageName: node
-  linkType: hard
-
 "rollup@npm:^3.29.5":
   version: 3.30.0
   resolution: "rollup@npm:3.30.0"
@@ -16532,6 +16561,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"serialize-javascript@npm:^6.0.1":
+  version: 6.0.2
+  resolution: "serialize-javascript@npm:6.0.2"
+  dependencies:
+    randombytes: "npm:^2.1.0"
+  checksum: 10c0/2dd09ef4b65a1289ba24a788b1423a035581bef60817bea1f01eda8e3bda623f86357665fe7ac1b50f6d4f583f97db9615b3f07b2a2e8cbcb75033965f771dd2
+  languageName: node
+  linkType: hard
+
 "serve-favicon@npm:^2.5.0":
   version: 2.5.1
   resolution: "serve-favicon@npm:2.5.1"
@@ -16819,6 +16857,13 @@ __metadata:
     astral-regex: "npm:^1.0.0"
     is-fullwidth-code-point: "npm:^2.0.0"
   checksum: 10c0/c317b21ec9e3d3968f3d5b548cbfc2eae331f58a03f1352621020799cbe695b3611ee972726f8f32d4ca530065a5ec9c74c97fde711c1f41b4a1585876b2c191
+  languageName: node
+  linkType: hard
+
+"smob@npm:^1.0.0":
+  version: 1.6.2
+  resolution: "smob@npm:1.6.2"
+  checksum: 10c0/a9cad85a18bc8e3f33759b0608ba3fec53b1af8fa760b9d110c7bf87018f14f0ed0789d173bef647646c143c6d417c60ba47c30056731a051f79048f2f233446
   languageName: node
   linkType: hard
 
@@ -17670,7 +17715,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^4.1.2, terser@npm:^4.6.2, terser@npm:^4.6.3":
+"terser@npm:^4.1.2, terser@npm:^4.6.3":
   version: 4.8.1
   resolution: "terser@npm:4.8.1"
   dependencies:
@@ -17680,6 +17725,20 @@ __metadata:
   bin:
     terser: bin/terser
   checksum: 10c0/1ec2620e58df0ea787ac579daf097df0fee2dd402f37acb4de0df1135f0598a29212e5f03042a9c2dc7e1bf1248b1dd9d9ea0724d34331a2017f32da8783b3d7
+  languageName: node
+  linkType: hard
+
+"terser@npm:^5.17.4":
+  version: 5.50.0
+  resolution: "terser@npm:5.50.0"
+  dependencies:
+    "@jridgewell/source-map": "npm:^0.3.3"
+    acorn: "npm:^8.15.0"
+    commander: "npm:^2.20.0"
+    source-map-support: "npm:~0.5.20"
+  bin:
+    terser: bin/terser
+  checksum: 10c0/d932282186239fcdc53ffb67568c7e9f2a2c58e21618d71500fc855f7f6bb2efdf061d383313880ae8bb45c7ba7c089e50978a689e1a6e2bbd5307fb639f1113
   languageName: node
   linkType: hard
 

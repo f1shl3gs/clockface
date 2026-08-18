@@ -1,6 +1,6 @@
 // Libraries
 import {forwardRef, useEffect} from 'react'
-import {Transition} from 'react-spring/renderprops'
+import {Transition, animated} from '@react-spring/web'
 import * as easings from 'd3-ease'
 
 // Components
@@ -23,6 +23,8 @@ import {usePortal} from '../../Utils/portals'
 
 // Styles
 import './Notification.scss'
+
+const AnimatedNotificationDialog = animated(NotificationDialog)
 
 export interface NotificationProps extends NotificationDialogProps {
   /** Positioning the notification left, center, or right on the window */
@@ -105,31 +107,28 @@ export const NotificationRoot = forwardRef<NotificationRef, NotificationProps>(
 
     const notificationElement = (
       <Transition
-        items={visible}
+        items={visible ? [true] : []}
         from={{opacity: 0, transform: translateOrigin()}}
         enter={{opacity: 1, transform: 'translateX(0)'}}
         leave={{opacity: 0, transform: translateOrigin()}}
         config={transitionConfig}
       >
-        {visible =>
-          visible &&
-          (props => (
-            <NotificationDialog
-              backgroundColor={backgroundColor}
-              className={className}
-              onDismiss={onDismiss}
-              gradient={gradient}
-              testID={testID}
-              style={{...style, ...props}}
-              size={size}
-              icon={icon}
-              ref={ref}
-              id={id}
-            >
-              {children}
-            </NotificationDialog>
-          ))
-        }
+        {props => (
+          <AnimatedNotificationDialog
+            backgroundColor={backgroundColor}
+            className={className}
+            onDismiss={onDismiss}
+            gradient={gradient}
+            testID={testID}
+            style={{...style, ...props}}
+            size={size}
+            icon={icon}
+            ref={ref}
+            id={id}
+          >
+            {children}
+          </AnimatedNotificationDialog>
+        )}
       </Transition>
     )
 

@@ -2,7 +2,7 @@ import {writeFileSync} from 'fs'
 
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import {terser} from 'rollup-plugin-terser'
+import terserModule from '@rollup/plugin-terser'
 import gzipModule from 'rollup-plugin-gzip'
 import typescript from '@rollup/plugin-typescript'
 import sass from 'rollup-plugin-sass'
@@ -11,6 +11,7 @@ import copy from 'rollup-plugin-copy'
 const pkg = require('./package.json')
 const isProductionBuild = process.env.NODE_ENV === 'production'
 const gzip = gzipModule.default || gzipModule
+const terser = terserModule.default || terserModule
 
 let plugins = [
   nodeResolve(),

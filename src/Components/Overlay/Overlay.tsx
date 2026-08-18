@@ -1,6 +1,6 @@
 // Libraries
 import React, {FunctionComponent, CSSProperties, useEffect, useRef} from 'react'
-import {Transition} from 'react-spring/renderprops'
+import {Transition, animated} from '@react-spring/web'
 import classnames from 'classnames'
 import * as easings from 'd3-ease'
 
@@ -16,6 +16,8 @@ import {StandardFunctionProps, InfluxColors} from '../../Types'
 
 // Styles
 import './Overlay.scss'
+
+const AnimatedOverlayMask = animated(OverlayMask)
 
 export interface OverlayProps extends StandardFunctionProps {
   /** Controls visibility of the overlay */
@@ -36,12 +38,14 @@ export const OverlayRoot: FunctionComponent<OverlayProps> = ({
   onEscape,
   className,
   transitionDuration = 360,
-  renderMaskElement = (style: CSSProperties) => <OverlayMask style={style} />,
+  renderMaskElement = (style: CSSProperties) => (
+    <AnimatedOverlayMask style={style} />
+  ),
 }) => {
   const oldVisibility = useRef<boolean>(visible)
 
   useEffect(() => {
-    if (visible && oldVisibility.current === false) {
+    if (visible && !oldVisibility.current) {
       window.addEventListener('keydown', handleEscapeKey)
     }
 
@@ -71,43 +75,40 @@ export const OverlayRoot: FunctionComponent<OverlayProps> = ({
   const OverlayRender = (
     <>
       <Transition
-        items={visible}
+        items={visible ? [true] : []}
         from={{opacity: 0}}
         enter={{opacity: 0.8}}
         leave={{opacity: 0}}
         config={transitionConfig}
       >
-        {visible => visible && (props => renderMaskElement(props))}
+        {props => renderMaskElement(props)}
       </Transition>
       <Transition
-        items={visible}
+        items={visible ? [true] : []}
         from={{opacity: 0, transform: 'translateY(44px)'}}
         enter={{opacity: 1, transform: 'translateY(0)'}}
         leave={{opacity: 0, transform: 'translateY(44px)'}}
         config={transitionConfig}
       >
-        {visible =>
-          visible &&
-          (props => (
-            <DapperScrollbars
-              className={overlayClass}
-              thumbStartColor={InfluxColors.White}
-              thumbStopColor={InfluxColors.Hydrogen}
-              noScrollX={true}
-              autoHide={false}
-              testID={testID}
-              id={id}
+        {props => (
+          <DapperScrollbars
+            className={overlayClass}
+            thumbStartColor={InfluxColors.White}
+            thumbStopColor={InfluxColors.Hydrogen}
+            noScrollX={true}
+            autoHide={false}
+            testID={testID}
+            id={id}
+          >
+            <animated.div
+              className="cf-overlay--children"
+              data-testid={`${testID}--children`}
+              style={props}
             >
-              <div
-                className="cf-overlay--children"
-                data-testid={`${testID}--children`}
-                style={props}
-              >
-                {children}
-              </div>
-            </DapperScrollbars>
-          ))
-        }
+              {children}
+            </animated.div>
+          </DapperScrollbars>
+        )}
       </Transition>
     </>
   )
