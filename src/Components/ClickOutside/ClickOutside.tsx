@@ -2,7 +2,7 @@ import React, {FunctionComponent, useEffect, useRef} from 'react'
 
 interface Props {
   /** Function to call when click outside is detected */
-  onClickOutside: (ev: MouseEvent) => void
+  onClickOutside: (ev: any) => void
   children: React.ReactElement
 }
 
