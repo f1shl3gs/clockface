@@ -61,7 +61,6 @@
     "moment": "2.29.4",
     "prettier": "^1.19.1",
     "pretty-quick": "^3.1.0",
-    "prop-types": "^15",
     "raw-loader": "^2.0.0",
     "react": "^19.2.0",
     "react-datepicker": "^2.8.0",
