@@ -24,7 +24,7 @@ export class Overlay extends Component<OverlayProps> {
   }
 }
 
-export {OverlayProps} from './Overlay'
+export type {OverlayProps} from './Overlay'
 export * from './OverlayContainer'
 export * from './OverlayHeader'
 export * from './OverlayMask'

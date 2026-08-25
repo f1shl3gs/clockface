@@ -16,5 +16,5 @@ export class SelectGroup extends Component<SelectGroupProps> {
   }
 }
 
-export {SelectGroupProps, SelectGroupRef} from './SelectGroup'
+export type {SelectGroupProps, SelectGroupRef} from './SelectGroup'
 export * from './SelectGroupOption'

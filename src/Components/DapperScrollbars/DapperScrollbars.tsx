@@ -1,27 +1,40 @@
 // Libraries
-import {FunctionComponent, useRef, useState, useEffect, UIEvent} from 'react'
+import {
+  FunctionComponent,
+  useRef,
+  useState,
+  useLayoutEffect,
+  UIEvent,
+  CSSProperties,
+  PointerEvent as ReactPointerEvent,
+  MouseEvent as ReactMouseEvent,
+} from 'react'
 import classnames from 'classnames'
-import Scrollbar from 'react-scrollbars-custom'
-import {ScrollState} from 'react-scrollbars-custom/dist/types/types'
-
-// Styles
-import './DapperScrollbars.scss'
 
 // Types
 import {StandardFunctionProps, InfluxColors, ComponentSize} from '../../Types'
 
-// react-scrollbars-custom uses a highly unusual type
-// to presumably handle touch and mouse events simultaneously
-export type FusionScrollEvent = ScrollState | UIEvent<HTMLDivElement>
-// Using this custom type makes typescript happy
-// and exposes enough typing to properly interface
-// with the onScroll and onUpdate props
+// Styles
+import './DapperScrollbars.scss'
+
+export interface FusionScrollValues {
+  scrollTop: number
+  scrollLeft: number
+  scrollHeight: number
+  scrollWidth: number
+  clientHeight: number
+  clientWidth: number
+}
+
+// Keeps the same callback style as DapperScrollbars (FusionScrollEvent union)
+export type FusionScrollEvent = FusionScrollValues | UIEvent<HTMLDivElement>
+
 export type FusionScrollHandler = (
   scrollValues: FusionScrollEvent,
   prevScrollValues?: FusionScrollEvent
 ) => void
 
-interface DapperScrollbarsProps extends StandardFunctionProps {
+export interface DapperScrollbarsProps extends StandardFunctionProps {
   /** Toggle display of tracks when no scrolling is necessary */
   removeTracksWhenNotUsed?: boolean
   /** Toggle display of vertical track when no scrolling is necessary */
@@ -58,6 +71,8 @@ interface DapperScrollbarsProps extends StandardFunctionProps {
   size?: ComponentSize
 }
 
+const MIN_THUMB_SIZE = 20
+
 export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   id,
   style,
@@ -82,23 +97,281 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   removeTrackXWhenNotUsed = true,
   size = ComponentSize.Small,
 }) => {
-  const scrollEl = useRef<any>(null)
-  // State is used here to ensure that the scroll position does not jump when
-  // a component using DapperScrollbars re-renders
-  const [scrollTopPos, setScrollTopPos] = useState<number>(Number(scrollTop))
-  const [scrollLeftPos, setScrollLeftPos] = useState<number>(Number(scrollLeft))
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const trackXRef = useRef<HTMLDivElement>(null)
+  const trackYRef = useRef<HTMLDivElement>(null)
+  const prevValuesRef = useRef<FusionScrollValues | null>(null)
+  const onScrollRef = useRef(onScroll)
+  const onUpdateRef = useRef(onUpdate)
+  const measureRef = useRef<(() => void) | null>(null)
+  const dragRef = useRef<{
+    axis: 'x' | 'y'
+    startPointer: number
+    startScroll: number
+  } | null>(null)
 
-  useEffect(() => {
-    if (scrollTop >= 0) {
-      setScrollTopPos(Number(scrollTop))
+  const [metrics, setMetrics] = useState({
+    scrollTop: Number(scrollTop),
+    scrollLeft: Number(scrollLeft),
+    scrollHeight: 0,
+    scrollWidth: 0,
+    clientHeight: 0,
+    clientWidth: 0,
+  })
+
+  const [overflow, setOverflow] = useState({x: false, y: false})
+  const [trackLengths, setTrackLengths] = useState({x: 0, y: 0})
+
+  // ---- 受控滚动位置 ----
+  useLayoutEffect(() => {
+    if (scrollerRef.current && scrollTop >= 0) {
+      scrollerRef.current.scrollTop = Number(scrollTop)
     }
   }, [scrollTop])
 
-  useEffect(() => {
-    setScrollLeftPos(Number(scrollLeft))
+  useLayoutEffect(() => {
+    if (scrollerRef.current) {
+      scrollerRef.current.scrollLeft = Number(scrollLeft)
+    }
   }, [scrollLeft])
 
-  const dapperScrollbarsClass = classnames('cf-dapper-scrollbars', {
+  const nextValues = (el: HTMLDivElement): FusionScrollValues => ({
+    scrollTop: el.scrollTop,
+    scrollLeft: el.scrollLeft,
+    scrollHeight: el.scrollHeight,
+    scrollWidth: el.scrollWidth,
+    clientHeight: el.clientHeight,
+    clientWidth: el.clientWidth,
+  })
+
+  // ---- 度量 + 通知 onUpdate ----
+  const measure = (): void => {
+    const el = scrollerRef.current
+    if (!el) {
+      return
+    }
+
+    setMetrics(nextValues(el))
+
+    const nextOverflow = {
+      x: el.scrollWidth > el.clientWidth,
+      y: el.scrollHeight > el.clientHeight,
+    }
+    setOverflow(prev =>
+      prev.x === nextOverflow.x && prev.y === nextOverflow.y
+        ? prev
+        : nextOverflow
+    )
+
+    const nextTrackLengths = {
+      x: trackXRef.current ? trackXRef.current.clientWidth : 0,
+      y: trackYRef.current ? trackYRef.current.clientHeight : 0,
+    }
+    setTrackLengths(prev =>
+      prev.x === nextTrackLengths.x && prev.y === nextTrackLengths.y
+        ? prev
+        : nextTrackLengths
+    )
+
+    if (onUpdateRef.current) {
+      onUpdateRef.current(nextValues(el), prevValuesRef.current ?? undefined)
+    }
+    prevValuesRef.current = nextValues(el)
+  }
+
+  // ---- 滚动事件 ----
+  const handleScroll = (e: UIEvent<HTMLDivElement>): void => {
+    const el = e.currentTarget
+    const values = nextValues(el)
+    setMetrics(values)
+
+    if (onScrollRef.current) {
+      onScrollRef.current(e, prevValuesRef.current ?? undefined)
+    }
+    if (onUpdateRef.current) {
+      onUpdateRef.current(values, prevValuesRef.current ?? undefined)
+    }
+    prevValuesRef.current = values
+  }
+
+  // ---- 轨道可见性 ----
+  const showTrackX =
+    !noScroll &&
+    !noScrollX &&
+    (!removeTracksWhenNotUsed || overflow.x) &&
+    (!removeTrackXWhenNotUsed || overflow.x)
+
+  const showTrackY =
+    !noScroll &&
+    !noScrollY &&
+    (!removeTracksWhenNotUsed || overflow.y) &&
+    (!removeTrackYWhenNotUsed || overflow.y)
+
+  // ---- 观察容器与内容的尺寸变化 ----
+  useLayoutEffect(() => {
+    onScrollRef.current = onScroll
+    onUpdateRef.current = onUpdate
+    measureRef.current = measure
+  })
+
+  useLayoutEffect(() => {
+    const el = scrollerRef.current
+    if (!el) {
+      return
+    }
+
+    measureRef.current?.()
+
+    const ro = new ResizeObserver(() => measureRef.current?.())
+    ro.observe(el)
+    if (contentRef.current) {
+      ro.observe(contentRef.current)
+    }
+    if (trackXRef.current) {
+      ro.observe(trackXRef.current)
+    }
+    if (trackYRef.current) {
+      ro.observe(trackYRef.current)
+    }
+
+    return () => ro.disconnect()
+  }, [showTrackX, showTrackY])
+
+  // ---- thumb 几何（按真实轨道长度做比例映射）----
+  const scrollableY = metrics.scrollHeight - metrics.clientHeight
+  const scrollableX = metrics.scrollWidth - metrics.clientWidth
+
+  const thumbYSize =
+    overflow.y && metrics.clientHeight > 0
+      ? Math.max(
+          (metrics.clientHeight * metrics.clientHeight) / metrics.scrollHeight,
+          MIN_THUMB_SIZE
+        )
+      : 0
+  const thumbYTravel = Math.max(trackLengths.y - thumbYSize, 0)
+  const thumbYPos =
+    overflow.y && scrollableY > 0
+      ? (metrics.scrollTop / scrollableY) * thumbYTravel
+      : 0
+
+  const thumbXSize =
+    overflow.x && metrics.clientWidth > 0
+      ? Math.max(
+          (metrics.clientWidth * metrics.clientWidth) / metrics.scrollWidth,
+          MIN_THUMB_SIZE
+        )
+      : 0
+  const thumbXTravel = Math.max(trackLengths.x - thumbXSize, 0)
+  const thumbXPos =
+    overflow.x && scrollableX > 0
+      ? (metrics.scrollLeft / scrollableX) * thumbXTravel
+      : 0
+
+  // ---- thumb 拖拽（pointer events）----
+  const beginDrag = (axis: 'x' | 'y') => (
+    e: ReactPointerEvent<HTMLDivElement>
+  ): void => {
+    const el = scrollerRef.current
+    if (!el || e.button !== 0) {
+      return
+    }
+    e.preventDefault()
+    e.stopPropagation()
+    e.currentTarget.setPointerCapture(e.pointerId)
+    dragRef.current = {
+      axis,
+      startPointer: axis === 'y' ? e.clientY : e.clientX,
+      startScroll: axis === 'y' ? el.scrollTop : el.scrollLeft,
+    }
+  }
+
+  const moveDrag = (axis: 'x' | 'y') => (
+    e: ReactPointerEvent<HTMLDivElement>
+  ): void => {
+    const drag = dragRef.current
+    const el = scrollerRef.current
+    if (!drag || drag.axis !== axis || !el) {
+      return
+    }
+
+    const viewLen = axis === 'y' ? el.clientHeight : el.clientWidth
+    const total = axis === 'y' ? el.scrollHeight : el.scrollWidth
+    const scrollable = total - viewLen
+    const trackLen =
+      axis === 'y'
+        ? trackYRef.current?.clientHeight ?? 0
+        : trackXRef.current?.clientWidth ?? 0
+    const thumbLen =
+      viewLen > 0 ? Math.max((viewLen * viewLen) / total, MIN_THUMB_SIZE) : 0
+
+    if (scrollable <= 0 || trackLen - thumbLen <= 0) {
+      return
+    }
+
+    const delta = (axis === 'y' ? e.clientY : e.clientX) - drag.startPointer
+    const next = drag.startScroll + (delta * scrollable) / (trackLen - thumbLen)
+
+    if (axis === 'y') {
+      el.scrollTop = next
+    } else {
+      el.scrollLeft = next
+    }
+  }
+
+  const endDrag = (): void => {
+    dragRef.current = null
+  }
+
+  // ---- 轨道点击翻页 ----
+  const handleTrackClick = (axis: 'x' | 'y') => (
+    e: ReactMouseEvent<HTMLDivElement>
+  ): void => {
+    if (e.button !== 0 || e.target !== e.currentTarget) {
+      return
+    }
+    const el = scrollerRef.current
+    if (!el) {
+      return
+    }
+    const rect = e.currentTarget.getBoundingClientRect()
+
+    if (axis === 'y') {
+      const y = e.clientY - rect.top
+      if (y < thumbYPos) {
+        el.scrollTop -= el.clientHeight
+      } else if (y > thumbYPos + thumbYSize) {
+        el.scrollTop += el.clientHeight
+      }
+    } else {
+      const x = e.clientX - rect.left
+      if (x < thumbXPos) {
+        el.scrollLeft -= el.clientWidth
+      } else if (x > thumbXPos + thumbXSize) {
+        el.scrollLeft += el.clientWidth
+      }
+    }
+  }
+
+  // ---- 容器样式 ----
+  const containerStyle: CSSProperties = {
+    ...style,
+    ...((autoSize || autoSizeWidth) && !style?.width
+      ? {width: 'fit-content'}
+      : {}),
+    ...((autoSize || autoSizeHeight) && !style?.height
+      ? {height: 'fit-content'}
+      : {}),
+  }
+
+  const scrollerStyle: CSSProperties = noScroll
+    ? {overflow: 'hidden'}
+    : {
+        overflowX: noScrollX ? 'hidden' : 'auto',
+        overflowY: noScrollY ? 'hidden' : 'auto',
+      }
+
+  const dapperScrollbars2Class = classnames('cf-dapper-scrollbars', {
     'cf-dapper-scrollbars--autohide': autoHide,
     [`cf-dapper-scrollbars--${size}`]: size,
     [`${className}`]: className,
@@ -112,95 +385,66 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     background: `linear-gradient(to bottom,  ${thumbStartColor} 0%,${thumbStopColor} 100%)`,
   }
 
-  const handleOnScroll: FusionScrollHandler = (
-    scrollValues,
-    prevScrollValues
-  ) => {
-    if (onScroll) {
-      onScroll(scrollValues, prevScrollValues)
-    }
-
-    const scrollState =
-      'scrollTop' in scrollValues
-        ? scrollValues
-        : {
-            scrollTop: scrollValues.currentTarget.scrollTop,
-            scrollLeft: scrollValues.currentTarget.scrollLeft,
-          }
-    const {scrollTop, scrollLeft} = scrollState
-    setScrollTopPos(scrollTop)
-    setScrollLeftPos(scrollLeft)
-  }
-
-  const handleUpdate: FusionScrollHandler = (
-    scrollValues,
-    prevScrollValues
-  ) => {
-    if (onUpdate) {
-      onUpdate(scrollValues, prevScrollValues)
-    }
-  }
-
   return (
-    <Scrollbar
-      ref={scrollEl}
-      onScroll={handleOnScroll}
-      onUpdate={handleUpdate}
-      data-testid={testID}
-      translateContentSizesToHolder={autoSize}
-      translateContentSizeYToHolder={autoSizeHeight}
-      translateContentSizeXToHolder={autoSizeWidth}
-      className={dapperScrollbarsClass}
-      style={style}
-      noDefaultStyles={false}
-      removeTracksWhenNotUsed={removeTracksWhenNotUsed}
-      removeTrackYWhenNotUsed={removeTrackYWhenNotUsed}
-      removeTrackXWhenNotUsed={removeTrackXWhenNotUsed}
-      noScrollX={noScrollX}
-      noScrollY={noScrollY}
-      noScroll={noScroll}
-      wrapperProps={{className: 'cf-dapper-scrollbars--wrapper'}}
-      contentProps={{className: 'cf-dapper-scrollbars--content'}}
-      trackXProps={{className: 'cf-dapper-scrollbars--track-x'}}
-      thumbXProps={{
-        renderer: props => {
-          const {elementRef, style, ...restProps} = props
-          const thumbStyle = {...style, ...thumbXStyle}
-          return (
-            <div
-              className="cf-dapper-scrollbars--thumb-x"
-              ref={elementRef}
-              style={thumbStyle}
-              {...restProps}
-              data-testid={`${testID}--thumb-x`}
-            />
-          )
-        },
-      }}
-      trackYProps={{className: 'cf-dapper-scrollbars--track-y'}}
-      thumbYProps={{
-        renderer: props => {
-          const {elementRef, style, ...restProps} = props
-          const thumbStyle = {...style, ...thumbYStyle}
-          return (
-            <div
-              className="cf-dapper-scrollbars--thumb-y"
-              ref={elementRef}
-              style={thumbStyle}
-              {...restProps}
-              data-testid={`${testID}--thumb-y`}
-            />
-          )
-        },
-      }}
-      scrollTop={scrollTopPos}
-      scrollLeft={scrollLeftPos}
+    <div
       id={id}
-      download={null}
-      inlist={null}
+      style={containerStyle}
+      className={dapperScrollbars2Class}
+      data-testid={testID}
     >
-      {children}
-    </Scrollbar>
+      <div
+        ref={scrollerRef}
+        className="cf-dapper-scrollbars--scroller"
+        style={scrollerStyle}
+        onScroll={handleScroll}
+      >
+        <div ref={contentRef} className="cf-dapper-scrollbars--content">
+          {children}
+        </div>
+      </div>
+      {showTrackX && (
+        <div
+          ref={trackXRef}
+          className="cf-dapper-scrollbars--track-x"
+          onClick={handleTrackClick('x')}
+        >
+          <div
+            className="cf-dapper-scrollbars--thumb-x"
+            data-testid={`${testID}--thumb-x`}
+            style={{
+              ...thumbXStyle,
+              width: `${thumbXSize}px`,
+              transform: `translateX(${thumbXPos}px)`,
+            }}
+            onPointerDown={beginDrag('x')}
+            onPointerMove={moveDrag('x')}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+          />
+        </div>
+      )}
+      {showTrackY && (
+        <div
+          ref={trackYRef}
+          className="cf-dapper-scrollbars--track-y"
+          onClick={handleTrackClick('y')}
+        >
+          <div
+            className="cf-dapper-scrollbars--thumb-y"
+            data-testid={`${testID}--thumb-y`}
+            style={{
+              ...thumbYStyle,
+              height: `${thumbYSize}px`,
+              transform: `translateY(${thumbYPos}px)`,
+            }}
+            onPointerDown={beginDrag('y')}
+            onPointerMove={moveDrag('y')}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+          />
+        </div>
+      )}
+    </div>
   )
 }
 

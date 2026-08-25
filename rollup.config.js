@@ -4,7 +4,8 @@ import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import terserModule from '@rollup/plugin-terser'
 import gzipModule from 'rollup-plugin-gzip'
-import typescript from '@rollup/plugin-typescript'
+import esbuildModule from 'rollup-plugin-esbuild'
+import replace from '@rollup/plugin-replace'
 import sass from 'rollup-plugin-sass'
 import copy from 'rollup-plugin-copy'
 
@@ -12,12 +13,22 @@ const pkg = require('./package.json')
 const isProductionBuild = process.env.NODE_ENV === 'production'
 const gzip = gzipModule.default || gzipModule
 const terser = terserModule.default || terserModule
+const esbuild = esbuildModule.default || esbuildModule
 
 let plugins = [
   nodeResolve(),
   commonjs(),
-  typescript({
-    include: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
+  replace({
+    preventAssignment: true,
+    'process.env.NODE_ENV': JSON.stringify(
+      isProductionBuild ? 'production' : 'development'
+    ),
+  }),
+  // Transpile only — type checking and declaration emit live in `tsc` (TS7
+  // native), run separately via `yarn typecheck` / the build script
+  esbuild({
+    target: 'es2020',
+    include: /\.(ts|tsx)$/,
   }),
   sass({
     api: 'modern',
@@ -45,15 +56,9 @@ if (isProductionBuild) {
 
 const input = 'src/index.ts'
 
-const globals = {
-  react: 'React',
-  'react-dom': 'ReactDOM',
-  uuid: 'uuid',
-  'prop-types': 'PropTypes',
-}
-
-// Do not bundle peer dependencies
-const external = ['react', 'react-dom', 'uuid', 'prop-types']
+// Do not bundle peer dependencies — the regex covers subpaths such as
+// react/jsx-runtime so consumers always pair the bundle with their own React
+const external = [/^react($|\/)/, /^react-dom($|\/)/]
 
 export default [
   {
@@ -61,11 +66,9 @@ export default [
     plugins,
     external,
     output: {
-      name: pkg.name,
-      file: pkg.main,
-      format: 'umd',
+      file: 'dist/index.esm.js',
+      format: 'es',
       sourcemap: true,
-      globals,
     },
     onwarn(warning, warn) {
       if (

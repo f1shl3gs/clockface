@@ -22,7 +22,7 @@ export class Panel extends Component<PanelProps> {
   }
 }
 
-export {PanelProps, PanelRef} from './Family/Panel'
+export type {PanelProps, PanelRef} from './Family/Panel'
 export * from './Family/PanelHeader'
 export * from './Composed/PanelSymbolHeader'
 export * from './Family/PanelBody'

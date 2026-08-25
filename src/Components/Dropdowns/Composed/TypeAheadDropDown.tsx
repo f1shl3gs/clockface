@@ -1,5 +1,12 @@
 // Libraries
-import React, {ChangeEvent, FC, useEffect, useMemo, useState} from 'react'
+import React, {
+  ChangeEvent,
+  FC,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import classnames from 'classnames'
 import {Dropdown} from '../.'
 import {MenuStatus} from '../Dropdown'
@@ -12,7 +19,6 @@ import {
 
 import {Input} from '../../Inputs/Input'
 import {DropdownHeader} from '../DropdownHeader'
-import {FixedSizeList} from 'react-window'
 import '../ScrollBarStyles.scss'
 import './TypeAheadDropDownStyles.scss'
 export interface SelectableItem {
@@ -74,8 +80,8 @@ export const TypeAheadDropDown: FC<OwnProps> = ({
   const [selectedItem, setSelectedItem] = useState<SelectableItem | null>(
     selectedOption
   )
-
-  const listRef = React.createRef<FixedSizeList<SelectableItem[]>>()
+  const [scrollTop, setScrollTop] = useState(0)
+  const listRef = useRef<HTMLDivElement>(null)
 
   let initialInputValue = ''
 
@@ -122,6 +128,16 @@ export const TypeAheadDropDown: FC<OwnProps> = ({
   const itemNames = useMemo(() => items.map(item => item.name?.toLowerCase()), [
     items.length,
   ])
+
+  // Replicates react-window's initialScrollOffset: scroll to the selected
+  // item whenever the list (re)mounts — i.e. when the menu opens or results
+  // transition between empty and non-empty
+  const hasResults = !!queryResults && queryResults.length > 0
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = getSelectedItemIndex() * LIST_ITEM_HEIGHT
+    }
+  }, [menuStatus, hasResults])
 
   const filter = (filterStr: string) => {
     if (!filterStr) {
@@ -285,6 +301,16 @@ export const TypeAheadDropDown: FC<OwnProps> = ({
     return 0
   }
 
+  // Minimal virtualization: render only the visible window (+2 items of
+  // buffer on each side) out of the full queryResults list
+  const viewportHeight = Math.min(queryResults.length * LIST_ITEM_HEIGHT, 150)
+  const firstVisible = Math.max(0, Math.floor(scrollTop / LIST_ITEM_HEIGHT) - 2)
+  const lastVisible = Math.min(
+    queryResults.length,
+    firstVisible + Math.ceil(viewportHeight / LIST_ITEM_HEIGHT) + 4
+  )
+  const visibleItems = queryResults.slice(firstVisible, lastVisible)
+
   return (
     <Dropdown
       {...props}
@@ -303,44 +329,51 @@ export const TypeAheadDropDown: FC<OwnProps> = ({
       menu={() => (
         <Dropdown.Menu testID={`${testID}-dropdown-menu`} theme={menuTheme}>
           {queryResults && queryResults.length > 0 ? (
-            <FixedSizeList
-              height={
-                queryResults.length * LIST_ITEM_HEIGHT > 150
-                  ? 150
-                  : queryResults.length * LIST_ITEM_HEIGHT
-              }
-              itemCount={queryResults.length}
-              itemSize={33}
-              width={'100%'}
-              layout="vertical"
-              itemData={queryResults}
-              className="menu-dropdown"
+            <div
               ref={listRef}
-              initialScrollOffset={getSelectedItemIndex() * LIST_ITEM_HEIGHT}
+              className="menu-dropdown"
+              style={{height: viewportHeight, overflowY: 'auto'}}
+              onScroll={e => setScrollTop(e.currentTarget.scrollTop)}
             >
-              {({data, index, style}) => {
-                const value = data[index]
-                // add the 'active' class to highlight when arrowing; like a hover
-                const classN = classnames('menu-dropdown-typeahead-item', {
-                  active: index === selectIndex,
-                })
+              <div
+                style={{
+                  height: queryResults.length * LIST_ITEM_HEIGHT,
+                  position: 'relative',
+                }}
+              >
+                {visibleItems.map((value, i) => {
+                  const index = firstVisible + i
+                  // add the 'active' class to highlight when arrowing; like a hover
+                  const classN = classnames('menu-dropdown-typeahead-item', {
+                    active: index === selectIndex,
+                  })
 
-                return (
-                  <div key={value.id} style={style}>
-                    <Dropdown.Item
-                      id={value.id.toString()}
-                      value={value}
-                      onClick={() => selectItem(value)}
-                      selected={value.id === selectedItem?.id}
-                      testID={`typeAhead-dropdown--item`}
-                      className={classN}
+                  return (
+                    <div
+                      key={value.id}
+                      style={{
+                        position: 'absolute',
+                        top: index * LIST_ITEM_HEIGHT,
+                        height: LIST_ITEM_HEIGHT,
+                        left: 0,
+                        right: 0,
+                      }}
                     >
-                      {value.name || defaultNameText}
-                    </Dropdown.Item>
-                  </div>
-                )
-              }}
-            </FixedSizeList>
+                      <Dropdown.Item
+                        id={value.id.toString()}
+                        value={value}
+                        onClick={() => selectItem(value)}
+                        selected={value.id === selectedItem?.id}
+                        testID={`typeAhead-dropdown--item`}
+                        className={classN}
+                      >
+                        {value.name || defaultNameText}
+                      </Dropdown.Item>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           ) : (
             <Dropdown.Item
               key="no-values-in-filter"

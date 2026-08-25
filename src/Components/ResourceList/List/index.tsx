@@ -20,7 +20,7 @@ export class ResourceList extends Component<ResourceListProps> {
   }
 }
 
-export {ResourceListProps, ResourceListRef} from './ResourceList'
+export type {ResourceListProps, ResourceListRef} from './ResourceList'
 export * from './ResourceListHeader'
 export * from './ResourceListSorter'
 export * from './ResourceListBody'

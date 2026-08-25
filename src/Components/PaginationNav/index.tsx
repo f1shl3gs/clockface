@@ -21,7 +21,8 @@ export class PaginationNav extends Component<PaginationNavProps> {
   }
 }
 
-export {Pagination, PaginationNavRef} from './PaginationNav'
+export type {PaginationNavRef} from './PaginationNav'
+export {Pagination} from './PaginationNav'
 export * from './PaginationItem'
 export * from './paginationTruncationItem'
 export * from './PaginationDirectionItem'

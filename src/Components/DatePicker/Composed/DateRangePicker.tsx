@@ -1,5 +1,6 @@
 // Libraries
 import {forwardRef, useState} from 'react'
+import dayjs from 'dayjs'
 
 // Components
 import {DatePicker} from '../Base/DatePicker'
@@ -11,6 +12,7 @@ import {
   TimeRange,
   ComponentColor,
   ComponentSize,
+  ComponentStatus,
   StandardFunctionProps,
   FlexDirection,
   AlignItems,
@@ -29,22 +31,19 @@ export const DateRangePicker = forwardRef<
   DateRangePickerRef,
   DateRangePickerProps
 >(({style, timeRange, onSetTimeRange, testID = 'date-range-picker'}, ref) => {
-  const [lower, setLower] = useState<string>(timeRange['lower'])
-  const [upper, setUpper] = useState<string | null | undefined>(
-    timeRange['upper']
-  )
+  const [lower, setLower] = useState<string>(timeRange.lower)
+  const [upper, setUpper] = useState<string | null | undefined>(timeRange.upper)
 
   const handleSetTimeRange = (): void => {
     onSetTimeRange({...timeRange, lower, upper})
   }
 
-  const handleSelectLower = (lower: string): void => {
-    setLower(lower)
-  }
-
-  const handleSelectUpper = (upper: string): void => {
-    setUpper(upper)
-  }
+  const lowerDate = dayjs(lower)
+  const upperDate = upper == null ? null : dayjs(upper)
+  const isInvalidRange =
+    !lowerDate.isValid() ||
+    (upperDate !== null &&
+      (!upperDate.isValid() || !upperDate.isAfter(lowerDate)))
 
   return (
     <FlexBox.FlexBox
@@ -55,16 +54,8 @@ export const DateRangePicker = forwardRef<
       alignItems={AlignItems.FlexEnd}
     >
       <FlexBox direction={FlexDirection.Row} testID={testID}>
-        <DatePicker
-          dateTime={lower}
-          onSelectDate={handleSelectLower}
-          label="Start"
-        />
-        <DatePicker
-          dateTime={upper}
-          onSelectDate={handleSelectUpper}
-          label="Stop"
-        />
+        <DatePicker dateTime={lower} onSelectDate={setLower} label="Start" />
+        <DatePicker dateTime={upper} onSelectDate={setUpper} label="Stop" />
       </FlexBox>
       <Button
         className="range-picker--submit"
@@ -72,6 +63,9 @@ export const DateRangePicker = forwardRef<
         size={ComponentSize.ExtraSmall}
         onClick={handleSetTimeRange}
         text="Apply Time Range"
+        status={
+          isInvalidRange ? ComponentStatus.Disabled : ComponentStatus.Default
+        }
       />
     </FlexBox.FlexBox>
   )

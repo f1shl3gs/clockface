@@ -16,5 +16,5 @@ export class Notification extends Component<NotificationProps> {
   }
 }
 
-export {NotificationProps, NotificationRef} from './Notification'
+export type {NotificationProps, NotificationRef} from './Notification'
 export * from './NotificationDialog'

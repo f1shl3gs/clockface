@@ -1,7 +1,5 @@
 // Libraries
-import {forwardRef, useEffect} from 'react'
-import {Transition, animated} from '@react-spring/web'
-import * as easings from 'd3-ease'
+import {forwardRef, CSSProperties, useEffect} from 'react'
 
 // Components
 import {NotificationDialog} from './NotificationDialog'
@@ -20,11 +18,13 @@ import {
 
 // Utils
 import {usePortal} from '../../Utils/portals'
+import {useDelayedUnmount} from '../../Utils/useDelayedUnmount'
 
 // Styles
 import './Notification.scss'
 
-const AnimatedNotificationDialog = animated(NotificationDialog)
+// Matches d3-ease's easeExpInOut, which drove the previous react-spring version
+const EASE_EXP_IN_OUT = 'cubic-bezier(0.87, 0, 0.13, 1)'
 
 export interface NotificationProps extends NotificationDialogProps {
   /** Positioning the notification left, center, or right on the window */
@@ -65,6 +65,7 @@ export const NotificationRoot = forwardRef<NotificationRef, NotificationProps>(
     ref
   ) => {
     const {addNotificationToPortal} = usePortal()
+    const shouldRender = useDelayedUnmount(visible, 300)
 
     useEffect(() => {
       if (visible && duration !== Infinity) {
@@ -79,11 +80,6 @@ export const NotificationRoot = forwardRef<NotificationRef, NotificationProps>(
       if (onTimeout) {
         onTimeout(id)
       }
-    }
-
-    const transitionConfig = {
-      duration: 300,
-      easing: easings.easeExpInOut,
     }
 
     const translateOrigin = () => {
@@ -105,31 +101,28 @@ export const NotificationRoot = forwardRef<NotificationRef, NotificationProps>(
       return `translate${cardinality}(${sign}50%)`
     }
 
-    const notificationElement = (
-      <Transition
-        items={visible ? [true] : []}
-        from={{opacity: 0, transform: translateOrigin()}}
-        enter={{opacity: 1, transform: 'translateX(0)'}}
-        leave={{opacity: 0, transform: translateOrigin()}}
-        config={transitionConfig}
+    const animationStyle = {
+      '--slide-from': translateOrigin(),
+      animation: `cf-notification-${
+        visible ? 'in' : 'out'
+      } 300ms ${EASE_EXP_IN_OUT} both`,
+    } as CSSProperties
+
+    const notificationElement = shouldRender && (
+      <NotificationDialog
+        backgroundColor={backgroundColor}
+        className={className}
+        onDismiss={onDismiss}
+        gradient={gradient}
+        testID={testID}
+        style={{...style, ...animationStyle}}
+        size={size}
+        icon={icon}
+        ref={ref}
+        id={id}
       >
-        {props => (
-          <AnimatedNotificationDialog
-            backgroundColor={backgroundColor}
-            className={className}
-            onDismiss={onDismiss}
-            gradient={gradient}
-            testID={testID}
-            style={{...style, ...props}}
-            size={size}
-            icon={icon}
-            ref={ref}
-            id={id}
-          >
-            {children}
-          </AnimatedNotificationDialog>
-        )}
-      </Transition>
+        {children}
+      </NotificationDialog>
     )
 
     return addNotificationToPortal(

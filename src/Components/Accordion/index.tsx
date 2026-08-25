@@ -19,4 +19,4 @@ export class Accordion extends Component<AccordionProps> {
   }
 }
 
-export {AccordionProps, AccordionRef} from './Accordion'
+export type {AccordionProps, AccordionRef} from './Accordion'

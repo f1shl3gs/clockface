@@ -18,6 +18,6 @@ export class EmptyState extends Component<EmptyStateProps> {
   }
 }
 
-export {EmptyStateProps, EmptyStateRef} from './EmptyState'
+export type {EmptyStateProps, EmptyStateRef} from './EmptyState'
 export * from './EmptyStateText'
 export * from './EmptyStateSubText'

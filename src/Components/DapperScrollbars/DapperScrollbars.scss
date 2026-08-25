@@ -1,19 +1,81 @@
 @import '../../Styles/variables';
 
 /*
-  DapperScrollbars
+  DapperScrollbars2 (self-contained, no react-scrollbars-custom)
   ------------------------------------------------------------------------------
 */
 
-.cf-dapper-scrollbars--wrapper {
-  margin-right: 0 !important;
-  margin-bottom: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-}
+.cf-dapper-scrollbars {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 
-.cf-dapper-scrollbars--content {
-  display: block !important;
+  .cf-dapper-scrollbars--scroller {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    // Hide the native scrollbars (Firefox)
+    scrollbar-width: none;
+
+    // Hide the native scrollbars (Chrome / Safari / Edge)
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .cf-dapper-scrollbars--content {
+    display: block;
+  }
+
+  .cf-dapper-scrollbars--track-x,
+  .cf-dapper-scrollbars--track-y {
+    position: absolute !important;
+    border-radius: 4px !important;
+    background-color: rgba($cf-grey-95, 0.15) !important;
+    user-select: none !important;
+    overflow: hidden !important;
+    transition: opacity $cf-transition-default !important;
+  }
+
+  .cf-dapper-scrollbars--track-x {
+    height: 4px !important;
+    width: calc(100% - 4px) !important;
+    bottom: 2px !important;
+    left: 2px !important;
+  }
+
+  .cf-dapper-scrollbars--track-y {
+    width: 4px !important;
+    height: calc(100% - 4px) !important;
+    right: 2px !important;
+    top: 2px !important;
+  }
+
+  .cf-dapper-scrollbars--thumb-x,
+  .cf-dapper-scrollbars--thumb-y {
+    position: absolute !important;
+    border-radius: 2px !important;
+    cursor: pointer !important;
+
+    // Keep pointer drag working over touch devices
+    touch-action: none;
+  }
+
+  .cf-dapper-scrollbars--thumb-x {
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  .cf-dapper-scrollbars--thumb-y {
+    width: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
 }
 
 .cf-dapper-scrollbars--autohide {
@@ -31,28 +93,20 @@
 }
 
 @mixin cf-dapper-scrollbars-size-modifier($dapper-scrollbars--size) {
-  .cf-dapper-scrollbars--track-x,
-  .cf-dapper-scrollbars--track-y {
-    border-radius: $dapper-scrollbars--size !important;
-    position: absolute !important;
-    background-color: rgba($cf-grey-95, 0.15) !important;
-    user-select: none !important;
-    overflow: hidden !important;
-    transition: opacity $cf-transition-default !important;
-  }
-
   .cf-dapper-scrollbars--track-x {
     height: $dapper-scrollbars--size !important;
-    width: calc(100% - #{$dapper-scrollbars--size}) !important;
     bottom: $dapper-scrollbars--size * 0.5 !important;
     left: $dapper-scrollbars--size * 0.5 !important;
+    width: calc(100% - #{$dapper-scrollbars--size}) !important;
+    border-radius: $dapper-scrollbars--size * 0.5 !important;
   }
 
   .cf-dapper-scrollbars--track-y {
     width: $dapper-scrollbars--size !important;
-    height: calc(100% - #{$dapper-scrollbars--size}) !important;
-    right: $dapper-scrollbars--size * 0.5 !important;
     top: $dapper-scrollbars--size * 0.5 !important;
+    right: $dapper-scrollbars--size * 0.5 !important;
+    height: calc(100% - #{$dapper-scrollbars--size}) !important;
+    border-radius: $dapper-scrollbars--size * 0.5 !important;
   }
 
   .cf-dapper-scrollbars--thumb-x,

@@ -18,6 +18,6 @@ export class NavMenu extends Component<NavMenuProps> {
   }
 }
 
-export {NavMenuProps, NavMenuRef} from './NavMenu'
+export type {NavMenuProps, NavMenuRef} from './NavMenu'
 export * from './NavMenuItem'
 export * from './NavMenuSubItem'

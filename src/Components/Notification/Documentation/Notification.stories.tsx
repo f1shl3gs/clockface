@@ -1,7 +1,6 @@
 // Libraries
 import {createRef} from 'react'
 import marked from 'marked'
-import uuid from 'uuid'
 
 // Storybook
 import {storiesOf} from '@storybook/react'
@@ -85,7 +84,7 @@ notificationStories.add(
       verticalAlign: VerticalAlignment,
       horizontalAlign: Alignment
     ) => (): void => {
-      const id = uuid.v4()
+      const id = crypto.randomUUID()
       const text = generateRandomText(randomTextLower, randomTextUpper)
       const icon = getRandomIcon()
       const gradient = getRandomGradient()

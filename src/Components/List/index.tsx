@@ -24,7 +24,7 @@ export class List extends Component<ListProps> {
   }
 }
 
-export {ListProps, ListRef} from './List'
+export type {ListProps, ListRef} from './List'
 export * from './ListItem'
 export * from './ListEmptyState'
 export * from './ListDivider'

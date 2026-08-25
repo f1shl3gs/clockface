@@ -18,6 +18,6 @@ export class RightClick extends Component<RightClickProps> {
   }
 }
 
-export {RightClickProps, RightClickRef} from './Base/RightClick'
+export type {RightClickProps, RightClickRef} from './Base/RightClick'
 export * from './Base/RightClickMenuItem'
 export * from './Base/RightClickDivider'

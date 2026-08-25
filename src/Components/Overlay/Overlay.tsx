@@ -1,8 +1,6 @@
 // Libraries
 import React, {FunctionComponent, CSSProperties, useEffect, useRef} from 'react'
-import {Transition, animated} from '@react-spring/web'
 import classnames from 'classnames'
-import * as easings from 'd3-ease'
 
 // Components
 import {OverlayMask} from './OverlayMask'
@@ -10,6 +8,7 @@ import {DapperScrollbars} from '../DapperScrollbars/DapperScrollbars'
 
 // Utils
 import {usePortal} from '../../Utils/portals'
+import {useDelayedUnmount} from '../../Utils/useDelayedUnmount'
 
 // Types
 import {StandardFunctionProps, InfluxColors} from '../../Types'
@@ -17,7 +16,8 @@ import {StandardFunctionProps, InfluxColors} from '../../Types'
 // Styles
 import './Overlay.scss'
 
-const AnimatedOverlayMask = animated(OverlayMask)
+// Matches d3-ease's easeExpInOut, which drove the previous react-spring version
+const EASE_EXP_IN_OUT = 'cubic-bezier(0.87, 0, 0.13, 1)'
 
 export interface OverlayProps extends StandardFunctionProps {
   /** Controls visibility of the overlay */
@@ -38,11 +38,10 @@ export const OverlayRoot: FunctionComponent<OverlayProps> = ({
   onEscape,
   className,
   transitionDuration = 360,
-  renderMaskElement = (style: CSSProperties) => (
-    <AnimatedOverlayMask style={style} />
-  ),
+  renderMaskElement = (style: CSSProperties) => <OverlayMask style={style} />,
 }) => {
   const oldVisibility = useRef<boolean>(visible)
+  const shouldRender = useDelayedUnmount(visible, transitionDuration)
 
   useEffect(() => {
     if (visible && !oldVisibility.current) {
@@ -63,53 +62,42 @@ export const OverlayRoot: FunctionComponent<OverlayProps> = ({
 
   const {addElementToPortal} = usePortal()
 
-  const transitionConfig = {
-    duration: transitionDuration,
-    easing: easings.easeExpInOut,
-  }
-
   const overlayClass = classnames('cf-overlay', {
     [`${className}`]: className,
   })
 
+  if (!shouldRender) {
+    return addElementToPortal(null)
+  }
+
+  const timing = `${transitionDuration}ms ${EASE_EXP_IN_OUT} both`
+  const maskStyle: CSSProperties = {
+    animation: `cf-overlay-mask-${visible ? 'in' : 'out'} ${timing}`,
+  }
+  const dialogStyle: CSSProperties = {
+    animation: `cf-overlay-dialog-${visible ? 'in' : 'out'} ${timing}`,
+  }
+
   const OverlayRender = (
     <>
-      <Transition
-        items={visible ? [true] : []}
-        from={{opacity: 0}}
-        enter={{opacity: 0.8}}
-        leave={{opacity: 0}}
-        config={transitionConfig}
+      {renderMaskElement(maskStyle)}
+      <DapperScrollbars
+        className={overlayClass}
+        thumbStartColor={InfluxColors.White}
+        thumbStopColor={InfluxColors.Hydrogen}
+        noScrollX={true}
+        autoHide={false}
+        testID={testID}
+        id={id}
       >
-        {props => renderMaskElement(props)}
-      </Transition>
-      <Transition
-        items={visible ? [true] : []}
-        from={{opacity: 0, transform: 'translateY(44px)'}}
-        enter={{opacity: 1, transform: 'translateY(0)'}}
-        leave={{opacity: 0, transform: 'translateY(44px)'}}
-        config={transitionConfig}
-      >
-        {props => (
-          <DapperScrollbars
-            className={overlayClass}
-            thumbStartColor={InfluxColors.White}
-            thumbStopColor={InfluxColors.Hydrogen}
-            noScrollX={true}
-            autoHide={false}
-            testID={testID}
-            id={id}
-          >
-            <animated.div
-              className="cf-overlay--children"
-              data-testid={`${testID}--children`}
-              style={props}
-            >
-              {children}
-            </animated.div>
-          </DapperScrollbars>
-        )}
-      </Transition>
+        <div
+          className="cf-overlay--children"
+          data-testid={`${testID}--children`}
+          style={dialogStyle}
+        >
+          {children}
+        </div>
+      </DapperScrollbars>
     </>
   )
 

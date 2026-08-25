@@ -28,7 +28,7 @@ export class Page extends Component<PageProps> {
   }
 }
 
-export {PageProps, PageRef} from './Page'
+export type {PageProps, PageRef} from './Page'
 export * from './PageHeader'
 export * from './PageTitle'
 export * from './PageControlBar'

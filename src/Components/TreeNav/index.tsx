@@ -28,7 +28,7 @@ export class TreeNav extends Component<TreeNavProps> {
   }
 }
 
-export {TreeNavProps, TreeNavRef} from './TreeNav'
+export type {TreeNavProps, TreeNavRef} from './TreeNav'
 export * from './TreeNavHeader'
 export * from './TreeNavUser'
 export * from './TreeNavUserItem'

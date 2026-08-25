@@ -16,5 +16,5 @@ export class SquareGrid extends Component<SquareGridProps> {
   }
 }
 
-export {SquareGridProps, SquareGridRef} from './SquareGrid'
+export type {SquareGridProps, SquareGridRef} from './SquareGrid'
 export * from './SquareGridCard'

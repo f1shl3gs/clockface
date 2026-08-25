@@ -18,6 +18,6 @@ export class FunnelPage extends Component<FunnelPageProps> {
   }
 }
 
-export {FunnelPageProps, FunnelPageRef} from './Family/FunnelPage'
+export type {FunnelPageProps, FunnelPageRef} from './Family/FunnelPage'
 export * from './Family/FunnelPageFooter'
 export * from './Family/FunnelPageFooterSection'

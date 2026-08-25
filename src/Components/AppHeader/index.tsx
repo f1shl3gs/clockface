@@ -16,5 +16,5 @@ export class AppHeader extends Component<AppHeaderProps> {
   }
 }
 
-export {AppHeaderProps, AppHeaderRef} from './AppHeader'
+export type {AppHeaderProps, AppHeaderRef} from './AppHeader'
 export * from './AppHeaderLogo'

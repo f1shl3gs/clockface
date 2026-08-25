@@ -18,6 +18,6 @@ export class Grid extends Component<GridProps> {
   }
 }
 
-export {GridProps, GridRef} from './Grid'
+export type {GridProps, GridRef} from './Grid'
 export * from './GridColumn'
 export * from './GridRow'

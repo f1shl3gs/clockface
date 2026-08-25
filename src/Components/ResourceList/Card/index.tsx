@@ -24,7 +24,7 @@ export class ResourceCard extends Component<ResourceCardProps> {
   }
 }
 
-export {ResourceCardProps, ResourceCardRef} from './ResourceCard'
+export type {ResourceCardProps, ResourceCardRef} from './ResourceCard'
 export * from './ResourceCardName'
 export * from './ResourceCardEditableName'
 export * from './ResourceCardDescription'

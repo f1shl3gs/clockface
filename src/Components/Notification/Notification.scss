@@ -159,3 +159,27 @@ $cf-notification-screen-margin: $cf-space-s;
     color: rgba($g20-white, 0.85);
   }
 }
+
+// Enter/exit animations (replaces react-spring Transition)
+// --slide-from is set inline per alignment; easing approximates d3-ease easeExpInOut
+@keyframes cf-notification-in {
+  from {
+    opacity: 0;
+    transform: var(--slide-from);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cf-notification-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: var(--slide-from);
+  }
+}

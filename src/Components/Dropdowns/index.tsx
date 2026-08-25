@@ -28,7 +28,8 @@ export class Dropdown extends Component<DropdownProps> {
   }
 }
 
-export {DropdownProps, DropdownRef, MenuStatus} from './Dropdown'
+export type {DropdownProps, DropdownRef} from './Dropdown'
+export {MenuStatus} from './Dropdown'
 export * from './DropdownMenu'
 export * from './DropdownButton'
 export * from './DropdownItem'

@@ -16,5 +16,5 @@ export class PopNav extends Component<PopNavProps> {
   }
 }
 
-export {PopNavProps, PopNavRef} from './PopNav'
+export type {PopNavProps, PopNavRef} from './PopNav'
 export * from './PopNavItem'

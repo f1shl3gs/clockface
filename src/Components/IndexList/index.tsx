@@ -24,7 +24,7 @@ export class IndexList extends Component<IndexListProps> {
   }
 }
 
-export {IndexListProps, IndexListRef} from './IndexList'
+export type {IndexListProps, IndexListRef} from './IndexList'
 export * from './IndexListBody'
 export * from './IndexListHeader'
 export * from './IndexListHeaderCell'

@@ -109,7 +109,7 @@ export const AccordionRoot = forwardRef<AccordionRef, AccordionProps>(
       iconPlacementPosition: hasBody ? iconPlacementPosition : Direction.None,
       isDisabled,
       onChange: onChangeFunction,
-      hasBody: hasBody,
+      hasBody,
     }
 
     return (

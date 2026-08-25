@@ -16,4 +16,4 @@ export class Popover extends Component<PopoverProps> {
   }
 }
 
-export {PopoverRef} from './Base/Popover'
+export type {PopoverRef} from './Base/Popover'

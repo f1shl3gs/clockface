@@ -20,7 +20,7 @@ export class Tabs extends Component<TabsProps> {
   }
 }
 
-export {TabsProps, TabsRef} from './Tabs'
+export type {TabsProps, TabsRef} from './Tabs'
 export * from './Tab'
 export * from './TabContents'
 export * from './TabsContainer'
