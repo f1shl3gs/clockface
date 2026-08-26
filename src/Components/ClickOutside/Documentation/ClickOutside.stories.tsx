@@ -1,29 +1,26 @@
 // Libraries
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
+import {marked} from 'marked'
 
 // Components
 import {ClickOutside} from '../ClickOutside'
 
 // Notes
-import ClickOutsideReadme from './ClickOutside.md'
+import ClickOutsideReadme from './ClickOutside.md?raw'
 
-const clickOutsideStories = storiesOf('Utilities/ClickOutside', module)
+export default {title: 'Utilities/ClickOutside'}
 
-clickOutsideStories.add(
-  'Example',
-  () => (
-    <div className="story--example">
-      <ClickOutside onClickOutside={() => alert('Clicked outside')}>
-        <div className="mockComponent box">Click outside this element</div>
-      </ClickOutside>
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(ClickOutsideReadme),
-    },
-  }
+export const Example = () => (
+  <div className="story--example">
+    <ClickOutside onClickOutside={() => alert('Clicked outside')}>
+      <div className="mockComponent box">Click outside this element</div>
+    </ClickOutside>
+  </div>
 )
+
+Example.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ClickOutsideReadme),
+    },
+  },
+}

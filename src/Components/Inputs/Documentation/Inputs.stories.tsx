@@ -1,21 +1,6 @@
 // Libraries
-import {RefObject, createRef, ChangeEvent} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {useState} from '@storybook/addons'
-import {
-  withKnobs,
-  radios,
-  number,
-  text,
-  select,
-  boolean,
-  object,
-  array,
-} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
+import {RefObject, createRef, ChangeEvent, useState} from 'react'
+import {marked} from 'marked'
 
 // Components
 import {
@@ -58,1114 +43,824 @@ import {
 } from '../../../Types'
 
 // Notes
-import InputReadme from './Input.md'
-import AutoInputReadme from './AutoInput.md'
-import VisibilityInputReadme from './VisibilityInput.md'
-import RangeSliderReadme from './RangeSlider.md'
-import TextAreaReadme from './TextArea.md'
-import ToggleReadme from './Toggle.md'
-import InputLabelReadme from './InputLabel.md'
-import TimeInputReadme from './TimeInput.md'
-import MultipleChoiceForm from './MultipleChoiceForm.md'
+import InputReadme from './Input.md?raw'
+import AutoInputReadme from './AutoInput.md?raw'
+import VisibilityInputReadme from './VisibilityInput.md?raw'
+import RangeSliderReadme from './RangeSlider.md?raw'
+import TextAreaReadme from './TextArea.md?raw'
+import ToggleReadme from './Toggle.md?raw'
+import InputLabelReadme from './InputLabel.md?raw'
+import TimeInputReadme from './TimeInput.md?raw'
+import MultipleChoiceForm from './MultipleChoiceForm.md?raw'
 
-const inputsBaseStories = storiesOf(
-  'Components/Inputs/Base',
-  module
-).addDecorator(withKnobs)
-
-const inputsComposedStories = storiesOf(
-  'Components/Inputs/Composed',
-  module
-).addDecorator(withKnobs)
-
-const inputsExampleStories = storiesOf(
-  'Components/Inputs/Examples',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/Inputs/Base'}
 
 const defaultInputStyle = {
   width: '200px',
 }
 
-inputsBaseStories.add(
-  'Input (Text)',
-  () => {
-    const inputRef: RefObject<InputRef | null> = createRef()
-    const inputContainerRef: RefObject<InputContainerRef | null> = createRef()
+export const InputText = () => {
+  const inputRef: RefObject<InputRef | null> = createRef()
+  const inputContainerRef: RefObject<InputContainerRef | null> = createRef()
 
-    const handleLogRefs = (): void => {
-      /* eslint-disable */
-      console.log('InputRef', inputRef.current)
-      console.log('InputContainerRef', inputContainerRef.current)
-      /* eslint-enable */
-    }
+  const handleLogRefs = (): void => {
+    /* eslint-disable */
+    console.log('InputRef', inputRef.current)
+    console.log('InputContainerRef', inputContainerRef.current)
+    /* eslint-enable */
+  }
 
-    return (
-      <div className="story--example">
+  return (
+    <div className="story--example">
+      <Input
+        ref={inputRef}
+        containerRef={inputContainerRef}
+        placeholder={'Placeholder Text'}
+        value={'Value Text'}
+        monospace={false}
+        onChange={() => {
+          // do nothing
+        }}
+        name={'Name'}
+        titleText={'Title Text'}
+        disabledTitleText={'Disabled Title Text'}
+        maxLength={24}
+        icon={(IconFont as Record<string, any>)['None']}
+        style={defaultInputStyle}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        autocomplete={(AutoComplete as Record<string, any>)['Off']}
+        type={InputType.Text}
+      />
+      <div className="story--test-buttons">
+        <button onClick={handleLogRefs}>Log Refs</button>
+      </div>
+    </div>
+  )
+}
+
+InputText.story = {
+  name: 'Input (Text)',
+
+  parameters: {
+    readme: {
+      content: marked.parse(InputReadme),
+    },
+  },
+}
+
+export const InputClearableText = () => {
+  const [value, setValue] = useState<string>(
+    'hello world how are you it is me working on this input.....'
+  )
+
+  return (
+    <div className="story--example">
+      <Input
+        min={0}
+        max={50}
+        value={value}
+        monospace={false}
+        onChange={e => setValue(e.target.value)}
+        onClear={() => setValue('')}
+        name={'Name'}
+        titleText={'Title Text'}
+        disabledTitleText={'Disabled Title Text'}
+        maxLength={125}
+        icon={(IconFont as Record<string, any>)['None']}
+        style={defaultInputStyle}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        type={InputType.Text}
+      />
+    </div>
+  )
+}
+
+InputClearableText.story = {
+  name: 'Input (Clearable Text)',
+
+  parameters: {
+    readme: {
+      content: marked.parse(InputReadme),
+    },
+  },
+}
+
+export const InputNumber = () => {
+  const [value, setValue] = useState<number>(25)
+
+  return (
+    <div className="story--example">
+      <Input
+        min={0}
+        max={50}
+        value={value}
+        monospace={false}
+        onChange={e =>
+          setValue(e.target.value === '' ? NaN : Number(e.target.value))
+        }
+        name={'Name'}
+        titleText={'Title Text'}
+        disabledTitleText={'Disabled Title Text'}
+        maxLength={24}
+        icon={(IconFont as Record<string, any>)['None']}
+        style={defaultInputStyle}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        type={InputType.Number}
+      />
+    </div>
+  )
+}
+
+InputNumber.story = {
+  name: 'Input (Number)',
+
+  parameters: {
+    readme: {
+      content: marked.parse(InputReadme),
+    },
+  },
+}
+
+export const InputPassword = () => (
+  <div className="story--example">
+    <Input
+      placeholder={'Placeholder Text'}
+      value={'Value Text'}
+      monospace={false}
+      onChange={() => {
+        // do nothing
+      }}
+      name={'Name'}
+      titleText={'Title Text'}
+      disabledTitleText={'Disabled Title Text'}
+      maxLength={24}
+      icon={(IconFont as Record<string, any>)['None']}
+      style={defaultInputStyle}
+      status={(ComponentStatus as Record<string, any>)['Default']}
+      size={(ComponentSize as Record<string, any>)['Small']}
+      autocomplete={(AutoComplete as Record<string, any>)['Off']}
+      type={InputType.Password}
+    />
+  </div>
+)
+
+InputPassword.story = {
+  name: 'Input (Password)',
+
+  parameters: {
+    readme: {
+      content: marked.parse(InputReadme),
+    },
+  },
+}
+
+export const InputEmail = () => (
+  <div className="story--example">
+    <Input
+      placeholder={'Placeholder Text'}
+      value={'value@text.com'}
+      monospace={false}
+      onChange={() => {
+        // do nothing
+      }}
+      name={'Name'}
+      titleText={'Title Text'}
+      disabledTitleText={'Disabled Title Text'}
+      maxLength={24}
+      icon={(IconFont as Record<string, any>)['None']}
+      style={defaultInputStyle}
+      status={(ComponentStatus as Record<string, any>)['Default']}
+      size={(ComponentSize as Record<string, any>)['Small']}
+      autocomplete={(AutoComplete as Record<string, any>)['Off']}
+      type={InputType.Email}
+    />
+  </div>
+)
+
+InputEmail.story = {
+  name: 'Input (Email)',
+
+  parameters: {
+    readme: {
+      content: marked.parse(InputReadme),
+    },
+  },
+}
+
+export const InputCheckbox = () => (
+  <div className="story--example">
+    <div style={{width: `${300}px`}}>
+      <FlexBox
+        direction={FlexDirection.Row}
+        alignItems={AlignItems.Center}
+        margin={ComponentSize.Medium}
+        stretchToFitWidth={true}
+      >
         <Input
-          ref={inputRef}
-          containerRef={inputContainerRef}
-          placeholder={text('placeholder', 'Placeholder Text')}
-          value={text('value', 'Value Text')}
-          monospace={boolean('monospace', false)}
+          name={'Name'}
           onChange={() => {
             // do nothing
           }}
-          name={text('name', 'Name')}
-          titleText={text('titleText', 'Title Text')}
-          disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-          maxLength={number('maxLength', 24)}
-          icon={
-            (IconFont as Record<string, any>)[
-              select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-            ]
-          }
-          style={object('style', defaultInputStyle)}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          autocomplete={
-            (AutoComplete as Record<string, any>)[
-              radios<AutoComplete>(
-                'autocomplete',
-                mapEnumKeys(AutoComplete),
-                AutoComplete.Off
-              )
-            ]
-          }
-          type={InputType.Text}
+          size={(ComponentSize as Record<string, any>)['Small']}
+          status={(ComponentStatus as Record<string, any>)['Default']}
+          type={InputType.Checkbox}
+          checked={true}
         />
-        <div className="story--test-buttons">
-          <button onClick={handleLogRefs}>Log Refs</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(InputReadme),
-    },
-  }
-)
-inputsBaseStories.add(
-  'Input (Clearable Text)',
-  () => {
-    const [value, setValue] = useState<string>(
-      'hello world how are you it is me working on this input.....'
-    )
-
-    return (
-      <div className="story--example">
-        <Input
-          min={number('min', 0)}
-          max={number('max', 50)}
-          value={value}
-          monospace={boolean('monospace', false)}
-          onChange={e => setValue(e.target.value)}
-          onClear={() => setValue('')}
-          name={text('name', 'Name')}
-          titleText={text('titleText', 'Title Text')}
-          disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-          maxLength={number('maxLength', 125)}
-          icon={
-            (IconFont as Record<string, any>)[
-              select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-            ]
-          }
-          style={object('style', defaultInputStyle)}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          type={InputType.Text}
-        />
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(InputReadme),
-    },
-  }
-)
-
-inputsBaseStories.add(
-  'Input (Number)',
-  () => {
-    const [value, setValue] = useState<number>(25)
-
-    return (
-      <div className="story--example">
-        <Input
-          min={number('min', 0)}
-          max={number('max', 50)}
-          value={value}
-          monospace={boolean('monospace', false)}
-          onChange={e =>
-            setValue(e.target.value === '' ? NaN : Number(e.target.value))
-          }
-          name={text('name', 'Name')}
-          titleText={text('titleText', 'Title Text')}
-          disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-          maxLength={number('maxLength', 24)}
-          icon={
-            (IconFont as Record<string, any>)[
-              select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-            ]
-          }
-          style={object('style', defaultInputStyle)}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          type={InputType.Number}
-        />
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(InputReadme),
-    },
-  }
-)
-
-inputsBaseStories.add(
-  'Input (Password)',
-  () => (
-    <div className="story--example">
-      <Input
-        placeholder={text('placeholder', 'Placeholder Text')}
-        value={text('value', 'Value Text')}
-        monospace={boolean('monospace', false)}
-        onChange={() => {
-          // do nothing
-        }}
-        name={text('name', 'Name')}
-        titleText={text('titleText', 'Title Text')}
-        disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-        maxLength={number('maxLength', 24)}
-        icon={
-          (IconFont as Record<string, any>)[
-            select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-          ]
-        }
-        style={object('style', defaultInputStyle)}
-        status={
-          (ComponentStatus as Record<string, any>)[
-            select('status', mapEnumKeys(ComponentStatus), 'Default')
-          ]
-        }
-        size={
-          (ComponentSize as Record<string, any>)[
-            select('size', mapEnumKeys(ComponentSize), 'Small')
-          ]
-        }
-        autocomplete={
-          (AutoComplete as Record<string, any>)[
-            radios<AutoComplete>(
-              'autocomplete',
-              mapEnumKeys(AutoComplete),
-              AutoComplete.Off
-            )
-          ]
-        }
-        type={InputType.Password}
-      />
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(InputReadme),
-    },
-  }
-)
-
-inputsBaseStories.add(
-  'Input (Email)',
-  () => (
-    <div className="story--example">
-      <Input
-        placeholder={text('placeholder', 'Placeholder Text')}
-        value={text('value', 'value@text.com')}
-        monospace={boolean('monospace', false)}
-        onChange={() => {
-          // do nothing
-        }}
-        name={text('name', 'Name')}
-        titleText={text('titleText', 'Title Text')}
-        disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-        maxLength={number('maxLength', 24)}
-        icon={
-          (IconFont as Record<string, any>)[
-            select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-          ]
-        }
-        style={object('style', defaultInputStyle)}
-        status={
-          (ComponentStatus as Record<string, any>)[
-            select('status', mapEnumKeys(ComponentStatus), 'Default')
-          ]
-        }
-        size={
-          (ComponentSize as Record<string, any>)[
-            select('size', mapEnumKeys(ComponentSize), 'Small')
-          ]
-        }
-        autocomplete={
-          (AutoComplete as Record<string, any>)[
-            radios<AutoComplete>(
-              'autocomplete',
-              mapEnumKeys(AutoComplete),
-              AutoComplete.Off
-            )
-          ]
-        }
-        type={InputType.Email}
-      />
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(InputReadme),
-    },
-  }
-)
-
-inputsBaseStories.add(
-  'Input (Checkbox)',
-  () => (
-    <div className="story--example">
-      <div style={{width: `${number('Parent Width (px)', 300)}px`}}>
-        <FlexBox
-          direction={FlexDirection.Row}
-          alignItems={AlignItems.Center}
-          margin={ComponentSize.Medium}
-          stretchToFitWidth={true}
-        >
-          <Input
-            name={text('name', 'Name')}
-            onChange={() => {
-              // do nothing
-            }}
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            status={
-              (ComponentStatus as Record<string, any>)[
-                select('status', mapEnumKeys(ComponentStatus), 'Default')
-              ]
-            }
-            type={InputType.Checkbox}
-            checked={boolean('checked', true)}
-          />
-          <InputLabel
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            active={boolean('checked', true)}
-            wrapText={boolean('Label: wrapText', true)}
-          >
-            {text('Label: text', 'I Agree to Terms and Conditions')}
-          </InputLabel>
-        </FlexBox>
-      </div>
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(InputReadme),
-    },
-  }
-)
-
-inputsBaseStories.add(
-  'InputLabel',
-  () => {
-    const inputLabelRef: RefObject<InputLabelRef | null> = createRef()
-
-    const handleLogRefs = (): void => {
-      /* eslint-disable */
-      console.log('ToggleRef', inputLabelRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
         <InputLabel
-          ref={inputLabelRef}
-          style={object('style', {})}
-          active={boolean('active', true)}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
+          size={(ComponentSize as Record<string, any>)['Small']}
+          active={true}
+          wrapText={true}
         >
-          {text('children', 'I am a label!')}
+          {'I Agree to Terms and Conditions'}
         </InputLabel>
-        <div className="story--test-buttons">
-          <button onClick={handleLogRefs}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(InputLabelReadme),
-    },
-  }
+      </FlexBox>
+    </div>
+  </div>
 )
 
-inputsBaseStories.add(
-  'Toggle',
-  () => {
-    const toggleRef: RefObject<ToggleRef | null> = createRef()
-    const toggleContainerRef: RefObject<ToggleContainerRef | null> = createRef()
+InputCheckbox.story = {
+  name: 'Input (Checkbox)',
 
-    const [checked, setChecked] = useState<boolean>(false)
+  parameters: {
+    readme: {
+      content: marked.parse(InputReadme),
+    },
+  },
+}
 
-    const handleToggleChange = (value?: string): void => {
-      /* eslint-disable */
-      console.log('onChange fired!', value)
-      /* eslint-enable */
-      setChecked(!checked)
+export const _InputLabel = () => {
+  const inputLabelRef: RefObject<InputLabelRef | null> = createRef()
+
+  const handleLogRefs = (): void => {
+    /* eslint-disable */
+    console.log('ToggleRef', inputLabelRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <InputLabel
+        ref={inputLabelRef}
+        style={{}}
+        active={true}
+        size={(ComponentSize as Record<string, any>)['Small']}
+      >
+        {'I am a label!'}
+      </InputLabel>
+      <div className="story--test-buttons">
+        <button onClick={handleLogRefs}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_InputLabel.story = {
+  name: 'InputLabel',
+
+  parameters: {
+    readme: {
+      content: marked.parse(InputLabelReadme),
+    },
+  },
+}
+
+export const _Toggle = () => {
+  const toggleRef: RefObject<ToggleRef | null> = createRef()
+  const toggleContainerRef: RefObject<ToggleContainerRef | null> = createRef()
+
+  const [checked, setChecked] = useState<boolean>(false)
+
+  const handleToggleChange = (value?: string): void => {
+    /* eslint-disable */
+    console.log('onChange fired!', value)
+    /* eslint-enable */
+    setChecked(!checked)
+  }
+
+  const handleLogRefs = (): void => {
+    /* eslint-disable */
+    console.log('ToggleRef', toggleRef.current)
+    console.log('ToggleContainerRef', toggleContainerRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Toggle
+        checked={checked}
+        ref={toggleRef}
+        titleText={'Title Text'}
+        disabledTitleText={'Disabled Title Text'}
+        containerRef={toggleContainerRef}
+        id={'example_toggle_id'}
+        value={'Value Text'}
+        style={{}}
+        tabIndex={1}
+        icon={(IconFont as Record<string, any>)['None']}
+        disabled={false}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        color={(ComponentColor as Record<string, any>)['Primary']}
+        fill={(Appearance as Record<string, any>)['None']}
+        type={(InputToggleType as Record<string, any>)['Checkbox']}
+        onChange={handleToggleChange}
+      ></Toggle>
+      <div className="story--test-buttons">
+        <button onClick={handleLogRefs}>Log Refs</button>
+      </div>
+    </div>
+  )
+}
+
+_Toggle.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ToggleReadme),
+    },
+  },
+}
+
+export const _TextArea = () => {
+  const textAreaRefDefault: RefObject<TextAreaRef | null> = createRef()
+  const textAreaRefDisabled: RefObject<TextAreaRef | null> = createRef()
+  const textAreaRefValid: RefObject<TextAreaRef | null> = createRef()
+  const textAreaRefError: RefObject<TextAreaRef | null> = createRef()
+  const textAreaRefLoading: RefObject<TextAreaRef | null> = createRef()
+  const textAreaContainerRef: RefObject<TextAreaContainerRef | null> =
+    createRef()
+
+  const handleLogRefs = (): void => {
+    /* eslint-disable */
+    console.log('TextAreaRef (Default)', textAreaRefDefault.current)
+    console.log('TextAreaRef (Disabled)', textAreaRefDisabled.current)
+    console.log('TextAreaRef (Valid)', textAreaRefValid.current)
+    console.log('TextAreaRef (Error)', textAreaRefError.current)
+    console.log('TextAreaRef (Loading)', textAreaRefLoading.current)
+    console.log('TextAreaContainerRef (Default)', textAreaContainerRef.current)
+    /* eslint-enable */
+  }
+
+  const exampleTextAreaStyle = {width: '100%', margin: '0 10px'}
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={handleLogRefs}>Log Refs</button>
+      </div>
+      <FlexBox
+        style={{width: '100%'}}
+        stretchToFitWidth={true}
+        direction={FlexDirection.Column}
+        margin={ComponentSize.Large}
+      >
+        <TextArea
+          ref={textAreaRefDefault}
+          containerRef={textAreaContainerRef}
+          value={
+            'Example text can be controlled from the Knobs panel on the right'
+          }
+          maxLength={50}
+          minLength={5}
+          placeholder={'Placeholder Text'}
+          onChange={() => {
+            // do nothing
+          }}
+          monospace={false}
+          autocomplete={(AutoComplete as Record<string, any>)['Off']}
+          size={(ComponentSize as Record<string, any>)['Small']}
+          style={exampleTextAreaStyle}
+          cols={20}
+          rows={10}
+          status={ComponentStatus.Default}
+        />
+        <TextArea
+          ref={textAreaRefDisabled}
+          value={
+            'Example text can be controlled from the Knobs panel on the right'
+          }
+          maxLength={50}
+          minLength={5}
+          placeholder={'Placeholder Text'}
+          onChange={() => {
+            // do nothing
+          }}
+          monospace={false}
+          autocomplete={(AutoComplete as Record<string, any>)['Off']}
+          size={(ComponentSize as Record<string, any>)['Small']}
+          style={exampleTextAreaStyle}
+          cols={20}
+          rows={10}
+          status={ComponentStatus.Disabled}
+        />
+        <TextArea
+          ref={textAreaRefValid}
+          value={
+            'Example text can be controlled from the Knobs panel on the right'
+          }
+          maxLength={50}
+          minLength={5}
+          placeholder={'Placeholder Text'}
+          onChange={() => {
+            // do nothing
+          }}
+          monospace={false}
+          autocomplete={(AutoComplete as Record<string, any>)['Off']}
+          size={(ComponentSize as Record<string, any>)['Small']}
+          style={exampleTextAreaStyle}
+          cols={20}
+          rows={10}
+          status={ComponentStatus.Valid}
+        />
+        <TextArea
+          ref={textAreaRefError}
+          value={
+            'Example text can be controlled from the Knobs panel on the right'
+          }
+          maxLength={50}
+          minLength={5}
+          placeholder={'Placeholder Text'}
+          onChange={() => {
+            // do nothing
+          }}
+          monospace={false}
+          autocomplete={(AutoComplete as Record<string, any>)['Off']}
+          size={(ComponentSize as Record<string, any>)['Small']}
+          style={exampleTextAreaStyle}
+          cols={20}
+          rows={10}
+          status={ComponentStatus.Error}
+        />
+        <TextArea
+          ref={textAreaRefLoading}
+          value={
+            'Example text can be controlled from the Knobs panel on the right'
+          }
+          maxLength={50}
+          minLength={5}
+          placeholder={'Placeholder Text'}
+          onChange={() => {
+            // do nothing
+          }}
+          monospace={false}
+          autocomplete={(AutoComplete as Record<string, any>)['Off']}
+          size={(ComponentSize as Record<string, any>)['Small']}
+          style={exampleTextAreaStyle}
+          cols={20}
+          rows={10}
+          status={ComponentStatus.Loading}
+        />
+      </FlexBox>
+    </div>
+  )
+}
+
+_TextArea.story = {
+  name: 'TextArea',
+
+  parameters: {
+    readme: {
+      content: marked.parse(TextAreaReadme),
+    },
+  },
+}
+
+export const _VisibilityInput = () => {
+  const [value, setValue] = useState<string>('Value text')
+  const visibilityInputRef: RefObject<VisibilityInputRef | null> = createRef()
+
+  const handleLogRefs = (): void => {
+    /* eslint-disable */
+    console.log('VisibilityInputRef', visibilityInputRef.current)
+    /* eslint-enable */
+  }
+
+  const handleInputChange = (e: ChangeEvent<VisibilityInputRef>): void => {
+    setValue(e.target.value)
+  }
+
+  return (
+    <div className="story--example">
+      <VisibilityInput
+        ref={visibilityInputRef}
+        placeholder={'Placeholder Text'}
+        value={value}
+        onChange={handleInputChange}
+        name={'Name'}
+        titleText={'Title Text'}
+        disabledTitleText={'Disabled Title Text'}
+        maxLength={24}
+        icon={(IconFont as Record<string, any>)['None']}
+        style={defaultInputStyle}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        autocomplete={(AutoComplete as Record<string, any>)['Off']}
+      />
+      <div className="story--test-buttons">
+        <button onClick={handleLogRefs}>Log Refs</button>
+      </div>
+    </div>
+  )
+}
+
+_VisibilityInput.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(VisibilityInputReadme),
+    },
+  },
+}
+
+export const _TimeInput = () => {
+  const DEFAULT_UNITS = ['s', 'm', 'h', 'd', 'w', 'mo']
+  const [value, setValue] = useState<string>('')
+  const [unit, setUnit] = useState<string>(DEFAULT_UNITS[0])
+  const timeInputRef: RefObject<TimeInputRef | null> = createRef()
+
+  const handleLogRefs = (): void => {
+    /* eslint-disable */
+    console.log('ref', timeInputRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <TimeInput
+        ref={timeInputRef}
+        placeholder={'00000'}
+        value={value}
+        units={DEFAULT_UNITS}
+        selectedUnit={unit}
+        onSelectUnit={setUnit}
+        onChange={setValue}
+        maxLength={5}
+        name={'Name'}
+        titleText={'Title Text'}
+        disabledTitleText={'Disabled Title Text'}
+        icon={(IconFont as Record<string, any>)['None']}
+        style={defaultInputStyle}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        size={(ComponentSize as Record<string, any>)['Small']}
+      />
+      <div className="story--test-buttons">
+        <button onClick={handleLogRefs}>Log Refs</button>
+      </div>
+    </div>
+  )
+}
+
+_TimeInput.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(TimeInputReadme),
+    },
+  },
+}
+
+export const _AutoInput = () => {
+  const autoInputRef: RefObject<AutoInputRef | null> = createRef()
+  const autoInputSelectGroupRef: RefObject<SelectGroupRef | null> = createRef()
+  const autoInputSelectGroupAutoRef: RefObject<SelectGroupOptionRef | null> =
+    createRef()
+  const autoInputSelectGroupCustomRef: RefObject<SelectGroupOptionRef | null> =
+    createRef()
+
+  const handleLogRef = (): void => {
+    /* eslint-disable */
+    console.log('AutoInput', autoInputRef.current)
+    console.log('AutoInput SelectGroup', autoInputSelectGroupRef.current)
+    console.log(
+      'AutoInput SelectGroupOption',
+      autoInputSelectGroupAutoRef.current
+    )
+    console.log(
+      'AutoInput SelectGroupOption',
+      autoInputSelectGroupCustomRef.current
+    )
+    /* eslint-enable */
+  }
+
+  const exampleAutoInputStyle = {width: '300px'}
+
+  return (
+    <div className="story--example">
+      <AutoInput
+        ref={autoInputRef}
+        radioRef={autoInputSelectGroupRef}
+        radioButtonAutoRef={autoInputSelectGroupAutoRef}
+        radioButtonCustomRef={autoInputSelectGroupCustomRef}
+        style={exampleAutoInputStyle}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        mode={(AutoInputMode as Record<string, any>)['Auto']}
+        color={(ComponentColor as Record<string, any>)['Primary']}
+        onChangeMode={mode => alert(`${mode}`)}
+        inputComponent={
+          <Input
+            value={'Swoggles'}
+            placeholder={'Enter a custom value...'}
+            size={(ComponentSize as Record<string, any>)['Small']}
+            type={(InputType as Record<string, any>)['Text']}
+            maxLength={100}
+            min={0}
+            max={100}
+          />
+        }
+      />
+      <div className="story--test-buttons">
+        <button onClick={handleLogRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_AutoInput.story = {
+  name: 'AutoInput',
+
+  parameters: {
+    readme: {
+      content: marked.parse(AutoInputReadme),
+    },
+  },
+}
+
+export const _RangeSlider = () => {
+  const [rangeSliderValue, setRangeSliderValue] = useState<number>(50)
+  const rangeSliderRef: RefObject<RangeSliderRef | null> = createRef()
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setRangeSliderValue(parseInt(e.target.value))
+  }
+
+  const handleLogRef = (): void => {
+    /* eslint-disable */
+    console.log(rangeSliderRef.current)
+    /* eslint-enable */
+  }
+
+  const exampleRangeSliderStyle = {width: '375px'}
+
+  return (
+    <div className="story--example">
+      <RangeSlider
+        ref={rangeSliderRef}
+        min={0}
+        max={100}
+        value={rangeSliderValue}
+        step={0}
+        onChange={handleInputChange}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        color={(ComponentColor as Record<string, any>)['Primary']}
+        labelPrefix={''}
+        labelSuffix={''}
+        fill={true}
+        hideLabels={false}
+        style={exampleRangeSliderStyle}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        orientation={
+          (ComponentOrientation as Record<string, any>)['Horizontal']
+        }
+        displayValue={false}
+      />
+      <div className="story--test-buttons">
+        <button onClick={handleLogRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_RangeSlider.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(RangeSliderReadme),
+    },
+  },
+}
+
+export const _MultipleChoiceForm = () => {
+  const [weapon, setWeapon] = useState<string>('chainsaw')
+
+  const handleToggleChange = (value?: string): void => {
+    if (value !== undefined) {
+      setWeapon(value)
     }
+  }
 
-    const handleLogRefs = (): void => {
-      /* eslint-disable */
-      console.log('ToggleRef', toggleRef.current)
-      console.log('ToggleContainerRef', toggleContainerRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
+  return (
+    <div className="story--example">
+      <FlexBox
+        direction={FlexDirection.Column}
+        margin={ComponentSize.Large}
+        alignItems={AlignItems.FlexStart}
+      >
+        <p>Choose a weapon to fight zombies with</p>
         <Toggle
-          checked={checked}
-          ref={toggleRef}
-          titleText={text('titleText', 'Title Text')}
-          disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-          containerRef={toggleContainerRef}
-          id={text('id', 'example_toggle_id')}
-          value={text('value', 'Value Text')}
-          style={object('style', {})}
-          tabIndex={number('tabIndex', 1)}
-          icon={
-            (IconFont as Record<string, any>)[
-              select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-            ]
-          }
-          disabled={boolean('disabled', false)}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          color={
-            (ComponentColor as Record<string, any>)[
-              select('color', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-          fill={
-            (Appearance as Record<string, any>)[
-              select('fill', ['None', 'Solid'], 'None')
-            ]
-          }
-          type={
-            (InputToggleType as Record<string, any>)[
-              select('type', mapEnumKeys(InputToggleType), 'Checkbox')
-            ]
-          }
+          tabIndex={1}
+          value="chainsaw"
+          id="chainsaw"
+          name="zombie_fighting_weapon"
+          checked={weapon === 'chainsaw'}
           onChange={handleToggleChange}
+          type={InputToggleType.Radio}
+          size={ComponentSize.ExtraSmall}
+          color={(ComponentColor as Record<string, any>)['Primary']}
+          fill={(Appearance as Record<string, any>)['None']}
         >
-          {!!text('label', '') && (
-            <InputLabel
-              size={
-                (ComponentSize as Record<string, any>)[
-                  select('size', mapEnumKeys(ComponentSize), 'Small')
-                ]
-              }
-              active={checked}
-              htmlFor={text('id', 'example_toggle_id')}
-            >
-              {text('label', '')}
-            </InputLabel>
-          )}
+          <InputLabel active={weapon === 'chainsaw'} htmlFor="chainsaw">
+            Chainsaw
+          </InputLabel>
         </Toggle>
-        <div className="story--test-buttons">
-          <button onClick={handleLogRefs}>Log Refs</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ToggleReadme),
-    },
-  }
-)
-
-inputsBaseStories.add(
-  'TextArea',
-  () => {
-    const textAreaRefDefault: RefObject<TextAreaRef | null> = createRef()
-    const textAreaRefDisabled: RefObject<TextAreaRef | null> = createRef()
-    const textAreaRefValid: RefObject<TextAreaRef | null> = createRef()
-    const textAreaRefError: RefObject<TextAreaRef | null> = createRef()
-    const textAreaRefLoading: RefObject<TextAreaRef | null> = createRef()
-    const textAreaContainerRef: RefObject<TextAreaContainerRef | null> = createRef()
-
-    const handleLogRefs = (): void => {
-      /* eslint-disable */
-      console.log('TextAreaRef (Default)', textAreaRefDefault.current)
-      console.log('TextAreaRef (Disabled)', textAreaRefDisabled.current)
-      console.log('TextAreaRef (Valid)', textAreaRefValid.current)
-      console.log('TextAreaRef (Error)', textAreaRefError.current)
-      console.log('TextAreaRef (Loading)', textAreaRefLoading.current)
-      console.log(
-        'TextAreaContainerRef (Default)',
-        textAreaContainerRef.current
-      )
-      /* eslint-enable */
-    }
-
-    const exampleTextAreaStyle = {width: '100%', margin: '0 10px'}
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={handleLogRefs}>Log Refs</button>
-        </div>
-        <FlexBox
-          style={{width: '100%'}}
-          stretchToFitWidth={true}
-          direction={FlexDirection.Column}
-          margin={ComponentSize.Large}
+        <Toggle
+          tabIndex={2}
+          value="crowbar"
+          id="crowbar"
+          name="zombie_fighting_weapon"
+          checked={weapon === 'crowbar'}
+          onChange={handleToggleChange}
+          type={InputToggleType.Radio}
+          size={ComponentSize.ExtraSmall}
+          color={(ComponentColor as Record<string, any>)['Primary']}
+          fill={(Appearance as Record<string, any>)['None']}
         >
-          <TextArea
-            ref={textAreaRefDefault}
-            containerRef={textAreaContainerRef}
-            value={text(
-              'value',
-              'Example text can be controlled from the Knobs panel on the right'
-            )}
-            maxLength={number('maxLength', 50)}
-            minLength={number('minLength', 5)}
-            placeholder={text('placeholder', 'Placeholder Text')}
-            onChange={() => {
-              // do nothing
-            }}
-            monospace={boolean('monospace', false)}
-            autocomplete={
-              (AutoComplete as Record<string, any>)[
-                radios<AutoComplete>(
-                  'autocomplete',
-                  mapEnumKeys(AutoComplete),
-                  AutoComplete.Off
-                )
-              ]
-            }
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            style={object('style', exampleTextAreaStyle)}
-            cols={number('cols', 20)}
-            rows={number('rows', 10)}
-            status={ComponentStatus.Default}
-          />
-          <TextArea
-            ref={textAreaRefDisabled}
-            value={text(
-              'value',
-              'Example text can be controlled from the Knobs panel on the right'
-            )}
-            maxLength={number('maxLength', 50)}
-            minLength={number('minLength', 5)}
-            placeholder={text('placeholder', 'Placeholder Text')}
-            onChange={() => {
-              // do nothing
-            }}
-            monospace={boolean('monospace', false)}
-            autocomplete={
-              (AutoComplete as Record<string, any>)[
-                radios<AutoComplete>(
-                  'autocomplete',
-                  mapEnumKeys(AutoComplete),
-                  AutoComplete.Off
-                )
-              ]
-            }
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            style={object('style', exampleTextAreaStyle)}
-            cols={number('cols', 20)}
-            rows={number('rows', 10)}
-            status={ComponentStatus.Disabled}
-          />
-          <TextArea
-            ref={textAreaRefValid}
-            value={text(
-              'value',
-              'Example text can be controlled from the Knobs panel on the right'
-            )}
-            maxLength={number('maxLength', 50)}
-            minLength={number('minLength', 5)}
-            placeholder={text('placeholder', 'Placeholder Text')}
-            onChange={() => {
-              // do nothing
-            }}
-            monospace={boolean('monospace', false)}
-            autocomplete={
-              (AutoComplete as Record<string, any>)[
-                radios<AutoComplete>(
-                  'autocomplete',
-                  mapEnumKeys(AutoComplete),
-                  AutoComplete.Off
-                )
-              ]
-            }
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            style={object('style', exampleTextAreaStyle)}
-            cols={number('cols', 20)}
-            rows={number('rows', 10)}
-            status={ComponentStatus.Valid}
-          />
-          <TextArea
-            ref={textAreaRefError}
-            value={text(
-              'value',
-              'Example text can be controlled from the Knobs panel on the right'
-            )}
-            maxLength={number('maxLength', 50)}
-            minLength={number('minLength', 5)}
-            placeholder={text('placeholder', 'Placeholder Text')}
-            onChange={() => {
-              // do nothing
-            }}
-            monospace={boolean('monospace', false)}
-            autocomplete={
-              (AutoComplete as Record<string, any>)[
-                radios<AutoComplete>(
-                  'autocomplete',
-                  mapEnumKeys(AutoComplete),
-                  AutoComplete.Off
-                )
-              ]
-            }
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            style={object('style', exampleTextAreaStyle)}
-            cols={number('cols', 20)}
-            rows={number('rows', 10)}
-            status={ComponentStatus.Error}
-          />
-          <TextArea
-            ref={textAreaRefLoading}
-            value={text(
-              'value',
-              'Example text can be controlled from the Knobs panel on the right'
-            )}
-            maxLength={number('maxLength', 50)}
-            minLength={number('minLength', 5)}
-            placeholder={text('placeholder', 'Placeholder Text')}
-            onChange={() => {
-              // do nothing
-            }}
-            monospace={boolean('monospace', false)}
-            autocomplete={
-              (AutoComplete as Record<string, any>)[
-                radios<AutoComplete>(
-                  'autocomplete',
-                  mapEnumKeys(AutoComplete),
-                  AutoComplete.Off
-                )
-              ]
-            }
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            style={object('style', exampleTextAreaStyle)}
-            cols={number('cols', 20)}
-            rows={number('rows', 10)}
-            status={ComponentStatus.Loading}
-          />
-        </FlexBox>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(TextAreaReadme),
-    },
-  }
-)
-
-inputsComposedStories.add(
-  'Visibility Input',
-  () => {
-    const [value, setValue] = useState<string>('Value text')
-    const visibilityInputRef: RefObject<VisibilityInputRef | null> = createRef()
-
-    const handleLogRefs = (): void => {
-      /* eslint-disable */
-      console.log('VisibilityInputRef', visibilityInputRef.current)
-      /* eslint-enable */
-    }
-
-    const handleInputChange = (e: ChangeEvent<VisibilityInputRef>): void => {
-      setValue(e.target.value)
-    }
-
-    return (
-      <div className="story--example">
-        <VisibilityInput
-          ref={visibilityInputRef}
-          placeholder={text('placeholder', 'Placeholder Text')}
-          value={value}
-          onChange={handleInputChange}
-          name={text('name', 'Name')}
-          titleText={text('titleText', 'Title Text')}
-          disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-          maxLength={number('maxLength', 24)}
-          icon={
-            (IconFont as Record<string, any>)[
-              select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-            ]
-          }
-          style={object('style', defaultInputStyle)}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          autocomplete={
-            (AutoComplete as Record<string, any>)[
-              radios<AutoComplete>(
-                'autocomplete',
-                mapEnumKeys(AutoComplete),
-                AutoComplete.Off
-              )
-            ]
-          }
-        />
-        <div className="story--test-buttons">
-          <button onClick={handleLogRefs}>Log Refs</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(VisibilityInputReadme),
-    },
-  }
-)
-
-inputsComposedStories.add(
-  'Time Input',
-  () => {
-    const DEFAULT_UNITS = ['s', 'm', 'h', 'd', 'w', 'mo']
-    const [value, setValue] = useState<string>('')
-    const [unit, setUnit] = useState<string>(DEFAULT_UNITS[0])
-    const timeInputRef: RefObject<TimeInputRef | null> = createRef()
-
-    const handleLogRefs = (): void => {
-      /* eslint-disable */
-      console.log('ref', timeInputRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <TimeInput
-          ref={timeInputRef}
-          placeholder={text('placeholder', '00000')}
-          value={value}
-          units={array('units', DEFAULT_UNITS)}
-          selectedUnit={unit}
-          onSelectUnit={setUnit}
-          onChange={setValue}
-          maxLength={number('maxLength', 5)}
-          name={text('name', 'Name')}
-          titleText={text('titleText', 'Title Text')}
-          disabledTitleText={text('disabledTitleText', 'Disabled Title Text')}
-          icon={
-            (IconFont as Record<string, any>)[
-              select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'None')
-            ]
-          }
-          style={object('style', defaultInputStyle)}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        />
-        <div className="story--test-buttons">
-          <button onClick={handleLogRefs}>Log Refs</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(TimeInputReadme),
-    },
-  }
-)
-
-inputsComposedStories.add(
-  'AutoInput',
-  () => {
-    const autoInputRef: RefObject<AutoInputRef | null> = createRef()
-    const autoInputSelectGroupRef: RefObject<SelectGroupRef | null> = createRef()
-    const autoInputSelectGroupAutoRef: RefObject<SelectGroupOptionRef | null> = createRef()
-    const autoInputSelectGroupCustomRef: RefObject<SelectGroupOptionRef | null> = createRef()
-
-    const handleLogRef = (): void => {
-      /* eslint-disable */
-      console.log('AutoInput', autoInputRef.current)
-      console.log('AutoInput SelectGroup', autoInputSelectGroupRef.current)
-      console.log(
-        'AutoInput SelectGroupOption',
-        autoInputSelectGroupAutoRef.current
-      )
-      console.log(
-        'AutoInput SelectGroupOption',
-        autoInputSelectGroupCustomRef.current
-      )
-      /* eslint-enable */
-    }
-
-    const exampleAutoInputStyle = {width: '300px'}
-
-    return (
-      <div className="story--example">
-        <AutoInput
-          ref={autoInputRef}
-          radioRef={autoInputSelectGroupRef}
-          radioButtonAutoRef={autoInputSelectGroupAutoRef}
-          radioButtonCustomRef={autoInputSelectGroupCustomRef}
-          style={object('style', exampleAutoInputStyle)}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          mode={
-            (AutoInputMode as Record<string, any>)[
-              select('mode', mapEnumKeys(AutoInputMode), 'Auto')
-            ]
-          }
-          color={
-            (ComponentColor as Record<string, any>)[
-              select('color', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-          onChangeMode={mode => alert(`${mode}`)}
-          inputComponent={
-            <Input
-              value={text('Input: value', 'Swoggles')}
-              placeholder={text(
-                'Input: placeholder',
-                'Enter a custom value...'
-              )}
-              size={
-                (ComponentSize as Record<string, any>)[
-                  select('size', mapEnumKeys(ComponentSize), 'Small')
-                ]
-              }
-              type={
-                (InputType as Record<string, any>)[
-                  select('Input: type', mapEnumKeys(InputType), 'Text')
-                ]
-              }
-              maxLength={number('Input: maxLength', 100)}
-              min={number('Input: min', 0)}
-              max={number('Input: max', 100)}
-            />
-          }
-        />
-        <div className="story--test-buttons">
-          <button onClick={handleLogRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(AutoInputReadme),
-    },
-  }
-)
-
-inputsComposedStories.add(
-  'Range Slider',
-  () => {
-    const [rangeSliderValue, setRangeSliderValue] = useState<number>(50)
-    const rangeSliderRef: RefObject<RangeSliderRef | null> = createRef()
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-      setRangeSliderValue(parseInt(e.target.value))
-    }
-
-    const handleLogRef = (): void => {
-      /* eslint-disable */
-      console.log(rangeSliderRef.current)
-      /* eslint-enable */
-    }
-
-    const exampleRangeSliderStyle = {width: '375px'}
-
-    return (
-      <div className="story--example">
-        <RangeSlider
-          ref={rangeSliderRef}
-          min={number('min', 0)}
-          max={number('max', 100)}
-          value={rangeSliderValue}
-          step={number('step', 0)}
-          onChange={handleInputChange}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          color={
-            (ComponentColor as Record<string, any>)[
-              select('color', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-          labelPrefix={text('labelPrefix', '')}
-          labelSuffix={text('labelSuffix', '')}
-          fill={boolean('fill', true)}
-          hideLabels={boolean('hide labels', false)}
-          style={object('style', exampleRangeSliderStyle)}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          orientation={
-            (ComponentOrientation as Record<string, any>)[
-              select(
-                'orientation',
-                mapEnumKeys(ComponentOrientation),
-                'Horizontal'
-              )
-            ]
-          }
-          displayValue={boolean('displayValue', false)}
-        />
-        <div className="story--test-buttons">
-          <button onClick={handleLogRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(RangeSliderReadme),
-    },
-  }
-)
-
-inputsExampleStories.add(
-  'Multiple Choice Form',
-  () => {
-    const [weapon, setWeapon] = useState<string>('chainsaw')
-
-    const handleToggleChange = (value?: string): void => {
-      if (value !== undefined) {
-        setWeapon(value)
-      }
-    }
-
-    return (
-      <div className="story--example">
-        <FlexBox
-          direction={FlexDirection.Column}
-          margin={ComponentSize.Large}
-          alignItems={AlignItems.FlexStart}
+          <InputLabel active={weapon === 'crowbar'} htmlFor="crowbar">
+            Crowbar
+          </InputLabel>
+        </Toggle>
+        <Toggle
+          tabIndex={3}
+          value="katana"
+          id="katana"
+          name="zombie_fighting_weapon"
+          checked={weapon === 'katana'}
+          onChange={handleToggleChange}
+          type={InputToggleType.Radio}
+          size={ComponentSize.ExtraSmall}
+          color={(ComponentColor as Record<string, any>)['Primary']}
+          fill={(Appearance as Record<string, any>)['None']}
         >
-          <p>Choose a weapon to fight zombies with</p>
-          <Toggle
-            tabIndex={1}
-            value="chainsaw"
-            id="chainsaw"
-            name="zombie_fighting_weapon"
-            checked={weapon === 'chainsaw'}
-            onChange={handleToggleChange}
-            type={InputToggleType.Radio}
-            size={ComponentSize.ExtraSmall}
-            color={
-              (ComponentColor as Record<string, any>)[
-                select('color', mapEnumKeys(ComponentColor), 'Primary')
-              ]
-            }
-            fill={
-              (Appearance as Record<string, any>)[
-                select('fill', ['None', 'Solid'], 'None')
-              ]
-            }
-          >
-            <InputLabel active={weapon === 'chainsaw'} htmlFor="chainsaw">
-              Chainsaw
-            </InputLabel>
-          </Toggle>
-          <Toggle
-            tabIndex={2}
-            value="crowbar"
-            id="crowbar"
-            name="zombie_fighting_weapon"
-            checked={weapon === 'crowbar'}
-            onChange={handleToggleChange}
-            type={InputToggleType.Radio}
-            size={ComponentSize.ExtraSmall}
-            color={
-              (ComponentColor as Record<string, any>)[
-                select('color', mapEnumKeys(ComponentColor), 'Primary')
-              ]
-            }
-            fill={
-              (Appearance as Record<string, any>)[
-                select('fill', ['None', 'Solid'], 'None')
-              ]
-            }
-          >
-            <InputLabel active={weapon === 'crowbar'} htmlFor="crowbar">
-              Crowbar
-            </InputLabel>
-          </Toggle>
-          <Toggle
-            tabIndex={3}
-            value="katana"
-            id="katana"
-            name="zombie_fighting_weapon"
-            checked={weapon === 'katana'}
-            onChange={handleToggleChange}
-            type={InputToggleType.Radio}
-            size={ComponentSize.ExtraSmall}
-            color={
-              (ComponentColor as Record<string, any>)[
-                select('color', mapEnumKeys(ComponentColor), 'Primary')
-              ]
-            }
-            fill={
-              (Appearance as Record<string, any>)[
-                select('fill', ['None', 'Solid'], 'None')
-              ]
-            }
-          >
-            <InputLabel active={weapon === 'katana'} htmlFor="katana">
-              Katana
-            </InputLabel>
-          </Toggle>
-        </FlexBox>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(MultipleChoiceForm),
-    },
-  }
-)
+          <InputLabel active={weapon === 'katana'} htmlFor="katana">
+            Katana
+          </InputLabel>
+        </Toggle>
+      </FlexBox>
+    </div>
+  )
+}
 
-inputsExampleStories.add(
-  'Collage',
-  () => {
-    return (
-      <div className="story--example">
-        <table className="two-axis-table two-axis-table--spaced">
-          <tbody>
-            <tr>
-              <td>
-                <code>Size</code>
-              </td>
-              {[
-                {size: ComponentSize.ExtraSmall, placeholder: 'ExtraSmall'},
-                {size: ComponentSize.Small, placeholder: 'Small'},
-                {size: ComponentSize.Medium, placeholder: 'Medium'},
-                {size: ComponentSize.Large, placeholder: 'Large'},
-              ].map((props, i) => (
-                <td key={i}>
-                  <Input {...props} />
-                </td>
-              ))}
-            </tr>
-            <tr>
-              <td>
-                <code>Status</code>
-              </td>
-              {[
-                {status: ComponentStatus.Default},
-                {status: ComponentStatus.Disabled},
-                {status: ComponentStatus.Loading},
-                {status: ComponentStatus.Error},
-                {status: ComponentStatus.Valid},
-              ].map((props, i) => (
-                <td key={i}>
-                  <Input placeholder={props.status.toString()} {...props} />
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    )
-  },
-  {
+_MultipleChoiceForm.story = {
+  parameters: {
     readme: {
-      content: marked(InputReadme),
+      content: marked.parse(MultipleChoiceForm),
     },
-  }
-)
+  },
+}
+
+export const Collage = () => {
+  return (
+    <div className="story--example">
+      <table className="two-axis-table two-axis-table--spaced">
+        <tbody>
+          <tr>
+            <td>
+              <code>Size</code>
+            </td>
+            {[
+              {size: ComponentSize.ExtraSmall, placeholder: 'ExtraSmall'},
+              {size: ComponentSize.Small, placeholder: 'Small'},
+              {size: ComponentSize.Medium, placeholder: 'Medium'},
+              {size: ComponentSize.Large, placeholder: 'Large'},
+            ].map((props, i) => (
+              <td key={i}>
+                <Input {...props} />
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>
+              <code>Status</code>
+            </td>
+            {[
+              {status: ComponentStatus.Default},
+              {status: ComponentStatus.Disabled},
+              {status: ComponentStatus.Loading},
+              {status: ComponentStatus.Error},
+              {status: ComponentStatus.Valid},
+            ].map((props, i) => (
+              <td key={i}>
+                <Input placeholder={props.status.toString()} {...props} />
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+Collage.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(InputReadme),
+    },
+  },
+}

@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Color Picker Widget
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 $color-picker--margin: 0;
 
@@ -52,7 +52,9 @@ $color-picker--margin: 0;
     border-radius: 50%;
     background-color: $g20-white;
     opacity: 0;
-    transition: opacity $cf-transition-default, transform $cf-transition-default;
+    transition:
+      opacity $cf-transition-default,
+      transform $cf-transition-default;
     box-shadow: 0 0 4px 1px rgba($g0-obsidian, 0.25);
   }
 

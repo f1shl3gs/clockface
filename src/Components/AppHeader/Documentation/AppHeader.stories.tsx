@@ -1,11 +1,6 @@
 // Libraries
 import {createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, select, text} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
+import {marked} from 'marked'
 
 // Components
 import {AppHeader, AppHeaderRef, AppHeaderLogoRef} from '../index'
@@ -20,199 +15,156 @@ import {
 } from '../../../Types'
 
 // Notes
-import AppHeaderReadme from './AppHeader.md'
-import AppHeaderLogoReadme from './AppHeaderLogo.md'
+import AppHeaderReadme from './AppHeader.md?raw'
+import AppHeaderLogoReadme from './AppHeaderLogo.md?raw'
 import {Button} from '../../Button/Composed/Button'
 import {FlexBox} from '../../FlexBox'
 
-const appHeaderFamilyStories = storiesOf(
-  'Layout/AppHeader/Family',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Layout/AppHeader/Family'}
 
-const appHeaderExampleStories = storiesOf(
-  'Layout/AppHeader/Example',
-  module
-).addDecorator(withKnobs)
+export const _AppHeader = () => {
+  const appHeaderRef = createRef<AppHeaderRef>()
 
-appHeaderFamilyStories.add(
-  'AppHeader',
-  () => {
-    const appHeaderRef = createRef<AppHeaderRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(appHeaderRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <AppHeader.AppHeader
-          ref={appHeaderRef}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(AppHeaderReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(appHeaderRef.current)
+    /* eslint-enable */
   }
-)
 
-appHeaderFamilyStories.add(
-  'AppHeaderLogo',
-  () => {
-    const appHeaderLogoRef = createRef<AppHeaderLogoRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(appHeaderLogoRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <AppHeader.Logo
-          ref={appHeaderLogoRef}
-          src={text('src', '/static/media/.storybook/influxdata-logo.png')}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+  return (
+    <div className="story--example">
+      <AppHeader.AppHeader
+        ref={appHeaderRef}
+        size={(ComponentSize as Record<string, any>)['Small']}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(AppHeaderLogoReadme),
-    },
-  }
-)
+    </div>
+  )
+}
 
-appHeaderExampleStories.add(
-  'AppHeader',
-  () => {
-    return (
-      <div className="mockPageWrapper">
-        <div className="mockPage">
-          <AppHeader
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-          >
-            <AppHeader.Logo
-              src={text('src', '/static/media/.storybook/influxdata-logo.png')}
-              size={
-                (ComponentSize as Record<string, any>)[
-                  select('size', mapEnumKeys(ComponentSize), 'Small')
-                ]
-              }
+_AppHeader.story = {
+  name: 'AppHeader',
+
+  parameters: {
+    readme: {
+      content: marked.parse(AppHeaderReadme),
+    },
+  },
+}
+
+export const AppHeaderLogo = () => {
+  const appHeaderLogoRef = createRef<AppHeaderLogoRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(appHeaderLogoRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <AppHeader.Logo
+        ref={appHeaderLogoRef}
+        src={'/static/media/.storybook/influxdata-logo.png'}
+        size={(ComponentSize as Record<string, any>)['Small']}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+AppHeaderLogo.story = {
+  name: 'AppHeaderLogo',
+
+  parameters: {
+    readme: {
+      content: marked.parse(AppHeaderLogoReadme),
+    },
+  },
+}
+
+export const __AppHeader = () => {
+  return (
+    <div className="mockPageWrapper">
+      <div className="mockPage">
+        <AppHeader size={(ComponentSize as Record<string, any>)['Small']}>
+          <AppHeader.Logo
+            src={'/static/media/.storybook/influxdata-logo.png'}
+            size={(ComponentSize as Record<string, any>)['Small']}
+          />
+          <FlexBox direction={FlexDirection.Row} margin={ComponentSize.Medium}>
+            <Button
+              size={(ComponentSize as Record<string, any>)['Small']}
+              text="Shiny Button"
+              color={ComponentColor.Success}
             />
-            <FlexBox
-              direction={FlexDirection.Row}
-              margin={ComponentSize.Medium}
+            <PopNav
+              size={(ComponentSize as Record<string, any>)['Small']}
+              buttonColor={(ComponentColor as Record<string, any>)['none']}
+              align={(Alignment as Record<string, any>)['Right']}
             >
-              <Button
-                size={
-                  (ComponentSize as Record<string, any>)[
-                    select('size', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-                text="Shiny Button"
-                color={ComponentColor.Success}
-              />
-              <PopNav
-                size={
-                  (ComponentSize as Record<string, any>)[
-                    select('size', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-                buttonColor={
-                  (ComponentColor as Record<string, any>)[
-                    select(
-                      'PopNav button color',
-                      {None: 'none', ...mapEnumKeys(ComponentColor)},
-                      'none'
-                    )
-                  ]
-                }
-                align={
-                  (Alignment as Record<string, any>)[
-                    select('alignment', mapEnumKeys(Alignment), 'Right')
-                  ]
-                }
+              <div
+                style={{
+                  margin: '0 16px',
+                }}
               >
                 <div
                   style={{
-                    margin: '0 16px',
+                    color: 'white',
                   }}
                 >
-                  <div
-                    style={{
-                      color: 'white',
-                    }}
-                  >
-                    Signed in as
-                  </div>
-                  <div
-                    style={{
-                      color: '#BEF0FF',
-                    }}
-                  >
-                    somewhatlongusername@yourdomain.com
-                  </div>
+                  Signed in as
                 </div>
-                <PopNav.Item
-                  titleLink={className => (
-                    <a className={className} href="#">
-                      First Item
-                    </a>
-                  )}
-                  active={false}
-                />
-                <PopNav.Item
-                  titleLink={className => (
-                    <a className={className} href="#">
-                      Second Item
-                    </a>
-                  )}
-                  active={false}
-                />
-                <PopNav.Item
-                  titleLink={className => (
-                    <a className={className} href="#">
-                      Third Item
-                    </a>
-                  )}
-                  active={false}
-                />
-              </PopNav>
-            </FlexBox>
-          </AppHeader>
-        </div>
+                <div
+                  style={{
+                    color: '#BEF0FF',
+                  }}
+                >
+                  somewhatlongusername@yourdomain.com
+                </div>
+              </div>
+              <PopNav.Item
+                titleLink={className => (
+                  <a className={className} href="#">
+                    First Item
+                  </a>
+                )}
+                active={false}
+              />
+              <PopNav.Item
+                titleLink={className => (
+                  <a className={className} href="#">
+                    Second Item
+                  </a>
+                )}
+                active={false}
+              />
+              <PopNav.Item
+                titleLink={className => (
+                  <a className={className} href="#">
+                    Third Item
+                  </a>
+                )}
+                active={false}
+              />
+            </PopNav>
+          </FlexBox>
+        </AppHeader>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+__AppHeader.story = {
+  name: 'AppHeader',
+
+  parameters: {
     readme: {
-      content: marked(AppHeaderReadme),
+      content: marked.parse(AppHeaderReadme),
     },
-  }
-)
+  },
+}

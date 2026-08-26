@@ -11,11 +11,10 @@ import {Omit, FlexDirection, AlignItems} from '../../../Types'
 // Styles
 import './ResourceCardMeta.scss'
 
-export interface ResourceCardMetaProps
-  extends Omit<
-    FlexBoxProps,
-    'stretchToFitWidth' | 'stretchToFitHeight' | 'margin'
-  > {}
+export interface ResourceCardMetaProps extends Omit<
+  FlexBoxProps,
+  'stretchToFitWidth' | 'stretchToFitHeight' | 'margin'
+> {}
 
 export type ResourceCardMetaRef = FlexBoxRef
 

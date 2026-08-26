@@ -1,6 +1,6 @@
 // Libraries
 import {CSSProperties} from 'react'
-import chroma from 'chroma-js'
+import {colord} from './colord'
 
 // Types
 import {Gradients, Gradient, DropdownMenuTheme} from '../Types'
@@ -49,10 +49,7 @@ export const getAverageColorFromLinearGradient = (
   // used within the button contrast tester widget
 
   if (rgbColors && rgbColors.length === 2) {
-    const startColor = chroma(rgbColors[0])
-    const stopColor = chroma(rgbColors[1])
-
-    return `${chroma.mix(startColor, stopColor)}`
+    return colord(rgbColors[0]).mix(rgbColors[1]).toRgbString()
   }
 
   return 'fail'

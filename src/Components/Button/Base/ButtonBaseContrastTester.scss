@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   ButtonBase Contrast Tester
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 table.button-base-contrast-tester {
   width: 100%;
@@ -13,7 +13,8 @@ table.button-base-contrast-tester {
     padding-bottom: $cf-marg-c;
   }
 
-  th, td {
+  th,
+  td {
     font-size: 13px;
     font-weight: $cf-font-weight--medium;
     border: 0;

@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
    Page Layout
    -----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-page {
   width: 100%;

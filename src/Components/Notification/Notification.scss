@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
     Notification
     ----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 $cf-notification-screen-margin: $cf-space-s;
 
@@ -46,7 +46,9 @@ $cf-notification-screen-margin: $cf-space-s;
     border: none;
     color: $g18-cloud;
     opacity: 0.6;
-    transition: opacity $cf-transition-default, transform $cf-transition-default;
+    transition:
+      opacity $cf-transition-default,
+      transform $cf-transition-default;
 
     &:active,
     &:focus,

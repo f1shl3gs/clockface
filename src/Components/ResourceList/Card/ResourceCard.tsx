@@ -18,8 +18,10 @@ import {
 import './ResourceCard.scss'
 import {Toggle} from '../../Inputs'
 
-export interface ResourceCardProps
-  extends Omit<FlexBoxProps, 'stretchToFitWidth' | 'stretchToFitHeight'> {
+export interface ResourceCardProps extends Omit<
+  FlexBoxProps,
+  'stretchToFitWidth' | 'stretchToFitHeight'
+> {
   /** Renders the card with disabled styles */
   disabled?: boolean
   /** Renders the context menu component in its designated place */

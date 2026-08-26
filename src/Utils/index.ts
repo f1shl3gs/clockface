@@ -1,6 +1,6 @@
 //Libraries
 import {CSSProperties} from 'react'
-import chroma from 'chroma-js'
+import {brighten, relativeLuminance} from './colord'
 
 // Constants
 import {getColorsFromGradient} from '../Utils/colors'
@@ -34,11 +34,11 @@ export const calculateTextColorFromBackground = (
 
   if (gradient) {
     const {start} = getColorsFromGradient(gradient)
-    return chroma(start).luminance() >= mediumGrey ? 'dark' : 'light'
+    return relativeLuminance(start) >= mediumGrey ? 'dark' : 'light'
   }
 
   if (backgroundColor) {
-    return chroma(backgroundColor).luminance() >= mediumGrey ? 'dark' : 'light'
+    return relativeLuminance(backgroundColor) >= mediumGrey ? 'dark' : 'light'
   }
 
   return ''
@@ -113,7 +113,7 @@ export const generateLabelStyle = (
   let backgroundColor = labelColor
 
   if (isMouseOver && isClickable) {
-    backgroundColor = `${chroma(labelColor).brighten(1)}`
+    backgroundColor = brighten(labelColor).toRgbString()
   }
 
   const color =

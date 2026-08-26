@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Resource Card
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-resource-card {
   display: grid;

@@ -45,7 +45,7 @@ export const darkTheme = {
 
 export const TableComponent = ({propDefinitions}) => {
   const props = propDefinitions.map(
-    ({property, propType, required, description, defaultValue}, i) => {
+    ({property, propType, required, description, defaultValue}) => {
       return (
         <tr key={property}>
           <td className="props-table--prop">{property}</td>

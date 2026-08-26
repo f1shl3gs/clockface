@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
    Clockface Application Wrapper
    -----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .clockface--app-wrapper {
   display: flex;
@@ -37,7 +37,7 @@
 
 .clockface--app-wrapper__presentation-mode {
   .cf-nav,
-  .cf-tree-nav, 
+  .cf-tree-nav,
   .cf-page-header,
   .cf-page-control-bar,
   .cf-nav--mask,

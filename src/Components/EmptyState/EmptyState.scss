@@ -3,7 +3,8 @@
   ------------------------------------------------------------------------------
 */
 
-@import '../../Styles/variables';
+@use 'sass:math' as *;
+@use '../../Styles/variables' as *;
 
 .cf-empty-state {
   display: flex;

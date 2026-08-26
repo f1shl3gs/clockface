@@ -1,11 +1,6 @@
 // Libraries
 import {createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, select} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
+import {marked} from 'marked'
 
 // Components
 import {PopNav, PopNavRef} from '../index'
@@ -14,117 +9,102 @@ import {PopNav, PopNavRef} from '../index'
 import {ComponentSize, Alignment, ComponentColor} from '../../../Types'
 
 // Notes
-import PopNavReadme from './PopNav.md'
+import PopNavReadme from './PopNav.md?raw'
 
-const popNavStories = storiesOf(
-  'Components/Navigation/PopNav',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/Navigation/PopNav'}
 
-popNavStories.add(
-  'PopNav',
-  () => {
-    const popNavRef = createRef<PopNavRef>()
+export const _PopNav = () => {
+  const popNavRef = createRef<PopNavRef>()
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(popNavRef.current)
-      /* eslint-enable */
-    }
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(popNavRef.current)
+    /* eslint-enable */
+  }
 
-    return (
-      <div className="story--example top">
-        <PopNav.PopNav
-          ref={popNavRef}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          buttonColor={
-            (ComponentColor as Record<string, any>)[
-              select(
-                'button color',
-                {None: 'none', ...mapEnumKeys(ComponentColor)},
-                'none'
-              )
-            ]
-          }
-          align={
-            (Alignment as Record<string, any>)[
-              select('alignment', mapEnumKeys(Alignment), 'Right')
-            ]
-          }
+  return (
+    <div className="story--example top">
+      <PopNav.PopNav
+        ref={popNavRef}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        buttonColor={(ComponentColor as Record<string, any>)['none']}
+        align={(Alignment as Record<string, any>)['Right']}
+      >
+        <div
+          style={{
+            margin: '0 16px',
+          }}
         >
           <div
             style={{
-              margin: '0 16px',
+              color: 'white',
             }}
           >
-            <div
-              style={{
-                color: 'white',
-              }}
-            >
-              Signed in as
-            </div>
-            <div>somewhatlongusername@yourdomain.com</div>
+            Signed in as
           </div>
-          <PopNav.Item
-            titleLink={className => (
-              <a className={className} href="#">
-                First Item
-              </a>
-            )}
-            active={false}
-          />
-          <PopNav.Item
-            titleLink={className => (
-              <a className={className} href="#">
-                Second Item
-              </a>
-            )}
-            active={false}
-          />
-          <PopNav.Item
-            titleLink={className => (
-              <a className={className} href="#">
-                Third Item
-              </a>
-            )}
-            active={false}
-          />
-        </PopNav.PopNav>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
+          <div>somewhatlongusername@yourdomain.com</div>
         </div>
+        <PopNav.Item
+          titleLink={className => (
+            <a className={className} href="#">
+              First Item
+            </a>
+          )}
+          active={false}
+        />
+        <PopNav.Item
+          titleLink={className => (
+            <a className={className} href="#">
+              Second Item
+            </a>
+          )}
+          active={false}
+        />
+        <PopNav.Item
+          titleLink={className => (
+            <a className={className} href="#">
+              Third Item
+            </a>
+          )}
+          active={false}
+        />
+      </PopNav.PopNav>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+_PopNav.story = {
+  name: 'PopNav',
+
+  parameters: {
     readme: {
-      content: marked(PopNavReadme),
+      content: marked.parse(PopNavReadme),
     },
-  }
+  },
+}
+
+export const PopNavItem = () => (
+  <div className="story--example">
+    <PopNav.Item
+      titleLink={className => (
+        <a className={className} href="#">
+          Menu Item
+        </a>
+      )}
+      active={false}
+    />
+  </div>
 )
 
-popNavStories.add(
-  'PopNavItem',
-  () => (
-    <div className="story--example">
-      <PopNav.Item
-        titleLink={className => (
-          <a className={className} href="#">
-            Menu Item
-          </a>
-        )}
-        active={false}
-      />
-    </div>
-  ),
-  {
+PopNavItem.story = {
+  name: 'PopNavItem',
+
+  parameters: {
     readme: {
-      content: marked(PopNavReadme),
+      content: marked.parse(PopNavReadme),
     },
-  }
-)
+  },
+}

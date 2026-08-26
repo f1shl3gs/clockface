@@ -1,11 +1,6 @@
 // Libraries
 import {RefObject, createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, text, select, boolean} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
+import {marked} from 'marked'
 
 // Components
 import {Heading, HeadingRef} from '..'
@@ -20,102 +15,80 @@ import {
 } from '../../../Types'
 
 // Notes
-import HeadingReadme from './Heading.md'
+import HeadingReadme from './Heading.md?raw'
 import {FlexBox} from '../../FlexBox'
 
-const headingStories = storiesOf('Components/Heading', module).addDecorator(
-  withKnobs
-)
+export default {title: 'Components/Heading'}
 
-headingStories.add(
-  'Base',
-  () => {
-    const headingRef: RefObject<HeadingRef | null> = createRef()
+export const Base = () => {
+  const headingRef: RefObject<HeadingRef | null> = createRef()
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log('Heading', headingRef.current)
-      /* eslint-enable */
-    }
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log('Heading', headingRef.current)
+    /* eslint-enable */
+  }
 
-    return (
-      <div className="story--example">
-        <Heading
-          ref={headingRef}
-          element={
-            (HeadingElement as Record<string, any>)[
-              select('element', mapEnumKeys(HeadingElement), 'H1')
-            ]
-          }
-          appearance={
-            (HeadingElement as Record<string, any>)[
-              select(
-                'appearance',
-                {Inherit: '', ...mapEnumKeys(HeadingElement)},
-                'Inherit'
-              )
-            ]
-          }
-          type={
-            (Typeface as Record<string, any>)[
-              select('type', mapEnumKeys(Typeface), 'ProximaNova')
-            ]
-          }
-          weight={
-            (FontWeight as Record<string, any>)[
-              select('weight', mapEnumKeys(FontWeight), 'Medium')
-            ]
-          }
-          underline={boolean('underline', false)}
-          selectable={boolean('selectable', false)}
-          onClick={() => alert('clicked')}
-        >
-          {text('text', 'Gigantic Mental Fortitude')}
+  return (
+    <div className="story--example">
+      <Heading
+        ref={headingRef}
+        element={(HeadingElement as Record<string, any>)['H1']}
+        appearance={(HeadingElement as Record<string, any>)['Inherit']}
+        type={(Typeface as Record<string, any>)['ProximaNova']}
+        weight={(FontWeight as Record<string, any>)['Medium']}
+        underline={false}
+        selectable={false}
+        onClick={() => alert('clicked')}
+      >
+        {'Gigantic Mental Fortitude'}
+      </Heading>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+Base.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(HeadingReadme),
+    },
+  },
+}
+
+export const Collage = () => {
+  return (
+    <div className="story--example">
+      <FlexBox direction={FlexDirection.Column} margin={ComponentSize.Large}>
+        <Heading element={HeadingElement.H2} appearance={HeadingElement.H1}>
+          Heading 1
         </Heading>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(HeadingReadme),
-    },
-  }
-)
+        <Heading element={HeadingElement.H2} appearance={HeadingElement.H2}>
+          Heading 2
+        </Heading>
+        <Heading element={HeadingElement.H2} appearance={HeadingElement.H3}>
+          Heading 3
+        </Heading>
+        <Heading element={HeadingElement.H2} appearance={HeadingElement.H4}>
+          Heading 4
+        </Heading>
+        <Heading element={HeadingElement.H2} appearance={HeadingElement.H5}>
+          Heading 5
+        </Heading>
+        <Heading element={HeadingElement.H2} appearance={HeadingElement.H6}>
+          Heading 6
+        </Heading>
+      </FlexBox>
+    </div>
+  )
+}
 
-headingStories.add(
-  'Collage',
-  () => {
-    return (
-      <div className="story--example">
-        <FlexBox direction={FlexDirection.Column} margin={ComponentSize.Large}>
-          <Heading element={HeadingElement.H2} appearance={HeadingElement.H1}>
-            Heading 1
-          </Heading>
-          <Heading element={HeadingElement.H2} appearance={HeadingElement.H2}>
-            Heading 2
-          </Heading>
-          <Heading element={HeadingElement.H2} appearance={HeadingElement.H3}>
-            Heading 3
-          </Heading>
-          <Heading element={HeadingElement.H2} appearance={HeadingElement.H4}>
-            Heading 4
-          </Heading>
-          <Heading element={HeadingElement.H2} appearance={HeadingElement.H5}>
-            Heading 5
-          </Heading>
-          <Heading element={HeadingElement.H2} appearance={HeadingElement.H6}>
-            Heading 6
-          </Heading>
-        </FlexBox>
-      </div>
-    )
-  },
-  {
+Collage.story = {
+  parameters: {
     readme: {
-      content: marked(HeadingReadme),
+      content: marked.parse(HeadingReadme),
     },
-  }
-)
+  },
+}

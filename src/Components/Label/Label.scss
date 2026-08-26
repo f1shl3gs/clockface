@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Label Component
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 $label-delete-size: $cf-text-base-0;
 
@@ -39,7 +39,9 @@ $label-delete-size: $cf-text-base-0;
   border: 0;
   outline: none;
   opacity: 0.4;
-  transition: opacity $cf-transition-default, transform $cf-transition-default;
+  transition:
+    opacity $cf-transition-default,
+    transform $cf-transition-default;
 
   &:focus {
     opacity: 1;

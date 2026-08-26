@@ -1,9 +1,9 @@
-@import './variables';
-
 /*
    Reset
    -----------------------------------------------------------------------------
 */
+
+@use './variables' as *;
 
 .cf-portal {
   z-index: $cf-z--portal;

@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Date Picker Styles (no react-datepicker)
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-date-picker {
   margin: $cf-marg-a;
@@ -203,7 +203,8 @@
   font-size: $cf-text-base--1;
   text-align: center;
   cursor: pointer;
-  transition: background-color $cf-transition-default,
+  transition:
+    background-color $cf-transition-default,
     color $cf-transition-default;
 
   &:hover {

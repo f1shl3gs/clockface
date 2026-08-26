@@ -1,11 +1,6 @@
 // Libraries
 import {useRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, select, text, object, boolean} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
+import {marked} from 'marked'
 
 // Components
 import {RightClick, RightClickRef} from '../'
@@ -14,86 +9,81 @@ import {RightClick, RightClickRef} from '../'
 import {ComponentColor} from '../../../Types'
 
 // Notes
-import RightClickReadme from './RightClick.md'
+import RightClickReadme from './RightClick.md?raw'
 
-const rightClickStories = storiesOf(
-  'Components/RightClick/Base',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/RightClick/Base'}
 
-rightClickStories.add(
-  'RightClick',
-  () => {
-    const triggerRef = useRef<HTMLDivElement>(null)
-    const rightClickMenuRef = useRef<RightClickRef>(null)
+export const _RightClick = () => {
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const rightClickMenuRef = useRef<RightClickRef>(null)
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(rightClickMenuRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="clickTestZone" ref={triggerRef}>
-          Right Click Me
-        </div>
-        <RightClick.RightClick
-          ref={rightClickMenuRef}
-          triggerRef={triggerRef}
-          disabled={boolean('disabled', false)}
-          className={text('className', '')}
-          style={object('style', {})}
-          color={
-            (ComponentColor as Record<string, any>)[
-              select('color', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-        >
-          <RightClick.MenuItem
-            onClick={value => {
-              alert(value)
-            }}
-            value="Cabbage"
-          >
-            Cabbage
-          </RightClick.MenuItem>
-          <RightClick.MenuItem
-            onClick={value => {
-              alert(value)
-            }}
-            value="Carrot"
-          >
-            Carrot
-          </RightClick.MenuItem>
-          <RightClick.Divider />
-          <RightClick.MenuItem
-            onClick={value => {
-              alert(value)
-            }}
-            value="Turnip"
-          >
-            Turnip
-          </RightClick.MenuItem>
-          <RightClick.MenuItem
-            onClick={value => {
-              alert(value)
-            }}
-            value="Radish"
-            disabled={true}
-          >
-            Radish
-          </RightClick.MenuItem>
-          <RightClick.MenuItem onClick={logRef} value="Turnip">
-            Log Ref
-          </RightClick.MenuItem>
-        </RightClick.RightClick>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(RightClickReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(rightClickMenuRef.current)
+    /* eslint-enable */
   }
-)
+
+  return (
+    <div className="story--example">
+      <div className="clickTestZone" ref={triggerRef}>
+        Right Click Me
+      </div>
+      <RightClick.RightClick
+        ref={rightClickMenuRef}
+        triggerRef={triggerRef}
+        disabled={false}
+        className={''}
+        style={{}}
+        color={(ComponentColor as Record<string, any>)['Primary']}
+      >
+        <RightClick.MenuItem
+          onClick={value => {
+            alert(value)
+          }}
+          value="Cabbage"
+        >
+          Cabbage
+        </RightClick.MenuItem>
+        <RightClick.MenuItem
+          onClick={value => {
+            alert(value)
+          }}
+          value="Carrot"
+        >
+          Carrot
+        </RightClick.MenuItem>
+        <RightClick.Divider />
+        <RightClick.MenuItem
+          onClick={value => {
+            alert(value)
+          }}
+          value="Turnip"
+        >
+          Turnip
+        </RightClick.MenuItem>
+        <RightClick.MenuItem
+          onClick={value => {
+            alert(value)
+          }}
+          value="Radish"
+          disabled={true}
+        >
+          Radish
+        </RightClick.MenuItem>
+        <RightClick.MenuItem onClick={logRef} value="Turnip">
+          Log Ref
+        </RightClick.MenuItem>
+      </RightClick.RightClick>
+    </div>
+  )
+}
+
+_RightClick.story = {
+  name: 'RightClick',
+
+  parameters: {
+    readme: {
+      content: marked.parse(RightClickReadme),
+    },
+  },
+}

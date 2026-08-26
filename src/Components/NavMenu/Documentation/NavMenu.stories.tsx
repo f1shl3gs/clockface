@@ -1,11 +1,6 @@
 // Libraries
 import {createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {mapEnumKeys} from '../../../Utils/storybook'
-import {withKnobs, boolean, text, select, radios} from '@storybook/addon-knobs'
+import {marked} from 'marked'
 
 // Components
 import {NavMenu, NavMenuRef, NavMenuItemRef} from '../'
@@ -15,187 +10,49 @@ import {Icon} from '../../Icon/Base/Icon'
 import {IconFont} from '../../../Types'
 
 // Notes
-import NavMenuReadme from './NavMenu.md'
-import NavMenuItemReadme from './NavMenuItem.md'
-import NavMenuSubItemReadme from './NavMenuSubItem.md'
+import NavMenuReadme from './NavMenu.md?raw'
+import NavMenuItemReadme from './NavMenuItem.md?raw'
+import NavMenuSubItemReadme from './NavMenuSubItem.md?raw'
 
-const navMenuStories = storiesOf(
-  'Components/Navigation/NavMenu',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/Navigation/NavMenu'}
 
-enum NavItems {
-  First = 'First',
-  Second = 'Second',
-  Third = 'Third',
-}
+export const _NavMenu = () => {
+  const navMenuRef = createRef<NavMenuRef>()
 
-navMenuStories.add(
-  'NavMenu',
-  () => {
-    const navMenuRef = createRef<NavMenuRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(navMenuRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <NavMenu.NavMenu ref={navMenuRef}>
-          <NavMenu.Item
-            titleLink={className => (
-              <a className={className} href="#">
-                {text('1 - title', 'First Item')}
-              </a>
-            )}
-            iconLink={className => (
-              <a className={className} href="#">
-                <Icon
-                  glyph={
-                    (IconFont as Record<string, any>)[
-                      select('1 - icon', mapEnumKeys(IconFont), 'Disks')
-                    ]
-                  }
-                />
-              </a>
-            )}
-            active={
-              NavItems[
-                radios<NavItems>(
-                  'active item',
-                  mapEnumKeys(NavItems),
-                  NavItems.First
-                )
-              ] == NavItems.First
-            }
-          />
-          <NavMenu.Item
-            titleLink={className => (
-              <a className={className} href="#">
-                {text('2 - title', 'Second Item')}
-              </a>
-            )}
-            iconLink={className => (
-              <a className={className} href="#">
-                <Icon
-                  glyph={
-                    (IconFont as Record<string, any>)[
-                      select('2 - icon', mapEnumKeys(IconFont), 'Zap')
-                    ]
-                  }
-                />
-              </a>
-            )}
-            active={
-              NavItems[
-                radios<NavItems>(
-                  'active item',
-                  mapEnumKeys(NavItems),
-                  NavItems.First
-                )
-              ] == NavItems.Second
-            }
-          >
-            <NavMenu.SubItem
-              titleLink={className => (
-                <a className={className} href="#">
-                  First Sub-Item
-                </a>
-              )}
-              active={false}
-            />
-            <NavMenu.SubItem
-              titleLink={className => (
-                <a className={className} href="#">
-                  Second Sub-Item
-                </a>
-              )}
-              active={false}
-            />
-            <NavMenu.SubItem
-              titleLink={className => (
-                <a className={className} href="#">
-                  Third Sub-Item
-                </a>
-              )}
-              active={false}
-            />
-          </NavMenu.Item>
-          <NavMenu.Item
-            titleLink={className => (
-              <a className={className} href="#">
-                {text('3 - title', 'Third Item')}
-              </a>
-            )}
-            iconLink={className => (
-              <a className={className} href="#">
-                <Icon
-                  glyph={
-                    (IconFont as Record<string, any>)[
-                      select('3 - icon', mapEnumKeys(IconFont), 'Group')
-                    ]
-                  }
-                />
-              </a>
-            )}
-            active={
-              NavItems[
-                radios<NavItems>(
-                  'active item',
-                  mapEnumKeys(NavItems),
-                  NavItems.First
-                )
-              ] == NavItems.Third
-            }
-          />
-        </NavMenu.NavMenu>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(NavMenuReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(navMenuRef.current)
+    /* eslint-enable */
   }
-)
 
-navMenuStories.add(
-  'NavMenuItem',
-  () => {
-    const navMenuRef = createRef<NavMenuItemRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(navMenuRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
+  return (
+    <div className="story--example">
+      <NavMenu.NavMenu ref={navMenuRef}>
         <NavMenu.Item
-          ref={navMenuRef}
           titleLink={className => (
             <a className={className} href="#">
-              {text('title', 'Item Title')}
+              {'First Item'}
             </a>
           )}
           iconLink={className => (
             <a className={className} href="#">
-              <Icon
-                glyph={
-                  (IconFont as Record<string, any>)[
-                    select('icon', mapEnumKeys(IconFont), 'Star')
-                  ]
-                }
-              />
+              <Icon glyph={(IconFont as Record<string, any>)['Disks']} />
             </a>
           )}
-          active={boolean('active', false)}
+          active={true}
+        />
+        <NavMenu.Item
+          titleLink={className => (
+            <a className={className} href="#">
+              {'Second Item'}
+            </a>
+          )}
+          iconLink={className => (
+            <a className={className} href="#">
+              <Icon glyph={(IconFont as Record<string, any>)['Zap']} />
+            </a>
+          )}
+          active={false}
         >
           <NavMenu.SubItem
             titleLink={className => (
@@ -222,36 +79,123 @@ navMenuStories.add(
             active={false}
           />
         </NavMenu.Item>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+        <NavMenu.Item
+          titleLink={className => (
+            <a className={className} href="#">
+              {'Third Item'}
+            </a>
+          )}
+          iconLink={className => (
+            <a className={className} href="#">
+              <Icon glyph={(IconFont as Record<string, any>)['Group']} />
+            </a>
+          )}
+          active={false}
+        />
+      </NavMenu.NavMenu>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(NavMenuItemReadme),
-    },
-  }
-)
+    </div>
+  )
+}
 
-navMenuStories.add(
-  'NavMenuSubItem',
-  () => (
+_NavMenu.story = {
+  name: 'NavMenu',
+
+  parameters: {
+    readme: {
+      content: marked.parse(NavMenuReadme),
+    },
+  },
+}
+
+export const NavMenuItem = () => {
+  const navMenuRef = createRef<NavMenuItemRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(navMenuRef.current)
+    /* eslint-enable */
+  }
+
+  return (
     <div className="story--example">
-      <NavMenu.SubItem
+      <NavMenu.Item
+        ref={navMenuRef}
         titleLink={className => (
           <a className={className} href="#">
-            {text('title', 'Sub Item Title')}
+            {'Item Title'}
           </a>
         )}
-        active={boolean('active', false)}
-      />
+        iconLink={className => (
+          <a className={className} href="#">
+            <Icon glyph={(IconFont as Record<string, any>)['Star']} />
+          </a>
+        )}
+        active={false}
+      >
+        <NavMenu.SubItem
+          titleLink={className => (
+            <a className={className} href="#">
+              First Sub-Item
+            </a>
+          )}
+          active={false}
+        />
+        <NavMenu.SubItem
+          titleLink={className => (
+            <a className={className} href="#">
+              Second Sub-Item
+            </a>
+          )}
+          active={false}
+        />
+        <NavMenu.SubItem
+          titleLink={className => (
+            <a className={className} href="#">
+              Third Sub-Item
+            </a>
+          )}
+          active={false}
+        />
+      </NavMenu.Item>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
     </div>
-  ),
-  {
+  )
+}
+
+NavMenuItem.story = {
+  name: 'NavMenuItem',
+
+  parameters: {
     readme: {
-      content: marked(NavMenuSubItemReadme),
+      content: marked.parse(NavMenuItemReadme),
     },
-  }
+  },
+}
+
+export const NavMenuSubItem = () => (
+  <div className="story--example">
+    <NavMenu.SubItem
+      titleLink={className => (
+        <a className={className} href="#">
+          {'Sub Item Title'}
+        </a>
+      )}
+      active={false}
+    />
+  </div>
 )
+
+NavMenuSubItem.story = {
+  name: 'NavMenuSubItem',
+
+  parameters: {
+    readme: {
+      content: marked.parse(NavMenuSubItemReadme),
+    },
+  },
+}

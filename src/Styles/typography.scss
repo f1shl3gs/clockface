@@ -3,6 +3,8 @@
    -----------------------------------------------------------------------------
 */
 
+@use './variables' as *;
+
 body {
   font-family: $cf-text-font;
   color: $cf-text-default;

@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
    Bullet
    -----------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-bullet {
   user-select: none;

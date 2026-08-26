@@ -90,12 +90,16 @@ export const RightClickRoot = forwardRef<RightClickRef, RightClickProps>(
     }
 
     const handleShowMenu = (): void => {
-      onShow && onShow()
+      if (onShow) {
+        onShow()
+      }
       setExpanded(true)
     }
 
     const handleHideMenu = (): void => {
-      onHide && onHide()
+      if (onHide) {
+        onHide()
+      }
       setExpanded(false)
     }
 

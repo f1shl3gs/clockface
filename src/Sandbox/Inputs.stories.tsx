@@ -1,7 +1,3 @@
-// Libraries
-
-// Storybook
-import {storiesOf} from '@storybook/react'
 import {FlexBox} from '../Components/FlexBox'
 import {
   AlignItems,
@@ -21,9 +17,9 @@ import {SelectGroup} from '../Components/SelectGroup'
 import {TextBlock} from '../Components/TextBlock'
 import {Heading} from '../Components/Typography'
 
-const cardStories = storiesOf('Sandbox/Inputs', module)
+export default {title: 'Sandbox/Inputs'}
 
-cardStories.add('Collage', () => {
+export const Collage = () => {
   const onChange = () => {
     // Nothing
   }
@@ -123,4 +119,4 @@ cardStories.add('Collage', () => {
       </FlexBox>
     </div>
   )
-})
+}

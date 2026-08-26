@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Color Preview Widget
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-color-preview {
   pointer-events: none;
@@ -16,7 +16,8 @@
   height: 18px;
   border-radius: 50%;
   border: $cf-border solid $g5-pepper;
-  transition: background-color $cf-transition-default,
+  transition:
+    background-color $cf-transition-default,
     border-color $cf-transition-default;
 
   .cf-input:hover + &,

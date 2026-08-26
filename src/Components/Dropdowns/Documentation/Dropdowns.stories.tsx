@@ -1,19 +1,6 @@
 // Libraries
-import {createRef, RefObject} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {
-  withKnobs,
-  text,
-  number,
-  select,
-  boolean,
-  array,
-  object,
-} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
+import {createRef, RefObject, useState} from 'react'
+import {marked} from 'marked'
 
 // Components
 import {
@@ -52,1036 +39,855 @@ import {
 } from '../../../Types'
 
 // Notes
-import DropdownReadme from './Dropdown.md'
-import DropdownButtonReadme from './DropdownButton.md'
-import DropdownDividerReadme from './DropdownDivider.md'
-import DropdownItemReadme from './DropdownItem.md'
-import DropdownItemEmptyReadme from './DropdownItemEmpty.md'
-import DropdownLinkItemReadme from './DropdownLinkItem.md'
-import DropdownMenuReadme from './DropdownMenu.md'
-import SelectDropdownReadme from './SelectDropdown.md'
-import TypeAheadDropdownReadme from './TypeAheadDropdown.md'
-import CreatableTypeAheadDropdownReadme from './CreatableTypeAheadDropdown.md'
-import MultiSelectDropdownReadme from './MultiSelectDropdown.md'
-import {useState} from '@storybook/addons'
+import DropdownReadme from './Dropdown.md?raw'
+import DropdownButtonReadme from './DropdownButton.md?raw'
+import DropdownDividerReadme from './DropdownDivider.md?raw'
+import DropdownItemReadme from './DropdownItem.md?raw'
+import DropdownItemEmptyReadme from './DropdownItemEmpty.md?raw'
+import DropdownLinkItemReadme from './DropdownLinkItem.md?raw'
+import DropdownMenuReadme from './DropdownMenu.md?raw'
+import SelectDropdownReadme from './SelectDropdown.md?raw'
+import TypeAheadDropdownReadme from './TypeAheadDropdown.md?raw'
+import CreatableTypeAheadDropdownReadme from './CreatableTypeAheadDropdown.md?raw'
+import MultiSelectDropdownReadme from './MultiSelectDropdown.md?raw'
 import {FlexBox} from '../../FlexBox'
 
-const dropdownFamilyStories = storiesOf(
-  'Components/Dropdowns/Family',
-  module
-).addDecorator(withKnobs)
-
-const dropdownComposedStories = storiesOf(
-  'Components/Dropdowns/Composed',
-  module
-).addDecorator(withKnobs)
-
-const dropdownExampleStories = storiesOf(
-  'Components/Dropdowns/Examples',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/Dropdowns/Family'}
 
 const defaultDropdownStyle = {width: '250px', marginRight: '45px'}
 
-dropdownFamilyStories.add(
-  'Dropdown',
-  () => {
-    const dropdownRef: RefObject<DropdownRef | null> = createRef()
+export const _Dropdown = () => {
+  const dropdownRef: RefObject<DropdownRef | null> = createRef()
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(dropdownRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Dropdown.Dropdown
-          ref={dropdownRef}
-          style={object('style', defaultDropdownStyle)}
-          button={(active, onClick) => (
-            <Dropdown.Button
-              active={active}
-              onClick={onClick}
-              status={
-                (ComponentStatus as Record<string, any>)[
-                  select('status', mapEnumKeys(ComponentStatus), 'Default')
-                ]
-              }
-            >
-              {text('Button Text', 'I am a Dropdown!')}
-            </Dropdown.Button>
-          )}
-          menu={onCollapse => (
-            <Dropdown.Menu onCollapse={onCollapse}>
-              <div className="mockComponent dropdownContents">
-                <span>Menu Contents</span>
-              </div>
-            </Dropdown.Menu>
-          )}
-          dropUp={boolean('dropUp', false)}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Refs</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(DropdownReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(dropdownRef.current)
+    /* eslint-enable */
   }
-)
 
-dropdownFamilyStories.add(
-  'DropdownButton',
-  () => {
-    const dropdownButtonRef: RefObject<DropdownButtonRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(dropdownButtonRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-        <div style={{width: '200px'}}>
+  return (
+    <div className="story--example">
+      <Dropdown.Dropdown
+        ref={dropdownRef}
+        style={defaultDropdownStyle}
+        button={(active, onClick) => (
           <Dropdown.Button
-            ref={dropdownButtonRef}
-            onClick={() => {
-              // do nothing
-            }}
-            status={
-              (ComponentStatus as Record<string, any>)[
-                select('status', mapEnumKeys(ComponentStatus), 'Default')
-              ]
-            }
-            color={
-              (ComponentColor as Record<string, any>)[
-                select('color', mapEnumKeys(ComponentColor), 'Primary')
-              ]
-            }
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-            active={boolean('active', false)}
-            icon={
-              (IconFont as Record<string, any>)[
-                select(
-                  'icon',
-                  {None: 'none', ...mapEnumKeys(IconFont)},
-                  'BarChart'
-                )
-              ]
-            }
-            trailingIcon={
-              (IconFont as Record<string, any>)[
-                select(
-                  'trailingIcon',
-                  {None: 'none', ...mapEnumKeys(IconFont)},
-                  'CaretDown_New'
-                )
-              ]
-            }
-            title={text('title', 'Hover Title Text')}
-            disabledTitleText={text('disabledTitleText', 'Disabled Text')}
+            active={active}
+            onClick={onClick}
+            status={(ComponentStatus as Record<string, any>)['Default']}
           >
-            {text('children (text)', 'I am a button!')}
+            {'I am a Dropdown!'}
           </Dropdown.Button>
-        </div>
+        )}
+        menu={onCollapse => (
+          <Dropdown.Menu onCollapse={onCollapse}>
+            <div className="mockComponent dropdownContents">
+              <span>Menu Contents</span>
+            </div>
+          </Dropdown.Menu>
+        )}
+        dropUp={false}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Refs</button>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+_Dropdown.story = {
+  parameters: {
     readme: {
-      content: marked(DropdownButtonReadme),
+      content: marked.parse(DropdownReadme),
     },
+  },
+}
+
+export const DropdownButton = () => {
+  const dropdownButtonRef: RefObject<DropdownButtonRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(dropdownButtonRef.current)
+    /* eslint-enable */
   }
-)
 
-dropdownFamilyStories.add(
-  'DropdownDivider',
-  () => {
-    const dropdownDividerRef: RefObject<DropdownDividerRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(dropdownDividerRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Dropdown.Divider
-          text={text('Divider Text', 'Divider Text')}
-          ref={dropdownDividerRef}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(DropdownDividerReadme),
-    },
-  }
-)
-
-dropdownFamilyStories.add(
-  'DropdownItem',
-  () => {
-    const dropdownItemRef: RefObject<DropdownItemRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(dropdownItemRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Dropdown.Item
-          ref={dropdownItemRef}
-          value={text('value', 'value')}
-          selected={boolean('selected', false)}
-          wrapText={boolean('wrapText', false)}
-          onClick={value => {
-            alert(`onClick returned: ${value}`)
+      <div style={{width: '200px'}}>
+        <Dropdown.Button
+          ref={dropdownButtonRef}
+          onClick={() => {
+            // do nothing
           }}
-          type={
-            (DropdownItemType as Record<string, any>)[
-              select('type', mapEnumKeys(DropdownItemType), 'None')
-            ]
-          }
-          disabled={boolean('disabled', false)}
+          status={(ComponentStatus as Record<string, any>)['Default']}
+          color={(ComponentColor as Record<string, any>)['Primary']}
+          size={(ComponentSize as Record<string, any>)['Small']}
+          active={false}
+          icon={(IconFont as Record<string, any>)['BarChart']}
+          trailingIcon={(IconFont as Record<string, any>)['CaretDown_New']}
+          title={'Hover Title Text'}
+          disabledTitleText={'Disabled Text'}
         >
-          {text('children (text)', 'I am a dropdown item!')}
-        </Dropdown.Item>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+          {'I am a button!'}
+        </Dropdown.Button>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+DropdownButton.story = {
+  name: 'DropdownButton',
+
+  parameters: {
     readme: {
-      content: marked(DropdownItemReadme),
+      content: marked.parse(DropdownButtonReadme),
     },
+  },
+}
+
+export const DropdownDivider = () => {
+  const dropdownDividerRef: RefObject<DropdownDividerRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(dropdownDividerRef.current)
+    /* eslint-enable */
   }
-)
 
-dropdownFamilyStories.add(
-  'DropdownItemEmpty',
-  () => {
-    const dropdownItemEmptyRef: RefObject<DropdownItemEmptyRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(dropdownItemEmptyRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Dropdown.ItemEmpty
-          wrapText={boolean('wrapText', false)}
-          ref={dropdownItemEmptyRef}
-        >
-          {text('children (text)', 'No items to display')}
-        </Dropdown.ItemEmpty>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+  return (
+    <div className="story--example">
+      <Dropdown.Divider text={'Divider Text'} ref={dropdownDividerRef} />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+DropdownDivider.story = {
+  name: 'DropdownDivider',
+
+  parameters: {
     readme: {
-      content: marked(DropdownItemEmptyReadme),
+      content: marked.parse(DropdownDividerReadme),
     },
+  },
+}
+
+export const DropdownItem = () => {
+  const dropdownItemRef: RefObject<DropdownItemRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(dropdownItemRef.current)
+    /* eslint-enable */
   }
-)
 
-dropdownFamilyStories.add(
-  'DropdownLinkItem',
-  () => {
-    const dropdownLinkItemRef: RefObject<DropdownLinkItemRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(dropdownLinkItemRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Dropdown.LinkItem
-          ref={dropdownLinkItemRef}
-          selected={boolean('selected', false)}
-          wrapText={boolean('wrapText', false)}
-          type={
-            (DropdownItemType as Record<string, any>)[
-              select('type', mapEnumKeys(DropdownItemType), 'None')
-            ]
-          }
-          disabled={boolean('disabled', false)}
-        >
-          <a
-            href={text('link target', 'http://www.influxdata.com')}
-            target="_blank"
-          >
-            {text('link text', 'Example Link')}
-          </a>
-        </Dropdown.LinkItem>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+  return (
+    <div className="story--example">
+      <Dropdown.Item
+        ref={dropdownItemRef}
+        value={'value'}
+        selected={false}
+        wrapText={false}
+        onClick={value => {
+          alert(`onClick returned: ${value}`)
+        }}
+        type={(DropdownItemType as Record<string, any>)['None']}
+        disabled={false}
+      >
+        {'I am a dropdown item!'}
+      </Dropdown.Item>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+DropdownItem.story = {
+  name: 'DropdownItem',
+
+  parameters: {
     readme: {
-      content: marked(DropdownLinkItemReadme),
+      content: marked.parse(DropdownItemReadme),
     },
+  },
+}
+
+export const DropdownItemEmpty = () => {
+  const dropdownItemEmptyRef: RefObject<DropdownItemEmptyRef | null> =
+    createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(dropdownItemEmptyRef.current)
+    /* eslint-enable */
   }
-)
+
+  return (
+    <div className="story--example">
+      <Dropdown.ItemEmpty wrapText={false} ref={dropdownItemEmptyRef}>
+        {'No items to display'}
+      </Dropdown.ItemEmpty>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+DropdownItemEmpty.story = {
+  name: 'DropdownItemEmpty',
+
+  parameters: {
+    readme: {
+      content: marked.parse(DropdownItemEmptyReadme),
+    },
+  },
+}
+
+export const DropdownLinkItem = () => {
+  const dropdownLinkItemRef: RefObject<DropdownLinkItemRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(dropdownLinkItemRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Dropdown.LinkItem
+        ref={dropdownLinkItemRef}
+        selected={false}
+        wrapText={false}
+        type={(DropdownItemType as Record<string, any>)['None']}
+        disabled={false}
+      >
+        <a href={'http://www.influxdata.com'} target="_blank">
+          {'Example Link'}
+        </a>
+      </Dropdown.LinkItem>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+DropdownLinkItem.story = {
+  name: 'DropdownLinkItem',
+
+  parameters: {
+    readme: {
+      content: marked.parse(DropdownLinkItemReadme),
+    },
+  },
+}
 
 interface ExampleDropdownItem {
   type: 'item' | 'divider'
   text: string
 }
 
-dropdownFamilyStories.add(
-  'DropdownMenu',
-  () => {
-    const dropdownMenuRef: RefObject<DropdownMenuRef | null> = createRef()
-    const dropdownMenuContentsRef: RefObject<DropdownMenuContentsRef | null> = createRef()
+export const DropdownMenu = () => {
+  const dropdownMenuRef: RefObject<DropdownMenuRef | null> = createRef()
+  const dropdownMenuContentsRef: RefObject<DropdownMenuContentsRef | null> =
+    createRef()
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log('DropdownMenu', dropdownMenuRef.current)
-      console.log('DropdownMenuContents', dropdownMenuContentsRef.current)
-      /* eslint-enable */
-    }
-
-    const exampleItems: ExampleDropdownItem[] = [
-      {
-        type: 'divider',
-        text: 'Domestic Fruits',
-      },
-      {
-        type: 'item',
-        text: 'Banana',
-      },
-      {
-        type: 'item',
-        text: 'Kiwi',
-      },
-      {
-        type: 'item',
-        text: 'Lemon',
-      },
-      {
-        type: 'item',
-        text: 'Apple',
-      },
-      {
-        type: 'item',
-        text: 'Orange',
-      },
-      {
-        type: 'item',
-        text: 'Grapefruit',
-      },
-      {
-        type: 'item',
-        text: 'Pear',
-      },
-      {
-        type: 'divider',
-        text: 'Imported Fruits',
-      },
-      {
-        type: 'item',
-        text: 'Dragonfruit',
-      },
-      {
-        type: 'item',
-        text: 'Yuzu',
-      },
-      {
-        type: 'item',
-        text: 'Mango',
-      },
-      {
-        type: 'item',
-        text: 'Lychee',
-      },
-      {
-        type: 'item',
-        text: 'Passionfruit',
-      },
-      {
-        type: 'item',
-        text: 'Guava',
-      },
-      {
-        type: 'divider',
-        text: 'Testing Only',
-      },
-      {
-        type: 'item',
-        text: 'This dropdown item text is much longer to test text wrapping',
-      },
-    ]
-
-    const selectedItems = array('Selected Items', ['Yuzu', 'Banana'])
-    const disabledItems = array('Disabled Items', ['Passionfruit'])
-
-    const menuStyle = {width: '250px'}
-
-    return (
-      <div className="story--example">
-        <Dropdown.Menu
-          ref={dropdownMenuRef}
-          style={object('style', menuStyle)}
-          contentsRef={dropdownMenuContentsRef}
-          theme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('theme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          maxHeight={number('maxHeight', 250)}
-          noScrollX={boolean('noScrollX', true)}
-          noScrollY={boolean('noScrollY', false)}
-          scrollToSelected={boolean('scrollToSelected', true)}
-        >
-          {exampleItems.map(item => {
-            if (item.type === 'divider') {
-              return <Dropdown.Divider key={item.text} text={item.text} />
-            }
-
-            return (
-              <Dropdown.Item
-                key={item.text}
-                wrapText={boolean('item wrapText', false)}
-                value={item.text}
-                selected={selectedItems.includes(item.text)}
-                disabled={disabledItems.includes(item.text)}
-                type={
-                  (DropdownItemType as Record<string, any>)[
-                    select('item type', mapEnumKeys(DropdownItemType), 'None')
-                  ]
-                }
-              >
-                {item.text}
-              </Dropdown.Item>
-            )
-          })}
-        </Dropdown.Menu>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(DropdownMenuReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log('DropdownMenu', dropdownMenuRef.current)
+    console.log('DropdownMenuContents', dropdownMenuContentsRef.current)
+    /* eslint-enable */
   }
-)
 
-dropdownComposedStories.add(
-  'SelectDropdown',
-  () => {
-    const selectDropdownOptions = [
-      '---Vegetables',
-      'Celery',
-      'Carrot',
-      'Potato',
-      'Corn',
-      'Bok Choy',
-      '---Fruits',
-      'Apple',
-      'Peach',
-      'Tomato',
-      'Grape',
-      'Orange',
-      'Lemon',
-      'Watermelon',
-      'Kiwi',
-      'Banana',
-      'Strawberry',
-    ]
-
-    const selectDropdownRef: RefObject<SelectDropdownRef | null> = createRef()
-    const [selected, changeSelected] = useState('Celery')
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(selectDropdownRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <SelectDropdown
-          ref={selectDropdownRef}
-          style={object('style', defaultDropdownStyle)}
-          menuMaxHeight={number('menuMaxHeight', 250)}
-          dropUp={boolean('dropUp', false)}
-          indicator={
-            (DropdownItemType as Record<string, any>)[
-              select('indicator', mapEnumKeys(DropdownItemType), 'Dot')
-            ]
-          }
-          menuTheme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          onSelect={changeSelected}
-          buttonStatus={
-            (ComponentStatus as Record<string, any>)[
-              select('buttonStatus', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          buttonColor={
-            (ComponentColor as Record<string, any>)[
-              select('buttonColor', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-          buttonSize={
-            (ComponentSize as Record<string, any>)[
-              select('buttonSize', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          buttonIcon={
-            (IconFont as Record<string, any>)[
-              select(
-                'buttonIcon',
-                {None: 'none', ...mapEnumKeys(IconFont)},
-                'BarChart'
-              )
-            ]
-          }
-          selectedOption={selected}
-          options={array('options', selectDropdownOptions)}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(SelectDropdownReadme),
+  const exampleItems: ExampleDropdownItem[] = [
+    {
+      type: 'divider',
+      text: 'Domestic Fruits',
     },
-  }
-)
-
-dropdownComposedStories.add(
-  'TypeAheadDropdown',
-  () => {
-    const selectDropdownOptions = [
-      {name: 'Apple', id: '0'},
-      {name: 'Peach', id: '5'},
-      {name: 'Tomato', id: '10'},
-      {name: 'Grape', id: '20'},
-      {name: 'Orange', id: '40'},
-      {name: 'Lemon', id: '30'},
-      {name: 'Watermelon', id: '70'},
-      {name: 'Kiwi', id: '8'},
-      {name: 'Banana', id: '9'},
-      {name: 'Strawberry', id: '1099'},
-      {name: 'Strawberry1', id: '123412'},
-      {name: 'Strawberry2', id: '2'},
-      {name: 'Strawberry3', id: '109'},
-      {name: 'Strawberry4', id: '19'},
-      {name: 'Strawberry5', id: '1'},
-      {name: 'blueberry', id: 'blueberry113'},
-      {id: '1234.3.33'},
-    ]
-
-    const oneHundredThousandItems = new Array(100000)
-    for (let i = 0; i < 100000; i++) {
-      const value = (i + 1).toString()
-      oneHundredThousandItems[i] = {
-        name: value,
-        id: value,
-      }
-    }
-
-    const onSelect = (item: SelectableItem | null) => {
-      /* eslint-disable */
-      console.log('ooh! selected item: ', item)
-      /* eslint-enable */
-    }
-
-    const selectedOption = {name: 'Lemon', id: '30'}
-
-    // putting sortNames as a boolean doesn't work because it is a prop,
-    // not a state, so it doesn't make the items sort (or unsort)
-    // because it happens once at instantiation
-    return (
-      <div className="story--example">
-        <span> with a pre-selected item:</span>
-        <TypeAheadDropDown
-          style={object('style', defaultDropdownStyle)}
-          onSelect={onSelect}
-          testIdSuffix="fooTest"
-          items={selectDropdownOptions}
-          menuTestID={text('menu test id', 'menuTest')}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          itemTestIdPrefix={text('item test id prefix', 'my-prefix')}
-          defaultNameText={text(
-            'default empty text',
-            'default empty name here'
-          )}
-          menuTheme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          selectedOption={selectedOption}
-          sortNames={true}
-        />
-
-        <span> without a pre-selected item:</span>
-        <TypeAheadDropDown
-          style={object('style 2', defaultDropdownStyle)}
-          onSelect={onSelect}
-          testIdSuffix="fooTest"
-          items={selectDropdownOptions}
-          menuTestID={text('menu test id 2', 'menuTest')}
-          itemTestIdPrefix={text('item test id prefix 2', 'my-prefix')}
-          defaultNameText={text(
-            'default empty text 2',
-            'default empty name here'
-          )}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status2', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          menuTheme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('menuTheme 2', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          sortNames={true}
-        />
-
-        <span> Stress test with 100,000 items:</span>
-        <TypeAheadDropDown
-          style={object('style 2', defaultDropdownStyle)}
-          onSelect={onSelect}
-          testIdSuffix="fooTest"
-          items={oneHundredThousandItems}
-          menuTestID={text('menu test id 2', 'menuTest')}
-          itemTestIdPrefix={text('item test id prefix 2', 'my-prefix')}
-          defaultNameText={text(
-            'default empty text 2',
-            'default empty name here'
-          )}
-          status={
-            (ComponentStatus as Record<string, any>)[
-              select('status2', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          menuTheme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('menuTheme 2', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          sortNames={true}
-        />
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(TypeAheadDropdownReadme),
+    {
+      type: 'item',
+      text: 'Banana',
     },
-  }
-)
-
-dropdownComposedStories.add(
-  'CreatableTypeAheadDropdown',
-  () => {
-    const defaultDropdownOptions = [
-      'Celery',
-      'Carrot',
-      'Potato',
-      'Onion',
-      'Tomato',
-      'Spinach',
-    ]
-    const [selected, changeSelected] = useState(defaultDropdownOptions[1])
-    const defaultColorOptions = [
-      '#DC4E58',
-      '#FFB94A',
-      '#2FA74D',
-      '#0098F0',
-      '#8E1FC3',
-    ]
-    const [selectedColor, changeSelectedColor] = useState(
-      defaultColorOptions[1]
-    )
-
-    const creatableTypeAheadDropdownReadmeRef: RefObject<CreatableTypeAheadDropdownReadmeRef | null> = createRef()
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(creatableTypeAheadDropdownReadmeRef.current)
-      /* eslint-enable */
-    }
-    return (
-      <div className="story--example">
-        <CreatableTypeAheadDropdown
-          ref={creatableTypeAheadDropdownReadmeRef}
-          style={object('style', defaultDropdownStyle)}
-          options={array('options', defaultDropdownOptions)}
-          selectedOption={selected}
-          onSelect={changeSelected}
-          placeholder={text('placeholder', 'Placeholder Text')}
-          inputStatus={
-            (ComponentStatus as Record<string, any>)[
-              select('inputStatus', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          inputSize={
-            (ComponentSize as Record<string, any>)[
-              select('inputSize', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          inputIcon={
-            (IconFont as Record<string, any>)[
-              select(
-                'inputIcon',
-                {None: 'none', ...mapEnumKeys(IconFont)},
-                'None'
-              )
-            ]
-          }
-          menuTheme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          menuMaxHeight={number('menuMaxHeight', 250)}
-        />
-        <span>With customized dropdown item: </span>
-        <CreatableTypeAheadDropdown
-          ref={creatableTypeAheadDropdownReadmeRef}
-          style={object('style', defaultDropdownStyle)}
-          options={defaultColorOptions}
-          selectedOption={selectedColor}
-          onSelect={changeSelectedColor}
-          placeholder={text('placeholder', 'Placeholder Text')}
-          inputStatus={
-            (ComponentStatus as Record<string, any>)[
-              select('inputStatus', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          inputSize={
-            (ComponentSize as Record<string, any>)[
-              select('inputSize', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          inputIcon={
-            (IconFont as Record<string, any>)[
-              select(
-                'inputIcon',
-                {None: 'none', ...mapEnumKeys(IconFont)},
-                'None'
-              )
-            ]
-          }
-          inputColorPreviewOn={true}
-          menuTheme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          menuMaxHeight={number('menuMaxHeight', 250)}
-          customizedDropdownItem={displayText => (
-            <FlexBox>
-              <ColorPreview color={displayText} />
-              <div style={{paddingLeft: '26px'}}>{displayText}</div>
-            </FlexBox>
-          )}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(CreatableTypeAheadDropdownReadme),
+    {
+      type: 'item',
+      text: 'Kiwi',
     },
-  }
-)
-
-dropdownComposedStories.add(
-  'MultiSelectdropdown',
-  () => {
-    const defaultMultiSelectOptions = [
-      'Celery',
-      'Carrot',
-      'Potato',
-      '---',
-      'Onion',
-      'Tomato',
-      'Spinach',
-    ]
-    const [selectedOptions, setSelectedOptions] = useState(['Celery', 'Onion'])
-
-    const multiSelectDropdownRef: RefObject<MultiSelectDropdownRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(multiSelectDropdownRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <MultiSelectDropdown
-          ref={multiSelectDropdownRef}
-          style={object('style', defaultDropdownStyle)}
-          menuMaxHeight={number('menuMaxHeight', 250)}
-          dropUp={boolean('dropUp', false)}
-          indicator={
-            (DropdownItemType as Record<string, any>)[
-              select('indicator', mapEnumKeys(DropdownItemType), 'Checkbox')
-            ]
-          }
-          menuTheme={
-            (DropdownMenuTheme as Record<string, any>)[
-              select('menuTheme', mapEnumKeys(DropdownMenuTheme), 'Onyx')
-            ]
-          }
-          onSelect={option => {
-            if (selectedOptions.includes(option)) {
-              setSelectedOptions(selectedOptions.filter(x => x !== option))
-            } else {
-              setSelectedOptions([...selectedOptions, option])
-            }
-          }}
-          buttonStatus={
-            (ComponentStatus as Record<string, any>)[
-              select('buttonStatus', mapEnumKeys(ComponentStatus), 'Default')
-            ]
-          }
-          buttonColor={
-            (ComponentColor as Record<string, any>)[
-              select('buttonColor', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-          buttonSize={
-            (ComponentSize as Record<string, any>)[
-              select('buttonSize', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          buttonIcon={
-            (IconFont as Record<string, any>)[
-              select(
-                'buttonIcon',
-                {None: 'none', ...mapEnumKeys(IconFont)},
-                'BarChart'
-              )
-            ]
-          }
-          emptyText={text('emptyText', 'None selected')}
-          selectedOptions={selectedOptions}
-          options={array('options', defaultMultiSelectOptions)}
-          isSearchable={boolean('isSearchable', true)}
-          searchbarInputPlaceholder={text(
-            'searchbarInputPlaceholder',
-            'Search'
-          )}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(MultiSelectDropdownReadme),
+    {
+      type: 'item',
+      text: 'Lemon',
     },
+    {
+      type: 'item',
+      text: 'Apple',
+    },
+    {
+      type: 'item',
+      text: 'Orange',
+    },
+    {
+      type: 'item',
+      text: 'Grapefruit',
+    },
+    {
+      type: 'item',
+      text: 'Pear',
+    },
+    {
+      type: 'divider',
+      text: 'Imported Fruits',
+    },
+    {
+      type: 'item',
+      text: 'Dragonfruit',
+    },
+    {
+      type: 'item',
+      text: 'Yuzu',
+    },
+    {
+      type: 'item',
+      text: 'Mango',
+    },
+    {
+      type: 'item',
+      text: 'Lychee',
+    },
+    {
+      type: 'item',
+      text: 'Passionfruit',
+    },
+    {
+      type: 'item',
+      text: 'Guava',
+    },
+    {
+      type: 'divider',
+      text: 'Testing Only',
+    },
+    {
+      type: 'item',
+      text: 'This dropdown item text is much longer to test text wrapping',
+    },
+  ]
+
+  const selectedItems = ['Yuzu', 'Banana']
+  const disabledItems = ['Passionfruit']
+
+  const menuStyle = {width: '250px'}
+
+  return (
+    <div className="story--example">
+      <Dropdown.Menu
+        ref={dropdownMenuRef}
+        style={menuStyle}
+        contentsRef={dropdownMenuContentsRef}
+        theme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        maxHeight={250}
+        noScrollX={true}
+        noScrollY={false}
+        scrollToSelected={true}
+      >
+        {exampleItems.map(item => {
+          if (item.type === 'divider') {
+            return <Dropdown.Divider key={item.text} text={item.text} />
+          }
+
+          return (
+            <Dropdown.Item
+              key={item.text}
+              wrapText={false}
+              value={item.text}
+              selected={selectedItems.includes(item.text)}
+              disabled={disabledItems.includes(item.text)}
+              type={(DropdownItemType as Record<string, any>)['None']}
+            >
+              {item.text}
+            </Dropdown.Item>
+          )
+        })}
+      </Dropdown.Menu>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+DropdownMenu.story = {
+  name: 'DropdownMenu',
+
+  parameters: {
+    readme: {
+      content: marked.parse(DropdownMenuReadme),
+    },
+  },
+}
+
+export const _SelectDropdown = () => {
+  const selectDropdownOptions = [
+    '---Vegetables',
+    'Celery',
+    'Carrot',
+    'Potato',
+    'Corn',
+    'Bok Choy',
+    '---Fruits',
+    'Apple',
+    'Peach',
+    'Tomato',
+    'Grape',
+    'Orange',
+    'Lemon',
+    'Watermelon',
+    'Kiwi',
+    'Banana',
+    'Strawberry',
+  ]
+
+  const selectDropdownRef: RefObject<SelectDropdownRef | null> = createRef()
+  const [selected, changeSelected] = useState('Celery')
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(selectDropdownRef.current)
+    /* eslint-enable */
   }
-)
 
-dropdownExampleStories.add(
-  'Collage',
-  () => {
-    const selectDropdownOptions = [
-      '---Vegetables',
-      'Celery',
-      'Carrot',
-      'Potato',
-      'Corn',
-      'Bok Choy',
-    ]
+  return (
+    <div className="story--example">
+      <SelectDropdown
+        ref={selectDropdownRef}
+        style={defaultDropdownStyle}
+        menuMaxHeight={250}
+        dropUp={false}
+        indicator={(DropdownItemType as Record<string, any>)['Dot']}
+        menuTheme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        onSelect={changeSelected}
+        buttonStatus={(ComponentStatus as Record<string, any>)['Default']}
+        buttonColor={(ComponentColor as Record<string, any>)['Primary']}
+        buttonSize={(ComponentSize as Record<string, any>)['Small']}
+        buttonIcon={(IconFont as Record<string, any>)['BarChart']}
+        selectedOption={selected}
+        options={selectDropdownOptions}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
 
-    const selectDropdownSelectedOption = 'Celery'
+_SelectDropdown.story = {
+  name: 'SelectDropdown',
 
-    return (
-      <div className="story--example">
-        <div>
-          <table className="two-axis-table two-axis-table--spaced">
-            <tbody>
-              <tr>
-                <td>
-                  <code>Size</code>
+  parameters: {
+    readme: {
+      content: marked.parse(SelectDropdownReadme),
+    },
+  },
+}
+
+export const TypeAheadDropdown = () => {
+  const selectDropdownOptions = [
+    {name: 'Apple', id: '0'},
+    {name: 'Peach', id: '5'},
+    {name: 'Tomato', id: '10'},
+    {name: 'Grape', id: '20'},
+    {name: 'Orange', id: '40'},
+    {name: 'Lemon', id: '30'},
+    {name: 'Watermelon', id: '70'},
+    {name: 'Kiwi', id: '8'},
+    {name: 'Banana', id: '9'},
+    {name: 'Strawberry', id: '1099'},
+    {name: 'Strawberry1', id: '123412'},
+    {name: 'Strawberry2', id: '2'},
+    {name: 'Strawberry3', id: '109'},
+    {name: 'Strawberry4', id: '19'},
+    {name: 'Strawberry5', id: '1'},
+    {name: 'blueberry', id: 'blueberry113'},
+    {id: '1234.3.33'},
+  ]
+
+  const oneHundredThousandItems = new Array(100000)
+  for (let i = 0; i < 100000; i++) {
+    const value = (i + 1).toString()
+    oneHundredThousandItems[i] = {
+      name: value,
+      id: value,
+    }
+  }
+
+  const onSelect = (item: SelectableItem | null) => {
+    /* eslint-disable */
+    console.log('ooh! selected item: ', item)
+    /* eslint-enable */
+  }
+
+  const selectedOption = {name: 'Lemon', id: '30'}
+
+  // putting sortNames as a boolean doesn't work because it is a prop,
+  // not a state, so it doesn't make the items sort (or unsort)
+  // because it happens once at instantiation
+  return (
+    <div className="story--example">
+      <span> with a pre-selected item:</span>
+      <TypeAheadDropDown
+        style={defaultDropdownStyle}
+        onSelect={onSelect}
+        testIdSuffix="fooTest"
+        items={selectDropdownOptions}
+        menuTestID={'menuTest'}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        itemTestIdPrefix={'my-prefix'}
+        defaultNameText={'default empty name here'}
+        menuTheme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        selectedOption={selectedOption}
+        sortNames={true}
+      />
+
+      <span> without a pre-selected item:</span>
+      <TypeAheadDropDown
+        style={defaultDropdownStyle}
+        onSelect={onSelect}
+        testIdSuffix="fooTest"
+        items={selectDropdownOptions}
+        menuTestID={'menuTest'}
+        itemTestIdPrefix={'my-prefix'}
+        defaultNameText={'default empty name here'}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        menuTheme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        sortNames={true}
+      />
+
+      <span> Stress test with 100,000 items:</span>
+      <TypeAheadDropDown
+        style={defaultDropdownStyle}
+        onSelect={onSelect}
+        testIdSuffix="fooTest"
+        items={oneHundredThousandItems}
+        menuTestID={'menuTest'}
+        itemTestIdPrefix={'my-prefix'}
+        defaultNameText={'default empty name here'}
+        status={(ComponentStatus as Record<string, any>)['Default']}
+        menuTheme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        sortNames={true}
+      />
+    </div>
+  )
+}
+
+TypeAheadDropdown.story = {
+  name: 'TypeAheadDropdown',
+
+  parameters: {
+    readme: {
+      content: marked.parse(TypeAheadDropdownReadme),
+    },
+  },
+}
+
+export const _CreatableTypeAheadDropdown = () => {
+  const defaultDropdownOptions = [
+    'Celery',
+    'Carrot',
+    'Potato',
+    'Onion',
+    'Tomato',
+    'Spinach',
+  ]
+  const [selected, changeSelected] = useState(defaultDropdownOptions[1])
+  const defaultColorOptions = [
+    '#DC4E58',
+    '#FFB94A',
+    '#2FA74D',
+    '#0098F0',
+    '#8E1FC3',
+  ]
+  const [selectedColor, changeSelectedColor] = useState(defaultColorOptions[1])
+
+  const creatableTypeAheadDropdownReadmeRef: RefObject<CreatableTypeAheadDropdownReadmeRef | null> =
+    createRef()
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(creatableTypeAheadDropdownReadmeRef.current)
+    /* eslint-enable */
+  }
+  return (
+    <div className="story--example">
+      <CreatableTypeAheadDropdown
+        ref={creatableTypeAheadDropdownReadmeRef}
+        style={defaultDropdownStyle}
+        options={defaultDropdownOptions}
+        selectedOption={selected}
+        onSelect={changeSelected}
+        placeholder={'Placeholder Text'}
+        inputStatus={(ComponentStatus as Record<string, any>)['Default']}
+        inputSize={(ComponentSize as Record<string, any>)['Small']}
+        inputIcon={(IconFont as Record<string, any>)['None']}
+        menuTheme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        menuMaxHeight={250}
+      />
+      <span>With customized dropdown item: </span>
+      <CreatableTypeAheadDropdown
+        ref={creatableTypeAheadDropdownReadmeRef}
+        style={defaultDropdownStyle}
+        options={defaultColorOptions}
+        selectedOption={selectedColor}
+        onSelect={changeSelectedColor}
+        placeholder={'Placeholder Text'}
+        inputStatus={(ComponentStatus as Record<string, any>)['Default']}
+        inputSize={(ComponentSize as Record<string, any>)['Small']}
+        inputIcon={(IconFont as Record<string, any>)['None']}
+        inputColorPreviewOn={true}
+        menuTheme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        menuMaxHeight={250}
+        customizedDropdownItem={displayText => (
+          <FlexBox>
+            <ColorPreview color={displayText} />
+            <div style={{paddingLeft: '26px'}}>{displayText}</div>
+          </FlexBox>
+        )}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_CreatableTypeAheadDropdown.story = {
+  name: 'CreatableTypeAheadDropdown',
+
+  parameters: {
+    readme: {
+      content: marked.parse(CreatableTypeAheadDropdownReadme),
+    },
+  },
+}
+
+export const MultiSelectdropdown = () => {
+  const defaultMultiSelectOptions = [
+    'Celery',
+    'Carrot',
+    'Potato',
+    '---',
+    'Onion',
+    'Tomato',
+    'Spinach',
+  ]
+  const [selectedOptions, setSelectedOptions] = useState(['Celery', 'Onion'])
+
+  const multiSelectDropdownRef: RefObject<MultiSelectDropdownRef | null> =
+    createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(multiSelectDropdownRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <MultiSelectDropdown
+        ref={multiSelectDropdownRef}
+        style={defaultDropdownStyle}
+        menuMaxHeight={250}
+        dropUp={false}
+        indicator={(DropdownItemType as Record<string, any>)['Checkbox']}
+        menuTheme={(DropdownMenuTheme as Record<string, any>)['Onyx']}
+        onSelect={option => {
+          if (selectedOptions.includes(option)) {
+            setSelectedOptions(selectedOptions.filter(x => x !== option))
+          } else {
+            setSelectedOptions([...selectedOptions, option])
+          }
+        }}
+        buttonStatus={(ComponentStatus as Record<string, any>)['Default']}
+        buttonColor={(ComponentColor as Record<string, any>)['Primary']}
+        buttonSize={(ComponentSize as Record<string, any>)['Small']}
+        buttonIcon={(IconFont as Record<string, any>)['BarChart']}
+        emptyText={'None selected'}
+        selectedOptions={selectedOptions}
+        options={defaultMultiSelectOptions}
+        isSearchable={true}
+        searchbarInputPlaceholder={'Search'}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+MultiSelectdropdown.story = {
+  name: 'MultiSelectdropdown',
+
+  parameters: {
+    readme: {
+      content: marked.parse(MultiSelectDropdownReadme),
+    },
+  },
+}
+
+export const Collage = () => {
+  const selectDropdownOptions = [
+    '---Vegetables',
+    'Celery',
+    'Carrot',
+    'Potato',
+    'Corn',
+    'Bok Choy',
+  ]
+
+  const selectDropdownSelectedOption = 'Celery'
+
+  return (
+    <div className="story--example">
+      <div>
+        <table className="two-axis-table two-axis-table--spaced">
+          <tbody>
+            <tr>
+              <td>
+                <code>Size</code>
+              </td>
+              {[
+                {size: ComponentSize.ExtraSmall, children: 'ExtraSmall'},
+                {size: ComponentSize.Small, children: 'Small'},
+                {size: ComponentSize.Medium, children: 'Medium'},
+                {size: ComponentSize.Large, children: 'Large'},
+              ].map((props, i) => (
+                <td key={i}>
+                  <Dropdown.Dropdown
+                    button={(active, onClick) => (
+                      <Dropdown.Button
+                        active={active}
+                        onClick={onClick}
+                        {...props}
+                      />
+                    )}
+                    menu={onCollapse => (
+                      <Dropdown.Menu onCollapse={onCollapse}>
+                        <div className="mockComponent dropdownContents">
+                          <span>Menu Contents</span>
+                        </div>
+                      </Dropdown.Menu>
+                    )}
+                  />
                 </td>
-                {[
-                  {size: ComponentSize.ExtraSmall, children: 'ExtraSmall'},
-                  {size: ComponentSize.Small, children: 'Small'},
-                  {size: ComponentSize.Medium, children: 'Medium'},
-                  {size: ComponentSize.Large, children: 'Large'},
-                ].map((props, i) => (
-                  <td key={i}>
-                    <Dropdown.Dropdown
-                      button={(active, onClick) => (
-                        <Dropdown.Button
-                          active={active}
-                          onClick={onClick}
-                          {...props}
-                        />
-                      )}
-                      menu={onCollapse => (
-                        <Dropdown.Menu onCollapse={onCollapse}>
-                          <div className="mockComponent dropdownContents">
-                            <span>Menu Contents</span>
-                          </div>
-                        </Dropdown.Menu>
-                      )}
-                    />
-                  </td>
-                ))}
-              </tr>
-              <tr>
-                <td>
-                  <code>Color</code>
+              ))}
+            </tr>
+            <tr>
+              <td>
+                <code>Color</code>
+              </td>
+              {[
+                {color: ComponentColor.Default},
+                {color: ComponentColor.Primary},
+                {color: ComponentColor.Tertiary},
+                {color: ComponentColor.Danger},
+              ].map((props, i) => (
+                <td key={i} style={{width: '200px'}}>
+                  <Dropdown.Dropdown
+                    button={(active, onClick) => (
+                      <Dropdown.Button
+                        active={active}
+                        onClick={onClick}
+                        {...props}
+                      >
+                        {props.color.toString()}
+                      </Dropdown.Button>
+                    )}
+                    menu={onCollapse => (
+                      <Dropdown.Menu onCollapse={onCollapse}>
+                        <div className="mockComponent dropdownContents">
+                          <span>Menu Contents</span>
+                        </div>
+                      </Dropdown.Menu>
+                    )}
+                    {...props}
+                  />
                 </td>
-                {[
-                  {color: ComponentColor.Default},
-                  {color: ComponentColor.Primary},
-                  {color: ComponentColor.Tertiary},
-                  {color: ComponentColor.Danger},
-                ].map((props, i) => (
-                  <td key={i} style={{width: '200px'}}>
-                    <Dropdown.Dropdown
-                      button={(active, onClick) => (
-                        <Dropdown.Button
-                          active={active}
-                          onClick={onClick}
-                          {...props}
-                        >
-                          {props.color.toString()}
-                        </Dropdown.Button>
-                      )}
-                      menu={onCollapse => (
-                        <Dropdown.Menu onCollapse={onCollapse}>
-                          <div className="mockComponent dropdownContents">
-                            <span>Menu Contents</span>
-                          </div>
-                        </Dropdown.Menu>
-                      )}
-                      {...props}
-                    />
-                  </td>
-                ))}
-              </tr>
-              <tr>
-                <td>
-                  <code>Status</code>
+              ))}
+            </tr>
+            <tr>
+              <td>
+                <code>Status</code>
+              </td>
+              {[
+                {status: ComponentStatus.Default},
+                {status: ComponentStatus.Disabled},
+                {status: ComponentStatus.Loading},
+                {status: ComponentStatus.Error},
+                {status: ComponentStatus.Valid},
+              ].map((props, i) => (
+                <td key={i} style={{width: '200px'}}>
+                  <Dropdown.Dropdown
+                    button={(active, onClick) => (
+                      <Dropdown.Button
+                        active={active}
+                        onClick={onClick}
+                        {...props}
+                      >
+                        {props.status.toString()}
+                      </Dropdown.Button>
+                    )}
+                    menu={onCollapse => (
+                      <Dropdown.Menu onCollapse={onCollapse}>
+                        <div className="mockComponent dropdownContents">
+                          <span>Menu Contents</span>
+                        </div>
+                      </Dropdown.Menu>
+                    )}
+                    {...props}
+                  />
                 </td>
-                {[
-                  {status: ComponentStatus.Default},
-                  {status: ComponentStatus.Disabled},
-                  {status: ComponentStatus.Loading},
-                  {status: ComponentStatus.Error},
-                  {status: ComponentStatus.Valid},
-                ].map((props, i) => (
-                  <td key={i} style={{width: '200px'}}>
-                    <Dropdown.Dropdown
-                      button={(active, onClick) => (
-                        <Dropdown.Button
-                          active={active}
-                          onClick={onClick}
-                          {...props}
-                        >
-                          {props.status.toString()}
-                        </Dropdown.Button>
-                      )}
-                      menu={onCollapse => (
-                        <Dropdown.Menu onCollapse={onCollapse}>
-                          <div className="mockComponent dropdownContents">
-                            <span>Menu Contents</span>
-                          </div>
-                        </Dropdown.Menu>
-                      )}
-                      {...props}
-                    />
-                  </td>
-                ))}
-              </tr>
+              ))}
+            </tr>
 
-              <tr>
-                <td>
-                  <code>Select theme</code>
+            <tr>
+              <td>
+                <code>Select theme</code>
+              </td>
+              {[
+                {menuTheme: DropdownMenuTheme.Onyx},
+                {menuTheme: DropdownMenuTheme.Amethyst},
+                {menuTheme: DropdownMenuTheme.Malachite},
+                {menuTheme: DropdownMenuTheme.Sapphire},
+              ].map((props, i) => (
+                <td key={i}>
+                  <SelectDropdown
+                    menuTheme={props.menuTheme}
+                    onSelect={option => {
+                      alert(option)
+                    }}
+                    buttonColor={ComponentColor.Primary}
+                    buttonSize={ComponentSize.Small}
+                    buttonIcon={IconFont.BarChart_New}
+                    selectedOption={selectDropdownSelectedOption}
+                    options={selectDropdownOptions}
+                  />
                 </td>
-                {[
-                  {menuTheme: DropdownMenuTheme.Onyx},
-                  {menuTheme: DropdownMenuTheme.Amethyst},
-                  {menuTheme: DropdownMenuTheme.Malachite},
-                  {menuTheme: DropdownMenuTheme.Sapphire},
-                ].map((props, i) => (
-                  <td key={i}>
-                    <SelectDropdown
-                      menuTheme={props.menuTheme}
-                      onSelect={option => {
-                        alert(option)
-                      }}
-                      buttonColor={ComponentColor.Primary}
-                      buttonSize={ComponentSize.Small}
-                      buttonIcon={IconFont.BarChart_New}
-                      selectedOption={selectDropdownSelectedOption}
-                      options={array('options', selectDropdownOptions)}
-                    />
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              ))}
+            </tr>
+          </tbody>
+        </table>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+Collage.story = {
+  parameters: {
     readme: {
-      content: marked(DropdownReadme),
+      content: marked.parse(DropdownReadme),
     },
-  }
-)
+  },
+}

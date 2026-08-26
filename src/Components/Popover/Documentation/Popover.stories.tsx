@@ -1,19 +1,6 @@
 // Libraries
-import {useRef, ChangeEvent, Fragment} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {
-  withKnobs,
-  select,
-  number,
-  boolean,
-  text,
-  object,
-} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
-import {useState} from '@storybook/addons'
+import {useRef, ChangeEvent, Fragment, useState} from 'react'
+import {marked} from 'marked'
 
 // Components
 import {Popover, PopoverRef} from '../'
@@ -42,30 +29,12 @@ import {
 import {getDictionary} from '../../../Utils'
 
 // Notes
-import PopoverReadme from './Popover.md'
-import ReflessPopoverReadme from './ReflessPopover.md'
-import QuestionMarkTooltipReadme from './QuestionMarkTooltip.md'
-import ErrorTooltipReadme from './ErrorTooltip.md'
+import PopoverReadme from './Popover.md?raw'
+import ReflessPopoverReadme from './ReflessPopover.md?raw'
+import QuestionMarkTooltipReadme from './QuestionMarkTooltip.md?raw'
+import ErrorTooltipReadme from './ErrorTooltip.md?raw'
 
-const popoverStories = storiesOf(
-  'Components/Popover/Base',
-  module
-).addDecorator(withKnobs)
-
-const composedPopoverStories = storiesOf(
-  'Components/Popover/Composed',
-  module
-).addDecorator(withKnobs)
-
-const testPopoverStories = storiesOf(
-  'Components/Popover/Tests',
-  module
-).addDecorator(withKnobs)
-
-const examplePopoverStories = storiesOf(
-  'Components/Popover/Examples',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/Popover/Base'}
 
 const exampleStyle = {
   width: '250px',
@@ -75,333 +44,307 @@ const exampleStyle = {
   justifyContent: 'center',
 }
 
-popoverStories.add(
-  'Popover',
-  () => {
-    const triggerRefA = useRef<HTMLDivElement>(null)
-    const triggerRefB = useRef<HTMLDivElement>(null)
-    const triggerRefC = useRef<HTMLButtonElement>(null)
-    const triggerRefD = useRef<HTMLDivElement>(null)
-    const popover1Ref = useRef<PopoverRef>(null)
-    const popover2Ref = useRef<PopoverRef>(null)
-    const popover3Ref = useRef<PopoverRef>(null)
-    const popover4Ref = useRef<PopoverRef>(null)
+export const _Popover = () => {
+  const triggerRefA = useRef<HTMLDivElement>(null)
+  const triggerRefB = useRef<HTMLDivElement>(null)
+  const triggerRefC = useRef<HTMLButtonElement>(null)
+  const triggerRefD = useRef<HTMLDivElement>(null)
+  const popover1Ref = useRef<PopoverRef>(null)
+  const popover2Ref = useRef<PopoverRef>(null)
+  const popover3Ref = useRef<PopoverRef>(null)
+  const popover4Ref = useRef<PopoverRef>(null)
 
-    const log1Ref = (): void => {
-      /* eslint-disable */
-      console.log(popover1Ref.current)
-      /* eslint-enable */
-    }
-
-    const log2Ref = (): void => {
-      /* eslint-disable */
-      console.log(popover2Ref.current)
-      /* eslint-enable */
-    }
-
-    const log3Ref = (): void => {
-      /* eslint-disable */
-      console.log(popover3Ref.current)
-      /* eslint-enable */
-    }
-
-    const log4Ref = (): void => {
-      /* eslint-disable */
-      console.log(popover4Ref.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <table className="story--invisible-table">
-          <tbody>
-            <tr>
-              <td>
-                <code>PopoverInteraction.Click</code>
-              </td>
-              <td>
-                <div className="mockComponent mockButton" ref={triggerRefA}>
-                  Click Me
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <code>PopoverInteraction.Hover</code>
-              </td>
-              <td>
-                <div className="mockComponent mockButton" ref={triggerRefB}>
-                  Hover Me
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Trigger element is disabled</td>
-              <td>
-                <SquareButton
-                  icon={IconFont.Zap}
-                  ref={triggerRefC}
-                  status={ComponentStatus.Disabled}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Controlled by <code>visible</code> prop
-              </td>
-              <td>
-                <div className="mockComponent mockButton" ref={triggerRefD}>
-                  Use Knobs
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <Popover.Popover
-          ref={popover1Ref}
-          triggerRef={triggerRefA}
-          enableDefaultStyles={boolean('enableDefaultStyles', true)}
-          contents={(onHide: any) => (
-            <>
-              This Popover uses the style prop
-              <Popover.DismissButton
-                onClick={onHide}
-                color={
-                  (ComponentColor as Record<string, any>)[
-                    select('color', mapEnumKeys(ComponentColor), 'Primary')
-                  ]
-                }
-              />
-              <div className="story--test-buttons">
-                <button onClick={log1Ref}>Log Ref</button>
-              </div>
-            </>
-          )}
-          className={text('className', '')}
-          style={object('style', exampleStyle)}
-          caretSize={number('caretSize', 8)}
-          distanceFromTrigger={number('distanceFromTrigger', 16)}
-          showEvent={PopoverInteraction.Click}
-          hideEvent={PopoverInteraction.Click}
-          position={
-            (PopoverPosition as Record<string, any>)[
-              select('position', mapEnumKeys(PopoverPosition), 'Below')
-            ]
-          }
-          color={
-            (ComponentColor as Record<string, any>)[
-              select('color', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-          appearance={
-            (Appearance as Record<string, any>)[
-              select('appearance', mapEnumKeys(Appearance), 'Outline')
-            ]
-          }
-        />
-        <Popover.Popover
-          ref={popover2Ref}
-          triggerRef={triggerRefB}
-          enableDefaultStyles={boolean('enableDefaultStyles', true)}
-          contents={() => (
-            <>
-              <div style={{marginTop: '30px'}}>
-                I'm just a simple popover looking for my
-                <br />
-                place in this <strong>vast and beautiful</strong> world.
-                <br />
-                Will you help me?
-              </div>
-              <div className="story--test-buttons">
-                <button onClick={log2Ref}>Log Ref</button>
-              </div>
-            </>
-          )}
-          showEvent={PopoverInteraction.Hover}
-          hideEvent={PopoverInteraction.Hover}
-          position={PopoverPosition.ToTheRight}
-          color={ComponentColor.Secondary}
-          appearance={Appearance.Outline}
-        />
-        <Popover.Popover
-          ref={popover3Ref}
-          triggerRef={triggerRefC}
-          enableDefaultStyles={boolean('enableDefaultStyles', true)}
-          contents={() => (
-            <>
-              <div style={{marginTop: '30px'}}>
-                I'm just a simple popover looking for my
-                <br />
-                place in this <strong>vast and beautiful</strong> world.
-                <br />
-                Will you help me?
-              </div>
-              <div className="story--test-buttons">
-                <button onClick={log3Ref}>Log Ref</button>
-              </div>
-            </>
-          )}
-          showEvent={PopoverInteraction.None}
-          hideEvent={PopoverInteraction.None}
-          position={PopoverPosition.Below}
-          color={ComponentColor.Success}
-          appearance={Appearance.Outline}
-        />
-        <Popover.Popover
-          ref={popover4Ref}
-          triggerRef={triggerRefD}
-          visible={boolean('visible', true)}
-          enableDefaultStyles={boolean('enableDefaultStyles', true)}
-          contents={() => (
-            <div>
-              My state can be controlled externally
-              <br />
-              via the <strong>visible</strong> prop
-              <br />
-              <br />
-              Look in the <strong>Knobs</strong> panel
-              <div className="story--test-buttons relative">
-                <button onClick={log4Ref}>Log Ref</button>
-              </div>
-            </div>
-          )}
-          showEvent={PopoverInteraction.None}
-          hideEvent={PopoverInteraction.None}
-          position={PopoverPosition.Below}
-          color={ComponentColor.Success}
-          appearance={Appearance.Outline}
-        />
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(PopoverReadme),
-    },
+  const log1Ref = (): void => {
+    /* eslint-disable */
+    console.log(popover1Ref.current)
+    /* eslint-enable */
   }
-)
 
-composedPopoverStories.add(
-  'ReflessPopover',
-  () => (
+  const log2Ref = (): void => {
+    /* eslint-disable */
+    console.log(popover2Ref.current)
+    /* eslint-enable */
+  }
+
+  const log3Ref = (): void => {
+    /* eslint-disable */
+    console.log(popover3Ref.current)
+    /* eslint-enable */
+  }
+
+  const log4Ref = (): void => {
+    /* eslint-disable */
+    console.log(popover4Ref.current)
+    /* eslint-enable */
+  }
+
+  return (
     <div className="story--example">
-      <ReflessPopover
-        visible={boolean('visible', false)}
-        enableDefaultStyles={boolean('enableDefaultStyles', false)}
-        contents={onHide => (
+      <table className="story--invisible-table">
+        <tbody>
+          <tr>
+            <td>
+              <code>PopoverInteraction.Click</code>
+            </td>
+            <td>
+              <div className="mockComponent mockButton" ref={triggerRefA}>
+                Click Me
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>PopoverInteraction.Hover</code>
+            </td>
+            <td>
+              <div className="mockComponent mockButton" ref={triggerRefB}>
+                Hover Me
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Trigger element is disabled</td>
+            <td>
+              <SquareButton
+                icon={IconFont.Zap}
+                ref={triggerRefC}
+                status={ComponentStatus.Disabled}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Controlled by <code>visible</code> prop
+            </td>
+            <td>
+              <div className="mockComponent mockButton" ref={triggerRefD}>
+                Use Knobs
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Popover.Popover
+        ref={popover1Ref}
+        triggerRef={triggerRefA}
+        enableDefaultStyles={true}
+        contents={(onHide: any) => (
           <>
-            PopoverContents
-            <Popover.DismissButton onClick={onHide} />
+            This Popover uses the style prop
+            <Popover.DismissButton
+              onClick={onHide}
+              color={(ComponentColor as Record<string, any>)['Primary']}
+            />
+            <div className="story--test-buttons">
+              <button onClick={log1Ref}>Log Ref</button>
+            </div>
           </>
         )}
-        className={text('className', '')}
-        style={object('style', exampleStyle)}
-        triggerStyle={object('triggerStyle', {display: 'inline-block'})}
-        caretSize={number('caretSize', 8)}
-        distanceFromTrigger={number('distanceFromTrigger', 16)}
+        className={''}
+        style={exampleStyle}
+        caretSize={8}
+        distanceFromTrigger={16}
         showEvent={PopoverInteraction.Click}
         hideEvent={PopoverInteraction.Click}
-        position={
-          (PopoverPosition as Record<string, any>)[
-            select('position', mapEnumKeys(PopoverPosition), 'Below')
-          ]
-        }
-        color={
-          (ComponentColor as Record<string, any>)[
-            select('color', mapEnumKeys(ComponentColor), 'Primary')
-          ]
-        }
-        appearance={
-          (Appearance as Record<string, any>)[
-            select('appearance', mapEnumKeys(Appearance), 'Outline')
-          ]
-        }
-      >
-        <div className="mockComponent mockButton">Popover Trigger Element</div>
-      </ReflessPopover>
+        position={(PopoverPosition as Record<string, any>)['Below']}
+        color={(ComponentColor as Record<string, any>)['Primary']}
+        appearance={(Appearance as Record<string, any>)['Outline']}
+      />
+      <Popover.Popover
+        ref={popover2Ref}
+        triggerRef={triggerRefB}
+        enableDefaultStyles={true}
+        contents={() => (
+          <>
+            <div style={{marginTop: '30px'}}>
+              I'm just a simple popover looking for my
+              <br />
+              place in this <strong>vast and beautiful</strong> world.
+              <br />
+              Will you help me?
+            </div>
+            <div className="story--test-buttons">
+              <button onClick={log2Ref}>Log Ref</button>
+            </div>
+          </>
+        )}
+        showEvent={PopoverInteraction.Hover}
+        hideEvent={PopoverInteraction.Hover}
+        position={PopoverPosition.ToTheRight}
+        color={ComponentColor.Secondary}
+        appearance={Appearance.Outline}
+      />
+      <Popover.Popover
+        ref={popover3Ref}
+        triggerRef={triggerRefC}
+        enableDefaultStyles={true}
+        contents={() => (
+          <>
+            <div style={{marginTop: '30px'}}>
+              I'm just a simple popover looking for my
+              <br />
+              place in this <strong>vast and beautiful</strong> world.
+              <br />
+              Will you help me?
+            </div>
+            <div className="story--test-buttons">
+              <button onClick={log3Ref}>Log Ref</button>
+            </div>
+          </>
+        )}
+        showEvent={PopoverInteraction.None}
+        hideEvent={PopoverInteraction.None}
+        position={PopoverPosition.Below}
+        color={ComponentColor.Success}
+        appearance={Appearance.Outline}
+      />
+      <Popover.Popover
+        ref={popover4Ref}
+        triggerRef={triggerRefD}
+        visible={true}
+        enableDefaultStyles={true}
+        contents={() => (
+          <div>
+            My state can be controlled externally
+            <br />
+            via the <strong>visible</strong> prop
+            <br />
+            <br />
+            Look in the <strong>Knobs</strong> panel
+            <div className="story--test-buttons relative">
+              <button onClick={log4Ref}>Log Ref</button>
+            </div>
+          </div>
+        )}
+        showEvent={PopoverInteraction.None}
+        hideEvent={PopoverInteraction.None}
+        position={PopoverPosition.Below}
+        color={ComponentColor.Success}
+        appearance={Appearance.Outline}
+      />
     </div>
-  ),
-  {
+  )
+}
+
+_Popover.story = {
+  parameters: {
     readme: {
-      content: marked(ReflessPopoverReadme),
+      content: marked.parse(PopoverReadme),
     },
-  }
-)
-
-composedPopoverStories.add(
-  'QuestionMarkTooltip',
-  () => {
-    const popoverRef = useRef<QuestionMarkTooltipRef>(null)
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(popoverRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <QuestionMarkTooltip
-          ref={popoverRef}
-          diameter={number('diameter', 18)}
-          tooltipContents={text('tooltipContents', 'Hello world!')}
-          className={text('className', '')}
-          style={object('style', {})}
-          tooltipStyle={object('tooltipStyle', {})}
-          color={
-            (ComponentColor as Record<string, any>)[
-              select('color', mapEnumKeys(ComponentColor), 'Primary')
-            ]
-          }
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
   },
-  {
-    readme: {
-      content: marked(QuestionMarkTooltipReadme),
-    },
-  }
+}
+
+export const _ReflessPopover = () => (
+  <div className="story--example">
+    <ReflessPopover
+      visible={false}
+      enableDefaultStyles={false}
+      contents={onHide => (
+        <>
+          PopoverContents
+          <Popover.DismissButton onClick={onHide} />
+        </>
+      )}
+      className={''}
+      style={exampleStyle}
+      triggerStyle={{display: 'inline-block'}}
+      caretSize={8}
+      distanceFromTrigger={16}
+      showEvent={PopoverInteraction.Click}
+      hideEvent={PopoverInteraction.Click}
+      position={(PopoverPosition as Record<string, any>)['Below']}
+      color={(ComponentColor as Record<string, any>)['Primary']}
+      appearance={(Appearance as Record<string, any>)['Outline']}
+    >
+      <div className="mockComponent mockButton">Popover Trigger Element</div>
+    </ReflessPopover>
+  </div>
 )
 
-composedPopoverStories.add(
-  'ErrorToolTip',
-  () => {
-    const popoverRef = useRef<ErrorTooltipRef>(null)
+_ReflessPopover.story = {
+  name: 'ReflessPopover',
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(popoverRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <ErrorTooltip
-          ref={popoverRef}
-          diameter={number('diameter', 17)}
-          tooltipContents={text('tooltipContents', 'Some Error Message')}
-          className={text('className', '')}
-          style={object('style', {})}
-          tooltipStyle={object('tooltipStyle', {})}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
+  parameters: {
+    readme: {
+      content: marked.parse(ReflessPopoverReadme),
+    },
   },
-  {
-    readme: {
-      content: marked(ErrorTooltipReadme),
-    },
-  }
-)
+}
 
-testPopoverStories.add('Popover Trigger within a DapperScrollbars', () => {
+export const _QuestionMarkTooltip = () => {
+  const popoverRef = useRef<QuestionMarkTooltipRef>(null)
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(popoverRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <QuestionMarkTooltip
+        ref={popoverRef}
+        diameter={18}
+        tooltipContents={'Hello world!'}
+        className={''}
+        style={{}}
+        tooltipStyle={{}}
+        color={(ComponentColor as Record<string, any>)['Primary']}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_QuestionMarkTooltip.story = {
+  name: 'QuestionMarkTooltip',
+
+  parameters: {
+    readme: {
+      content: marked.parse(QuestionMarkTooltipReadme),
+    },
+  },
+}
+
+export const ErrorToolTip = () => {
+  const popoverRef = useRef<ErrorTooltipRef>(null)
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(popoverRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <ErrorTooltip
+        ref={popoverRef}
+        diameter={17}
+        tooltipContents={'Some Error Message'}
+        className={''}
+        style={{}}
+        tooltipStyle={{}}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+ErrorToolTip.story = {
+  name: 'ErrorToolTip',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ErrorTooltipReadme),
+    },
+  },
+}
+
+export const PopoverTriggerWithinADapperScrollbars = () => {
   const triggerRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -482,9 +425,13 @@ testPopoverStories.add('Popover Trigger within a DapperScrollbars', () => {
       </DapperScrollbars>
     </div>
   )
-})
+}
 
-testPopoverStories.add('Popover + Autofocus Child', () => {
+PopoverTriggerWithinADapperScrollbars.story = {
+  name: 'Popover Trigger within a DapperScrollbars',
+}
+
+export const PopoverAutofocusChild = () => {
   const triggerRef = useRef<HTMLDivElement>(null)
   const [inputValue, updateInputValue] = useState<string>('')
 
@@ -522,9 +469,13 @@ testPopoverStories.add('Popover + Autofocus Child', () => {
       </div>
     </div>
   )
-})
+}
 
-testPopoverStories.add('200 Popovers + Filtering', () => {
+PopoverAutofocusChild.story = {
+  name: 'Popover + Autofocus Child',
+}
+
+export const _200PopoversFiltering = () => {
   const [searchTerm, updateSearchTerm] = useState<string>('')
   const words: {name: string}[] = []
   const dictionary = getDictionary()
@@ -582,55 +533,59 @@ testPopoverStories.add('200 Popovers + Filtering', () => {
       </div>
     </div>
   )
-})
+}
 
-examplePopoverStories.add(
-  'Collage',
-  () => {
-    const triggerRefA = useRef<HTMLDivElement>(null)
-    const triggerRefB = useRef<HTMLDivElement>(null)
-    const triggerRefC = useRef<HTMLDivElement>(null)
-    const triggerRefD = useRef<HTMLDivElement>(null)
-    const triggerRefE = useRef<HTMLDivElement>(null)
-    const triggerRefF = useRef<HTMLDivElement>(null)
-    const triggerRefG = useRef<HTMLDivElement>(null)
+_200PopoversFiltering.story = {
+  name: '200 Popovers + Filtering',
+}
 
-    return (
-      <div className="story--example">
-        <div>
-          {[
-            {ref: triggerRefA, color: ComponentColor.Default},
-            {ref: triggerRefB, color: ComponentColor.Primary},
-            {ref: triggerRefC, color: ComponentColor.Secondary},
-            {ref: triggerRefD, color: ComponentColor.Tertiary},
-            {ref: triggerRefE, color: ComponentColor.Success},
-            {ref: triggerRefF, color: ComponentColor.Danger},
-            {ref: triggerRefG, color: ComponentColor.Warning},
-          ].map(({ref, color}) => {
-            return (
-              <div key={color.toString()}>
-                <div style={{height: '100px'}} ref={ref}></div>
-                <Popover.Popover
-                  triggerRef={ref}
-                  visible={true}
-                  enableDefaultStyles={true}
-                  contents={() => <div>{color.toString()}</div>}
-                  showEvent={PopoverInteraction.None}
-                  hideEvent={PopoverInteraction.None}
-                  position={PopoverPosition.Above}
-                  color={color}
-                  appearance={Appearance.Outline}
-                />
-              </div>
-            )
-          })}
-        </div>
+export const Collage = () => {
+  const triggerRefA = useRef<HTMLDivElement>(null)
+  const triggerRefB = useRef<HTMLDivElement>(null)
+  const triggerRefC = useRef<HTMLDivElement>(null)
+  const triggerRefD = useRef<HTMLDivElement>(null)
+  const triggerRefE = useRef<HTMLDivElement>(null)
+  const triggerRefF = useRef<HTMLDivElement>(null)
+  const triggerRefG = useRef<HTMLDivElement>(null)
+
+  return (
+    <div className="story--example">
+      <div>
+        {[
+          {ref: triggerRefA, color: ComponentColor.Default},
+          {ref: triggerRefB, color: ComponentColor.Primary},
+          {ref: triggerRefC, color: ComponentColor.Secondary},
+          {ref: triggerRefD, color: ComponentColor.Tertiary},
+          {ref: triggerRefE, color: ComponentColor.Success},
+          {ref: triggerRefF, color: ComponentColor.Danger},
+          {ref: triggerRefG, color: ComponentColor.Warning},
+        ].map(({ref, color}) => {
+          return (
+            <div key={color.toString()}>
+              <div style={{height: '100px'}} ref={ref}></div>
+              <Popover.Popover
+                triggerRef={ref}
+                visible={true}
+                enableDefaultStyles={true}
+                contents={() => <div>{color.toString()}</div>}
+                showEvent={PopoverInteraction.None}
+                hideEvent={PopoverInteraction.None}
+                position={PopoverPosition.Above}
+                color={color}
+                appearance={Appearance.Outline}
+              />
+            </div>
+          )
+        })}
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+Collage.story = {
+  parameters: {
     readme: {
-      content: marked(PopoverReadme),
+      content: marked.parse(PopoverReadme),
     },
-  }
-)
+  },
+}

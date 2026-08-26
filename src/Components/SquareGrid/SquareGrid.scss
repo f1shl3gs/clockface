@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
    Flexible Square Grid
    -----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-square-grid {
   display: grid;

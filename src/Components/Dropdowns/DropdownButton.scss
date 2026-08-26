@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Dropdown Button
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 /* Button */
 .cf-dropdown--button {

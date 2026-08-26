@@ -1,12 +1,6 @@
 // Libraries
-import {createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, boolean, text, number, select} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
-import {useState} from '@storybook/addons'
+import {createRef, useState} from 'react'
+import {marked} from 'marked'
 
 // Components
 import {AppWrapper, AppWrapperRef} from '../AppWrapper'
@@ -29,731 +23,643 @@ import {
 } from '../../../Types'
 
 // Notes
-import AppWrapperReadme from './AppWrapper.md'
+import AppWrapperReadme from './AppWrapper.md?raw'
 
-const layoutStories = storiesOf('Layout/AppWrapper', module).addDecorator(
-  withKnobs
-)
+export default {title: 'Layout/AppWrapper'}
 
-layoutStories.add(
-  'AppWrapper',
-  () => {
-    const appWrapperRef = createRef<AppWrapperRef>()
+export const _AppWrapper = () => {
+  const appWrapperRef = createRef<AppWrapperRef>()
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(appWrapperRef.current)
-      /* eslint-enable */
-    }
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(appWrapperRef.current)
+    /* eslint-enable */
+  }
 
-    return (
-      <div className="mockPageWrapper">
-        <div className="mockPage">
-          <AppHeader
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('header size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-          >
-            <AppHeader.Logo
-              src={text('src', '/static/media/.storybook/influxdata-logo.png')}
-              size={
-                (ComponentSize as Record<string, any>)[
-                  select('header size', mapEnumKeys(ComponentSize), 'Small')
-                ]
-              }
+  return (
+    <div className="mockPageWrapper">
+      <div className="mockPage">
+        <AppHeader size={(ComponentSize as Record<string, any>)['Small']}>
+          <AppHeader.Logo
+            src={'/static/media/.storybook/influxdata-logo.png'}
+            size={(ComponentSize as Record<string, any>)['Small']}
+          />
+          <FlexBox direction={FlexDirection.Row} margin={ComponentSize.Medium}>
+            <Button
+              size={(ComponentSize as Record<string, any>)['Small']}
+              text="Shiny Button"
+              color={ComponentColor.Success}
             />
-            <FlexBox
-              direction={FlexDirection.Row}
-              margin={ComponentSize.Medium}
+            <PopNav
+              size={(ComponentSize as Record<string, any>)['Small']}
+              buttonColor={(ComponentColor as Record<string, any>)['none']}
             >
-              <Button
-                size={
-                  (ComponentSize as Record<string, any>)[
-                    select('header size', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-                text="Shiny Button"
-                color={ComponentColor.Success}
-              />
-              <PopNav
-                size={
-                  (ComponentSize as Record<string, any>)[
-                    select('header size', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-                buttonColor={
-                  (ComponentColor as Record<string, any>)[
-                    select(
-                      'PopNav button color',
-                      {None: 'none', ...mapEnumKeys(ComponentColor)},
-                      'none'
-                    )
-                  ]
-                }
+              <div
+                style={{
+                  margin: '0 16px',
+                }}
               >
                 <div
                   style={{
-                    margin: '0 16px',
+                    color: 'white',
                   }}
                 >
-                  <div
-                    style={{
-                      color: 'white',
-                    }}
-                  >
-                    Signed in as
-                  </div>
-                  <div
-                    style={{
-                      color: '#BEF0FF',
-                    }}
-                  >
-                    somewhatlongusername@yourdomain.com
-                  </div>
+                  Signed in as
                 </div>
-                <PopNav.Item
-                  titleLink={className => (
-                    <a className={className} href="#">
-                      First Item
-                    </a>
-                  )}
-                  active={false}
-                />
-                <PopNav.Item
-                  titleLink={className => (
-                    <a className={className} href="#">
-                      Second Item
-                    </a>
-                  )}
-                  active={false}
-                />
-                <PopNav.Item
-                  titleLink={className => (
-                    <a className={className} href="#">
-                      Third Item
-                    </a>
-                  )}
-                  active={false}
-                />
-              </PopNav>
-            </FlexBox>
-          </AppHeader>
-          <AppWrapper
-            ref={appWrapperRef}
-            presentationMode={boolean('presentationMode', false)}
-          >
-            <NavMenu>
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    JohnDoe (OrgName)
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.CuboUniform} />
-                  </a>
-                )}
-                active={false}
-              >
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Switch Organizations
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Create Organization
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Logout
-                    </a>
-                  )}
-                  active={false}
-                />
-              </NavMenu.Item>
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Queries
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.GraphLine_New} />
-                  </a>
-                )}
-                active={false}
-              />
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Dashboards
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.DashH} />
-                  </a>
-                )}
-                active={false}
-              />
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Tasks
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.Calendar} />
-                  </a>
-                )}
-                active={true}
-              />
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Monitoring & Alerts
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.Bell} />
-                  </a>
-                )}
-                active={false}
-              >
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      History
-                    </a>
-                  )}
-                  active={false}
-                />
-              </NavMenu.Item>
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Load Data
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.Layers} />
-                  </a>
-                )}
-                active={false}
-              >
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Buckets
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Telegraf
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Scrapers
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Tokens
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Client Libraries
-                    </a>
-                  )}
-                  active={false}
-                />
-              </NavMenu.Item>
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Settings
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.CogOutline_New} />
-                  </a>
-                )}
-                active={false}
-              >
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Members
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Variables
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Templates
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Labels
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Profile
-                    </a>
-                  )}
-                  active={false}
-                />
-              </NavMenu.Item>
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Cloud
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.Cloud} />
-                  </a>
-                )}
-                active={false}
-              >
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Billing
-                    </a>
-                  )}
-                  active={false}
-                />
-                <NavMenu.SubItem
-                  titleLink={(className: string) => (
-                    <a className={className} href="#">
-                      Usage
-                    </a>
-                  )}
-                  active={false}
-                />
-              </NavMenu.Item>
-              <NavMenu.Item
-                titleLink={(className: string) => (
-                  <a className={className} href="#">
-                    Feedback
-                  </a>
-                )}
-                iconLink={(className: string) => (
-                  <a className={className} href="#">
-                    <Icon glyph={IconFont.Chat} />
-                  </a>
-                )}
-                active={false}
-              />
-            </NavMenu>
-            <Page titleTag="bloop">
-              <Page.Header
-                fullWidth={boolean('fullWidth', false)}
-                gutters={
-                  (ComponentSize as Record<string, any>)[
-                    select('gutters', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-              >
-                <Page.Title
-                  title={text('Page Title', 'Page head, feet, and toes')}
-                />
-              </Page.Header>
-              <Page.ControlBar
-                fullWidth={boolean('fullWidth', false)}
-                gutters={
-                  (ComponentSize as Record<string, any>)[
-                    select('gutters', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-              >
-                <Page.ControlBarLeft>
-                  {boolean('Button in PageControlBarLeft', true) ? (
-                    <div className="mockComponent mockButton">Left Button</div>
-                  ) : null}
-                </Page.ControlBarLeft>
-                <Page.ControlBarCenter>
-                  {boolean('Button in PageControlBarCenter', true) ? (
-                    <div className="mockComponent mockButton">
-                      Center Button
-                    </div>
-                  ) : null}
-                </Page.ControlBarCenter>
-                <Page.ControlBarRight>
-                  {boolean('Button in PageControlBarRight', true) ? (
-                    <div className="mockComponent mockButton">Right Button</div>
-                  ) : null}
-                </Page.ControlBarRight>
-              </Page.ControlBar>
-              <Page.Contents
-                fullWidth={boolean('fullWidth', false)}
-                scrollable={boolean('scrollable', true)}
-                gutters={
-                  (ComponentSize as Record<string, any>)[
-                    select('gutters', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-              >
                 <div
-                  className="mockComponent pageContents"
-                  style={{height: `${number('mock contents height', 1200)}px`}}
+                  style={{
+                    color: '#BEF0FF',
+                  }}
                 >
-                  <h4>
-                    Here's some dummy text to help show where page contents are
-                    and for scrolling
-                  </h4>
+                  somewhatlongusername@yourdomain.com
                 </div>
-              </Page.Contents>
-            </Page>
-          </AppWrapper>
-        </div>
-        <div className="story--test-buttons relative">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(AppWrapperReadme),
-    },
-  }
-)
-
-layoutStories.add(
-  'AppWrapper + TreeNav',
-  () => {
-    const [navState, setNavState] = useState<boolean>(true)
-    const [navActiveItem, setNavActiveItem] = useState<string>('data')
-    const appWrapperRef = createRef<AppWrapperRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(appWrapperRef.current)
-      /* eslint-enable */
-    }
-
-    const handleToggleNavState = (): void => {
-      const newState = !navState
-
-      setNavState(newState)
-    }
-
-    const handleNavClick = (id: string): void => {
-      setNavActiveItem(id)
-    }
-
-    const isItemActive = (id: string): boolean => {
-      return id === navActiveItem || navActiveItem.startsWith(id)
-    }
-
-    const navItems = [
-      {id: 'home', label: 'Getting Started'},
-      {id: 'user', label: 'JohnDoe (OrgName)'},
-      {id: 'data', label: 'Data'},
-      {id: 'data-buckets', label: 'Buckets'},
-      {id: 'data-sources', label: 'Data Sources'},
-      {id: 'explore', label: 'Data Explorer'},
-      {id: 'boards', label: 'Dashboards'},
-      {id: 'org', label: 'Organization'},
-      {id: 'tasks', label: 'Tasks'},
-      {id: 'alerts', label: 'Alerts'},
-      {id: 'settings', label: 'Settings'},
-      {id: 'settings-members', label: 'Members'},
-      {id: 'settings-variables', label: 'Variables'},
-      {id: 'settings-templates', label: 'Templates'},
-      {id: 'settings-labels', label: 'Labels'},
-      {id: 'settings-profile', label: 'Profile'},
-    ]
-
-    const lookupPageTitle = (): string => {
-      const activeItem = navItems.find(item => item.id === navActiveItem)
-
-      if (activeItem) {
-        return activeItem.label
-      }
-
-      return 'I am a page title!'
-    }
-
-    const banner = (
-      <div
-        style={{
-          width: '100%',
-          height: '100px',
-          backgroundColor: '#333',
-          borderRadius: '4px',
-        }}
-      >
-        Banner
-      </div>
-    )
-
-    return (
-      <div className="mockPageWrapper">
-        <div className="mockPage">
-          <AppWrapper
-            ref={appWrapperRef}
-            presentationMode={boolean('presentationMode', false)}
-          >
-            <TreeNav
-              headerElement={
-                <TreeNav.Header
-                  id="home"
-                  label={<InfluxDataLogo simplified />}
-                  onClick={handleNavClick}
-                  active={isItemActive('home')}
-                  icon={<Icon glyph={IconFont.CuboUniform} />}
-                  color={
-                    (ComponentColor as Record<string, any>)[
-                      select('color', mapEnumKeys(ComponentColor), 'Primary')
-                    ]
-                  }
-                />
-              }
-              bannerElement={banner}
-              hideBannerWhenCollapsed={boolean(
-                'hideBannerWhenCollapsed',
-                false
+              </div>
+              <PopNav.Item
+                titleLink={className => (
+                  <a className={className} href="#">
+                    First Item
+                  </a>
+                )}
+                active={false}
+              />
+              <PopNav.Item
+                titleLink={className => (
+                  <a className={className} href="#">
+                    Second Item
+                  </a>
+                )}
+                active={false}
+              />
+              <PopNav.Item
+                titleLink={className => (
+                  <a className={className} href="#">
+                    Third Item
+                  </a>
+                )}
+                active={false}
+              />
+            </PopNav>
+          </FlexBox>
+        </AppHeader>
+        <AppWrapper ref={appWrapperRef} presentationMode={false}>
+          <NavMenu>
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  JohnDoe (OrgName)
+                </a>
               )}
-              expanded={navState}
-              onToggleClick={handleToggleNavState}
-              userElement={
-                <TreeNav.User
-                  id="user"
-                  username="Company Name"
-                  team="Team Name"
-                >
-                  {boolean('show user links', true) ? (
-                    <>
-                      <TreeNav.SubHeading label="Company" />
-                      <TreeNav.UserItem id="billing" label="Billing" />
-                      <TreeNav.UserItem
-                        id="members"
-                        label="Members"
-                        linkElement={className => (
-                          <a href="#" className={className} />
-                        )}
-                      />
-                      <TreeNav.UserItem id="about" label="About" />
-                      <TreeNav.SubHeading label="Team" />
-                      <TreeNav.UserItem id="members" label="Members" />
-                      <TreeNav.UserItem id="about" label="About" />
-                      <TreeNav.SubHeading
-                        label="somebody@somewhere.com"
-                        lowercase
-                      />
-                      <TreeNav.UserItem id="switch" label="Switch workspace" />
-                      <TreeNav.UserItem id="logout" label="Logout" />
-                    </>
-                  ) : null}
-                </TreeNav.User>
-              }
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.CuboUniform} />
+                </a>
+              )}
+              active={false}
             >
-              <TreeNav.Item
-                id="data"
-                label="Ingest"
-                icon={<Icon glyph={IconFont.Download_New} />}
-                active={isItemActive('data')}
-                onClick={handleNavClick}
-              >
-                <TreeNav.SubMenu>
-                  <TreeNav.SubHeading label="Ingest" />
-                  <TreeNav.SubItem
-                    id="data-buckets"
-                    label="Buckets"
-                    active={isItemActive('data-buckets')}
-                    onClick={handleNavClick}
-                  />
-                  <TreeNav.SubItem
-                    id="data-sources"
-                    label="Sources"
-                    active={isItemActive('data-sources')}
-                    onClick={handleNavClick}
-                  />
-                </TreeNav.SubMenu>
-              </TreeNav.Item>
-              <TreeNav.Item
-                id="build"
-                label="Build"
-                icon={<Icon glyph={IconFont.Braces} />}
-                active={isItemActive('build')}
-                onClick={handleNavClick}
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Switch Organizations
+                  </a>
+                )}
+                active={false}
               />
-              <TreeNav.Item
-                id="monitor"
-                label="Monitor & Alert"
-                icon={<Icon glyph={IconFont.GraphLine_New} />}
-                active={isItemActive('boards')}
-                onClick={handleNavClick}
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Create Organization
+                  </a>
+                )}
+                active={false}
               />
-              <TreeNav.Item
-                id="access"
-                label="Access"
-                icon={<Icon glyph={IconFont.Lock} />}
-                active={isItemActive('access')}
-                onClick={handleNavClick}
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Logout
+                  </a>
+                )}
+                active={false}
               />
-              <TreeNav.Item
-                id="settings"
-                label="Settings"
-                icon={<Icon glyph={IconFont.CogOutline_New} />}
-                active={isItemActive('settings')}
-                onClick={handleNavClick}
+            </NavMenu.Item>
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Queries
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.GraphLine_New} />
+                </a>
+              )}
+              active={false}
+            />
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Dashboards
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.DashH} />
+                </a>
+              )}
+              active={false}
+            />
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Tasks
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.Calendar} />
+                </a>
+              )}
+              active={true}
+            />
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Monitoring & Alerts
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.Bell} />
+                </a>
+              )}
+              active={false}
+            >
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    History
+                  </a>
+                )}
+                active={false}
+              />
+            </NavMenu.Item>
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Load Data
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.Layers} />
+                </a>
+              )}
+              active={false}
+            >
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Buckets
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Telegraf
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Scrapers
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Tokens
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Client Libraries
+                  </a>
+                )}
+                active={false}
+              />
+            </NavMenu.Item>
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Settings
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.CogOutline_New} />
+                </a>
+              )}
+              active={false}
+            >
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Members
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Variables
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Templates
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Labels
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Profile
+                  </a>
+                )}
+                active={false}
+              />
+            </NavMenu.Item>
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Cloud
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.Cloud} />
+                </a>
+              )}
+              active={false}
+            >
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Billing
+                  </a>
+                )}
+                active={false}
+              />
+              <NavMenu.SubItem
+                titleLink={(className: string) => (
+                  <a className={className} href="#">
+                    Usage
+                  </a>
+                )}
+                active={false}
+              />
+            </NavMenu.Item>
+            <NavMenu.Item
+              titleLink={(className: string) => (
+                <a className={className} href="#">
+                  Feedback
+                </a>
+              )}
+              iconLink={(className: string) => (
+                <a className={className} href="#">
+                  <Icon glyph={IconFont.Chat} />
+                </a>
+              )}
+              active={false}
+            />
+          </NavMenu>
+          <Page titleTag="bloop">
+            <Page.Header
+              fullWidth={false}
+              gutters={(ComponentSize as Record<string, any>)['Small']}
+            >
+              <Page.Title title={'Page head, feet, and toes'} />
+            </Page.Header>
+            <Page.ControlBar
+              fullWidth={false}
+              gutters={(ComponentSize as Record<string, any>)['Small']}
+            >
+              <Page.ControlBarLeft>
+                <div className="mockComponent mockButton">Left Button</div>
+              </Page.ControlBarLeft>
+              <Page.ControlBarCenter>
+                <div className="mockComponent mockButton">Center Button</div>
+              </Page.ControlBarCenter>
+              <Page.ControlBarRight>
+                <div className="mockComponent mockButton">Right Button</div>
+              </Page.ControlBarRight>
+            </Page.ControlBar>
+            <Page.Contents
+              fullWidth={false}
+              scrollable={true}
+              gutters={(ComponentSize as Record<string, any>)['Small']}
+            >
+              <div
+                className="mockComponent pageContents"
+                style={{height: `${1200}px`}}
               >
-                <TreeNav.SubMenu>
-                  <TreeNav.SubHeading label="Settings" />
-                  <TreeNav.SubItem
-                    id="settings-members"
-                    label="Members"
-                    active={isItemActive('settings-members')}
-                    onClick={handleNavClick}
-                  />
-                  <TreeNav.SubItem
-                    id="settings-variables"
-                    label="Variables"
-                    active={isItemActive('settings-variables')}
-                    onClick={handleNavClick}
-                  />
-                  <TreeNav.SubItem
-                    id="settings-templates"
-                    label="Templates"
-                    active={isItemActive('settings-templates')}
-                    onClick={handleNavClick}
-                  />
-                  <TreeNav.SubItem
-                    id="settings-labels"
-                    label="Labels"
-                    active={isItemActive('settings-labels')}
-                    onClick={handleNavClick}
-                  />
-                  <TreeNav.SubItem
-                    id="settings-profile"
-                    label="Profile"
-                    active={isItemActive('settings-profile')}
-                    onClick={handleNavClick}
-                  />
-                </TreeNav.SubMenu>
-              </TreeNav.Item>
-            </TreeNav>
-            <Page titleTag="bloop">
-              <Page.Header
-                fullWidth={boolean('fullWidth', false)}
-                gutters={
-                  (ComponentSize as Record<string, any>)[
-                    select('gutters', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-              >
-                <Page.Title title={lookupPageTitle()} />
-              </Page.Header>
-              <Page.ControlBar
-                fullWidth={boolean('fullWidth', false)}
-                gutters={
-                  (ComponentSize as Record<string, any>)[
-                    select('gutters', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-              >
-                <Page.ControlBarLeft>
-                  {boolean('Button in PageControlBarLeft', true) ? (
-                    <div className="mockComponent mockButton">Left Button</div>
-                  ) : null}
-                </Page.ControlBarLeft>
-                <Page.ControlBarCenter>
-                  {boolean('Button in PageControlBarCenter', true) ? (
-                    <div className="mockComponent mockButton">
-                      Center Button
-                    </div>
-                  ) : null}
-                </Page.ControlBarCenter>
-                <Page.ControlBarRight>
-                  {boolean('Button in PageControlBarRight', true) ? (
-                    <div className="mockComponent mockButton">Right Button</div>
-                  ) : null}
-                </Page.ControlBarRight>
-              </Page.ControlBar>
-              <Page.Contents
-                fullWidth={boolean('fullWidth', false)}
-                scrollable={boolean('scrollable', true)}
-                gutters={
-                  (ComponentSize as Record<string, any>)[
-                    select('gutters', mapEnumKeys(ComponentSize), 'Small')
-                  ]
-                }
-              >
-                <div
-                  className="mockComponent pageContents"
-                  style={{height: `${number('mock contents height', 1200)}px`}}
-                >
-                  <h4>
-                    Here's some dummy text to help show where page contents are
-                    and for scrolling
-                  </h4>
-                </div>
-              </Page.Contents>
-            </Page>
-          </AppWrapper>
-        </div>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+                <h4>
+                  Here's some dummy text to help show where page contents are
+                  and for scrolling
+                </h4>
+              </div>
+            </Page.Contents>
+          </Page>
+        </AppWrapper>
       </div>
-    )
-  },
-  {
+      <div className="story--test-buttons relative">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_AppWrapper.story = {
+  name: 'AppWrapper',
+
+  parameters: {
     readme: {
-      content: marked(AppWrapperReadme),
+      content: marked.parse(AppWrapperReadme),
     },
+  },
+}
+
+export const AppWrapperTreeNav = () => {
+  const [navState, setNavState] = useState<boolean>(true)
+  const [navActiveItem, setNavActiveItem] = useState<string>('data')
+  const appWrapperRef = createRef<AppWrapperRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(appWrapperRef.current)
+    /* eslint-enable */
   }
-)
+
+  const handleToggleNavState = (): void => {
+    const newState = !navState
+
+    setNavState(newState)
+  }
+
+  const handleNavClick = (id: string): void => {
+    setNavActiveItem(id)
+  }
+
+  const isItemActive = (id: string): boolean => {
+    return id === navActiveItem || navActiveItem.startsWith(id)
+  }
+
+  const navItems = [
+    {id: 'home', label: 'Getting Started'},
+    {id: 'user', label: 'JohnDoe (OrgName)'},
+    {id: 'data', label: 'Data'},
+    {id: 'data-buckets', label: 'Buckets'},
+    {id: 'data-sources', label: 'Data Sources'},
+    {id: 'explore', label: 'Data Explorer'},
+    {id: 'boards', label: 'Dashboards'},
+    {id: 'org', label: 'Organization'},
+    {id: 'tasks', label: 'Tasks'},
+    {id: 'alerts', label: 'Alerts'},
+    {id: 'settings', label: 'Settings'},
+    {id: 'settings-members', label: 'Members'},
+    {id: 'settings-variables', label: 'Variables'},
+    {id: 'settings-templates', label: 'Templates'},
+    {id: 'settings-labels', label: 'Labels'},
+    {id: 'settings-profile', label: 'Profile'},
+  ]
+
+  const lookupPageTitle = (): string => {
+    const activeItem = navItems.find(item => item.id === navActiveItem)
+
+    if (activeItem) {
+      return activeItem.label
+    }
+
+    return 'I am a page title!'
+  }
+
+  const banner = (
+    <div
+      style={{
+        width: '100%',
+        height: '100px',
+        backgroundColor: '#333',
+        borderRadius: '4px',
+      }}
+    >
+      Banner
+    </div>
+  )
+
+  return (
+    <div className="mockPageWrapper">
+      <div className="mockPage">
+        <AppWrapper ref={appWrapperRef} presentationMode={false}>
+          <TreeNav
+            headerElement={
+              <TreeNav.Header
+                id="home"
+                label={<InfluxDataLogo simplified />}
+                onClick={handleNavClick}
+                active={isItemActive('home')}
+                icon={<Icon glyph={IconFont.CuboUniform} />}
+                color={(ComponentColor as Record<string, any>)['Primary']}
+              />
+            }
+            bannerElement={banner}
+            hideBannerWhenCollapsed={false}
+            expanded={navState}
+            onToggleClick={handleToggleNavState}
+            userElement={
+              <TreeNav.User id="user" username="Company Name" team="Team Name">
+                <>
+                  <TreeNav.SubHeading label="Company" />
+                  <TreeNav.UserItem id="billing" label="Billing" />
+                  <TreeNav.UserItem
+                    id="members"
+                    label="Members"
+                    linkElement={className => (
+                      <a href="#" className={className} />
+                    )}
+                  />
+                  <TreeNav.UserItem id="about" label="About" />
+                  <TreeNav.SubHeading label="Team" />
+                  <TreeNav.UserItem id="members" label="Members" />
+                  <TreeNav.UserItem id="about" label="About" />
+                  <TreeNav.SubHeading
+                    label="somebody@somewhere.com"
+                    lowercase
+                  />
+                  <TreeNav.UserItem id="switch" label="Switch workspace" />
+                  <TreeNav.UserItem id="logout" label="Logout" />
+                </>
+              </TreeNav.User>
+            }
+          >
+            <TreeNav.Item
+              id="data"
+              label="Ingest"
+              icon={<Icon glyph={IconFont.Download_New} />}
+              active={isItemActive('data')}
+              onClick={handleNavClick}
+            >
+              <TreeNav.SubMenu>
+                <TreeNav.SubHeading label="Ingest" />
+                <TreeNav.SubItem
+                  id="data-buckets"
+                  label="Buckets"
+                  active={isItemActive('data-buckets')}
+                  onClick={handleNavClick}
+                />
+                <TreeNav.SubItem
+                  id="data-sources"
+                  label="Sources"
+                  active={isItemActive('data-sources')}
+                  onClick={handleNavClick}
+                />
+              </TreeNav.SubMenu>
+            </TreeNav.Item>
+            <TreeNav.Item
+              id="build"
+              label="Build"
+              icon={<Icon glyph={IconFont.Braces} />}
+              active={isItemActive('build')}
+              onClick={handleNavClick}
+            />
+            <TreeNav.Item
+              id="monitor"
+              label="Monitor & Alert"
+              icon={<Icon glyph={IconFont.GraphLine_New} />}
+              active={isItemActive('boards')}
+              onClick={handleNavClick}
+            />
+            <TreeNav.Item
+              id="access"
+              label="Access"
+              icon={<Icon glyph={IconFont.Lock} />}
+              active={isItemActive('access')}
+              onClick={handleNavClick}
+            />
+            <TreeNav.Item
+              id="settings"
+              label="Settings"
+              icon={<Icon glyph={IconFont.CogOutline_New} />}
+              active={isItemActive('settings')}
+              onClick={handleNavClick}
+            >
+              <TreeNav.SubMenu>
+                <TreeNav.SubHeading label="Settings" />
+                <TreeNav.SubItem
+                  id="settings-members"
+                  label="Members"
+                  active={isItemActive('settings-members')}
+                  onClick={handleNavClick}
+                />
+                <TreeNav.SubItem
+                  id="settings-variables"
+                  label="Variables"
+                  active={isItemActive('settings-variables')}
+                  onClick={handleNavClick}
+                />
+                <TreeNav.SubItem
+                  id="settings-templates"
+                  label="Templates"
+                  active={isItemActive('settings-templates')}
+                  onClick={handleNavClick}
+                />
+                <TreeNav.SubItem
+                  id="settings-labels"
+                  label="Labels"
+                  active={isItemActive('settings-labels')}
+                  onClick={handleNavClick}
+                />
+                <TreeNav.SubItem
+                  id="settings-profile"
+                  label="Profile"
+                  active={isItemActive('settings-profile')}
+                  onClick={handleNavClick}
+                />
+              </TreeNav.SubMenu>
+            </TreeNav.Item>
+          </TreeNav>
+          <Page titleTag="bloop">
+            <Page.Header
+              fullWidth={false}
+              gutters={(ComponentSize as Record<string, any>)['Small']}
+            >
+              <Page.Title title={lookupPageTitle()} />
+            </Page.Header>
+            <Page.ControlBar
+              fullWidth={false}
+              gutters={(ComponentSize as Record<string, any>)['Small']}
+            >
+              <Page.ControlBarLeft>
+                <div className="mockComponent mockButton">Left Button</div>
+              </Page.ControlBarLeft>
+              <Page.ControlBarCenter>
+                <div className="mockComponent mockButton">Center Button</div>
+              </Page.ControlBarCenter>
+              <Page.ControlBarRight>
+                <div className="mockComponent mockButton">Right Button</div>
+              </Page.ControlBarRight>
+            </Page.ControlBar>
+            <Page.Contents
+              fullWidth={false}
+              scrollable={true}
+              gutters={(ComponentSize as Record<string, any>)['Small']}
+            >
+              <div
+                className="mockComponent pageContents"
+                style={{height: `${1200}px`}}
+              >
+                <h4>
+                  Here's some dummy text to help show where page contents are
+                  and for scrolling
+                </h4>
+              </div>
+            </Page.Contents>
+          </Page>
+        </AppWrapper>
+      </div>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+AppWrapperTreeNav.story = {
+  name: 'AppWrapper + TreeNav',
+
+  parameters: {
+    readme: {
+      content: marked.parse(AppWrapperReadme),
+    },
+  },
+}

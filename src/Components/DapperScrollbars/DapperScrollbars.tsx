@@ -269,89 +269,90 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
       : 0
 
   // ---- thumb 拖拽（pointer events）----
-  const beginDrag = (axis: 'x' | 'y') => (
-    e: ReactPointerEvent<HTMLDivElement>
-  ): void => {
-    const el = scrollerRef.current
-    if (!el || e.button !== 0) {
-      return
-    }
-    e.preventDefault()
-    e.stopPropagation()
-    e.currentTarget.setPointerCapture(e.pointerId)
-    dragRef.current = {
-      axis,
-      startPointer: axis === 'y' ? e.clientY : e.clientX,
-      startScroll: axis === 'y' ? el.scrollTop : el.scrollLeft,
-    }
-  }
-
-  const moveDrag = (axis: 'x' | 'y') => (
-    e: ReactPointerEvent<HTMLDivElement>
-  ): void => {
-    const drag = dragRef.current
-    const el = scrollerRef.current
-    if (!drag || drag.axis !== axis || !el) {
-      return
+  const beginDrag =
+    (axis: 'x' | 'y') =>
+    (e: ReactPointerEvent<HTMLDivElement>): void => {
+      const el = scrollerRef.current
+      if (!el || e.button !== 0) {
+        return
+      }
+      e.preventDefault()
+      e.stopPropagation()
+      e.currentTarget.setPointerCapture(e.pointerId)
+      dragRef.current = {
+        axis,
+        startPointer: axis === 'y' ? e.clientY : e.clientX,
+        startScroll: axis === 'y' ? el.scrollTop : el.scrollLeft,
+      }
     }
 
-    const viewLen = axis === 'y' ? el.clientHeight : el.clientWidth
-    const total = axis === 'y' ? el.scrollHeight : el.scrollWidth
-    const scrollable = total - viewLen
-    const trackLen =
-      axis === 'y'
-        ? trackYRef.current?.clientHeight ?? 0
-        : trackXRef.current?.clientWidth ?? 0
-    const thumbLen =
-      viewLen > 0 ? Math.max((viewLen * viewLen) / total, MIN_THUMB_SIZE) : 0
+  const moveDrag =
+    (axis: 'x' | 'y') =>
+    (e: ReactPointerEvent<HTMLDivElement>): void => {
+      const drag = dragRef.current
+      const el = scrollerRef.current
+      if (!drag || drag.axis !== axis || !el) {
+        return
+      }
 
-    if (scrollable <= 0 || trackLen - thumbLen <= 0) {
-      return
+      const viewLen = axis === 'y' ? el.clientHeight : el.clientWidth
+      const total = axis === 'y' ? el.scrollHeight : el.scrollWidth
+      const scrollable = total - viewLen
+      const trackLen =
+        axis === 'y'
+          ? (trackYRef.current?.clientHeight ?? 0)
+          : (trackXRef.current?.clientWidth ?? 0)
+      const thumbLen =
+        viewLen > 0 ? Math.max((viewLen * viewLen) / total, MIN_THUMB_SIZE) : 0
+
+      if (scrollable <= 0 || trackLen - thumbLen <= 0) {
+        return
+      }
+
+      const delta = (axis === 'y' ? e.clientY : e.clientX) - drag.startPointer
+      const next =
+        drag.startScroll + (delta * scrollable) / (trackLen - thumbLen)
+
+      if (axis === 'y') {
+        el.scrollTop = next
+      } else {
+        el.scrollLeft = next
+      }
     }
-
-    const delta = (axis === 'y' ? e.clientY : e.clientX) - drag.startPointer
-    const next = drag.startScroll + (delta * scrollable) / (trackLen - thumbLen)
-
-    if (axis === 'y') {
-      el.scrollTop = next
-    } else {
-      el.scrollLeft = next
-    }
-  }
 
   const endDrag = (): void => {
     dragRef.current = null
   }
 
   // ---- 轨道点击翻页 ----
-  const handleTrackClick = (axis: 'x' | 'y') => (
-    e: ReactMouseEvent<HTMLDivElement>
-  ): void => {
-    if (e.button !== 0 || e.target !== e.currentTarget) {
-      return
-    }
-    const el = scrollerRef.current
-    if (!el) {
-      return
-    }
-    const rect = e.currentTarget.getBoundingClientRect()
+  const handleTrackClick =
+    (axis: 'x' | 'y') =>
+    (e: ReactMouseEvent<HTMLDivElement>): void => {
+      if (e.button !== 0 || e.target !== e.currentTarget) {
+        return
+      }
+      const el = scrollerRef.current
+      if (!el) {
+        return
+      }
+      const rect = e.currentTarget.getBoundingClientRect()
 
-    if (axis === 'y') {
-      const y = e.clientY - rect.top
-      if (y < thumbYPos) {
-        el.scrollTop -= el.clientHeight
-      } else if (y > thumbYPos + thumbYSize) {
-        el.scrollTop += el.clientHeight
-      }
-    } else {
-      const x = e.clientX - rect.left
-      if (x < thumbXPos) {
-        el.scrollLeft -= el.clientWidth
-      } else if (x > thumbXPos + thumbXSize) {
-        el.scrollLeft += el.clientWidth
+      if (axis === 'y') {
+        const y = e.clientY - rect.top
+        if (y < thumbYPos) {
+          el.scrollTop -= el.clientHeight
+        } else if (y > thumbYPos + thumbYSize) {
+          el.scrollTop += el.clientHeight
+        }
+      } else {
+        const x = e.clientX - rect.left
+        if (x < thumbXPos) {
+          el.scrollLeft -= el.clientWidth
+        } else if (x > thumbXPos + thumbXSize) {
+          el.scrollLeft += el.clientWidth
+        }
       }
     }
-  }
 
   // ---- 容器样式 ----
   const containerStyle: CSSProperties = {

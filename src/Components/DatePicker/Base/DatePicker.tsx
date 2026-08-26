@@ -58,11 +58,7 @@ export const DatePicker = forwardRef<DatePickerRef, DatePickerProps>(
     // The UI can only express hour/minute precision, so anything below the
     // minute is normalized away on every explicit selection
     const selectAt = (d: Dayjs, hour: number, minute: number): string =>
-      d
-        .startOf('minute')
-        .hour(hour)
-        .minute(minute)
-        .toISOString()
+      d.startOf('minute').hour(hour).minute(minute).toISOString()
 
     const handleSelectDate = (d: Dayjs): void => {
       onSelectDate(selectAt(d, date.hour(), date.minute()))
@@ -88,8 +84,8 @@ export const DatePicker = forwardRef<DatePickerRef, DatePickerProps>(
     const displayValue = inputIsInvalid
       ? inputValue
       : dateTime
-      ? dayjs(dateTime).format(inputFormat || DEFAULT_DISPLAY_FORMAT)
-      : inputValue
+        ? dayjs(dateTime).format(inputFormat || DEFAULT_DISPLAY_FORMAT)
+        : inputValue
 
     const firstCell = viewMonth.startOf('week')
     const cells = Array.from({length: 42}, (_, i) => firstCell.add(i, 'day'))

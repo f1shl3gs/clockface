@@ -1,5 +1,4 @@
-@import '../../Styles/variables';
-
+@use '../../Styles/variables' as *;
 $dropdown-item--dot-radius: 6px;
 $dropdown-item--checkbox-size: 16px;
 $dropdown-item--padding-h: $cf-space-2xs;
@@ -141,7 +140,9 @@ $dropdown-item--padding-v: $cf-space-2xs;
     height: 8px;
     opacity: 0;
     transform: translate(-50%, -60%) rotate(45deg);
-    transition: opacity $cf-transition-default, transform $cf-transition-default;
+    transition:
+      opacity $cf-transition-default,
+      transform $cf-transition-default;
     border-bottom: 2px solid $cf-white;
     border-right: 2px solid $cf-white;
   }
@@ -171,7 +172,9 @@ $dropdown-item--padding-v: $cf-space-2xs;
     height: $dropdown-item--dot-radius;
     opacity: 0;
     transform: translate(-50%, -50%) scale(2, 2);
-    transition: opacity $cf-transition-default, transform $cf-transition-default;
+    transition:
+      opacity $cf-transition-default,
+      transform $cf-transition-default;
     background-color: $g20-white;
     border-radius: 50%;
   }

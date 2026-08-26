@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Error Tooltip Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-error-tooltip {
   color: $c-fire;

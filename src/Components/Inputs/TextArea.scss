@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   TextArea Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-text-area {
   position: relative;

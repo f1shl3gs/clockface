@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   FlexBox Utility
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-flex-box {
   display: flex;

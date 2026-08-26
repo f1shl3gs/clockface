@@ -1,4 +1,5 @@
-@import '../../Styles/variables';
+@use 'sass:math' as *;
+@use '../../Styles/variables' as *;
 
 .cf-list-indicator {
   position: relative;
@@ -24,7 +25,9 @@
     border-radius: 50%;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.25, 0.25);
-    transition: transform $cf-transition-default, opacity $cf-transition-default;
+    transition:
+      transform $cf-transition-default,
+      opacity $cf-transition-default;
     background-color: $g20-white;
     width: 0.5em;
     height: 0.5em;
@@ -54,7 +57,9 @@
     height: 0.75em;
     opacity: 0;
     transform: translate(-50%, -70%) rotate(45deg);
-    transition: opacity $cf-transition-default, transform $cf-transition-default;
+    transition:
+      opacity $cf-transition-default,
+      transform $cf-transition-default;
     border-bottom: 2px solid $cf-white;
     border-right: 2px solid $cf-white;
   }

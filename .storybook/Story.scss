@@ -1,5 +1,6 @@
-@import '../src/Styles/variables';
-@import '../src/Styles/shared';
+@use 'sass:math' as *;
+@use '../src/Styles/variables' as *;
+@use '../src/Styles/shared' as *;
 
 html,
 body.sb-show-main {

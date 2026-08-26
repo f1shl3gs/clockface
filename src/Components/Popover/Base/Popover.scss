@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Popover Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-popover {
   position: fixed;

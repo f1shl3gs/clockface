@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Funnel Page
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 $funnel-page--base-font: 14px;
 $funnel-page--base-font--large: 16px;
@@ -14,6 +14,16 @@ $funnel-page--gradient-b-z: $funnel-page--gradient-a-z + 1;
 $funnel-page--gradient-c-z: $funnel-page--gradient-b-z + 1;
 $funnel-page--graphic-z: $funnel-page--gradient-c-z + 1;
 $funnel-page--scroll-z: $funnel-page--graphic-z + 1;
+
+@mixin funnel-page-background() {
+  z-index: $funnel-page--graphic-z;
+  // This image reference breaks the storybook build and is also
+  // not working properly in production
+  // background-image: url('./Images/FunnelPageGraphic.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .cf-funnel-page {
   width: 100%;
@@ -42,7 +52,9 @@ $funnel-page--scroll-z: $funnel-page--graphic-z + 1;
   z-index: $funnel-page--gradient-b-z;
 }
 
-.cf-funnel-page--gradient + .cf-funnel-page--gradient + .cf-funnel-page--gradient {
+.cf-funnel-page--gradient
+  + .cf-funnel-page--gradient
+  + .cf-funnel-page--gradient {
   z-index: $funnel-page--gradient-c-z;
 }
 

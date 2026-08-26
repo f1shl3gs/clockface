@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Password Input Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-input-field + .cf-visibility-input--icon {
   background: transparent;

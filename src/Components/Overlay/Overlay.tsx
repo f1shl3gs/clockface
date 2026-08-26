@@ -4,14 +4,13 @@ import classnames from 'classnames'
 
 // Components
 import {OverlayMask} from './OverlayMask'
-import {DapperScrollbars} from '../DapperScrollbars/DapperScrollbars'
 
 // Utils
 import {usePortal} from '../../Utils/portals'
 import {useDelayedUnmount} from '../../Utils/useDelayedUnmount'
 
 // Types
-import {StandardFunctionProps, InfluxColors} from '../../Types'
+import {StandardFunctionProps} from '../../Types'
 
 // Styles
 import './Overlay.scss'
@@ -81,15 +80,7 @@ export const OverlayRoot: FunctionComponent<OverlayProps> = ({
   const OverlayRender = (
     <>
       {renderMaskElement(maskStyle)}
-      <DapperScrollbars
-        className={overlayClass}
-        thumbStartColor={InfluxColors.White}
-        thumbStopColor={InfluxColors.Hydrogen}
-        noScrollX={true}
-        autoHide={false}
-        testID={testID}
-        id={id}
-      >
+      <div className={overlayClass} data-testid={testID} id={id}>
         <div
           className="cf-overlay--children"
           data-testid={`${testID}--children`}
@@ -97,7 +88,7 @@ export const OverlayRoot: FunctionComponent<OverlayProps> = ({
         >
           {children}
         </div>
-      </DapperScrollbars>
+      </div>
     </>
   )
 

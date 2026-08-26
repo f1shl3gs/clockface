@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {fireEvent} from '@testing-library/dom'
 import {cleanup, render} from '@testing-library/react'
 import {ClickOutside} from '../ClickOutside'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 const textInsideOfComponent = "Don't click here, click outside of here, family"
 const siblingTextOfComponent =
@@ -15,9 +16,8 @@ interface Props {
 }
 
 const Wrapper = (props: Props) => {
-  const [shouldShowClickOutsideComponent, setComponentVisibility] = useState(
-    true
-  )
+  const [shouldShowClickOutsideComponent, setComponentVisibility] =
+    useState(true)
 
   const toggleComponentVisibility = () => {
     setComponentVisibility(!shouldShowClickOutsideComponent)
@@ -45,7 +45,7 @@ describe('the Click Outside component', () => {
     cleanup()
   })
   it('calls the `onClickOutside` method when a mousedown event outside the handler is fired', () => {
-    const mockClickOutside = jest.fn()
+    const mockClickOutside = vi.fn()
     const {getByText} = render(<Wrapper onClickOutside={mockClickOutside} />)
 
     fireEvent.mouseDown(getByText(siblingTextOfComponent))
@@ -56,7 +56,7 @@ describe('the Click Outside component', () => {
   })
 
   it("doesn't call the `onClickOutside` method when a click inside the handler happens", () => {
-    const mockClickOutside = jest.fn()
+    const mockClickOutside = vi.fn()
     const {getByText} = render(<Wrapper onClickOutside={mockClickOutside} />)
 
     fireEvent.click(getByText(textInsideOfComponent))
@@ -66,7 +66,7 @@ describe('the Click Outside component', () => {
   })
 
   it('properly unbinds the event when it unmounts itself', () => {
-    const mockClickOutside = jest.fn()
+    const mockClickOutside = vi.fn()
     const {getByText} = render(<Wrapper onClickOutside={mockClickOutside} />)
 
     fireEvent.mouseDown(getByText(siblingTextOfComponent))
@@ -79,7 +79,7 @@ describe('the Click Outside component', () => {
   })
 
   it('tracks the rendered child through a DOM ref', () => {
-    const mockClickOutside = jest.fn()
+    const mockClickOutside = vi.fn()
     const {getByText} = render(
       <ClickOutside onClickOutside={mockClickOutside}>
         <button>Inside button</button>

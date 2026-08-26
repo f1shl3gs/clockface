@@ -1,17 +1,6 @@
 // Libraries
 import {createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {
-  withKnobs,
-  color,
-  number,
-  boolean,
-  object,
-  text,
-} from '@storybook/addon-knobs'
+import {marked} from 'marked'
 
 // Components
 import {ColorPicker, ColorPickerRef} from '../ColorPicker'
@@ -20,55 +9,49 @@ import {ColorPicker, ColorPickerRef} from '../ColorPicker'
 import {InfluxColors} from '../../../Types'
 
 // Notes
-import ColorPickerReadme from './ColorPicker.md'
-import ColorPickerCustomReadme from './ColorPickerCustom.md'
+import ColorPickerReadme from './ColorPicker.md?raw'
+import ColorPickerCustomReadme from './ColorPickerCustom.md?raw'
 
-const colorPickerStories = storiesOf(
-  'Components/Color Picker/Family',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/Color Picker/Family'}
 
-const colorPickerExampleStories = storiesOf(
-  'Components/Color Picker/Examples',
-  module
-).addDecorator(withKnobs)
+export const _ColorPicker = () => {
+  const colorPickerRef = createRef<ColorPickerRef>()
 
-colorPickerStories.add(
-  'ColorPicker',
-  () => {
-    const colorPickerRef = createRef<ColorPickerRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(colorPickerRef.current)
-      /* eslint-enable */
-    }
-
-    const defaultStyle = {width: '400px'}
-
-    return (
-      <div className="story--example">
-        <ColorPicker
-          ref={colorPickerRef}
-          style={object('style', defaultStyle)}
-          color={text('color', `${InfluxColors.Honeydew}`)}
-          onChange={(color, status) => {
-            alert(`Color: ${color}, Status: ${status}`)
-          }}
-          maintainInputFocus={boolean('maintainInputFocus', false)}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ColorPickerReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(colorPickerRef.current)
+    /* eslint-enable */
   }
-)
+
+  const defaultStyle = {width: '400px'}
+
+  return (
+    <div className="story--example">
+      <ColorPicker
+        ref={colorPickerRef}
+        style={defaultStyle}
+        color={`${InfluxColors.Honeydew}`}
+        onChange={(color, status) => {
+          alert(`Color: ${color}, Status: ${status}`)
+        }}
+        maintainInputFocus={false}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_ColorPicker.story = {
+  name: 'ColorPicker',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ColorPickerReadme),
+    },
+  },
+}
 
 const customColors = [
   {
@@ -137,40 +120,40 @@ const customColors = [
   },
 ]
 
-colorPickerExampleStories.add(
-  'Custom Color Palette',
-  () => {
-    const colorPickerRef = createRef<ColorPickerRef>()
+export const CustomColorPalette = () => {
+  const colorPickerRef = createRef<ColorPickerRef>()
 
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(colorPickerRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div style={{width: `${number('Parent Width (px)', 300)}px`}}>
-          <ColorPicker
-            ref={colorPickerRef}
-            swatchesPerRow={number('swatchesPerRow', 4)}
-            color={color('color', `${customColors[3].hex}`)}
-            onChange={color => {
-              alert(`Swatch selected: ${color}`)
-            }}
-            maintainInputFocus={boolean('maintainInputFocus', false)}
-            colors={object('colors', customColors)}
-          />
-        </div>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ColorPickerCustomReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(colorPickerRef.current)
+    /* eslint-enable */
   }
-)
+
+  return (
+    <div className="story--example">
+      <div style={{width: `${300}px`}}>
+        <ColorPicker
+          ref={colorPickerRef}
+          swatchesPerRow={4}
+          color={`${customColors[3].hex}`}
+          onChange={color => {
+            alert(`Swatch selected: ${color}`)
+          }}
+          maintainInputFocus={false}
+          colors={customColors}
+        />
+      </div>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+CustomColorPalette.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ColorPickerCustomReadme),
+    },
+  },
+}

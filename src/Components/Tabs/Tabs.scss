@@ -1,10 +1,11 @@
-@import '../../Styles/variables.scss';
-@import '../../Styles/typography.scss';
-
 /*
   Tabs Component
   ------------------------------------------------------------------------------
 */
+
+@use 'sass:math' as *;
+@use '../../Styles/variables' as *;
+@use '../../Styles/typography' as *;
 
 $cf-tab--text: $cf-grey-55;
 $cf-tab--text-hover: $cf-white;

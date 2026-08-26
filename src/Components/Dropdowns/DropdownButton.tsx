@@ -93,7 +93,7 @@ export const DropdownButton = forwardRef<
         <span className="cf-dropdown--selected">{children}</span>
         {status === ComponentStatus.Loading ? (
           <TechnoSpinner diameterPixels={20} />
-        ) : !!trailingIcon ? (
+        ) : trailingIcon ? (
           // we check for trailingIcon here because we want to disable the animation for trailingIcon, the cf-dropdown--caret is animated
           <Icon glyph={trailingIcon} className="cf-dropdown--trailing-icon" />
         ) : (

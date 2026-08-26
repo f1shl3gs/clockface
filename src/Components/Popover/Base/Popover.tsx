@@ -178,12 +178,16 @@ export const PopoverRoot = forwardRef<PopoverRef, PopoverProps>(
     }
 
     const handleShowDialog = (): void => {
-      onShow && onShow()
+      if (onShow) {
+        onShow()
+      }
       setExpanded(true)
     }
 
     const handleHideDialog = (): void => {
-      onHide && onHide()
+      if (onHide) {
+        onHide()
+      }
       setExpanded(false)
     }
 

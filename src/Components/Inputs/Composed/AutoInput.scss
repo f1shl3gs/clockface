@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Auto Input Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-auto-input {
   width: 100%;

@@ -1,10 +1,11 @@
-@import '../../Styles/variables.scss';
-@import '../../Styles/typography.scss';
-
 /*
   SelectGroup Component
   ------------------------------------------------------------------------------
 */
+@use 'sass:color' as *;
+
+@use '../../Styles/variables' as *;
+@use '../../Styles/typography' as *;
 
 $select-group--padding: $cf-space-2xs;
 
@@ -30,8 +31,10 @@ $select-group--padding: $cf-space-2xs;
   font-family: $cf-text-font;
   font-weight: $cf-font-weight--medium;
   background-color: $cf-button-default-bg;
-  transition: background-color $cf-transition-default,
-    color $cf-transition-default, box-shadow $cf-transition-default;
+  transition:
+    background-color $cf-transition-default,
+    color $cf-transition-default,
+    box-shadow $cf-transition-default;
   color: $cf-grey-65;
   outline: none;
   text-align: center;

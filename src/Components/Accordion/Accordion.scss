@@ -1,5 +1,4 @@
-@import '../../Styles/variables';
-
+@use '../../Styles/variables' as *;
 .cf-accordion {
   width: 100%;
   margin-bottom: $cf-space-3xs;

@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Draggable Resizer
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-draggable-resizer {
   display: flex;
@@ -111,7 +111,9 @@
   > .cf-draggable-resizer--gradient2 {
     opacity: 0;
     z-index: 2;
-    transition: opacity $cf-transition-default, height $cf-transition-default,
+    transition:
+      opacity $cf-transition-default,
+      height $cf-transition-default,
       width $cf-transition-default;
   }
 

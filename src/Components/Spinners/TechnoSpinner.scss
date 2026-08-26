@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Techno Spinner
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-techno-spinner {
   border-style: solid;

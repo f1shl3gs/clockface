@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
    Panels
    -----------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-panel {
   border-radius: $cf-radius;

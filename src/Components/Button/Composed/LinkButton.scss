@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Link Button
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 a:link,
 a:visited,

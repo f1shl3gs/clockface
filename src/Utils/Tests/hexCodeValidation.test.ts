@@ -1,4 +1,5 @@
 import {validateHexCode, VALID_HEX_LENGTH} from '../hexCodeValidation'
+import {describe, expect, it} from 'vitest'
 
 describe('the validateHexCode function', () => {
   it('returns null when valid', () => {
@@ -15,7 +16,7 @@ describe('the validateHexCode function', () => {
     expect(validateHexCode(' ')).toEqual('Cannot contain spaces')
   })
 
-  it(`requires a length of ${VALID_HEX_LENGTH} (\`\$\{VALID_HEX_LENGTH\}\`)`, () => {
+  it(`requires a length of ${VALID_HEX_LENGTH} (\`$\{VALID_HEX_LENGTH}\`)`, () => {
     expect(
       validateHexCode(
         '#G0000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1111111111111111111111111'

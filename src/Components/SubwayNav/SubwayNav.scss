@@ -1,5 +1,4 @@
-@import '../../Styles/variables';
-
+@use '../../Styles/variables' as *;
 .subway-navigation-container {
   display: flex;
   justify-content: center;

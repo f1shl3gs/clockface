@@ -1,9 +1,9 @@
-@import '../../../Styles/variables.scss';
-
 /*
   Resource Meta Items
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-resource-meta {
   color: $cf-grey-55;

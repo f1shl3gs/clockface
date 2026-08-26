@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
     Pop Nav
     ----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-pop-nav {
   display: inline-flex;

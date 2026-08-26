@@ -14,8 +14,10 @@ import {
   ComponentSize,
 } from '../../../Types'
 
-export interface PanelHeaderProps
-  extends Omit<FlexBoxProps, 'stretchToFitWidth' | 'stretchToFitHeight'> {
+export interface PanelHeaderProps extends Omit<
+  FlexBoxProps,
+  'stretchToFitWidth' | 'stretchToFitHeight'
+> {
   /** Controls padding */
   size?: ComponentSize
 }

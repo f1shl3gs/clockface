@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Text Block
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-text-block {
   font-weight: $cf-font-weight--medium;

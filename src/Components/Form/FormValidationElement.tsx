@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useEffect, useRef} from 'react'
+import React, {FunctionComponent, useEffect, useRef, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -15,8 +15,12 @@ import {
   ValidationFunction,
 } from '../../Types'
 
-export interface FormValidationElementProps
-  extends Omit<StandardFunctionProps, 'children'> {
+export type FormValidationElementRef = HTMLLabelElement
+
+export interface FormValidationElementProps extends Omit<
+  StandardFunctionProps,
+  'children'
+> {
   /** Child components */
   children: (status: ComponentStatus) => React.ReactNode
   /** Function used for validation check */
@@ -37,78 +41,71 @@ export interface FormValidationElementProps
   htmlFor?: string
   /** Pre-validation mode ( Validation happens ) */
   prevalidate?: boolean
+
+  ref?: Ref<FormValidationElementRef>
 }
 
-export type FormValidationElementRef = HTMLLabelElement
-
-export const FormValidationElement = forwardRef<
-  FormValidationElementRef,
+export const FormValidationElement: FunctionComponent<
   FormValidationElementProps
->(
-  (
-    {
-      id,
-      value,
-      style,
-      label,
-      htmlFor,
-      helpText,
-      children,
-      required,
-      labelAddOn,
-      className,
-      validationFunc,
-      onStatusChange,
-      prevalidate = false,
-      testID = 'form--validation-element',
-    },
-    ref
-  ) => {
-    const shouldPerformValidation = useRef<boolean>(prevalidate)
-    const originalValue = useRef(value)
+> = ({
+  id,
+  value,
+  style,
+  label,
+  htmlFor,
+  helpText,
+  children,
+  required,
+  labelAddOn,
+  className,
+  validationFunc,
+  onStatusChange,
+  prevalidate = false,
+  testID = 'form--validation-element',
+  ref,
+}) => {
+  const shouldPerformValidation = useRef<boolean>(prevalidate)
+  const originalValue = useRef(value)
 
-    let errorMessage: string | null = null
-    let status = ComponentStatus.Default
+  let errorMessage: string | null = null
+  let status = ComponentStatus.Default
 
-    useEffect(() => {
-      if (originalValue.current !== value) {
-        shouldPerformValidation.current = true
-      }
-    }, [value])
-
-    if (shouldPerformValidation.current) {
-      errorMessage = validationFunc(value)
-      status = !!errorMessage ? ComponentStatus.Error : ComponentStatus.Valid
+  useEffect(() => {
+    if (originalValue.current !== value) {
+      shouldPerformValidation.current = true
     }
+  }, [value])
 
-    if (onStatusChange) {
-      onStatusChange(status)
-    }
-
-    const formValidationElementClass = classnames('cf-form--element', {
-      [`${className}`]: className,
-    })
-
-    return (
-      <label
-        id={id}
-        ref={ref}
-        style={style}
-        htmlFor={htmlFor}
-        data-testid={testID}
-        className={formValidationElementClass}
-      >
-        {!!label && (
-          <FormLabel label={label} required={required}>
-            {labelAddOn && labelAddOn()}
-          </FormLabel>
-        )}
-        {children(status)}
-        {!!errorMessage && <FormElementError message={errorMessage} />}
-        {!!helpText && <FormHelpText text={helpText} />}
-      </label>
-    )
+  if (shouldPerformValidation.current) {
+    errorMessage = validationFunc(value)
+    status = errorMessage ? ComponentStatus.Error : ComponentStatus.Valid
   }
-)
 
-FormValidationElement.displayName = 'FormValidationElement'
+  if (onStatusChange) {
+    onStatusChange(status)
+  }
+
+  const formValidationElementClass = classnames('cf-form--element', {
+    [`${className}`]: className,
+  })
+
+  return (
+    <label
+      id={id}
+      ref={ref}
+      style={style}
+      htmlFor={htmlFor}
+      data-testid={testID}
+      className={formValidationElementClass}
+    >
+      {!!label && (
+        <FormLabel label={label} required={required}>
+          {labelAddOn && labelAddOn()}
+        </FormLabel>
+      )}
+      {children(status)}
+      {!!errorMessage && <FormElementError message={errorMessage} />}
+      {!!helpText && <FormHelpText text={helpText} />}
+    </label>
+  )
+}

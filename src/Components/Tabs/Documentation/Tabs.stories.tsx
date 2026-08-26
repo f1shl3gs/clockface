@@ -1,12 +1,6 @@
 // Libraries
-import {createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, text, select, boolean, number} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
-import {useState} from '@storybook/addons'
+import {createRef, useState} from 'react'
+import {marked} from 'marked'
 
 // Components
 import {Tabs, TabsRef, TabRef, TabContentsRef, TabsContainerRef} from '../'
@@ -16,366 +10,311 @@ import {Icon} from '../../Icon/Base/Icon'
 import {ComponentSize, Orientation, IconFont, Alignment} from '../../../Types'
 
 // Notes
-import TabsReadme from './Tabs.md'
-import TabReadme from './Tab.md'
-import TabContentsReadme from './TabContents.md'
-import TabsContainerReadme from './TabsContainer.md'
-import TabsExampleReadme from './TabsExample.md'
+import TabsReadme from './Tabs.md?raw'
+import TabReadme from './Tab.md?raw'
+import TabContentsReadme from './TabContents.md?raw'
+import TabsContainerReadme from './TabsContainer.md?raw'
+import TabsExampleReadme from './TabsExample.md?raw'
 
-const tabsStories = storiesOf('Components/Tabs/Family', module).addDecorator(
-  withKnobs
-)
+export default {title: 'Components/Tabs/Family'}
 
-const tabsExampleStories = storiesOf(
-  'Components/Tabs/Examples',
-  module
-).addDecorator(withKnobs)
+export const _Tabs = () => {
+  const [activeTab, setActiveTab] = useState<string>('pomelo')
+  const tabsRef = createRef<TabsRef>()
 
-tabsStories.add(
-  'Tabs',
-  () => {
-    const [activeTab, setActiveTab] = useState<string>('pomelo')
-    const tabsRef = createRef<TabsRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(tabsRef.current)
-      /* eslint-enable */
-    }
-
-    const handleTabClick = (id?: string): void => {
-      if (id === undefined) {
-        return
-      }
-      setActiveTab(id)
-    }
-
-    const exampleTabs = [
-      {
-        id: 'yuzu',
-        label: 'Yuzu',
-      },
-      {
-        id: 'mandarin',
-        label: 'Mandarin',
-      },
-      {
-        id: 'citron',
-        label: 'Citron',
-      },
-      {
-        id: 'pomelo',
-        label: 'Pomelo',
-      },
-      {
-        id: 'kabosu',
-        label: 'Kabosu',
-      },
-      {
-        id: 'sudachi',
-        label: 'Sudachi',
-      },
-    ]
-
-    const dropdownLabel =
-      exampleTabs.find(tab => tab.id === activeTab)?.label ?? 'No active tab'
-
-    return (
-      <div className="story--example">
-        <Tabs.Tabs
-          ref={tabsRef}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Medium')
-            ]
-          }
-          alignment={
-            (Alignment as Record<string, any>)[
-              select('alignment', mapEnumKeys(Alignment), 'Left')
-            ]
-          }
-          dropdownAlignment={
-            (Alignment as Record<string, any>)[
-              select('dropdownAlignment', mapEnumKeys(Alignment), 'Center')
-            ]
-          }
-          dropdownLabel={dropdownLabel}
-          orientation={
-            (Orientation as Record<string, any>)[
-              select('orientation', mapEnumKeys(Orientation), 'Horizontal')
-            ]
-          }
-          dropdownBreakpoint={number('dropdownBreakpoint', 750)}
-        >
-          {exampleTabs.map(tab => (
-            <Tabs.Tab
-              key={tab.id}
-              active={activeTab === tab.id}
-              id={tab.id}
-              text={tab.label}
-              onClick={handleTabClick}
-            />
-          ))}
-        </Tabs.Tabs>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(TabsReadme),
-    },
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(tabsRef.current)
+    /* eslint-enable */
   }
-)
 
-tabsStories.add(
-  'Tab',
-  () => {
-    const tabRef = createRef<TabRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(tabRef.current)
-      /* eslint-enable */
+  const handleTabClick = (id?: string): void => {
+    if (id === undefined) {
+      return
     }
+    setActiveTab(id)
+  }
 
-    return (
-      <div
-        className={`story--example cf-tabs__md cf-tabs__${
-          (Orientation as Record<string, any>)[
-            select('orientation', mapEnumKeys(Orientation), 'Horizontal')
-          ]
-        }`}
+  const exampleTabs = [
+    {
+      id: 'yuzu',
+      label: 'Yuzu',
+    },
+    {
+      id: 'mandarin',
+      label: 'Mandarin',
+    },
+    {
+      id: 'citron',
+      label: 'Citron',
+    },
+    {
+      id: 'pomelo',
+      label: 'Pomelo',
+    },
+    {
+      id: 'kabosu',
+      label: 'Kabosu',
+    },
+    {
+      id: 'sudachi',
+      label: 'Sudachi',
+    },
+  ]
+
+  const dropdownLabel =
+    exampleTabs.find(tab => tab.id === activeTab)?.label ?? 'No active tab'
+
+  return (
+    <div className="story--example">
+      <Tabs.Tabs
+        ref={tabsRef}
+        size={(ComponentSize as Record<string, any>)['Medium']}
+        alignment={(Alignment as Record<string, any>)['Left']}
+        dropdownAlignment={(Alignment as Record<string, any>)['Center']}
+        dropdownLabel={dropdownLabel}
+        orientation={(Orientation as Record<string, any>)['Horizontal']}
+        dropdownBreakpoint={750}
+      >
+        {exampleTabs.map(tab => (
+          <Tabs.Tab
+            key={tab.id}
+            active={activeTab === tab.id}
+            id={tab.id}
+            text={tab.label}
+            onClick={handleTabClick}
+          />
+        ))}
+      </Tabs.Tabs>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_Tabs.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(TabsReadme),
+    },
+  },
+}
+
+export const _Tab = () => {
+  const tabRef = createRef<TabRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(tabRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div
+      className={`story--example cf-tabs__md cf-tabs__${
+        (Orientation as Record<string, any>)['Horizontal']
+      }`}
+    >
+      <Tabs.Tab
+        ref={tabRef}
+        icon={<Icon glyph={(IconFont as Record<string, any>)['Star']} />}
+        active={true}
+        id={'fruits'}
+        text={'Fruits'}
+        onClick={id => alert(`Tab clicked, id: ${id}`)}
+        onDismiss={id => alert(`Tab dismissed, id: ${id}`)}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_Tab.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(TabReadme),
+    },
+  },
+}
+
+export const _TabContents = () => {
+  const tabContentsRef = createRef<TabContentsRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(tabContentsRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Tabs.TabContents ref={tabContentsRef}>
+        <p>Contents go here</p>
+      </Tabs.TabContents>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+_TabContents.story = {
+  name: 'TabContents',
+
+  parameters: {
+    readme: {
+      content: marked.parse(TabContentsReadme),
+    },
+  },
+}
+
+export const TabsContainer = () => {
+  const tabContainerRef = createRef<TabsContainerRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(tabContainerRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Tabs.Container
+        ref={tabContainerRef}
+        orientation={(Orientation as Record<string, any>)['Horizontal']}
+        stretchToFitWidth={false}
+        stretchToFitHeight={false}
+      >
+        <Tabs
+          size={(ComponentSize as Record<string, any>)['Large']}
+          orientation={(Orientation as Record<string, any>)['Horizontal']}
+        >
+          <Tabs.Tab
+            active={false}
+            id="tab1"
+            text={'Fruits'}
+            onClick={id => alert(`Tab1 clicked, id: ${id}`)}
+          />
+          <Tabs.Tab
+            active={true}
+            id="tab2"
+            text={'Vegetables'}
+            onClick={id => alert(`Tab2 clicked, id: ${id}`)}
+          />
+          <Tabs.Tab
+            active={false}
+            id="tab3"
+            text={'Animals'}
+            onClick={id => alert(`Tab3 clicked, id: ${id}`)}
+          />
+        </Tabs>
+        <Tabs.TabContents>TabContents</Tabs.TabContents>
+      </Tabs.Container>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+TabsContainer.story = {
+  name: 'TabsContainer',
+
+  parameters: {
+    readme: {
+      content: marked.parse(TabsContainerReadme),
+    },
+  },
+}
+
+export const TabsWithLinks = () => {
+  const [activeTab, setActiveTab] = useState<string>('triangles')
+  const tabsRef = createRef<TabsRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(tabsRef.current)
+    /* eslint-enable */
+  }
+
+  const handleTabClick = (id?: string): void => {
+    if (id === undefined) {
+      return
+    }
+    setActiveTab(id)
+  }
+
+  const handleTabDismiss = (id?: string): void => {
+    /* eslint-disable */
+    console.log('dismissed tab: ', id)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Tabs.Tabs
+        ref={tabsRef}
+        size={(ComponentSize as Record<string, any>)['Large']}
+        orientation={(Orientation as Record<string, any>)['Horizontal']}
+        alignment={(Alignment as Record<string, any>)['Left']}
+        dropdownAlignment={(Alignment as Record<string, any>)['Center']}
+        dropdownBreakpoint={700}
       >
         <Tabs.Tab
-          ref={tabRef}
-          icon={
-            <Icon
-              glyph={
-                (IconFont as Record<string, any>)[
-                  select('icon', mapEnumKeys(IconFont), 'Star')
-                ]
-              }
-            />
-          }
-          active={boolean('active', true)}
-          id={text('id', 'fruits')}
-          text={text('text', 'Fruits')}
-          onClick={id => alert(`Tab clicked, id: ${id}`)}
-          onDismiss={id => alert(`Tab dismissed, id: ${id}`)}
+          active={activeTab === 'circles'}
+          id="circles"
+          text="Circles"
+          onClick={handleTabClick}
         />
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+        <Tabs.Tab
+          active={activeTab === 'triangles'}
+          id="triangles"
+          text="Triangles"
+          onClick={handleTabClick}
+        />
+        <Tabs.Tab
+          active={activeTab === 'squares'}
+          id="squares"
+          text="Squares"
+          onClick={handleTabClick}
+          onDismiss={handleTabDismiss}
+        />
+        <Tabs.Tab
+          active={activeTab === 'pentagons'}
+          id="pentagons"
+          text="Pentagons"
+          onClick={handleTabClick}
+        />
+        <Tabs.Tab
+          active={activeTab === 'hexagons'}
+          id="hexagons"
+          text="Hexagons (Link)"
+          linkElement={className => <a href="#" className={className} />}
+        />
+        <Tabs.Tab
+          active={activeTab === 'septagons'}
+          id="septagons"
+          text="Septagons (Link)"
+          linkElement={className => <a href="#" className={className} />}
+          onDismiss={handleTabDismiss}
+        />
+      </Tabs.Tabs>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+TabsWithLinks.story = {
+  name: 'Tabs with Links',
+
+  parameters: {
     readme: {
-      content: marked(TabReadme),
+      content: marked.parse(TabsExampleReadme),
     },
-  }
-)
-
-tabsStories.add(
-  'TabContents',
-  () => {
-    const tabContentsRef = createRef<TabContentsRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(tabContentsRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Tabs.TabContents ref={tabContentsRef}>
-          <p>Contents go here</p>
-        </Tabs.TabContents>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
   },
-  {
-    readme: {
-      content: marked(TabContentsReadme),
-    },
-  }
-)
-
-tabsStories.add(
-  'TabsContainer',
-  () => {
-    const tabContainerRef = createRef<TabsContainerRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(tabContainerRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Tabs.Container
-          ref={tabContainerRef}
-          orientation={
-            (Orientation as Record<string, any>)[
-              select('orientation', mapEnumKeys(Orientation), 'Horizontal')
-            ]
-          }
-          stretchToFitWidth={boolean('stretchToFitWidth', false)}
-          stretchToFitHeight={boolean('stretchToFitHeight', false)}
-        >
-          <Tabs
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Large')
-              ]
-            }
-            orientation={
-              (Orientation as Record<string, any>)[
-                select('orientation', mapEnumKeys(Orientation), 'Horizontal')
-              ]
-            }
-          >
-            <Tabs.Tab
-              active={false}
-              id="tab1"
-              text={text('Tab1: text', 'Fruits')}
-              onClick={id => alert(`Tab1 clicked, id: ${id}`)}
-            />
-            <Tabs.Tab
-              active={true}
-              id="tab2"
-              text={text('Tab2: text', 'Vegetables')}
-              onClick={id => alert(`Tab2 clicked, id: ${id}`)}
-            />
-            <Tabs.Tab
-              active={false}
-              id="tab3"
-              text={text('Tab3: text', 'Animals')}
-              onClick={id => alert(`Tab3 clicked, id: ${id}`)}
-            />
-          </Tabs>
-          <Tabs.TabContents>TabContents</Tabs.TabContents>
-        </Tabs.Container>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(TabsContainerReadme),
-    },
-  }
-)
-
-tabsExampleStories.add(
-  'Tabs with Links',
-  () => {
-    const [activeTab, setActiveTab] = useState<string>('triangles')
-    const tabsRef = createRef<TabsRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(tabsRef.current)
-      /* eslint-enable */
-    }
-
-    const handleTabClick = (id?: string): void => {
-      if (id === undefined) {
-        return
-      }
-      setActiveTab(id)
-    }
-
-    const handleTabDismiss = (id?: string): void => {
-      /* eslint-disable */
-      console.log('dismissed tab: ', id)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Tabs.Tabs
-          ref={tabsRef}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Large')
-            ]
-          }
-          orientation={
-            (Orientation as Record<string, any>)[
-              select('orientation', mapEnumKeys(Orientation), 'Horizontal')
-            ]
-          }
-          alignment={
-            (Alignment as Record<string, any>)[
-              select('alignment', mapEnumKeys(Alignment), 'Left')
-            ]
-          }
-          dropdownAlignment={
-            (Alignment as Record<string, any>)[
-              select('dropdownAlignment', mapEnumKeys(Alignment), 'Center')
-            ]
-          }
-          dropdownBreakpoint={number('dropdownBreakpoint', 700)}
-        >
-          <Tabs.Tab
-            active={activeTab === 'circles'}
-            id="circles"
-            text="Circles"
-            onClick={handleTabClick}
-          />
-          <Tabs.Tab
-            active={activeTab === 'triangles'}
-            id="triangles"
-            text="Triangles"
-            onClick={handleTabClick}
-          />
-          <Tabs.Tab
-            active={activeTab === 'squares'}
-            id="squares"
-            text="Squares"
-            onClick={handleTabClick}
-            onDismiss={handleTabDismiss}
-          />
-          <Tabs.Tab
-            active={activeTab === 'pentagons'}
-            id="pentagons"
-            text="Pentagons"
-            onClick={handleTabClick}
-          />
-          <Tabs.Tab
-            active={activeTab === 'hexagons'}
-            id="hexagons"
-            text="Hexagons (Link)"
-            linkElement={className => <a href="#" className={className} />}
-          />
-          <Tabs.Tab
-            active={activeTab === 'septagons'}
-            id="septagons"
-            text="Septagons (Link)"
-            linkElement={className => <a href="#" className={className} />}
-            onDismiss={handleTabDismiss}
-          />
-        </Tabs.Tabs>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(TabsExampleReadme),
-    },
-  }
-)
+}

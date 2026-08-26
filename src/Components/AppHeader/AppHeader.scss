@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
    App Header
    -----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-app-header {
   width: 100%;

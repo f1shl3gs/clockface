@@ -68,7 +68,7 @@ export const SubwayNavStep = (props: OwnProps) => {
             color: iconAndTextColor,
           }}
         >
-          {text.split('\n').map(function(item, index) {
+          {text.split('\n').map(function (item, index) {
             return (
               <span key={`${item}-${index}`}>
                 {item}

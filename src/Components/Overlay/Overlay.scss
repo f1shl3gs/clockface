@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
    Overlays
    -----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 // Mixins for shared styles
 %overlay-styles {

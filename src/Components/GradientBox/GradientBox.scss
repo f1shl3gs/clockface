@@ -1,5 +1,4 @@
-@import '../../Styles/variables';
-
+@use '../../Styles/variables' as *;
 .cf-gradient-box {
   padding: $cf-border;
   box-sizing: border-box;

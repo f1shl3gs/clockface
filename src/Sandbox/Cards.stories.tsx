@@ -1,7 +1,3 @@
-// Libraries
-
-// Storybook
-import {storiesOf} from '@storybook/react'
 import {ResourceCard} from '../Components/ResourceList/Card'
 import {FlexBox} from '../Components/FlexBox'
 import {SquareButton} from '../Components/Button/Composed/SquareButton'
@@ -19,9 +15,9 @@ import {Icon} from '../Components/Icon'
 import {Label} from '../Components/Label'
 import {Button} from '../Components/Button/Composed/Button'
 
-const cardStories = storiesOf('Sandbox/Cards', module)
+export default {title: 'Sandbox/Cards'}
 
-cardStories.add('Resource Cards', () => {
+export const ResourceCards = () => {
   return (
     <div className="story--example">
       <FlexBox direction={FlexDirection.Column} margin={ComponentSize.Large}>
@@ -34,7 +30,7 @@ cardStories.add('Resource Cards', () => {
       </FlexBox>
     </div>
   )
-})
+}
 
 function CardBuckets() {
   return (

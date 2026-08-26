@@ -1,12 +1,6 @@
 // Libraries
-import {createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, select, number, object} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
-import {useState} from '@storybook/addons'
+import {createRef, useState} from 'react'
+import {marked} from 'marked'
 
 // Types
 import {Orientation, Gradients} from '../../../Types'
@@ -15,258 +9,225 @@ import {Orientation, Gradients} from '../../../Types'
 import {DraggableResizer, DraggableResizerPanelRef} from '../'
 
 // Notes
-import DraggableResizerReadme from './DraggableResizer.md'
-import DraggableResizerPanelReadme from './DraggableResizerPanel.md'
-import DraggableResizerExampleAReadme from './DraggableResizerExampleA.md'
-import DraggableResizerExampleBReadme from './DraggableResizerExampleB.md'
+import DraggableResizerReadme from './DraggableResizer.md?raw'
+import DraggableResizerPanelReadme from './DraggableResizerPanel.md?raw'
+import DraggableResizerExampleAReadme from './DraggableResizerExampleA.md?raw'
+import DraggableResizerExampleBReadme from './DraggableResizerExampleB.md?raw'
 
-const draggableResizerExamplesStories = storiesOf(
-  'Layout/Draggable Resizer/Examples',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Layout/Draggable Resizer/Examples'}
 
-const draggableResizerStories = storiesOf(
-  'Layout/Draggable Resizer/Family',
-  module
-).addDecorator(withKnobs)
+export const _DraggableResizer = () => (
+  <div className="mockPage padded">
+    <DraggableResizer
+      handleOrientation={(Orientation as Record<string, any>)['Vertical']}
+      handleGradient={
+        (Gradients as Record<string, any>)[
+          (Gradients as Record<string, any>)['PastelGothic']
+        ]
+      }
+      handlePositions={[0.5]}
+      onChangePositions={
+        handlePositions =>
+          console.log(`this.setState({handlePositions: ${handlePositions}})`) // eslint-disable-line
+      }
+    >
+      <DraggableResizer.Panel>
+        <div className="mockCard" />
+      </DraggableResizer.Panel>
+      <DraggableResizer.Panel>
+        <div className="mockCard" />
+      </DraggableResizer.Panel>
+    </DraggableResizer>
+  </div>
+)
 
-const exampleHandlePositionRange = {
-  range: true,
-  min: 0,
-  max: 1,
-  step: 0.01,
+_DraggableResizer.story = {
+  name: 'DraggableResizer',
+
+  parameters: {
+    readme: {
+      content: marked.parse(DraggableResizerReadme),
+    },
+  },
 }
 
-draggableResizerStories.add(
-  'DraggableResizer',
-  () => (
+export const DraggableResizerPanel = () => {
+  const draggableResizerPanelRef = createRef<DraggableResizerPanelRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(draggableResizerPanelRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <DraggableResizer.Panel
+        ref={draggableResizerPanelRef}
+        minSizePixels={50}
+        sizePercent={0.5}
+      >
+        <div className="mockCard" />
+      </DraggableResizer.Panel>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+DraggableResizerPanel.story = {
+  name: 'DraggableResizerPanel',
+
+  parameters: {
+    readme: {
+      content: marked.parse(DraggableResizerPanelReadme),
+    },
+  },
+}
+
+export const _3Panels = () => {
+  const [position, updatePosition] = useState<number[]>([0.25, 0.5])
+  const draggableResizerPanelRef1 = createRef<DraggableResizerPanelRef>()
+  const draggableResizerPanelRef2 = createRef<DraggableResizerPanelRef>()
+  const draggableResizerPanelRef3 = createRef<DraggableResizerPanelRef>()
+  const defaultBackgroundStyle = {backgroundColor: 'transparent'}
+  const defaultBarStyle = {backgroundColor: '#ffffff'}
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(draggableResizerPanelRef1.current)
+    console.log(draggableResizerPanelRef2.current)
+    /* eslint-enable */
+  }
+
+  return (
     <div className="mockPage padded">
       <DraggableResizer
-        handleOrientation={
-          (Orientation as Record<string, any>)[
-            select('handleOrientation', mapEnumKeys(Orientation), 'Vertical')
-          ]
-        }
+        handleOrientation={(Orientation as Record<string, any>)['Vertical']}
         handleGradient={
           (Gradients as Record<string, any>)[
-            (Gradients as Record<string, any>)[
-              select('handleGradient', mapEnumKeys(Gradients), 'PastelGothic')
-            ]
+            (Gradients as Record<string, any>)['PastelGothic']
           ]
         }
-        handlePositions={[
-          number('handlePositions', 0.5, exampleHandlePositionRange),
-        ]}
-        onChangePositions={
-          handlePositions =>
-            console.log(`this.setState({handlePositions: ${handlePositions}})`) // eslint-disable-line
-        }
+        backgroundStyle={defaultBackgroundStyle}
+        handleBarStyle={defaultBarStyle}
+        handlePositions={position}
+        onChangePositions={handlePositions => updatePosition(handlePositions)}
       >
-        <DraggableResizer.Panel>
-          <div className="mockCard" />
+        <DraggableResizer.Panel
+          ref={draggableResizerPanelRef1}
+          isCollapsible={true}
+        >
+          <div className="mockCard">
+            <span>1</span>
+          </div>
         </DraggableResizer.Panel>
-        <DraggableResizer.Panel>
-          <div className="mockCard" />
+        <DraggableResizer.Panel
+          ref={draggableResizerPanelRef2}
+          isCollapsible={true}
+        >
+          <div className="mockCard">
+            <span>2</span>
+          </div>
+        </DraggableResizer.Panel>
+        <DraggableResizer.Panel
+          ref={draggableResizerPanelRef3}
+          isCollapsible={true}
+        >
+          <div className="mockCard">
+            <span>3</span>
+          </div>
         </DraggableResizer.Panel>
       </DraggableResizer>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
     </div>
-  ),
-  {
+  )
+}
+
+_3Panels.story = {
+  parameters: {
     readme: {
-      content: marked(DraggableResizerReadme),
+      content: marked.parse(DraggableResizerExampleAReadme),
     },
+  },
+}
+
+export const _4Panels = () => {
+  const [positions, updatePositions] = useState<number[]>([0.25, 0.5, 0.75])
+
+  const draggableResizerPanelRef1 = createRef<DraggableResizerPanelRef>()
+  const draggableResizerPanelRef2 = createRef<DraggableResizerPanelRef>()
+  const draggableResizerPanelRef3 = createRef<DraggableResizerPanelRef>()
+  const draggableResizerPanelRef4 = createRef<DraggableResizerPanelRef>()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(draggableResizerPanelRef1.current)
+    console.log(draggableResizerPanelRef2.current)
+    console.log(draggableResizerPanelRef3.current)
+    console.log(draggableResizerPanelRef4.current)
+    /* eslint-enable */
   }
-)
 
-draggableResizerStories.add(
-  'DraggableResizerPanel',
-  () => {
-    const draggableResizerPanelRef = createRef<DraggableResizerPanelRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(draggableResizerPanelRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
+  return (
+    <div className="mockPage padded">
+      <DraggableResizer
+        handleOrientation={(Orientation as Record<string, any>)['Vertical']}
+        handleGradient={
+          (Gradients as Record<string, any>)[
+            (Gradients as Record<string, any>)['PastelGothic']
+          ]
+        }
+        handlePositions={positions}
+        onChangePositions={handlePositions => updatePositions(handlePositions)}
+      >
         <DraggableResizer.Panel
-          ref={draggableResizerPanelRef}
-          minSizePixels={50}
-          sizePercent={0.5}
+          ref={draggableResizerPanelRef1}
+          isCollapsible={true}
         >
-          <div className="mockCard" />
+          <div className="mockCard">
+            <span>1</span>
+          </div>
         </DraggableResizer.Panel>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(DraggableResizerPanelReadme),
-    },
-  }
-)
-
-draggableResizerExamplesStories.add(
-  '3 Panels',
-  () => {
-    const [position, updatePosition] = useState<number[]>([0.25, 0.5])
-    const draggableResizerPanelRef1 = createRef<DraggableResizerPanelRef>()
-    const draggableResizerPanelRef2 = createRef<DraggableResizerPanelRef>()
-    const draggableResizerPanelRef3 = createRef<DraggableResizerPanelRef>()
-    const defaultBackgroundStyle = {backgroundColor: 'transparent'}
-    const defaultBarStyle = {backgroundColor: '#ffffff'}
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(draggableResizerPanelRef1.current)
-      console.log(draggableResizerPanelRef2.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="mockPage padded">
-        <DraggableResizer
-          handleOrientation={
-            (Orientation as Record<string, any>)[
-              select('handleOrientation', mapEnumKeys(Orientation), 'Vertical')
-            ]
-          }
-          handleGradient={
-            (Gradients as Record<string, any>)[
-              (Gradients as Record<string, any>)[
-                select('handleGradient', mapEnumKeys(Gradients), 'PastelGothic')
-              ]
-            ]
-          }
-          backgroundStyle={object('backgroundStyle', defaultBackgroundStyle)}
-          handleBarStyle={object('handleBarStyle', defaultBarStyle)}
-          handlePositions={position}
-          onChangePositions={handlePositions => updatePosition(handlePositions)}
+        <DraggableResizer.Panel
+          ref={draggableResizerPanelRef2}
+          isCollapsible={true}
         >
-          <DraggableResizer.Panel
-            ref={draggableResizerPanelRef1}
-            isCollapsible={true}
-          >
-            <div className="mockCard">
-              <span>1</span>
-            </div>
-          </DraggableResizer.Panel>
-          <DraggableResizer.Panel
-            ref={draggableResizerPanelRef2}
-            isCollapsible={true}
-          >
-            <div className="mockCard">
-              <span>2</span>
-            </div>
-          </DraggableResizer.Panel>
-          <DraggableResizer.Panel
-            ref={draggableResizerPanelRef3}
-            isCollapsible={true}
-          >
-            <div className="mockCard">
-              <span>3</span>
-            </div>
-          </DraggableResizer.Panel>
-        </DraggableResizer>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(DraggableResizerExampleAReadme),
-    },
-  }
-)
-
-draggableResizerExamplesStories.add(
-  '4 Panels',
-  () => {
-    const [positions, updatePositions] = useState<number[]>([0.25, 0.5, 0.75])
-
-    const draggableResizerPanelRef1 = createRef<DraggableResizerPanelRef>()
-    const draggableResizerPanelRef2 = createRef<DraggableResizerPanelRef>()
-    const draggableResizerPanelRef3 = createRef<DraggableResizerPanelRef>()
-    const draggableResizerPanelRef4 = createRef<DraggableResizerPanelRef>()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(draggableResizerPanelRef1.current)
-      console.log(draggableResizerPanelRef2.current)
-      console.log(draggableResizerPanelRef3.current)
-      console.log(draggableResizerPanelRef4.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="mockPage padded">
-        <DraggableResizer
-          handleOrientation={
-            (Orientation as Record<string, any>)[
-              select('handleOrientation', mapEnumKeys(Orientation), 'Vertical')
-            ]
-          }
-          handleGradient={
-            (Gradients as Record<string, any>)[
-              (Gradients as Record<string, any>)[
-                select('handleGradient', mapEnumKeys(Gradients), 'PastelGothic')
-              ]
-            ]
-          }
-          handlePositions={positions}
-          onChangePositions={handlePositions =>
-            updatePositions(handlePositions)
-          }
+          <div className="mockCard">
+            <span>2</span>
+          </div>
+        </DraggableResizer.Panel>
+        <DraggableResizer.Panel
+          ref={draggableResizerPanelRef3}
+          isCollapsible={true}
         >
-          <DraggableResizer.Panel
-            ref={draggableResizerPanelRef1}
-            isCollapsible={true}
-          >
-            <div className="mockCard">
-              <span>1</span>
-            </div>
-          </DraggableResizer.Panel>
-          <DraggableResizer.Panel
-            ref={draggableResizerPanelRef2}
-            isCollapsible={true}
-          >
-            <div className="mockCard">
-              <span>2</span>
-            </div>
-          </DraggableResizer.Panel>
-          <DraggableResizer.Panel
-            ref={draggableResizerPanelRef3}
-            isCollapsible={true}
-          >
-            <div className="mockCard">
-              <span>3</span>
-            </div>
-          </DraggableResizer.Panel>
-          <DraggableResizer.Panel
-            ref={draggableResizerPanelRef4}
-            isCollapsible={true}
-          >
-            <div className="mockCard">
-              <span>4</span>
-            </div>
-          </DraggableResizer.Panel>
-        </DraggableResizer>
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
+          <div className="mockCard">
+            <span>3</span>
+          </div>
+        </DraggableResizer.Panel>
+        <DraggableResizer.Panel
+          ref={draggableResizerPanelRef4}
+          isCollapsible={true}
+        >
+          <div className="mockCard">
+            <span>4</span>
+          </div>
+        </DraggableResizer.Panel>
+      </DraggableResizer>
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+_4Panels.story = {
+  parameters: {
     readme: {
-      content: marked(DraggableResizerExampleBReadme),
+      content: marked.parse(DraggableResizerExampleBReadme),
     },
-  }
-)
+  },
+}

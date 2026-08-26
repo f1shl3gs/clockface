@@ -1,11 +1,6 @@
 // Libraries
 import {RefObject, createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {withKnobs, text, select, color, boolean} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
+import {marked} from 'marked'
 
 // Components
 import {
@@ -38,668 +33,436 @@ import {
 } from '../../../Types'
 
 // Notes
-import PanelReadme from './Panel.md'
-import PanelHeaderReadme from './PanelHeader.md'
-import PanelSymbolHeaderReadme from './PanelSymbolHeader.md'
-import BannerPanelReadme from './BannerPanel.md'
-import PanelBodyReadme from './PanelBody.md'
-import PanelFooterReadme from './PanelFooter.md'
-import ExampleAReadme from './PanelExampleA.md'
-import ExampleBReadme from './PanelExampleB.md'
-import ExampleCReadme from './PanelExampleC.md'
-import ExampleDReadme from './PanelExampleD.md'
-import PanelPlaygroundReadme from './PanelPlayground.md'
+import PanelReadme from './Panel.md?raw'
+import PanelHeaderReadme from './PanelHeader.md?raw'
+import PanelSymbolHeaderReadme from './PanelSymbolHeader.md?raw'
+import BannerPanelReadme from './BannerPanel.md?raw'
+import PanelBodyReadme from './PanelBody.md?raw'
+import PanelFooterReadme from './PanelFooter.md?raw'
+import ExampleAReadme from './PanelExampleA.md?raw'
+import ExampleBReadme from './PanelExampleB.md?raw'
+import ExampleCReadme from './PanelExampleC.md?raw'
+import ExampleDReadme from './PanelExampleD.md?raw'
+import PanelPlaygroundReadme from './PanelPlayground.md?raw'
 
-const panelStories = storiesOf('Components/Panels/Family', module).addDecorator(
-  withKnobs
-)
+export default {title: 'Components/Panels/Family'}
 
-const panelComposedStories = storiesOf(
-  'Components/Panels/Composed',
-  module
-).addDecorator(withKnobs)
+export const _Panel = () => {
+  const panelRef: RefObject<PanelRef | null> = createRef()
 
-const panelExampleStories = storiesOf(
-  'Components/Panels/Examples',
-  module
-).addDecorator(withKnobs)
-
-panelStories.add(
-  'Panel',
-  () => {
-    const panelRef: RefObject<PanelRef | null> = createRef()
-
-    const logPanelRef = (): void => {
-      /* eslint-disable */
-      console.log(panelRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Panel.Panel
-          ref={panelRef}
-          gradient={
-            (Gradients as Record<string, any>)[
-              select(
-                'gradient',
-                {None: 'none', ...mapEnumKeys(Gradients)},
-                'None'
-              )
-            ]
-          }
-          backgroundColor={color('backgroundColor', `${InfluxColors.Castle}`)}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logPanelRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(PanelReadme),
-    },
+  const logPanelRef = (): void => {
+    /* eslint-disable */
+    console.log(panelRef.current)
+    /* eslint-enable */
   }
-)
 
-panelStories.add(
-  'PanelHeader',
-  () => {
-    const panelHeaderRef: RefObject<PanelHeaderRef | null> = createRef()
+  return (
+    <div className="story--example">
+      <Panel.Panel
+        ref={panelRef}
+        gradient={(Gradients as Record<string, any>)['None']}
+        backgroundColor={`${InfluxColors.Castle}`}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logPanelRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
 
-    const logPanelRefs = (): void => {
-      /* eslint-disable */
-      console.log('PanelHeader', panelHeaderRef.current)
-      /* eslint-enable */
-    }
+_Panel.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(PanelReadme),
+    },
+  },
+}
 
-    const headerTypes = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
+export const PanelHeader = () => {
+  const panelHeaderRef: RefObject<PanelHeaderRef | null> = createRef()
 
-    return (
-      <div className="story--example">
-        <Panel.Header
-          ref={panelHeaderRef}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
+  const logPanelRefs = (): void => {
+    /* eslint-disable */
+    console.log('PanelHeader', panelHeaderRef.current)
+    /* eslint-enable */
+  }
+
+  const headerTypes = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
+
+  return (
+    <div className="story--example">
+      <Panel.Header
+        ref={panelHeaderRef}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        direction={(FlexDirection as Record<string, any>)['Row']}
+        alignItems={(AlignItems as Record<string, any>)['Center']}
+        justifyContent={(JustifyContent as Record<string, any>)['SpaceBetween']}
+        margin={(ComponentSize as Record<string, any>)['None']}
+      >
+        {headerTypes[3] === headerTypes[0] && <h1>{'I am a cool Panel'}</h1>}
+        {headerTypes[3] === headerTypes[1] && <h2>{'I am a cool Panel'}</h2>}
+        {headerTypes[3] === headerTypes[2] && <h3>{'I am a cool Panel'}</h3>}
+        {headerTypes[3] === headerTypes[3] && <h4>{'I am a cool Panel'}</h4>}
+        {headerTypes[3] === headerTypes[4] && <h5>{'I am a cool Panel'}</h5>}
+        {headerTypes[3] === headerTypes[5] && <h6>{'I am a cool Panel'}</h6>}
+      </Panel.Header>
+      <div className="story--test-buttons">
+        <button onClick={logPanelRefs}>Log Refs</button>
+      </div>
+    </div>
+  )
+}
+
+PanelHeader.story = {
+  name: 'PanelHeader',
+
+  parameters: {
+    readme: {
+      content: marked.parse(PanelHeaderReadme),
+    },
+  },
+}
+
+export const PanelBody = () => {
+  const panelBodyRef: RefObject<PanelBodyRef | null> = createRef()
+
+  const logPanelRef = (): void => {
+    /* eslint-disable */
+    console.log(panelBodyRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Panel.Body
+        ref={panelBodyRef}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        direction={(FlexDirection as Record<string, any>)['Column']}
+        alignItems={(AlignItems as Record<string, any>)['Stretch']}
+        justifyContent={(JustifyContent as Record<string, any>)['FlexStart']}
+        margin={(ComponentSize as Record<string, any>)['None']}
+      >
+        <p>
+          {
+            'Lorem ipsum dolor amet aesthetic quinoa small batch crucifix snackwave pabst typewriter kinfolk craft beer wolf unicorn activated charcoal chambray tattooed. Pok pok everyday carry tattooed etsy, small batch photo booth paleo cray prism fanny pack cred. Beard vinyl affogato leggings. Cold-pressed selfies pinterest crucifix freegan cronut glossier vegan drinking vinegar food truck quinoa lumbersexual.'
           }
-          direction={
-            (FlexDirection as Record<string, any>)[
-              select('direction', mapEnumKeys(FlexDirection), 'Row')
-            ]
-          }
-          alignItems={
-            (AlignItems as Record<string, any>)[
-              select('alignItems', mapEnumKeys(AlignItems), 'Center')
-            ]
-          }
-          justifyContent={
-            (JustifyContent as Record<string, any>)[
-              select(
-                'justifyContent ',
-                mapEnumKeys(JustifyContent),
-                'SpaceBetween'
-              )
-            ]
-          }
-          margin={
-            (ComponentSize as Record<string, any>)[
-              select(
-                'margin',
-                {None: '', ...mapEnumKeys(ComponentSize)},
-                'None'
-              )
-            ]
-          }
+        </p>
+      </Panel.Body>
+      <div className="story--test-buttons">
+        <button onClick={logPanelRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+PanelBody.story = {
+  name: 'PanelBody',
+
+  parameters: {
+    readme: {
+      content: marked.parse(PanelBodyReadme),
+    },
+  },
+}
+
+export const PanelFooter = () => {
+  const panelFooterRef: RefObject<PanelFooterRef | null> = createRef()
+
+  const logPanelRef = (): void => {
+    /* eslint-disable */
+    console.log(panelFooterRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Panel.Footer
+        ref={panelFooterRef}
+        size={(ComponentSize as Record<string, any>)['Small']}
+        direction={(FlexDirection as Record<string, any>)['Row']}
+        alignItems={(AlignItems as Record<string, any>)['Center']}
+        justifyContent={(JustifyContent as Record<string, any>)['Center']}
+        margin={(ComponentSize as Record<string, any>)['None']}
+      >
+        <div className="mockComponent mockButton">Button</div>
+        <div className="mockComponent mockButton">Button</div>
+      </Panel.Footer>
+      <div className="story--test-buttons">
+        <button onClick={logPanelRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+PanelFooter.story = {
+  name: 'PanelFooter',
+
+  parameters: {
+    readme: {
+      content: marked.parse(PanelFooterReadme),
+    },
+  },
+}
+
+export const PanelSymbolHeader = () => {
+  const panelSymbolHeaderRef: RefObject<PanelSymbolHeaderRef | null> =
+    createRef()
+
+  const logPanelSymbolHeaderRef = (): void => {
+    /* eslint-disable */
+    console.log(panelSymbolHeaderRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <Panel.SymbolHeader
+        ref={panelSymbolHeaderRef}
+        symbol={<Bullet text={1} />}
+        title={<h4>Panel Title</h4>}
+      />
+      <div className="story--test-buttons">
+        <button onClick={logPanelSymbolHeaderRef}>Log Ref</button>
+      </div>
+    </div>
+  )
+}
+
+PanelSymbolHeader.story = {
+  name: 'PanelSymbolHeader',
+
+  parameters: {
+    readme: {
+      content: marked.parse(PanelSymbolHeaderReadme),
+    },
+  },
+}
+
+export const _BannerPanel = () => {
+  const bannerPanelRef: RefObject<BannerPanelRef | null> = createRef()
+
+  const logBannerPanelRef = (): void => {
+    /* eslint-disable */
+    console.log(bannerPanelRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <BannerPanel
+        ref={bannerPanelRef}
+        hideMobileIcon={true}
+        size={(ComponentSize as Record<string, any>)['ExtraSmall']}
+        icon={(IconFont as Record<string, any>)['Cloud']}
+        gradient={(Gradients as Record<string, any>)['BeijingEclipse']}
+        textColor={`${InfluxColors.Twilight}`}
+      >
+        <div
+          style={{
+            width: '100%',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
         >
-          {select('title element', headerTypes, headerTypes[3]) ===
-            headerTypes[0] && <h1>{text('title', 'I am a cool Panel')}</h1>}
-          {select('title element', headerTypes, headerTypes[3]) ===
-            headerTypes[1] && <h2>{text('title', 'I am a cool Panel')}</h2>}
-          {select('title element', headerTypes, headerTypes[3]) ===
-            headerTypes[2] && <h3>{text('title', 'I am a cool Panel')}</h3>}
-          {select('title element', headerTypes, headerTypes[3]) ===
-            headerTypes[3] && <h4>{text('title', 'I am a cool Panel')}</h4>}
-          {select('title element', headerTypes, headerTypes[3]) ===
-            headerTypes[4] && <h5>{text('title', 'I am a cool Panel')}</h5>}
-          {select('title element', headerTypes, headerTypes[3]) ===
-            headerTypes[5] && <h6>{text('title', 'I am a cool Panel')}</h6>}
-        </Panel.Header>
-        <div className="story--test-buttons">
-          <button onClick={logPanelRefs}>Log Refs</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(PanelHeaderReadme),
-    },
-  }
-)
-
-panelStories.add(
-  'PanelBody',
-  () => {
-    const panelBodyRef: RefObject<PanelBodyRef | null> = createRef()
-
-    const logPanelRef = (): void => {
-      /* eslint-disable */
-      console.log(panelBodyRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Panel.Body
-          ref={panelBodyRef}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          direction={
-            (FlexDirection as Record<string, any>)[
-              select('direction', mapEnumKeys(FlexDirection), 'Column')
-            ]
-          }
-          alignItems={
-            (AlignItems as Record<string, any>)[
-              select('alignItems', mapEnumKeys(AlignItems), 'Stretch')
-            ]
-          }
-          justifyContent={
-            (JustifyContent as Record<string, any>)[
-              select(
-                'justifyContent ',
-                mapEnumKeys(JustifyContent),
-                'FlexStart'
-              )
-            ]
-          }
-          margin={
-            (ComponentSize as Record<string, any>)[
-              select(
-                'margin',
-                {None: '', ...mapEnumKeys(ComponentSize)},
-                'None'
-              )
-            ]
-          }
-        >
-          <p>
-            {text(
-              'children',
-              'Lorem ipsum dolor amet aesthetic quinoa small batch crucifix snackwave pabst typewriter kinfolk craft beer wolf unicorn activated charcoal chambray tattooed. Pok pok everyday carry tattooed etsy, small batch photo booth paleo cray prism fanny pack cred. Beard vinyl affogato leggings. Cold-pressed selfies pinterest crucifix freegan cronut glossier vegan drinking vinegar food truck quinoa lumbersexual.'
-            )}
-          </p>
-        </Panel.Body>
-        <div className="story--test-buttons">
-          <button onClick={logPanelRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(PanelBodyReadme),
-    },
-  }
-)
-
-panelStories.add(
-  'PanelFooter',
-  () => {
-    const panelFooterRef: RefObject<PanelFooterRef | null> = createRef()
-
-    const logPanelRef = (): void => {
-      /* eslint-disable */
-      console.log(panelFooterRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Panel.Footer
-          ref={panelFooterRef}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          direction={
-            (FlexDirection as Record<string, any>)[
-              select('direction', mapEnumKeys(FlexDirection), 'Row')
-            ]
-          }
-          alignItems={
-            (AlignItems as Record<string, any>)[
-              select('alignItems', mapEnumKeys(AlignItems), 'Center')
-            ]
-          }
-          justifyContent={
-            (JustifyContent as Record<string, any>)[
-              select('justifyContent ', mapEnumKeys(JustifyContent), 'Center')
-            ]
-          }
-          margin={
-            (ComponentSize as Record<string, any>)[
-              select(
-                'margin',
-                {None: '', ...mapEnumKeys(ComponentSize)},
-                'None'
-              )
-            ]
-          }
-        >
-          <div className="mockComponent mockButton">Button</div>
-          <div className="mockComponent mockButton">Button</div>
-        </Panel.Footer>
-        <div className="story--test-buttons">
-          <button onClick={logPanelRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(PanelFooterReadme),
-    },
-  }
-)
-
-panelComposedStories.add(
-  'PanelSymbolHeader',
-  () => {
-    const panelSymbolHeaderRef: RefObject<PanelSymbolHeaderRef | null> = createRef()
-
-    const logPanelSymbolHeaderRef = (): void => {
-      /* eslint-disable */
-      console.log(panelSymbolHeaderRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <Panel.SymbolHeader
-          ref={panelSymbolHeaderRef}
-          symbol={<Bullet text={1} />}
-          title={<h4>Panel Title</h4>}
-        />
-        <div className="story--test-buttons">
-          <button onClick={logPanelSymbolHeaderRef}>Log Ref</button>
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(PanelSymbolHeaderReadme),
-    },
-  }
-)
-
-panelComposedStories.add(
-  'BannerPanel',
-  () => {
-    const bannerPanelRef: RefObject<BannerPanelRef | null> = createRef()
-
-    const logBannerPanelRef = (): void => {
-      /* eslint-disable */
-      console.log(bannerPanelRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <BannerPanel
-          ref={bannerPanelRef}
-          hideMobileIcon={true}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'ExtraSmall')
-            ]
-          }
-          icon={
-            (IconFont as Record<string, any>)[
-              select('icon', {None: 'none', ...mapEnumKeys(IconFont)}, 'Cloud')
-            ]
-          }
-          gradient={
-            (Gradients as Record<string, any>)[
-              select(
-                'gradient',
-                {None: 'none', ...mapEnumKeys(Gradients)},
-                'BeijingEclipse'
-              )
-            ]
-          }
-          textColor={color('textColor', `${InfluxColors.Twilight}`)}
-        >
-          <div
-            style={{
-              width: '100%',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
-            <div>
-              Is some text with <a href="#">a link to nowhere</a>
-            </div>
-            <div>
-              <div className="mockComponent mockButton">
-                This is not a button
-              </div>
-            </div>
+          <div>
+            Is some text with <a href="#">a link to nowhere</a>
           </div>
-        </BannerPanel>
-        <div className="story--test-buttons">
-          <button onClick={logBannerPanelRef}>Log Ref</button>
+          <div>
+            <div className="mockComponent mockButton">This is not a button</div>
+          </div>
         </div>
+      </BannerPanel>
+      <div className="story--test-buttons">
+        <button onClick={logBannerPanelRef}>Log Ref</button>
       </div>
-    )
+    </div>
+  )
+}
+
+_BannerPanel.story = {
+  name: 'BannerPanel',
+
+  parameters: {
+    readme: {
+      content: marked.parse(BannerPanelReadme),
+    },
   },
-  {
-    readme: {
-      content: marked(BannerPanelReadme),
-    },
-  }
+}
+
+export const DismissablePanel = () => (
+  <div className="story--example">
+    <Panel
+      gradient={(Gradients as Record<string, any>)['GundamPilot']}
+      onDismiss={() => alert('onDismiss clicked!')}
+      border={false}
+    >
+      <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+        <h4>Welcome!</h4>
+      </Panel.Header>
+      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+        <p>We've built a lot of cool new things to make your life easier</p>
+        <p>
+          <a href="#">Click Here</a> to take the tour
+        </p>
+      </Panel.Body>
+    </Panel>
+  </div>
 )
 
-panelExampleStories.add(
-  'Dismissable Panel',
-  () => (
-    <div className="story--example">
+DismissablePanel.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ExampleAReadme),
+    },
+  },
+}
+
+export const GettingStartedPanel = () => (
+  <div className="story--example">
+    <Panel>
+      <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+        <h5>Getting started with InfluxDB 2.0</h5>
+      </Panel.Header>
+      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column widthSM={Columns.Four}>
+              <Panel backgroundColor={InfluxColors.Pepper}>
+                <Panel.Body>
+                  <p>Configure a Data Collector</p>
+                </Panel.Body>
+              </Panel>
+            </Grid.Column>
+            <Grid.Column widthSM={Columns.Four}>
+              <Panel backgroundColor={InfluxColors.Pepper}>
+                <Panel.Body>
+                  <p>Build a Monitoring Dashboard</p>
+                </Panel.Body>
+              </Panel>
+            </Grid.Column>
+            <Grid.Column widthSM={Columns.Four}>
+              <Panel backgroundColor={InfluxColors.Pepper}>
+                <Panel.Body>
+                  <p>Explore Data with Flux</p>
+                </Panel.Body>
+              </Panel>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Panel.Body>
+      <Panel.Footer size={(ComponentSize as Record<string, any>)['Small']}>
+        <p>
+          Check our <a href="#">Documentation Site</a> for more tutorials
+        </p>
+      </Panel.Footer>
+    </Panel>
+  </div>
+)
+
+GettingStartedPanel.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ExampleBReadme),
+    },
+  },
+}
+
+export const DangerZonePanel = () => (
+  <div className="story--example">
+    <Panel gradient={Gradients.DocScott}>
+      <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+        <h3>Danger Zone!</h3>
+      </Panel.Header>
+      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+        <p>These actions can have unintended wide-reaching consequences</p>
+      </Panel.Body>
+    </Panel>
+  </div>
+)
+
+DangerZonePanel.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ExampleCReadme),
+    },
+  },
+}
+
+export const NumberedPanel = () => (
+  <div className="story--example">
+    <Panel style={{width: '100%'}}>
+      <Panel.SymbolHeader
+        symbol={
+          <Bullet
+            text={1}
+            size={(ComponentSize as Record<string, any>)['Medium']}
+          />
+        }
+        title={<h5>Panel Title</h5>}
+        size={(ComponentSize as Record<string, any>)['Small']}
+      >
+        Panel Header Content
+      </Panel.SymbolHeader>
+      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+        Panel Body Content
+      </Panel.Body>
+      <Panel.Footer
+        size={(ComponentSize as Record<string, any>)['Small']}
+        justifyContent={JustifyContent.FlexStart}
+      >
+        <p>Panel Footer Content</p>
+      </Panel.Footer>
+    </Panel>
+  </div>
+)
+
+NumberedPanel.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ExampleDReadme),
+    },
+  },
+}
+
+export const PanelPlayground = () => (
+  <div className="story--example">
+    <GradientBox
+      borderGradient={(Gradients as Record<string, any>)['MiyazakiSky']}
+      borderColor={`${InfluxColors.Raven}`}
+    >
       <Panel
-        gradient={
-          (Gradients as Record<string, any>)[
-            select(
-              'gradient',
-              {None: 'none', ...mapEnumKeys(Gradients)},
-              'GundamPilot'
-            )
-          ]
-        }
-        onDismiss={() => alert('onDismiss clicked!')}
-        border={boolean('border', false)}
+        gradient={(Gradients as Record<string, any>)['None']}
+        style={{width: '500px'}}
+        backgroundColor={`${InfluxColors.Raven}`}
       >
-        <Panel.Header
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          <h4>Welcome!</h4>
+        <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+          <Heading
+            element={(HeadingElement as Record<string, any>)['H3']}
+            appearance={(HeadingElement as Record<string, any>)['Inherit']}
+            type={(Typeface as Record<string, any>)['ProximaNova']}
+            weight={(FontWeight as Record<string, any>)['Medium']}
+            underline={false}
+            selectable={false}
+          >
+            {'Heads up'}
+          </Heading>
         </Panel.Header>
-        <Panel.Body
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          <p>We've built a lot of cool new things to make your life easier</p>
-          <p>
-            <a href="#">Click Here</a> to take the tour
-          </p>
+        <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+          <p>{'Body rock'}</p>
         </Panel.Body>
-      </Panel>
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(ExampleAReadme),
-    },
-  }
-)
-
-panelExampleStories.add(
-  'Getting Started Panel',
-  () => (
-    <div className="story--example">
-      <Panel>
-        <Panel.Header
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          <h5>Getting started with InfluxDB 2.0</h5>
-        </Panel.Header>
-        <Panel.Body
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          <Grid>
-            <Grid.Row>
-              <Grid.Column widthSM={Columns.Four}>
-                <Panel backgroundColor={InfluxColors.Pepper}>
-                  <Panel.Body>
-                    <p>Configure a Data Collector</p>
-                  </Panel.Body>
-                </Panel>
-              </Grid.Column>
-              <Grid.Column widthSM={Columns.Four}>
-                <Panel backgroundColor={InfluxColors.Pepper}>
-                  <Panel.Body>
-                    <p>Build a Monitoring Dashboard</p>
-                  </Panel.Body>
-                </Panel>
-              </Grid.Column>
-              <Grid.Column widthSM={Columns.Four}>
-                <Panel backgroundColor={InfluxColors.Pepper}>
-                  <Panel.Body>
-                    <p>Explore Data with Flux</p>
-                  </Panel.Body>
-                </Panel>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Panel.Body>
-        <Panel.Footer
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          <p>
-            Check our <a href="#">Documentation Site</a> for more tutorials
-          </p>
+        <Panel.Footer>
+          <div className="mockComponent mockButton">Not a button</div>
         </Panel.Footer>
       </Panel>
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(ExampleBReadme),
-    },
-  }
+    </GradientBox>
+  </div>
 )
 
-panelExampleStories.add(
-  'Danger Zone Panel',
-  () => (
-    <div className="story--example">
-      <Panel gradient={Gradients.DocScott}>
-        <Panel.Header
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          <h3>Danger Zone!</h3>
-        </Panel.Header>
-        <Panel.Body
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          <p>These actions can have unintended wide-reaching consequences</p>
-        </Panel.Body>
-      </Panel>
-    </div>
-  ),
-  {
+PanelPlayground.story = {
+  parameters: {
     readme: {
-      content: marked(ExampleCReadme),
+      content: marked.parse(PanelPlaygroundReadme),
     },
-  }
-)
-
-panelExampleStories.add(
-  'Numbered Panel',
-  () => (
-    <div className="story--example">
-      <Panel style={{width: '100%'}}>
-        <Panel.SymbolHeader
-          symbol={
-            <Bullet
-              text={1}
-              size={
-                (ComponentSize as Record<string, any>)[
-                  select('symbol size', mapEnumKeys(ComponentSize), 'Medium')
-                ]
-              }
-            />
-          }
-          title={<h5>Panel Title</h5>}
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          Panel Header Content
-        </Panel.SymbolHeader>
-        <Panel.Body
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-        >
-          Panel Body Content
-        </Panel.Body>
-        <Panel.Footer
-          size={
-            (ComponentSize as Record<string, any>)[
-              select('size', mapEnumKeys(ComponentSize), 'Small')
-            ]
-          }
-          justifyContent={JustifyContent.FlexStart}
-        >
-          <p>Panel Footer Content</p>
-        </Panel.Footer>
-      </Panel>
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(ExampleDReadme),
-    },
-  }
-)
-
-panelExampleStories.add(
-  'Panel Playground',
-  () => (
-    <div className="story--example">
-      <GradientBox
-        borderGradient={
-          (Gradients as Record<string, any>)[
-            select(
-              'border gradient',
-              {None: 'none', ...mapEnumKeys(Gradients)},
-              'MiyazakiSky'
-            )
-          ]
-        }
-        borderColor={color('border color', `${InfluxColors.Raven}`)}
-      >
-        <Panel
-          gradient={
-            (Gradients as Record<string, any>)[
-              select(
-                'background gradient',
-                {None: 'none', ...mapEnumKeys(Gradients)},
-                'None'
-              )
-            ]
-          }
-          style={{width: '500px'}}
-          backgroundColor={color('background color', `${InfluxColors.Raven}`)}
-        >
-          <Panel.Header
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-          >
-            <Heading
-              element={
-                (HeadingElement as Record<string, any>)[
-                  select('header element', mapEnumKeys(HeadingElement), 'H3')
-                ]
-              }
-              appearance={
-                (HeadingElement as Record<string, any>)[
-                  select(
-                    'header appearance',
-                    {Inherit: '', ...mapEnumKeys(HeadingElement)},
-                    'Inherit'
-                  )
-                ]
-              }
-              type={
-                (Typeface as Record<string, any>)[
-                  select('type', mapEnumKeys(Typeface), 'ProximaNova')
-                ]
-              }
-              weight={
-                (FontWeight as Record<string, any>)[
-                  select('weight', mapEnumKeys(FontWeight), 'Medium')
-                ]
-              }
-              underline={boolean('underline', false)}
-              selectable={boolean('selectable', false)}
-            >
-              {text('header text', 'Heads up')}
-            </Heading>
-          </Panel.Header>
-          <Panel.Body
-            size={
-              (ComponentSize as Record<string, any>)[
-                select('size', mapEnumKeys(ComponentSize), 'Small')
-              ]
-            }
-          >
-            <p>{text('body text', 'Body rock')}</p>
-          </Panel.Body>
-          {boolean('footer', true) && (
-            <Panel.Footer>
-              <div className="mockComponent mockButton">Not a button</div>
-            </Panel.Footer>
-          )}
-        </Panel>
-      </GradientBox>
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(PanelPlaygroundReadme),
-    },
-  }
-)
+  },
+}

@@ -1,6 +1,6 @@
 // Libraries
 import {FunctionComponent, useRef, useEffect, useState} from 'react'
-import chroma from 'chroma-js'
+import {contrastRatio} from '../../../Utils/colord'
 
 // Components
 import {ButtonBase, ButtonBaseRef} from './ButtonBase'
@@ -139,9 +139,9 @@ export const ButtonBaseContrastTester: FunctionComponent<{}> = () => {
       )
 
       return {
-        default: chroma.contrast(defaultColor, defaultBackground).toFixed(2),
-        active: chroma.contrast(activeColor, activeBackground).toFixed(2),
-        disabled: chroma.contrast(disabledColor, disabledBackground).toFixed(2),
+        default: contrastRatio(defaultColor, defaultBackground).toFixed(2),
+        active: contrastRatio(activeColor, activeBackground).toFixed(2),
+        disabled: contrastRatio(disabledColor, disabledBackground).toFixed(2),
       }
     })
 

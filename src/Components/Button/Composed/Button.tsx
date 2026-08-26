@@ -81,7 +81,7 @@ export const Button = forwardRef<ButtonRef, ButtonProps>(
         className={className}
         titleText={titleText || text}
         disabledTitleText={disabledTitleText}
-        tabIndex={!!tabIndex ? tabIndex : 0}
+        tabIndex={tabIndex ? tabIndex : 0}
       >
         <IconAndText
           placeIconAfterText={placeIconAfterText}

@@ -1,9 +1,10 @@
-@import '../../Styles/variables';
-
 /*
     Navigation Menu
     ----------------------------------------------------------------------------
 */
+
+@use 'sass:math' as *;
+@use '../../Styles/variables' as *;
 
 .cf-nav {
   position: absolute;
@@ -69,7 +70,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transition: background-color $cf-time-slow $cf-ease-smooth,
+  transition:
+    background-color $cf-time-slow $cf-ease-smooth,
     transform $cf-time-slow $cf-ease-smooth;
   background-color: $g11-sidewalk;
 
@@ -176,7 +178,8 @@
   &:link,
   &:active,
   &:visited {
-    transition: text-shadow $cf-time-slow $cf-ease-smooth,
+    transition:
+      text-shadow $cf-time-slow $cf-ease-smooth,
       color $cf-transition-default;
     color: $c-yeti;
   }
@@ -222,7 +225,10 @@
   }
   .cf-nav--item-icon {
     color: $g20-white;
-    text-shadow: 0 0 9px $c-laser, 0 0 15px $c-ocean, 0 0 20px $c-amethyst;
+    text-shadow:
+      0 0 9px $c-laser,
+      0 0 15px $c-ocean,
+      0 0 20px $c-amethyst;
   }
 }
 
@@ -369,7 +375,10 @@
       &:visited,
       &:hover {
         background-color: $cf-nav-menu--bg;
-        text-shadow: 0 0 9px $c-yeti, 0 0 15px $c-hydrogen, 0 0 20px $c-laser;
+        text-shadow:
+          0 0 9px $c-yeti,
+          0 0 15px $c-hydrogen,
+          0 0 20px $c-laser;
       }
     }
   }

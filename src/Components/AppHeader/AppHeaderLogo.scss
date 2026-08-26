@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
    Top Nav
    -----------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-app-header--logo {
   height: 30px;

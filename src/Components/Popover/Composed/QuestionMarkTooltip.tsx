@@ -62,13 +62,15 @@ export const QuestionMarkTooltip = forwardRef<
     }
 
     const handleActivateCircle = () => {
-      triggerRef.current &&
+      if (triggerRef.current) {
         triggerRef.current.classList.add('cf-question-mark-tooltip__active')
+      }
     }
 
     const handleDeactivateCircle = () => {
-      triggerRef.current &&
+      if (triggerRef.current) {
         triggerRef.current.classList.remove('cf-question-mark-tooltip__active')
+      }
     }
 
     return (

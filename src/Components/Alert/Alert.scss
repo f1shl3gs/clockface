@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Alert
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 $alert--icon-padding: $cf-marg-d + $cf-marg-a;
 

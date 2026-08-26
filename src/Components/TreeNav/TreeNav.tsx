@@ -47,9 +47,8 @@ export const TreeNavRoot = forwardRef<TreeNavRef, TreeNavProps>(
     },
     ref
   ) => {
-    const [mobileState, setMobileState] = useState<TreeNavMobileState>(
-      'collapsed'
-    )
+    const [mobileState, setMobileState] =
+      useState<TreeNavMobileState>('collapsed')
 
     const navMenuRootClass = classnames('cf-tree-nav', {
       'cf-tree-nav__collapsed': !expanded,

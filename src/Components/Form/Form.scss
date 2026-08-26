@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Form Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-form--wrapper {
   width: 100%;

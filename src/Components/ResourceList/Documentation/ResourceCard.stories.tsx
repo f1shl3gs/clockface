@@ -1,20 +1,6 @@
 // Libraries
-import {createRef, RefObject} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {
-  withKnobs,
-  text,
-  boolean,
-  array,
-  number,
-  select,
-  object,
-} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
-import {useState} from '@storybook/addons'
+import {createRef, RefObject, useState} from 'react'
+import {marked} from 'marked'
 
 // Components
 import {ResourceCard, ResourceCardRef} from '../Card'
@@ -51,73 +37,344 @@ import {
 } from '../../../Types'
 
 // Notes
-import ResourceCardReadme from './ResourceCard.md'
-import ResourceCardDescriptionReadme from './ResourceCardDescription.md'
-import ResourceCardEditableDescriptionReadme from './ResourceCardEditableDescription.md'
-import ResourceCardNameReadme from './ResourceCardName.md'
-import ResourceCardEditableNameReadme from './ResourceCardEditableName.md'
-import ResourceCardMetaReadme from './ResourceCardMeta.md'
-import ResourceCardExampleReadme from './ResourceCardExample.md'
+import ResourceCardReadme from './ResourceCard.md?raw'
+import ResourceCardDescriptionReadme from './ResourceCardDescription.md?raw'
+import ResourceCardEditableDescriptionReadme from './ResourceCardEditableDescription.md?raw'
+import ResourceCardNameReadme from './ResourceCardName.md?raw'
+import ResourceCardEditableNameReadme from './ResourceCardEditableName.md?raw'
+import ResourceCardMetaReadme from './ResourceCardMeta.md?raw'
+import ResourceCardExampleReadme from './ResourceCardExample.md?raw'
 import {InputLabel} from '../../Inputs'
 import {Popover} from '../../Popover'
 import {List} from '../../List'
 import {Icon} from '../../Icon'
 
-const resourceListCardStories = storiesOf(
-  'Components/Cards/ResourceCard/Family',
-  module
-).addDecorator(withKnobs)
-
-const resourceListExampleStories = storiesOf(
-  'Components/Cards/ResourceCard/Examples',
-  module
-).addDecorator(withKnobs)
+export default {title: 'Components/Cards/ResourceCard/Family'}
 
 const resourceCardMeta = ['Created by Bob', 'Updated 25m ago']
 
-resourceListCardStories.add(
-  'ResourceCard',
-  () => {
-    const resourceCardRef: RefObject<ResourceCardRef | null> = createRef()
-    const resourceCardNameRef: RefObject<ResourceCardNameRef | null> = createRef()
-    const resourceCardMetaRef: RefObject<ResourceCardMetaRef | null> = createRef()
-    const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> = createRef()
+export const _ResourceCard = () => {
+  const resourceCardRef: RefObject<ResourceCardRef | null> = createRef()
+  const resourceCardNameRef: RefObject<ResourceCardNameRef | null> = createRef()
+  const resourceCardMetaRef: RefObject<ResourceCardMetaRef | null> = createRef()
+  const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> =
+    createRef()
 
-    const [name, setName] = useState<string>('Edit my name!')
-    const [description, setDescription] = useState<string>(
-      'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa.'
+  const [name, setName] = useState<string>('Edit my name!')
+  const [description, setDescription] = useState<string>(
+    'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa.'
+  )
+
+  const logRefs = (): void => {
+    /* eslint-disable */
+    console.log('ResourceCard', resourceCardRef.current)
+    console.log('ResourceCardName', resourceCardNameRef.current)
+    console.log('ResourceCardMeta', resourceCardMetaRef.current)
+    console.log(
+      'ResourceCardEditableDescription',
+      resourceCardEditableDescriptionRef.current
     )
+    /* eslint-enable */
+  }
 
-    const logRefs = (): void => {
-      /* eslint-disable */
-      console.log('ResourceCard', resourceCardRef.current)
-      console.log('ResourceCardName', resourceCardNameRef.current)
-      console.log('ResourceCardMeta', resourceCardMetaRef.current)
-      console.log(
-        'ResourceCardEditableDescription',
-        resourceCardEditableDescriptionRef.current
-      )
-      /* eslint-enable */
-    }
+  const resourceCardExampleStyle = {
+    width: '700px',
+  }
 
-    const resourceCardExampleStyle = {
-      width: '700px',
-    }
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRefs}>Log Refs</button>
+      </div>
+      <ResourceCard.ResourceCard
+        ref={resourceCardRef}
+        disabled={false}
+        contextMenuInteraction={'alwaysVisible'}
+        style={resourceCardExampleStyle}
+        contextMenu={
+          <FlexBox margin={ComponentSize.ExtraSmall}>
+            <span>
+              <SquareButton
+                size={ComponentSize.ExtraSmall}
+                icon={IconFont.Duplicate_New}
+                color={ComponentColor.Colorless}
+              />
+            </span>
+            <span>
+              <SquareButton
+                size={ComponentSize.ExtraSmall}
+                icon={IconFont.Trash_New}
+                color={ComponentColor.Colorless}
+              />
+            </span>
+            <span>
+              <SquareButton
+                size={ComponentSize.ExtraSmall}
+                icon={IconFont.CogSolid_New}
+                color={ComponentColor.Colorless}
+              />
+            </span>
+          </FlexBox>
+        }
+        highlightOnHover={true}
+        direction={(FlexDirection as Record<string, any>)['Column']}
+        alignItems={(AlignItems as Record<string, any>)['Stretch']}
+        justifyContent={(JustifyContent as Record<string, any>)['FlexStart']}
+        margin={(ComponentSize as Record<string, any>)['Small']}
+      >
+        <ResourceCard.EditableName
+          ref={resourceCardNameRef}
+          name={name}
+          onUpdate={setName}
+          onClick={() => alert('<ResourceCardEditableName /> onClick fired!')}
+        />
+        <ResourceCard.EditableDescription
+          ref={resourceCardEditableDescriptionRef}
+          description={description}
+          onUpdate={setDescription}
+          placeholder={'Enter a description'}
+        />
+        <ResourceCard.Meta ref={resourceCardMetaRef}>
+          {resourceCardMeta.map(meta => (
+            <span key={meta}>{meta}</span>
+          ))}
+        </ResourceCard.Meta>
+      </ResourceCard.ResourceCard>
+    </div>
+  )
+}
 
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRefs}>Log Refs</button>
-        </div>
-        <ResourceCard.ResourceCard
-          ref={resourceCardRef}
-          disabled={boolean('disabled', false)}
-          contextMenuInteraction={select(
-            'contextMenuInteraction',
-            ['alwaysVisible', 'showOnHover'],
-            'alwaysVisible'
-          )}
-          style={object('style', resourceCardExampleStyle)}
+_ResourceCard.story = {
+  name: 'ResourceCard',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ResourceCardReadme),
+    },
+  },
+}
+
+export const _ResourceCardDescription = () => {
+  const resourceCardDescriptionRef: RefObject<ResourceCardDescriptionRef | null> =
+    createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(resourceCardDescriptionRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+      <ResourceCardDescription
+        ref={resourceCardDescriptionRef}
+        description={
+          'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa. '
+        }
+      />
+    </div>
+  )
+}
+
+_ResourceCardDescription.story = {
+  name: 'ResourceCardDescription',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ResourceCardDescriptionReadme),
+    },
+  },
+}
+
+export const _ResourceCardEditableDescription = () => {
+  const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> =
+    createRef()
+
+  const logRefs = (): void => {
+    /* eslint-disable */
+    console.log(
+      'ResourceCardEditableDescription',
+      resourceCardEditableDescriptionRef.current
+    )
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRefs}>Log Refs</button>
+      </div>
+      <ResourceCardEditableDescription
+        ref={resourceCardEditableDescriptionRef}
+        description={
+          'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa. '
+        }
+        onUpdate={description => alert(`onUpdate fired with "${description}"`)}
+        placeholder={'Enter a description'}
+      />
+    </div>
+  )
+}
+
+_ResourceCardEditableDescription.story = {
+  name: 'ResourceCardEditableDescription',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ResourceCardEditableDescriptionReadme),
+    },
+  },
+}
+
+export const _ResourceCardName = () => {
+  const resourceCardNameRef1: RefObject<ResourceCardNameRef | null> =
+    createRef()
+  const resourceCardNameRef2: RefObject<ResourceCardNameRef | null> =
+    createRef()
+
+  const logRefs = (): void => {
+    /* eslint-disable */
+    console.log(resourceCardNameRef1.current)
+    console.log(resourceCardNameRef2.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRefs}>Log Refs</button>
+      </div>
+      <div style={{margin: '30px'}}>
+        <ResourceCardName
+          ref={resourceCardNameRef1}
+          name={'Card Name'}
+          onClick={() => alert('onClick fired!')}
+          errorMessage={'Some Error'}
+          status={ComponentStatus.Default}
+        />
+      </div>
+      <div style={{margin: '30px'}}>
+        <ResourceCardName
+          ref={resourceCardNameRef2}
+          name={'Card Name'}
+          errorMessage={'Some Error'}
+          status={ComponentStatus.Default}
+        />
+      </div>
+    </div>
+  )
+}
+
+_ResourceCardName.story = {
+  name: 'ResourceCardName',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ResourceCardNameReadme),
+    },
+  },
+}
+
+export const _ResourceCardEditableName = () => {
+  const resourceCardEditableNameRef1: RefObject<ResourceCardEditableNameRef | null> =
+    createRef()
+  const resourceCardEditableNameRef2: RefObject<ResourceCardEditableNameRef | null> =
+    createRef()
+
+  const logRefs = (): void => {
+    /* eslint-disable */
+    console.log(resourceCardEditableNameRef1.current)
+    console.log(resourceCardEditableNameRef2.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRefs}>Log Refs</button>
+      </div>
+      <div style={{margin: '30px'}}>
+        <ResourceCardEditableName
+          ref={resourceCardEditableNameRef1}
+          name={'Card Name'}
+          onClick={() => alert('onClick fired!')}
+          onUpdate={name => alert(`onUpdate fired with "${name}"`)}
+          noNameString={'Untitled Card'}
+          placeholder={'Name this card...'}
+        />
+      </div>
+      <div style={{margin: '30px'}}>
+        <ResourceCardEditableName
+          ref={resourceCardEditableNameRef2}
+          name={'Card Name'}
+          onUpdate={name => alert(`onUpdate fired with "${name}"`)}
+          noNameString={'Untitled Card'}
+          placeholder={'Name this card...'}
+        />
+      </div>
+    </div>
+  )
+}
+
+_ResourceCardEditableName.story = {
+  name: 'ResourceCardEditableName',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ResourceCardEditableNameReadme),
+    },
+  },
+}
+
+export const _ResourceCardMeta = () => {
+  const resourceCardMeta: RefObject<ResourceCardMetaRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(resourceCardMeta.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+      <ResourceCardMeta
+        ref={resourceCardMeta}
+        direction={(FlexDirection as Record<string, any>)['Row']}
+        alignItems={(AlignItems as Record<string, any>)['Center']}
+        justifyContent={(JustifyContent as Record<string, any>)['FlexStart']}
+      >
+        <span>Boosh</span>
+        <span>Bang</span>
+        <span>Wham</span>
+        <span>Pow</span>
+      </ResourceCardMeta>
+    </div>
+  )
+}
+
+_ResourceCardMeta.story = {
+  name: 'ResourceCardMeta',
+
+  parameters: {
+    readme: {
+      content: marked.parse(ResourceCardMetaReadme),
+    },
+  },
+}
+
+export const ToggleableCard = () => {
+  const settingsRef: RefObject<HTMLButtonElement | null> = createRef()
+
+  return (
+    <div className="story--example">
+      <div style={{width: `${900}px`}}>
+        <ResourceCard
           contextMenu={
             <FlexBox margin={ComponentSize.ExtraSmall}>
               <span>
@@ -136,426 +393,112 @@ resourceListCardStories.add(
               </span>
               <span>
                 <SquareButton
+                  ref={settingsRef}
                   size={ComponentSize.ExtraSmall}
                   icon={IconFont.CogSolid_New}
                   color={ComponentColor.Colorless}
                 />
               </span>
+              <Popover
+                appearance={Appearance.Outline}
+                enableDefaultStyles={false}
+                style={{width: '200px'}}
+                contents={() => (
+                  <List>
+                    <List.Item
+                      value=""
+                      selected={false}
+                      wrapText={false}
+                      /* eslint-disable */
+                      onClick={() => {}}
+                      /* eslint-enable */
+                      backgroundColor={InfluxColors.Pool}
+                      size={ComponentSize.Small}
+                    >
+                      <List.Icon glyph={IconFont.Cube} />
+                      {'Put Turtle in Water'}
+                    </List.Item>
+                  </List>
+                )}
+                triggerRef={settingsRef}
+              />
             </FlexBox>
-          }
-          highlightOnHover={boolean('highlightOnHover', true)}
-          direction={
-            (FlexDirection as Record<string, any>)[
-              select('direction', mapEnumKeys(FlexDirection), 'Column')
-            ]
-          }
-          alignItems={
-            (AlignItems as Record<string, any>)[
-              select('alignItems', mapEnumKeys(AlignItems), 'Stretch')
-            ]
-          }
-          justifyContent={
-            (JustifyContent as Record<string, any>)[
-              select(
-                'justifyContent ',
-                mapEnumKeys(JustifyContent),
-                'FlexStart'
-              )
-            ]
-          }
-          margin={
-            (ComponentSize as Record<string, any>)[
-              select('margin', mapEnumKeys(ComponentSize), 'Small')
-            ]
           }
         >
           <ResourceCard.EditableName
-            ref={resourceCardNameRef}
-            name={name}
-            onUpdate={setName}
-            onClick={() => alert('<ResourceCardEditableName /> onClick fired!')}
+            name={'Rolling temperature notebook'}
+            onUpdate={name => alert(`onUpate name fired: ${name}`)}
           />
           <ResourceCard.EditableDescription
-            ref={resourceCardEditableDescriptionRef}
-            description={description}
-            onUpdate={setDescription}
-            placeholder={text('description placeholder', 'Enter a description')}
+            description={'No description'}
+            onUpdate={desc => alert(`onUpate description fired: ${desc}`)}
           />
-          <ResourceCard.Meta ref={resourceCardMetaRef}>
-            {array('metaData', resourceCardMeta).map(meta => (
-              <span key={meta}>{meta}</span>
-            ))}
-          </ResourceCard.Meta>
-        </ResourceCard.ResourceCard>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ResourceCardReadme),
-    },
-  }
-)
-
-resourceListCardStories.add(
-  'ResourceCardDescription',
-  () => {
-    const resourceCardDescriptionRef: RefObject<ResourceCardDescriptionRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(resourceCardDescriptionRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-        <ResourceCardDescription
-          ref={resourceCardDescriptionRef}
-          description={text(
-            'description',
-            'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa. '
-          )}
-        />
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ResourceCardDescriptionReadme),
-    },
-  }
-)
-
-resourceListCardStories.add(
-  'ResourceCardEditableDescription',
-  () => {
-    const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> = createRef()
-
-    const logRefs = (): void => {
-      /* eslint-disable */
-      console.log(
-        'ResourceCardEditableDescription',
-        resourceCardEditableDescriptionRef.current
-      )
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRefs}>Log Refs</button>
-        </div>
-        <ResourceCardEditableDescription
-          ref={resourceCardEditableDescriptionRef}
-          description={text(
-            'description',
-            'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa. '
-          )}
-          onUpdate={description =>
-            alert(`onUpdate fired with "${description}"`)
-          }
-          placeholder={text('description placeholder', 'Enter a description')}
-        />
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ResourceCardEditableDescriptionReadme),
-    },
-  }
-)
-
-resourceListCardStories.add(
-  'ResourceCardName',
-  () => {
-    const resourceCardNameRef1: RefObject<ResourceCardNameRef | null> = createRef()
-    const resourceCardNameRef2: RefObject<ResourceCardNameRef | null> = createRef()
-
-    const logRefs = (): void => {
-      /* eslint-disable */
-      console.log(resourceCardNameRef1.current)
-      console.log(resourceCardNameRef2.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRefs}>Log Refs</button>
-        </div>
-        <div style={{margin: '30px'}}>
-          <ResourceCardName
-            ref={resourceCardNameRef1}
-            name={text('name', 'Card Name')}
-            onClick={() => alert('onClick fired!')}
-            errorMessage={text('errorMessage', 'Some Error')}
-            status={select(
-              'status',
-              [ComponentStatus.Default, ComponentStatus.Error],
-              ComponentStatus.Default
-            )}
-          />
-        </div>
-        <div style={{margin: '30px'}}>
-          <ResourceCardName
-            ref={resourceCardNameRef2}
-            name={text('name', 'Card Name')}
-            errorMessage={text('errorMessage', 'Some Error')}
-            status={select(
-              'status',
-              [ComponentStatus.Default, ComponentStatus.Error],
-              ComponentStatus.Default
-            )}
-          />
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ResourceCardNameReadme),
-    },
-  }
-)
-
-resourceListCardStories.add(
-  'ResourceCardEditableName',
-  () => {
-    const resourceCardEditableNameRef1: RefObject<ResourceCardEditableNameRef | null> = createRef()
-    const resourceCardEditableNameRef2: RefObject<ResourceCardEditableNameRef | null> = createRef()
-
-    const logRefs = (): void => {
-      /* eslint-disable */
-      console.log(resourceCardEditableNameRef1.current)
-      console.log(resourceCardEditableNameRef2.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRefs}>Log Refs</button>
-        </div>
-        <div style={{margin: '30px'}}>
-          <ResourceCardEditableName
-            ref={resourceCardEditableNameRef1}
-            name={text('name', 'Card Name')}
-            onClick={() => alert('onClick fired!')}
-            onUpdate={name => alert(`onUpdate fired with "${name}"`)}
-            noNameString={text('noNameString', 'Untitled Card')}
-            placeholder={text('placeholder', 'Name this card...')}
-          />
-        </div>
-        <div style={{margin: '30px'}}>
-          <ResourceCardEditableName
-            ref={resourceCardEditableNameRef2}
-            name={text('name', 'Card Name')}
-            onUpdate={name => alert(`onUpdate fired with "${name}"`)}
-            noNameString={text('noNameString', 'Untitled Card')}
-            placeholder={text('placeholder', 'Name this card...')}
-          />
-        </div>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ResourceCardEditableNameReadme),
-    },
-  }
-)
-
-resourceListCardStories.add(
-  'ResourceCardMeta',
-  () => {
-    const resourceCardMeta: RefObject<ResourceCardMetaRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(resourceCardMeta.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-        <ResourceCardMeta
-          ref={resourceCardMeta}
-          direction={
-            (FlexDirection as Record<string, any>)[
-              select('direction', mapEnumKeys(FlexDirection), 'Row')
-            ]
-          }
-          alignItems={
-            (AlignItems as Record<string, any>)[
-              select('alignItems', mapEnumKeys(AlignItems), 'Center')
-            ]
-          }
-          justifyContent={
-            (JustifyContent as Record<string, any>)[
-              select(
-                'justifyContent ',
-                mapEnumKeys(JustifyContent),
-                'FlexStart'
-              )
-            ]
-          }
-        >
-          <span>Boosh</span>
-          <span>Bang</span>
-          <span>Wham</span>
-          <span>Pow</span>
-        </ResourceCardMeta>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(ResourceCardMetaReadme),
-    },
-  }
-)
-
-resourceListExampleStories.add(
-  'Toggleable Card',
-  () => {
-    const settingsRef: RefObject<HTMLButtonElement | null> = createRef()
-
-    return (
-      <div className="story--example">
-        <div style={{width: `${number('Width (px)', 900)}px`}}>
-          <ResourceCard
-            contextMenu={
-              <FlexBox margin={ComponentSize.ExtraSmall}>
-                <span>
-                  <SquareButton
-                    size={ComponentSize.ExtraSmall}
-                    icon={IconFont.Duplicate_New}
-                    color={ComponentColor.Colorless}
-                  />
-                </span>
-                <span>
-                  <SquareButton
-                    size={ComponentSize.ExtraSmall}
-                    icon={IconFont.Trash_New}
-                    color={ComponentColor.Colorless}
-                  />
-                </span>
-                <span>
-                  <SquareButton
-                    ref={settingsRef}
-                    size={ComponentSize.ExtraSmall}
-                    icon={IconFont.CogSolid_New}
-                    color={ComponentColor.Colorless}
-                  />
-                </span>
-                <Popover
-                  appearance={Appearance.Outline}
-                  enableDefaultStyles={false}
-                  style={{width: '200px'}}
-                  contents={() => (
-                    <List>
-                      <List.Item
-                        value=""
-                        selected={false}
-                        wrapText={false}
-                        /* eslint-disable */
-                        onClick={() => {}}
-                        /* eslint-enable */
-                        backgroundColor={InfluxColors.Pool}
-                        size={ComponentSize.Small}
-                      >
-                        <List.Icon glyph={IconFont.Cube} />
-                        {'Put Turtle in Water'}
-                      </List.Item>
-                    </List>
-                  )}
-                  triggerRef={settingsRef}
-                />
-              </FlexBox>
-            }
-          >
-            <ResourceCard.EditableName
-              name={text('name', 'Rolling temperature notebook')}
-              onUpdate={name => alert(`onUpate name fired: ${name}`)}
-            />
-            <ResourceCard.EditableDescription
-              description={text('description', 'No description')}
-              onUpdate={desc => alert(`onUpate description fired: ${desc}`)}
-            />
-            <ResourceCard.Meta>
-              <FlexBox
-                direction={FlexDirection.Row}
-                alignItems={AlignItems.Center}
-                margin={ComponentSize.Medium}
-              >
-                <SlideToggle
-                  onChange={() => {
-                    // Do nothing
-                  }}
-                  size={ComponentSize.ExtraSmall}
-                  active={!boolean('disabled', false)}
-                />
-                <InputLabel active={!boolean('disabled', false)}>
-                  Active
-                </InputLabel>
-              </FlexBox>
-              <strong>System bucket</strong>
-              <a href="#">Setup instructions</a>
-              <span>
-                Last completed: 2021-07-21T09:15:00Z{' '}
-                <Icon glyph={IconFont.AlertTriangle} />
-              </span>
-              <span>Scheduled to run every 15m</span>
-              <span>ID: 07dd331e1c9fc00</span>
-            </ResourceCard.Meta>
-            <FlexBox direction={FlexDirection.Row} margin={ComponentSize.Small}>
-              <Label
-                id="CRIT"
-                description="I'm a cool label"
-                name="CRIT"
-                color="#da3434"
+          <ResourceCard.Meta>
+            <FlexBox
+              direction={FlexDirection.Row}
+              alignItems={AlignItems.Center}
+              margin={ComponentSize.Medium}
+            >
+              <SlideToggle
+                onChange={() => {
+                  // Do nothing
+                }}
                 size={ComponentSize.ExtraSmall}
-                /* eslint-disable */
-                onDelete={() => {}}
-                /* eslint-enable */
+                active={!false}
               />
-              <Label
-                id="WARN"
-                description="I'm a cool label"
-                name="WARN"
-                color="#f2b218"
-                size={ComponentSize.ExtraSmall}
-                /* eslint-disable */
-                onDelete={() => {}}
-                /* eslint-enable*/
-              />
-              <Label
-                id="OK"
-                description="I'm a cool label"
-                name="OK"
-                color="#6ac255"
-                size={ComponentSize.ExtraSmall}
-                /* eslint-disable */
-                onDelete={() => {}}
-                /* eslint-enable */
-              />
+              <InputLabel active={!false}>Active</InputLabel>
             </FlexBox>
-          </ResourceCard>
-        </div>
+            <strong>System bucket</strong>
+            <a href="#">Setup instructions</a>
+            <span>
+              Last completed: 2021-07-21T09:15:00Z{' '}
+              <Icon glyph={IconFont.AlertTriangle} />
+            </span>
+            <span>Scheduled to run every 15m</span>
+            <span>ID: 07dd331e1c9fc00</span>
+          </ResourceCard.Meta>
+          <FlexBox direction={FlexDirection.Row} margin={ComponentSize.Small}>
+            <Label
+              id="CRIT"
+              description="I'm a cool label"
+              name="CRIT"
+              color="#da3434"
+              size={ComponentSize.ExtraSmall}
+              /* eslint-disable */
+              onDelete={() => {}}
+              /* eslint-enable */
+            />
+            <Label
+              id="WARN"
+              description="I'm a cool label"
+              name="WARN"
+              color="#f2b218"
+              size={ComponentSize.ExtraSmall}
+              /* eslint-disable */
+              onDelete={() => {}}
+              /* eslint-enable*/
+            />
+            <Label
+              id="OK"
+              description="I'm a cool label"
+              name="OK"
+              color="#6ac255"
+              size={ComponentSize.ExtraSmall}
+              /* eslint-disable */
+              onDelete={() => {}}
+              /* eslint-enable */
+            />
+          </FlexBox>
+        </ResourceCard>
       </div>
-    )
-  },
-  {
+    </div>
+  )
+}
+
+ToggleableCard.story = {
+  parameters: {
     readme: {
-      content: marked(ResourceCardExampleReadme),
+      content: marked.parse(ResourceCardExampleReadme),
     },
-  }
-)
+  },
+}

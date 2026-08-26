@@ -1,9 +1,9 @@
-@import '../../../Styles/variables.scss';
-
 /*
   Editable Name for Resource Cards
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-resource-name {
   position: relative;

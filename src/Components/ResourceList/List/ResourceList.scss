@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Resource List
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-resource-list {
   width: 100%;

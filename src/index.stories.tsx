@@ -1,21 +1,16 @@
-// Libraries
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-
 // Readme
-import IndexReadme from './index.md'
+import IndexReadme from './index.md?raw'
 
-const dataTypeStories = storiesOf('Home/Clockface', module)
+export default {title: 'Home/Clockface'}
 
-dataTypeStories.add(
-  'Overview',
-  () => {
-    return <div className="markdown-body"></div>
-  },
-  {
+export const Overview = () => {
+  return <div className="markdown-body"></div>
+}
+
+Overview.story = {
+  parameters: {
     readme: {
       content: IndexReadme,
     },
-  }
-)
+  },
+}

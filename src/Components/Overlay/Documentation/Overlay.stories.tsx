@@ -1,19 +1,6 @@
 // Libraries
-import {RefObject, createRef} from 'react'
-import marked from 'marked'
-
-// Storybook
-import {storiesOf} from '@storybook/react'
-import {
-  withKnobs,
-  number,
-  text,
-  boolean,
-  color,
-  select,
-} from '@storybook/addon-knobs'
-import {mapEnumKeys} from '../../../Utils/storybook'
-import {useState} from '@storybook/addons'
+import {RefObject, createRef, useState} from 'react'
+import {marked} from 'marked'
 
 // Components
 import {OverlayRoot as Overlay} from '../Overlay'
@@ -28,13 +15,15 @@ import {Button} from '../../Button/Composed/Button'
 import {ComponentColor, ComponentSize, Gradients} from '../../../Types'
 
 // Notes
-import OverlayReadme from './Overlay.md'
-import OverlayContainerReadme from './OverlayContainer.md'
-import OverlayMaskReadme from './OverlayMask.md'
-import OverlayHeaderReadme from './OverlayHeader.md'
-import OverlayBodyReadme from './OverlayBody.md'
-import OverlayFooterReadme from './OverlayFooter.md'
-import ConfirmationOverlayReadme from './ConfirmationOverlay.md'
+import OverlayReadme from './Overlay.md?raw'
+import OverlayContainerReadme from './OverlayContainer.md?raw'
+import OverlayMaskReadme from './OverlayMask.md?raw'
+import OverlayHeaderReadme from './OverlayHeader.md?raw'
+import OverlayBodyReadme from './OverlayBody.md?raw'
+import OverlayFooterReadme from './OverlayFooter.md?raw'
+import ConfirmationOverlayReadme from './ConfirmationOverlay.md?raw'
+
+export default {title: 'Components/Overlays/Family'}
 
 const instructionsElement = (
   <p>
@@ -42,255 +31,280 @@ const instructionsElement = (
   </p>
 )
 
-const overlayStories = storiesOf(
-  'Components/Overlays/Family',
-  module
-).addDecorator(withKnobs)
-
-overlayStories.add(
-  'Overlay',
-  () => (
-    <div className="story--example">
-      {instructionsElement}
-      <Overlay
-        transitionDuration={number('transitionDuration', 360)}
-        visible={boolean('visible', false)}
+export const _Overlay = () => (
+  <div className="story--example">
+    {instructionsElement}
+    <Overlay transitionDuration={360} visible={false}>
+      <OverlayContainer
+        fullScreen={false}
+        maxWidth={400}
+        margin={(ComponentSize as Record<string, any>)['Medium']}
       >
-        <OverlayContainer
-          fullScreen={boolean('fullScreen', false)}
-          maxWidth={400}
-          margin={
-            (ComponentSize as Record<string, any>)[
-              select('margin', mapEnumKeys(ComponentSize), 'Medium')
-            ]
-          }
-        >
-          <OverlayHeader
-            wrapText={boolean('wrap header text', false)}
-            title={text('title', 'Howdy partner!')}
-            onDismiss={() => {
-              alert('Overlay dismiss clicked')
-            }}
-          />
-          <OverlayBody>
-            <p>
-              Before you go riding off into the sunset make sure you really want
-              to do this. Deleting all your data cannot be undone and can have
-              dangerous and permanent side effects.
-            </p>
-          </OverlayBody>
-          <OverlayFooter>
-            <Button text="Cancel" />
-            <Button text="Yes, burn it all!" color={ComponentColor.Danger} />
-          </OverlayFooter>
-        </OverlayContainer>
-      </Overlay>
-    </div>
-  ),
-  {
-    readme: {
-      content: marked(OverlayReadme),
-    },
-  }
-)
-
-overlayStories.add(
-  'OverlayContainer',
-  () => {
-    const overlayContainerRef: RefObject<OverlayContainerRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(overlayContainerRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-        <OverlayContainer
-          fullScreen={boolean('fullScreen', false)}
-          maxWidth={number('maxWidth', 800)}
-          ref={overlayContainerRef}
-        >
-          <div
-            className="mockComponent"
-            style={{width: '100%', height: '400px'}}
-          >
-            Header, Body, or Footer go here
-          </div>
-        </OverlayContainer>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(OverlayContainerReadme),
-    },
-  }
-)
-
-overlayStories.add(
-  'OverlayMask',
-  () => {
-    const overlayMaskRef: RefObject<OverlayMaskRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(overlayMaskRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-        {instructionsElement}
-        <OverlayMask
-          ref={overlayMaskRef}
-          gradient={
-            (Gradients as Record<string, any>)[
-              (Gradients as Record<string, any>)[
-                select('gradient', mapEnumKeys(Gradients), 'GundamPilot')
-              ]
-            ]
-          }
-          backgroundColor={color('backgroundColor', '')}
-        />
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(OverlayMaskReadme),
-    },
-  }
-)
-
-overlayStories.add(
-  'OverlayHeader',
-  () => {
-    const overlayHeaderRef: RefObject<OverlayHeaderRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(overlayHeaderRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
         <OverlayHeader
-          ref={overlayHeaderRef}
-          title={text('title', 'Are you sure?')}
+          wrapText={false}
+          title={'Howdy partner!'}
+          onDismiss={() => {
+            alert('Overlay dismiss clicked')
+          }}
+        />
+        <OverlayBody>
+          <p>
+            Before you go riding off into the sunset make sure you really want
+            to do this. Deleting all your data cannot be undone and can have
+            dangerous and permanent side effects.
+          </p>
+        </OverlayBody>
+        <OverlayFooter>
+          <Button text="Cancel" />
+          <Button text="Yes, burn it all!" color={ComponentColor.Danger} />
+        </OverlayFooter>
+      </OverlayContainer>
+    </Overlay>
+  </div>
+)
+
+_Overlay.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(OverlayReadme),
+    },
+  },
+}
+
+export const _OverlayContainer = () => {
+  const overlayContainerRef: RefObject<OverlayContainerRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(overlayContainerRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+      <OverlayContainer
+        fullScreen={false}
+        maxWidth={800}
+        ref={overlayContainerRef}
+      >
+        <div className="mockComponent" style={{width: '100%', height: '400px'}}>
+          Header, Body, or Footer go here
+        </div>
+      </OverlayContainer>
+    </div>
+  )
+}
+
+_OverlayContainer.story = {
+  name: 'OverlayContainer',
+
+  parameters: {
+    readme: {
+      content: marked.parse(OverlayContainerReadme),
+    },
+  },
+}
+
+export const _OverlayMask = () => {
+  const overlayMaskRef: RefObject<OverlayMaskRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(overlayMaskRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+      {instructionsElement}
+      <OverlayMask
+        ref={overlayMaskRef}
+        gradient={
+          (Gradients as Record<string, any>)[
+            (Gradients as Record<string, any>)['GundamPilot']
+          ]
+        }
+        backgroundColor={''}
+      />
+    </div>
+  )
+}
+
+_OverlayMask.story = {
+  name: 'OverlayMask',
+
+  parameters: {
+    readme: {
+      content: marked.parse(OverlayMaskReadme),
+    },
+  },
+}
+
+export const _OverlayHeader = () => {
+  const overlayHeaderRef: RefObject<OverlayHeaderRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(overlayHeaderRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+      <OverlayHeader
+        ref={overlayHeaderRef}
+        title={'Are you sure?'}
+        onDismiss={() => {
+          alert('Dismissed')
+        }}
+      >
+        <div className="mockComponent mockButton">Child Element</div>
+      </OverlayHeader>
+    </div>
+  )
+}
+
+_OverlayHeader.story = {
+  name: 'OverlayHeader',
+
+  parameters: {
+    readme: {
+      content: marked.parse(OverlayHeaderReadme),
+    },
+  },
+}
+
+export const _OverlayBody = () => {
+  const overlayBodyRef: RefObject<OverlayBodyRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(overlayBodyRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+      <OverlayBody ref={overlayBodyRef}>
+        <div className="mockComponent" style={{width: '100%', height: '300px'}}>
+          This is a great place to stick a form or important text
+        </div>
+      </OverlayBody>
+    </div>
+  )
+}
+
+_OverlayBody.story = {
+  name: 'OverlayBody',
+
+  parameters: {
+    readme: {
+      content: marked.parse(OverlayBodyReadme),
+    },
+  },
+}
+
+export const _OverlayFooter = () => {
+  const overlayFooterRef: RefObject<OverlayFooterRef | null> = createRef()
+
+  const logRef = (): void => {
+    /* eslint-disable */
+    console.log(overlayFooterRef.current)
+    /* eslint-enable */
+  }
+
+  return (
+    <div className="story--example">
+      <div className="story--test-buttons">
+        <button onClick={logRef}>Log Ref</button>
+      </div>
+      <OverlayFooter ref={overlayFooterRef}>
+        <div className="mockComponent" style={{width: '120px'}}>
+          Action Button
+        </div>
+        <div className="mockComponent" style={{width: '120px'}}>
+          Action Button
+        </div>
+      </OverlayFooter>
+    </div>
+  )
+}
+
+_OverlayFooter.story = {
+  name: 'OverlayFooter',
+
+  parameters: {
+    readme: {
+      content: marked.parse(OverlayFooterReadme),
+    },
+  },
+}
+
+export const ConfirmationOverlay = () => (
+  <div className="story--example">
+    {instructionsElement}
+    <Overlay visible={true}>
+      <OverlayContainer maxWidth={400}>
+        <OverlayHeader
+          title="Are you sure?"
           onDismiss={() => {
             alert('Dismissed')
           }}
-        >
-          <div className="mockComponent mockButton">Child Element</div>
-        </OverlayHeader>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(OverlayHeaderReadme),
-    },
-  }
-)
-
-overlayStories.add(
-  'OverlayBody',
-  () => {
-    const overlayBodyRef: RefObject<OverlayBodyRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(overlayBodyRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-        <OverlayBody ref={overlayBodyRef}>
-          <div
-            className="mockComponent"
-            style={{width: '100%', height: '300px'}}
-          >
-            This is a great place to stick a form or important text
-          </div>
+        />
+        <OverlayBody>
+          <p>
+            This action could cause a lot of things to break unexpectedly. We're
+            pretty sure you don't want to do this accidentally. What will it be?
+          </p>
         </OverlayBody>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(OverlayBodyReadme),
-    },
-  }
-)
-
-overlayStories.add(
-  'OverlayFooter',
-  () => {
-    const overlayFooterRef: RefObject<OverlayFooterRef | null> = createRef()
-
-    const logRef = (): void => {
-      /* eslint-disable */
-      console.log(overlayFooterRef.current)
-      /* eslint-enable */
-    }
-
-    return (
-      <div className="story--example">
-        <div className="story--test-buttons">
-          <button onClick={logRef}>Log Ref</button>
-        </div>
-        <OverlayFooter ref={overlayFooterRef}>
-          <div className="mockComponent" style={{width: '120px'}}>
-            Action Button
-          </div>
-          <div className="mockComponent" style={{width: '120px'}}>
-            Action Button
-          </div>
+        <OverlayFooter>
+          <Button text="Cancel" />
+          <Button text="Pull the Lever!" color={ComponentColor.Danger} />
         </OverlayFooter>
-      </div>
-    )
-  },
-  {
-    readme: {
-      content: marked(OverlayFooterReadme),
-    },
-  }
+      </OverlayContainer>
+    </Overlay>
+  </div>
 )
 
-const overlayExampleStories = storiesOf(
-  'Components/Overlays/Examples',
-  module
-).addDecorator(withKnobs)
+ConfirmationOverlay.story = {
+  parameters: {
+    readme: {
+      content: marked.parse(ConfirmationOverlayReadme),
+    },
+  },
+}
 
-overlayExampleStories.add(
-  'Confirmation Overlay',
-  () => (
+export const OverlayWithEscapeHandler = () => {
+  const [visible, setVisibility] = useState<boolean>(false)
+
+  const handleDismiss = (): void => {
+    setVisibility(false)
+  }
+
+  const handleShow = (): void => {
+    setVisibility(true)
+  }
+
+  return (
     <div className="story--example">
-      {instructionsElement}
-      <Overlay visible={boolean('visible', true)}>
-        <OverlayContainer maxWidth={number('maxWidth', 400)}>
-          <OverlayHeader
-            title="Are you sure?"
-            onDismiss={() => {
-              alert('Dismissed')
-            }}
-          />
+      <div className="mockComponent mockButton" onClick={handleShow}>
+        Click Me
+      </div>
+      <Overlay visible={visible} onEscape={handleDismiss}>
+        <OverlayContainer maxWidth={400}>
+          <OverlayHeader title="Are you sure?" onDismiss={handleDismiss} />
           <OverlayBody>
             <p>
               This action could cause a lot of things to break unexpectedly.
@@ -299,60 +313,21 @@ overlayExampleStories.add(
             </p>
           </OverlayBody>
           <OverlayFooter>
-            <Button text="Cancel" />
+            <Button text="Cancel" onClick={handleDismiss} />
             <Button text="Pull the Lever!" color={ComponentColor.Danger} />
           </OverlayFooter>
         </OverlayContainer>
       </Overlay>
     </div>
-  ),
-  {
+  )
+}
+
+OverlayWithEscapeHandler.story = {
+  name: 'Overlay with Escape Handler',
+
+  parameters: {
     readme: {
-      content: marked(ConfirmationOverlayReadme),
+      content: marked.parse(ConfirmationOverlayReadme),
     },
-  }
-)
-
-overlayExampleStories.add(
-  'Overlay with Escape Handler',
-  () => {
-    const [visible, setVisibility] = useState<boolean>(false)
-
-    const handleDismiss = (): void => {
-      setVisibility(false)
-    }
-
-    const handleShow = (): void => {
-      setVisibility(true)
-    }
-
-    return (
-      <div className="story--example">
-        <div className="mockComponent mockButton" onClick={handleShow}>
-          Click Me
-        </div>
-        <Overlay visible={visible} onEscape={handleDismiss}>
-          <OverlayContainer maxWidth={number('maxWidth', 400)}>
-            <OverlayHeader title="Are you sure?" onDismiss={handleDismiss} />
-            <OverlayBody>
-              <p>
-                This action could cause a lot of things to break unexpectedly.
-                We're pretty sure you don't want to do this accidentally. What
-                will it be?
-              </p>
-            </OverlayBody>
-            <OverlayFooter>
-              <Button text="Cancel" onClick={handleDismiss} />
-              <Button text="Pull the Lever!" color={ComponentColor.Danger} />
-            </OverlayFooter>
-          </OverlayContainer>
-        </Overlay>
-      </div>
-    )
   },
-  {
-    readme: {
-      content: marked(ConfirmationOverlayReadme),
-    },
-  }
-)
+}

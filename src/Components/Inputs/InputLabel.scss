@@ -1,9 +1,9 @@
-@import '../../Styles/variables.scss';
-
 /*
   Slide Toggle Component
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-input-label {
   white-space: nowrap;

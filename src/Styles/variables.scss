@@ -289,9 +289,12 @@ $cf-transition-default: $cf-time-quick $cf-ease-snappy;
    These ensure consistent appearance across different kinds of inputs
 */
 
-$cf-input--transition: background-color $cf-transition-default,
-  border-color $cf-transition-default, color $cf-transition-default,
-  box-shadow $cf-transition-default, color $cf-transition-default;
+$cf-input--transition:
+  background-color $cf-transition-default,
+  border-color $cf-transition-default,
+  color $cf-transition-default,
+  box-shadow $cf-transition-default,
+  color $cf-transition-default;
 
 $cf-input-background--default: $cf-grey-5;
 $cf-input-background--focused: rgba($cf-grey-95, 0.15);
@@ -604,21 +607,12 @@ $cf-scrollbar-offset: 3px;
   box-shadow: 0 1px 4px 1px rgba($g0-obsidian, 0.2);
 }
 @mixin focus-shadow($color: $c-pool) {
-  box-shadow: inset 0 0 0 $cf-border rgba($color, 0.75),
+  box-shadow:
+    inset 0 0 0 $cf-border rgba($color, 0.75),
     0px 0px ($cf-border * 2) $color;
 }
 @mixin focus-glow($color: $c-pool) {
   box-shadow: 0px 0px ($cf-border * 2) $color;
-}
-
-@mixin funnel-page-background() {
-  z-index: $funnel-page--graphic-z;
-  // This image reference breaks the storybook build and is also
-  // not working properly in production
-  // background-image: url('./Images/FunnelPageGraphic.svg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 // Blur
@@ -643,7 +637,8 @@ $cf-scrollbar-offset: 3px;
   @supports (
     (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
   ) {
-    background: linear-gradient(0deg, rgba($c-pool, 0.05), rgba($c-pool, 0.05)),
+    background:
+      linear-gradient(0deg, rgba($c-pool, 0.05), rgba($c-pool, 0.05)),
       #{rgba($cf-grey-95, 0.05)};
   }
 }

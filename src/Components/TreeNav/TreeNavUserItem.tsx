@@ -5,8 +5,10 @@ import classnames from 'classnames'
 // Types
 import {StandardFunctionProps, Omit, RenderLinkElement} from '../../Types'
 
-export interface TreeNavUserItemProps
-  extends Omit<StandardFunctionProps, 'id'> {
+export interface TreeNavUserItemProps extends Omit<
+  StandardFunctionProps,
+  'id'
+> {
   /** Unique identifier for user item */
   id: string
   /** Controls highlighting of the user item */

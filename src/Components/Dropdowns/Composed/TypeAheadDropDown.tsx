@@ -21,12 +21,13 @@ import {Input} from '../../Inputs/Input'
 import {DropdownHeader} from '../DropdownHeader'
 import '../ScrollBarStyles.scss'
 import './TypeAheadDropDownStyles.scss'
+
 export interface SelectableItem {
   id: string
   name?: string
 }
 
-interface OwnProps extends StandardFunctionProps {
+interface Props extends StandardFunctionProps {
   items: SelectableItem[]
   onSelect: (item: SelectableItem | null) => void
   /** what shows in the input when nothing is selected */
@@ -51,7 +52,7 @@ const enCollator = new Intl.Collator('en-us')
 
 const LIST_ITEM_HEIGHT = 33
 
-export const TypeAheadDropDown: FC<OwnProps> = ({
+export const TypeAheadDropDown: FC<Props> = ({
   id,
   style,
   items,
@@ -90,9 +91,8 @@ export const TypeAheadDropDown: FC<OwnProps> = ({
   }
 
   const [inputValue, setInputValue] = useState<string>(initialInputValue)
-  const [backupSelectionValue, setBackupSelectionValue] = useState<string>(
-    initialInputValue
-  )
+  const [backupSelectionValue, setBackupSelectionValue] =
+    useState<string>(initialInputValue)
 
   useEffect(() => {
     // If selectedOption is invalid (not in the list of items), then we want to clear the input value
@@ -125,9 +125,10 @@ export const TypeAheadDropDown: FC<OwnProps> = ({
     }
   }, [items, inputValue])
 
-  const itemNames = useMemo(() => items.map(item => item.name?.toLowerCase()), [
-    items.length,
-  ])
+  const itemNames = useMemo(
+    () => items.map(item => item.name?.toLowerCase()),
+    [items.length]
+  )
 
   // Replicates react-window's initialScrollOffset: scroll to the selected
   // item whenever the list (re)mounts — i.e. when the menu opens or results

@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Toggle Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-toggle {
   display: flex;

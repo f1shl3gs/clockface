@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
    Panel Symbol Header
    -----------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 $panel-symbol-header-gutter-small: $cf-marg-c;
 $panel-symbol-header-gutter: $cf-marg-d + $cf-marg-b;

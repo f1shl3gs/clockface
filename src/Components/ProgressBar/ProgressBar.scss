@@ -1,5 +1,4 @@
-@import '../../Styles/variables';
-
+@use '../../Styles/variables' as *;
 .cf-progress-bar {
   @include no-user-select();
 }

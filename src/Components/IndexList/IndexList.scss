@@ -1,10 +1,10 @@
-@import '../../Styles/variables';
-@import '../../Styles/typography';
-
 /*
   Index List Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
+@use '../../Styles/typography' as *;
 
 $cf-index-list--row-height: 52px;
 $cf-index-list--sort-text: $cf-grey-65;
@@ -34,7 +34,9 @@ $cf-index-list--sort-text: $cf-grey-65;
   color: $cf-card-text--default;
   display: flex;
   align-items: center;
-  transition: opacity $cf-transition-default, color $cf-transition-default;
+  transition:
+    opacity $cf-transition-default,
+    color $cf-transition-default;
 
   &:after {
     @include createOverlayBase();
@@ -147,7 +149,9 @@ $cf-index-list--sort-text: $cf-grey-65;
   a:visited,
   a:hover,
   a:active {
-    transition: color $cf-transition-default, opacity $cf-transition-default;
+    transition:
+      color $cf-transition-default,
+      opacity $cf-transition-default;
     opacity: 0.7;
   }
 }
@@ -191,7 +195,9 @@ $cf-index-list--sort-text: $cf-grey-65;
   opacity: 0;
   position: relative;
   top: -1px;
-  transition: opacity $cf-transition-default, transform $cf-transition-default;
+  transition:
+    opacity $cf-transition-default,
+    transform $cf-transition-default;
 
   > span.cf-icon {
     position: absolute;

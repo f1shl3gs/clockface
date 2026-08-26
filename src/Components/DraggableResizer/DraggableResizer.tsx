@@ -107,12 +107,8 @@ export const DraggableResizerRoot: FunctionComponent<DraggableResizerProps> = ({
       return
     }
 
-    const {
-      x,
-      y,
-      width,
-      height,
-    } = containerRef.current.getBoundingClientRect() as DOMRect
+    const {x, y, width, height} =
+      containerRef.current.getBoundingClientRect() as DOMRect
 
     let containerSize = width
     // The single-axis position of the mouse relative to the `.draggable-resizer` container

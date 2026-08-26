@@ -1,7 +1,7 @@
-@import './reset.scss';
-@import './fonts.scss';
-@import './helpers.scss';
-@import './icon.scss';
-@import './utopia.scss';
-@import './typography.scss';
-@import './portals.scss';
+@forward './reset.scss';
+@forward './fonts.scss';
+@forward './helpers.scss';
+@forward './icon.scss';
+@forward './utopia.scss';
+@forward './typography.scss';
+@forward './portals.scss';

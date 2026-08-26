@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Button Group
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-button-group {
   display: flex;

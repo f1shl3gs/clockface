@@ -1,6 +1,7 @@
-@import '../../Styles/variables';
-
 /* Works on Firefox */
+
+@use '../../Styles/variables' as *;
+
 .menu-dropdown {
   scrollbar-width: thin;
 }

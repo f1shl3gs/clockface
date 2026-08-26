@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Right-Click Menu Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-right-click {
   position: fixed;

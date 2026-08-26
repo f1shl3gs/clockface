@@ -19,8 +19,7 @@ import {StandardFunctionProps, ComponentSize, IconFont} from '../../../Types'
 // Styles
 import './ResourceCardDescription.scss'
 
-export interface ResourceCardEditableDescriptionProps
-  extends StandardFunctionProps {
+export interface ResourceCardEditableDescriptionProps extends StandardFunctionProps {
   /** Called when user hits enter or blurs the input  */
   onUpdate: (description: string) => void
   /** Text to display in description */
@@ -51,9 +50,8 @@ export const ResourceCardEditableDescription = forwardRef<
     ref
   ) => {
     const [isEditing, setEditingState] = useState<boolean>(false)
-    const [workingDescription, setWorkingDescription] = useState<string>(
-      description
-    )
+    const [workingDescription, setWorkingDescription] =
+      useState<string>(description)
 
     const resourceCardEditableDescriptionClass = classnames(
       'cf-resource-description cf-resource-description__editable',

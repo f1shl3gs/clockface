@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Confirmation Button Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-confirmation-button--container {
   display: flex;

@@ -20,16 +20,15 @@ import {
 // Styles
 import './LinkButton.scss'
 
-export interface LinkButtonProps
-  extends Omit<
-    ButtonProps,
-    | 'onClick'
-    | 'onMouseOver'
-    | 'onMouseOut'
-    | 'onMouseEnter'
-    | 'onMouseLeave'
-    | 'type'
-  > {
+export interface LinkButtonProps extends Omit<
+  ButtonProps,
+  | 'onClick'
+  | 'onMouseOver'
+  | 'onMouseOut'
+  | 'onMouseEnter'
+  | 'onMouseLeave'
+  | 'type'
+> {
   /** Destination for link button */
   href: string
   /** Where to open to the link */

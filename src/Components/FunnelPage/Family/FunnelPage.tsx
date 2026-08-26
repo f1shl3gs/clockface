@@ -1,13 +1,13 @@
 // Libraries
 import React, {forwardRef, CSSProperties} from 'react'
 import classnames from 'classnames'
-import chroma from 'chroma-js'
 
 // Components
 import {DapperScrollbars} from '../../DapperScrollbars/DapperScrollbars'
 
 // Utilities
 import {generateInlineCSSGradient} from '../../../Utils/colors'
+import {colord} from '../../../Utils/colord'
 
 // Styles
 import './FunnelPage.scss'
@@ -57,31 +57,31 @@ export const FunnelPageRoot = forwardRef<FunnelPageRef, FunnelPageProps>(
     const accentGradientAColors = [
       {
         position: 0,
-        color: `${chroma(accentColorA).alpha(0.6)}`,
+        color: `${colord(accentColorA).alpha(0.6).toRgbString()}`,
       },
       {
         position: 100,
-        color: `${chroma(accentColorA).alpha(0)}`,
+        color: `${colord(accentColorA).alpha(0).toRgbString()}`,
       },
     ]
     const accentGradientBColors = [
       {
         position: 0,
-        color: `${chroma(accentColorB).alpha(0.6)}`,
+        color: `${colord(accentColorB).alpha(0.6).toRgbString()}`,
       },
       {
         position: 100,
-        color: `${chroma(accentColorB).alpha(0)}`,
+        color: `${colord(accentColorB).alpha(0).toRgbString()}`,
       },
     ]
     const backgroundGradientColors = [
       {
         position: 0,
-        color: `${chroma(backgroundColor).alpha(0)}`,
+        color: `${colord(backgroundColor).alpha(0).toRgbString()}`,
       },
       {
         position: 100,
-        color: `${chroma(backgroundColor).alpha(0.8)}`,
+        color: `${colord(backgroundColor).alpha(0.8).toRgbString()}`,
       },
     ]
     const accentGradientA = generateInlineCSSGradient(

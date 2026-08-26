@@ -1,5 +1,4 @@
-@import '../../../Styles/variables';
-
+@use '../../../Styles/variables' as *;
 .cf-banner-panel {
   width: 100%;
 }

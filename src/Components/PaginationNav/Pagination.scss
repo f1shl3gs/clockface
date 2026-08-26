@@ -1,9 +1,10 @@
-@import '../../Styles/variables';
-
 /*
   pagination
   ------------------------------------------------------------------------------
 */
+
+@use 'sass:math' as *;
+@use '../../Styles/variables' as *;
 
 $cf-pagination--border-color: $g5-pepper;
 $cf-pagination--direction-icon: $g14-chromium;

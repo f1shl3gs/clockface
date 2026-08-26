@@ -1,5 +1,6 @@
-@import '../../Styles/variables';
-@import '../../Styles/typography.scss';
+@use 'sass:math' as *;
+@use '../../Styles/variables' as *;
+@use '../../Styles/typography' as *;
 
 $list-item--text-opacity: 0.666;
 
@@ -56,7 +57,9 @@ $list-item--background-dark: $c-pool;
 .cf-list-item {
   z-index: 1;
   @include listItemSharedStyles();
-  transition: color $cf-transition-default, background-color 0.25s;
+  transition:
+    color $cf-transition-default,
+    background-color 0.25s;
 
   &.cf-list-item__clickable:hover,
   &.cf-list-item__clickable.cf-list-item__active {
@@ -74,7 +77,8 @@ $list-item--background-dark: $c-pool;
   border-radius: $cf-radius;
   z-index: -1;
   opacity: 1;
-  transition: opacity $cf-transition-default,
+  transition:
+    opacity $cf-transition-default,
     background-color $cf-transition-default;
   background-color: transparent;
 }

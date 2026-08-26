@@ -1,9 +1,9 @@
-@import '../../../Styles/variables.scss';
-
 /*
   Resource Editable Description
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-resource-description--preview,
 .cf-input.cf-resource-description--input > input {
@@ -24,8 +24,10 @@
   overflow: hidden;
   @include no-user-select();
   color: $cf-grey-55;
-  transition: color $cf-transition-default,
-    background-color $cf-transition-default, border-color $cf-transition-default;
+  transition:
+    color $cf-transition-default,
+    background-color $cf-transition-default,
+    border-color $cf-transition-default;
 
   .cf-icon {
     position: relative;

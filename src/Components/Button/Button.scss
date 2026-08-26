@@ -1,10 +1,10 @@
-@import '../../Styles/variables';
-@import '../../Styles/typography';
-
 /*
   Button Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
+@use '../../Styles/typography' as *;
 
 .cf-button {
   font-weight: $cf-font-weight--medium;
@@ -12,8 +12,10 @@
   border-style: solid;
   border-width: 0;
   text-decoration: none;
-  transition: background-color $cf-transition-default,
-    box-shadow $cf-transition-default, color $cf-transition-default;
+  transition:
+    background-color $cf-transition-default,
+    box-shadow $cf-transition-default,
+    color $cf-transition-default;
   outline: none;
   border-radius: $cf-radius;
   white-space: nowrap;

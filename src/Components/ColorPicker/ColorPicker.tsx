@@ -74,7 +74,7 @@ export const ColorPicker = forwardRef<ColorPickerSwatchRef, ColorPickerProps>(
       [`${className}`]: className,
     })
 
-    const inputStatus = !!errorMessage
+    const inputStatus = errorMessage
       ? ComponentStatus.Error
       : ComponentStatus.Valid
 
@@ -93,7 +93,7 @@ export const ColorPicker = forwardRef<ColorPickerSwatchRef, ColorPickerProps>(
       // is stale and this outgoing information needs to be fresh in order
       // for the stateful parent to correctly make decisions
 
-      const nextStatus = !!validationFunc(nextColor)
+      const nextStatus = validationFunc(nextColor)
         ? ComponentStatus.Error
         : ComponentStatus.Valid
 

@@ -192,7 +192,7 @@ export const CreatableTypeAheadDropdown = forwardRef<
             onClick={handleSelect}
             testID={`${testID}--item-${option}`}
           >
-            {!!customizedDropdownItem ? customizedDropdownItem(option) : option}
+            {customizedDropdownItem ? customizedDropdownItem(option) : option}
           </Dropdown.Item>
         ))}
       </Dropdown.Menu>

@@ -12,10 +12,16 @@ declare global {
     interface IntrinsicElements extends React.JSX.IntrinsicElements {}
     type Element = React.JSX.Element
     interface ElementClass extends React.JSX.ElementClass {}
-    interface ElementAttributesProperty extends React.JSX.ElementAttributesProperty {}
-    interface ElementChildrenAttribute extends React.JSX.ElementChildrenAttribute {}
+    interface ElementAttributesProperty
+      extends React.JSX.ElementAttributesProperty {}
+    interface ElementChildrenAttribute
+      extends React.JSX.ElementChildrenAttribute {}
     interface IntrinsicAttributes extends React.JSX.IntrinsicAttributes {}
-    interface IntrinsicClassAttributes<T> extends React.JSX.IntrinsicClassAttributes<T> {}
-    type LibraryManagedAttributes<C, P> = React.JSX.LibraryManagedAttributes<C, P>
+    interface IntrinsicClassAttributes<T> extends React.JSX
+      .IntrinsicClassAttributes<T> {}
+    type LibraryManagedAttributes<C, P> = React.JSX.LibraryManagedAttributes<
+      C,
+      P
+    >
   }
 }

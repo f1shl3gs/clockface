@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   CTA (Call to Action) Button Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 .cf-button-lg.cf-cta-button {
   > .cf-button--label {

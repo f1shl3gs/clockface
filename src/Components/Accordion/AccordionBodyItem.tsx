@@ -19,7 +19,8 @@ export const AccordionBodyItem = forwardRef<
   const context = useAccordionContext()
 
   const accordionBodyContainerClassName = classnames(`cf-accordion--body`, {
-    [`cf-accordion--body-alignment-${context.iconPlacementPosition}`]: context.iconPlacementPosition,
+    [`cf-accordion--body-alignment-${context.iconPlacementPosition}`]:
+      context.iconPlacementPosition,
     [`${className}`]: className,
     [`cf-accordion--body--disabled`]: context.isDisabled,
   })

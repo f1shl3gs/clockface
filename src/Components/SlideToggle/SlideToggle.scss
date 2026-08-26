@@ -1,16 +1,17 @@
-@import '../../Styles/variables.scss';
-
 /*
   Slide Toggle Component
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 $slide-toggle--gap: 3px;
 
 .cf-slide-toggle {
   position: relative;
   display: inline-block;
-  transition: background-color $cf-transition-default,
+  transition:
+    background-color $cf-transition-default,
     border-color $cf-transition-default;
   background-color: $cf-grey-25;
   overflow: hidden;
@@ -41,7 +42,8 @@ $slide-toggle--gap: 3px;
 .cf-slide-toggle--knob {
   position: absolute;
   top: 50%;
-  transition: background-color $cf-transition-default,
+  transition:
+    background-color $cf-transition-default,
     transform $cf-transition-default;
   transform: translate(0, -50%);
   border-radius: 50%;

@@ -22,13 +22,12 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es2020",
-    "types": [
-      "jest"
-    ],
+    "types": [],
     "typeRoots": [
       "node_modules/@types"
     ],
-    "isolatedModules": true
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
   "include": [
     "src",

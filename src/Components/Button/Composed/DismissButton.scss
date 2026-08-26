@@ -1,9 +1,9 @@
-@import '../../../Styles/variables';
-
 /*
   Dismiss Button
   ------------------------------------------------------------------------------
 */
+
+@use '../../../Styles/variables' as *;
 
 button.cf-dismiss-button {
   &,

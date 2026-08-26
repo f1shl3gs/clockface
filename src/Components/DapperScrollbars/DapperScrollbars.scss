@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   DapperScrollbars2 (self-contained, no react-scrollbars-custom)
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-dapper-scrollbars {
   position: relative;

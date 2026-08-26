@@ -1,5 +1,6 @@
 import {render} from '@testing-library/react'
 import {RBAC} from './RBAC'
+import {describe, expect, it} from 'vitest'
 
 const setup = (override?: {}) => {
   const props = {

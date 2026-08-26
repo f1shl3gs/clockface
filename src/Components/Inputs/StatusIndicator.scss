@@ -1,9 +1,9 @@
-@import '../../Styles/variables';
-
 /*
   Status Indicator Styles
   ------------------------------------------------------------------------------
 */
+
+@use '../../Styles/variables' as *;
 
 .cf-status-indicator {
   top: 0;

@@ -5,8 +5,10 @@ import classnames from 'classnames'
 // Types
 import {StandardFunctionProps, InputToggleType, Omit} from '../../Types'
 
-export interface SelectGroupOptionProps
-  extends Omit<StandardFunctionProps, 'id'> {
+export interface SelectGroupOptionProps extends Omit<
+  StandardFunctionProps,
+  'id'
+> {
   /** Unique identifier for this radio button */
   id: string
   /** Toggles radio button active state */

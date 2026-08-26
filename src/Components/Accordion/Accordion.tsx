@@ -61,9 +61,8 @@ export const AccordionRoot = forwardRef<AccordionRef, AccordionProps>(
     const [isExpanded, setExpanded] = useState(expanded)
     const [animation, setAnimation] = useState(false)
     const [isDisabled, setDisabled] = useState(disabled)
-    const [iconPlacementPosition, setIconPlacementPosition] = useState(
-      iconPlacement
-    )
+    const [iconPlacementPosition, setIconPlacementPosition] =
+      useState(iconPlacement)
 
     useEffect(() => {
       setExpanded(expanded)
