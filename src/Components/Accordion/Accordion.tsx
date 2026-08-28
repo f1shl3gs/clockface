@@ -91,16 +91,15 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
   )
 
   const [header, ...body] = React.Children.toArray(children)
-  const hasBody = body.length ? true : false
+  const hasBody = !!body.length
 
   /* eslint-disable */
   const onChangeFunction = () => {
     if (onChange) {
       onChange()
-    } else {
-      return
     }
   }
+
   const contextState = {
     isExpanded,
     setExpanded,
