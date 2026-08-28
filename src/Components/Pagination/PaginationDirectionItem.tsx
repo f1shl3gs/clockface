@@ -1,5 +1,5 @@
 // Libraries
-import {MouseEvent, FunctionComponent, Ref} from 'react'
+import {FunctionComponent, MouseEvent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -10,12 +10,13 @@ import './Pagination.scss'
 
 // Types
 import {
-  StandardFunctionProps,
+  ButtonShape,
   ComponentColor,
   ComponentSize,
-  ButtonShape,
+  ComponentStatus,
   Direction,
   IconFont,
+  StandardFunctionProps,
 } from '../../Types'
 
 export interface PaginationDirectionItemProps extends StandardFunctionProps {
@@ -23,7 +24,7 @@ export interface PaginationDirectionItemProps extends StandardFunctionProps {
   direction: Direction
   onClick?: (e?: MouseEvent<HTMLButtonElement>) => void
   size?: ComponentSize
-  isActive: boolean
+  active: boolean
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLLIElement>
 }
@@ -38,7 +39,7 @@ export const PaginationDirectionItem: FunctionComponent<
   direction,
   onClick,
   size = ComponentSize.Medium,
-  isActive,
+  active,
   ref,
 }) => {
   const paginationClassName = classnames('cf-pagination--item--container', {
@@ -49,6 +50,8 @@ export const PaginationDirectionItem: FunctionComponent<
     direction === Direction.Left
       ? IconFont.CaretLeft_New
       : IconFont.CaretRight_New
+
+  const status = active ? ComponentStatus.Default : ComponentStatus.Disabled
 
   return (
     <li
@@ -64,7 +67,7 @@ export const PaginationDirectionItem: FunctionComponent<
         onClick={onClick}
         shape={ButtonShape.Square}
         icon={iconFont}
-        active={isActive}
+        status={status}
       />
     </li>
   )

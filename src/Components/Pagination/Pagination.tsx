@@ -239,7 +239,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             onClick={() => moveToPage(activePage - 1)}
             key={'pagination--item-left'}
             size={size}
-            isActive={activePage > 1}
+            active={activePage > 1}
           />
         )}
         {
@@ -290,7 +290,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             onClick={() => moveToPage(activePage + 1)}
             key={'pagination--item-right'}
             size={size}
-            isActive={activePage < totalPages}
+            active={activePage < totalPages}
           />
         )}
       </ul>

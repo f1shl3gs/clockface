@@ -117,7 +117,7 @@ export const _PaginationDirectionItem = () => {
         ref={paginationDirectionItemRef}
         direction={(Direction as Record<string, any>)['Left']}
         size={(ComponentSize as Record<string, any>)['Small']}
-        isActive={false}
+        active={false}
       />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
