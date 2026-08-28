@@ -10,7 +10,6 @@ import {FormHelpText} from './FormHelpText'
 // Types
 import {
   StandardFunctionProps,
-  Omit,
   ComponentStatus,
   ValidationFunction,
 } from '../../Types'

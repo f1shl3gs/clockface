@@ -17,7 +17,6 @@ import './Toggle.scss'
 
 // Types
 import {
-  Omit,
   ComponentColor,
   ComponentSize,
   IconFont,

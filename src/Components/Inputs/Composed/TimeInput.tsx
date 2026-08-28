@@ -13,7 +13,6 @@ import {
 
 // Types
 import {
-  Omit,
   ComponentSize,
   ComponentStatus,
   InputType,

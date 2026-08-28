@@ -7,7 +7,6 @@ import {FlexBox, FlexBoxProps} from '../../FlexBox'
 
 // Types
 import {
-  Omit,
   FlexDirection,
   JustifyContent,
   AlignItems,

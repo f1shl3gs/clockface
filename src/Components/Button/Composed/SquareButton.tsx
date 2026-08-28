@@ -7,7 +7,6 @@ import {Icon} from '../../Icon/Base/Icon'
 
 // Types
 import {
-  Omit,
   ComponentStatus,
   ComponentColor,
   ComponentSize,

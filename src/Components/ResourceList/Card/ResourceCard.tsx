@@ -11,7 +11,6 @@ import {
   ComponentSize,
   FlexDirection,
   InputToggleType,
-  Omit,
 } from '../../../Types'
 
 // Styles

@@ -3,7 +3,7 @@ import {FunctionComponent} from 'react'
 import classnames from 'classnames'
 
 // Types
-import {StandardFunctionProps, Omit} from '../../Types'
+import {StandardFunctionProps} from '../../Types'
 
 export interface TreeNavSubHeadingProps extends Omit<
   StandardFunctionProps,

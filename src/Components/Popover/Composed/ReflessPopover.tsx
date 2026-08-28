@@ -5,9 +5,6 @@ import {FunctionComponent, useRef, CSSProperties} from 'react'
 import {PopoverProps} from '../Base/Popover'
 import {Popover} from '../'
 
-// Types
-import {Omit} from '../../../Types'
-
 interface ReflessPopoverProps extends Omit<PopoverProps, 'triggerRef'> {
   /** Useful for correcting any layout disruptions */
   triggerStyle?: CSSProperties

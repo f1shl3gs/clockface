@@ -3,7 +3,7 @@ import {RefObject, KeyboardEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
-import {StandardFunctionProps, InputToggleType, Omit} from '../../Types'
+import {StandardFunctionProps, InputToggleType} from '../../Types'
 
 export interface SelectGroupOptionProps extends Omit<
   StandardFunctionProps,

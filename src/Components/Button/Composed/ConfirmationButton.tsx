@@ -10,7 +10,6 @@ import './ConfirmationButton.scss'
 
 // Types
 import {
-  Omit,
   ComponentSize,
   ButtonShape,
   ComponentStatus,

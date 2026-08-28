@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import {FlexBox, FlexBoxProps} from '../../FlexBox'
 
 // Types
-import {Omit, ComponentSize, JustifyContent} from '../../../Types'
+import {ComponentSize, JustifyContent} from '../../../Types'
 
 export interface PanelFooterProps extends Omit<
   FlexBoxProps,

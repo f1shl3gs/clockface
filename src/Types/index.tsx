@@ -5,9 +5,6 @@ import {
   GRID_BREAKPOINT_LG,
 } from '../Constants'
 
-// Utilities
-export type Omit<K, V> = Pick<K, Exclude<keyof K, V>>
-
 // Standardized prop definitons
 export interface StandardFunctionProps {
   /** Unique identifier for getting an element */

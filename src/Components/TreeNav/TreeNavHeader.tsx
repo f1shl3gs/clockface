@@ -5,7 +5,6 @@ import classnames from 'classnames'
 // Types
 import {
   StandardFunctionProps,
-  Omit,
   ComponentColor,
   RenderLinkElement,
 } from '../../Types'

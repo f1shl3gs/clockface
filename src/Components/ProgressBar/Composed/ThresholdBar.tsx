@@ -3,7 +3,7 @@ import {useEffect, useState, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
-import {Gradients, InfluxColors, Omit, ComponentSize} from '../../../Types'
+import {Gradients, InfluxColors, ComponentSize} from '../../../Types'
 import {ProgressBarProps, ProgressBar} from '../ProgressBar'
 
 export type threshold = {

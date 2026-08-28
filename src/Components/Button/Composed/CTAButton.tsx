@@ -11,7 +11,6 @@ import './CTAButton.scss'
 
 // Types
 import {
-  Omit,
   IconFont,
   ComponentStatus,
   ComponentColor,

@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import {FlexBox, FlexBoxProps} from '../../FlexBox'
 
 // Types
-import {Omit, FlexDirection, AlignItems} from '../../../Types'
+import {FlexDirection, AlignItems} from '../../../Types'
 
 // Styles
 import './ResourceCardMeta.scss'

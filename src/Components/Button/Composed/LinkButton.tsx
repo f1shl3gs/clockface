@@ -8,7 +8,6 @@ import {IconAndText} from './IconAndText'
 
 // Types
 import {
-  Omit,
   ComponentStatus,
   ComponentColor,
   ComponentSize,

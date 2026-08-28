@@ -3,7 +3,7 @@ import React, {FunctionComponent} from 'react'
 import classnames from 'classnames'
 
 // Types
-import {StandardFunctionProps, Omit, RenderLinkElement} from '../../Types'
+import {StandardFunctionProps, RenderLinkElement} from '../../Types'
 
 export interface TreeNavSubItemProps extends Omit<StandardFunctionProps, 'id'> {
   /** Unique identifier for nav sub item */
