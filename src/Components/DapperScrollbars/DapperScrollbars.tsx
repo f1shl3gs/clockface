@@ -123,7 +123,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   const [overflow, setOverflow] = useState({x: false, y: false})
   const [trackLengths, setTrackLengths] = useState({x: 0, y: 0})
 
-  // ---- 受控滚动位置 ----
+  // ---- Controlled scroll position ----
   useLayoutEffect(() => {
     if (scrollerRef.current && scrollTop >= 0) {
       scrollerRef.current.scrollTop = Number(scrollTop)
@@ -145,7 +145,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     clientWidth: el.clientWidth,
   })
 
-  // ---- 度量 + 通知 onUpdate ----
+  // ---- Measure + notify onUpdate ----
   const measure = (): void => {
     const el = scrollerRef.current
     if (!el) {
@@ -180,7 +180,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     prevValuesRef.current = nextValues(el)
   }
 
-  // ---- 滚动事件 ----
+  // ---- Scroll events ----
   const handleScroll = (e: UIEvent<HTMLDivElement>): void => {
     const el = e.currentTarget
     const values = nextValues(el)
@@ -195,7 +195,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     prevValuesRef.current = values
   }
 
-  // ---- 轨道可见性 ----
+  // ---- Track visibility ----
   const showTrackX =
     !noScroll &&
     !noScrollX &&
@@ -208,7 +208,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     (!removeTracksWhenNotUsed || overflow.y) &&
     (!removeTrackYWhenNotUsed || overflow.y)
 
-  // ---- 观察容器与内容的尺寸变化 ----
+  // ---- Observe container and content size changes ----
   useLayoutEffect(() => {
     onScrollRef.current = onScroll
     onUpdateRef.current = onUpdate
@@ -238,7 +238,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     return () => ro.disconnect()
   }, [showTrackX, showTrackY])
 
-  // ---- thumb 几何（按真实轨道长度做比例映射）----
+  // ---- Thumb geometry (proportional mapping against real track length) ----
   const scrollableY = metrics.scrollHeight - metrics.clientHeight
   const scrollableX = metrics.scrollWidth - metrics.clientWidth
 
@@ -268,7 +268,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
       ? (metrics.scrollLeft / scrollableX) * thumbXTravel
       : 0
 
-  // ---- thumb 拖拽（pointer events）----
+  // ---- Thumb dragging (pointer events) ----
   const beginDrag =
     (axis: 'x' | 'y') =>
     (e: ReactPointerEvent<HTMLDivElement>): void => {
@@ -324,7 +324,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     dragRef.current = null
   }
 
-  // ---- 轨道点击翻页 ----
+  // ---- Track click paging ----
   const handleTrackClick =
     (axis: 'x' | 'y') =>
     (e: ReactMouseEvent<HTMLDivElement>): void => {
@@ -354,7 +354,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
       }
     }
 
-  // ---- 容器样式 ----
+  // ---- Container styles ----
   const containerStyle: CSSProperties = {
     ...style,
     ...((autoSize || autoSizeWidth) && !style?.width
