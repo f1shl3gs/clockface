@@ -3,17 +3,14 @@ import {useRef, ChangeEvent, Fragment, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Popover, PopoverRef} from '../'
+import {Popover} from '../'
 import {ReflessPopover} from '../Composed/ReflessPopover'
-import {
-  QuestionMarkTooltip,
-  QuestionMarkTooltipRef,
-} from '../Composed/QuestionMarkTooltip'
-import {ErrorTooltip, ErrorTooltipRef} from '../Composed/ErrorTooltip'
+import {QuestionMarkTooltip} from '../Composed/QuestionMarkTooltip'
+import {ErrorTooltip} from '../Composed/ErrorTooltip'
 import {SquareButton} from '../../Button/Composed/SquareButton'
-import {Button, ButtonRef} from '../../Button/Composed/Button'
+import {Button} from '../../Button/Composed/Button'
 import {DapperScrollbars} from '../../DapperScrollbars/DapperScrollbars'
-import {Input, InputRef} from '../../Inputs'
+import {Input} from '../../Inputs'
 
 // Types
 import {
@@ -33,6 +30,7 @@ import PopoverReadme from './Popover.md?raw'
 import ReflessPopoverReadme from './ReflessPopover.md?raw'
 import QuestionMarkTooltipReadme from './QuestionMarkTooltip.md?raw'
 import ErrorTooltipReadme from './ErrorTooltip.md?raw'
+import {DismissButton} from '../../Button/Composed/DismissButton'
 
 export default {title: 'Components/Popover/Base'}
 
@@ -49,10 +47,10 @@ export const _Popover = () => {
   const triggerRefB = useRef<HTMLDivElement>(null)
   const triggerRefC = useRef<HTMLButtonElement>(null)
   const triggerRefD = useRef<HTMLDivElement>(null)
-  const popover1Ref = useRef<PopoverRef>(null)
-  const popover2Ref = useRef<PopoverRef>(null)
-  const popover3Ref = useRef<PopoverRef>(null)
-  const popover4Ref = useRef<PopoverRef>(null)
+  const popover1Ref = useRef<HTMLDivElement>(null)
+  const popover2Ref = useRef<HTMLDivElement>(null)
+  const popover3Ref = useRef<HTMLDivElement>(null)
+  const popover4Ref = useRef<HTMLDivElement>(null)
 
   const log1Ref = (): void => {
     /* eslint-disable */
@@ -124,14 +122,14 @@ export const _Popover = () => {
           </tr>
         </tbody>
       </table>
-      <Popover.Popover
+      <Popover
         ref={popover1Ref}
         triggerRef={triggerRefA}
         enableDefaultStyles={true}
         contents={(onHide: any) => (
           <>
             This Popover uses the style prop
-            <Popover.DismissButton
+            <DismissButton
               onClick={onHide}
               color={(ComponentColor as Record<string, any>)['Primary']}
             />
@@ -150,7 +148,7 @@ export const _Popover = () => {
         color={(ComponentColor as Record<string, any>)['Primary']}
         appearance={(Appearance as Record<string, any>)['Outline']}
       />
-      <Popover.Popover
+      <Popover
         ref={popover2Ref}
         triggerRef={triggerRefB}
         enableDefaultStyles={true}
@@ -174,7 +172,7 @@ export const _Popover = () => {
         color={ComponentColor.Secondary}
         appearance={Appearance.Outline}
       />
-      <Popover.Popover
+      <Popover
         ref={popover3Ref}
         triggerRef={triggerRefC}
         enableDefaultStyles={true}
@@ -198,7 +196,7 @@ export const _Popover = () => {
         color={ComponentColor.Success}
         appearance={Appearance.Outline}
       />
-      <Popover.Popover
+      <Popover
         ref={popover4Ref}
         triggerRef={triggerRefD}
         visible={true}
@@ -242,7 +240,7 @@ export const _ReflessPopover = () => (
       contents={onHide => (
         <>
           PopoverContents
-          <Popover.DismissButton onClick={onHide} />
+          <DismissButton onClick={onHide} />
         </>
       )}
       className={''}
@@ -272,7 +270,7 @@ _ReflessPopover.story = {
 }
 
 export const _QuestionMarkTooltip = () => {
-  const popoverRef = useRef<QuestionMarkTooltipRef>(null)
+  const popoverRef = useRef<HTMLSpanElement>(null)
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -309,7 +307,7 @@ _QuestionMarkTooltip.story = {
 }
 
 export const ErrorToolTip = () => {
-  const popoverRef = useRef<ErrorTooltipRef>(null)
+  const popoverRef = useRef<HTMLSpanElement>(null)
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -349,7 +347,7 @@ export const PopoverTriggerWithinADapperScrollbars = () => {
 
   return (
     <div className="story--example">
-      <Popover.Popover
+      <Popover
         triggerRef={triggerRef}
         contents={() => (
           <>
@@ -441,7 +439,7 @@ export const PopoverAutofocusChild = () => {
 
   return (
     <div className="story--example">
-      <Popover.Popover
+      <Popover
         triggerRef={triggerRef}
         contents={() => (
           <>
@@ -488,10 +486,10 @@ export const _200PopoversFiltering = () => {
 
   const popovers = words.map(word => ({
     name: word.name,
-    triggerRef: useRef<ButtonRef>(null),
+    triggerRef: useRef<HTMLButtonElement>(null),
   }))
 
-  const handleInputChange = (e: ChangeEvent<InputRef>): void => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     updateSearchTerm(e.target.value)
   }
 
@@ -517,7 +515,7 @@ export const _200PopoversFiltering = () => {
                   text={pop.name}
                   icon={IconFont.CuboUniform}
                 />
-                <Popover.Popover
+                <Popover
                   triggerRef={pop.triggerRef}
                   contents={() => <p>{pop.name}</p>}
                   showEvent={PopoverInteraction.Click}
@@ -562,8 +560,8 @@ export const Collage = () => {
         ].map(({ref, color}) => {
           return (
             <div key={color.toString()}>
-              <div style={{height: '100px'}} ref={ref}></div>
-              <Popover.Popover
+              <div style={{height: '100px'}} ref={ref} />
+              <Popover
                 triggerRef={ref}
                 visible={true}
                 enableDefaultStyles={true}

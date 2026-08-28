@@ -448,5 +448,3 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     </div>
   )
 }
-
-DapperScrollbars.displayName = 'DapperScrollbars'

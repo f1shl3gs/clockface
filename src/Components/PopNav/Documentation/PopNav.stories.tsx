@@ -3,7 +3,7 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {PopNav, PopNavRef} from '../index'
+import {PopNav, PopNavItem} from '../index'
 
 // Types
 import {ComponentSize, Alignment, ComponentColor} from '../../../Types'
@@ -14,7 +14,7 @@ import PopNavReadme from './PopNav.md?raw'
 export default {title: 'Components/Navigation/PopNav'}
 
 export const _PopNav = () => {
-  const popNavRef = createRef<PopNavRef>()
+  const popNavRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -24,7 +24,7 @@ export const _PopNav = () => {
 
   return (
     <div className="story--example top">
-      <PopNav.PopNav
+      <PopNav
         ref={popNavRef}
         size={(ComponentSize as Record<string, any>)['Small']}
         buttonColor={(ComponentColor as Record<string, any>)['none']}
@@ -44,7 +44,7 @@ export const _PopNav = () => {
           </div>
           <div>somewhatlongusername@yourdomain.com</div>
         </div>
-        <PopNav.Item
+        <PopNavItem
           titleLink={className => (
             <a className={className} href="#">
               First Item
@@ -52,7 +52,7 @@ export const _PopNav = () => {
           )}
           active={false}
         />
-        <PopNav.Item
+        <PopNavItem
           titleLink={className => (
             <a className={className} href="#">
               Second Item
@@ -60,7 +60,7 @@ export const _PopNav = () => {
           )}
           active={false}
         />
-        <PopNav.Item
+        <PopNavItem
           titleLink={className => (
             <a className={className} href="#">
               Third Item
@@ -68,7 +68,7 @@ export const _PopNav = () => {
           )}
           active={false}
         />
-      </PopNav.PopNav>
+      </PopNav>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -86,9 +86,9 @@ _PopNav.story = {
   },
 }
 
-export const PopNavItem = () => (
+export const _PopNavItem = () => (
   <div className="story--example">
-    <PopNav.Item
+    <PopNavItem
       titleLink={className => (
         <a className={className} href="#">
           Menu Item
@@ -99,7 +99,7 @@ export const PopNavItem = () => (
   </div>
 )
 
-PopNavItem.story = {
+_PopNavItem.story = {
   name: 'PopNavItem',
 
   parameters: {

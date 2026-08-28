@@ -3,9 +3,10 @@ import React, {
   CSSProperties,
   ChangeEvent,
   KeyboardEvent,
-  forwardRef,
   RefObject,
   useState,
+  FunctionComponent,
+  Ref,
 } from 'react'
 import classnames from 'classnames'
 
@@ -27,7 +28,7 @@ import {
   InputType,
   StandardFunctionProps,
 } from '../../Types'
-import {ColorPreview} from '../ColorPicker/ColorPreview'
+import {ColorPickerPreview} from '../ColorPicker/ColorPickerPreview'
 
 export interface InputProps extends StandardFunctionProps {
   /** Minimum value for number & range types */
@@ -44,8 +45,6 @@ export interface InputProps extends StandardFunctionProps {
   onBlur?: (e?: ChangeEvent<HTMLInputElement>) => void
   /** Function to be called on focus gain */
   onFocus?: (e?: ChangeEvent<HTMLInputElement>) => void
-  /** Function to be called on key press */
-  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void
   /** Function to be called on key up */
   onKeyUp?: (e: KeyboardEvent<HTMLInputElement>) => void
   /** Function to be called on key down */
@@ -90,182 +89,171 @@ export interface InputProps extends StandardFunctionProps {
   /** Pass in a RegEx matcher for best results */
   pattern?: string
   /** Pass through for container ref */
-  containerRef?: RefObject<InputContainerRef | null>
+  containerRef?: RefObject<HTMLDivElement | null>
   /** Render input using monospace font */
   monospace?: boolean
   /** Color preview to be displayed to the left of text.
    * Value should be in #000000 format.
    * If both icon and colorPreview props are set, icon will take priority */
   colorPreview?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLInputElement>
 }
 
-export type InputRef = HTMLInputElement
-export type InputContainerRef = HTMLDivElement
+export const Input: FunctionComponent<InputProps> = ({
+  id,
+  min,
+  max,
+  step,
+  icon,
+  size = ComponentSize.Small,
+  name = '',
+  type = InputType.Text,
+  style = {width: '100%'},
+  value = '',
+  status = ComponentStatus.Default,
+  onBlur,
+  onClear,
+  testID = 'input-field',
+  pattern,
+  onFocus,
+  checked,
+  onKeyUp,
+  required = false,
+  tabIndex,
+  onChange,
+  titleText = '',
+  className,
+  children,
+  autoFocus = false,
+  maxLength,
+  onKeyDown,
+  monospace = false,
+  spellCheck = false,
+  inputStyle,
+  placeholder = '',
+  containerRef,
+  autocomplete = AutoComplete.Off,
+  disabledTitleText = 'This input is disabled',
+  colorPreview,
+  ref,
+}) => {
+  const [isFocused, setFocus] = useState<boolean>(autoFocus)
+  const correctStatus = value === value ? status : ComponentStatus.Error
 
-export const Input = forwardRef<InputRef, InputProps>(
-  (
-    {
-      id,
-      min,
-      max,
-      step,
-      icon,
-      size = ComponentSize.Small,
-      name = '',
-      type = InputType.Text,
-      style = {width: '100%'},
-      value = '',
-      status = ComponentStatus.Default,
-      onBlur,
-      onClear,
-      testID = 'input-field',
-      pattern,
-      onFocus,
-      checked,
-      onKeyUp,
-      required = false,
-      tabIndex,
-      onChange,
-      titleText = '',
-      className,
-      children,
-      autoFocus = false,
-      maxLength,
-      onKeyDown,
-      monospace = false,
-      spellCheck = false,
-      onKeyPress,
-      inputStyle,
-      placeholder = '',
-      containerRef,
-      autocomplete = AutoComplete.Off,
-      disabledTitleText = 'This input is disabled',
-      colorPreview,
-    },
-    ref
-  ) => {
-    const [isFocused, setFocus] = useState<boolean>(autoFocus)
-    const correctStatus = value === value ? status : ComponentStatus.Error
+  const inputClass = classnames('cf-input', {
+    [`cf-input-${size}`]: size,
+    'cf-input__focused': isFocused,
+    'cf-input__has-checkbox': type === InputType.Checkbox,
+    'cf-input__has-icon': icon || colorPreview,
+    'cf-input__has-clear-btn': onClear && value,
+    'cf-input__valid': correctStatus === ComponentStatus.Valid,
+    'cf-input__error': correctStatus === ComponentStatus.Error,
+    'cf-input__loading': correctStatus === ComponentStatus.Loading,
+    'cf-input__disabled': correctStatus === ComponentStatus.Disabled,
+    'cf-input-monospace': monospace,
+    [`${className}`]: className,
+  })
 
-    const inputClass = classnames('cf-input', {
-      [`cf-input-${size}`]: size,
-      'cf-input__focused': isFocused,
-      'cf-input__has-checkbox': type === InputType.Checkbox,
-      'cf-input__has-icon': icon || colorPreview,
-      'cf-input__has-clear-btn': onClear && value,
-      'cf-input__valid': correctStatus === ComponentStatus.Valid,
-      'cf-input__error': correctStatus === ComponentStatus.Error,
-      'cf-input__loading': correctStatus === ComponentStatus.Loading,
-      'cf-input__disabled': correctStatus === ComponentStatus.Disabled,
-      'cf-input-monospace': monospace,
-      [`${className}`]: className,
-    })
+  const inputFieldClass = classnames('cf-input-field', {
+    [`cf-input__indicator`]: status !== ComponentStatus.Default,
+  })
 
-    const inputFieldClass = classnames('cf-input-field', {
-      [`cf-input__indicator`]: status !== ComponentStatus.Default,
-    })
+  const handleInputFocus = (e: ChangeEvent<HTMLInputElement>): void => {
+    setFocus(true)
 
-    const handleInputFocus = (e: ChangeEvent<HTMLInputElement>): void => {
-      setFocus(true)
-
-      if (onFocus) {
-        onFocus(e)
-      }
+    if (onFocus) {
+      onFocus(e)
     }
+  }
 
-    const handleInputBlur = (e: ChangeEvent<HTMLInputElement>): void => {
-      setFocus(false)
+  const handleInputBlur = (e: ChangeEvent<HTMLInputElement>): void => {
+    setFocus(false)
 
-      if (onBlur) {
-        onBlur(e)
-      }
+    if (onBlur) {
+      onBlur(e)
     }
+  }
 
-    const inputCheckboxClass = classnames('cf-input--checkbox', {checked})
+  const inputCheckboxClass = classnames('cf-input--checkbox', {checked})
 
-    const correctlyTypedValue: string | number = value === value ? value : ''
-    const correctType: string = value === value ? type : 'text'
-    const correctlyTypedMin: string | number | undefined =
-      min === min ? min : ''
-    const correctlyTypedMax: string | number | undefined =
-      max === max ? max : ''
+  const correctlyTypedValue: string | number = value === value ? value : ''
+  const correctType: string = value === value ? type : 'text'
+  const correctlyTypedMin: string | number | undefined = min === min ? min : ''
+  const correctlyTypedMax: string | number | undefined = max === max ? max : ''
 
-    /** If both icon and colorPreview are set in props, icon has higher priority */
-    let iconElement: React.ReactElement | null = null
-    if (icon) {
-      iconElement = <Icon glyph={icon} className="cf-input-icon" />
-    } else if (colorPreview) {
-      iconElement = (
-        <ColorPreview color={colorPreview} className="cf-input-icon" />
-      )
-    }
-
-    const clearClasses = classnames('cf-input-clear-btn', {
-      large: size === ComponentSize.Large,
-      medium: size === ComponentSize.Medium,
-      xsmall: size === ComponentSize.ExtraSmall,
-    })
-
-    const clearElement = onClear && value && (
-      <DismissButton
-        onClick={onClear}
-        className={clearClasses}
-        titleText="clear this text field"
-        color={ComponentColor.Tertiary}
-        size={size}
-      />
-    )
-
-    const title =
-      status === ComponentStatus.Disabled ? disabledTitleText : titleText
-
-    return (
-      <div className={inputClass} style={style} ref={containerRef}>
-        {type !== InputType.Checkbox && (
-          <StatusIndicator
-            status={correctStatus}
-            shadow={true}
-            testID={testID}
-            size={size}
-          />
-        )}
-        <input
-          id={id}
-          ref={ref}
-          min={correctlyTypedMin}
-          max={correctlyTypedMax}
-          step={step}
-          checked={checked}
-          title={title}
-          autoComplete={autocomplete}
-          name={name}
-          type={correctType}
-          value={correctlyTypedValue}
-          placeholder={placeholder}
-          autoFocus={autoFocus}
-          spellCheck={spellCheck}
-          onChange={onChange}
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
-          onKeyPress={onKeyPress}
-          onKeyUp={onKeyUp}
-          onKeyDown={onKeyDown}
-          className={inputFieldClass}
-          disabled={status === ComponentStatus.Disabled}
-          maxLength={maxLength}
-          tabIndex={tabIndex}
-          data-testid={testID}
-          style={inputStyle}
-          required={required}
-          pattern={pattern}
-        />
-        {clearElement}
-        {type === InputType.Checkbox && <div className={inputCheckboxClass} />}
-        {iconElement}
-        {children}
-      </div>
+  /** If both icon and colorPreview are set in props, icon has higher priority */
+  let iconElement: React.ReactElement | null = null
+  if (icon) {
+    iconElement = <Icon glyph={icon} className="cf-input-icon" />
+  } else if (colorPreview) {
+    iconElement = (
+      <ColorPickerPreview color={colorPreview} className="cf-input-icon" />
     )
   }
-)
 
-Input.displayName = 'Input'
+  const clearClasses = classnames('cf-input-clear-btn', {
+    large: size === ComponentSize.Large,
+    medium: size === ComponentSize.Medium,
+    xsmall: size === ComponentSize.ExtraSmall,
+  })
+
+  const clearElement = onClear && value && (
+    <DismissButton
+      onClick={onClear}
+      className={clearClasses}
+      titleText="clear this text field"
+      color={ComponentColor.Tertiary}
+      size={size}
+    />
+  )
+
+  const title =
+    status === ComponentStatus.Disabled ? disabledTitleText : titleText
+
+  return (
+    <div className={inputClass} style={style} ref={containerRef}>
+      {type !== InputType.Checkbox && (
+        <StatusIndicator
+          status={correctStatus}
+          shadow={true}
+          testID={testID}
+          size={size}
+        />
+      )}
+      <input
+        id={id}
+        ref={ref}
+        min={correctlyTypedMin}
+        max={correctlyTypedMax}
+        step={step}
+        checked={checked}
+        title={title}
+        autoComplete={autocomplete}
+        name={name}
+        type={correctType}
+        value={correctlyTypedValue}
+        placeholder={placeholder}
+        autoFocus={autoFocus}
+        spellCheck={spellCheck}
+        onChange={onChange}
+        onBlur={handleInputBlur}
+        onFocus={handleInputFocus}
+        onKeyUp={onKeyUp}
+        onKeyDown={onKeyDown}
+        className={inputFieldClass}
+        disabled={status === ComponentStatus.Disabled}
+        maxLength={maxLength}
+        tabIndex={tabIndex}
+        data-testid={testID}
+        style={inputStyle}
+        required={required}
+        pattern={pattern}
+      />
+      {clearElement}
+      {type === InputType.Checkbox && <div className={inputCheckboxClass} />}
+      {iconElement}
+      {children}
+    </div>
+  )
+}

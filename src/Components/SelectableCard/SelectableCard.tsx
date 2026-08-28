@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, MouseEvent, KeyboardEvent} from 'react'
+import React, {MouseEvent, KeyboardEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -22,9 +22,9 @@ export interface SelectableCardProps extends StandardFunctionProps {
   /** Text label */
   label: string
   /** Useful for toggling selected state */
-  onClick: (id?: string, e?: MouseEvent<SelectableCardRef>) => void
+  onClick: (id?: string, e?: MouseEvent<HTMLDivElement>) => void
   /** Useful for toggling selected state */
-  onKeyDown?: (id?: string, e?: KeyboardEvent<SelectableCardRef>) => void
+  onKeyDown?: (id?: string, e?: KeyboardEvent<HTMLDivElement>) => void
   /** Controls font size of the card's label */
   fontSize?: ComponentSize
   /** Controls the color of the selected border */
@@ -39,96 +39,87 @@ export interface SelectableCardProps extends StandardFunctionProps {
   icon?: IconFont
   /** Customize the icon that appears in selected state */
   tabIndex?: number
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type SelectableCardRef = HTMLDivElement
+export const SelectableCard: FunctionComponent<SelectableCardProps> = ({
+  id,
+  icon,
+  style,
+  label,
+  color = ComponentColor.Success,
+  testID = 'selectable-card',
+  onClick,
+  fontSize = ComponentSize.Small,
+  selected = false,
+  disabled = false,
+  formName,
+  tabIndex,
+  children,
+  onKeyDown,
+  className,
+  ref,
+}) => {
+  const selectableCardClass = classnames('cf-selectable-card', {
+    'cf-selectable-card__selected': selected,
+    'cf-selectable-card__disabled': disabled,
+    'cf-selectable-card__has-icon': icon,
+    [`cf-selectable-card__${fontSize}`]: fontSize,
+    [`cf-selectable-card__${color}`]: color,
+    [`${className}`]: className,
+  })
 
-export const SelectableCard = forwardRef<
-  SelectableCardRef,
-  SelectableCardProps
->(
-  (
-    {
-      id,
-      icon,
-      style,
-      label,
-      color = ComponentColor.Success,
-      testID = 'selectable-card',
-      onClick,
-      fontSize = ComponentSize.Small,
-      selected = false,
-      disabled = false,
-      formName,
-      tabIndex,
-      children,
-      onKeyDown,
-      className,
-    },
-    ref
-  ) => {
-    const selectableCardClass = classnames('cf-selectable-card', {
-      'cf-selectable-card__selected': selected,
-      'cf-selectable-card__disabled': disabled,
-      'cf-selectable-card__has-icon': icon,
-      [`cf-selectable-card__${fontSize}`]: fontSize,
-      [`cf-selectable-card__${color}`]: color,
-      [`${className}`]: className,
-    })
-
-    const handleClick = (e: MouseEvent<SelectableCardRef>): void => {
-      if (!disabled) {
-        onClick(id, e)
-      }
+  const handleClick = (e: MouseEvent<HTMLDivElement>): void => {
+    if (!disabled) {
+      onClick(id, e)
     }
-
-    const handleKeyDown = (e: KeyboardEvent<SelectableCardRef>): void => {
-      if (!disabled && onKeyDown) {
-        onKeyDown(id, e)
-      }
-    }
-
-    const childrenExist = React.Children.count(children) > 0
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        className={selectableCardClass}
-        data-testid={testID}
-        tabIndex={disabled ? undefined : tabIndex}
-      >
-        <label className="cf-selectable-card--label" htmlFor={id}>
-          <span>{label}</span>
-          {icon && (
-            <span className="cf-selectable-card--indicator">
-              <Icon glyph={icon} className="cf-selectable-card--icon" />
-            </span>
-          )}
-        </label>
-        <div className="cf-selectable-card--body">
-          {childrenExist && (
-            <div className="cf-selectable-card--children">{children}</div>
-          )}
-          <input
-            className="cf-selectable-card--hidden-input"
-            id={id}
-            data-testid={`${testID}--hidden-input`}
-            name={formName}
-            type="checkbox"
-            value={label}
-            defaultChecked={selected}
-            disabled={disabled}
-            {...(tabIndex ? {tabIndex: -1} : {})}
-          />
-          <span className="cf-selectable-card--focus" />
-        </div>
-      </div>
-    )
   }
-)
 
-SelectableCard.displayName = 'SelectableCard'
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
+    if (!disabled && onKeyDown) {
+      onKeyDown(id, e)
+    }
+  }
+
+  const childrenExist = React.Children.count(children) > 0
+
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      className={selectableCardClass}
+      data-testid={testID}
+      tabIndex={disabled ? undefined : tabIndex}
+    >
+      <label className="cf-selectable-card--label" htmlFor={id}>
+        <span>{label}</span>
+        {icon && (
+          <span className="cf-selectable-card--indicator">
+            <Icon glyph={icon} className="cf-selectable-card--icon" />
+          </span>
+        )}
+      </label>
+      <div className="cf-selectable-card--body">
+        {childrenExist && (
+          <div className="cf-selectable-card--children">{children}</div>
+        )}
+        <input
+          className="cf-selectable-card--hidden-input"
+          id={id}
+          data-testid={`${testID}--hidden-input`}
+          name={formName}
+          type="checkbox"
+          value={label}
+          defaultChecked={selected}
+          disabled={disabled}
+          {...(tabIndex ? {tabIndex: -1} : {})}
+        />
+        <span className="cf-selectable-card--focus" />
+      </div>
+    </div>
+  )
+}

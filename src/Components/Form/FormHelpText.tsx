@@ -5,12 +5,10 @@ import classnames from 'classnames'
 // Types
 import {StandardFunctionProps} from '../../Types'
 
-export type FormHelpTextRef = HTMLSpanElement
-
 export interface FormHelpTextProps extends StandardFunctionProps {
   /** Input description  or instruction text */
   text: string
-  ref?: Ref<FormHelpTextRef>
+  ref?: Ref<HTMLSpanElement>
 }
 
 export const FormHelpText: FunctionComponent<FormHelpTextProps> = ({

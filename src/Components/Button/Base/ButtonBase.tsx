@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, MouseEvent} from 'react'
+import {MouseEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Styles
@@ -44,76 +44,70 @@ export interface ButtonBaseProps extends StandardFunctionProps {
   active?: boolean
   /** Button type of 'button' or 'submit' */
   type?: ButtonType
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
 
-export type ButtonBaseRef = HTMLButtonElement
+export const ButtonBase: FunctionComponent<ButtonBaseProps> = ({
+  id,
+  style,
+  onClick,
+  children,
+  tabIndex,
+  titleText,
+  disabledTitleText,
+  className,
+  onMouseOut,
+  onMouseOver,
+  onMouseEnter,
+  onMouseLeave,
+  active = false,
+  testID = 'button-base',
+  type = ButtonType.Button,
+  size = ComponentSize.Small,
+  shape = ButtonShape.Default,
+  color = ComponentColor.Default,
+  status = ComponentStatus.Default,
+  ref,
+}) => {
+  const disabled =
+    status === ComponentStatus.Disabled || status === ComponentStatus.Loading
 
-export const ButtonBase = forwardRef<ButtonBaseRef, ButtonBaseProps>(
-  (
+  const buttonBaseClass = classnames(
+    `cf-button cf-button-${size} cf-button-${color}`,
     {
-      id,
-      style,
-      onClick,
-      children,
-      tabIndex,
-      titleText,
-      disabledTitleText,
-      className,
-      onMouseOut,
-      onMouseOver,
-      onMouseEnter,
-      onMouseLeave,
-      active = false,
-      testID = 'button-base',
-      type = ButtonType.Button,
-      size = ComponentSize.Small,
-      shape = ButtonShape.Default,
-      color = ComponentColor.Default,
-      status = ComponentStatus.Default,
-    },
-    ref
-  ) => {
-    const disabled =
-      status === ComponentStatus.Disabled || status === ComponentStatus.Loading
+      'cf-button-square': shape === ButtonShape.Square,
+      'cf-button-stretch': shape === ButtonShape.StretchToFit,
+      'cf-button--loading': status === ComponentStatus.Loading,
+      'cf-button--disabled': status === ComponentStatus.Disabled,
+      active,
+      [`${className}`]: className,
+    }
+  )
 
-    const buttonBaseClass = classnames(
-      `cf-button cf-button-${size} cf-button-${color}`,
-      {
-        'cf-button-square': shape === ButtonShape.Square,
-        'cf-button-stretch': shape === ButtonShape.StretchToFit,
-        'cf-button--loading': status === ComponentStatus.Loading,
-        'cf-button--disabled': status === ComponentStatus.Disabled,
-        active,
-        [`${className}`]: className,
-      }
-    )
+  const titleTextToBeUsed =
+    status === ComponentStatus.Disabled && disabledTitleText
+      ? disabledTitleText
+      : titleText
 
-    const titleTextToBeUsed =
-      status === ComponentStatus.Disabled && disabledTitleText
-        ? disabledTitleText
-        : titleText
-
-    return (
-      <button
-        className={buttonBaseClass}
-        disabled={disabled}
-        onClick={onClick}
-        onMouseOut={onMouseOut}
-        onMouseOver={onMouseOver}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        title={titleTextToBeUsed}
-        tabIndex={tabIndex ? tabIndex : 0}
-        type={type}
-        data-testid={testID}
-        id={id}
-        style={style}
-        ref={ref}
-      >
-        <span>{children}</span>
-      </button>
-    )
-  }
-)
-
-ButtonBase.displayName = 'ButtonBase'
+  return (
+    <button
+      className={buttonBaseClass}
+      disabled={disabled}
+      onClick={onClick}
+      onMouseOut={onMouseOut}
+      onMouseOver={onMouseOver}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      title={titleTextToBeUsed}
+      tabIndex={tabIndex ? tabIndex : 0}
+      type={type}
+      data-testid={testID}
+      id={id}
+      style={style}
+      ref={ref}
+    >
+      <span>{children}</span>
+    </button>
+  )
+}

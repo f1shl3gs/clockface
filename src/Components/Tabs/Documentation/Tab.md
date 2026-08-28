@@ -7,7 +7,7 @@ Just an individual tab component.
 import {Tabs} from '@influxdata/clockface'
 ```
 ```tsx
-<Tabs.Tab />
+<Tab />
 ```
 
 ### Example

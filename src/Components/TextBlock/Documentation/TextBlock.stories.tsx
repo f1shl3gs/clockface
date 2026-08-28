@@ -1,9 +1,9 @@
 // Libraries
-import {CSSProperties, RefObject, createRef} from 'react'
+import {CSSProperties, createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {TextBlock, TextBlockRef} from '../'
+import {TextBlock} from '../'
 
 // Types
 import {ComponentSize} from '../../../Types'
@@ -20,10 +20,10 @@ const customTextBlockStyles: CSSProperties = {
 }
 
 export const Example = () => {
-  const textBlock1Ref: RefObject<TextBlockRef | null> = createRef()
-  const textBlock2Ref: RefObject<TextBlockRef | null> = createRef()
-  const textBlock3Ref: RefObject<TextBlockRef | null> = createRef()
-  const textBlock4Ref: RefObject<TextBlockRef | null> = createRef()
+  const textBlock1Ref = createRef<HTMLDivElement>()
+  const textBlock2Ref = createRef<HTMLDivElement>()
+  const textBlock3Ref = createRef<HTMLDivElement>()
+  const textBlock4Ref = createRef<HTMLDivElement>()
 
   const logLabelRefs = (): void => {
     /* eslint-disable */

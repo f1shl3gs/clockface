@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -10,48 +10,39 @@ export interface ListEmptyStateProps extends StandardFunctionProps {
   wrapText?: boolean
   /** Size of this component */
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type ListEmptyStateRef = HTMLDivElement
+export const ListEmptyState: FunctionComponent<ListEmptyStateProps> = ({
+  id,
+  size = ComponentSize.Small,
+  style,
+  testID = 'list-empty-state',
+  wrapText = false,
+  children,
+  className,
+  ref,
+}) => {
+  const listEmptyStateClass = classnames('cf-list-empty-state', {
+    [`${className}`]: className,
+    [`cf-list-item__${size}`]: size,
+  })
 
-export const ListEmptyState = forwardRef<
-  ListEmptyStateRef,
-  ListEmptyStateProps
->(
-  (
-    {
-      id,
-      size = ComponentSize.Small,
-      style,
-      testID = 'list-empty-state',
-      wrapText = false,
-      children,
-      className,
-    },
-    ref
-  ) => {
-    const listEmptyStateClass = classnames('cf-list-empty-state', {
-      [`${className}`]: className,
-      [`cf-list-item__${size}`]: size,
-    })
+  const listEmptyStateTextClass = classnames('cf-list-empty-state--text', {
+    'cf-list-item--text__wrap': wrapText,
+    'cf-list-item--text__no-wrap': !wrapText,
+  })
 
-    const listEmptyStateTextClass = classnames('cf-list-empty-state--text', {
-      'cf-list-item--text__wrap': wrapText,
-      'cf-list-item--text__no-wrap': !wrapText,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={listEmptyStateClass}
-      >
-        <div className={listEmptyStateTextClass}>{children}</div>
-      </div>
-    )
-  }
-)
-
-ListEmptyState.displayName = 'ListEmptyState'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={listEmptyStateClass}
+    >
+      <div className={listEmptyStateTextClass}>{children}</div>
+    </div>
+  )
+}

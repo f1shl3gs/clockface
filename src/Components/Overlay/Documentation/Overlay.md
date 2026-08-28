@@ -9,15 +9,15 @@ import {Overlay} from '@influxdata/clockface'
 All components in the `Overlay` family can be accessed from the single class import
 ```tsx
 <Overlay visible={true}>
-  <Overlay.Container maxWidth={600}>
+  <OverlayContainer maxWidth={600}>
     <Overlay.Header />
-    <Overlay.Body>
+    <OverlayBody>
       // Contents go here
-    </Overlay.Body>
+    </OverlayBody>
     <Overlay.Footer>
       // Action buttons go here
     </Overlay.Footer>
-  </Overlay.Container>
+  </OverlayContainer>
 </Overlay>
 ```
 

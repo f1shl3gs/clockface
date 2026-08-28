@@ -3,15 +3,33 @@ import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {AppWrapper, AppWrapperRef} from '../AppWrapper'
-import {AppHeader} from '../../AppHeader'
-import {NavMenu} from '../../NavMenu'
+import {AppWrapper} from '../AppWrapper'
+import {AppHeader, AppHeaderLogo} from '../../AppHeader'
+import {NavMenu, NavMenuItem, NavMenuSubItem} from '../../NavMenu'
 import {FlexBox} from '../../FlexBox'
 import {Button} from '../../Button/Composed/Button'
-import {PopNav} from '../../PopNav'
-import {Page} from '../../Page/index'
+import {PopNav, PopNavItem} from '../../PopNav'
+import {
+  Page,
+  PageContents,
+  PageControlBar,
+  PageControlBarCenter,
+  PageControlBarLeft,
+  PageControlBarRight,
+  PageHeader,
+  PageTitle,
+} from '../../Page/index'
 import {Icon} from '../../Icon/Base/Icon'
-import {TreeNav} from '../../TreeNav'
+import {
+  TreeNav,
+  TreeNavHeader,
+  TreeNavItem,
+  TreeNavSubHeading,
+  TreeNavSubItem,
+  TreeNavSubMenu,
+  TreeNavUser,
+  TreeNavUserItem,
+} from '../../TreeNav'
 import {InfluxDataLogo} from '../../Logo'
 
 // Types
@@ -28,7 +46,7 @@ import AppWrapperReadme from './AppWrapper.md?raw'
 export default {title: 'Layout/AppWrapper'}
 
 export const _AppWrapper = () => {
-  const appWrapperRef = createRef<AppWrapperRef>()
+  const appWrapperRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -40,7 +58,7 @@ export const _AppWrapper = () => {
     <div className="mockPageWrapper">
       <div className="mockPage">
         <AppHeader size={(ComponentSize as Record<string, any>)['Small']}>
-          <AppHeader.Logo
+          <AppHeaderLogo
             src={'/static/media/.storybook/influxdata-logo.png'}
             size={(ComponentSize as Record<string, any>)['Small']}
           />
@@ -74,7 +92,7 @@ export const _AppWrapper = () => {
                   somewhatlongusername@yourdomain.com
                 </div>
               </div>
-              <PopNav.Item
+              <PopNavItem
                 titleLink={className => (
                   <a className={className} href="#">
                     First Item
@@ -82,7 +100,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <PopNav.Item
+              <PopNavItem
                 titleLink={className => (
                   <a className={className} href="#">
                     Second Item
@@ -90,7 +108,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <PopNav.Item
+              <PopNavItem
                 titleLink={className => (
                   <a className={className} href="#">
                     Third Item
@@ -103,7 +121,7 @@ export const _AppWrapper = () => {
         </AppHeader>
         <AppWrapper ref={appWrapperRef} presentationMode={false}>
           <NavMenu>
-            <NavMenu.Item
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   JohnDoe (OrgName)
@@ -116,7 +134,7 @@ export const _AppWrapper = () => {
               )}
               active={false}
             >
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Switch Organizations
@@ -124,7 +142,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Create Organization
@@ -132,7 +150,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Logout
@@ -140,8 +158,8 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-            </NavMenu.Item>
-            <NavMenu.Item
+            </NavMenuItem>
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Queries
@@ -154,7 +172,7 @@ export const _AppWrapper = () => {
               )}
               active={false}
             />
-            <NavMenu.Item
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Dashboards
@@ -167,7 +185,7 @@ export const _AppWrapper = () => {
               )}
               active={false}
             />
-            <NavMenu.Item
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Tasks
@@ -180,7 +198,7 @@ export const _AppWrapper = () => {
               )}
               active={true}
             />
-            <NavMenu.Item
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Monitoring & Alerts
@@ -193,7 +211,7 @@ export const _AppWrapper = () => {
               )}
               active={false}
             >
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     History
@@ -201,8 +219,8 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-            </NavMenu.Item>
-            <NavMenu.Item
+            </NavMenuItem>
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Load Data
@@ -215,7 +233,7 @@ export const _AppWrapper = () => {
               )}
               active={false}
             >
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Buckets
@@ -223,7 +241,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Telegraf
@@ -231,7 +249,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Scrapers
@@ -239,7 +257,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Tokens
@@ -247,7 +265,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Client Libraries
@@ -255,8 +273,8 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-            </NavMenu.Item>
-            <NavMenu.Item
+            </NavMenuItem>
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Settings
@@ -269,7 +287,7 @@ export const _AppWrapper = () => {
               )}
               active={false}
             >
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Members
@@ -277,7 +295,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Variables
@@ -285,7 +303,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Templates
@@ -293,7 +311,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Labels
@@ -301,7 +319,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Profile
@@ -309,8 +327,8 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-            </NavMenu.Item>
-            <NavMenu.Item
+            </NavMenuItem>
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Cloud
@@ -323,7 +341,7 @@ export const _AppWrapper = () => {
               )}
               active={false}
             >
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Billing
@@ -331,7 +349,7 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-              <NavMenu.SubItem
+              <NavMenuSubItem
                 titleLink={(className: string) => (
                   <a className={className} href="#">
                     Usage
@@ -339,8 +357,8 @@ export const _AppWrapper = () => {
                 )}
                 active={false}
               />
-            </NavMenu.Item>
-            <NavMenu.Item
+            </NavMenuItem>
+            <NavMenuItem
               titleLink={(className: string) => (
                 <a className={className} href="#">
                   Feedback
@@ -355,27 +373,27 @@ export const _AppWrapper = () => {
             />
           </NavMenu>
           <Page titleTag="bloop">
-            <Page.Header
+            <PageHeader
               fullWidth={false}
               gutters={(ComponentSize as Record<string, any>)['Small']}
             >
-              <Page.Title title={'Page head, feet, and toes'} />
-            </Page.Header>
-            <Page.ControlBar
+              <PageTitle title={'Page head, feet, and toes'} />
+            </PageHeader>
+            <PageControlBar
               fullWidth={false}
               gutters={(ComponentSize as Record<string, any>)['Small']}
             >
-              <Page.ControlBarLeft>
+              <PageControlBarLeft>
                 <div className="mockComponent mockButton">Left Button</div>
-              </Page.ControlBarLeft>
-              <Page.ControlBarCenter>
+              </PageControlBarLeft>
+              <PageControlBarCenter>
                 <div className="mockComponent mockButton">Center Button</div>
-              </Page.ControlBarCenter>
-              <Page.ControlBarRight>
+              </PageControlBarCenter>
+              <PageControlBarRight>
                 <div className="mockComponent mockButton">Right Button</div>
-              </Page.ControlBarRight>
-            </Page.ControlBar>
-            <Page.Contents
+              </PageControlBarRight>
+            </PageControlBar>
+            <PageContents
               fullWidth={false}
               scrollable={true}
               gutters={(ComponentSize as Record<string, any>)['Small']}
@@ -389,7 +407,7 @@ export const _AppWrapper = () => {
                   and for scrolling
                 </h4>
               </div>
-            </Page.Contents>
+            </PageContents>
           </Page>
         </AppWrapper>
       </div>
@@ -413,7 +431,7 @@ _AppWrapper.story = {
 export const AppWrapperTreeNav = () => {
   const [navState, setNavState] = useState<boolean>(true)
   const [navActiveItem, setNavActiveItem] = useState<string>('data')
-  const appWrapperRef = createRef<AppWrapperRef>()
+  const appWrapperRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -483,7 +501,7 @@ export const AppWrapperTreeNav = () => {
         <AppWrapper ref={appWrapperRef} presentationMode={false}>
           <TreeNav
             headerElement={
-              <TreeNav.Header
+              <TreeNavHeader
                 id="home"
                 label={<InfluxDataLogo simplified />}
                 onClick={handleNavClick}
@@ -497,139 +515,134 @@ export const AppWrapperTreeNav = () => {
             expanded={navState}
             onToggleClick={handleToggleNavState}
             userElement={
-              <TreeNav.User id="user" username="Company Name" team="Team Name">
-                <>
-                  <TreeNav.SubHeading label="Company" />
-                  <TreeNav.UserItem id="billing" label="Billing" />
-                  <TreeNav.UserItem
-                    id="members"
-                    label="Members"
-                    linkElement={className => (
-                      <a href="#" className={className} />
-                    )}
-                  />
-                  <TreeNav.UserItem id="about" label="About" />
-                  <TreeNav.SubHeading label="Team" />
-                  <TreeNav.UserItem id="members" label="Members" />
-                  <TreeNav.UserItem id="about" label="About" />
-                  <TreeNav.SubHeading
-                    label="somebody@somewhere.com"
-                    lowercase
-                  />
-                  <TreeNav.UserItem id="switch" label="Switch workspace" />
-                  <TreeNav.UserItem id="logout" label="Logout" />
-                </>
-              </TreeNav.User>
+              <TreeNavUser id="user" username="Company Name" team="Team Name">
+                <TreeNavSubHeading label="Company" />
+                <TreeNavUserItem id="billing" label="Billing" />
+                <TreeNavUserItem
+                  id="members"
+                  label="Members"
+                  linkElement={className => (
+                    <a href="#" className={className} />
+                  )}
+                />
+                <TreeNavUserItem id="about" label="About" />
+                <TreeNavSubHeading label="Team" />
+                <TreeNavUserItem id="members" label="Members" />
+                <TreeNavUserItem id="about" label="About" />
+                <TreeNavSubHeading label="somebody@somewhere.com" lowercase />
+                <TreeNavUserItem id="switch" label="Switch workspace" />
+                <TreeNavUserItem id="logout" label="Logout" />
+              </TreeNavUser>
             }
           >
-            <TreeNav.Item
+            <TreeNavItem
               id="data"
               label="Ingest"
               icon={<Icon glyph={IconFont.Download_New} />}
               active={isItemActive('data')}
               onClick={handleNavClick}
             >
-              <TreeNav.SubMenu>
-                <TreeNav.SubHeading label="Ingest" />
-                <TreeNav.SubItem
+              <TreeNavSubMenu>
+                <TreeNavSubHeading label="Ingest" />
+                <TreeNavSubItem
                   id="data-buckets"
                   label="Buckets"
                   active={isItemActive('data-buckets')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="data-sources"
                   label="Sources"
                   active={isItemActive('data-sources')}
                   onClick={handleNavClick}
                 />
-              </TreeNav.SubMenu>
-            </TreeNav.Item>
-            <TreeNav.Item
+              </TreeNavSubMenu>
+            </TreeNavItem>
+            <TreeNavItem
               id="build"
               label="Build"
               icon={<Icon glyph={IconFont.Braces} />}
               active={isItemActive('build')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="monitor"
               label="Monitor & Alert"
               icon={<Icon glyph={IconFont.GraphLine_New} />}
               active={isItemActive('boards')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="access"
               label="Access"
               icon={<Icon glyph={IconFont.Lock} />}
               active={isItemActive('access')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="settings"
               label="Settings"
               icon={<Icon glyph={IconFont.CogOutline_New} />}
               active={isItemActive('settings')}
               onClick={handleNavClick}
             >
-              <TreeNav.SubMenu>
-                <TreeNav.SubHeading label="Settings" />
-                <TreeNav.SubItem
+              <TreeNavSubMenu>
+                <TreeNavSubHeading label="Settings" />
+                <TreeNavSubItem
                   id="settings-members"
                   label="Members"
                   active={isItemActive('settings-members')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-variables"
                   label="Variables"
                   active={isItemActive('settings-variables')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-templates"
                   label="Templates"
                   active={isItemActive('settings-templates')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-labels"
                   label="Labels"
                   active={isItemActive('settings-labels')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-profile"
                   label="Profile"
                   active={isItemActive('settings-profile')}
                   onClick={handleNavClick}
                 />
-              </TreeNav.SubMenu>
-            </TreeNav.Item>
+              </TreeNavSubMenu>
+            </TreeNavItem>
           </TreeNav>
           <Page titleTag="bloop">
-            <Page.Header
+            <PageHeader
               fullWidth={false}
               gutters={(ComponentSize as Record<string, any>)['Small']}
             >
-              <Page.Title title={lookupPageTitle()} />
-            </Page.Header>
-            <Page.ControlBar
+              <PageTitle title={lookupPageTitle()} />
+            </PageHeader>
+            <PageControlBar
               fullWidth={false}
               gutters={(ComponentSize as Record<string, any>)['Small']}
             >
-              <Page.ControlBarLeft>
+              <PageControlBarLeft>
                 <div className="mockComponent mockButton">Left Button</div>
-              </Page.ControlBarLeft>
-              <Page.ControlBarCenter>
+              </PageControlBarLeft>
+              <PageControlBarCenter>
                 <div className="mockComponent mockButton">Center Button</div>
-              </Page.ControlBarCenter>
-              <Page.ControlBarRight>
+              </PageControlBarCenter>
+              <PageControlBarRight>
                 <div className="mockComponent mockButton">Right Button</div>
-              </Page.ControlBarRight>
-            </Page.ControlBar>
-            <Page.Contents
+              </PageControlBarRight>
+            </PageControlBar>
+            <PageContents
               fullWidth={false}
               scrollable={true}
               gutters={(ComponentSize as Record<string, any>)['Small']}
@@ -643,7 +656,7 @@ export const AppWrapperTreeNav = () => {
                   and for scrolling
                 </h4>
               </div>
-            </Page.Contents>
+            </PageContents>
           </Page>
         </AppWrapper>
       </div>

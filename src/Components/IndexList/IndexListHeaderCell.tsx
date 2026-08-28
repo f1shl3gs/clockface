@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, FunctionComponent} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -18,68 +18,61 @@ export interface IndexListHeaderCellProps extends StandardFunctionProps {
   sortKey?: string
   /** Useful for triggering a change in sort state */
   onClick?: (nextSort: Sort, sortKey: string | undefined) => void
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLTableCellElement>
 }
 
-export type IndexListHeaderCellRef = HTMLTableHeaderCellElement
-
-export const IndexListHeaderCell = forwardRef<
-  IndexListHeaderCellRef,
+export const IndexListHeaderCell: FunctionComponent<
   IndexListHeaderCellProps
->(
-  (
-    {
-      id,
-      sort,
-      style,
-      width,
-      sortKey,
-      onClick,
-      columnName = '',
-      alignment = Alignment.Left,
-      testID = 'index-list--header-cell',
-    },
-    ref
-  ) => {
-    const IndexListHeaderCellClass = classnames('cf-index-list--header-cell', {
-      'cf-index-list--align-left': alignment === Alignment.Left,
-      'cf-index-list--align-center': alignment === Alignment.Center,
-      'cf-index-list--align-right': alignment === Alignment.Right,
-      'cf-index-list--sortable': isSortable(sort),
-      'cf-index-list--sort-descending': sort === Sort.Descending,
-      'cf-index-list--sort-ascending': sort === Sort.Ascending,
-    })
+> = ({
+  id,
+  sort,
+  style,
+  width,
+  sortKey,
+  onClick,
+  columnName = '',
+  alignment = Alignment.Left,
+  testID = 'index-list--header-cell',
+  ref,
+}) => {
+  const IndexListHeaderCellClass = classnames('cf-index-list--header-cell', {
+    'cf-index-list--align-left': alignment === Alignment.Left,
+    'cf-index-list--align-center': alignment === Alignment.Center,
+    'cf-index-list--align-right': alignment === Alignment.Right,
+    'cf-index-list--sortable': isSortable(sort),
+    'cf-index-list--sort-descending': sort === Sort.Descending,
+    'cf-index-list--sort-ascending': sort === Sort.Ascending,
+  })
 
-    const handleClick = (): void => {
-      if (!onClick || !sort || !sortKey) {
-        return
-      }
-
-      if (sort === Sort.None) {
-        onClick(Sort.Ascending, sortKey)
-      } else if (sort === Sort.Ascending) {
-        onClick(Sort.Descending, sortKey)
-      } else if (sort === Sort.Descending) {
-        onClick(Sort.None, sortKey)
-      }
+  const handleClick = (): void => {
+    if (!onClick || !sort || !sortKey) {
+      return
     }
 
-    return (
-      <th
-        ref={ref}
-        className={IndexListHeaderCellClass}
-        style={{width, ...style}}
-        onClick={handleClick}
-        data-testid={testID}
-        id={id}
-      >
-        {columnName}
-        <SortIndicator sortable={isSortable(sort)} />
-      </th>
-    )
+    if (sort === Sort.None) {
+      onClick(Sort.Ascending, sortKey)
+    } else if (sort === Sort.Ascending) {
+      onClick(Sort.Descending, sortKey)
+    } else if (sort === Sort.Descending) {
+      onClick(Sort.None, sortKey)
+    }
   }
-)
 
-IndexListHeaderCell.displayName = 'IndexListHeaderCell'
+  return (
+    <th
+      ref={ref}
+      className={IndexListHeaderCellClass}
+      style={{width, ...style}}
+      onClick={handleClick}
+      data-testid={testID}
+      id={id}
+    >
+      {columnName}
+      <SortIndicator sortable={isSortable(sort)} />
+    </th>
+  )
+}
 
 const SortIndicator: FunctionComponent<{sortable: boolean}> = ({sortable}) => {
   if (sortable) {

@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, ChangeEvent, MouseEvent} from 'react'
+import {ChangeEvent, MouseEvent, FunctionComponent, Ref} from 'react'
 
 // Components
 import {Input} from '../Inputs/Input'
@@ -22,13 +22,17 @@ export interface PaginationInputProps extends StandardFunctionProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void | undefined
   onClick?: (e?: MouseEvent<HTMLButtonElement>) => void
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLInputElement>
 }
 
-export type PaginationInputRef = HTMLInputElement
-export const PaginationInput = forwardRef<
-  PaginationInputRef,
-  PaginationInputProps
->(({size = ComponentSize.Small, currentPage = 1, onChange, onClick}, ref) => {
+export const PaginationInput: FunctionComponent<PaginationInputProps> = ({
+  size = ComponentSize.Small,
+  currentPage = 1,
+  onChange,
+  onClick,
+  ref,
+}) => {
   const iconFont = 'CaretRight'
   const inputStyles = {width: currentPage.toString().length + 6 + 'ch'}
 
@@ -56,6 +60,4 @@ export const PaginationInput = forwardRef<
       />
     </div>
   )
-})
-
-PaginationInput.displayName = 'PaginationInput'
+}

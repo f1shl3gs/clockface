@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react' // Styles
+import {FunctionComponent, Ref} from 'react' // Styles
 import classnames from 'classnames'
 
 // Types
@@ -8,14 +8,19 @@ import {StandardFunctionProps} from '../../Types'
 //Context
 import {useAccordionContext} from './Accordion'
 
-export interface AccordionBodyItemProps extends StandardFunctionProps {}
+export interface AccordionBodyItemProps extends StandardFunctionProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
+}
 
-export type AccordionBodyItemRef = HTMLDivElement
-
-export const AccordionBodyItem = forwardRef<
-  AccordionBodyItemRef,
-  AccordionBodyItemProps
->(({id, style, testID = 'accordion-body', children, className}, ref) => {
+export const AccordionBodyItem: FunctionComponent<AccordionBodyItemProps> = ({
+  id,
+  style,
+  testID = 'accordion-body',
+  children,
+  className,
+  ref,
+}) => {
   const context = useAccordionContext()
 
   const accordionBodyContainerClassName = classnames(`cf-accordion--body`, {
@@ -36,6 +41,4 @@ export const AccordionBodyItem = forwardRef<
       {children}
     </div>
   )
-})
-
-AccordionBodyItem.displayName = 'AccordionBodyItem'
+}

@@ -1,5 +1,11 @@
 // Libraries
-import React, {forwardRef, RefObject, CSSProperties, ReactNode} from 'react'
+import React, {
+  RefObject,
+  CSSProperties,
+  ReactNode,
+  FunctionComponent,
+  Ref,
+} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -25,84 +31,77 @@ export interface DropdownMenuProps extends StandardFunctionProps {
   /** Function to handle closing the menu when a child item is clicked */
   onCollapse?: () => void
   /** Pass through ref for contents element within scrollbars */
-  contentsRef?: RefObject<DropdownMenuContentsRef | null>
+  contentsRef?: RefObject<HTMLDivElement | null>
   /** Useful for customizing appearance of the contents element within scrollbars */
   contentsStyle?: CSSProperties
   /** Controls autoHide behavior of scrollbars within the menu */
   autoHideScrollbars?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type DropdownMenuRef = HTMLDivElement
-export type DropdownMenuContentsRef = HTMLDivElement
+export const DropdownMenu: FunctionComponent<DropdownMenuProps> = ({
+  id,
+  theme = DropdownMenuTheme.Onyx,
+  style = {width: '100%'},
+  testID = 'dropdown-menu',
+  children,
+  maxHeight = 250,
+  noScrollX = true,
+  noScrollY = false,
+  className,
+  onCollapse,
+  contentsRef,
+  contentsStyle,
+  scrollToSelected = true,
+  autoHideScrollbars = false,
+  ref,
+}) => {
+  const DropdownMenuClass = classnames('cf-dropdown-menu', {
+    [`${className}`]: className,
+    [`cf-dropdown__${theme}`]: theme,
+  })
 
-export const DropdownMenu = forwardRef<DropdownMenuRef, DropdownMenuProps>(
-  (
-    {
-      id,
-      theme = DropdownMenuTheme.Onyx,
-      style = {width: '100%'},
-      testID = 'dropdown-menu',
-      children,
-      maxHeight = 250,
-      noScrollX = true,
-      noScrollY = false,
-      className,
-      onCollapse,
-      contentsRef,
-      contentsStyle,
-      scrollToSelected = true,
-      autoHideScrollbars = false,
-    },
-    ref
-  ) => {
-    const DropdownMenuClass = classnames('cf-dropdown-menu', {
-      [`${className}`]: className,
-      [`cf-dropdown__${theme}`]: theme,
-    })
+  // const {thumbStartColor, thumbStopColor} = getScrollbarColorsFromTheme(theme)
 
-    // const {thumbStartColor, thumbStopColor} = getScrollbarColorsFromTheme(theme)
+  const scrollTop = calculateSelectedPosition(scrollToSelected, children)
 
-    const scrollTop = calculateSelectedPosition(scrollToSelected, children)
-
-    const scrollbarsStyle = {
-      width: '100%',
-      minWidth: '100%',
-      maxWidth: '100%',
-      maxHeight: `${maxHeight}px`,
-    }
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={DropdownMenuClass}
-        data-testid={testID}
-      >
-        <DapperScrollbars
-          style={scrollbarsStyle}
-          autoHide={autoHideScrollbars}
-          autoSizeHeight={true}
-          noScrollX={noScrollX}
-          noScrollY={noScrollY}
-          scrollTop={scrollTop}
-        >
-          <div
-            ref={contentsRef}
-            style={contentsStyle}
-            onClick={onCollapse}
-            className="cf-dropdown-menu--contents"
-            data-testid={`${testID}--contents`}
-          >
-            {children}
-          </div>
-        </DapperScrollbars>
-      </div>
-    )
+  const scrollbarsStyle = {
+    width: '100%',
+    minWidth: '100%',
+    maxWidth: '100%',
+    maxHeight: `${maxHeight}px`,
   }
-)
 
-DropdownMenu.displayName = 'DropdownMenu'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={DropdownMenuClass}
+      data-testid={testID}
+    >
+      <DapperScrollbars
+        style={scrollbarsStyle}
+        autoHide={autoHideScrollbars}
+        autoSizeHeight={true}
+        noScrollX={noScrollX}
+        noScrollY={noScrollY}
+        scrollTop={scrollTop}
+      >
+        <div
+          ref={contentsRef}
+          style={contentsStyle}
+          onClick={onCollapse}
+          className="cf-dropdown-menu--contents"
+          data-testid={`${testID}--contents`}
+        >
+          {children}
+        </div>
+      </DapperScrollbars>
+    </div>
+  )
+}
 
 const calculateSelectedPosition = (
   scrollToSelected: boolean,

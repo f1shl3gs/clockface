@@ -1,6 +1,6 @@
 # Index List Header Cell
 
-IndexListHeaderCells are intended to be the children of `<IndexList.Header />`. They can be accessed via the single `IndexList` import as a subclass.
+IndexListHeaderCells are intended to be the children of `<IndexListHeader />`. They can be accessed via the single `IndexList` import as a subclass.
 
 ### Usage
 ```tsx

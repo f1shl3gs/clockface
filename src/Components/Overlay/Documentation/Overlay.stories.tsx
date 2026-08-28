@@ -1,14 +1,14 @@
 // Libraries
-import {RefObject, createRef, useState} from 'react'
+import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {OverlayRoot as Overlay} from '../Overlay'
-import {OverlayContainer, OverlayContainerRef} from '../OverlayContainer'
-import {OverlayMask, OverlayMaskRef} from '../OverlayMask'
-import {OverlayHeader, OverlayHeaderRef} from '../OverlayHeader'
-import {OverlayBody, OverlayBodyRef} from '../OverlayBody'
-import {OverlayFooter, OverlayFooterRef} from '../OverlayFooter'
+import {Overlay} from '../Overlay'
+import {OverlayContainer} from '../OverlayContainer'
+import {OverlayMask} from '../OverlayMask'
+import {OverlayHeader} from '../OverlayHeader'
+import {OverlayBody} from '../OverlayBody'
+import {OverlayFooter} from '../OverlayFooter'
 import {Button} from '../../Button/Composed/Button'
 
 // Types
@@ -72,7 +72,7 @@ _Overlay.story = {
 }
 
 export const _OverlayContainer = () => {
-  const overlayContainerRef: RefObject<OverlayContainerRef | null> = createRef()
+  const overlayContainerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -109,7 +109,7 @@ _OverlayContainer.story = {
 }
 
 export const _OverlayMask = () => {
-  const overlayMaskRef: RefObject<OverlayMaskRef | null> = createRef()
+  const overlayMaskRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -147,7 +147,7 @@ _OverlayMask.story = {
 }
 
 export const _OverlayHeader = () => {
-  const overlayHeaderRef: RefObject<OverlayHeaderRef | null> = createRef()
+  const overlayHeaderRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -184,7 +184,7 @@ _OverlayHeader.story = {
 }
 
 export const _OverlayBody = () => {
-  const overlayBodyRef: RefObject<OverlayBodyRef | null> = createRef()
+  const overlayBodyRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -217,7 +217,7 @@ _OverlayBody.story = {
 }
 
 export const _OverlayFooter = () => {
-  const overlayFooterRef: RefObject<OverlayFooterRef | null> = createRef()
+  const overlayFooterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

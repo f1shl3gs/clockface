@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, useState, useEffect} from 'react'
+import {useState, useEffect, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -32,111 +32,105 @@ export interface TabsProps extends StandardFunctionProps {
   dropdownLabel?: string
   /** Alignment of tabs within container (small displays) */
   dropdownAlignment?: Alignment
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLElement>
 }
 
-export type TabsRef = HTMLElement
+export const Tabs: FunctionComponent<TabsProps> = ({
+  id,
+  size = ComponentSize.Medium,
+  style,
+  testID = 'tabs',
+  children,
+  alignment = Alignment.Left,
+  className,
+  orientation = Orientation.Horizontal,
+  dropdownLabel = 'dropdownLabel',
+  dropdownAlignment = Alignment.Center,
+  dropdownBreakpoint = Breakpoint.None,
+  ref,
+}) => {
+  const [screenWidth, setScreenWidth] = useState<number>(9999)
+  const [state, setState] = useState<'visible' | 'hidden'>('hidden')
 
-export const TabsRoot = forwardRef<TabsRef, TabsProps>(
-  (
-    {
-      id,
-      size = ComponentSize.Medium,
-      style,
-      testID = 'tabs',
-      children,
-      alignment = Alignment.Left,
-      className,
-      orientation = Orientation.Horizontal,
-      dropdownLabel = 'dropdownLabel',
-      dropdownAlignment = Alignment.Center,
-      dropdownBreakpoint = Breakpoint.None,
-    },
-    ref
-  ) => {
-    const [screenWidth, setScreenWidth] = useState<number>(9999)
-    const [state, setState] = useState<'visible' | 'hidden'>('hidden')
+  const isDropdownEnabled = dropdownBreakpoint !== Breakpoint.None
 
-    const isDropdownEnabled = dropdownBreakpoint !== Breakpoint.None
+  const tabsClass = classnames('cf-tabs', {
+    [`cf-tabs__align-${alignment}`]: alignment,
+    [`cf-tabs__${orientation}`]: orientation,
+    [`cf-tabs__${size}`]: size,
+    [`${className}`]: className,
+  })
 
-    const tabsClass = classnames('cf-tabs', {
-      [`cf-tabs__align-${alignment}`]: alignment,
-      [`cf-tabs__${orientation}`]: orientation,
-      [`cf-tabs__${size}`]: size,
-      [`${className}`]: className,
-    })
+  const tabsDropdownClass = classnames('cf-tabs--dropdown', {
+    [`cf-tabs--dropdown__${state}`]: state,
+    [`cf-tabs--dropdown__align-${dropdownAlignment}`]: dropdownAlignment,
+    [`cf-tabs--dropdown__${size}`]: size,
+    [`${className}`]: className,
+  })
 
-    const tabsDropdownClass = classnames('cf-tabs--dropdown', {
-      [`cf-tabs--dropdown__${state}`]: state,
-      [`cf-tabs--dropdown__align-${dropdownAlignment}`]: dropdownAlignment,
-      [`cf-tabs--dropdown__${size}`]: size,
-      [`${className}`]: className,
-    })
-
-    useEffect((): (() => void) => {
-      if (isDropdownEnabled) {
-        setScreenWidth(window.innerWidth)
-        window.addEventListener('resize', handleResize)
-      }
-
-      return (): void => {
-        window.removeEventListener('resize', handleResize)
-      }
-    }, [])
-
-    const handleResize = (): void => {
+  useEffect((): (() => void) => {
+    if (isDropdownEnabled) {
       setScreenWidth(window.innerWidth)
+      window.addEventListener('resize', handleResize)
     }
 
-    const handleToggleMenu = (): void => {
-      if (state === 'visible') {
-        setState('hidden')
-      } else {
-        setState('visible')
-      }
+    return (): void => {
+      window.removeEventListener('resize', handleResize)
     }
+  }, [])
 
-    const handleHideMenu = (): void => {
-      if (state === 'visible') {
-        setState('hidden')
-      }
+  const handleResize = (): void => {
+    setScreenWidth(window.innerWidth)
+  }
+
+  const handleToggleMenu = (): void => {
+    if (state === 'visible') {
+      setState('hidden')
+    } else {
+      setState('visible')
     }
+  }
 
-    if (isDropdownEnabled && screenWidth <= dropdownBreakpoint) {
-      return (
-        <ClickOutside onClickOutside={handleHideMenu}>
-          <nav
-            id={id}
-            ref={ref}
-            style={style}
-            onClick={handleToggleMenu}
-            className={tabsDropdownClass}
-            data-testid={testID}
-          >
-            <div className="cf-tabs--dropdown-label">
-              {dropdownLabel}
-              <Icon
-                glyph={IconFont.CaretDown_New}
-                className="cf-tabs--dropdown-icon"
-              />
-            </div>
-            <div className="cf-tabs--dropdown-menu">{children}</div>
-          </nav>
-        </ClickOutside>
-      )
+  const handleHideMenu = (): void => {
+    if (state === 'visible') {
+      setState('hidden')
     }
+  }
 
+  if (isDropdownEnabled && screenWidth <= dropdownBreakpoint) {
     return (
-      <nav
-        id={id}
-        ref={ref}
-        style={style}
-        className={tabsClass}
-        data-testid={testID}
-      >
-        {children}
-      </nav>
+      <ClickOutside onClickOutside={handleHideMenu}>
+        <nav
+          id={id}
+          ref={ref}
+          style={style}
+          onClick={handleToggleMenu}
+          className={tabsDropdownClass}
+          data-testid={testID}
+        >
+          <div className="cf-tabs--dropdown-label">
+            {dropdownLabel}
+            <Icon
+              glyph={IconFont.CaretDown_New}
+              className="cf-tabs--dropdown-icon"
+            />
+          </div>
+          <div className="cf-tabs--dropdown-menu">{children}</div>
+        </nav>
+      </ClickOutside>
     )
   }
-)
 
-TabsRoot.displayName = 'Tabs'
+  return (
+    <nav
+      id={id}
+      ref={ref}
+      style={style}
+      className={tabsClass}
+      data-testid={testID}
+    >
+      {children}
+    </nav>
+  )
+}

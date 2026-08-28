@@ -3,7 +3,7 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {ColorPicker, ColorPickerRef} from '../ColorPicker'
+import {ColorPicker} from '../ColorPicker'
 
 // Types
 import {InfluxColors} from '../../../Types'
@@ -15,7 +15,7 @@ import ColorPickerCustomReadme from './ColorPickerCustom.md?raw'
 export default {title: 'Components/Color Picker/Family'}
 
 export const _ColorPicker = () => {
-  const colorPickerRef = createRef<ColorPickerRef>()
+  const colorPickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -121,7 +121,7 @@ const customColors = [
 ]
 
 export const CustomColorPalette = () => {
-  const colorPickerRef = createRef<ColorPickerRef>()
+  const colorPickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

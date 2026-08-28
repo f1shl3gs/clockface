@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, CSSProperties} from 'react'
+import {CSSProperties, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -13,53 +13,43 @@ export interface DraggableResizerPanelProps extends StandardFunctionProps {
   /** Does not have a value initially, gets passed a value by being a child of DraggableResizer */
   sizePercent?: number
   /** Test ID for Integration Tests */
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type DraggableResizerPanelRef = HTMLDivElement
-
-export const DraggableResizerPanel = forwardRef<
-  DraggableResizerPanelRef,
+export const DraggableResizerPanel: FunctionComponent<
   DraggableResizerPanelProps
->(
-  (
-    {
-      id,
-      style,
-      children,
-      className,
-      sizePercent,
-      minSizePixels = 0,
-      testID = 'draggable-resizer--panel',
-    },
-    ref
-  ) => {
-    const draggableResizerPanelClass = classnames(
-      'cf-draggable-resizer--panel',
-      {
-        [`${className}`]: className,
-      }
-    )
+> = ({
+  id,
+  style,
+  children,
+  className,
+  sizePercent,
+  minSizePixels = 0,
+  testID = 'draggable-resizer--panel',
+  ref,
+}) => {
+  const draggableResizerPanelClass = classnames('cf-draggable-resizer--panel', {
+    [`${className}`]: className,
+  })
 
-    const draggableResizerPanelStyle = (): CSSProperties | undefined => {
-      if (sizePercent) {
-        return {flex: `${sizePercent} 0 ${minSizePixels}px`, ...style}
-      }
-
-      return style
+  const draggableResizerPanelStyle = (): CSSProperties | undefined => {
+    if (sizePercent) {
+      return {flex: `${sizePercent} 0 ${minSizePixels}px`, ...style}
     }
 
-    return (
-      <div
-        ref={ref}
-        className={draggableResizerPanelClass}
-        style={draggableResizerPanelStyle()}
-        data-testid={testID}
-        id={id}
-      >
-        {children}
-      </div>
-    )
+    return style
   }
-)
 
-DraggableResizerPanel.displayName = 'DraggableResizerPanel'
+  return (
+    <div
+      ref={ref}
+      className={draggableResizerPanelClass}
+      style={draggableResizerPanelStyle()}
+      data-testid={testID}
+      id={id}
+    >
+      {children}
+    </div>
+  )
+}

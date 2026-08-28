@@ -3,7 +3,7 @@ import * as React from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Label, LabelRef} from '../'
+import {Label} from '../'
 
 // Types
 import {ComponentSize, InfluxColors} from '../../../Types'
@@ -14,9 +14,9 @@ import LabelReadme from './Label.md?raw'
 export default {title: 'Components/Label/Examples'}
 
 export const Variants = () => {
-  const labelReadOnlyRef: React.RefObject<LabelRef | null> = React.createRef()
-  const labelClickableRef: React.RefObject<LabelRef | null> = React.createRef()
-  const labelDeletableRef: React.RefObject<LabelRef | null> = React.createRef()
+  const labelReadOnlyRef = React.createRef<HTMLDivElement>()
+  const labelClickableRef = React.createRef<HTMLDivElement>()
+  const labelDeletableRef = React.createRef<HTMLDivElement>()
 
   const logLabelRefs = (): void => {
     /* eslint-disable */

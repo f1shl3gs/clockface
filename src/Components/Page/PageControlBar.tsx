@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import React, {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -10,50 +10,41 @@ export interface PageControlBarProps extends StandardFunctionProps {
   fullWidth: boolean
   /** Controls the gutters (left and right margins) */
   gutters?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type PageControlBarRef = HTMLDivElement
+export const PageControlBar: FunctionComponent<PageControlBarProps> = ({
+  id,
+  style,
+  children,
+  className,
+  fullWidth,
+  testID = 'page-control-bar',
+  gutters = ComponentSize.Medium,
+  ref,
+}) => {
+  const noChildren = React.Children.count(children) === 0
 
-export const PageControlBar = forwardRef<
-  PageControlBarRef,
-  PageControlBarProps
->(
-  (
-    {
-      id,
-      style,
-      children,
-      className,
-      fullWidth,
-      testID = 'page-control-bar',
-      gutters = ComponentSize.Medium,
-    },
-    ref
-  ) => {
-    const noChildren = React.Children.count(children) === 0
+  const pageControlBarClass = classnames('cf-page-control-bar', {
+    'cf-page-control-bar__no-children': noChildren,
+    [`cf-page__gutter-${gutters}`]: gutters,
+    [`${className}`]: className,
+  })
 
-    const pageControlBarClass = classnames('cf-page-control-bar', {
-      'cf-page-control-bar__no-children': noChildren,
-      [`cf-page__gutter-${gutters}`]: gutters,
-      [`${className}`]: className,
-    })
+  const containerClassName = fullWidth
+    ? 'cf-page-control-bar--fluid'
+    : 'cf-page-control-bar--fixed'
 
-    const containerClassName = fullWidth
-      ? 'cf-page-control-bar--fluid'
-      : 'cf-page-control-bar--fixed'
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={pageControlBarClass}
-      >
-        <div className={containerClassName}>{children}</div>
-      </div>
-    )
-  }
-)
-
-PageControlBar.displayName = 'PageControlBar'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={pageControlBarClass}
+    >
+      <div className={containerClassName}>{children}</div>
+    </div>
+  )
+}

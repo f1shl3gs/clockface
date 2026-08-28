@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -11,39 +11,33 @@ import './EmptyState.scss'
 export interface EmptyStateProps extends StandardFunctionProps {
   /** Controls vertical padding in container and font size of children */
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type EmptyStateRef = HTMLDivElement
+export const EmptyState: FunctionComponent<EmptyStateProps> = ({
+  id,
+  style,
+  children,
+  className,
+  testID = 'empty-state',
+  size = ComponentSize.Small,
+  ref,
+}) => {
+  const emptyStateClass = classnames('cf-empty-state', {
+    [`cf-empty-state--${size}`]: size,
+    [`${className}`]: className,
+  })
 
-export const EmptyStateRoot = forwardRef<EmptyStateRef, EmptyStateProps>(
-  (
-    {
-      id,
-      style,
-      children,
-      className,
-      testID = 'empty-state',
-      size = ComponentSize.Small,
-    },
-    ref
-  ) => {
-    const emptyStateClass = classnames('cf-empty-state', {
-      [`cf-empty-state--${size}`]: size,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={emptyStateClass}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-EmptyStateRoot.displayName = 'EmptyState'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={emptyStateClass}
+    >
+      {children}
+    </div>
+  )
+}

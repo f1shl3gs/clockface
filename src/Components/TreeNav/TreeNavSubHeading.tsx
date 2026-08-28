@@ -39,5 +39,3 @@ export const TreeNavSubHeading: FunctionComponent<TreeNavSubHeadingProps> = ({
     </div>
   )
 }
-
-TreeNavSubHeading.displayName = 'TreeNavSubHeading'

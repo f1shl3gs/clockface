@@ -9,7 +9,7 @@ import {List} from '@influxdata/clockface'
 ```
 
 ```tsx
-<List.Item
+<ListItem
   selected={true}
   value="Banana"
   color={ComponentColor.Primary}
@@ -20,7 +20,7 @@ import {List} from '@influxdata/clockface'
   linkElement={<a href="url" />}
 >
   Banana
-</List.Item>
+</ListItem>
 ```
 
 For best results do not pass an an element into `linkElement` with children. It is intended to replace the `<div />` as the outermost element while maintaining the same children already passed in to `ListItem`. If you need to attach a `ref` that is one of the only cases to use attributes of the passed in element.

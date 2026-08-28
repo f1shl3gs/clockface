@@ -1,9 +1,9 @@
 // Libraries
-import {RefObject, createRef, useState} from 'react'
+import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {SlideToggle, SlideToggleRef} from '../'
+import {SlideToggle} from '../'
 import {FlexBox} from '../../FlexBox'
 import {InputLabel} from '../../Inputs/InputLabel'
 
@@ -23,7 +23,7 @@ import SlideToggleWithLabelsReadme from './SlideToggleWithLabels.md?raw'
 export default {title: 'Components/Slide Toggles/Family'}
 
 export const _SlideToggle = () => {
-  const slideToggleRef: RefObject<SlideToggleRef | null> = createRef()
+  const slideToggleRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -33,7 +33,7 @@ export const _SlideToggle = () => {
 
   return (
     <div className="story--example">
-      <SlideToggle.SlideToggle
+      <SlideToggle
         ref={slideToggleRef}
         onChange={() => alert('clicked')}
         active={false}

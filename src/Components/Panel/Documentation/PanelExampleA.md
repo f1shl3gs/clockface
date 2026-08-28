@@ -11,9 +11,9 @@ import {Panel} from '@influxdata/clockface'
   <Panel.Header onDismiss={() => {
     // do the thing
   }}>
-  <Panel.Body>
+  <PanelBody>
     // Contents
-  </Panel.Body>
+  </PanelBody>
 </Panel>
 ```
 

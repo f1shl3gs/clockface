@@ -8,9 +8,9 @@ import {FlexBox} from '@influxdata/clockface'
 ```
 ```tsx
 <FlexBox>
-  <FlexBox.Child basis="20px" grow="1" shrink="0">
+  <FlexBoxChild basis="20px" grow="1" shrink="0">
     // Children
-  </FlexBox.Child>
+  </FlexBoxChild>
 </FlexBox>
 ```
 

@@ -8,9 +8,9 @@ import {Tabs} from '@influxdata/clockface'
 ```
 ```tsx
 <Tabs>
-  <Tabs.Tab />
-  <Tabs.Tab />
-  <Tabs.Tab />
+  <Tab />
+  <Tab />
+  <Tab />
 </Tabs>
 ```
 

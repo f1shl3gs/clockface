@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -10,44 +10,38 @@ export interface PageHeaderProps extends StandardFunctionProps {
   fullWidth: boolean
   /** Controls the gutters (left and right margins) */
   gutters?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type PageHeaderRef = HTMLDivElement
+export const PageHeader: FunctionComponent<PageHeaderProps> = ({
+  id,
+  style,
+  children,
+  className,
+  fullWidth,
+  testID = 'page-header',
+  gutters = ComponentSize.Medium,
+  ref,
+}) => {
+  const pageHeaderClass = classnames('cf-page-header', {
+    [`cf-page__gutter-${gutters}`]: gutters,
+    [`${className}`]: className,
+  })
 
-export const PageHeader = forwardRef<PageHeaderRef, PageHeaderProps>(
-  (
-    {
-      id,
-      style,
-      children,
-      className,
-      fullWidth,
-      testID = 'page-header',
-      gutters = ComponentSize.Medium,
-    },
-    ref
-  ) => {
-    const pageHeaderClass = classnames('cf-page-header', {
-      [`cf-page__gutter-${gutters}`]: gutters,
-      [`${className}`]: className,
-    })
+  const containerClassName = fullWidth
+    ? 'cf-page-header--fluid'
+    : 'cf-page-header--fixed'
 
-    const containerClassName = fullWidth
-      ? 'cf-page-header--fluid'
-      : 'cf-page-header--fixed'
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={pageHeaderClass}
-      >
-        <div className={containerClassName}>{children}</div>
-      </div>
-    )
-  }
-)
-
-PageHeader.displayName = 'PageHeader'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={pageHeaderClass}
+    >
+      <div className={containerClassName}>{children}</div>
+    </div>
+  )
+}

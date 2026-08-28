@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, CSSProperties, useEffect} from 'react'
+import {CSSProperties, useEffect, FunctionComponent, Ref} from 'react'
 
 // Components
 import {NotificationDialog} from './NotificationDialog'
@@ -11,10 +11,7 @@ import {
   VerticalAlignment,
   ComponentSize,
 } from '../../Types'
-import {
-  NotificationDialogProps,
-  NotificationDialogRef,
-} from './NotificationDialog'
+import {NotificationDialogProps} from './NotificationDialog'
 
 // Utils
 import {usePortal} from '../../Utils/portals'
@@ -37,100 +34,94 @@ export interface NotificationProps extends NotificationDialogProps {
   onTimeout?: (id?: string) => void
   /** Duration before notification calls onTimeout function */
   duration?: number
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
-
-export type NotificationRef = NotificationDialogRef
 
 const defaultNotificationStyle = {maxWidth: '500px'}
 
-export const NotificationRoot = forwardRef<NotificationRef, NotificationProps>(
-  (
-    {
-      id,
-      icon,
-      size = ComponentSize.Medium,
-      style = defaultNotificationStyle,
-      testID,
-      visible = true,
-      duration = Infinity,
-      children,
-      gradient,
-      onDismiss,
-      className,
-      onTimeout,
-      backgroundColor = InfluxColors.Castle,
-      verticalAlignment = VerticalAlignment.Top,
-      horizontalAlignment = Alignment.Right,
-    },
-    ref
-  ) => {
-    const {addNotificationToPortal} = usePortal()
-    const shouldRender = useDelayedUnmount(visible, 300)
+export const Notification: FunctionComponent<NotificationProps> = ({
+  id,
+  icon,
+  size = ComponentSize.Medium,
+  style = defaultNotificationStyle,
+  testID,
+  visible = true,
+  duration = Infinity,
+  children,
+  gradient,
+  onDismiss,
+  className,
+  onTimeout,
+  backgroundColor = InfluxColors.Castle,
+  verticalAlignment = VerticalAlignment.Top,
+  horizontalAlignment = Alignment.Right,
+  ref,
+}) => {
+  const {addNotificationToPortal} = usePortal()
+  const shouldRender = useDelayedUnmount(visible, 300)
 
-    useEffect(() => {
-      if (visible && duration !== Infinity) {
-        const dismissTimer = setTimeout(handleTimeout, duration)
-        return () => clearTimeout(dismissTimer)
-      }
-
-      return
-    }, [visible])
-
-    const handleTimeout = () => {
-      if (onTimeout) {
-        onTimeout(id)
-      }
+  useEffect(() => {
+    if (visible && duration !== Infinity) {
+      const dismissTimer = setTimeout(handleTimeout, duration)
+      return () => clearTimeout(dismissTimer)
     }
 
-    const translateOrigin = () => {
-      let cardinality = 'X'
-      let sign = ''
+    return
+  }, [visible])
 
-      if (horizontalAlignment === 'center') {
-        cardinality = 'Y'
+  const handleTimeout = () => {
+    if (onTimeout) {
+      onTimeout(id)
+    }
+  }
 
-        if (verticalAlignment === 'top') {
-          sign = '-'
-        }
-      }
+  const translateOrigin = () => {
+    let cardinality = 'X'
+    let sign = ''
 
-      if (horizontalAlignment === 'left') {
+    if (horizontalAlignment === 'center') {
+      cardinality = 'Y'
+
+      if (verticalAlignment === 'top') {
         sign = '-'
       }
-
-      return `translate${cardinality}(${sign}50%)`
     }
 
-    const animationStyle = {
-      '--slide-from': translateOrigin(),
-      animation: `cf-notification-${
-        visible ? 'in' : 'out'
-      } 300ms ${EASE_EXP_IN_OUT} both`,
-    } as CSSProperties
+    if (horizontalAlignment === 'left') {
+      sign = '-'
+    }
 
-    const notificationElement = shouldRender && (
-      <NotificationDialog
-        backgroundColor={backgroundColor}
-        className={className}
-        onDismiss={onDismiss}
-        gradient={gradient}
-        testID={testID}
-        style={{...style, ...animationStyle}}
-        size={size}
-        icon={icon}
-        ref={ref}
-        id={id}
-      >
-        {children}
-      </NotificationDialog>
-    )
-
-    return addNotificationToPortal(
-      notificationElement,
-      horizontalAlignment,
-      verticalAlignment
-    )
+    return `translate${cardinality}(${sign}50%)`
   }
-)
 
-NotificationRoot.displayName = 'Notification'
+  const animationStyle = {
+    '--slide-from': translateOrigin(),
+    animation: `cf-notification-${
+      visible ? 'in' : 'out'
+    } 300ms ${EASE_EXP_IN_OUT} both`,
+  } as CSSProperties
+
+  const notificationElement = shouldRender && (
+    <NotificationDialog
+      backgroundColor={backgroundColor}
+      className={className}
+      onDismiss={onDismiss}
+      gradient={gradient}
+      testID={testID}
+      style={{...style, ...animationStyle}}
+      size={size}
+      icon={icon}
+      ref={ref}
+      id={id}
+    >
+      {children}
+    </NotificationDialog>
+  )
+
+  return addNotificationToPortal(
+    notificationElement,
+    horizontalAlignment,
+    verticalAlignment
+  )
+}

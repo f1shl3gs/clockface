@@ -7,7 +7,7 @@ The second tier of navigation items
 import {NavMenu} from '@influxdata/clockface'
 ```
 ```tsx
-<NavMenu.SubItem />
+<NavMenuSubItem />
 ```
 
 ### React Router
@@ -17,16 +17,16 @@ The `titleLink` and `iconLink` props should be passed the same element to ensure
 
 ```tsx
 // Using anchor tags
-<NavMenu.Item titleLink={className => <a href="http://www.myurl.com" className={className}>Item Title</a>} />
+<NavMenuItem titleLink={className => <a href="http://www.myurl.com" className={className}>Item Title</a>} />
 ```
 ```tsx
 // Using a router link
-<NavMenu.Item titleLink={className => <a to="/pages/home" className={className}>Item Title</a>} />
+<NavMenuItem titleLink={className => <a to="/pages/home" className={className}>Item Title</a>} />
 ```
 
 ### Styling
 
-`<NavMenu.SubItem />` receives its styles by being a child of `<NavMenu.Item />`
+`<NavMenuSubItem />` receives its styles by being a child of `<NavMenuItem />`
 
 ### Example
 <!-- STORY -->

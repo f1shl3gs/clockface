@@ -5,11 +5,12 @@ import {
   useRef,
   RefObject,
   MouseEvent,
-  forwardRef,
+  FunctionComponent,
+  Ref,
 } from 'react'
 
 // Components
-import {RightClickMenu, RightClickMenuRef} from './RightClickMenu'
+import {RightClickMenu} from './RightClickMenu'
 
 // Utils
 import {usePortal} from '../../../Utils/portals'
@@ -35,112 +36,106 @@ export interface RightClickProps extends StandardFunctionProps {
   disabled?: boolean
   /** Reference to trigger element */
   triggerRef: RefObject<any | null>
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLUListElement>
 }
 
-export type RightClickRef = RightClickMenuRef
+export const RightClick: FunctionComponent<RightClickProps> = ({
+  id,
+  style,
+  onShow,
+  onHide,
+  children,
+  className,
+  triggerRef,
+  disabled = false,
+  testID = 'right-click',
+  color = ComponentColor.Default,
+  ref,
+}) => {
+  const [expanded, setExpanded] = useState<boolean>(false)
+  const {addElementToPortal} = usePortal()
+  const mouseOffset = useRef<Coordinates>({x: 0, y: 0})
 
-export const RightClickRoot = forwardRef<RightClickRef, RightClickProps>(
-  (
-    {
-      id,
-      style,
-      onShow,
-      onHide,
-      children,
-      className,
-      triggerRef,
-      disabled = false,
-      testID = 'right-click',
-      color = ComponentColor.Default,
-    },
-    ref
-  ) => {
-    const [expanded, setExpanded] = useState<boolean>(false)
-    const {addElementToPortal} = usePortal()
-    const mouseOffset = useRef<Coordinates>({x: 0, y: 0})
+  useEffect((): (() => void) => {
+    handleAddEventListeners()
 
-    useEffect((): (() => void) => {
-      handleAddEventListeners()
+    return (): void => {
+      handleRemoveEventListeners()
+    }
+  }, [])
 
-      return (): void => {
-        handleRemoveEventListeners()
-      }
-    }, [])
-
-    const handleTriggerClick = (e: MouseEvent): void => {
-      if (disabled || !triggerRef.current) {
-        // triggerRef.current can be set to null in a specific context:
-        // If you are using RightClick within a FunctionComponent and
-        // are using createRef it will not work. You must use useRef
-        return
-      }
-
-      e.preventDefault()
-      e.stopPropagation()
-
-      const {clientX, clientY} = e
-      const {top, left} = triggerRef.current.getBoundingClientRect()
-
-      mouseOffset.current = {
-        x: Math.ceil(Math.abs(left - clientX)),
-        y: Math.ceil(Math.abs(top - clientY)),
-      }
-
-      handleShowMenu()
+  const handleTriggerClick = (e: MouseEvent): void => {
+    if (disabled || !triggerRef.current) {
+      // triggerRef.current can be set to null in a specific context:
+      // If you are using RightClick within a FunctionComponent and
+      // are using createRef it will not work. You must use useRef
+      return
     }
 
-    const handleShowMenu = (): void => {
-      if (onShow) {
-        onShow()
-      }
-      setExpanded(true)
+    e.preventDefault()
+    e.stopPropagation()
+
+    const {clientX, clientY} = e
+    const {top, left} = triggerRef.current.getBoundingClientRect()
+
+    mouseOffset.current = {
+      x: Math.ceil(Math.abs(left - clientX)),
+      y: Math.ceil(Math.abs(top - clientY)),
     }
 
-    const handleHideMenu = (): void => {
-      if (onHide) {
-        onHide()
-      }
-      setExpanded(false)
-    }
-
-    const handleAddEventListeners = (): void => {
-      if (!triggerRef.current) {
-        return
-      }
-
-      triggerRef.current.addEventListener('contextmenu', handleTriggerClick)
-    }
-
-    const handleRemoveEventListeners = (): void => {
-      if (!triggerRef.current) {
-        return
-      }
-
-      triggerRef.current.removeEventListener('contextmenu', handleTriggerClick)
-    }
-
-    if (!expanded) {
-      return null
-    }
-
-    const rightClickMenu = (
-      <RightClickMenu
-        mouseOffset={mouseOffset.current}
-        triggerRef={triggerRef}
-        className={className}
-        testID={testID}
-        onHide={handleHideMenu}
-        color={color}
-        style={style}
-        ref={ref}
-        id={id}
-      >
-        {children}
-      </RightClickMenu>
-    )
-
-    return addElementToPortal(rightClickMenu)
+    handleShowMenu()
   }
-)
 
-RightClickRoot.displayName = 'RightClick'
+  const handleShowMenu = (): void => {
+    if (onShow) {
+      onShow()
+    }
+    setExpanded(true)
+  }
+
+  const handleHideMenu = (): void => {
+    if (onHide) {
+      onHide()
+    }
+    setExpanded(false)
+  }
+
+  const handleAddEventListeners = (): void => {
+    if (!triggerRef.current) {
+      return
+    }
+
+    triggerRef.current.addEventListener('contextmenu', handleTriggerClick)
+  }
+
+  const handleRemoveEventListeners = (): void => {
+    if (!triggerRef.current) {
+      return
+    }
+
+    triggerRef.current.removeEventListener('contextmenu', handleTriggerClick)
+  }
+
+  if (!expanded) {
+    return null
+  }
+
+  const rightClickMenu = (
+    <RightClickMenu
+      mouseOffset={mouseOffset.current}
+      triggerRef={triggerRef}
+      className={className}
+      testID={testID}
+      onHide={handleHideMenu}
+      color={color}
+      style={style}
+      ref={ref}
+      id={id}
+    >
+      {children}
+    </RightClickMenu>
+  )
+
+  return addElementToPortal(rightClickMenu)
+}

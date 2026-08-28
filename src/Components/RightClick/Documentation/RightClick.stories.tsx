@@ -3,7 +3,7 @@ import {useRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {RightClick, RightClickRef} from '../'
+import {RightClick, RightClickDivider, RightClickMenuItem} from '../'
 
 // Types
 import {ComponentColor} from '../../../Types'
@@ -15,7 +15,7 @@ export default {title: 'Components/RightClick/Base'}
 
 export const _RightClick = () => {
   const triggerRef = useRef<HTMLDivElement>(null)
-  const rightClickMenuRef = useRef<RightClickRef>(null)
+  const rightClickMenuRef = useRef<HTMLUListElement>(null)
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -28,7 +28,7 @@ export const _RightClick = () => {
       <div className="clickTestZone" ref={triggerRef}>
         Right Click Me
       </div>
-      <RightClick.RightClick
+      <RightClick
         ref={rightClickMenuRef}
         triggerRef={triggerRef}
         disabled={false}
@@ -36,32 +36,32 @@ export const _RightClick = () => {
         style={{}}
         color={(ComponentColor as Record<string, any>)['Primary']}
       >
-        <RightClick.MenuItem
+        <RightClickMenuItem
           onClick={value => {
             alert(value)
           }}
           value="Cabbage"
         >
           Cabbage
-        </RightClick.MenuItem>
-        <RightClick.MenuItem
+        </RightClickMenuItem>
+        <RightClickMenuItem
           onClick={value => {
             alert(value)
           }}
           value="Carrot"
         >
           Carrot
-        </RightClick.MenuItem>
-        <RightClick.Divider />
-        <RightClick.MenuItem
+        </RightClickMenuItem>
+        <RightClickDivider />
+        <RightClickMenuItem
           onClick={value => {
             alert(value)
           }}
           value="Turnip"
         >
           Turnip
-        </RightClick.MenuItem>
-        <RightClick.MenuItem
+        </RightClickMenuItem>
+        <RightClickMenuItem
           onClick={value => {
             alert(value)
           }}
@@ -69,11 +69,11 @@ export const _RightClick = () => {
           disabled={true}
         >
           Radish
-        </RightClick.MenuItem>
-        <RightClick.MenuItem onClick={logRef} value="Turnip">
+        </RightClickMenuItem>
+        <RightClickMenuItem onClick={logRef} value="Turnip">
           Log Ref
-        </RightClick.MenuItem>
-      </RightClick.RightClick>
+        </RightClickMenuItem>
+      </RightClick>
     </div>
   )
 }

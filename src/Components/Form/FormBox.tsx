@@ -1,27 +1,31 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 
 // Types
 import {StandardFunctionProps} from '../../Types'
 
-export interface FormBoxProps extends StandardFunctionProps {}
+export interface FormBoxProps extends StandardFunctionProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
+}
 
-export type FormBoxRef = HTMLDivElement
-
-export const FormBox = forwardRef<FormBoxRef, FormBoxProps>(
-  ({children, id, style, className = '', testID = 'form--box'}, ref) => {
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={`cf-form--box ${className}`}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-FormBox.displayName = 'FormBox'
+export const FormBox: FunctionComponent<FormBoxProps> = ({
+  children,
+  id,
+  style,
+  className = '',
+  testID = 'form--box',
+  ref,
+}) => {
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={`cf-form--box ${className}`}
+    >
+      {children}
+    </div>
+  )
+}

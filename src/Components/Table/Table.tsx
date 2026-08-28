@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Styles
@@ -19,47 +19,41 @@ export interface TableProps extends StandardFunctionProps {
   striped?: boolean
   /** Highlights a row on hover, useful for improving legibility on dense tables */
   highlight?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLTableElement>
 }
 
-export type TableRef = HTMLTableElement
+export const Table: FunctionComponent<TableProps> = ({
+  id,
+  style = {width: '100%'},
+  testID = 'table',
+  striped = false,
+  borders = BorderType.Horizontal,
+  children,
+  fontSize = ComponentSize.Medium,
+  highlight = false,
+  className,
+  cellPadding = ComponentSize.Small,
+  ref,
+}) => {
+  const tableClass = classnames('cf-table', {
+    [`cf-table__padding-${cellPadding}`]: cellPadding,
+    [`cf-table__borders-${borders}`]: borders,
+    [`cf-table__font-${fontSize}`]: fontSize,
+    'cf-table__striped': striped,
+    'cf-table__highlight': highlight,
+    [`${className}`]: className,
+  })
 
-export const TableRoot = forwardRef<TableRef, TableProps>(
-  (
-    {
-      id,
-      style = {width: '100%'},
-      testID = 'table',
-      striped = false,
-      borders = BorderType.Horizontal,
-      children,
-      fontSize = ComponentSize.Medium,
-      highlight = false,
-      className,
-      cellPadding = ComponentSize.Small,
-    },
-    ref
-  ) => {
-    const tableClass = classnames('cf-table', {
-      [`cf-table__padding-${cellPadding}`]: cellPadding,
-      [`cf-table__borders-${borders}`]: borders,
-      [`cf-table__font-${fontSize}`]: fontSize,
-      'cf-table__striped': striped,
-      'cf-table__highlight': highlight,
-      [`${className}`]: className,
-    })
-
-    return (
-      <table
-        id={id}
-        ref={ref}
-        style={style}
-        className={tableClass}
-        data-testid={testID}
-      >
-        {children}
-      </table>
-    )
-  }
-)
-
-TableRoot.displayName = 'Table'
+  return (
+    <table
+      id={id}
+      ref={ref}
+      style={style}
+      className={tableClass}
+      data-testid={testID}
+    >
+      {children}
+    </table>
+  )
+}

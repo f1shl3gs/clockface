@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import React, {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -13,49 +13,40 @@ export interface SpinnerContainerProps extends StandardFunctionProps {
   loading: RemoteDataState
   /** Spinner component */
   spinnerComponent: React.ReactElement
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type SpinnerContainerRef = HTMLDivElement
+export const SpinnerContainer: FunctionComponent<SpinnerContainerProps> = ({
+  id,
+  style,
+  testID = 'spinner-container',
+  loading,
+  children,
+  className,
+  spinnerComponent,
+  ref,
+}) => {
+  const spinnerContainerClass = classnames('cf-spinner-container', {
+    [`${className}`]: className,
+  })
 
-export const SpinnerContainer = forwardRef<
-  SpinnerContainerRef,
-  SpinnerContainerProps
->(
-  (
-    {
-      id,
-      style,
-      testID = 'spinner-container',
-      loading,
-      children,
-      className,
-      spinnerComponent,
-    },
-    ref
-  ) => {
-    const spinnerContainerClass = classnames('cf-spinner-container', {
-      [`${className}`]: className,
-    })
-
-    if (
-      loading === RemoteDataState.Loading ||
-      loading === RemoteDataState.NotStarted
-    ) {
-      return (
-        <div
-          className={spinnerContainerClass}
-          data-testid={testID}
-          id={id}
-          ref={ref}
-          style={style}
-        >
-          {spinnerComponent}
-        </div>
-      )
-    }
-
-    return <>{children}</>
+  if (
+    loading === RemoteDataState.Loading ||
+    loading === RemoteDataState.NotStarted
+  ) {
+    return (
+      <div
+        className={spinnerContainerClass}
+        data-testid={testID}
+        id={id}
+        ref={ref}
+        style={style}
+      >
+        {spinnerComponent}
+      </div>
+    )
   }
-)
 
-SpinnerContainer.displayName = 'SpinnerContainer'
+  return <>{children}</>
+}

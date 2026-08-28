@@ -64,5 +64,3 @@ export const TreeNavSubItem: FunctionComponent<TreeNavSubItemProps> = ({
     </div>
   )
 }
-
-TreeNavSubItem.displayName = 'TreeNavSubItem'

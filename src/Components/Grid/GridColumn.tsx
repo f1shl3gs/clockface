@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -22,53 +22,47 @@ export interface GridColumnProps extends StandardFunctionProps {
   offsetMD?: Columns
   /** Number of columns shifted when viewport width is greater than 1500px */
   offsetLG?: Columns
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type GridColumnRef = HTMLDivElement
+export const GridColumn: FunctionComponent<GridColumnProps> = ({
+  id,
+  style,
+  testID = 'grid--column',
+  widthXS = Columns.Twelve,
+  widthSM,
+  widthMD,
+  widthLG,
+  children,
+  offsetXS,
+  offsetSM,
+  offsetMD,
+  offsetLG,
+  className,
+  ref,
+}) => {
+  const gridColumnClass = classnames('cf-grid--column', {
+    [`${className}`]: className,
+    [`cf-col-xs-${widthXS}`]: widthXS,
+    [`cf-col-sm-${widthSM}`]: widthSM,
+    [`cf-col-md-${widthMD}`]: widthMD,
+    [`cf-col-lg-${widthLG}`]: widthLG,
+    [`cf-col-xs-offset-${offsetXS}`]: offsetXS,
+    [`cf-col-sm-offset-${offsetSM}`]: offsetSM,
+    [`cf-col-md-offset-${offsetMD}`]: offsetMD,
+    [`cf-col-lg-offset-${offsetLG}`]: offsetLG,
+  })
 
-export const GridColumn = forwardRef<GridColumnRef, GridColumnProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'grid--column',
-      widthXS = Columns.Twelve,
-      widthSM,
-      widthMD,
-      widthLG,
-      children,
-      offsetXS,
-      offsetSM,
-      offsetMD,
-      offsetLG,
-      className,
-    },
-    ref
-  ) => {
-    const gridColumnClass = classnames('cf-grid--column', {
-      [`${className}`]: className,
-      [`cf-col-xs-${widthXS}`]: widthXS,
-      [`cf-col-sm-${widthSM}`]: widthSM,
-      [`cf-col-md-${widthMD}`]: widthMD,
-      [`cf-col-lg-${widthLG}`]: widthLG,
-      [`cf-col-xs-offset-${offsetXS}`]: offsetXS,
-      [`cf-col-sm-offset-${offsetSM}`]: offsetSM,
-      [`cf-col-md-offset-${offsetMD}`]: offsetMD,
-      [`cf-col-lg-offset-${offsetLG}`]: offsetLG,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={gridColumnClass}
-        data-testid={testID}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-GridColumn.displayName = 'GridColumn'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={gridColumnClass}
+      data-testid={testID}
+    >
+      {children}
+    </div>
+  )
+}

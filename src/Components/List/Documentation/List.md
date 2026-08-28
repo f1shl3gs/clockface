@@ -10,10 +10,10 @@ import {List} from '@influxdata/clockface'
 
 ```tsx
 <List style={{width: '250px', height: '100%'}}>
-  <List.Item>Hey there,</List.Item>
-  <List.Item>It's me</List.Item>
-  <List.Divider />
-  <List.Item>Your pal List!</List.Item>
+  <ListItem>Hey there,</ListItem>
+  <ListItem>It's me</ListItem>
+  <ListDivider />
+  <ListItem>Your pal List!</ListItem>
 </List>
 ```
 

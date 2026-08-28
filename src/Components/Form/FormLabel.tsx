@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -12,65 +12,59 @@ export interface FormLabelProps extends StandardFunctionProps {
   required?: boolean
   /** Useful for associating a label with an input */
   htmlFor?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement & HTMLLabelElement>
 }
 
-export type FormLabelRef = HTMLDivElement & HTMLLabelElement
+export const FormLabel: FunctionComponent<FormLabelProps> = ({
+  id,
+  label,
+  style,
+  testID = 'form--label',
+  htmlFor,
+  children,
+  required,
+  className,
+  ref,
+}) => {
+  const formLabelClass = classnames('cf-form--label', {
+    [`${className}`]: className,
+  })
 
-export const FormLabel = forwardRef<FormLabelRef, FormLabelProps>(
-  (
-    {
-      id,
-      label,
-      style,
-      testID = 'form--label',
-      htmlFor,
-      children,
-      required,
-      className,
-    },
-    ref
-  ) => {
-    const formLabelClass = classnames('cf-form--label', {
-      [`${className}`]: className,
-    })
+  const labelChildren = (
+    <>
+      <div className="cf-form--label-text">
+        {label}
+        {!!required && <span className="cf-form--label-required">*</span>}
+      </div>
+      {children}
+    </>
+  )
 
-    const labelChildren = (
-      <>
-        <div className="cf-form--label-text">
-          {label}
-          {!!required && <span className="cf-form--label-required">*</span>}
-        </div>
-        {children}
-      </>
-    )
-
-    if (htmlFor) {
-      return (
-        <label
-          id={id}
-          ref={ref}
-          style={style}
-          htmlFor={htmlFor}
-          data-testid={testID}
-          className={formLabelClass}
-        >
-          {labelChildren}
-        </label>
-      )
-    }
-
+  if (htmlFor) {
     return (
-      <div
+      <label
         id={id}
         ref={ref}
         style={style}
+        htmlFor={htmlFor}
         data-testid={testID}
         className={formLabelClass}
       >
         {labelChildren}
-      </div>
+      </label>
     )
   }
-)
 
-FormLabel.displayName = 'FormLabel'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={formLabelClass}
+    >
+      {labelChildren}
+    </div>
+  )
+}

@@ -1,21 +1,19 @@
 // Libraries
-import {RefObject, createRef} from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {ResourceList, ResourceListRef} from '../List'
+import {ResourceList} from '../List'
+import {ResourceListHeader} from '../List/ResourceListHeader'
+import {ResourceListBody} from '../List/ResourceListBody'
+import {ResourceListSorter} from '../List/ResourceListSorter'
 import {
-  ResourceListHeader,
-  ResourceListHeaderRef,
-} from '../List/ResourceListHeader'
-import {ResourceListBody, ResourceListBodyRef} from '../List/ResourceListBody'
-import {
-  ResourceListSorter,
-  ResourceListSorterRef,
-} from '../List/ResourceListSorter'
-import {ResourceCard} from '../Card'
+  ResourceCard,
+  ResourceCardEditableDescription,
+  ResourceCardName,
+} from '../Card'
 import {Input} from '../../Inputs/Input'
-import {EmptyState} from '../../EmptyState'
+import {EmptyState, EmptyStateText} from '../../EmptyState'
 
 // Types
 import {Sort, IconFont} from '../../../Types'
@@ -30,7 +28,7 @@ import ResourceListExampleReadme from './ResourceListExample.md?raw'
 export default {title: 'Components/ResourceList/List Family'}
 
 export const _ResourceList = () => {
-  const resourceListRef: RefObject<ResourceListRef | null> = createRef()
+  const resourceListRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -43,7 +41,7 @@ export const _ResourceList = () => {
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
-      <ResourceList.ResourceList ref={resourceListRef} />
+      <ResourceList ref={resourceListRef} />
     </div>
   )
 }
@@ -74,14 +72,10 @@ const exampleHeaderSorts = [
 ]
 
 export const _ResourceListHeader = () => {
-  const resourceListHeaderRef: RefObject<ResourceListHeaderRef | null> =
-    createRef()
-  const resourceListSorterNameRef: RefObject<ResourceListSorterRef | null> =
-    createRef()
-  const resourceListSorterCreatedRef: RefObject<ResourceListSorterRef | null> =
-    createRef()
-  const resourceListSorterColorRef: RefObject<ResourceListSorterRef | null> =
-    createRef()
+  const resourceListHeaderRef = createRef<HTMLDivElement>()
+  const resourceListSorterNameRef = createRef<HTMLDivElement>()
+  const resourceListSorterCreatedRef = createRef<HTMLDivElement>()
+  const resourceListSorterColorRef = createRef<HTMLDivElement>()
 
   const sorterRefs = [
     resourceListSorterNameRef,
@@ -145,7 +139,7 @@ _ResourceListHeader.story = {
 }
 
 export const _ResourceListBody = () => {
-  const resourceListBodyRef: RefObject<ResourceListBodyRef | null> = createRef()
+  const resourceListBodyRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -182,8 +176,7 @@ _ResourceListBody.story = {
 }
 
 export const _ResourceListSorter = () => {
-  const resourceListSorterRef: RefObject<ResourceListSorterRef | null> =
-    createRef()
+  const resourceListSorterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -246,7 +239,7 @@ const exampleDashboards = [
 export const DashboardsList = () => (
   <div className="story--example">
     <ResourceList>
-      <ResourceList.Header
+      <ResourceListHeader
         filterComponent={
           <Input
             icon={IconFont.Search_New}
@@ -256,7 +249,7 @@ export const DashboardsList = () => (
           />
         }
       >
-        <ResourceList.Sorter
+        <ResourceListSorter
           name="Name"
           sortKey="name"
           onClick={(nextSort, sortKey) =>
@@ -264,7 +257,7 @@ export const DashboardsList = () => (
           }
           sort={Sort.Ascending}
         />
-        <ResourceList.Sorter
+        <ResourceListSorter
           name="Description"
           sortKey="desc"
           onClick={(nextSort, sortKey) =>
@@ -272,7 +265,7 @@ export const DashboardsList = () => (
           }
           sort={Sort.None}
         />
-        <ResourceList.Sorter
+        <ResourceListSorter
           name="Last Updated"
           sortKey="updated"
           onClick={(nextSort, sortKey) =>
@@ -280,11 +273,11 @@ export const DashboardsList = () => (
           }
           sort={Sort.None}
         />
-      </ResourceList.Header>
-      <ResourceList.Body
+      </ResourceListHeader>
+      <ResourceListBody
         emptyState={
           <EmptyState>
-            <EmptyState.Text>{'No dashboards exist'}</EmptyState.Text>
+            <EmptyStateText>{'No dashboards exist'}</EmptyStateText>
           </EmptyState>
         }
       >
@@ -292,10 +285,10 @@ export const DashboardsList = () => (
           .filter(d => d.name.toLocaleLowerCase().includes(''))
           .map(dash => (
             <ResourceCard key={dash.id}>
-              <ResourceCard.Name name={dash.name} />
-              <ResourceCard.EditableDescription
+              <ResourceCardName name={dash.name} />
+              <ResourceCardEditableDescription
                 description={dash.description}
-                onUpdate={desc => alert(`onUpate description fired: ${desc}`)}
+                onUpdate={desc => alert(`onUpdate description fired: ${desc}`)}
               />
               <>Last updated {dash.updatedAt}</>,
               <>
@@ -303,7 +296,7 @@ export const DashboardsList = () => (
               </>
             </ResourceCard>
           ))}
-      </ResourceList.Body>
+      </ResourceListBody>
     </ResourceList>
   </div>
 )

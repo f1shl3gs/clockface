@@ -1,12 +1,12 @@
 # Dropdown Divider
 
-DropdownDivider is part of the Dropdown component family and can be accessed from the single import. This element receives most of its styles from being a child of `<Dropdown.Menu />`.
+DropdownDivider is part of the Dropdown component family and can be accessed from the single import. This element receives most of its styles from being a child of `<DropdownMenu />`.
 
 ### Usage
 ```tsx
 import {Dropdown} from '@influxdata/clockface'
 
-<Dropdown.Divider />
+<DropdownDivider />
 ```
 If the `text` prop is left empty the divider will render as a thin horizontal line.
 

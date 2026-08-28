@@ -9,16 +9,16 @@ import {Dropdown} from '@influxdata/clockface'
 Dropdown uses render props to connect the button and menu interactions together:
 ```tsx
 <Dropdown
-  menu={onCollapse => <Dropdown.Menu onCollapse={onCollapse} />}
-  button={(active, onClick) => <Dropdown.Button active={active} onClick={onClick} />}
+  menu={onCollapse => <DropdownMenu onCollapse={onCollapse} />}
+  button={(active, onClick) => <DropdownButton active={active} onClick={onClick} />}
 />
 ```
 onCollapse is optional, if passed in the menu will collapse when an item is clicked.
-If you want the menu to stay open until a specific action is fired, pass onCollapse into the triggering child element within `<Dropdown.Menu>`
+If you want the menu to stay open until a specific action is fired, pass onCollapse into the triggering child element within `<DropdownMenu>`
 
 ### Customization
 
-If you want a custom menu or button, simply pass in your own component instead of `<Dropdown.Menu>` or `<Dropdown.Button>`.
+If you want a custom menu or button, simply pass in your own component instead of `<DropdownMenu>` or `<DropdownButton>`.
 
 ### Example
 <!-- STORY -->

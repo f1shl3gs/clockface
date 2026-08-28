@@ -1,11 +1,5 @@
 // Libraries
-import {
-  FunctionComponent,
-  useRef,
-  RefObject,
-  CSSProperties,
-  useState,
-} from 'react'
+import {FunctionComponent, useRef, CSSProperties, useState} from 'react'
 
 // Components
 import {Button, ButtonProps} from './Button'
@@ -86,7 +80,7 @@ export const ConfirmationButton: FunctionComponent<ConfirmationButtonProps> = ({
   confirmationButtonColor = ComponentColor.Danger,
 }) => {
   const [buttonState, setButtonState] = useState<boolean>(false)
-  const triggerRef: RefObject<HTMLButtonElement | null> = useRef(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
 
   const isDisabled =
     status === ComponentStatus.Disabled || status === ComponentStatus.Loading
@@ -153,8 +147,6 @@ export const ConfirmationButton: FunctionComponent<ConfirmationButtonProps> = ({
     </>
   )
 }
-
-ConfirmationButton.displayName = 'ConfirmationButton'
 
 const ConfirmationContents: FunctionComponent<{
   onHide: (() => void) | undefined

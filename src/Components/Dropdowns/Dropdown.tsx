@@ -1,5 +1,12 @@
 // Libraries
-import React, {forwardRef, MouseEvent, useState, useEffect, useRef} from 'react'
+import React, {
+  MouseEvent,
+  useState,
+  useEffect,
+  useRef,
+  FunctionComponent,
+  Ref,
+} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -17,12 +24,12 @@ export enum MenuStatus {
 }
 
 export interface DropdownProps extends StandardFunctionProps {
-  /** Component to render as the button (use Dropdown.Button) */
+  /** Component to render as the button (use DropdownButton) */
   button: (
     active: boolean,
     onClick: (e?: MouseEvent<HTMLElement>) => void
   ) => React.ReactElement
-  /** Component to render as the menu (use Dropdown.Menu) */
+  /** Component to render as the menu (use DropdownMenu) */
   menu: (onCollapse?: () => void) => React.ReactElement
   /** Renders the menu element above the button instead of below */
   dropUp?: boolean
@@ -43,124 +50,118 @@ export interface DropdownProps extends StandardFunctionProps {
    * then nothing will happen- the menu will not open)
    * */
   menuOpen?: MenuStatus
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type DropdownRef = HTMLDivElement
+export const Dropdown: FunctionComponent<DropdownProps> = ({
+  id,
+  menu,
+  style = {width: '100%'},
+  testID = 'dropdown',
+  button,
+  dropUp = false,
+  className,
+  onClickAway,
+  menuOpen,
+  disableAutoFocus = false,
+  ref,
+}) => {
+  const [expanded, setExpandedState] = useState(false)
+  const didMountRef = useRef(false)
+  const defaultRef = useRef<HTMLDivElement>(null)
+  const internalRef = ref || defaultRef
 
-export const DropdownRoot = forwardRef<DropdownRef, DropdownProps>(
-  (
-    {
-      id,
-      menu,
-      style = {width: '100%'},
-      testID = 'dropdown',
-      button,
-      dropUp = false,
-      className,
-      onClickAway,
-      menuOpen,
-      disableAutoFocus = false,
-    },
-    ref
-  ) => {
-    const [expanded, setExpandedState] = useState(false)
-    const didMountRef = useRef(false)
-    const defaultRef = useRef<DropdownRef>(null)
-    const internalRef = ref || defaultRef
-
-    const handleToggleMenu = (e?: MouseEvent<HTMLElement>): void => {
-      e?.preventDefault()
-      setExpandedState(!expanded)
-    }
-
-    const handleCollapseMenu = (): void => {
-      setExpandedState(false)
-      if (onClickAway) {
-        onClickAway()
-      }
-    }
-
-    useEffect(() => {
-      if (menuOpen === MenuStatus.Closed) {
-        setExpandedState(false)
-      }
-      if (menuOpen === MenuStatus.Open) {
-        setExpandedState(true)
-      }
-    }, [menuOpen])
-
-    const handleEscapeKey = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') {
-        setExpandedState(false)
-      }
-    }
-
-    useEffect(() => {
-      if (!disableAutoFocus) {
-        if (expanded) {
-          /**
-           * Find the first focusable element from within the dropdown,
-           * starting with the first focusable, active item
-           */
-          const selector = 'button.cf-dropdown-item'
-          const activeEl = document.querySelector(`${selector}.active`)
-          const firstEl = document.querySelector(selector)
-          const element = (activeEl || firstEl) as HTMLButtonElement
-
-          if (element) {
-            element.focus()
-          }
-
-          window.addEventListener('keydown', handleEscapeKey)
-        } else {
-          window.removeEventListener('keydown', handleEscapeKey)
-
-          /**
-           * When the popover is closed, restore focus to the trigger element
-           */
-          if (typeof internalRef !== 'function' && internalRef.current) {
-            const triggerEl = internalRef.current.querySelector(
-              'button[tabindex]'
-            ) as HTMLButtonElement
-
-            if (didMountRef.current && triggerEl) {
-              triggerEl.focus()
-            }
-          }
-        }
-
-        didMountRef.current = true
-
-        return () => {
-          window.removeEventListener('keydown', handleEscapeKey)
-        }
-      }
-      return
-    }, [expanded])
-
-    const dropdownClass = classnames('cf-dropdown', {
-      [`${className}`]: className,
-      'cf-dropdown__up': dropUp,
-      'cf-dropdown__down': !dropUp,
-    })
-
-    return (
-      <ClickOutside onClickOutside={handleCollapseMenu}>
-        <div
-          style={style}
-          id={id}
-          ref={internalRef}
-          className={dropdownClass}
-          data-testid={testID}
-        >
-          {button(expanded, handleToggleMenu)}
-          <div className="cf-dropdown--menu-container">
-            {expanded && menu(handleCollapseMenu)}
-          </div>
-        </div>
-      </ClickOutside>
-    )
+  const handleToggleMenu = (e?: MouseEvent<HTMLElement>): void => {
+    e?.preventDefault()
+    setExpandedState(!expanded)
   }
-)
 
-DropdownRoot.displayName = 'Dropdown'
+  const handleCollapseMenu = (): void => {
+    setExpandedState(false)
+    if (onClickAway) {
+      onClickAway()
+    }
+  }
+
+  useEffect(() => {
+    if (menuOpen === MenuStatus.Closed) {
+      setExpandedState(false)
+    }
+    if (menuOpen === MenuStatus.Open) {
+      setExpandedState(true)
+    }
+  }, [menuOpen])
+
+  const handleEscapeKey = (e: KeyboardEvent): void => {
+    if (e.key === 'Escape') {
+      setExpandedState(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!disableAutoFocus) {
+      if (expanded) {
+        /**
+         * Find the first focusable element from within the dropdown,
+         * starting with the first focusable, active item
+         */
+        const selector = 'button.cf-dropdown-item'
+        const activeEl = document.querySelector(`${selector}.active`)
+        const firstEl = document.querySelector(selector)
+        const element = (activeEl || firstEl) as HTMLButtonElement
+
+        if (element) {
+          element.focus()
+        }
+
+        window.addEventListener('keydown', handleEscapeKey)
+      } else {
+        window.removeEventListener('keydown', handleEscapeKey)
+
+        /**
+         * When the popover is closed, restore focus to the trigger element
+         */
+        if (typeof internalRef !== 'function' && internalRef.current) {
+          const triggerEl = internalRef.current.querySelector(
+            'button[tabindex]'
+          ) as HTMLButtonElement
+
+          if (didMountRef.current && triggerEl) {
+            triggerEl.focus()
+          }
+        }
+      }
+
+      didMountRef.current = true
+
+      return () => {
+        window.removeEventListener('keydown', handleEscapeKey)
+      }
+    }
+    return
+  }, [expanded])
+
+  const dropdownClass = classnames('cf-dropdown', {
+    [`${className}`]: className,
+    'cf-dropdown__up': dropUp,
+    'cf-dropdown__down': !dropUp,
+  })
+
+  return (
+    <ClickOutside onClickOutside={handleCollapseMenu}>
+      <div
+        style={style}
+        id={id}
+        ref={internalRef}
+        className={dropdownClass}
+        data-testid={testID}
+      >
+        {button(expanded, handleToggleMenu)}
+        <div className="cf-dropdown--menu-container">
+          {expanded && menu(handleCollapseMenu)}
+        </div>
+      </div>
+    </ClickOutside>
+  )
+}

@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -19,69 +19,63 @@ export interface PageContentsProps extends StandardFunctionProps {
   autoHideScrollbar?: boolean
   /** Controls the gutters (left and right margins) */
   gutters?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type PageContentsRef = HTMLDivElement
+export const PageContents: FunctionComponent<PageContentsProps> = ({
+  id,
+  style,
+  children,
+  className,
+  fullWidth = false,
+  scrollable = false,
+  testID = 'page-contents',
+  autoHideScrollbar = false,
+  gutters = ComponentSize.Medium,
+  scrollbarSize = ComponentSize.Small,
+  ref,
+}) => {
+  const pageContentsClass = classnames('cf-page-contents', {
+    'cf-page-contents__no-scroll': !scrollable,
+    [`cf-page__gutter-${gutters}`]: gutters,
+    [`${className}`]: className,
+  })
 
-export const PageContents = forwardRef<PageContentsRef, PageContentsProps>(
-  (
-    {
-      id,
-      style,
-      children,
-      className,
-      fullWidth = false,
-      scrollable = false,
-      testID = 'page-contents',
-      autoHideScrollbar = false,
-      gutters = ComponentSize.Medium,
-      scrollbarSize = ComponentSize.Small,
-    },
-    ref
-  ) => {
-    const pageContentsClass = classnames('cf-page-contents', {
-      'cf-page-contents__no-scroll': !scrollable,
-      [`cf-page__gutter-${gutters}`]: gutters,
-      [`${className}`]: className,
-    })
+  const widthClass = fullWidth
+    ? 'cf-page-contents__fluid'
+    : 'cf-page-contents__fixed'
 
-    const widthClass = fullWidth
-      ? 'cf-page-contents__fluid'
-      : 'cf-page-contents__fixed'
+  const kids = (
+    <div ref={ref} className={widthClass}>
+      {children}
+    </div>
+  )
 
-    const kids = (
-      <div ref={ref} className={widthClass}>
-        {children}
-      </div>
-    )
-
-    if (scrollable) {
-      return (
-        <DapperScrollbars
-          id={id}
-          style={style}
-          testID={testID}
-          autoHide={autoHideScrollbar}
-          className={pageContentsClass}
-          size={scrollbarSize}
-        >
-          {kids}
-        </DapperScrollbars>
-      )
-    }
-
+  if (scrollable) {
     return (
-      <div
+      <DapperScrollbars
         id={id}
-        ref={ref}
         style={style}
-        data-testid={testID}
+        testID={testID}
+        autoHide={autoHideScrollbar}
         className={pageContentsClass}
+        size={scrollbarSize}
       >
         {kids}
-      </div>
+      </DapperScrollbars>
     )
   }
-)
 
-PageContents.displayName = 'PageContents'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={pageContentsClass}
+    >
+      {kids}
+    </div>
+  )
+}

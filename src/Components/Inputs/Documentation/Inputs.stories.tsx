@@ -1,29 +1,18 @@
 // Libraries
-import {RefObject, createRef, ChangeEvent, useState} from 'react'
+import {createRef, ChangeEvent, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
 import {
   Toggle,
-  ToggleRef,
-  ToggleContainerRef,
   Input,
-  InputRef,
-  InputContainerRef,
   AutoInput,
-  AutoInputRef,
   RangeSlider,
-  RangeSliderRef,
   TextArea,
-  TextAreaRef,
-  TextAreaContainerRef,
   VisibilityInput,
-  VisibilityInputRef,
   TimeInput,
-  TimeInputRef,
 } from '../'
-import {InputLabel, InputLabelRef} from '../InputLabel'
-import {SelectGroupRef, SelectGroupOptionRef} from '../../SelectGroup/index'
+import {InputLabel} from '../InputLabel'
 import {FlexBox} from '../../FlexBox'
 
 // Types
@@ -60,8 +49,8 @@ const defaultInputStyle = {
 }
 
 export const InputText = () => {
-  const inputRef: RefObject<InputRef | null> = createRef()
-  const inputContainerRef: RefObject<InputContainerRef | null> = createRef()
+  const inputRef = createRef<HTMLInputElement>()
+  const inputContainerRef = createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
     /* eslint-disable */
@@ -292,7 +281,7 @@ InputCheckbox.story = {
 }
 
 export const _InputLabel = () => {
-  const inputLabelRef: RefObject<InputLabelRef | null> = createRef()
+  const inputLabelRef = createRef<HTMLLabelElement>()
 
   const handleLogRefs = (): void => {
     /* eslint-disable */
@@ -328,8 +317,8 @@ _InputLabel.story = {
 }
 
 export const _Toggle = () => {
-  const toggleRef: RefObject<ToggleRef | null> = createRef()
-  const toggleContainerRef: RefObject<ToggleContainerRef | null> = createRef()
+  const toggleRef = createRef<HTMLInputElement>()
+  const toggleContainerRef = createRef<HTMLDivElement>()
 
   const [checked, setChecked] = useState<boolean>(false)
 
@@ -366,7 +355,7 @@ export const _Toggle = () => {
         fill={(Appearance as Record<string, any>)['None']}
         type={(InputToggleType as Record<string, any>)['Checkbox']}
         onChange={handleToggleChange}
-      ></Toggle>
+      />
       <div className="story--test-buttons">
         <button onClick={handleLogRefs}>Log Refs</button>
       </div>
@@ -383,13 +372,12 @@ _Toggle.story = {
 }
 
 export const _TextArea = () => {
-  const textAreaRefDefault: RefObject<TextAreaRef | null> = createRef()
-  const textAreaRefDisabled: RefObject<TextAreaRef | null> = createRef()
-  const textAreaRefValid: RefObject<TextAreaRef | null> = createRef()
-  const textAreaRefError: RefObject<TextAreaRef | null> = createRef()
-  const textAreaRefLoading: RefObject<TextAreaRef | null> = createRef()
-  const textAreaContainerRef: RefObject<TextAreaContainerRef | null> =
-    createRef()
+  const textAreaRefDefault = createRef<HTMLTextAreaElement>()
+  const textAreaRefDisabled = createRef<HTMLTextAreaElement>()
+  const textAreaRefValid = createRef<HTMLTextAreaElement>()
+  const textAreaRefError = createRef<HTMLTextAreaElement>()
+  const textAreaRefLoading = createRef<HTMLTextAreaElement>()
+  const textAreaContainerRef = createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
     /* eslint-disable */
@@ -528,7 +516,7 @@ _TextArea.story = {
 
 export const _VisibilityInput = () => {
   const [value, setValue] = useState<string>('Value text')
-  const visibilityInputRef: RefObject<VisibilityInputRef | null> = createRef()
+  const visibilityInputRef = createRef<HTMLInputElement>()
 
   const handleLogRefs = (): void => {
     /* eslint-disable */
@@ -536,7 +524,7 @@ export const _VisibilityInput = () => {
     /* eslint-enable */
   }
 
-  const handleInputChange = (e: ChangeEvent<VisibilityInputRef>): void => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setValue(e.target.value)
   }
 
@@ -576,7 +564,7 @@ export const _TimeInput = () => {
   const DEFAULT_UNITS = ['s', 'm', 'h', 'd', 'w', 'mo']
   const [value, setValue] = useState<string>('')
   const [unit, setUnit] = useState<string>(DEFAULT_UNITS[0])
-  const timeInputRef: RefObject<TimeInputRef | null> = createRef()
+  const timeInputRef = createRef<HTMLInputElement>()
 
   const handleLogRefs = (): void => {
     /* eslint-disable */
@@ -619,12 +607,10 @@ _TimeInput.story = {
 }
 
 export const _AutoInput = () => {
-  const autoInputRef: RefObject<AutoInputRef | null> = createRef()
-  const autoInputSelectGroupRef: RefObject<SelectGroupRef | null> = createRef()
-  const autoInputSelectGroupAutoRef: RefObject<SelectGroupOptionRef | null> =
-    createRef()
-  const autoInputSelectGroupCustomRef: RefObject<SelectGroupOptionRef | null> =
-    createRef()
+  const autoInputRef = createRef<HTMLDivElement>()
+  const autoInputSelectGroupRef = createRef<HTMLDivElement>()
+  const autoInputSelectGroupAutoRef = createRef<HTMLInputElement>()
+  const autoInputSelectGroupCustomRef = createRef<HTMLInputElement>()
 
   const handleLogRef = (): void => {
     /* eslint-disable */
@@ -686,7 +672,7 @@ _AutoInput.story = {
 
 export const _RangeSlider = () => {
   const [rangeSliderValue, setRangeSliderValue] = useState<number>(50)
-  const rangeSliderRef: RefObject<RangeSliderRef | null> = createRef()
+  const rangeSliderRef = createRef<HTMLInputElement>()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setRangeSliderValue(parseInt(e.target.value))

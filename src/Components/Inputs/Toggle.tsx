@@ -2,9 +2,10 @@
 import React, {
   ChangeEvent,
   KeyboardEvent,
-  forwardRef,
   RefObject,
   useState,
+  FunctionComponent,
+  Ref,
 } from 'react'
 import classnames from 'classnames'
 
@@ -95,152 +96,145 @@ export interface ToggleProps extends Omit<StandardFunctionProps, 'id'> {
   /** Whether or not the input receives autofocus when mounted */
   autoFocus?: boolean
   /** Refers to the visible element rather than the hidden input that ref refers to */
-  containerRef?: RefObject<ToggleContainerRef | null>
+  containerRef?: RefObject<HTMLDivElement | null>
   /** Controls color of toggle */
   color?: ComponentColor
   /** Deprecated */
   appearance?: Appearance
   /** Renders the toggle as "Solid" */
   fill?: Appearance
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLInputElement>
 }
 
-export type ToggleRef = HTMLInputElement
-export type ToggleContainerRef = HTMLDivElement
+export const Toggle: FunctionComponent<ToggleProps> = ({
+  id,
+  fill,
+  icon,
+  type,
+  size = ComponentSize.Small,
+  name,
+  style,
+  value = '',
+  color = ComponentColor.Primary,
+  onBlur,
+  testID = 'toggle',
+  onFocus,
+  checked = false,
+  onKeyUp,
+  disabled = false,
+  children,
+  tabIndex,
+  onChange,
+  titleText = '',
+  className,
+  autoFocus = false,
+  onKeyDown,
+  onKeyPress,
+  containerRef,
+  disabledTitleText = 'This input is disabled',
+  ref,
+}) => {
+  const [isFocused, setFocus] = useState<boolean>(autoFocus)
 
-export const Toggle = forwardRef<ToggleRef, ToggleProps>(
-  (
-    {
-      id,
-      fill,
-      icon,
-      type,
-      size = ComponentSize.Small,
-      name,
-      style,
-      value = '',
-      color = ComponentColor.Primary,
-      onBlur,
-      testID = 'toggle',
-      onFocus,
-      checked = false,
-      onKeyUp,
-      disabled = false,
-      children,
-      tabIndex,
-      onChange,
-      titleText = '',
-      className,
-      autoFocus = false,
-      onKeyDown,
-      onKeyPress,
-      containerRef,
-      disabledTitleText = 'This input is disabled',
-    },
-    ref
-  ) => {
-    const [isFocused, setFocus] = useState<boolean>(autoFocus)
+  const toggleClass = classnames('cf-toggle', {
+    [`cf-toggle__${size}`]: size,
+    [`cf-toggle__${color}`]: color,
+    [`cf-toggle__fill-${fill}`]: fill,
+    'cf-toggle__checked': checked,
+    'cf-toggle__focused': isFocused,
+    'cf-toggle__checkbox': type === InputToggleType.Checkbox,
+    'cf-toggle__radio': type === InputToggleType.Radio,
+    'cf-toggle__disabled': disabled,
+    'cf-toggle__labelled': children && !!React.Children.count(children),
+    [`${className}`]: className,
+  })
 
-    const toggleClass = classnames('cf-toggle', {
-      [`cf-toggle__${size}`]: size,
-      [`cf-toggle__${color}`]: color,
-      [`cf-toggle__fill-${fill}`]: fill,
-      'cf-toggle__checked': checked,
-      'cf-toggle__focused': isFocused,
-      'cf-toggle__checkbox': type === InputToggleType.Checkbox,
-      'cf-toggle__radio': type === InputToggleType.Radio,
-      'cf-toggle__disabled': disabled,
-      'cf-toggle__labelled': children && !!React.Children.count(children),
-      [`${className}`]: className,
-    })
-
-    const handleClick = (): void => {
-      if (disabled) {
-        return
-      }
-      onChange(value)
+  const handleClick = (): void => {
+    if (disabled) {
+      return
     }
+    onChange(value)
+  }
 
-    const handleKeyUp = (e: KeyboardEvent<HTMLLabelElement>): void => {
-      if (e.key === ' ') {
-        handleClick()
-      }
-      if (onKeyUp) {
-        onKeyUp(e)
-      }
+  const handleKeyUp = (e: KeyboardEvent<HTMLLabelElement>): void => {
+    if (e.key === ' ') {
+      handleClick()
     }
-
-    const handleInputFocus = (e: ChangeEvent<HTMLLabelElement>): void => {
-      setFocus(true)
-
-      if (onFocus) {
-        onFocus(e)
-      }
+    if (onKeyUp) {
+      onKeyUp(e)
     }
+  }
 
-    const handleInputBlur = (e: ChangeEvent<HTMLLabelElement>): void => {
-      setFocus(false)
+  const handleInputFocus = (e: ChangeEvent<HTMLLabelElement>): void => {
+    setFocus(true)
 
-      if (onBlur) {
-        onBlur(e)
-      }
+    if (onFocus) {
+      onFocus(e)
     }
+  }
 
-    let indicator = (
+  const handleInputBlur = (e: ChangeEvent<HTMLLabelElement>): void => {
+    setFocus(false)
+
+    if (onBlur) {
+      onBlur(e)
+    }
+  }
+
+  let indicator = (
+    <span className="cf-toggle--box">
+      <span className="cf-toggle--indicator cf-toggle--dot" />
+    </span>
+  )
+
+  if (icon) {
+    indicator = (
       <span className="cf-toggle--box">
-        <span className="cf-toggle--indicator cf-toggle--dot" />
+        <Icon glyph={icon} className="cf-toggle--indicator cf-toggle--icon" />
       </span>
     )
-
-    if (icon) {
-      indicator = (
-        <span className="cf-toggle--box">
-          <Icon glyph={icon} className="cf-toggle--indicator cf-toggle--icon" />
-        </span>
-      )
-    }
-
-    const title = disabled ? disabledTitleText : titleText
-
-    // putting onClick handler on the containing div,
-    // so that clicking on the children will toggle as well
-    // (b/c of the explicit onclick handler, the 'for' linking the labels
-    // to the input does not toggle the button at all)
-    return (
-      <div className={toggleClass} style={style} ref={containerRef}>
-        <input
-          id={id}
-          ref={ref}
-          onClick={handleClick}
-          type={type}
-          name={name}
-          title={title}
-          value={value}
-          tabIndex={-1}
-          disabled={disabled}
-          readOnly={true}
-          onKeyDown={onKeyDown}
-          autoFocus={autoFocus}
-          className="cf-toggle--input"
-          onKeyPress={onKeyPress}
-          data-testid={`${testID}--input`}
-          checked={checked}
-        />
-        <label
-          title={title}
-          onBlur={handleInputBlur}
-          htmlFor={id}
-          onFocus={handleInputFocus}
-          onKeyUp={handleKeyUp}
-          tabIndex={tabIndex}
-          className="cf-toggle--visual-input"
-          data-testid={testID}
-        >
-          {indicator}
-          {children}
-        </label>
-      </div>
-    )
   }
-)
 
-Toggle.displayName = 'Toggle'
+  const title = disabled ? disabledTitleText : titleText
+
+  // putting onClick handler on the containing div,
+  // so that clicking on the children will toggle as well
+  // (b/c of the explicit onclick handler, the 'for' linking the labels
+  // to the input does not toggle the button at all)
+  return (
+    <div className={toggleClass} style={style} ref={containerRef}>
+      <input
+        id={id}
+        ref={ref}
+        onClick={handleClick}
+        type={type}
+        name={name}
+        title={title}
+        value={value}
+        tabIndex={-1}
+        disabled={disabled}
+        readOnly={true}
+        onKeyDown={onKeyDown}
+        autoFocus={autoFocus}
+        className="cf-toggle--input"
+        onKeyPress={onKeyPress}
+        data-testid={`${testID}--input`}
+        checked={checked}
+      />
+      <label
+        title={title}
+        onBlur={handleInputBlur}
+        htmlFor={id}
+        onFocus={handleInputFocus}
+        onKeyUp={handleKeyUp}
+        tabIndex={tabIndex}
+        className="cf-toggle--visual-input"
+        data-testid={testID}
+      >
+        {indicator}
+        {children}
+      </label>
+    </div>
+  )
+}

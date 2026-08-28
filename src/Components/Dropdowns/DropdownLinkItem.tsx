@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -17,54 +17,45 @@ export interface DropdownLinkItemProps extends StandardFunctionProps {
   wrapText?: boolean
   /** Renders the element in a disabled state, does not affect functionality */
   disabled?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type DropdownLinkItemRef = HTMLDivElement
-
-export const DropdownLinkItem = forwardRef<
-  DropdownLinkItemRef,
-  DropdownLinkItemProps
->(
-  (
+export const DropdownLinkItem: FunctionComponent<DropdownLinkItemProps> = ({
+  id,
+  type = DropdownItemType.None,
+  style,
+  testID = 'dropdown-link-item',
+  wrapText = false,
+  selected = false,
+  children,
+  disabled,
+  className,
+  ref,
+}) => {
+  const dropdownLinkItemClass = classnames(
+    'cf-dropdown-item cf-dropdown-link-item',
     {
-      id,
-      type = DropdownItemType.None,
-      style,
-      testID = 'dropdown-link-item',
-      wrapText = false,
-      selected = false,
-      children,
-      disabled,
-      className,
-    },
-    ref
-  ) => {
-    const dropdownLinkItemClass = classnames(
-      'cf-dropdown-item cf-dropdown-link-item',
-      {
-        [`cf-dropdown-item__${type}`]:
-          type === DropdownItemType.Checkbox || type === DropdownItemType.Dot,
-        active: selected,
-        [`${className}`]: className,
-        'cf-dropdown-item__wrap': wrapText,
-        'cf-dropdown-item__no-wrap': !wrapText,
-        'cf-dropdown-item__disabled': disabled,
-      }
-    )
+      [`cf-dropdown-item__${type}`]:
+        type === DropdownItemType.Checkbox || type === DropdownItemType.Dot,
+      active: selected,
+      [`${className}`]: className,
+      'cf-dropdown-item__wrap': wrapText,
+      'cf-dropdown-item__no-wrap': !wrapText,
+      'cf-dropdown-item__disabled': disabled,
+    }
+  )
 
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={dropdownLinkItemClass}
-        data-testid={testID}
-      >
-        <DropdownItemSelectionIndicator type={type} />
-        {children}
-      </div>
-    )
-  }
-)
-
-DropdownLinkItem.displayName = 'DropdownLinkItem'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={dropdownLinkItemClass}
+      data-testid={testID}
+    >
+      <DropdownItemSelectionIndicator type={type} />
+      {children}
+    </div>
+  )
+}

@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useRef, RefObject, CSSProperties} from 'react'
+import React, {useRef, CSSProperties, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -25,81 +25,74 @@ export interface QuestionMarkTooltipProps extends StandardFunctionProps {
   color?: ComponentColor
   /** Useful for customizing the tooltip itself */
   tooltipStyle?: CSSProperties
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLSpanElement>
 }
 
-export type QuestionMarkTooltipRef = HTMLSpanElement
-
-export const QuestionMarkTooltip = forwardRef<
-  QuestionMarkTooltipRef,
+export const QuestionMarkTooltip: FunctionComponent<
   QuestionMarkTooltipProps
->(
-  (
-    {
-      id,
-      style,
-      className,
-      tooltipStyle,
-      diameter = 18,
-      tooltipContents,
-      color = ComponentColor.Primary,
-      testID = 'question-mark-tooltip',
-    },
-    ref
-  ) => {
-    const triggerRef: RefObject<HTMLDivElement | null> = useRef(null)
+> = ({
+  id,
+  style,
+  className,
+  tooltipStyle,
+  diameter = 18,
+  tooltipContents,
+  color = ComponentColor.Primary,
+  testID = 'question-mark-tooltip',
+  ref,
+}) => {
+  const triggerRef = useRef<HTMLDivElement>(null)
 
-    const circleClassName = classnames('cf-question-mark-tooltip', {
-      [`${className}`]: className,
-      [`cf-question-mark-tooltip__${color}`]: color,
-    })
+  const circleClassName = classnames('cf-question-mark-tooltip', {
+    [`${className}`]: className,
+    [`cf-question-mark-tooltip__${color}`]: color,
+  })
 
-    const circleStyle = {
-      width: `${diameter}px`,
-      height: `${diameter}px`,
-      lineHeight: `${diameter}px`,
-      fontSize: `${Math.ceil(diameter * 0.75)}px`,
-      ...style,
-    }
-
-    const handleActivateCircle = () => {
-      if (triggerRef.current) {
-        triggerRef.current.classList.add('cf-question-mark-tooltip__active')
-      }
-    }
-
-    const handleDeactivateCircle = () => {
-      if (triggerRef.current) {
-        triggerRef.current.classList.remove('cf-question-mark-tooltip__active')
-      }
-    }
-
-    return (
-      <span ref={ref}>
-        <div
-          className={circleClassName}
-          ref={triggerRef}
-          style={circleStyle}
-          data-testid={testID}
-        >
-          ?
-        </div>
-        <Popover
-          distanceFromTrigger={8}
-          triggerRef={triggerRef}
-          showEvent={PopoverInteraction.Hover}
-          hideEvent={PopoverInteraction.Hover}
-          onShow={handleActivateCircle}
-          onHide={handleDeactivateCircle}
-          contents={() => <>{tooltipContents}</>}
-          testID={`${testID}--tooltip`}
-          style={tooltipStyle}
-          color={color}
-          appearance={Appearance.Outline}
-          id={id}
-        />
-      </span>
-    )
+  const circleStyle = {
+    width: `${diameter}px`,
+    height: `${diameter}px`,
+    lineHeight: `${diameter}px`,
+    fontSize: `${Math.ceil(diameter * 0.75)}px`,
+    ...style,
   }
-)
 
-QuestionMarkTooltip.displayName = 'QuestionMarkTooltip'
+  const handleActivateCircle = () => {
+    if (triggerRef.current) {
+      triggerRef.current.classList.add('cf-question-mark-tooltip__active')
+    }
+  }
+
+  const handleDeactivateCircle = () => {
+    if (triggerRef.current) {
+      triggerRef.current.classList.remove('cf-question-mark-tooltip__active')
+    }
+  }
+
+  return (
+    <span ref={ref}>
+      <div
+        className={circleClassName}
+        ref={triggerRef}
+        style={circleStyle}
+        data-testid={testID}
+      >
+        ?
+      </div>
+      <Popover
+        distanceFromTrigger={8}
+        triggerRef={triggerRef}
+        showEvent={PopoverInteraction.Hover}
+        hideEvent={PopoverInteraction.Hover}
+        onShow={handleActivateCircle}
+        onHide={handleDeactivateCircle}
+        contents={() => <>{tooltipContents}</>}
+        testID={`${testID}--tooltip`}
+        style={tooltipStyle}
+        color={color}
+        appearance={Appearance.Outline}
+        id={id}
+      />
+    </span>
+  )
+}

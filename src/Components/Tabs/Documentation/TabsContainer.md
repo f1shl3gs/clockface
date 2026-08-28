@@ -1,20 +1,20 @@
 # TabsContainer
 
-This component is intended to wrap `<Tabs />` and `<Tabs.TabContents />` so they line up nicely. You can also use `FlexBox` to achieve the same goal.
+This component is intended to wrap `<Tabs />` and `<TabContents />` so they line up nicely. You can also use `FlexBox` to achieve the same goal.
 
 ### Usage
 ```tsx
 import {Tabs} from '@influxdata/clockface'
 ```
 ```tsx
-<Tabs.Container>
+<TabsContainer>
   <Tabs>
-    <Tabs.Tab />
-    <Tabs.Tab />
-    <Tabs.Tab />
+    <Tab />
+    <Tab />
+    <Tab />
   </Tabs>
   <Tabs.TabContent />
-</Tabs.Container>
+</TabsContainer>
 ```
 
 ### Example

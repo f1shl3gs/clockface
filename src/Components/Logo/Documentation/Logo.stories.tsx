@@ -3,14 +3,7 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {
-  InfluxDataLogo,
-  InfluxDataLogoRef,
-  InfluxDBCloudLogo,
-  InfluxDBCloudLogoRef,
-  InfluxLogo,
-  InfluxLogoRef,
-} from '../'
+import {InfluxDataLogo, InfluxDBCloudLogo, InfluxLogo} from '../'
 
 // Types
 import {
@@ -29,7 +22,7 @@ import InfluxLogoReadme from './InfluxLogo.md?raw'
 export default {title: 'Components/Logos'}
 
 export const _InfluxLogo = () => {
-  const logoRef = createRef<InfluxLogoRef>()
+  const logoRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -70,7 +63,7 @@ _InfluxLogo.story = {
 }
 
 export const _InfluxData = () => {
-  const logoRef = createRef<InfluxDataLogoRef>()
+  const logoRef = createRef<SVGSVGElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -103,7 +96,7 @@ _InfluxData.story = {
 }
 
 export const InfluxDbCloud = () => {
-  const logoRef = createRef<InfluxDBCloudLogoRef>()
+  const logoRef = createRef<SVGSVGElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

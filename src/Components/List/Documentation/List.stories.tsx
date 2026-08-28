@@ -1,14 +1,15 @@
 // Libraries
-import {createRef, RefObject, useRef, useState} from 'react'
+import {createRef, useRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
 import {
   List,
-  ListRef,
-  ListDividerRef,
-  ListItemRef,
-  ListEmptyStateRef,
+  ListDivider,
+  ListEmptyState,
+  ListIcon,
+  ListIndicator,
+  ListItem,
 } from '../'
 import {Popover} from '../../Popover'
 
@@ -243,7 +244,7 @@ const exampleItems: ExampleDropdownItem[] = [
 
 export const _List = () => {
   const [selectedItem, setSelectedItem] = useState<string>('Grapefruit')
-  const listRef: RefObject<ListRef | null> = createRef()
+  const listRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -257,7 +258,7 @@ export const _List = () => {
 
   return (
     <div className="story--example">
-      <List.List
+      <List
         ref={listRef}
         style={defaultListStyle}
         gradient={(Gradients as Record<string, any>)['None']}
@@ -266,7 +267,7 @@ export const _List = () => {
         {exampleItems.map(item => {
           if (item.type === 'item') {
             return (
-              <List.Item
+              <ListItem
                 key={item.text}
                 backgroundColor={item.backgroundColor}
                 gradient={item.gradient}
@@ -277,24 +278,24 @@ export const _List = () => {
                 wrapText={item.wrap}
                 disabled={item.disabled}
               >
-                {item.icon && <List.Icon glyph={item.icon} />}
+                {item.icon && <ListIcon glyph={item.icon} />}
                 {!item.noIndicator && !item.icon && (
-                  <List.Indicator type={'checkbox'} />
+                  <ListIndicator type={'checkbox'} />
                 )}
                 {item.text}
-              </List.Item>
+              </ListItem>
             )
           }
 
           return (
-            <List.Divider
+            <ListDivider
               key={item.text}
               text={item.text}
               size={(ComponentSize as Record<string, any>)['Small']}
             />
           )
         })}
-      </List.List>
+      </List>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Refs</button>
       </div>
@@ -310,8 +311,8 @@ _List.story = {
   },
 }
 
-export const ListDivider = () => {
-  const dropdownDividerRef: RefObject<ListDividerRef | null> = createRef()
+export const _ListDivider = () => {
+  const dropdownDividerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -321,7 +322,7 @@ export const ListDivider = () => {
 
   return (
     <div className="story--example">
-      <List.Divider text={'Divider Text'} ref={dropdownDividerRef} />
+      <ListDivider text={'Divider Text'} ref={dropdownDividerRef} />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -329,7 +330,7 @@ export const ListDivider = () => {
   )
 }
 
-ListDivider.story = {
+_ListDivider.story = {
   name: 'ListDivider',
 
   parameters: {
@@ -339,8 +340,8 @@ ListDivider.story = {
   },
 }
 
-export const ListItem = () => {
-  const listItemRef: RefObject<ListItemRef | null> = createRef()
+export const _ListItem = () => {
+  const listItemRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -350,7 +351,7 @@ export const ListItem = () => {
 
   return (
     <div className="story--example">
-      <List.Item
+      <ListItem
         ref={listItemRef}
         value={'value'}
         selected={false}
@@ -363,7 +364,7 @@ export const ListItem = () => {
         disabled={false}
       >
         {'I am a dropdown item!'}
-      </List.Item>
+      </ListItem>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -371,7 +372,7 @@ export const ListItem = () => {
   )
 }
 
-ListItem.story = {
+_ListItem.story = {
   name: 'ListItem',
 
   parameters: {
@@ -381,8 +382,8 @@ ListItem.story = {
   },
 }
 
-export const ListEmptyState = () => {
-  const listEmptyStateRef: RefObject<ListEmptyStateRef | null> = createRef()
+export const _ListEmptyState = () => {
+  const listEmptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -392,13 +393,13 @@ export const ListEmptyState = () => {
 
   return (
     <div className="story--example">
-      <List.EmptyState
+      <ListEmptyState
         wrapText={false}
         size={(ComponentSize as Record<string, any>)['Small']}
         ref={listEmptyStateRef}
       >
         {'No items to display'}
-      </List.EmptyState>
+      </ListEmptyState>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -406,7 +407,7 @@ export const ListEmptyState = () => {
   )
 }
 
-ListEmptyState.story = {
+_ListEmptyState.story = {
   name: 'ListEmptyState',
 
   parameters: {
@@ -417,7 +418,7 @@ ListEmptyState.story = {
 }
 
 export const UsingLinkElementProp = () => {
-  const linkElementRef: RefObject<HTMLAnchorElement | null> = createRef()
+  const linkElementRef = createRef<HTMLAnchorElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -427,7 +428,7 @@ export const UsingLinkElementProp = () => {
 
   return (
     <div className="story--example">
-      <List.Item
+      <ListItem
         selected={false}
         wrapText={false}
         disabled={false}
@@ -441,9 +442,9 @@ export const UsingLinkElementProp = () => {
           />
         }
       >
-        <List.Indicator type={'checkbox'} />
+        <ListIndicator type={'checkbox'} />
         {'Example Link'}
-      </List.Item>
+      </ListItem>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -462,7 +463,7 @@ UsingLinkElementProp.story = {
 }
 
 export const IconsIndicators = () => {
-  const listItemRef: RefObject<ListItemRef | null> = createRef()
+  const listItemRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -472,7 +473,7 @@ export const IconsIndicators = () => {
 
   return (
     <div className="story--example" style={{flexDirection: 'column'}}>
-      <List.Item
+      <ListItem
         ref={listItemRef}
         value={'value'}
         selected={false}
@@ -484,11 +485,11 @@ export const IconsIndicators = () => {
         size={(ComponentSize as Record<string, any>)['Small']}
         disabled={false}
       >
-        <List.Indicator type={'checkbox'} />
+        <ListIndicator type={'checkbox'} />
         {'I am a dropdown item!'}
-        <List.Icon glyph={(IconFont as Record<string, any>)['Bell']} />
-      </List.Item>
-      <List.Item
+        <ListIcon glyph={(IconFont as Record<string, any>)['Bell']} />
+      </ListItem>
+      <ListItem
         ref={listItemRef}
         value={'value'}
         selected={false}
@@ -500,10 +501,10 @@ export const IconsIndicators = () => {
         size={(ComponentSize as Record<string, any>)['Small']}
         disabled={false}
       >
-        <List.Icon glyph={(IconFont as Record<string, any>)['Bell']} />
+        <ListIcon glyph={(IconFont as Record<string, any>)['Bell']} />
         {'I am a dropdown item!'}
-        <List.Indicator type={'checkbox'} />
-      </List.Item>
+        <ListIndicator type={'checkbox'} />
+      </ListItem>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -550,11 +551,11 @@ export const UsedWithAPopover = () => {
         triggerRef={triggerRef}
         contents={onHide => (
           <List style={{width: '200px'}} backgroundColor={InfluxColors.White}>
-            <List.Divider
+            <ListDivider
               text="Actions"
               size={(ComponentSize as Record<string, any>)['Small']}
             />
-            <List.Item
+            <ListItem
               value=""
               selected={false}
               wrapText={false}
@@ -562,10 +563,10 @@ export const UsedWithAPopover = () => {
               backgroundColor={InfluxColors.Pool}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Icon glyph={IconFont.Cube} />
+              <ListIcon glyph={IconFont.Cube} />
               {'Put Turtle in Water'}
-            </List.Item>
-            <List.Item
+            </ListItem>
+            <ListItem
               value=""
               selected={false}
               wrapText={false}
@@ -573,10 +574,10 @@ export const UsedWithAPopover = () => {
               backgroundColor={InfluxColors.Rainforest}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Icon glyph={IconFont.Pencil} />
+              <ListIcon glyph={IconFont.Pencil} />
               {'Feed Turtle'}
-            </List.Item>
-            <List.Item
+            </ListItem>
+            <ListItem
               value=""
               selected={false}
               wrapText={false}
@@ -584,10 +585,10 @@ export const UsedWithAPopover = () => {
               backgroundColor={InfluxColors.Pineapple}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Icon glyph={IconFont.StarSmile} />
+              <ListIcon glyph={IconFont.StarSmile} />
               {'Put Turtle Outside'}
-            </List.Item>
-            <List.Item
+            </ListItem>
+            <ListItem
               value=""
               selected={false}
               wrapText={false}
@@ -595,53 +596,53 @@ export const UsedWithAPopover = () => {
               backgroundColor={InfluxColors.Star}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Icon glyph={IconFont.Pencil} />
+              <ListIcon glyph={IconFont.Pencil} />
               {'Teach Turtle a Trick'}
-            </List.Item>
-            <List.Divider
+            </ListItem>
+            <ListDivider
               text="Hat"
               size={(ComponentSize as Record<string, any>)['Small']}
             />
-            <List.Item
+            <ListItem
               value="Detective Hat"
               selected={turtleHat === 'Detective Hat'}
               wrapText={false}
               onClick={handleToggleHat(onHide || noop)}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Indicator type={'checkbox'} />
+              <ListIndicator type={'checkbox'} />
               {'Detective Hat'}
-            </List.Item>
-            <List.Item
+            </ListItem>
+            <ListItem
               value="Party Hat"
               selected={turtleHat === 'Party Hat'}
               wrapText={false}
               onClick={handleToggleHat(onHide || noop)}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Indicator type={'checkbox'} />
+              <ListIndicator type={'checkbox'} />
               {'Party Hat'}
-            </List.Item>
-            <List.Item
+            </ListItem>
+            <ListItem
               value="10 Gallon Hat"
               selected={turtleHat === '10 Gallon Hat'}
               wrapText={false}
               onClick={handleToggleHat(onHide || noop)}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Indicator type={'checkbox'} />
+              <ListIndicator type={'checkbox'} />
               {'10 Gallon Hat'}
-            </List.Item>
-            <List.Item
+            </ListItem>
+            <ListItem
               value="Half Eaten Grape"
               selected={turtleHat === 'Half Eaten Grape'}
               wrapText={false}
               onClick={handleToggleHat(onHide || noop)}
               size={(ComponentSize as Record<string, any>)['Small']}
             >
-              <List.Indicator type={'checkbox'} />
+              <ListIndicator type={'checkbox'} />
               {'Half Eaten Grape'}
-            </List.Item>
+            </ListItem>
           </List>
         )}
       />

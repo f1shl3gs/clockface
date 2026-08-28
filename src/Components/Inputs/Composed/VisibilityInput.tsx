@@ -2,9 +2,9 @@ import {
   ChangeEvent,
   KeyboardEvent,
   MouseEvent,
-  forwardRef,
   FunctionComponent,
   useState,
+  Ref,
 } from 'react'
 import classnames from 'classnames'
 
@@ -73,107 +73,96 @@ export interface VisibilityInputProps extends StandardFunctionProps {
   visible?: boolean
   /** Function to be called on button click */
   onToggleClick?: (e?: MouseEvent<HTMLButtonElement>) => void
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLInputElement>
 }
 
-export type VisibilityInputRef = HTMLInputElement
+export const VisibilityInput: FunctionComponent<VisibilityInputProps> = ({
+  id,
+  icon,
+  name,
+  value,
+  style,
+  onBlur,
+  pattern,
+  onKeyUp,
+  onFocus,
+  tabIndex,
+  required,
+  onChange,
+  titleText,
+  maxLength,
+  onKeyDown,
+  className,
+  autoFocus,
+  spellCheck,
+  placeholder,
+  autocomplete,
+  onToggleClick,
+  visible = false,
+  disabledTitleText,
+  testID = 'visibility-input',
+  size = ComponentSize.Small,
+  status = ComponentStatus.Default,
+  ref,
+}) => {
+  const [mode, setMode] = useState<'visible' | 'hidden'>('hidden')
+  const visibilityInputClass = classnames('cf-visibility-input', {
+    [`${className}`]: className,
+  })
 
-export const VisibilityInput = forwardRef<
-  VisibilityInputRef,
-  VisibilityInputProps
->(
-  (
-    {
-      id,
-      icon,
-      name,
-      value,
-      style,
-      onBlur,
-      pattern,
-      onKeyUp,
-      onFocus,
-      tabIndex,
-      required,
-      onChange,
-      titleText,
-      maxLength,
-      onKeyDown,
-      className,
-      autoFocus,
-      onKeyPress,
-      spellCheck,
-      placeholder,
-      autocomplete,
-      onToggleClick,
-      visible = false,
-      disabledTitleText,
-      testID = 'visibility-input',
-      size = ComponentSize.Small,
-      status = ComponentStatus.Default,
-    },
-    ref
-  ) => {
-    const [mode, setMode] = useState<'visible' | 'hidden'>('hidden')
-    const visibilityInputClass = classnames('cf-visibility-input', {
-      [`${className}`]: className,
-    })
+  const visibility = visible || mode === 'visible'
+  const inputType = visibility ? InputType.Text : InputType.Password
 
-    const visibility = visible || mode === 'visible'
-    const inputType = visibility ? InputType.Text : InputType.Password
-
-    const handleToggleClick = (e?: MouseEvent<HTMLButtonElement>): void => {
-      if (onToggleClick) {
-        onToggleClick(e)
-      } else if (mode === 'visible') {
-        setMode('hidden')
-      } else {
-        setMode('visible')
-      }
+  const handleToggleClick = (e?: MouseEvent<HTMLButtonElement>): void => {
+    if (onToggleClick) {
+      onToggleClick(e)
+    } else if (mode === 'visible') {
+      setMode('hidden')
+    } else {
+      setMode('visible')
     }
-
-    return (
-      <div className={visibilityInputClass} style={style}>
-        <Input
-          placeholder={placeholder}
-          spellCheck={spellCheck}
-          autoFocus={autoFocus}
-          onKeyDown={onKeyDown}
-          onKeyPress={onKeyPress}
-          onBlur={onBlur}
-          pattern={pattern}
-          onKeyUp={onKeyUp}
-          onFocus={onFocus}
-          tabIndex={tabIndex}
-          required={required}
-          id={id}
-          ref={ref}
-          icon={icon}
-          size={size}
-          name={name}
-          maxLength={maxLength}
-          disabledTitleText={disabledTitleText}
-          titleText={titleText}
-          type={inputType}
-          value={value}
-          testID={testID}
-          status={status}
-          onChange={onChange}
-          className={visibilityInputClass}
-          autocomplete={autocomplete}
-        >
-          <VisibilityIcon
-            status={status}
-            size={size}
-            visible={visibility}
-            onClick={handleToggleClick}
-          />
-        </Input>
-      </div>
-    )
   }
-)
 
-VisibilityInput.displayName = 'VisibilityInput'
+  return (
+    <div className={visibilityInputClass} style={style}>
+      <Input
+        placeholder={placeholder}
+        spellCheck={spellCheck}
+        autoFocus={autoFocus}
+        onKeyDown={onKeyDown}
+        onBlur={onBlur}
+        pattern={pattern}
+        onKeyUp={onKeyUp}
+        onFocus={onFocus}
+        tabIndex={tabIndex}
+        required={required}
+        id={id}
+        ref={ref}
+        icon={icon}
+        size={size}
+        name={name}
+        maxLength={maxLength}
+        disabledTitleText={disabledTitleText}
+        titleText={titleText}
+        type={inputType}
+        value={value}
+        testID={testID}
+        status={status}
+        onChange={onChange}
+        className={visibilityInputClass}
+        autocomplete={autocomplete}
+      >
+        <VisibilityIcon
+          status={status}
+          size={size}
+          visible={visibility}
+          onClick={handleToggleClick}
+        />
+      </Input>
+    </div>
+  )
+}
 
 interface VisibilityIconProps {
   visible: boolean
@@ -201,5 +190,3 @@ const VisibilityIcon: FunctionComponent<VisibilityIconProps> = ({
     />
   )
 }
-
-VisibilityIcon.displayName = 'VisibilityIcon'

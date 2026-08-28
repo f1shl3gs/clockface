@@ -7,7 +7,7 @@
 import {DraggableResizer} from '@influxdata/clockface'
 ```
 ```tsx
-<DraggableResizer.Panel />
+<DraggableResizerPanel />
 ```
 
 *Note:* because `DraggableResizer` is using a no-wrap flexbox layout scheme, `DraggableResizerPanel` can become distorted because it can't shrink below the size of its children. To get around this we recommend styling a dive inside the panel as such:
@@ -17,7 +17,7 @@ import {DraggableResizer} from '@influxdata/clockface'
   <div style={{position: 'absolute', overflow: 'hidden', width: '100%', height: '100%'}}>
     // Panel contents go here
   </div>
-</DraggableResizer.Panel>
+</DraggableResizerPanel>
 ```
 
 ### Example

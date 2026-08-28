@@ -7,9 +7,9 @@ Panel Body is for containing the main content of a panel. It can be accessed via
 import {Panel} from '@influxdata/clockface'
 ```
 ```tsx
-<Panel.Body>
+<PanelBody>
   // Children
-</Panel.Body>
+</PanelBody>
 ```
 
 ### Example

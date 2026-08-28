@@ -5,24 +5,23 @@ import {marked} from 'marked'
 // Components
 import {
   Form,
-  FormRef,
-  FormBoxRef,
-  FormLabelRef,
-  FormFooterRef,
-  FormDividerRef,
-  FormElementRef,
-  FormHelpTextRef,
-  FormElementErrorRef,
-  FormValidationElementRef,
+  FormBox,
+  FormDivider,
+  FormElement,
+  FormElementError,
+  FormFooter,
+  FormHelpText,
+  FormLabel,
+  FormValidationElement,
 } from '../index'
 
-import {Grid} from '../../Grid'
+import {Grid, GridColumn, GridRow} from '../../Grid'
 import {Button} from '../../Button/Composed/Button'
 import {Input} from '../../Inputs/Input'
-import {FlexBox} from '../../FlexBox'
+import {FlexBox, FlexBoxChild} from '../../FlexBox'
 import {SlideToggle} from '../../SlideToggle'
 import {InputLabel} from '../../Inputs/InputLabel'
-import {Panel} from '../../Panel'
+import {Panel, PanelBody} from '../../Panel'
 import {TextBlock} from '../../TextBlock/TextBlock'
 import {DismissButton} from '../../Button/Composed/DismissButton'
 import {SelectDropdown} from '../../Dropdowns/Composed/SelectDropdown'
@@ -61,7 +60,7 @@ const mockValidationFunc = (value: string): string | null => {
 }
 
 export const _Form = () => {
-  const formRef = createRef<FormRef>()
+  const formRef = createRef<HTMLFormElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -72,7 +71,7 @@ export const _Form = () => {
   return (
     <div className="story--example">
       <div className="story--form-example">
-        <Form.Form ref={formRef} />
+        <Form ref={formRef} />
       </div>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -89,8 +88,8 @@ _Form.story = {
   },
 }
 
-export const FormBox = () => {
-  const formBoxRef = createRef<FormBoxRef>()
+export const _FormBox = () => {
+  const formBoxRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -101,7 +100,7 @@ export const FormBox = () => {
   return (
     <div className="story--example">
       <div className="story--form-example">
-        <Form.Box ref={formBoxRef} />
+        <FormBox ref={formBoxRef} />
       </div>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -110,7 +109,7 @@ export const FormBox = () => {
   )
 }
 
-FormBox.story = {
+_FormBox.story = {
   name: 'FormBox',
 
   parameters: {
@@ -120,8 +119,8 @@ FormBox.story = {
   },
 }
 
-export const FormDivider = () => {
-  const formDividerRef = createRef<FormDividerRef>()
+export const _FormDivider = () => {
+  const formDividerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -132,7 +131,7 @@ export const FormDivider = () => {
   return (
     <div className="story--example">
       <div className="story--form-example">
-        <Form.Divider ref={formDividerRef} lineColor={''} />
+        <FormDivider ref={formDividerRef} lineColor={''} />
       </div>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -141,7 +140,7 @@ export const FormDivider = () => {
   )
 }
 
-FormDivider.story = {
+_FormDivider.story = {
   name: 'FormDivider',
 
   parameters: {
@@ -151,8 +150,8 @@ FormDivider.story = {
   },
 }
 
-export const FormElement = () => {
-  const formElementRef = createRef<FormElementRef>()
+export const _FormElement = () => {
+  const formElementRef = createRef<HTMLLabelElement & HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -163,7 +162,7 @@ export const FormElement = () => {
   return (
     <div className="story--example">
       <div className="story--form-example">
-        <Form.Element
+        <FormElement
           ref={formElementRef}
           label={'Element Label'}
           helpText={'Help Text'}
@@ -171,7 +170,7 @@ export const FormElement = () => {
           required={true}
         >
           <div className="mockComponent mockInput">Input Goes Here</div>
-        </Form.Element>
+        </FormElement>
       </div>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -180,7 +179,7 @@ export const FormElement = () => {
   )
 }
 
-FormElement.story = {
+_FormElement.story = {
   name: 'FormElement',
 
   parameters: {
@@ -190,8 +189,8 @@ FormElement.story = {
   },
 }
 
-export const FormElementError = () => {
-  const formElementErrorRef = createRef<FormElementErrorRef>()
+export const _FormElementError = () => {
+  const formElementErrorRef = createRef<HTMLSpanElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -201,7 +200,7 @@ export const FormElementError = () => {
 
   return (
     <div className="story--example">
-      <Form.ElementError ref={formElementErrorRef} message={'Error Message'} />
+      <FormElementError ref={formElementErrorRef} message={'Error Message'} />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -209,7 +208,7 @@ export const FormElementError = () => {
   )
 }
 
-FormElementError.story = {
+_FormElementError.story = {
   name: 'FormElementError',
 
   parameters: {
@@ -219,8 +218,8 @@ FormElementError.story = {
   },
 }
 
-export const FormFooter = () => {
-  const formFooterRef = createRef<FormFooterRef>()
+export const _FormFooter = () => {
+  const formFooterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -230,10 +229,10 @@ export const FormFooter = () => {
 
   return (
     <div className="story--example">
-      <Form.Footer ref={formFooterRef}>
+      <FormFooter ref={formFooterRef}>
         <Button text="Cancel" />
         <Button text="Confirm" color={ComponentColor.Primary} />
-      </Form.Footer>
+      </FormFooter>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -241,7 +240,7 @@ export const FormFooter = () => {
   )
 }
 
-FormFooter.story = {
+_FormFooter.story = {
   name: 'FormFooter',
 
   parameters: {
@@ -251,8 +250,8 @@ FormFooter.story = {
   },
 }
 
-export const FormHelpText = () => {
-  const formHelpTextRef = createRef<FormHelpTextRef>()
+export const _FormHelpText = () => {
+  const formHelpTextRef = createRef<HTMLSpanElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -263,7 +262,7 @@ export const FormHelpText = () => {
   return (
     <div className="story--example">
       <div className="story--form-example">
-        <Form.HelpText ref={formHelpTextRef} text={'Help Text'} />
+        <FormHelpText ref={formHelpTextRef} text={'Help Text'} />
       </div>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -272,7 +271,7 @@ export const FormHelpText = () => {
   )
 }
 
-FormHelpText.story = {
+_FormHelpText.story = {
   name: 'FormHelpText',
 
   parameters: {
@@ -282,8 +281,8 @@ FormHelpText.story = {
   },
 }
 
-export const FormLabel = () => {
-  const formLabelRef = createRef<FormLabelRef>()
+export const _FormLabel = () => {
+  const formLabelRef = createRef<HTMLDivElement & HTMLLabelElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -294,11 +293,7 @@ export const FormLabel = () => {
   return (
     <div className="story--example">
       <div className="story--form-example">
-        <Form.Label
-          ref={formLabelRef}
-          label={'Element Label'}
-          required={true}
-        />
+        <FormLabel ref={formLabelRef} label={'Element Label'} required={true} />
       </div>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -307,7 +302,7 @@ export const FormLabel = () => {
   )
 }
 
-FormLabel.story = {
+_FormLabel.story = {
   name: 'FormLabel',
 
   parameters: {
@@ -317,8 +312,8 @@ FormLabel.story = {
   },
 }
 
-export const FormValidationElement = () => {
-  const formValidationElementRef = createRef<FormValidationElementRef>()
+export const _FormValidationElement = () => {
+  const formValidationElementRef = createRef<HTMLLabelElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -329,7 +324,7 @@ export const FormValidationElement = () => {
   return (
     <div className="story--example">
       <div className="story--form-example">
-        <Form.ValidationElement
+        <FormValidationElement
           ref={formValidationElementRef}
           label={'Element Label'}
           value={'Input Value (delete this to cause error)'}
@@ -347,7 +342,7 @@ export const FormValidationElement = () => {
               }}
             />
           )}
-        </Form.ValidationElement>
+        </FormValidationElement>
       </div>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -356,7 +351,7 @@ export const FormValidationElement = () => {
   )
 }
 
-FormValidationElement.story = {
+_FormValidationElement.story = {
   name: 'FormValidationElement',
 
   parameters: {
@@ -420,9 +415,9 @@ export const CreateUserForm = () => {
       <div className="story--form-example">
         <Form>
           <Grid>
-            <Grid.Row>
-              <Grid.Column widthXS={Columns.Six}>
-                <Form.ValidationElement
+            <GridRow>
+              <GridColumn widthXS={Columns.Six}>
+                <FormValidationElement
                   label="Username"
                   required={true}
                   value={''}
@@ -439,10 +434,10 @@ export const CreateUserForm = () => {
                       }}
                     />
                   )}
-                </Form.ValidationElement>
-              </Grid.Column>
-              <Grid.Column widthXS={Columns.Six}>
-                <Form.ValidationElement
+                </FormValidationElement>
+              </GridColumn>
+              <GridColumn widthXS={Columns.Six}>
+                <FormValidationElement
                   label="Email"
                   required={true}
                   value={''}
@@ -459,10 +454,10 @@ export const CreateUserForm = () => {
                       }}
                     />
                   )}
-                </Form.ValidationElement>
-              </Grid.Column>
-              <Grid.Column widthXS={Columns.Twelve}>
-                <Form.Element label="Title or Description" required={false}>
+                </FormValidationElement>
+              </GridColumn>
+              <GridColumn widthXS={Columns.Twelve}>
+                <FormElement label="Title or Description" required={false}>
                   <Input
                     size={ComponentSize.Small}
                     placeholder="What role does this user play?"
@@ -471,11 +466,11 @@ export const CreateUserForm = () => {
                       // do nothing
                     }}
                   />
-                </Form.Element>
-              </Grid.Column>
-              <Grid.Column widthXS={Columns.Twelve}>
-                <Form.Element label="Team" required={false}>
-                  <Form.Box>
+                </FormElement>
+              </GridColumn>
+              <GridColumn widthXS={Columns.Twelve}>
+                <FormElement label="Team" required={false}>
+                  <FormBox>
                     <FlexBox
                       stretchToFitWidth={true}
                       direction={FlexDirection.Row}
@@ -494,20 +489,20 @@ export const CreateUserForm = () => {
                         Add this user to all teams?
                       </InputLabel>
                     </FlexBox>
-                  </Form.Box>
-                </Form.Element>
-              </Grid.Column>
-              <Grid.Column widthXS={Columns.Twelve}>
-                <Form.Footer>
+                  </FormBox>
+                </FormElement>
+              </GridColumn>
+              <GridColumn widthXS={Columns.Twelve}>
+                <FormFooter>
                   <Button
                     text="Create User"
                     color={ComponentColor.Primary}
                     size={ComponentSize.Small}
                     status={submitStatus()}
                   />
-                </Form.Footer>
-              </Grid.Column>
-            </Grid.Row>
+                </FormFooter>
+              </GridColumn>
+            </GridRow>
           </Grid>
         </Form>
       </div>
@@ -533,7 +528,7 @@ export const NaturalLanguageForm = () => (
           }}
           color={ComponentColor.Danger}
         />
-        <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+        <PanelBody size={(ComponentSize as Record<string, any>)['Small']}>
           <FlexBox
             direction={FlexDirection.Column}
             margin={(ComponentSize as Record<string, any>)['Small']}
@@ -547,7 +542,7 @@ export const NaturalLanguageForm = () => (
                 size={(ComponentSize as Record<string, any>)['Small']}
                 text="When"
               />
-              <FlexBox.Child grow={1}>
+              <FlexBoxChild grow={1}>
                 <SelectDropdown
                   options={['any value', 'all values']}
                   selectedOption="any value"
@@ -556,8 +551,8 @@ export const NaturalLanguageForm = () => (
                   }}
                   buttonSize={(ComponentSize as Record<string, any>)['Small']}
                 />
-              </FlexBox.Child>
-              <FlexBox.Child grow={2}>
+              </FlexBoxChild>
+              <FlexBoxChild grow={2}>
                 <SelectDropdown
                   options={[
                     'is above threshold',
@@ -571,31 +566,31 @@ export const NaturalLanguageForm = () => (
                   }}
                   buttonSize={(ComponentSize as Record<string, any>)['Small']}
                 />
-              </FlexBox.Child>
+              </FlexBoxChild>
             </FlexBox>
             <FlexBox
               stretchToFitWidth={true}
               direction={FlexDirection.Row}
               margin={(ComponentSize as Record<string, any>)['Small']}
             >
-              <FlexBox.Child>
+              <FlexBoxChild>
                 <Input
                   type={InputType.Number}
                   value="90"
                   size={(ComponentSize as Record<string, any>)['Small']}
                 />
-              </FlexBox.Child>
+              </FlexBoxChild>
               <TextBlock
                 size={(ComponentSize as Record<string, any>)['Small']}
                 text="to"
               />
-              <FlexBox.Child>
+              <FlexBoxChild>
                 <Input
                   type={InputType.Number}
                   value="100"
                   size={(ComponentSize as Record<string, any>)['Small']}
                 />
-              </FlexBox.Child>
+              </FlexBoxChild>
               <TextBlock
                 size={(ComponentSize as Record<string, any>)['Small']}
                 text="set status to"
@@ -607,7 +602,7 @@ export const NaturalLanguageForm = () => (
               />
             </FlexBox>
           </FlexBox>
-        </Panel.Body>
+        </PanelBody>
       </Panel>
     </div>
   </div>

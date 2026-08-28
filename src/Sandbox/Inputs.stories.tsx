@@ -13,7 +13,7 @@ import {
 import {Button} from '../Components/Button/Composed/Button'
 import {Input, RangeSlider, Toggle} from '../Components/Inputs'
 import {SelectDropdown} from '../Components/Dropdowns/Composed/SelectDropdown'
-import {SelectGroup} from '../Components/SelectGroup'
+import {SelectGroup, SelectGroupOption} from '../Components/SelectGroup'
 import {TextBlock} from '../Components/TextBlock'
 import {Heading} from '../Components/Typography'
 
@@ -53,7 +53,7 @@ export const Collage = () => {
                   buttonSize={size}
                 />
                 <SelectGroup size={size}>
-                  <SelectGroup.Option
+                  <SelectGroupOption
                     id={`mode-${size.toString()}-1`}
                     active={true}
                     value="1"
@@ -61,8 +61,8 @@ export const Collage = () => {
                     onClick={onChange}
                   >
                     Select
-                  </SelectGroup.Option>
-                  <SelectGroup.Option
+                  </SelectGroupOption>
+                  <SelectGroupOption
                     id={`mode-${size.toString()}-2`}
                     active={false}
                     value="2"
@@ -70,7 +70,7 @@ export const Collage = () => {
                     onClick={onChange}
                   >
                     Group
-                  </SelectGroup.Option>
+                  </SelectGroupOption>
                 </SelectGroup>
                 <TextBlock text="TextBlock" size={size} />
                 <RangeSlider

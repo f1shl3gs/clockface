@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, RefObject, useLayoutEffect, useRef} from 'react'
+import {RefObject, useLayoutEffect, useRef, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -25,99 +25,90 @@ export interface RightClickMenuProps extends StandardFunctionProps {
   onHide: () => void
   /** Mouse position from right click event */
   mouseOffset: Coordinates
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLUListElement>
 }
 
-export type RightClickMenuRef = HTMLUListElement
+export const RightClickMenu: FunctionComponent<RightClickMenuProps> = ({
+  id,
+  style,
+  color,
+  onHide,
+  testID,
+  children,
+  className,
+  triggerRef,
+  mouseOffset,
+  ref,
+}) => {
+  const menuRef = useRef<HTMLDivElement>(null)
 
-export const RightClickMenu = forwardRef<
-  RightClickMenuRef,
-  RightClickMenuProps
->(
-  (
-    {
-      id,
-      style,
-      color,
-      onHide,
-      testID,
-      children,
-      className,
-      triggerRef,
-      mouseOffset,
-    },
-    ref
-  ) => {
-    const menuRef = useRef<HTMLDivElement>(null)
-
-    const handleUpdateStyles = (): void => {
-      if (!triggerRef.current || !menuRef.current) {
-        return
-      }
-
-      const menuStyles = {
-        ...calculateRightClickMenuStyles(mouseOffset, triggerRef, menuRef),
-        ...style,
-      }
-
-      const menuStyleString = convertCSSPropertiesToString(menuStyles)
-
-      if (menuRef.current) {
-        menuRef.current.setAttribute('style', menuStyleString)
-      }
+  const handleUpdateStyles = (): void => {
+    if (!triggerRef.current || !menuRef.current) {
+      return
     }
 
-    const rightClickMenuClassName = classnames('cf-right-click', {
-      [`${className}`]: className,
-      [`cf-right-click__${color}`]: color,
-    })
-
-    const hidePopoverWhenOutOfView = (
-      entries: IntersectionObserverEntry[]
-    ): void => {
-      if (!!entries.length && entries[0].isIntersecting === false) {
-        onHide()
-      }
+    const menuStyles = {
+      ...calculateRightClickMenuStyles(mouseOffset, triggerRef, menuRef),
+      ...style,
     }
 
-    const observer = new IntersectionObserver(hidePopoverWhenOutOfView)
+    const menuStyleString = convertCSSPropertiesToString(menuStyles)
 
-    useLayoutEffect((): (() => void) => {
-      handleUpdateStyles()
-      observer.observe(triggerRef.current)
-      // The third argument in addEventListener is "false" by default and controls bubbling
-      // scroll events do not bubble by default so setting this to "true"
-      // allows the listener to pick up scroll events from nested scrollable elements
-      window.addEventListener('scroll', handleUpdateStyles, true)
-      window.addEventListener('resize', handleUpdateStyles)
-
-      return (): void => {
-        observer.disconnect()
-        window.removeEventListener('scroll', handleUpdateStyles)
-        window.removeEventListener('resize', handleUpdateStyles)
-      }
-    }, [])
-
-    useLayoutEffect(() => {
-      handleUpdateStyles()
-    })
-
-    return (
-      <ClickOutside onClickOutside={onHide}>
-        <div
-          id={id}
-          ref={menuRef}
-          style={style}
-          onClick={onHide}
-          className={rightClickMenuClassName}
-          data-testid={testID}
-        >
-          <ul ref={ref} className="cf-right-click--menu">
-            {children}
-          </ul>
-        </div>
-      </ClickOutside>
-    )
+    if (menuRef.current) {
+      menuRef.current.setAttribute('style', menuStyleString)
+    }
   }
-)
 
-RightClickMenu.displayName = 'RightClickMenu'
+  const rightClickMenuClassName = classnames('cf-right-click', {
+    [`${className}`]: className,
+    [`cf-right-click__${color}`]: color,
+  })
+
+  const hidePopoverWhenOutOfView = (
+    entries: IntersectionObserverEntry[]
+  ): void => {
+    if (!!entries.length && entries[0].isIntersecting === false) {
+      onHide()
+    }
+  }
+
+  const observer = new IntersectionObserver(hidePopoverWhenOutOfView)
+
+  useLayoutEffect((): (() => void) => {
+    handleUpdateStyles()
+    observer.observe(triggerRef.current)
+    // The third argument in addEventListener is "false" by default and controls bubbling
+    // scroll events do not bubble by default so setting this to "true"
+    // allows the listener to pick up scroll events from nested scrollable elements
+    window.addEventListener('scroll', handleUpdateStyles, true)
+    window.addEventListener('resize', handleUpdateStyles)
+
+    return (): void => {
+      observer.disconnect()
+      window.removeEventListener('scroll', handleUpdateStyles)
+      window.removeEventListener('resize', handleUpdateStyles)
+    }
+  }, [])
+
+  useLayoutEffect(() => {
+    handleUpdateStyles()
+  })
+
+  return (
+    <ClickOutside onClickOutside={onHide}>
+      <div
+        id={id}
+        ref={menuRef}
+        style={style}
+        onClick={onHide}
+        className={rightClickMenuClassName}
+        data-testid={testID}
+      >
+        <ul ref={ref} className="cf-right-click--menu">
+          {children}
+        </ul>
+      </div>
+    </ClickOutside>
+  )
+}

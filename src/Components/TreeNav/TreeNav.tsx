@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useState} from 'react'
+import React, {useState, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -25,106 +25,101 @@ export interface TreeNavProps extends StandardFunctionProps {
   userElement?: React.ReactElement
   /** Controls how the Banner element renders when in collapsed state */
   hideBannerWhenCollapsed?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLElement>
 }
 
-export type TreeNavRef = HTMLElement
 export type TreeNavMobileState = 'expanded' | 'collapsed'
 
-export const TreeNavRoot = forwardRef<TreeNavRef, TreeNavProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'tree-nav',
-      children,
-      expanded = true,
-      className,
-      userElement,
-      bannerElement,
-      onToggleClick,
-      headerElement,
-      hideBannerWhenCollapsed = false,
-    },
-    ref
-  ) => {
-    const [mobileState, setMobileState] =
-      useState<TreeNavMobileState>('collapsed')
+export const TreeNav: FunctionComponent<TreeNavProps> = ({
+  id,
+  style,
+  testID = 'tree-nav',
+  children,
+  expanded = true,
+  className,
+  userElement,
+  bannerElement,
+  onToggleClick,
+  headerElement,
+  hideBannerWhenCollapsed = false,
+  ref,
+}) => {
+  const [mobileState, setMobileState] =
+    useState<TreeNavMobileState>('collapsed')
 
-    const navMenuRootClass = classnames('cf-tree-nav', {
-      'cf-tree-nav__collapsed': !expanded,
-      'cf-tree-nav__mobile-collapsed': mobileState === 'collapsed',
-      [`${className}`]: className,
+  const navMenuRootClass = classnames('cf-tree-nav', {
+    'cf-tree-nav__collapsed': !expanded,
+    'cf-tree-nav__mobile-collapsed': mobileState === 'collapsed',
+    [`${className}`]: className,
+  })
+
+  let banner = <></>
+  let toggleElement = <></>
+
+  if (bannerElement) {
+    const bannerClass = classnames('cf-tree-nav--banner', {
+      'cf-tree-nav--banner__always-visible': !hideBannerWhenCollapsed,
     })
 
-    let banner = <></>
-    let toggleElement = <></>
-
-    if (bannerElement) {
-      const bannerClass = classnames('cf-tree-nav--banner', {
-        'cf-tree-nav--banner__always-visible': !hideBannerWhenCollapsed,
-      })
-
-      banner = (
-        <>
-          <div className="cf-tree-nav--banner-spacer" />
-          <div className={bannerClass}>{bannerElement}</div>
-        </>
-      )
-    }
-
-    if (onToggleClick) {
-      const toggleIcon = expanded ? IconFont.SidebarClose : IconFont.SidebarOpen
-      toggleElement = (
-        <div
-          className="cf-tree-nav--toggle"
-          onClick={onToggleClick}
-          data-testid={`${testID}-toggle`}
-        >
-          <Icon glyph={toggleIcon} />
-        </div>
-      )
-    }
-
-    const handleMobileToggleClick = (): void => {
-      if (mobileState === 'expanded') {
-        setMobileState('collapsed')
-      } else {
-        setMobileState('expanded')
-      }
-    }
-
-    return (
-      <nav
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={navMenuRootClass}
-      >
-        {headerElement}
-        <div className="cf-tree-nav--menu">
-          {userElement}
-          <DapperScrollbars
-            className="cf-tree-nav--scroll-area"
-            noScrollX={true}
-            autoHide={true}
-          >
-            {children}
-            {banner}
-          </DapperScrollbars>
-        </div>
-        {toggleElement}
-        <button
-          type="button"
-          className="cf-tree-nav--mobile-toggle"
-          data-testid={`${testID}-mobile-toggle`}
-          onClick={handleMobileToggleClick}
-        >
-          <div className="cf-tree-nav--hamburger" />
-        </button>
-      </nav>
+    banner = (
+      <>
+        <div className="cf-tree-nav--banner-spacer" />
+        <div className={bannerClass}>{bannerElement}</div>
+      </>
     )
   }
-)
 
-TreeNavRoot.displayName = 'TreeNav'
+  if (onToggleClick) {
+    const toggleIcon = expanded ? IconFont.SidebarClose : IconFont.SidebarOpen
+    toggleElement = (
+      <div
+        className="cf-tree-nav--toggle"
+        onClick={onToggleClick}
+        data-testid={`${testID}-toggle`}
+      >
+        <Icon glyph={toggleIcon} />
+      </div>
+    )
+  }
+
+  const handleMobileToggleClick = (): void => {
+    if (mobileState === 'expanded') {
+      setMobileState('collapsed')
+    } else {
+      setMobileState('expanded')
+    }
+  }
+
+  return (
+    <nav
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={navMenuRootClass}
+    >
+      {headerElement}
+      <div className="cf-tree-nav--menu">
+        {userElement}
+        <DapperScrollbars
+          className="cf-tree-nav--scroll-area"
+          noScrollX={true}
+          autoHide={true}
+        >
+          {children}
+          {banner}
+        </DapperScrollbars>
+      </div>
+      {toggleElement}
+      <button
+        type="button"
+        className="cf-tree-nav--mobile-toggle"
+        data-testid={`${testID}-mobile-toggle`}
+        onClick={handleMobileToggleClick}
+      >
+        <div className="cf-tree-nav--hamburger" />
+      </button>
+    </nav>
+  )
+}

@@ -11,10 +11,10 @@ import {PaginationInput} from '@influxdata/clockface'
 ```tsx
 //If both direction and page provided, it defaults to direction
 //Item with direction
-<PaginationNav.Item
+<Pagination.Item
   currentPage={1}
   size={'Medium'}
-></PaginationNav.Item>
+></Pagination.Item>
 ```
 
 ### Example

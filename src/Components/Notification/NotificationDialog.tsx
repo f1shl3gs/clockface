@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -40,99 +40,90 @@ export interface NotificationDialogProps extends StandardFunctionProps {
   size: ComponentSize
   /** Notification theme */
   color?: ComponentColor
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type NotificationDialogRef = HTMLDivElement
-
-export const NotificationDialog = forwardRef<
-  NotificationDialogRef,
-  NotificationDialogProps
->(
-  (
-    {
-      id,
-      size,
-      icon,
-      style,
-      color = '',
-      testID = 'notification',
-      children,
-      gradient,
-      onDismiss,
-      className,
-      backgroundColor = InfluxColors.Castle,
-    },
-    ref
-  ) => {
-    let internalGradient = gradient
-    if (color) {
-      const notificationThemes: Record<string, Gradients> = {
-        [ComponentColor.Primary]: Gradients.Info,
-        [ComponentColor.Success]: Gradients.Success,
-        [ComponentColor.Danger]: Gradients.Danger,
-      }
-
-      internalGradient = notificationThemes[color] || Gradients.Info
+export const NotificationDialog: FunctionComponent<NotificationDialogProps> = ({
+  id,
+  size,
+  icon,
+  style,
+  color = '',
+  testID = 'notification',
+  children,
+  gradient,
+  onDismiss,
+  className,
+  backgroundColor = InfluxColors.Castle,
+  ref,
+}) => {
+  let internalGradient = gradient
+  if (color) {
+    const notificationThemes: Record<string, Gradients> = {
+      [ComponentColor.Primary]: Gradients.Info,
+      [ComponentColor.Success]: Gradients.Success,
+      [ComponentColor.Danger]: Gradients.Danger,
     }
 
-    const textColor = calculateTextColorFromBackground(
-      backgroundColor,
-      internalGradient
-    )
-
-    const notificationDialogClassName = classnames(
-      `cf-notification cf-notification__${color || 'default'}`,
-      {
-        'cf-notification__has-icon': icon,
-        [`cf-notification__${size}`]: size,
-        [`cf-notification__${textColor}-text`]: textColor,
-        'cf-notification__dismissable': onDismiss,
-        [`${className}`]: className,
-      }
-    )
-
-    const notificationDialogStyle = generateBackgroundStyle(
-      backgroundColor,
-      internalGradient,
-      false,
-      style
-    )
-
-    const handleDismiss = () => {
-      if (onDismiss) {
-        onDismiss(id)
-      }
-    }
-
-    return (
-      <div
-        className={notificationDialogClassName}
-        data-testid={testID}
-        id={id}
-        style={notificationDialogStyle}
-        ref={ref}
-      >
-        {!!icon && <Icon glyph={icon} className="cf-notification--icon" />}
-        <div className="cf-notification--contents">
-          <div
-            className="cf-notification--children"
-            data-testid={`${testID}--children`}
-          >
-            {children}
-          </div>
-        </div>
-        {onDismiss && (
-          <SquareButton
-            icon={IconFont.Remove_New}
-            onClick={handleDismiss}
-            className="cf-notification--dismiss"
-            testID={`${testID}--dismiss`}
-            size={ComponentSize.ExtraSmall}
-          />
-        )}
-      </div>
-    )
+    internalGradient = notificationThemes[color] || Gradients.Info
   }
-)
 
-NotificationDialog.displayName = 'NotificationDialog'
+  const textColor = calculateTextColorFromBackground(
+    backgroundColor,
+    internalGradient
+  )
+
+  const notificationDialogClassName = classnames(
+    `cf-notification cf-notification__${color || 'default'}`,
+    {
+      'cf-notification__has-icon': icon,
+      [`cf-notification__${size}`]: size,
+      [`cf-notification__${textColor}-text`]: textColor,
+      'cf-notification__dismissable': onDismiss,
+      [`${className}`]: className,
+    }
+  )
+
+  const notificationDialogStyle = generateBackgroundStyle(
+    backgroundColor,
+    internalGradient,
+    false,
+    style
+  )
+
+  const handleDismiss = () => {
+    if (onDismiss) {
+      onDismiss(id)
+    }
+  }
+
+  return (
+    <div
+      className={notificationDialogClassName}
+      data-testid={testID}
+      id={id}
+      style={notificationDialogStyle}
+      ref={ref}
+    >
+      {!!icon && <Icon glyph={icon} className="cf-notification--icon" />}
+      <div className="cf-notification--contents">
+        <div
+          className="cf-notification--children"
+          data-testid={`${testID}--children`}
+        >
+          {children}
+        </div>
+      </div>
+      {onDismiss && (
+        <SquareButton
+          icon={IconFont.Remove_New}
+          onClick={handleDismiss}
+          className="cf-notification--dismiss"
+          testID={`${testID}--dismiss`}
+          size={ComponentSize.ExtraSmall}
+        />
+      )}
+    </div>
+  )
+}

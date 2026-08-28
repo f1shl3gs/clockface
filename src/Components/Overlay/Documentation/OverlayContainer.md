@@ -8,9 +8,9 @@ import {Overlay} from '@influxdata/clockface'
 ```
 All components in the `Overlay` family can be accessed from the single class import
 ```tsx
-<Overlay.Container maxWidth={600}>
+<OverlayContainer maxWidth={600}>
   // Header, Body, or Footer go here
-</Overlay.Container>
+</OverlayContainer>
 ```
 
 ### Example

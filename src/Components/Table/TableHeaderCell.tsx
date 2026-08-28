@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -12,50 +12,41 @@ export interface TableHeaderCellProps extends StandardFunctionProps {
   horizontalAlignment?: Alignment
   /** Vertical alignment of contents */
   verticalAlignment?: VerticalAlignment
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLTableCellElement>
 }
 
-export type TableHeaderCellRef = HTMLTableHeaderCellElement
+export const TableHeaderCell: FunctionComponent<TableHeaderCellProps> = ({
+  id,
+  style,
+  testID = 'table-header-cell',
+  colSpan = 1,
+  children,
+  className,
+  verticalAlignment = VerticalAlignment.Middle,
+  horizontalAlignment = Alignment.Left,
+  ref,
+}) => {
+  const tableHeaderCellClass = classnames('cf-table--header-cell', {
+    [`${className}`]: className,
+  })
 
-export const TableHeaderCell = forwardRef<
-  TableHeaderCellRef,
-  TableHeaderCellProps
->(
-  (
-    {
-      id,
-      style,
-      testID = 'table-header-cell',
-      colSpan = 1,
-      children,
-      className,
-      verticalAlignment = VerticalAlignment.Middle,
-      horizontalAlignment = Alignment.Left,
-    },
-    ref
-  ) => {
-    const tableHeaderCellClass = classnames('cf-table--header-cell', {
-      [`${className}`]: className,
-    })
-
-    const tableHeaderCellStyle = {
-      textAlign: horizontalAlignment,
-      verticalAlign: verticalAlignment,
-      ...style,
-    }
-
-    return (
-      <th
-        id={id}
-        ref={ref}
-        style={tableHeaderCellStyle}
-        colSpan={colSpan}
-        data-testid={testID}
-        className={tableHeaderCellClass}
-      >
-        {children}
-      </th>
-    )
+  const tableHeaderCellStyle = {
+    textAlign: horizontalAlignment,
+    verticalAlign: verticalAlignment,
+    ...style,
   }
-)
 
-TableHeaderCell.displayName = 'TableHeaderCell'
+  return (
+    <th
+      id={id}
+      ref={ref}
+      style={tableHeaderCellStyle}
+      colSpan={colSpan}
+      data-testid={testID}
+      className={tableHeaderCellClass}
+    >
+      {children}
+    </th>
+  )
+}

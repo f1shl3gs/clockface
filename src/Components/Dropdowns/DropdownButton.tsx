@@ -1,10 +1,10 @@
 // Libraries
-import {forwardRef, MouseEvent} from 'react'
+import {MouseEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
 import {Icon} from '../Icon'
-import {ButtonBase, ButtonBaseRef} from '../Button/Base/ButtonBase'
+import {ButtonBase} from '../Button/Base/ButtonBase'
 import {TechnoSpinner} from '../Spinners/TechnoSpinner'
 
 // Types
@@ -39,69 +39,60 @@ export interface DropdownButtonProps extends StandardFunctionProps {
   /** Text to be displayed on hover tooltip */
   title?: string
   disabledTitleText?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
 
-export type DropdownButtonRef = ButtonBaseRef
+export const DropdownButton: FunctionComponent<DropdownButtonProps> = ({
+  id,
+  icon,
+  size = ComponentSize.Small,
+  style,
+  color = ComponentColor.Default,
+  title,
+  disabledTitleText,
+  active = false,
+  testID = 'dropdown--button',
+  status = ComponentStatus.Default,
+  onClick,
+  children,
+  className,
+  trailingIcon,
+  ref,
+}) => {
+  const dropdownButtonClass = classnames('cf-dropdown--button', {
+    [`${className}`]: className,
+    'cf-dropdown__error': status === ComponentStatus.Error,
+    'cf-dropdown__loading': status === ComponentStatus.Loading,
+  })
 
-export const DropdownButton = forwardRef<
-  DropdownButtonRef,
-  DropdownButtonProps
->(
-  (
-    {
-      id,
-      icon,
-      size = ComponentSize.Small,
-      style,
-      color = ComponentColor.Default,
-      title,
-      disabledTitleText,
-      active = false,
-      testID = 'dropdown--button',
-      status = ComponentStatus.Default,
-      onClick,
-      children,
-      className,
-      trailingIcon,
-    },
-    ref
-  ) => {
-    const dropdownButtonClass = classnames('cf-dropdown--button', {
-      [`${className}`]: className,
-      'cf-dropdown__error': status === ComponentStatus.Error,
-      'cf-dropdown__loading': status === ComponentStatus.Loading,
-    })
-
-    return (
-      <ButtonBase
-        id={id}
-        ref={ref}
-        type={ButtonType.Button}
-        size={size}
-        style={style}
-        color={color}
-        shape={ButtonShape.StretchToFit}
-        testID={testID}
-        active={active}
-        status={status}
-        onClick={onClick}
-        className={dropdownButtonClass}
-        titleText={title}
-        disabledTitleText={disabledTitleText}
-      >
-        {!!icon && <Icon glyph={icon} className="cf-dropdown--icon" />}
-        <span className="cf-dropdown--selected">{children}</span>
-        {status === ComponentStatus.Loading ? (
-          <TechnoSpinner diameterPixels={20} />
-        ) : trailingIcon ? (
-          // we check for trailingIcon here because we want to disable the animation for trailingIcon, the cf-dropdown--caret is animated
-          <Icon glyph={trailingIcon} className="cf-dropdown--trailing-icon" />
-        ) : (
-          <Icon glyph={IconFont.CaretDown_New} className="cf-dropdown--caret" />
-        )}
-      </ButtonBase>
-    )
-  }
-)
-
-DropdownButton.displayName = 'DropdownButton'
+  return (
+    <ButtonBase
+      id={id}
+      ref={ref}
+      type={ButtonType.Button}
+      size={size}
+      style={style}
+      color={color}
+      shape={ButtonShape.StretchToFit}
+      testID={testID}
+      active={active}
+      status={status}
+      onClick={onClick}
+      className={dropdownButtonClass}
+      titleText={title}
+      disabledTitleText={disabledTitleText}
+    >
+      {!!icon && <Icon glyph={icon} className="cf-dropdown--icon" />}
+      <span className="cf-dropdown--selected">{children}</span>
+      {status === ComponentStatus.Loading ? (
+        <TechnoSpinner diameterPixels={20} />
+      ) : trailingIcon ? (
+        // we check for trailingIcon here because we want to disable the animation for trailingIcon, the cf-dropdown--caret is animated
+        <Icon glyph={trailingIcon} className="cf-dropdown--trailing-icon" />
+      ) : (
+        <Icon glyph={IconFont.CaretDown_New} className="cf-dropdown--caret" />
+      )}
+    </ButtonBase>
+  )
+}

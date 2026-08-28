@@ -10,7 +10,7 @@ import {
 } from '../../../Utils'
 
 // Components
-import {Notification, NotificationDialog, NotificationDialogRef} from '../index'
+import {Notification, NotificationDialog} from '../index'
 
 // Types
 import {
@@ -222,7 +222,7 @@ _Notification.story = {
 }
 
 export const _NotificationDialog = () => {
-  const notificationDialogRef = createRef<NotificationDialogRef>()
+  const notificationDialogRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

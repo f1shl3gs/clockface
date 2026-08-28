@@ -3,8 +3,8 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {DateRangePicker, DateRangePickerRef} from '../Composed/DateRangePicker'
-import {DatePicker, DatePickerRef} from '../Base/DatePicker'
+import {DateRangePicker} from '../Composed/DateRangePicker'
+import {DatePicker} from '../Base/DatePicker'
 
 // Notes
 import DatePickerReadme from './DatePicker.md?raw'
@@ -13,7 +13,7 @@ import DateRangePickerReadme from './DateRangePicker.md?raw'
 export default {title: 'Components/DatePicker/Base'}
 
 export const _DateRangePicker = () => {
-  const dateRangePickerRef = createRef<DateRangePickerRef>()
+  const dateRangePickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -48,7 +48,7 @@ _DateRangePicker.story = {
 }
 
 export const _DatePicker = () => {
-  const datePickerRef = createRef<DatePickerRef>()
+  const datePickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

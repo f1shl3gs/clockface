@@ -20,5 +20,3 @@ export const DropdownItemSelectionIndicator: FunctionComponent<
       return <></>
   }
 }
-
-DropdownItemSelectionIndicator.displayName = 'DropdownItemSelectionIndicator'

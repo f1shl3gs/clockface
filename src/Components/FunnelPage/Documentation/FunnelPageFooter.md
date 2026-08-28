@@ -11,9 +11,9 @@ import {FunnelPage} from '@influxdata/clockface'
 // Recommended usage:
 <AppWrapper type="funnel">
   <FunnelPage />
-  <FunnelPage.Footer>
-    <FunnelPage.FooterSection>I am a footer!</FunnelPage.FooterSection>
-  </FunnelPage.Footer>
+  <FunnelPageFooter>
+    <FunnelPageFooterSection>I am a footer!</FunnelPageFooterSection>
+  </FunnelPageFooter>
 </AppWrapper>
 ```
 

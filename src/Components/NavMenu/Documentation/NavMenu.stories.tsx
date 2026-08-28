@@ -3,7 +3,7 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {NavMenu, NavMenuRef, NavMenuItemRef} from '../'
+import {NavMenu, NavMenuItem, NavMenuSubItem} from '../'
 import {Icon} from '../../Icon/Base/Icon'
 
 // Types
@@ -17,7 +17,7 @@ import NavMenuSubItemReadme from './NavMenuSubItem.md?raw'
 export default {title: 'Components/Navigation/NavMenu'}
 
 export const _NavMenu = () => {
-  const navMenuRef = createRef<NavMenuRef>()
+  const navMenuRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -27,8 +27,8 @@ export const _NavMenu = () => {
 
   return (
     <div className="story--example">
-      <NavMenu.NavMenu ref={navMenuRef}>
-        <NavMenu.Item
+      <NavMenu ref={navMenuRef}>
+        <NavMenuItem
           titleLink={className => (
             <a className={className} href="#">
               {'First Item'}
@@ -41,7 +41,7 @@ export const _NavMenu = () => {
           )}
           active={true}
         />
-        <NavMenu.Item
+        <NavMenuItem
           titleLink={className => (
             <a className={className} href="#">
               {'Second Item'}
@@ -54,7 +54,7 @@ export const _NavMenu = () => {
           )}
           active={false}
         >
-          <NavMenu.SubItem
+          <NavMenuSubItem
             titleLink={className => (
               <a className={className} href="#">
                 First Sub-Item
@@ -62,7 +62,7 @@ export const _NavMenu = () => {
             )}
             active={false}
           />
-          <NavMenu.SubItem
+          <NavMenuSubItem
             titleLink={className => (
               <a className={className} href="#">
                 Second Sub-Item
@@ -70,7 +70,7 @@ export const _NavMenu = () => {
             )}
             active={false}
           />
-          <NavMenu.SubItem
+          <NavMenuSubItem
             titleLink={className => (
               <a className={className} href="#">
                 Third Sub-Item
@@ -78,8 +78,8 @@ export const _NavMenu = () => {
             )}
             active={false}
           />
-        </NavMenu.Item>
-        <NavMenu.Item
+        </NavMenuItem>
+        <NavMenuItem
           titleLink={className => (
             <a className={className} href="#">
               {'Third Item'}
@@ -92,7 +92,7 @@ export const _NavMenu = () => {
           )}
           active={false}
         />
-      </NavMenu.NavMenu>
+      </NavMenu>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -110,8 +110,8 @@ _NavMenu.story = {
   },
 }
 
-export const NavMenuItem = () => {
-  const navMenuRef = createRef<NavMenuItemRef>()
+export const _NavMenuItem = () => {
+  const navMenuRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -121,7 +121,7 @@ export const NavMenuItem = () => {
 
   return (
     <div className="story--example">
-      <NavMenu.Item
+      <NavMenuItem
         ref={navMenuRef}
         titleLink={className => (
           <a className={className} href="#">
@@ -135,7 +135,7 @@ export const NavMenuItem = () => {
         )}
         active={false}
       >
-        <NavMenu.SubItem
+        <NavMenuSubItem
           titleLink={className => (
             <a className={className} href="#">
               First Sub-Item
@@ -143,7 +143,7 @@ export const NavMenuItem = () => {
           )}
           active={false}
         />
-        <NavMenu.SubItem
+        <NavMenuSubItem
           titleLink={className => (
             <a className={className} href="#">
               Second Sub-Item
@@ -151,7 +151,7 @@ export const NavMenuItem = () => {
           )}
           active={false}
         />
-        <NavMenu.SubItem
+        <NavMenuSubItem
           titleLink={className => (
             <a className={className} href="#">
               Third Sub-Item
@@ -159,7 +159,7 @@ export const NavMenuItem = () => {
           )}
           active={false}
         />
-      </NavMenu.Item>
+      </NavMenuItem>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -167,7 +167,7 @@ export const NavMenuItem = () => {
   )
 }
 
-NavMenuItem.story = {
+_NavMenuItem.story = {
   name: 'NavMenuItem',
 
   parameters: {
@@ -177,9 +177,9 @@ NavMenuItem.story = {
   },
 }
 
-export const NavMenuSubItem = () => (
+export const _NavMenuSubItem = () => (
   <div className="story--example">
-    <NavMenu.SubItem
+    <NavMenuSubItem
       titleLink={className => (
         <a className={className} href="#">
           {'Sub Item Title'}
@@ -190,7 +190,7 @@ export const NavMenuSubItem = () => (
   </div>
 )
 
-NavMenuSubItem.story = {
+_NavMenuSubItem.story = {
   name: 'NavMenuSubItem',
 
   parameters: {

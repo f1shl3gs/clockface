@@ -1,11 +1,11 @@
 // Libraries
-import {forwardRef, useState} from 'react'
+import {useState, FunctionComponent, Ref} from 'react'
 import dayjs from 'dayjs'
 
 // Components
 import {DatePicker} from '../Base/DatePicker'
 import {Button} from '../../Button/Composed/Button'
-import {FlexBox, FlexBoxRef} from '../../FlexBox/index'
+import {FlexBox} from '../../FlexBox/index'
 
 // Types
 import {
@@ -23,14 +23,17 @@ export interface DateRangePickerProps extends StandardFunctionProps {
   timeRange: TimeRange
   /** Function called when time range is set */
   onSetTimeRange: (timeRange: TimeRange) => void
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type DateRangePickerRef = FlexBoxRef
-
-export const DateRangePicker = forwardRef<
-  DateRangePickerRef,
-  DateRangePickerProps
->(({style, timeRange, onSetTimeRange, testID = 'date-range-picker'}, ref) => {
+export const DateRangePicker: FunctionComponent<DateRangePickerProps> = ({
+  style,
+  timeRange,
+  onSetTimeRange,
+  testID = 'date-range-picker',
+  ref,
+}) => {
   const [lower, setLower] = useState<string>(timeRange.lower)
   const [upper, setUpper] = useState<string | null | undefined>(timeRange.upper)
 
@@ -46,7 +49,7 @@ export const DateRangePicker = forwardRef<
       (!upperDate.isValid() || !upperDate.isAfter(lowerDate)))
 
   return (
-    <FlexBox.FlexBox
+    <FlexBox
       ref={ref}
       direction={FlexDirection.Column}
       style={style}
@@ -67,8 +70,6 @@ export const DateRangePicker = forwardRef<
           isInvalidRange ? ComponentStatus.Disabled : ComponentStatus.Default
         }
       />
-    </FlexBox.FlexBox>
+    </FlexBox>
   )
-})
-
-DateRangePicker.displayName = 'DateRangePicker'
+}

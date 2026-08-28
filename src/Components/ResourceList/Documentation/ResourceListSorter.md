@@ -7,7 +7,7 @@
 import {ResourceList} from '@influxdata/clockface'
 ```
 ```tsx
-<ResourceList.Sorter />
+<ResourceListSorter />
 ```
 
 ### Example
@@ -23,7 +23,7 @@ import {ResourceList} from '@influxdata/clockface'
 | `sortDirection` | `Sort` | Keeps track of which direction sorting is happening in |
 | `items` | `[]` | List of items; enables sorting and/or filtering |
 
-Next, pass a handler function into each `<ResourceList.Sorter />` you want to be sortable:
+Next, pass a handler function into each `<ResourceListSorter />` you want to be sortable:
 
 ```tsx
 private handleSort = (nextSort: Sort, sortKey: string): void => {
@@ -34,19 +34,19 @@ private handleSort = (nextSort: Sort, sortKey: string): void => {
 }
 ```
 ```tsx
-<ResourceList.Sorter onClick={this.handleSort} />
+<ResourceListSorter onClick={this.handleSort} />
 ```
 
 When a sorter is clicked it cycles to the next available sort state and passes that back. This ensures that sort states are cycled through in a consistent manner.
 
-Make sure each each `<ResourceList.Sorter />` receives state:
+Make sure each each `<ResourceListSorter />` receives state:
 
 ```tsx
 const {sortKey, sortDirection, items} = this.state
 ```
 ```tsx
 items.map(item => (
-  <ResourceList.Sorter
+  <ResourceListSorter
     sortKey={item.sortKey}
     sort={item.sortKey === sortKey ? sortDirection : null}
     // In this example the list is sorted by only one key at a time

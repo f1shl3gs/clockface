@@ -29,7 +29,7 @@ export interface OverlayProps extends StandardFunctionProps {
   onEscape?: (visible: boolean) => void
 }
 
-export const OverlayRoot: FunctionComponent<OverlayProps> = ({
+export const Overlay: FunctionComponent<OverlayProps> = ({
   id,
   testID = 'overlay',
   visible,
@@ -94,5 +94,3 @@ export const OverlayRoot: FunctionComponent<OverlayProps> = ({
 
   return addElementToPortal(OverlayRender)
 }
-
-OverlayRoot.displayName = 'Overlay'

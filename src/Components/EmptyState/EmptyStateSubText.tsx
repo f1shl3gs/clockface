@@ -1,16 +1,22 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
 import {StandardFunctionProps} from '../../Types'
 
-export type EmptyStateSubTextRef = HTMLParagraphElement
+export interface EmptyStateSubTextProps extends StandardFunctionProps {
+  ref?: Ref<HTMLParagraphElement>
+}
 
-export const EmptyStateSubText = forwardRef<
-  EmptyStateSubTextRef,
-  StandardFunctionProps
->(({id, children, style, className, testID = 'empty-state--sub-text'}, ref) => {
+export const EmptyStateSubText: FunctionComponent<EmptyStateSubTextProps> = ({
+  id,
+  children,
+  style,
+  className,
+  testID = 'empty-state--sub-text',
+  ref,
+}) => {
   const emptyStateSubTextClass = classnames('cf-empty-state--sub-text', {
     [`${className}`]: className,
   })
@@ -26,6 +32,4 @@ export const EmptyStateSubText = forwardRef<
       {children}
     </p>
   )
-})
-
-EmptyStateSubText.displayName = 'EmptyStateSubText'
+}

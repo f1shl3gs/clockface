@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Styles
@@ -15,41 +15,35 @@ export interface AppWrapperProps extends StandardFunctionProps {
   presentationMode?: boolean
   /** Controls responsive layout (can be either "page" for "funnel") */
   type?: AppWrapperType
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type AppWrapperRef = HTMLDivElement
+export const AppWrapper: FunctionComponent<AppWrapperProps> = ({
+  id = 'cf-app-wrapper',
+  type = 'standard',
+  style,
+  testID = 'app-wrapper',
+  children,
+  className,
+  presentationMode = false,
+  ref,
+}) => {
+  const appWrapperClass = classnames('clockface--app-wrapper', {
+    'clockface--app-wrapper__presentation-mode': presentationMode,
+    [`clockface--app-wrapper__${type}`]: type,
+    [`${className}`]: className,
+  })
 
-export const AppWrapper = forwardRef<AppWrapperRef, AppWrapperProps>(
-  (
-    {
-      id = 'cf-app-wrapper',
-      type = 'standard',
-      style,
-      testID = 'app-wrapper',
-      children,
-      className,
-      presentationMode = false,
-    },
-    ref
-  ) => {
-    const appWrapperClass = classnames('clockface--app-wrapper', {
-      'clockface--app-wrapper__presentation-mode': presentationMode,
-      [`clockface--app-wrapper__${type}`]: type,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        className={appWrapperClass}
-        data-testid={testID}
-        id={id}
-        style={style}
-        ref={ref}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-AppWrapper.displayName = 'AppWrapper'
+  return (
+    <div
+      className={appWrapperClass}
+      data-testid={testID}
+      id={id}
+      style={style}
+      ref={ref}
+    >
+      {children}
+    </div>
+  )
+}

@@ -7,7 +7,7 @@ Here's a stateful example of `DraggableResizer` with 2 panels. Because this exam
 import {DraggableResizer} from '@influxdata/clockface'
 ```
 ```tsx
-<DraggableResizer.Panel />
+<DraggableResizerPanel />
 ```
 
 ### Example

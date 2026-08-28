@@ -1,8 +1,14 @@
 // Libraries
-import {MouseEvent, forwardRef, useState} from 'react'
+import {MouseEvent, useState, FunctionComponent, Ref} from 'react'
 
 // Components
-import {Dropdown, DropdownRef} from '../'
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownButton,
+  DropdownItem,
+  DropdownDivider,
+} from '../'
 
 // Constants
 import {DROPDOWN_DIVIDER_SHORTCODE} from '../../../Constants'
@@ -47,147 +53,140 @@ export interface MultiSelectDropdownProps extends StandardFunctionProps {
   /** Enables the search bar in the dropdown menu */
   isSearchable?: boolean
   searchbarInputPlaceholder?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type MultiSelectDropdownRef = DropdownRef
-
-export const MultiSelectDropdown = forwardRef<
-  MultiSelectDropdownRef,
+export const MultiSelectDropdown: FunctionComponent<
   MultiSelectDropdownProps
->(
-  (
-    {
-      id,
-      style = {width: '100%'},
-      dropUp = false,
-      testID = 'multiselect-dropdown',
-      options,
-      onSelect,
-      emptyText = 'None selected',
-      menuTheme = DropdownMenuTheme.Onyx,
-      className,
-      buttonSize = ComponentSize.Small,
-      buttonIcon,
-      indicator = DropdownItemType.Checkbox,
-      buttonColor = ComponentColor.Default,
-      buttonStatus = ComponentStatus.Default,
-      menuMaxHeight,
-      selectedOptions,
-      isSearchable = false,
-      searchbarInputPlaceholder = 'Search',
-    },
-    ref
-  ) => {
-    const buttonText = selectedOptions.length
-      ? selectedOptions.join(', ')
-      : emptyText
+> = ({
+  id,
+  style = {width: '100%'},
+  dropUp = false,
+  testID = 'multiselect-dropdown',
+  options,
+  onSelect,
+  emptyText = 'None selected',
+  menuTheme = DropdownMenuTheme.Onyx,
+  className,
+  buttonSize = ComponentSize.Small,
+  buttonIcon,
+  indicator = DropdownItemType.Checkbox,
+  buttonColor = ComponentColor.Default,
+  buttonStatus = ComponentStatus.Default,
+  menuMaxHeight,
+  selectedOptions,
+  isSearchable = false,
+  searchbarInputPlaceholder = 'Search',
+  ref,
+}) => {
+  const buttonText = selectedOptions.length
+    ? selectedOptions.join(', ')
+    : emptyText
 
-    const [filterString, setFilterString] = useState('')
+  const [filterString, setFilterString] = useState('')
 
-    const button = (
-      active: boolean,
-      onClick: (e?: MouseEvent<HTMLElement>) => void
-    ) => (
-      <Dropdown.Button
-        active={active}
-        onClick={onClick}
-        status={buttonStatus}
-        color={buttonColor}
-        size={buttonSize}
-        icon={buttonIcon}
-      >
-        {buttonText}
-      </Dropdown.Button>
-    )
+  const button = (
+    active: boolean,
+    onClick: (e?: MouseEvent<HTMLElement>) => void
+  ) => (
+    <DropdownButton
+      active={active}
+      onClick={onClick}
+      status={buttonStatus}
+      color={buttonColor}
+      size={buttonSize}
+      icon={buttonIcon}
+    >
+      {buttonText}
+    </DropdownButton>
+  )
 
-    const NoResults = () => (
-      <Dropdown.Item
-        key="no-values-in-filter"
-        testID="nothing-in-filter-typeAhead"
-        disabled={true}
-      >
-        {filterString.length > 0
-          ? `no matches for ${filterString}`
-          : 'No results'}
-      </Dropdown.Item>
-    )
+  const NoResults = () => (
+    <DropdownItem
+      key="no-values-in-filter"
+      testID="nothing-in-filter-typeAhead"
+      disabled={true}
+    >
+      {filterString.length > 0
+        ? `no matches for ${filterString}`
+        : 'No results'}
+    </DropdownItem>
+  )
 
-    const handleFiltering = (e: any) => {
-      const filterStr = e.currentTarget.value
-      setFilterString(filterStr)
-    }
-
-    const clearFilter = () => {
-      setFilterString('')
-    }
-
-    const menu = () => (
-      <>
-        {isSearchable && (
-          <Dropdown.Menu theme={menuTheme} style={{paddingBottom: 0}}>
-            <Input
-              placeholder={searchbarInputPlaceholder}
-              value={filterString}
-              onChange={handleFiltering}
-              onClear={clearFilter}
-            />
-          </Dropdown.Menu>
-        )}
-        <Dropdown.Menu theme={menuTheme} maxHeight={menuMaxHeight}>
-          {options.map(o => {
-            // case-insensitive search
-            if (
-              isSearchable &&
-              !o.toUpperCase().includes(filterString.toUpperCase())
-            ) {
-              return
-            }
-
-            if (o === DROPDOWN_DIVIDER_SHORTCODE) {
-              return <Dropdown.Divider key={o} />
-            }
-
-            if (o.includes(DROPDOWN_DIVIDER_SHORTCODE)) {
-              const dividerText = o.replace(DROPDOWN_DIVIDER_SHORTCODE, '')
-              return <Dropdown.Divider key={o} text={dividerText} />
-            }
-
-            return (
-              <Dropdown.Item
-                key={o}
-                type={indicator}
-                value={o}
-                title={o}
-                selected={selectedOptions.includes(o)}
-                onClick={onSelect}
-              >
-                {o}
-              </Dropdown.Item>
-            )
-          })}
-
-          {options.filter(option =>
-            option.toUpperCase().includes(filterString.toUpperCase())
-          ).length === 0 ? (
-            <NoResults />
-          ) : null}
-        </Dropdown.Menu>
-      </>
-    )
-
-    return (
-      <Dropdown.Dropdown
-        id={id}
-        ref={ref}
-        style={style}
-        testID={testID}
-        dropUp={dropUp}
-        className={className}
-        button={button}
-        menu={menu}
-      />
-    )
+  const handleFiltering = (e: any) => {
+    const filterStr = e.currentTarget.value
+    setFilterString(filterStr)
   }
-)
 
-MultiSelectDropdown.displayName = 'MultiSelectDropdown'
+  const clearFilter = () => {
+    setFilterString('')
+  }
+
+  const menu = () => (
+    <>
+      {isSearchable && (
+        <DropdownMenu theme={menuTheme} style={{paddingBottom: 0}}>
+          <Input
+            placeholder={searchbarInputPlaceholder}
+            value={filterString}
+            onChange={handleFiltering}
+            onClear={clearFilter}
+          />
+        </DropdownMenu>
+      )}
+      <DropdownMenu theme={menuTheme} maxHeight={menuMaxHeight}>
+        {options.map(o => {
+          // case-insensitive search
+          if (
+            isSearchable &&
+            !o.toUpperCase().includes(filterString.toUpperCase())
+          ) {
+            return
+          }
+
+          if (o === DROPDOWN_DIVIDER_SHORTCODE) {
+            return <DropdownDivider key={o} />
+          }
+
+          if (o.includes(DROPDOWN_DIVIDER_SHORTCODE)) {
+            const dividerText = o.replace(DROPDOWN_DIVIDER_SHORTCODE, '')
+            return <DropdownDivider key={o} text={dividerText} />
+          }
+
+          return (
+            <DropdownItem
+              key={o}
+              type={indicator}
+              value={o}
+              title={o}
+              selected={selectedOptions.includes(o)}
+              onClick={onSelect}
+            >
+              {o}
+            </DropdownItem>
+          )
+        })}
+
+        {options.filter(option =>
+          option.toUpperCase().includes(filterString.toUpperCase())
+        ).length === 0 ? (
+          <NoResults />
+        ) : null}
+      </DropdownMenu>
+    </>
+  )
+
+  return (
+    <Dropdown
+      id={id}
+      ref={ref}
+      style={style}
+      testID={testID}
+      dropUp={dropUp}
+      className={className}
+      button={button}
+      menu={menu}
+    />
+  )
+}

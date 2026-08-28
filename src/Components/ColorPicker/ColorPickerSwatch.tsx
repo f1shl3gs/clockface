@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -18,66 +18,57 @@ interface ColorPickerSwatchProps extends StandardFunctionProps {
   index: number
   /** Number of colors used in Color Picker, used to determine rounded corners */
   swatchesCount: number
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type ColorPickerSwatchRef = HTMLDivElement
+export const ColorPickerSwatch: FunctionComponent<ColorPickerSwatchProps> = ({
+  id,
+  hex,
+  name,
+  index,
+  style,
+  onClick,
+  className,
+  swatchesCount,
+  swatchesPerRow,
+  testID = 'color-picker',
+  ref,
+}) => {
+  const colorPickerSwatchClass = classnames('cf-color-picker--swatch', {
+    [`${className}`]: className,
+    'cf-color-picker--swatch__top-left': index === 0,
+    'cf-color-picker--swatch__top-right': index === swatchesPerRow - 1,
+    'cf-color-picker--swatch__bottom-left':
+      index === swatchesCount - swatchesPerRow,
+    'cf-color-picker--swatch__bottom-right': index === swatchesCount - 1,
+  })
 
-export const ColorPickerSwatch = forwardRef<
-  ColorPickerSwatchRef,
-  ColorPickerSwatchProps
->(
-  (
-    {
-      id,
-      hex,
-      name,
-      index,
-      style,
-      onClick,
-      className,
-      swatchesCount,
-      swatchesPerRow,
-      testID = 'color-picker',
-    },
-    ref
-  ) => {
-    const colorPickerSwatchClass = classnames('cf-color-picker--swatch', {
-      [`${className}`]: className,
-      'cf-color-picker--swatch__top-left': index === 0,
-      'cf-color-picker--swatch__top-right': index === swatchesPerRow - 1,
-      'cf-color-picker--swatch__bottom-left':
-        index === swatchesCount - swatchesPerRow,
-      'cf-color-picker--swatch__bottom-right': index === swatchesCount - 1,
-    })
+  const size = `${100 / swatchesPerRow}%`
 
-    const size = `${100 / swatchesPerRow}%`
-
-    const colorPickerSwatchStyle = {
-      width: size,
-      paddingBottom: size,
-      ...style,
-    }
-
-    const handleClick = (): void => {
-      onClick(hex)
-    }
-
-    const title = name ? name : hex
-
-    return (
-      <div
-        className={colorPickerSwatchClass}
-        title={title}
-        onClick={handleClick}
-        data-testid={`${testID}--swatch`}
-        style={colorPickerSwatchStyle}
-        ref={ref}
-        id={id}
-      >
-        <span style={{backgroundColor: hex}} />
-      </div>
-    )
+  const colorPickerSwatchStyle = {
+    width: size,
+    paddingBottom: size,
+    ...style,
   }
-)
 
-ColorPickerSwatch.displayName = 'ColorPickerSwatch'
+  const handleClick = (): void => {
+    onClick(hex)
+  }
+
+  const title = name ? name : hex
+
+  return (
+    <div
+      className={colorPickerSwatchClass}
+      title={title}
+      onClick={handleClick}
+      data-testid={`${testID}--swatch`}
+      style={colorPickerSwatchStyle}
+      ref={ref}
+      id={id}
+    >
+      <span style={{backgroundColor: hex}} />
+    </div>
+  )
+}

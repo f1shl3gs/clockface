@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -12,47 +12,41 @@ export interface TableCellProps extends StandardFunctionProps {
   horizontalAlignment?: Alignment
   /** Vertical alignment of contents */
   verticalAlignment?: VerticalAlignment
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLTableCellElement>
 }
 
-export type TableCellRef = HTMLTableDataCellElement
+export const TableCell: FunctionComponent<TableCellProps> = ({
+  id,
+  style,
+  testID = 'table-cell',
+  colSpan = 1,
+  children,
+  className,
+  verticalAlignment = VerticalAlignment.Middle,
+  horizontalAlignment = Alignment.Left,
+  ref,
+}) => {
+  const tableCellClass = classnames('cf-table--cell', {
+    [`${className}`]: className,
+  })
 
-export const TableCell = forwardRef<TableCellRef, TableCellProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'table-cell',
-      colSpan = 1,
-      children,
-      className,
-      verticalAlignment = VerticalAlignment.Middle,
-      horizontalAlignment = Alignment.Left,
-    },
-    ref
-  ) => {
-    const tableCellClass = classnames('cf-table--cell', {
-      [`${className}`]: className,
-    })
-
-    const tableCellStyle = {
-      textAlign: horizontalAlignment,
-      verticalAlign: verticalAlignment,
-      ...style,
-    }
-
-    return (
-      <td
-        id={id}
-        ref={ref}
-        style={tableCellStyle}
-        colSpan={colSpan}
-        className={tableCellClass}
-        data-testid={testID}
-      >
-        {children}
-      </td>
-    )
+  const tableCellStyle = {
+    textAlign: horizontalAlignment,
+    verticalAlign: verticalAlignment,
+    ...style,
   }
-)
 
-TableCell.displayName = 'TableCell'
+  return (
+    <td
+      id={id}
+      ref={ref}
+      style={tableCellStyle}
+      colSpan={colSpan}
+      className={tableCellClass}
+      data-testid={testID}
+    >
+      {children}
+    </td>
+  )
+}

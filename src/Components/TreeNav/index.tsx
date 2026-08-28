@@ -1,34 +1,4 @@
-// Libraries
-import {Component} from 'react'
-
-// Components
-import {TreeNavRoot, TreeNavProps} from './TreeNav'
-import {TreeNavHeader} from './TreeNavHeader'
-import {TreeNavUser} from './TreeNavUser'
-import {TreeNavUserItem} from './TreeNavUserItem'
-import {TreeNavItem} from './TreeNavItem'
-import {TreeNavSubMenu} from './TreeNavSubMenu'
-import {TreeNavSubItem} from './TreeNavSubItem'
-import {TreeNavSubHeading} from './TreeNavSubHeading'
-
-export class TreeNav extends Component<TreeNavProps> {
-  public static readonly displayName = 'TreeNav'
-
-  public static TreeNav = TreeNavRoot
-  public static Header = TreeNavHeader
-  public static User = TreeNavUser
-  public static UserItem = TreeNavUserItem
-  public static Item = TreeNavItem
-  public static SubMenu = TreeNavSubMenu
-  public static SubItem = TreeNavSubItem
-  public static SubHeading = TreeNavSubHeading
-
-  render() {
-    return <TreeNavRoot {...this.props} />
-  }
-}
-
-export type {TreeNavProps, TreeNavRef} from './TreeNav'
+export * from './TreeNav'
 export * from './TreeNavHeader'
 export * from './TreeNavUser'
 export * from './TreeNavUserItem'

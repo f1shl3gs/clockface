@@ -10,18 +10,18 @@ All `Table` family components can be accessed from the same class import:
 ```tsx
 <Table>
   <Table.Header>
-    <Table.Row>
+    <TableRow>
       <Table.HeaderCell />
       <Table.HeaderCell />
-    </Table.Row>
+    </TableRow>
   </Table.Header>
-  <Table.Body>
-    <Table.Row>
-      <Table.Cell />
-      <Table.Cell />
-    </Table.Row>
-  </Table.Body>
-  <Table.Footer />
+  <TableBody>
+    <TableRow>
+      <TableCell />
+      <TableCell />
+    </TableRow>
+  </TableBody>
+  <TableFooter />
 </Table>
 ```
 
@@ -33,11 +33,11 @@ All `Table` family components can be accessed from the same class import:
 In some cases, such as highlighting an erroneous row of data, you may want to mark a row as having a certain state. You can pass in the `ComponentColor` data type into the `color` prop of each row:
 
 ```tsx
-<Table.Row color={ComponentColor.Danger}>
-  <Table.Cell />
-  <Table.Cell />
-  <Table.Cell />
-</Table.Row>
+<TableRow color={ComponentColor.Danger}>
+  <TableCell />
+  <TableCell />
+  <TableCell />
+</TableRow>
 ```
 
 <!-- STORY HIDE START -->

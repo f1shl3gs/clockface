@@ -1,4 +1,10 @@
-import {ResourceCard} from '../Components/ResourceList/Card'
+import {
+  ResourceCard,
+  ResourceCardEditableDescription,
+  ResourceCardEditableName,
+  ResourceCardMeta,
+  ResourceCardName,
+} from '../Components/ResourceList/Card'
 import {FlexBox} from '../Components/FlexBox'
 import {SquareButton} from '../Components/Button/Composed/SquareButton'
 import {
@@ -61,11 +67,11 @@ function CardBuckets() {
         </FlexBox>
       }
     >
-      <ResourceCard.Name name="Rolling temperature notebook" />
-      <ResourceCard.Meta>
+      <ResourceCardName name="Rolling temperature notebook" />
+      <ResourceCardMeta>
         <strong>System bucket</strong>
         <span>Retention: 7 days</span>
-      </ResourceCard.Meta>
+      </ResourceCardMeta>
     </ResourceCard>
   )
 }
@@ -99,11 +105,11 @@ function CardBucketsFull() {
         </FlexBox>
       }
     >
-      <ResourceCard.Name name="Rolling temperature notebook" />
-      <ResourceCard.Meta>
+      <ResourceCardName name="Rolling temperature notebook" />
+      <ResourceCardMeta>
         <strong>System bucket</strong>
         <span>Retention: 7 days</span>
-      </ResourceCard.Meta>
+      </ResourceCardMeta>
       <FlexBox
         direction={FlexDirection.Row}
         justifyContent={JustifyContent.SpaceBetween}
@@ -170,15 +176,15 @@ function CardDisabled() {
         </FlexBox>
       }
     >
-      <ResourceCard.EditableName
+      <ResourceCardEditableName
         name="Rolling temperature notebook"
         onUpdate={name => alert(`onUpate name fired: ${name}`)}
       />
-      <ResourceCard.EditableDescription
+      <ResourceCardEditableDescription
         description="No description"
         onUpdate={desc => alert(`onUpate description fired: ${desc}`)}
       />
-      <ResourceCard.Meta>
+      <ResourceCardMeta>
         <FlexBox
           direction={FlexDirection.Row}
           alignItems={AlignItems.Center}
@@ -208,7 +214,7 @@ function CardDisabled() {
           text="ID: 07dd331e1c9fc00"
           placeIconAfterText
         />
-      </ResourceCard.Meta>
+      </ResourceCardMeta>
     </ResourceCard>
   )
 }
@@ -242,15 +248,15 @@ function CardAll() {
         </FlexBox>
       }
     >
-      <ResourceCard.EditableName
+      <ResourceCardEditableName
         name="Rolling temperature notebook"
         onUpdate={name => alert(`onUpate name fired: ${name}`)}
       />
-      <ResourceCard.EditableDescription
+      <ResourceCardEditableDescription
         description="No description"
         onUpdate={desc => alert(`onUpate description fired: ${desc}`)}
       />
-      <ResourceCard.Meta>
+      <ResourceCardMeta>
         <FlexBox
           direction={FlexDirection.Row}
           alignItems={AlignItems.Center}
@@ -278,7 +284,7 @@ function CardAll() {
           text="ID: 07dd331e1c9fc00"
           placeIconAfterText
         />
-      </ResourceCard.Meta>
+      </ResourceCardMeta>
       <FlexBox direction={FlexDirection.Row} margin={ComponentSize.Medium}>
         <Label
           id="CRIT"
@@ -318,8 +324,8 @@ function CardAll() {
 function CardTask() {
   return (
     <ResourceCard>
-      <ResourceCard.Name name="Notebook Task for local_54f15257-1b35-4567-becc-fb1c2462e996" />
-      <ResourceCard.Meta>
+      <ResourceCardName name="Notebook Task for local_54f15257-1b35-4567-becc-fb1c2462e996" />
+      <ResourceCardMeta>
         <FlexBox
           direction={FlexDirection.Row}
           alignItems={AlignItems.Center}
@@ -339,7 +345,7 @@ function CardTask() {
         <span>Created: 2021-07-20 17:45:43</span>
         <span>Created by: trys@clearleft.com</span>
         <span>Last used: 6 minutes ago</span>
-      </ResourceCard.Meta>
+      </ResourceCardMeta>
       <FlexBox
         direction={FlexDirection.Row}
         justifyContent={JustifyContent.FlexEnd}
@@ -390,7 +396,7 @@ function CardLabel() {
         </FlexBox>
       }
     >
-      <ResourceCard.Meta>
+      <ResourceCardMeta>
         <Label
           id="Analytics"
           description="I'm a cool label"
@@ -402,7 +408,7 @@ function CardLabel() {
           /* eslint-enable */
         />
         <span>No description</span>
-      </ResourceCard.Meta>
+      </ResourceCardMeta>
     </ResourceCard>
   )
 }

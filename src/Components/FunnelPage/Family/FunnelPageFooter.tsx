@@ -1,18 +1,23 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
 import {StandardFunctionProps} from '../../../Types'
 
-export interface FunnelPageFooterProps extends StandardFunctionProps {}
+export interface FunnelPageFooterProps extends StandardFunctionProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
+}
 
-export type FunnelPageFooterRef = HTMLDivElement
-
-export const FunnelPageFooter = forwardRef<
-  FunnelPageFooterRef,
-  FunnelPageFooterProps
->(({id, style, testID = 'funnel-page--footer', children, className}, ref) => {
+export const FunnelPageFooter: FunctionComponent<FunnelPageFooterProps> = ({
+  id,
+  style,
+  testID = 'funnel-page--footer',
+  children,
+  className,
+  ref,
+}) => {
   const funnelPageFooterClassName = classnames('cf-funnel-page--footer', {
     [`${className}`]: className,
   })
@@ -28,6 +33,4 @@ export const FunnelPageFooter = forwardRef<
       {children}
     </div>
   )
-})
-
-FunnelPageFooter.displayName = 'FunnelPageFooter'
+}

@@ -1,18 +1,23 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
 import {StandardFunctionProps} from '../../../Types'
 
-export interface RightClickDividerProps extends StandardFunctionProps {}
+export interface RightClickDividerProps extends StandardFunctionProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLLIElement>
+}
 
-export type RightClickDividerRef = HTMLLIElement
-
-export const RightClickDivider = forwardRef<
-  RightClickDividerRef,
-  RightClickDividerProps
->(({id, style, testID = 'right-click-divider', children, className}, ref) => {
+export const RightClickDivider: FunctionComponent<RightClickDividerProps> = ({
+  id,
+  style,
+  testID = 'right-click-divider',
+  children,
+  className,
+  ref,
+}) => {
   const rightClickDividerClassName = classnames('cf-right-click--divider', {
     [`${className}`]: className,
   })
@@ -28,6 +33,4 @@ export const RightClickDivider = forwardRef<
       {children}
     </li>
   )
-})
-
-RightClickDivider.displayName = 'RightClickDivider'
+}

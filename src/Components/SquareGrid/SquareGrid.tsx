@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, CSSProperties} from 'react'
+import {CSSProperties, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -13,45 +13,39 @@ export interface SquareGridProps extends StandardFunctionProps {
   cardSize: string
   /** Gap between cards */
   gutter?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type SquareGridRef = HTMLDivElement
+export const SquareGrid: FunctionComponent<SquareGridProps> = ({
+  id,
+  style = {width: '100%'},
+  testID = 'square-grid',
+  children,
+  className,
+  cardSize,
+  gutter,
+  ref,
+}) => {
+  const gridClass = classnames('cf-square-grid', {
+    [`cf-square-grid__gutter-${gutter}`]: gutter,
+    [`${className}`]: className,
+  })
 
-export const SquareGridRoot = forwardRef<SquareGridRef, SquareGridProps>(
-  (
-    {
-      id,
-      style = {width: '100%'},
-      testID = 'square-grid',
-      children,
-      className,
-      cardSize,
-      gutter,
-    },
-    ref
-  ) => {
-    const gridClass = classnames('cf-square-grid', {
-      [`cf-square-grid__gutter-${gutter}`]: gutter,
-      [`${className}`]: className,
-    })
-
-    const gridStyle: CSSProperties = {
-      gridTemplateColumns: `repeat(auto-fill, minmax(${cardSize}, 1fr))`,
-      ...style,
-    }
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={gridStyle}
-        className={gridClass}
-        data-testid={testID}
-      >
-        {children}
-      </div>
-    )
+  const gridStyle: CSSProperties = {
+    gridTemplateColumns: `repeat(auto-fill, minmax(${cardSize}, 1fr))`,
+    ...style,
   }
-)
 
-SquareGridRoot.displayName = 'SquareGrid'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={gridStyle}
+      className={gridClass}
+      data-testid={testID}
+    >
+      {children}
+    </div>
+  )
+}

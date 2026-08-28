@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import React, {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -34,78 +34,71 @@ export interface ResourceCardProps extends Omit<
   cardSelected?: boolean
   cardSelectable?: boolean
   handleCardSelection?: (resourceId?: string) => void
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type ResourceCardRef = HTMLDivElement
+export const ResourceCard: FunctionComponent<ResourceCardProps> = ({
+  id,
+  style,
+  testID = 'resource-card',
+  margin = ComponentSize.Large,
+  children,
+  disabled,
+  direction = FlexDirection.Column,
+  className,
+  alignItems = AlignItems.Stretch,
+  contextMenu,
+  justifyContent,
+  highlightOnHover = true,
+  contextMenuInteraction = 'alwaysVisible',
+  cardSelected = false,
+  cardSelectable = false,
+  handleCardSelection = () => null,
+  ref,
+}) => {
+  const resourceCardClass = classnames('cf-resource-card', {
+    'cf-resource-card__highlight': highlightOnHover,
+    'cf-resource-card__disabled': disabled,
+    'cf-resource-card__context-hover': contextMenuInteraction === 'showOnHover',
+    [`${className}`]: className,
+  })
 
-export const ResourceCardRoot = forwardRef<ResourceCardRef, ResourceCardProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'resource-card',
-      margin = ComponentSize.Large,
-      children,
-      disabled,
-      direction = FlexDirection.Column,
-      className,
-      alignItems = AlignItems.Stretch,
-      contextMenu,
-      justifyContent,
-      highlightOnHover = true,
-      contextMenuInteraction = 'alwaysVisible',
-      cardSelected = false,
-      cardSelectable = false,
-      handleCardSelection = () => null,
-    },
-    ref
-  ) => {
-    const resourceCardClass = classnames('cf-resource-card', {
-      'cf-resource-card__highlight': highlightOnHover,
-      'cf-resource-card__disabled': disabled,
-      'cf-resource-card__context-hover':
-        contextMenuInteraction === 'showOnHover',
-      [`${className}`]: className,
-    })
+  const contextMenuElement = contextMenu && (
+    <div className="cf-resource-card--context-menu">{contextMenu}</div>
+  )
+  const selectableCardCheckboxStyle = {marginRight: '24px'}
 
-    const contextMenuElement = contextMenu && (
-      <div className="cf-resource-card--context-menu">{contextMenu}</div>
-    )
-    const selectableCardCheckboxStyle = {marginRight: '24px'}
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={resourceCardClass}
-        data-testid={testID}
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={resourceCardClass}
+      data-testid={testID}
+    >
+      <FlexBox
+        margin={margin}
+        direction={direction}
+        alignItems={alignItems}
+        justifyContent={justifyContent}
+        stretchToFitHeight={true}
+        stretchToFitWidth={true}
       >
-        <FlexBox.FlexBox
-          margin={margin}
-          direction={direction}
-          alignItems={alignItems}
-          justifyContent={justifyContent}
-          stretchToFitHeight={true}
-          stretchToFitWidth={true}
-        >
-          {cardSelectable && (
-            <Toggle
-              type={InputToggleType.Checkbox}
-              onChange={handleCardSelection}
-              size={ComponentSize.Small}
-              checked={cardSelected}
-              id={`${id}-checkbox`}
-              style={selectableCardCheckboxStyle}
-              className="batch-select-card-checkbox"
-            />
-          )}
-          {children}
-        </FlexBox.FlexBox>
-        {contextMenuElement}
-      </div>
-    )
-  }
-)
-
-ResourceCardRoot.displayName = 'ResourceCard'
+        {cardSelectable && (
+          <Toggle
+            type={InputToggleType.Checkbox}
+            onChange={handleCardSelection}
+            size={ComponentSize.Small}
+            checked={cardSelected}
+            id={`${id}-checkbox`}
+            style={selectableCardCheckboxStyle}
+            className="batch-select-card-checkbox"
+          />
+        )}
+        {children}
+      </FlexBox>
+      {contextMenuElement}
+    </div>
+  )
+}

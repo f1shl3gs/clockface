@@ -3,7 +3,7 @@ import {createRef, RefObject, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {SelectGroup, SelectGroupRef, SelectGroupOptionRef} from '../'
+import {SelectGroup, SelectGroupOption} from '../'
 
 // Types
 import {
@@ -29,17 +29,14 @@ export const _SelectGroup = () => {
   const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([
     mirepoix[0],
   ])
-  const selectGroupRef: RefObject<SelectGroupRef | null> = createRef()
-  const selectGroupButtonCeleryRef: RefObject<SelectGroupOptionRef | null> =
-    createRef()
-  const selectGroupButtonCarrotRef: RefObject<SelectGroupOptionRef | null> =
-    createRef()
-  const selectGroupButtonOnionRef: RefObject<SelectGroupOptionRef | null> =
-    createRef()
+  const selectGroupRef = createRef<HTMLDivElement>()
+  const selectGroupButtonCeleryRef = createRef<HTMLInputElement>()
+  const selectGroupButtonCarrotRef = createRef<HTMLInputElement>()
+  const selectGroupButtonOnionRef = createRef<HTMLInputElement>()
 
   const selectGroupButtonRefs: Record<
     string,
-    RefObject<SelectGroupOptionRef | null>
+    RefObject<HTMLInputElement | null>
   > = {
     Celery: selectGroupButtonCeleryRef,
     Carrot: selectGroupButtonCarrotRef,
@@ -57,7 +54,7 @@ export const _SelectGroup = () => {
 
   return (
     <div className="story--example">
-      <SelectGroup.SelectGroup
+      <SelectGroup
         ref={selectGroupRef}
         style={{width: '400px'}}
         size={(ComponentSize as Record<string, any>)['Small']}
@@ -87,7 +84,7 @@ export const _SelectGroup = () => {
           const disabled = btn === mirepoix[3]
 
           return (
-            <SelectGroup.Option
+            <SelectGroupOption
               type={(InputToggleType as Record<string, any>)['SelectGroup']}
               name={'mirepoix'}
               ref={selectGroupButtonRefs[btn]}
@@ -100,10 +97,10 @@ export const _SelectGroup = () => {
               disabled={disabled}
             >
               {btn}
-            </SelectGroup.Option>
+            </SelectGroupOption>
           )
         })}
-      </SelectGroup.SelectGroup>
+      </SelectGroup>
       <div className="story--test-buttons">
         <button onClick={logSelectGroupRefs}>Log Refs</button>
       </div>
@@ -121,9 +118,8 @@ _SelectGroup.story = {
   },
 }
 
-export const SelectGroupOption = () => {
-  const selectGroupButtonRef: RefObject<SelectGroupOptionRef | null> =
-    createRef()
+export const _SelectGroupOption = () => {
+  const selectGroupButtonRef = createRef<HTMLInputElement>()
 
   const logSelectGroupOptionRef = (): void => {
     /* eslint-disable */
@@ -133,7 +129,7 @@ export const SelectGroupOption = () => {
 
   return (
     <div className="story--example">
-      <SelectGroup.Option
+      <SelectGroupOption
         ref={selectGroupButtonRef}
         id={'example-selectGroup-option'}
         active={false}
@@ -146,7 +142,7 @@ export const SelectGroupOption = () => {
         disabledTitleText={'Explainer for why this item is disabled'}
       >
         {'Button Label'}
-      </SelectGroup.Option>
+      </SelectGroupOption>
       <div className="story--test-buttons">
         <button onClick={logSelectGroupOptionRef}>Log Ref</button>
       </div>
@@ -154,7 +150,7 @@ export const SelectGroupOption = () => {
   )
 }
 
-SelectGroupOption.story = {
+_SelectGroupOption.story = {
   name: 'SelectGroupOption',
 
   parameters: {
@@ -175,7 +171,7 @@ export const NoteEditorModeToggle = () => {
           color={(ComponentColor as Record<string, any>)['Default']}
           shape={ButtonShape.StretchToFit}
         >
-          <SelectGroup.Option
+          <SelectGroupOption
             titleText="Compose your Note using Markdown"
             id="mode-compose"
             active={activeItemID === 'mode-compose'}
@@ -184,8 +180,8 @@ export const NoteEditorModeToggle = () => {
             onClick={activeItemID => updateActiveItemID(activeItemID)}
           >
             Compose
-          </SelectGroup.Option>
-          <SelectGroup.Option
+          </SelectGroupOption>
+          <SelectGroupOption
             titleText="See a preview of your Note"
             id="mode-preview"
             active={activeItemID === 'mode-preview'}
@@ -194,7 +190,7 @@ export const NoteEditorModeToggle = () => {
             onClick={activeItemID => updateActiveItemID(activeItemID)}
           >
             Preview
-          </SelectGroup.Option>
+          </SelectGroupOption>
         </SelectGroup>
       </div>
     </div>

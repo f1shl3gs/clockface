@@ -10,7 +10,7 @@ import {AppHeader} from '@influxdata/clockface'
 
 ```tsx
 <AppHeader>
-  <AppHeader.Logo>
+  <AppHeaderLogo>
   {children}
 </AppHeader>
 ```

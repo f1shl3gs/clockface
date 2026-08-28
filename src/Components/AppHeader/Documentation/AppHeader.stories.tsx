@@ -3,8 +3,8 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {AppHeader, AppHeaderRef, AppHeaderLogoRef} from '../index'
-import {PopNav} from '../../PopNav/index'
+import {AppHeader, AppHeaderLogo} from '../index'
+import {PopNav, PopNavItem} from '../../PopNav/index'
 
 // Types
 import {
@@ -23,7 +23,7 @@ import {FlexBox} from '../../FlexBox'
 export default {title: 'Layout/AppHeader/Family'}
 
 export const _AppHeader = () => {
-  const appHeaderRef = createRef<AppHeaderRef>()
+  const appHeaderRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -33,7 +33,7 @@ export const _AppHeader = () => {
 
   return (
     <div className="story--example">
-      <AppHeader.AppHeader
+      <AppHeader
         ref={appHeaderRef}
         size={(ComponentSize as Record<string, any>)['Small']}
       />
@@ -54,8 +54,8 @@ _AppHeader.story = {
   },
 }
 
-export const AppHeaderLogo = () => {
-  const appHeaderLogoRef = createRef<AppHeaderLogoRef>()
+export const _AppHeaderLogo = () => {
+  const appHeaderLogoRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -65,7 +65,7 @@ export const AppHeaderLogo = () => {
 
   return (
     <div className="story--example">
-      <AppHeader.Logo
+      <AppHeaderLogo
         ref={appHeaderLogoRef}
         src={'/static/media/.storybook/influxdata-logo.png'}
         size={(ComponentSize as Record<string, any>)['Small']}
@@ -77,7 +77,7 @@ export const AppHeaderLogo = () => {
   )
 }
 
-AppHeaderLogo.story = {
+_AppHeaderLogo.story = {
   name: 'AppHeaderLogo',
 
   parameters: {
@@ -92,7 +92,7 @@ export const __AppHeader = () => {
     <div className="mockPageWrapper">
       <div className="mockPage">
         <AppHeader size={(ComponentSize as Record<string, any>)['Small']}>
-          <AppHeader.Logo
+          <AppHeaderLogo
             src={'/static/media/.storybook/influxdata-logo.png'}
             size={(ComponentSize as Record<string, any>)['Small']}
           />
@@ -127,7 +127,7 @@ export const __AppHeader = () => {
                   somewhatlongusername@yourdomain.com
                 </div>
               </div>
-              <PopNav.Item
+              <PopNavItem
                 titleLink={className => (
                   <a className={className} href="#">
                     First Item
@@ -135,7 +135,7 @@ export const __AppHeader = () => {
                 )}
                 active={false}
               />
-              <PopNav.Item
+              <PopNavItem
                 titleLink={className => (
                   <a className={className} href="#">
                     Second Item
@@ -143,7 +143,7 @@ export const __AppHeader = () => {
                 )}
                 active={false}
               />
-              <PopNav.Item
+              <PopNavItem
                 titleLink={className => (
                   <a className={className} href="#">
                     Third Item

@@ -3,10 +3,19 @@ import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {TreeNav, TreeNavRef} from '../'
+import {
+  TreeNav,
+  TreeNavHeader,
+  TreeNavItem,
+  TreeNavSubHeading,
+  TreeNavSubItem,
+  TreeNavSubMenu,
+  TreeNavUser,
+  TreeNavUserItem,
+} from '../'
 import {Icon} from '../../Icon/Base/Icon'
 import {AppWrapper} from '../../AppWrapper/AppWrapper'
-import {Page} from '../../Page/index'
+import {Page, PageContents, PageHeader, PageTitle} from '../../Page/index'
 
 // Types
 import {IconFont} from '../../../Types'
@@ -21,7 +30,7 @@ export const _TreeNav = () => {
   const [activeItem, setActiveItem] = useState<string>('item-1')
   const [activeSubItem, setActiveSubItem] = useState<string>('data-buckets')
   const [expanded, setExpanded] = useState<boolean>(true)
-  const navMenuRef = createRef<TreeNavRef>()
+  const navMenuRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -45,12 +54,12 @@ export const _TreeNav = () => {
     <div className="mockPageWrapper">
       <div className="mockPage">
         <AppWrapper>
-          <TreeNav.TreeNav
+          <TreeNav
             ref={navMenuRef}
             expanded={expanded}
             onToggleClick={handleToggleExpanded}
             headerElement={
-              <TreeNav.Header
+              <TreeNavHeader
                 id="home"
                 label={<InfluxDBCloudLogo cloud={true} />}
                 onClick={
@@ -62,132 +71,129 @@ export const _TreeNav = () => {
               />
             }
             userElement={
-              <TreeNav.User
-                username="Captain Milkshake"
-                team="Dairy Desperados"
-              >
-                <TreeNav.SubHeading label="Company" />
-                <TreeNav.UserItem id="billing" label="Billing" />
-                <TreeNav.UserItem
+              <TreeNavUser username="Captain Milkshake" team="Dairy Desperados">
+                <TreeNavSubHeading label="Company" />
+                <TreeNavUserItem id="billing" label="Billing" />
+                <TreeNavUserItem
                   id="members"
                   label="Members"
                   linkElement={className => (
                     <a href="#" className={className} />
                   )}
                 />
-                <TreeNav.UserItem id="about" label="About" />
-                <TreeNav.SubHeading label="Team" />
-                <TreeNav.UserItem id="members" label="Members" />
-                <TreeNav.UserItem id="about" label="About" />
-                <TreeNav.SubHeading label="Dkim@Influxdata.com" lowercase />
-                <TreeNav.UserItem id="switch" label="Switch workspace" />
-                <TreeNav.UserItem id="logout" label="Logout" />
-              </TreeNav.User>
+                <TreeNavUserItem id="about" label="About" />
+                <TreeNavSubHeading label="Team" />
+                <TreeNavUserItem id="members" label="Members" />
+                <TreeNavUserItem id="about" label="About" />
+                <TreeNavSubHeading label="Dkim@Influxdata.com" lowercase />
+                <TreeNavUserItem id="switch" label="Switch workspace" />
+                <TreeNavUserItem id="logout" label="Logout" />
+              </TreeNavUser>
             }
           >
-            <TreeNav.Item
+            <TreeNavItem
               id="item-1"
               label="Ingest"
               icon={<Icon glyph={IconFont.Download_New} />}
               active={activeItem === 'item-1'}
               onClick={handleItemClick}
             >
-              <TreeNav.SubMenu>
-                <TreeNav.SubHeading label="Ingest" />
-                <TreeNav.SubItem
+              <TreeNavSubMenu>
+                <TreeNavSubHeading label="Ingest" />
+                <TreeNavSubItem
                   id="data-buckets"
                   label="Buckets"
                   active={activeSubItem === 'data-buckets'}
                   onClick={handleSubItemClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="data-sources"
                   label="Sources"
                   active={activeSubItem === 'data-sources'}
                   onClick={handleSubItemClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="data-telegraf"
                   label="Telegraf"
                   active={activeSubItem === 'data-telegraf'}
                   onClick={handleSubItemClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="data-tokens"
                   label="API Tokens"
                   active={activeSubItem === 'data-tokens'}
                   onClick={handleSubItemClick}
                 />
-              </TreeNav.SubMenu>
-            </TreeNav.Item>
-            <TreeNav.Item
+              </TreeNavSubMenu>
+            </TreeNavItem>
+            <TreeNavItem
               id="item-2"
               label={'Build'}
               icon={<Icon glyph={IconFont.Braces} />}
               onClick={handleItemClick}
               active={activeItem === 'item-2'}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="item-3"
               label="Monitor & Alert"
               icon={<Icon glyph={IconFont.GraphLine_New} />}
               onClick={handleItemClick}
               active={activeItem === 'item-3'}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="item-4"
               label="Access"
               icon={<Icon glyph={IconFont.Lock} />}
               onClick={handleItemClick}
               active={activeItem === 'item-4'}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="item-5"
               label="Settings"
               icon={<Icon glyph={IconFont.CogOutline_New} />}
               onClick={handleItemClick}
               active={activeItem === 'item-5'}
             >
-              <TreeNav.SubMenu>
-                <TreeNav.SubHeading label="Settings" />
-                <TreeNav.SubItem
+              <TreeNavSubMenu>
+                <TreeNavSubHeading label="Settings" />
+                <TreeNavSubItem
                   id="item-5-sub-1"
                   label="Banana"
                   linkElement={className => (
                     <a href="#" className={className} />
                   )}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="item-5-sub-2"
                   label="Dragonfruit"
                   linkElement={className => (
                     <a href="#" className={className} />
                   )}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="item-5-sub-3"
                   label="Apple"
                   linkElement={className => (
                     <a href="#" className={className} />
                   )}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="item-5-sub-4"
                   label="Pineapple"
                   linkElement={className => (
                     <a href="#" className={className} />
                   )}
                 />
-              </TreeNav.SubMenu>
-            </TreeNav.Item>
-          </TreeNav.TreeNav>
+              </TreeNavSubMenu>
+            </TreeNavItem>
+          </TreeNav>
           <Page>
-            <Page.Header fullWidth={false}>
-              <Page.Title title="I am a page" />
-            </Page.Header>
-            <Page.Contents fullWidth={false}>
+            <PageHeader fullWidth={false}>
+              <PageTitle title="I am a page" />
+            </PageHeader>
+            <PageContents fullWidth={false}>
               <p>sfsds</p>
-            </Page.Contents>
+            </PageContents>
           </Page>
         </AppWrapper>
         <div className="story--test-buttons story--test-buttons--bottom">

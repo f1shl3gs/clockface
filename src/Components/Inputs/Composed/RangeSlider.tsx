@@ -1,4 +1,4 @@
-import {ChangeEvent, forwardRef, FunctionComponent, CSSProperties} from 'react'
+import {ChangeEvent, FunctionComponent, CSSProperties, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -52,135 +52,129 @@ export interface RangeSliderProps extends StandardFunctionProps {
   orientation?: ComponentOrientation
   /** Determines whether to display value  */
   displayValue?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLInputElement>
 }
 
-export type RangeSliderRef = HTMLInputElement
+export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
+  id,
+  min = 0,
+  max = 100,
+  fill = false,
+  size = ComponentSize.Small,
+  step,
+  style,
+  color = ComponentColor.Primary,
+  value,
+  testID = 'range-slider',
+  status = ComponentStatus.Default,
+  onChange,
+  className,
+  hideLabels = false,
+  labelPrefix,
+  labelSuffix,
+  autocomplete,
+  orientation = ComponentOrientation.Horizontal,
+  displayValue = false,
+  ref,
+}) => {
+  const rangeSliderClass = classnames('cf-range-slider', {
+    [`cf-range-slider__${color}`]: color,
+    [`cf-range-slider__${size}`]: size,
+    'cf-range-slider__disabled': status === ComponentStatus.Disabled,
+    [`${className}`]: className,
+  })
 
-export const RangeSlider = forwardRef<RangeSliderRef, RangeSliderProps>(
-  (
+  const rangeSliderInputClass = classnames('cf-range-slider--input', {
+    'cf-range-slider__fill': fill,
+  })
+
+  const valmaxClassName = classnames(
+    'cf-range-slider--label cf-range-slider--max',
     {
-      id,
-      min = 0,
-      max = 100,
-      fill = false,
-      size = ComponentSize.Small,
-      step,
-      style,
-      color = ComponentColor.Primary,
-      value,
-      testID = 'range-slider',
-      status = ComponentStatus.Default,
-      onChange,
-      className,
-      hideLabels = false,
-      labelPrefix,
-      labelSuffix,
-      autocomplete,
-      orientation = ComponentOrientation.Horizontal,
-      displayValue = false,
-    },
-    ref
-  ) => {
-    const rangeSliderClass = classnames('cf-range-slider', {
-      [`cf-range-slider__${color}`]: color,
-      [`cf-range-slider__${size}`]: size,
-      'cf-range-slider__disabled': status === ComponentStatus.Disabled,
-      [`${className}`]: className,
-    })
-
-    const rangeSliderInputClass = classnames('cf-range-slider--input', {
-      'cf-range-slider__fill': fill,
-    })
-
-    const valmaxClassName = classnames(
-      'cf-range-slider--label cf-range-slider--max',
-      {
-        [`cf-range-slider--valmax-label__with-value`]:
-          orientation === ComponentOrientation.Horizontal && displayValue,
-        [`cf-range-slider--valmax-label`]:
-          orientation === ComponentOrientation.Horizontal && !displayValue,
-      }
-    )
-
-    const inputStyle = generateRangeSliderTrackFillStyle(
-      fill,
-      min,
-      max,
-      value,
-      color,
-      status
-    )
-
-    const verticalLabelStyle = {
-      transform: 'rotate(270deg)',
+      [`cf-range-slider--valmax-label__with-value`]:
+        orientation === ComponentOrientation.Horizontal && displayValue,
+      [`cf-range-slider--valmax-label`]:
+        orientation === ComponentOrientation.Horizontal && !displayValue,
     }
+  )
 
-    const cleanedValue = valueWithBounds(value, min, max)
+  const inputStyle = generateRangeSliderTrackFillStyle(
+    fill,
+    min,
+    max,
+    value,
+    color,
+    status
+  )
 
-    const rangeSliderClassName =
-      orientation === ComponentOrientation.Vertical
-        ? `${rangeSliderClass} cf-range-slider__vertical`
-        : rangeSliderClass
+  const verticalLabelStyle = {
+    transform: 'rotate(270deg)',
+  }
 
-    return (
-      <div className={rangeSliderClassName} style={style}>
-        <RangeSliderLabel
-          value={min}
-          prefix={labelPrefix}
-          suffix={labelSuffix}
-          style={
-            orientation === ComponentOrientation.Vertical
-              ? verticalLabelStyle
-              : {}
-          }
-          hidden={hideLabels}
-          testID={`${testID}--min`}
-          className="cf-range-slider--min"
-        />
-        <Input
-          id={id}
-          ref={ref}
-          min={Math.min(min, max)}
-          max={Math.max(min, max)}
-          step={step}
-          size={size}
-          type={InputType.Range}
-          value={cleanedValue}
-          testID={testID}
-          status={status}
-          onChange={onChange}
-          className={rangeSliderInputClass}
-          inputStyle={inputStyle}
-          autocomplete={autocomplete}
-        />
-        <div className="cf-range-slider--focus" />
-        <div className={valmaxClassName}>
-          {displayValue && (
-            <RangeSliderLabel
-              value={cleanedValue}
-              prefix={labelPrefix}
-              suffix={labelSuffix}
-              hidden={hideLabels}
-              testID={`${testID}--val`}
-            />
-          )}
-          <div>
-            {displayValue && <span>/</span>}
-            <RangeSliderLabel
-              value={max}
-              prefix={labelPrefix}
-              suffix={labelSuffix}
-              hidden={hideLabels}
-              testID={`${testID}--max`}
-            />
-          </div>
+  const cleanedValue = valueWithBounds(value, min, max)
+
+  const rangeSliderClassName =
+    orientation === ComponentOrientation.Vertical
+      ? `${rangeSliderClass} cf-range-slider__vertical`
+      : rangeSliderClass
+
+  return (
+    <div className={rangeSliderClassName} style={style}>
+      <RangeSliderLabel
+        value={min}
+        prefix={labelPrefix}
+        suffix={labelSuffix}
+        style={
+          orientation === ComponentOrientation.Vertical
+            ? verticalLabelStyle
+            : {}
+        }
+        hidden={hideLabels}
+        testID={`${testID}--min`}
+        className="cf-range-slider--min"
+      />
+      <Input
+        id={id}
+        ref={ref}
+        min={Math.min(min, max)}
+        max={Math.max(min, max)}
+        step={step}
+        size={size}
+        type={InputType.Range}
+        value={cleanedValue}
+        testID={testID}
+        status={status}
+        onChange={onChange}
+        className={rangeSliderInputClass}
+        inputStyle={inputStyle}
+        autocomplete={autocomplete}
+      />
+      <div className="cf-range-slider--focus" />
+      <div className={valmaxClassName}>
+        {displayValue && (
+          <RangeSliderLabel
+            value={cleanedValue}
+            prefix={labelPrefix}
+            suffix={labelSuffix}
+            hidden={hideLabels}
+            testID={`${testID}--val`}
+          />
+        )}
+        <div>
+          {displayValue && <span>/</span>}
+          <RangeSliderLabel
+            value={max}
+            prefix={labelPrefix}
+            suffix={labelSuffix}
+            hidden={hideLabels}
+            testID={`${testID}--max`}
+          />
         </div>
       </div>
-    )
-  }
-)
-
-RangeSlider.displayName = 'RangeSlider'
+    </div>
+  )
+}
 
 const valueWithBounds = (value: number, min: number, max: number): number => {
   const minVal = Math.min(min, max)
@@ -230,5 +224,3 @@ const RangeSliderLabel: FunctionComponent<RangeSliderLabelProps> = ({
     </span>
   )
 }
-
-RangeSliderLabel.displayName = 'RangeSliderLabel'

@@ -1,9 +1,9 @@
 // Libraries
-import {RefObject, createRef} from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {SquareGrid, SquareGridRef, SquareGridCardRef} from '../'
+import {SquareGrid, SquareGridCard} from '../'
 
 // Types
 import {ComponentSize} from '../../../Types'
@@ -14,8 +14,8 @@ import SquareGridReadme from './SquareGrid.md?raw'
 export default {title: 'Layout/Fluid Square Grid'}
 
 export const _SquareGrid = () => {
-  const squareGridRef: RefObject<SquareGridRef | null> = createRef()
-  const squareGridCardRef: RefObject<SquareGridCardRef | null> = createRef()
+  const squareGridRef = createRef<HTMLDivElement>()
+  const squareGridCardRef = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
     /* eslint-disable */
@@ -26,57 +26,57 @@ export const _SquareGrid = () => {
 
   return (
     <div className="story--example">
-      <SquareGrid.SquareGrid
+      <SquareGrid
         ref={squareGridRef}
         cardSize={'100px'}
         gutter={(ComponentSize as Record<string, any>)['None']}
       >
-        <SquareGrid.Card>
+        <SquareGridCard ref={squareGridCardRef}>
           <div className="mockComponent stretch">A</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">B</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">C</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">D</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">E</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">F</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">G</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">H</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">I</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">J</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">K</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">L</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">M</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">N</div>
-        </SquareGrid.Card>
-        <SquareGrid.Card>
+        </SquareGridCard>
+        <SquareGridCard>
           <div className="mockComponent stretch">O</div>
-        </SquareGrid.Card>
-      </SquareGrid.SquareGrid>
+        </SquareGridCard>
+      </SquareGrid>
       <div className="story--test-buttons">
         <button onClick={logRefs}>Log Refs</button>
       </div>

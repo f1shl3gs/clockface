@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -8,14 +8,18 @@ import {StandardFunctionProps} from '../../Types'
 export interface DropdownDividerProps extends StandardFunctionProps {
   /** Text to be displayed on divider, a line will be displayed if no text is provided */
   text?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type DropdownDividerRef = HTMLDivElement
-
-export const DropdownDivider = forwardRef<
-  DropdownDividerRef,
-  DropdownDividerProps
->(({id, text, style, testID = 'dropdown-divider', className}, ref) => {
+export const DropdownDivider: FunctionComponent<DropdownDividerProps> = ({
+  id,
+  text,
+  style,
+  testID = 'dropdown-divider',
+  className,
+  ref,
+}) => {
   const dropdownDividerClass = classnames('cf-dropdown-divider', {
     line: !text,
     [`${className}`]: className,
@@ -32,6 +36,4 @@ export const DropdownDivider = forwardRef<
       {text}
     </div>
   )
-})
-
-DropdownDivider.displayName = 'DropdownDivider'
+}

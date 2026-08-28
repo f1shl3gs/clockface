@@ -8,7 +8,7 @@ import {SquareGrid} from '@influxdata/clockface'
 ```
 ```tsx
 <SquareGrid>
-  <SquareGrid.Card />
+  <SquareGridCard />
 </SquareGrid>
 ```
 

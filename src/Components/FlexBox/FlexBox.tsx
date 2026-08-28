@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, MouseEvent} from 'react'
+import {MouseEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -28,51 +28,45 @@ export interface FlexBoxProps extends StandardFunctionProps {
   /** stretches component spacer to fit parent height */
   stretchToFitHeight?: boolean
   onClick?: (e: MouseEvent<HTMLElement>) => void
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type FlexBoxRef = HTMLDivElement
+export const FlexBox: FunctionComponent<FlexBoxProps> = ({
+  id,
+  style,
+  testID = 'flex-box',
+  margin,
+  children,
+  direction = FlexDirection.Row,
+  className,
+  alignItems = AlignItems.Center,
+  justifyContent = JustifyContent.FlexStart,
+  stretchToFitWidth = false,
+  stretchToFitHeight = false,
+  onClick,
+  ref,
+}) => {
+  const flexBoxClass = classnames('cf-flex-box', {
+    [`cf-flex-box__margin-${margin}`]: margin,
+    [`cf-flex-box__${direction}`]: direction,
+    [`cf-flex-box__justify-${justifyContent}`]: justifyContent,
+    [`cf-flex-box__align-${alignItems}`]: alignItems,
+    'cf-flex-box__stretch-w': stretchToFitWidth,
+    'cf-flex-box__stretch-h': stretchToFitHeight,
+    [`${className}`]: className,
+  })
 
-export const FlexBoxRoot = forwardRef<FlexBoxRef, FlexBoxProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'flex-box',
-      margin,
-      children,
-      direction = FlexDirection.Row,
-      className,
-      alignItems = AlignItems.Center,
-      justifyContent = JustifyContent.FlexStart,
-      stretchToFitWidth = false,
-      stretchToFitHeight = false,
-      onClick,
-    },
-    ref
-  ) => {
-    const flexBoxClass = classnames('cf-flex-box', {
-      [`cf-flex-box__margin-${margin}`]: margin,
-      [`cf-flex-box__${direction}`]: direction,
-      [`cf-flex-box__justify-${justifyContent}`]: justifyContent,
-      [`cf-flex-box__align-${alignItems}`]: alignItems,
-      'cf-flex-box__stretch-w': stretchToFitWidth,
-      'cf-flex-box__stretch-h': stretchToFitHeight,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={flexBoxClass}
-        onClick={onClick}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-FlexBoxRoot.displayName = 'FlexBox'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={flexBoxClass}
+      onClick={onClick}
+    >
+      {children}
+    </div>
+  )
+}

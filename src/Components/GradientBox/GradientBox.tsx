@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -14,44 +14,38 @@ export interface GradientBoxProps extends StandardFunctionProps {
   borderGradient?: Gradients
   /** Controls the border gradient color */
   borderColor?: InfluxColors | string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type GradientBoxRef = HTMLDivElement
+export const GradientBox: FunctionComponent<GradientBoxProps> = ({
+  id,
+  style,
+  testID = 'gradient-box',
+  children,
+  className,
+  borderColor = 'none',
+  borderGradient,
+  ref,
+}) => {
+  const gradientBoxClass = classnames('cf-gradient-box', {
+    [`${className}`]: className,
+  })
 
-export const GradientBox = forwardRef<GradientBoxRef, GradientBoxProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'gradient-box',
-      children,
-      className,
-      borderColor = 'none',
-      borderGradient,
-    },
-    ref
-  ) => {
-    const gradientBoxClass = classnames('cf-gradient-box', {
-      [`${className}`]: className,
-    })
-
-    const gradientBoxStyle = {
-      ...generateBackgroundStyle(borderColor, borderGradient),
-      ...style,
-    }
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        className={gradientBoxClass}
-        data-testid={testID}
-        style={gradientBoxStyle}
-      >
-        {children}
-      </div>
-    )
+  const gradientBoxStyle = {
+    ...generateBackgroundStyle(borderColor, borderGradient),
+    ...style,
   }
-)
 
-GradientBox.displayName = 'GradientBox'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      className={gradientBoxClass}
+      data-testid={testID}
+      style={gradientBoxStyle}
+    >
+      {children}
+    </div>
+  )
+}

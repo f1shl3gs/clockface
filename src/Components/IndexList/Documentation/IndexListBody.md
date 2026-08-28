@@ -7,9 +7,9 @@ IndexListBody is intended to be the first child of `IndexList`, similar to `<tbo
 import {IndexList} from '@influxdata/clockface'
 ```
 ```tsx
-<IndexList.Body>
+<IndexListBody>
   // List rows go here
-</IndexList.Body>
+</IndexListBody>
 ```
 
 IndexListBody requires a element (ideally `<EmptyState />`) be passed in to its `emptyState` prop. This element is rendered when the `children` prop becomes undefined or has length of 0. This can happen if a filtering mechanism is built into the list and no results match the query, in which case the empty state would communicate that to the user. The `columnCount` prop is passed into the `colSpan` atrribute of the empty state's container cell and ensures the empty state takes up the full width of the table.

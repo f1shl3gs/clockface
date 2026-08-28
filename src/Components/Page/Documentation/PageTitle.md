@@ -1,6 +1,6 @@
 # Page Title
 
-Used primarily within `<Page.HeaderLeft />` as the title of a page, hence the name.
+Used primarily within `<PageHeaderLeft />` as the title of a page, hence the name.
 
 ### Usage
 
@@ -9,7 +9,7 @@ import {Page} from '@influxdata/clockface'
 ```
 
 ```tsx
-<Page.Title />
+<PageTitle />
 ```
 
 ### Example

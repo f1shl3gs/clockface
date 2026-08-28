@@ -1,18 +1,17 @@
 // Libraries
-import {RefObject, createRef} from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
 import {
   Panel,
-  PanelRef,
-  PanelHeaderRef,
-  PanelBodyRef,
-  PanelFooterRef,
-  PanelSymbolHeaderRef,
+  PanelBody,
+  PanelFooter,
+  PanelHeader,
+  PanelSymbolHeader,
 } from '../'
-import {BannerPanel, BannerPanelRef} from '../Composed/BannerPanel'
-import {Grid} from '../../Grid'
+import {BannerPanel} from '../Composed/BannerPanel'
+import {Grid, GridColumn, GridRow} from '../../Grid'
 import {Bullet} from '../../Icon'
 import {Heading} from '../../Typography'
 import {GradientBox} from '../../GradientBox/GradientBox'
@@ -48,7 +47,7 @@ import PanelPlaygroundReadme from './PanelPlayground.md?raw'
 export default {title: 'Components/Panels/Family'}
 
 export const _Panel = () => {
-  const panelRef: RefObject<PanelRef | null> = createRef()
+  const panelRef = createRef<HTMLDivElement>()
 
   const logPanelRef = (): void => {
     /* eslint-disable */
@@ -58,7 +57,7 @@ export const _Panel = () => {
 
   return (
     <div className="story--example">
-      <Panel.Panel
+      <Panel
         ref={panelRef}
         gradient={(Gradients as Record<string, any>)['None']}
         backgroundColor={`${InfluxColors.Castle}`}
@@ -78,8 +77,8 @@ _Panel.story = {
   },
 }
 
-export const PanelHeader = () => {
-  const panelHeaderRef: RefObject<PanelHeaderRef | null> = createRef()
+export const _PanelHeader = () => {
+  const panelHeaderRef = createRef<HTMLDivElement>()
 
   const logPanelRefs = (): void => {
     /* eslint-disable */
@@ -91,7 +90,7 @@ export const PanelHeader = () => {
 
   return (
     <div className="story--example">
-      <Panel.Header
+      <PanelHeader
         ref={panelHeaderRef}
         size={(ComponentSize as Record<string, any>)['Small']}
         direction={(FlexDirection as Record<string, any>)['Row']}
@@ -105,7 +104,7 @@ export const PanelHeader = () => {
         {headerTypes[3] === headerTypes[3] && <h4>{'I am a cool Panel'}</h4>}
         {headerTypes[3] === headerTypes[4] && <h5>{'I am a cool Panel'}</h5>}
         {headerTypes[3] === headerTypes[5] && <h6>{'I am a cool Panel'}</h6>}
-      </Panel.Header>
+      </PanelHeader>
       <div className="story--test-buttons">
         <button onClick={logPanelRefs}>Log Refs</button>
       </div>
@@ -113,7 +112,7 @@ export const PanelHeader = () => {
   )
 }
 
-PanelHeader.story = {
+_PanelHeader.story = {
   name: 'PanelHeader',
 
   parameters: {
@@ -123,8 +122,8 @@ PanelHeader.story = {
   },
 }
 
-export const PanelBody = () => {
-  const panelBodyRef: RefObject<PanelBodyRef | null> = createRef()
+export const _PanelBody = () => {
+  const panelBodyRef = createRef<HTMLDivElement>()
 
   const logPanelRef = (): void => {
     /* eslint-disable */
@@ -134,7 +133,7 @@ export const PanelBody = () => {
 
   return (
     <div className="story--example">
-      <Panel.Body
+      <PanelBody
         ref={panelBodyRef}
         size={(ComponentSize as Record<string, any>)['Small']}
         direction={(FlexDirection as Record<string, any>)['Column']}
@@ -147,7 +146,7 @@ export const PanelBody = () => {
             'Lorem ipsum dolor amet aesthetic quinoa small batch crucifix snackwave pabst typewriter kinfolk craft beer wolf unicorn activated charcoal chambray tattooed. Pok pok everyday carry tattooed etsy, small batch photo booth paleo cray prism fanny pack cred. Beard vinyl affogato leggings. Cold-pressed selfies pinterest crucifix freegan cronut glossier vegan drinking vinegar food truck quinoa lumbersexual.'
           }
         </p>
-      </Panel.Body>
+      </PanelBody>
       <div className="story--test-buttons">
         <button onClick={logPanelRef}>Log Ref</button>
       </div>
@@ -155,7 +154,7 @@ export const PanelBody = () => {
   )
 }
 
-PanelBody.story = {
+_PanelBody.story = {
   name: 'PanelBody',
 
   parameters: {
@@ -165,8 +164,8 @@ PanelBody.story = {
   },
 }
 
-export const PanelFooter = () => {
-  const panelFooterRef: RefObject<PanelFooterRef | null> = createRef()
+export const _PanelFooter = () => {
+  const panelFooterRef = createRef<HTMLDivElement>()
 
   const logPanelRef = (): void => {
     /* eslint-disable */
@@ -176,7 +175,7 @@ export const PanelFooter = () => {
 
   return (
     <div className="story--example">
-      <Panel.Footer
+      <PanelFooter
         ref={panelFooterRef}
         size={(ComponentSize as Record<string, any>)['Small']}
         direction={(FlexDirection as Record<string, any>)['Row']}
@@ -186,7 +185,7 @@ export const PanelFooter = () => {
       >
         <div className="mockComponent mockButton">Button</div>
         <div className="mockComponent mockButton">Button</div>
-      </Panel.Footer>
+      </PanelFooter>
       <div className="story--test-buttons">
         <button onClick={logPanelRef}>Log Ref</button>
       </div>
@@ -194,7 +193,7 @@ export const PanelFooter = () => {
   )
 }
 
-PanelFooter.story = {
+_PanelFooter.story = {
   name: 'PanelFooter',
 
   parameters: {
@@ -204,9 +203,8 @@ PanelFooter.story = {
   },
 }
 
-export const PanelSymbolHeader = () => {
-  const panelSymbolHeaderRef: RefObject<PanelSymbolHeaderRef | null> =
-    createRef()
+export const _PanelSymbolHeader = () => {
+  const panelSymbolHeaderRef = createRef<HTMLDivElement>()
 
   const logPanelSymbolHeaderRef = (): void => {
     /* eslint-disable */
@@ -216,7 +214,7 @@ export const PanelSymbolHeader = () => {
 
   return (
     <div className="story--example">
-      <Panel.SymbolHeader
+      <PanelSymbolHeader
         ref={panelSymbolHeaderRef}
         symbol={<Bullet text={1} />}
         title={<h4>Panel Title</h4>}
@@ -228,7 +226,7 @@ export const PanelSymbolHeader = () => {
   )
 }
 
-PanelSymbolHeader.story = {
+_PanelSymbolHeader.story = {
   name: 'PanelSymbolHeader',
 
   parameters: {
@@ -239,7 +237,7 @@ PanelSymbolHeader.story = {
 }
 
 export const _BannerPanel = () => {
-  const bannerPanelRef: RefObject<BannerPanelRef | null> = createRef()
+  const bannerPanelRef = createRef<HTMLDivElement>()
 
   const logBannerPanelRef = (): void => {
     /* eslint-disable */
@@ -297,15 +295,15 @@ export const DismissablePanel = () => (
       onDismiss={() => alert('onDismiss clicked!')}
       border={false}
     >
-      <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+      <PanelHeader size={(ComponentSize as Record<string, any>)['Small']}>
         <h4>Welcome!</h4>
-      </Panel.Header>
-      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+      </PanelHeader>
+      <PanelBody size={(ComponentSize as Record<string, any>)['Small']}>
         <p>We've built a lot of cool new things to make your life easier</p>
         <p>
           <a href="#">Click Here</a> to take the tour
         </p>
-      </Panel.Body>
+      </PanelBody>
     </Panel>
   </div>
 )
@@ -321,41 +319,41 @@ DismissablePanel.story = {
 export const GettingStartedPanel = () => (
   <div className="story--example">
     <Panel>
-      <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+      <PanelHeader size={(ComponentSize as Record<string, any>)['Small']}>
         <h5>Getting started with InfluxDB 2.0</h5>
-      </Panel.Header>
-      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+      </PanelHeader>
+      <PanelBody size={(ComponentSize as Record<string, any>)['Small']}>
         <Grid>
-          <Grid.Row>
-            <Grid.Column widthSM={Columns.Four}>
+          <GridRow>
+            <GridColumn widthSM={Columns.Four}>
               <Panel backgroundColor={InfluxColors.Pepper}>
-                <Panel.Body>
+                <PanelBody>
                   <p>Configure a Data Collector</p>
-                </Panel.Body>
+                </PanelBody>
               </Panel>
-            </Grid.Column>
-            <Grid.Column widthSM={Columns.Four}>
+            </GridColumn>
+            <GridColumn widthSM={Columns.Four}>
               <Panel backgroundColor={InfluxColors.Pepper}>
-                <Panel.Body>
+                <PanelBody>
                   <p>Build a Monitoring Dashboard</p>
-                </Panel.Body>
+                </PanelBody>
               </Panel>
-            </Grid.Column>
-            <Grid.Column widthSM={Columns.Four}>
+            </GridColumn>
+            <GridColumn widthSM={Columns.Four}>
               <Panel backgroundColor={InfluxColors.Pepper}>
-                <Panel.Body>
+                <PanelBody>
                   <p>Explore Data with Flux</p>
-                </Panel.Body>
+                </PanelBody>
               </Panel>
-            </Grid.Column>
-          </Grid.Row>
+            </GridColumn>
+          </GridRow>
         </Grid>
-      </Panel.Body>
-      <Panel.Footer size={(ComponentSize as Record<string, any>)['Small']}>
+      </PanelBody>
+      <PanelFooter size={(ComponentSize as Record<string, any>)['Small']}>
         <p>
           Check our <a href="#">Documentation Site</a> for more tutorials
         </p>
-      </Panel.Footer>
+      </PanelFooter>
     </Panel>
   </div>
 )
@@ -371,12 +369,12 @@ GettingStartedPanel.story = {
 export const DangerZonePanel = () => (
   <div className="story--example">
     <Panel gradient={Gradients.DocScott}>
-      <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+      <PanelHeader size={(ComponentSize as Record<string, any>)['Small']}>
         <h3>Danger Zone!</h3>
-      </Panel.Header>
-      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+      </PanelHeader>
+      <PanelBody size={(ComponentSize as Record<string, any>)['Small']}>
         <p>These actions can have unintended wide-reaching consequences</p>
-      </Panel.Body>
+      </PanelBody>
     </Panel>
   </div>
 )
@@ -392,7 +390,7 @@ DangerZonePanel.story = {
 export const NumberedPanel = () => (
   <div className="story--example">
     <Panel style={{width: '100%'}}>
-      <Panel.SymbolHeader
+      <PanelSymbolHeader
         symbol={
           <Bullet
             text={1}
@@ -403,16 +401,16 @@ export const NumberedPanel = () => (
         size={(ComponentSize as Record<string, any>)['Small']}
       >
         Panel Header Content
-      </Panel.SymbolHeader>
-      <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+      </PanelSymbolHeader>
+      <PanelBody size={(ComponentSize as Record<string, any>)['Small']}>
         Panel Body Content
-      </Panel.Body>
-      <Panel.Footer
+      </PanelBody>
+      <PanelFooter
         size={(ComponentSize as Record<string, any>)['Small']}
         justifyContent={JustifyContent.FlexStart}
       >
         <p>Panel Footer Content</p>
-      </Panel.Footer>
+      </PanelFooter>
     </Panel>
   </div>
 )
@@ -436,7 +434,7 @@ export const PanelPlayground = () => (
         style={{width: '500px'}}
         backgroundColor={`${InfluxColors.Raven}`}
       >
-        <Panel.Header size={(ComponentSize as Record<string, any>)['Small']}>
+        <PanelHeader size={(ComponentSize as Record<string, any>)['Small']}>
           <Heading
             element={(HeadingElement as Record<string, any>)['H3']}
             appearance={(HeadingElement as Record<string, any>)['Inherit']}
@@ -447,13 +445,13 @@ export const PanelPlayground = () => (
           >
             {'Heads up'}
           </Heading>
-        </Panel.Header>
-        <Panel.Body size={(ComponentSize as Record<string, any>)['Small']}>
+        </PanelHeader>
+        <PanelBody size={(ComponentSize as Record<string, any>)['Small']}>
           <p>{'Body rock'}</p>
-        </Panel.Body>
-        <Panel.Footer>
+        </PanelBody>
+        <PanelFooter>
           <div className="mockComponent mockButton">Not a button</div>
-        </Panel.Footer>
+        </PanelFooter>
       </Panel>
     </GradientBox>
   </div>

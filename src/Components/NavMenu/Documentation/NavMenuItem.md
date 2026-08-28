@@ -1,13 +1,13 @@
 # NavMenuItem
 
-The first tier of navigation items. It can optionally contain `NavMenu.SubItem`
+The first tier of navigation items. It can optionally contain `NavMenuSubItem`
 
 ### Usage
 ```tsx
 import {NavMenu} from '@influxdata/clockface'
 ```
 ```tsx
-<NavMenu.Item />
+<NavMenuItem />
 ```
 
 ### React Router
@@ -17,14 +17,14 @@ The `titleLink` and `iconLink` props should be passed the same element to ensure
 
 ```tsx
 // Using anchor tags
-<NavMenu.Item
+<NavMenuItem
   iconLink={className => <a href="http://www.myurl.com" className={className}><Icon /></a>}
   titleLink={className => <a href="http://www.myurl.com" className={className}>Item Title</a>}
 />
 ```
 ```tsx
 // Using a router link
-<NavMenu.Item
+<NavMenuItem
   iconLink={className => <a to="/pages/home" className={className}><Icon /></a>}
   titleLink={className => <a to="/pages/home" className={className}>Item Title</a>}
 />
@@ -32,11 +32,11 @@ The `titleLink` and `iconLink` props should be passed the same element to ensure
 
 ### Creating Sub-Items
 
-Simply pass in `<NavMenu.SubItem />` as children of `<NavMenu.Item />` and they will appear below the title link
+Simply pass in `<NavMenuSubItem />` as children of `<NavMenuItem />` and they will appear below the title link
 
 ### Styling
 
-`<NavMenu.Item />` receives its styles by being a child of `<NavMenu />`
+`<NavMenuItem />` receives its styles by being a child of `<NavMenu />`
 
 ### Example
 <!-- STORY -->

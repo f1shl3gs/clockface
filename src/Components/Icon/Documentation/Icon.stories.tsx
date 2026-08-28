@@ -1,10 +1,10 @@
 // Libraries
-import {CSSProperties, RefObject, createRef} from 'react'
+import {CSSProperties, createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Icon, IconRef} from '../'
-import {Bullet, BulletRef} from '../'
+import {Icon} from '../'
+import {Bullet} from '../'
 
 // Types
 import {IconFont, ComponentSize, InfluxColors} from '../../../Types'
@@ -17,7 +17,7 @@ export default {title: 'Components/Icon/Base'}
 
 export const BaseIcon = () => {
   const iconStyleExample: CSSProperties = {color: '#6BDFFF', fontSize: '60px'}
-  const iconRef: RefObject<IconRef | null> = createRef()
+  const iconRef = createRef<HTMLSpanElement>()
 
   const logIconRef = (): void => {
     /* eslint-disable */
@@ -48,7 +48,7 @@ BaseIcon.story = {
 }
 
 export const _Bullet = () => {
-  const bulletRef: RefObject<BulletRef | null> = createRef()
+  const bulletRef = createRef<HTMLSpanElement>()
 
   const logbulletRef = (): void => {
     /* eslint-disable */

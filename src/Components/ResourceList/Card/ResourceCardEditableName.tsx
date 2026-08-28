@@ -1,16 +1,17 @@
 // Libraries
 import {
-  forwardRef,
   KeyboardEvent,
   ChangeEvent,
   MouseEvent,
   useState,
   RefObject,
+  FunctionComponent,
+  Ref,
 } from 'react'
 import classnames from 'classnames'
 
 // Components
-import {Input, InputRef} from '../../Inputs/Input'
+import {Input} from '../../Inputs/Input'
 import {Icon} from '../../Icon/Base/Icon'
 import {SpinnerContainer} from '../../Spinners/SpinnerContainer'
 import {TechnoSpinner} from '../../Spinners/TechnoSpinner'
@@ -43,160 +44,151 @@ export interface ResourceCardEditableNameProps extends StandardFunctionProps {
   /** TestID for input sub-component */
   inputTestID?: string
   /** Pass through to assign a ref to the Input present in edit mode */
-  inputRef?: RefObject<InputRef | null>
+  inputRef?: RefObject<HTMLInputElement | null>
   /** For the anchor tag in the resource card - needed for browsers to show the proper context menu */
   href?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type ResourceCardEditableNameRef = HTMLDivElement
-
-export const ResourceCardEditableName = forwardRef<
-  ResourceCardEditableNameRef,
+export const ResourceCardEditableName: FunctionComponent<
   ResourceCardEditableNameProps
->(
-  (
+> = ({
+  id,
+  href,
+  name,
+  style,
+  testID = 'resource-editable-name',
+  onClick,
+  inputRef,
+  onUpdate,
+  className,
+  placeholder = 'Enter a new name',
+  inputTestID = 'resource-editable-name--input',
+  noNameString = 'Untitled',
+  buttonTestID = 'resource-editable-name--button',
+  ref,
+}) => {
+  const [isEditing, setEditingState] = useState<boolean>(false)
+  const [workingName, setWorkingName] = useState<string>(name)
+  const [loading, setLoading] = useState<RemoteDataState>(RemoteDataState.Done)
+
+  const resourceCardEditableNameClass = classnames(
+    'cf-resource-editable-name',
     {
-      id,
-      href,
-      name,
-      style,
-      testID = 'resource-editable-name',
-      onClick,
-      inputRef,
-      onUpdate,
-      className,
-      placeholder = 'Enter a new name',
-      inputTestID = 'resource-editable-name--input',
-      noNameString = 'Untitled',
-      buttonTestID = 'resource-editable-name--button',
-    },
-    ref
-  ) => {
-    const [isEditing, setEditingState] = useState<boolean>(false)
-    const [workingName, setWorkingName] = useState<string>(name)
-    const [loading, setLoading] = useState<RemoteDataState>(
-      RemoteDataState.Done
-    )
-
-    const resourceCardEditableNameClass = classnames(
-      'cf-resource-editable-name',
-      {
-        'cf-resource-editable-name__editing': isEditing,
-        'untitled-name': name === noNameString,
-        [`${className}`]: className,
-      }
-    )
-
-    const resourceCardEditableNameLinkClass = classnames(
-      'cf-resource-name--text',
-      {
-        'cf-resource-name--text__link': onClick,
-      }
-    )
-
-    const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-      // this behavior is overriden by the onClick handler
-      if (href) {
-        e.preventDefault()
-      }
-      if (onClick) {
-        onClick(e)
-      }
+      'cf-resource-editable-name__editing': isEditing,
+      'untitled-name': name === noNameString,
+      [`${className}`]: className,
     }
+  )
 
-    const handleStartEditing = (): void => {
-      setEditingState(true)
+  const resourceCardEditableNameLinkClass = classnames(
+    'cf-resource-name--text',
+    {
+      'cf-resource-name--text__link': onClick,
     }
+  )
 
-    const handleStopEditing = async (): Promise<void> => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    // this behavior is overriden by the onClick handler
+    if (href) {
+      e.preventDefault()
+    }
+    if (onClick) {
+      onClick(e)
+    }
+  }
+
+  const handleStartEditing = (): void => {
+    setEditingState(true)
+  }
+
+  const handleStopEditing = async (): Promise<void> => {
+    setLoading(RemoteDataState.Loading)
+    await onUpdate(workingName)
+    setLoading(RemoteDataState.Done)
+    setEditingState(false)
+  }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setWorkingName(e.target.value)
+  }
+
+  const handleInputFocus = (e?: ChangeEvent<HTMLInputElement>): void => {
+    e?.currentTarget.select()
+  }
+
+  const handleKeyDown = async (
+    e: KeyboardEvent<HTMLInputElement>
+  ): Promise<void> => {
+    if (e.key === 'Enter') {
+      e.persist()
+
+      if (!workingName) {
+        setEditingState(false)
+        setWorkingName(name)
+
+        return
+      }
       setLoading(RemoteDataState.Loading)
       await onUpdate(workingName)
       setLoading(RemoteDataState.Done)
       setEditingState(false)
     }
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-      setWorkingName(e.target.value)
+    if (e.key === 'Escape') {
+      setWorkingName(name)
+      setEditingState(false)
     }
-
-    const handleInputFocus = (e?: ChangeEvent<HTMLInputElement>): void => {
-      e?.currentTarget.select()
-    }
-
-    const handleKeyDown = async (
-      e: KeyboardEvent<HTMLInputElement>
-    ): Promise<void> => {
-      if (e.key === 'Enter') {
-        e.persist()
-
-        if (!workingName) {
-          setEditingState(false)
-          setWorkingName(name)
-
-          return
-        }
-        setLoading(RemoteDataState.Loading)
-        await onUpdate(workingName)
-        setLoading(RemoteDataState.Done)
-        setEditingState(false)
-      }
-
-      if (e.key === 'Escape') {
-        setWorkingName(name)
-        setEditingState(false)
-      }
-    }
-
-    const showInput = isEditing && loading !== RemoteDataState.Loading
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={resourceCardEditableNameClass}
-      >
-        <SpinnerContainer
-          loading={loading}
-          spinnerComponent={<TechnoSpinner diameterPixels={20} />}
-        >
-          <a
-            className={resourceCardEditableNameLinkClass}
-            onClick={handleClick}
-            data-testid={testID}
-            href={href}
-          >
-            {name || noNameString}
-          </a>
-        </SpinnerContainer>
-        <div
-          className="cf-resource-editable-name--toggle"
-          onClick={handleStartEditing}
-          data-testid={buttonTestID}
-        >
-          <Icon glyph={IconFont.Pencil} />
-        </div>
-        {showInput && (
-          <ClickOutside onClickOutside={handleStopEditing}>
-            <Input
-              ref={inputRef}
-              size={ComponentSize.ExtraSmall}
-              maxLength={90}
-              autoFocus={true}
-              spellCheck={false}
-              placeholder={placeholder}
-              onFocus={handleInputFocus}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              className="cf-resource-editable-name--input"
-              value={workingName}
-              testID={inputTestID}
-            />
-          </ClickOutside>
-        )}
-      </div>
-    )
   }
-)
 
-ResourceCardEditableName.displayName = 'ResourceCardEditableName'
+  const showInput = isEditing && loading !== RemoteDataState.Loading
+
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={resourceCardEditableNameClass}
+    >
+      <SpinnerContainer
+        loading={loading}
+        spinnerComponent={<TechnoSpinner diameterPixels={20} />}
+      >
+        <a
+          className={resourceCardEditableNameLinkClass}
+          onClick={handleClick}
+          data-testid={testID}
+          href={href}
+        >
+          {name || noNameString}
+        </a>
+      </SpinnerContainer>
+      <div
+        className="cf-resource-editable-name--toggle"
+        onClick={handleStartEditing}
+        data-testid={buttonTestID}
+      >
+        <Icon glyph={IconFont.Pencil} />
+      </div>
+      {showInput && (
+        <ClickOutside onClickOutside={handleStopEditing}>
+          <Input
+            ref={inputRef}
+            size={ComponentSize.ExtraSmall}
+            maxLength={90}
+            autoFocus={true}
+            spellCheck={false}
+            placeholder={placeholder}
+            onFocus={handleInputFocus}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            className="cf-resource-editable-name--input"
+            value={workingName}
+            testID={inputTestID}
+          />
+        </ClickOutside>
+      )}
+    </div>
+  )
+}

@@ -1,6 +1,6 @@
 # Page Sub-Title
 
-Used primarily within `<Page.HeaderLeft />` as the secondary title of a page, hence the name. It is best used in combination with `<Page.Title />`.
+Used primarily within `<PageHeaderLeft />` as the secondary title of a page, hence the name. It is best used in combination with `<PageTitle />`.
 
 ### Usage
 
@@ -14,7 +14,7 @@ import {Page} from '@influxdata/clockface'
 
 ### Recommended
 
-Best used with `FlexBox` and `Page.Title` like so:
+Best used with `FlexBox` and `PageTitle` like so:
 
 ```tsx
 <FlexBox
@@ -22,7 +22,7 @@ Best used with `FlexBox` and `Page.Title` like so:
   alignItems={AlignItems.FlexStart}
   margin={ComponentSpacer.Small}
 >
-  <Page.Title title="Primary Title" />
+  <PageTitle title="Primary Title" />
   <Page.SubTitle title="Secondary Title" />
 </FlexBox>
 ```

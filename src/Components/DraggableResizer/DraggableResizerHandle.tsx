@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, CSSProperties, useState} from 'react'
+import {CSSProperties, useState, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -35,191 +35,180 @@ export interface DraggableResizerHandleProps extends StandardFunctionProps {
   orientation: Orientation
   handleBarStyle?: CSSProperties
   handleBackgroundStyle?: CSSProperties
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type DraggableResizerHandleRef = HTMLDivElement
-
-export const DraggableResizerHandle = forwardRef<
-  DraggableResizerHandleRef,
+export const DraggableResizerHandle: FunctionComponent<
   DraggableResizerHandleProps
->(
-  (
+> = ({
+  id,
+  style,
+  testID,
+  gradient,
+  className,
+  orientation,
+  isCollapsibleToLower = false,
+  isCollapsibleToUpper = false,
+  onCollapseButtonClick,
+  dragging = false,
+  dragIndex = 9999,
+  onStartDrag = () => {
+    // do nothing
+  },
+  handleBarStyle,
+  ref,
+}) => {
+  const [collapsibleLower, setCollapsibleLower] = useState<boolean>(false)
+  const [collapsibleUpper, setCollapsibleUpper] = useState<boolean>(false)
+
+  const handleMouseDown = (): void => {
+    onStartDrag(dragIndex)
+    setCollapsibleUpper(false)
+    setCollapsibleUpper(false)
+  }
+
+  const DraggableResizerHandleClass = classnames(
+    'cf-draggable-resizer--handle',
     {
-      id,
-      style,
-      testID,
-      gradient,
-      className,
-      orientation,
-      isCollapsibleToLower = false,
-      isCollapsibleToUpper = false,
-      onCollapseButtonClick,
-      dragging = false,
-      dragIndex = 9999,
-      onStartDrag = () => {
-        // do nothing
-      },
-      handleBarStyle,
-    },
-    ref
-  ) => {
-    const [collapsibleLower, setCollapsibleLower] = useState<boolean>(false)
-    const [collapsibleUpper, setCollapsibleUpper] = useState<boolean>(false)
-
-    const handleMouseDown = (): void => {
-      onStartDrag(dragIndex)
-      setCollapsibleUpper(false)
-      setCollapsibleUpper(false)
+      [`cf-draggable-resizer-handle--${orientation}`]: orientation,
+      'cf-draggable-resizer--handle-dragging': dragging,
+      [`${className}`]: className,
     }
+  )
 
-    const DraggableResizerHandleClass = classnames(
-      'cf-draggable-resizer--handle',
-      {
-        [`cf-draggable-resizer-handle--${orientation}`]: orientation,
-        'cf-draggable-resizer--handle-dragging': dragging,
-        [`${className}`]: className,
-      }
-    )
+  const DraggableResizerHandlePillOneClass = classnames(
+    'cf-draggable-resizer--handle-pill1',
+    {
+      [`cf-draggable-resizer--handle-pill1--${orientation}`]: orientation,
+    }
+  )
 
-    const DraggableResizerHandlePillOneClass = classnames(
-      'cf-draggable-resizer--handle-pill1',
-      {
-        [`cf-draggable-resizer--handle-pill1--${orientation}`]: orientation,
-      }
-    )
+  const DraggableResizerHandlePillTwoClass = classnames(
+    'cf-draggable-resizer--handle-pill2',
+    {
+      [`cf-draggable-resizer--handle-pill2--${orientation}`]: orientation,
+    }
+  )
 
-    const DraggableResizerHandlePillTwoClass = classnames(
-      'cf-draggable-resizer--handle-pill2',
-      {
-        [`cf-draggable-resizer--handle-pill2--${orientation}`]: orientation,
-      }
-    )
+  const DraggableResizerGradientPillOneClass = classnames(
+    'cf-draggable-resizer--gradient1',
+    {
+      [`cf-draggable-resizer--gradient1--${orientation}`]: orientation,
+    }
+  )
 
-    const DraggableResizerGradientPillOneClass = classnames(
-      'cf-draggable-resizer--gradient1',
-      {
-        [`cf-draggable-resizer--gradient1--${orientation}`]: orientation,
-      }
-    )
+  const DraggableResizerGradientPillTwoClass = classnames(
+    'cf-draggable-resizer--gradient2',
+    {
+      [`cf-draggable-resizer--gradient2--${orientation}`]: orientation,
+    }
+  )
 
-    const DraggableResizerGradientPillTwoClass = classnames(
-      'cf-draggable-resizer--gradient2',
-      {
-        [`cf-draggable-resizer--gradient2--${orientation}`]: orientation,
-      }
-    )
+  const collapsibleButtonClassNames = classnames(
+    'cf-draggable-resizer-collapse-button',
+    {
+      'cf-draggable-resizer-collapse-icon--horizontal':
+        orientation === Orientation.Horizontal,
+    }
+  )
 
-    const collapsibleButtonClassNames = classnames(
-      'cf-draggable-resizer-collapse-button',
-      {
-        'cf-draggable-resizer-collapse-icon--horizontal':
-          orientation === Orientation.Horizontal,
-      }
-    )
+  const collapsibleHandleContainerClassNames = classnames(
+    'cf-draggable-resizer-handle-container',
+    {
+      [`cf-draggable-resizer-handle-container--${orientation}`]: orientation,
+    }
+  )
 
-    const collapsibleHandleContainerClassNames = classnames(
-      'cf-draggable-resizer-handle-container',
-      {
-        [`cf-draggable-resizer-handle-container--${orientation}`]: orientation,
-      }
-    )
+  const collapsibleButtonContainerClassNames = classnames(
+    'cf-draggable-resizer-button-container',
+    {
+      [`cf-draggable-resizer-button-container--${orientation}`]: orientation,
+    }
+  )
 
-    const collapsibleButtonContainerClassNames = classnames(
-      'cf-draggable-resizer-button-container',
-      {
-        [`cf-draggable-resizer-button-container--${orientation}`]: orientation,
-      }
-    )
-
-    const gradientStyle = (): CSSProperties | undefined => {
-      if (!orientation || !gradient) {
-        return
-      }
-
-      const colors = getColorsFromGradient(gradient)
-
-      if (orientation == Orientation.Vertical) {
-        return {
-          background: `linear-gradient(to bottom,  ${colors.start} 0%,${colors.stop} 100%)`,
-          backgroundColor: '#FFFFFF',
-        }
-      }
-
-      if (orientation === Orientation.Horizontal) {
-        return {
-          background: `linear-gradient(to right,  ${colors.start} 0%,${colors.stop} 100%)`,
-          backgroundColor: '#FFFFFF',
-        }
-      }
-
+  const gradientStyle = (): CSSProperties | undefined => {
+    if (!orientation || !gradient) {
       return
     }
 
-    const onCollapsibleLowerClick = () => {
-      setCollapsibleLower(!collapsibleLower)
-      onCollapseButtonClick(0, dragIndex)
+    const colors = getColorsFromGradient(gradient)
+
+    if (orientation == Orientation.Vertical) {
+      return {
+        background: `linear-gradient(to bottom,  ${colors.start} 0%,${colors.stop} 100%)`,
+        backgroundColor: '#FFFFFF',
+      }
     }
 
-    const onCollapsibleUpperClick = () => {
-      setCollapsibleUpper(!collapsibleUpper)
-      onCollapseButtonClick(1, dragIndex)
+    if (orientation === Orientation.Horizontal) {
+      return {
+        background: `linear-gradient(to right,  ${colors.start} 0%,${colors.stop} 100%)`,
+        backgroundColor: '#FFFFFF',
+      }
     }
 
-    return (
-      <div className={collapsibleHandleContainerClassNames}>
-        <div className={collapsibleButtonContainerClassNames}>
-          {isCollapsibleToLower && (
-            <SquareButton
-              icon={
-                collapsibleLower
-                  ? IconFont.CollapseRight
-                  : IconFont.CollapseLeft
-              }
-              onClick={onCollapsibleLowerClick}
-              className={collapsibleButtonClassNames}
-            />
-          )}
-          {isCollapsibleToUpper && (
-            <SquareButton
-              icon={
-                collapsibleUpper
-                  ? IconFont.CollapseLeft
-                  : IconFont.CollapseRight
-              }
-              onClick={onCollapsibleUpperClick}
-              className={collapsibleButtonClassNames}
-            />
-          )}
-        </div>
-        <div
-          ref={ref}
-          className={DraggableResizerHandleClass}
-          onMouseDown={handleMouseDown}
-          title="Drag to resize"
-          data-testid={testID}
-          style={style}
-          id={id}
-        >
-          <div
-            className={DraggableResizerHandlePillOneClass}
-            style={handleBarStyle}
-          ></div>
-          <div
-            className={DraggableResizerGradientPillOneClass}
-            style={gradientStyle()}
-          />
-          <div
-            className={DraggableResizerHandlePillTwoClass}
-            style={handleBarStyle}
-          ></div>
-          <div
-            className={DraggableResizerGradientPillTwoClass}
-            style={gradientStyle()}
-          />
-        </div>
-      </div>
-    )
+    return
   }
-)
 
-DraggableResizerHandle.displayName = 'DraggableResizerHandle'
+  const onCollapsibleLowerClick = () => {
+    setCollapsibleLower(!collapsibleLower)
+    onCollapseButtonClick(0, dragIndex)
+  }
+
+  const onCollapsibleUpperClick = () => {
+    setCollapsibleUpper(!collapsibleUpper)
+    onCollapseButtonClick(1, dragIndex)
+  }
+
+  return (
+    <div className={collapsibleHandleContainerClassNames}>
+      <div className={collapsibleButtonContainerClassNames}>
+        {isCollapsibleToLower && (
+          <SquareButton
+            icon={
+              collapsibleLower ? IconFont.CollapseRight : IconFont.CollapseLeft
+            }
+            onClick={onCollapsibleLowerClick}
+            className={collapsibleButtonClassNames}
+          />
+        )}
+        {isCollapsibleToUpper && (
+          <SquareButton
+            icon={
+              collapsibleUpper ? IconFont.CollapseLeft : IconFont.CollapseRight
+            }
+            onClick={onCollapsibleUpperClick}
+            className={collapsibleButtonClassNames}
+          />
+        )}
+      </div>
+      <div
+        ref={ref}
+        className={DraggableResizerHandleClass}
+        onMouseDown={handleMouseDown}
+        title="Drag to resize"
+        data-testid={testID}
+        style={style}
+        id={id}
+      >
+        <div
+          className={DraggableResizerHandlePillOneClass}
+          style={handleBarStyle}
+        />
+        <div
+          className={DraggableResizerGradientPillOneClass}
+          style={gradientStyle()}
+        />
+        <div
+          className={DraggableResizerHandlePillTwoClass}
+          style={handleBarStyle}
+        />
+        <div
+          className={DraggableResizerGradientPillTwoClass}
+          style={gradientStyle()}
+        />
+      </div>
+    </div>
+  )
+}

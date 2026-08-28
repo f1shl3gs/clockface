@@ -1,20 +1,2 @@
-// Libraries
-import {Component} from 'react'
-
-// Components
-import {DraggableResizerRoot, DraggableResizerProps} from './DraggableResizer'
-import {DraggableResizerPanel} from './DraggableResizerPanel'
-
-export class DraggableResizer extends Component<DraggableResizerProps> {
-  public static readonly displayName = 'DraggableResizer'
-
-  public static DraggableResizer = DraggableResizerRoot
-  public static Panel = DraggableResizerPanel
-
-  render() {
-    return <DraggableResizerRoot {...this.props} />
-  }
-}
-
-export type {DraggableResizerProps} from './DraggableResizer'
+export * from './DraggableResizer'
 export * from './DraggableResizerPanel'

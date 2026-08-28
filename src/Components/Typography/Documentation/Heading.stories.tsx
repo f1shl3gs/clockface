@@ -1,9 +1,9 @@
 // Libraries
-import {RefObject, createRef} from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Heading, HeadingRef} from '..'
+import {Heading} from '..'
 
 // Types
 import {
@@ -21,7 +21,7 @@ import {FlexBox} from '../../FlexBox'
 export default {title: 'Components/Heading'}
 
 export const Base = () => {
-  const headingRef: RefObject<HeadingRef | null> = createRef()
+  const headingRef = createRef<HTMLHeadingElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

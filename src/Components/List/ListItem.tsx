@@ -1,10 +1,11 @@
 // Libraries
 import React, {
-  forwardRef,
   MouseEvent,
   createContext,
   useContext,
   cloneElement,
+  FunctionComponent,
+  Ref,
 } from 'react'
 import classnames from 'classnames'
 
@@ -44,7 +45,7 @@ export interface ListItemProps extends CombinedListItemProps {
   /** Value to be returned via the onClick function */
   value?: any
   /** When a dropdown item is clicked, its `value` prop is returned via `onChange` */
-  onClick?: (value?: any, e?: MouseEvent<ListItemRef>) => void
+  onClick?: (value?: any, e?: MouseEvent<HTMLButtonElement>) => void
   /** Controls whether the text contents of this item wrap or not */
   wrapText?: boolean
   /** Title attribute */
@@ -57,9 +58,9 @@ export interface ListItemProps extends CombinedListItemProps {
   backgroundColor?: InfluxColors | string
   /** Overrides backgroundColor, fills background with gradient */
   gradient?: Gradients
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
-
-export type ListItemRef = HTMLButtonElement
 
 export const ListItemContext = createContext<ListItemContextProps>({
   selected: false,
@@ -69,133 +70,127 @@ export const ListItemContext = createContext<ListItemContextProps>({
   listItemContrastColor: undefined,
 })
 
-export const ListItem = forwardRef<ListItemRef, ListItemProps>(
-  (
-    {
-      id,
-      size = ComponentSize.Small,
-      style,
-      value,
-      title,
-      testID = 'list-item',
-      onClick,
-      wrapText = false,
-      selected = false,
-      gradient,
-      children,
-      disabled = false,
-      className,
-      linkElement,
-      backgroundColor,
-    },
-    ref
-  ) => {
-    const {listContrastColor} = useContext(ListContext)
-    const contrastColor = calculateTextColorFromBackground(
-      backgroundColor,
-      gradient
-    )
+export const ListItem: FunctionComponent<ListItemProps> = ({
+  id,
+  size = ComponentSize.Small,
+  style,
+  value,
+  title,
+  testID = 'list-item',
+  onClick,
+  wrapText = false,
+  selected = false,
+  gradient,
+  children,
+  disabled = false,
+  className,
+  linkElement,
+  backgroundColor,
+  ref,
+}) => {
+  const {listContrastColor} = useContext(ListContext)
+  const contrastColor = calculateTextColorFromBackground(
+    backgroundColor,
+    gradient
+  )
 
-    const listItemClass = classnames('cf-list-item', {
-      'cf-list-item__active': selected,
-      [`cf-list-item__${size}`]: size,
-      [`cf-list-item__${listContrastColor || 'light'}`]: true,
-      [`${className}`]: className,
-      'cf-list-item__disabled': disabled,
-      'cf-list-item__clickable': !!onClick,
-    })
+  const listItemClass = classnames('cf-list-item', {
+    'cf-list-item__active': selected,
+    [`cf-list-item__${size}`]: size,
+    [`cf-list-item__${listContrastColor || 'light'}`]: true,
+    [`${className}`]: className,
+    'cf-list-item__disabled': disabled,
+    'cf-list-item__clickable': !!onClick,
+  })
 
-    const listItemTextClass = classnames('cf-list-item--text', {
-      'cf-list-item--text__wrap': wrapText,
-      'cf-list-item--text__no-wrap': !wrapText,
-    })
+  const listItemTextClass = classnames('cf-list-item--text', {
+    'cf-list-item--text__wrap': wrapText,
+    'cf-list-item--text__no-wrap': !wrapText,
+  })
 
-    const handleClick = (e: MouseEvent<ListItemRef>): void => {
-      if (onClick && !disabled) {
-        onClick(value, e)
-      }
+  const handleClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    if (onClick && !disabled) {
+      onClick(value, e)
+    }
+  }
+
+  const formattedChildren = React.Children.map(children, child => {
+    if (typeof child === 'string') {
+      return <div className={listItemTextClass}>{child}</div>
     }
 
-    const formattedChildren = React.Children.map(children, child => {
-      if (typeof child === 'string') {
-        return <div className={listItemTextClass}>{child}</div>
-      }
+    return child
+  })
 
-      return child
-    })
+  let highlightElement
 
-    let highlightElement
-
-    if ((!!onClick || linkElement) && !disabled) {
-      highlightElement = (
-        <ListItemHighlight
-          gradient={gradient}
-          backgroundColor={backgroundColor}
-          selected={selected}
-        />
-      )
-    }
-
-    let itemStyle = style
-    const itemColor =
-      contrastColor === 'dark' ? InfluxColors.Kevlar : InfluxColors.White
-
-    if (backgroundColor) {
-      itemStyle = selected
-        ? {color: itemColor, ...style}
-        : {color: backgroundColor, ...style}
-    }
-
-    if (gradient) {
-      itemStyle = selected ? {color: itemColor, ...style} : undefined
-    }
-
-    const listItemChildren = (
-      <>
-        <ListItemContext.Provider
-          value={{
-            size,
-            selected,
-            listItemBackgroundColor: backgroundColor,
-            listItemContrastColor: contrastColor || 'light',
-            listItemGradient: gradient,
-          }}
-        >
-          {formattedChildren}
-        </ListItemContext.Provider>
-        {highlightElement}
-      </>
-    )
-
-    if (linkElement) {
-      return cloneElement(
-        linkElement,
-        {
-          id,
-          style: itemStyle,
-          title,
-          className: listItemClass,
-          'data-testid': testID,
-        },
-        listItemChildren
-      )
-    }
-
-    return (
-      <button
-        type="button"
-        id={id}
-        ref={ref}
-        style={itemStyle}
-        title={title}
-        onClick={handleClick}
-        className={listItemClass}
-        data-testid={testID}
-      >
-        {listItemChildren}
-      </button>
+  if ((!!onClick || linkElement) && !disabled) {
+    highlightElement = (
+      <ListItemHighlight
+        gradient={gradient}
+        backgroundColor={backgroundColor}
+        selected={selected}
+      />
     )
   }
-)
 
-ListItem.displayName = 'ListItem'
+  let itemStyle = style
+  const itemColor =
+    contrastColor === 'dark' ? InfluxColors.Kevlar : InfluxColors.White
+
+  if (backgroundColor) {
+    itemStyle = selected
+      ? {color: itemColor, ...style}
+      : {color: backgroundColor, ...style}
+  }
+
+  if (gradient) {
+    itemStyle = selected ? {color: itemColor, ...style} : undefined
+  }
+
+  const listItemChildren = (
+    <>
+      <ListItemContext.Provider
+        value={{
+          size,
+          selected,
+          listItemBackgroundColor: backgroundColor,
+          listItemContrastColor: contrastColor || 'light',
+          listItemGradient: gradient,
+        }}
+      >
+        {formattedChildren}
+      </ListItemContext.Provider>
+      {highlightElement}
+    </>
+  )
+
+  if (linkElement) {
+    return cloneElement(
+      linkElement,
+      {
+        id,
+        style: itemStyle,
+        title,
+        className: listItemClass,
+        'data-testid': testID,
+      },
+      listItemChildren
+    )
+  }
+
+  return (
+    <button
+      type="button"
+      id={id}
+      ref={ref}
+      style={itemStyle}
+      title={title}
+      onClick={handleClick}
+      className={listItemClass}
+      data-testid={testID}
+    >
+      {listItemChildren}
+    </button>
+  )
+}

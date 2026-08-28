@@ -1,5 +1,5 @@
 // Libraries
-import {FunctionComponent, MouseEvent, useState, forwardRef} from 'react'
+import {FunctionComponent, MouseEvent, useState, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -26,86 +26,82 @@ export interface LabelProps extends StandardFunctionProps {
   onDelete?: (id: string) => void
   /** Size of Label */
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type LabelRef = HTMLDivElement
+export const Label: FunctionComponent<LabelProps> = ({
+  id,
+  name,
+  size = ComponentSize.ExtraSmall,
+  style,
+  color,
+  testID = 'label--pill',
+  onClick,
+  onDelete,
+  className,
+  description,
+  ref,
+}) => {
+  const [isMouseOver, setHoverState] = useState(false)
 
-export const Label = forwardRef<LabelRef, LabelProps>(
-  (
-    {
-      id,
-      name,
-      size = ComponentSize.ExtraSmall,
-      style,
-      color,
-      testID = 'label--pill',
-      onClick,
-      onDelete,
-      className,
-      description,
-    },
-    ref
-  ) => {
-    const [isMouseOver, setHoverState] = useState(false)
+  const labelClass = classnames('cf-label', {
+    [`${className}`]: className,
+    [`cf-label--${size}`]: size,
+    'cf-label--deletable': onDelete,
+    'cf-label--clickable': onClick,
+  })
 
-    const labelClass = classnames('cf-label', {
-      [`${className}`]: className,
-      [`cf-label--${size}`]: size,
-      'cf-label--deletable': onDelete,
-      'cf-label--clickable': onClick,
-    })
-
-    const handleClick = (e: MouseEvent<HTMLDivElement>): void => {
-      if (onClick) {
-        e.stopPropagation()
-        e.preventDefault()
-        onClick(id)
-      }
+  const handleClick = (e: MouseEvent<HTMLDivElement>): void => {
+    if (onClick) {
+      e.stopPropagation()
+      e.preventDefault()
+      onClick(id)
     }
-
-    const handleDelete = (): void => {
-      if (onDelete) {
-        onDelete(id)
-      }
-    }
-
-    const handleToggleHoverState = (): void => {
-      if (onClick) {
-        setHoverState(!isMouseOver)
-      }
-    }
-
-    const labelStyle = generateLabelStyle(color, !!onClick, isMouseOver, style)
-
-    return (
-      <div
-        onMouseEnter={handleToggleHoverState}
-        onMouseLeave={handleToggleHoverState}
-        className={labelClass}
-        style={labelStyle}
-        title={description}
-        ref={ref}
-        id={id}
-      >
-        <span
-          className="cf-label--name"
-          onClick={handleClick}
-          data-testid={`${testID} ${name}`}
-        >
-          {name}
-        </span>
-        {onDelete && (
-          <LabelDeleteButton
-            onDelete={handleDelete}
-            name={name}
-            testID={testID}
-            color={`${labelStyle.color}`}
-          />
-        )}
-      </div>
-    )
   }
-)
+
+  const handleDelete = (): void => {
+    if (onDelete) {
+      onDelete(id)
+    }
+  }
+
+  const handleToggleHoverState = (): void => {
+    if (onClick) {
+      setHoverState(!isMouseOver)
+    }
+  }
+
+  const labelStyle = generateLabelStyle(color, !!onClick, isMouseOver, style)
+
+  return (
+    <div
+      onMouseEnter={handleToggleHoverState}
+      onMouseLeave={handleToggleHoverState}
+      className={labelClass}
+      style={labelStyle}
+      title={description}
+      ref={ref}
+      id={id}
+    >
+      <span
+        className="cf-label--name"
+        onClick={handleClick}
+        data-testid={`${testID} ${name}`}
+      >
+        {name}
+      </span>
+      {onDelete && (
+        <LabelDeleteButton
+          onDelete={handleDelete}
+          name={name}
+          testID={testID}
+          color={`${labelStyle.color}`}
+        />
+      )}
+    </div>
+  )
+}
 
 interface DeleteButtonProps {
   /** Name of the Label, appears inside the label */
@@ -137,7 +133,3 @@ const LabelDeleteButton: FunctionComponent<DeleteButtonProps> = ({
     />
   )
 }
-
-LabelDeleteButton.displayName = 'LabelDeleteButton'
-
-Label.displayName = 'Label'

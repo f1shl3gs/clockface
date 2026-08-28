@@ -5,7 +5,7 @@ The directional button in the pagination component
 ### Usage
 
 ```tsx
-import {PaginationNav} from '@influxdata/clockface'
+import {Pagination} from '@influxdata/clockface'
 ```
 
 ### Example

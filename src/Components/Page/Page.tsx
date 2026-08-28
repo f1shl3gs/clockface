@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, useEffect} from 'react'
+import {useEffect, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -11,34 +11,38 @@ import './Page.scss'
 export interface PageProps extends StandardFunctionProps {
   /** Use this prop to update document.title when the page first renders &  on subsequent updates */
   titleTag?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type PageRef = HTMLDivElement
+export const Page: FunctionComponent<PageProps> = ({
+  id,
+  style,
+  titleTag,
+  children,
+  className,
+  testID = 'page',
+  ref,
+}) => {
+  useEffect(() => {
+    if (titleTag) {
+      document.title = `${titleTag}`
+    }
+  }, [titleTag])
 
-export const PageRoot = forwardRef<PageRef, PageProps>(
-  ({id, style, titleTag, children, className, testID = 'page'}, ref) => {
-    useEffect(() => {
-      if (titleTag) {
-        document.title = `${titleTag}`
-      }
-    }, [titleTag])
+  const pageClass = classnames('cf-page', {
+    [`${className}`]: className,
+  })
 
-    const pageClass = classnames('cf-page', {
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={pageClass}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-PageRoot.displayName = 'Page'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={pageClass}
+    >
+      {children}
+    </div>
+  )
+}

@@ -1,9 +1,9 @@
 // Libraries
-import {RefObject, createRef} from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {FlexBox, FlexBoxRef, FlexBoxChildRef} from '../'
+import {FlexBox, FlexBoxChild} from '../'
 
 // Types
 import {
@@ -20,7 +20,7 @@ import FlexBoxChildReadme from './FlexBoxChild.md?raw'
 export default {title: 'Layout/FlexBox'}
 
 export const _FlexBox = () => {
-  const flexBoxRef: RefObject<FlexBoxRef | null> = createRef()
+  const flexBoxRef = createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
     /* eslint-disable */
@@ -30,7 +30,7 @@ export const _FlexBox = () => {
 
   return (
     <div className="story--example">
-      <FlexBox.FlexBox
+      <FlexBox
         ref={flexBoxRef}
         direction={(FlexDirection as Record<string, any>)['Row']}
         alignItems={(AlignItems as Record<string, any>)['Center']}
@@ -59,7 +59,7 @@ export const _FlexBox = () => {
           className="mockComponent box"
           style={{height: '120px', width: '120px'}}
         />
-      </FlexBox.FlexBox>
+      </FlexBox>
       <div className="story--test-buttons">
         <button onClick={handleLogRef}>Log Ref</button>
       </div>
@@ -78,11 +78,11 @@ _FlexBox.story = {
 }
 
 export const FlexChild = () => {
-  const flexBoxRef: RefObject<FlexBoxRef | null> = createRef()
-  const flexBoxChildARef: RefObject<FlexBoxChildRef | null> = createRef()
-  const flexBoxChildBRef: RefObject<FlexBoxChildRef | null> = createRef()
-  const flexBoxChildCRef: RefObject<FlexBoxChildRef | null> = createRef()
-  const flexBoxChildDRef: RefObject<FlexBoxChildRef | null> = createRef()
+  const flexBoxRef = createRef<HTMLDivElement>()
+  const flexBoxChildARef = createRef<HTMLDivElement>()
+  const flexBoxChildBRef = createRef<HTMLDivElement>()
+  const flexBoxChildCRef = createRef<HTMLDivElement>()
+  const flexBoxChildDRef = createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
     /* eslint-disable */
@@ -96,7 +96,7 @@ export const FlexChild = () => {
 
   return (
     <div className="story--example">
-      <FlexBox.FlexBox
+      <FlexBox
         ref={flexBoxRef}
         direction={FlexDirection.Row}
         alignItems={AlignItems.Center}
@@ -104,19 +104,19 @@ export const FlexChild = () => {
         margin={(ComponentSize as Record<string, any>)['Small']}
         stretchToFitWidth={true}
       >
-        <FlexBox.Child ref={flexBoxChildARef} basis={40} grow={0} shrink={0}>
+        <FlexBoxChild ref={flexBoxChildARef} basis={40} grow={0} shrink={0}>
           <div className="mockComponent stretch">A</div>
-        </FlexBox.Child>
-        <FlexBox.Child ref={flexBoxChildBRef} basis={0} grow={1} shrink={0}>
+        </FlexBoxChild>
+        <FlexBoxChild ref={flexBoxChildBRef} basis={0} grow={1} shrink={0}>
           <div className="mockComponent stretch">B</div>
-        </FlexBox.Child>
-        <FlexBox.Child ref={flexBoxChildCRef} basis={0} grow={2} shrink={0}>
+        </FlexBoxChild>
+        <FlexBoxChild ref={flexBoxChildCRef} basis={0} grow={2} shrink={0}>
           <div className="mockComponent stretch">C</div>
-        </FlexBox.Child>
-        <FlexBox.Child ref={flexBoxChildDRef} basis={80} grow={0} shrink={0}>
+        </FlexBoxChild>
+        <FlexBoxChild ref={flexBoxChildDRef} basis={80} grow={0} shrink={0}>
           <div className="mockComponent stretch">D</div>
-        </FlexBox.Child>
-      </FlexBox.FlexBox>
+        </FlexBoxChild>
+      </FlexBox>
       <div className="story--test-buttons">
         <button onClick={handleLogRefs}>Log Refs</button>
       </div>

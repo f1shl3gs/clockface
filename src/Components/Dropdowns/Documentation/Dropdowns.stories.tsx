@@ -1,32 +1,24 @@
 // Libraries
-import {createRef, RefObject, useState} from 'react'
+import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
 import {
   Dropdown,
-  DropdownRef,
-  DropdownButtonRef,
-  DropdownDividerRef,
-  DropdownItemRef,
-  DropdownItemEmptyRef,
-  DropdownLinkItemRef,
-  DropdownMenuRef,
-  DropdownMenuContentsRef,
+  DropdownButton,
+  DropdownDivider,
+  DropdownItem,
+  DropdownItemEmpty,
+  DropdownLinkItem,
+  DropdownMenu,
 } from '../'
-import {SelectDropdown, SelectDropdownRef} from '../Composed/SelectDropdown'
-import {
-  MultiSelectDropdown,
-  MultiSelectDropdownRef,
-} from '../Composed/MultiSelectDropdown'
-import {ColorPreview} from '../../ColorPicker/ColorPreview'
+import {SelectDropdown} from '../Composed/SelectDropdown'
+import {MultiSelectDropdown} from '../Composed/MultiSelectDropdown'
+import {ColorPickerPreview} from '../../ColorPicker/ColorPickerPreview'
 
 import {TypeAheadDropDown, SelectableItem} from '../Composed/TypeAheadDropDown'
 
-import {
-  CreatableTypeAheadDropdown,
-  CreatableTypeAheadDropdownReadmeRef,
-} from '../Composed/CreatableTypeAheadDropdown'
+import {CreatableTypeAheadDropdown} from '../Composed/CreatableTypeAheadDropdown'
 
 // Types
 import {
@@ -57,7 +49,7 @@ export default {title: 'Components/Dropdowns/Family'}
 const defaultDropdownStyle = {width: '250px', marginRight: '45px'}
 
 export const _Dropdown = () => {
-  const dropdownRef: RefObject<DropdownRef | null> = createRef()
+  const dropdownRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -67,24 +59,24 @@ export const _Dropdown = () => {
 
   return (
     <div className="story--example">
-      <Dropdown.Dropdown
+      <Dropdown
         ref={dropdownRef}
         style={defaultDropdownStyle}
         button={(active, onClick) => (
-          <Dropdown.Button
+          <DropdownButton
             active={active}
             onClick={onClick}
             status={(ComponentStatus as Record<string, any>)['Default']}
           >
             {'I am a Dropdown!'}
-          </Dropdown.Button>
+          </DropdownButton>
         )}
         menu={onCollapse => (
-          <Dropdown.Menu onCollapse={onCollapse}>
+          <DropdownMenu onCollapse={onCollapse}>
             <div className="mockComponent dropdownContents">
               <span>Menu Contents</span>
             </div>
-          </Dropdown.Menu>
+          </DropdownMenu>
         )}
         dropUp={false}
       />
@@ -103,8 +95,8 @@ _Dropdown.story = {
   },
 }
 
-export const DropdownButton = () => {
-  const dropdownButtonRef: RefObject<DropdownButtonRef | null> = createRef()
+export const _DropdownButton = () => {
+  const dropdownButtonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -118,7 +110,7 @@ export const DropdownButton = () => {
         <button onClick={logRef}>Log Ref</button>
       </div>
       <div style={{width: '200px'}}>
-        <Dropdown.Button
+        <DropdownButton
           ref={dropdownButtonRef}
           onClick={() => {
             // do nothing
@@ -133,13 +125,13 @@ export const DropdownButton = () => {
           disabledTitleText={'Disabled Text'}
         >
           {'I am a button!'}
-        </Dropdown.Button>
+        </DropdownButton>
       </div>
     </div>
   )
 }
 
-DropdownButton.story = {
+_DropdownButton.story = {
   name: 'DropdownButton',
 
   parameters: {
@@ -149,8 +141,8 @@ DropdownButton.story = {
   },
 }
 
-export const DropdownDivider = () => {
-  const dropdownDividerRef: RefObject<DropdownDividerRef | null> = createRef()
+export const _DropdownDivider = () => {
+  const dropdownDividerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -160,7 +152,7 @@ export const DropdownDivider = () => {
 
   return (
     <div className="story--example">
-      <Dropdown.Divider text={'Divider Text'} ref={dropdownDividerRef} />
+      <DropdownDivider text={'Divider Text'} ref={dropdownDividerRef} />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -168,7 +160,7 @@ export const DropdownDivider = () => {
   )
 }
 
-DropdownDivider.story = {
+_DropdownDivider.story = {
   name: 'DropdownDivider',
 
   parameters: {
@@ -178,8 +170,8 @@ DropdownDivider.story = {
   },
 }
 
-export const DropdownItem = () => {
-  const dropdownItemRef: RefObject<DropdownItemRef | null> = createRef()
+export const _DropdownItem = () => {
+  const dropdownItemRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -189,7 +181,7 @@ export const DropdownItem = () => {
 
   return (
     <div className="story--example">
-      <Dropdown.Item
+      <DropdownItem
         ref={dropdownItemRef}
         value={'value'}
         selected={false}
@@ -201,7 +193,7 @@ export const DropdownItem = () => {
         disabled={false}
       >
         {'I am a dropdown item!'}
-      </Dropdown.Item>
+      </DropdownItem>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -209,7 +201,7 @@ export const DropdownItem = () => {
   )
 }
 
-DropdownItem.story = {
+_DropdownItem.story = {
   name: 'DropdownItem',
 
   parameters: {
@@ -219,9 +211,8 @@ DropdownItem.story = {
   },
 }
 
-export const DropdownItemEmpty = () => {
-  const dropdownItemEmptyRef: RefObject<DropdownItemEmptyRef | null> =
-    createRef()
+export const _DropdownItemEmpty = () => {
+  const dropdownItemEmptyRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -231,9 +222,9 @@ export const DropdownItemEmpty = () => {
 
   return (
     <div className="story--example">
-      <Dropdown.ItemEmpty wrapText={false} ref={dropdownItemEmptyRef}>
+      <DropdownItemEmpty wrapText={false} ref={dropdownItemEmptyRef}>
         {'No items to display'}
-      </Dropdown.ItemEmpty>
+      </DropdownItemEmpty>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -241,7 +232,7 @@ export const DropdownItemEmpty = () => {
   )
 }
 
-DropdownItemEmpty.story = {
+_DropdownItemEmpty.story = {
   name: 'DropdownItemEmpty',
 
   parameters: {
@@ -251,8 +242,8 @@ DropdownItemEmpty.story = {
   },
 }
 
-export const DropdownLinkItem = () => {
-  const dropdownLinkItemRef: RefObject<DropdownLinkItemRef | null> = createRef()
+export const _DropdownLinkItem = () => {
+  const dropdownLinkItemRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -262,7 +253,7 @@ export const DropdownLinkItem = () => {
 
   return (
     <div className="story--example">
-      <Dropdown.LinkItem
+      <DropdownLinkItem
         ref={dropdownLinkItemRef}
         selected={false}
         wrapText={false}
@@ -272,7 +263,7 @@ export const DropdownLinkItem = () => {
         <a href={'http://www.influxdata.com'} target="_blank">
           {'Example Link'}
         </a>
-      </Dropdown.LinkItem>
+      </DropdownLinkItem>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -280,7 +271,7 @@ export const DropdownLinkItem = () => {
   )
 }
 
-DropdownLinkItem.story = {
+_DropdownLinkItem.story = {
   name: 'DropdownLinkItem',
 
   parameters: {
@@ -295,10 +286,9 @@ interface ExampleDropdownItem {
   text: string
 }
 
-export const DropdownMenu = () => {
-  const dropdownMenuRef: RefObject<DropdownMenuRef | null> = createRef()
-  const dropdownMenuContentsRef: RefObject<DropdownMenuContentsRef | null> =
-    createRef()
+export const _DropdownMenu = () => {
+  const dropdownMenuRef = createRef<HTMLDivElement>()
+  const dropdownMenuContentsRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -385,7 +375,7 @@ export const DropdownMenu = () => {
 
   return (
     <div className="story--example">
-      <Dropdown.Menu
+      <DropdownMenu
         ref={dropdownMenuRef}
         style={menuStyle}
         contentsRef={dropdownMenuContentsRef}
@@ -397,11 +387,11 @@ export const DropdownMenu = () => {
       >
         {exampleItems.map(item => {
           if (item.type === 'divider') {
-            return <Dropdown.Divider key={item.text} text={item.text} />
+            return <DropdownDivider key={item.text} text={item.text} />
           }
 
           return (
-            <Dropdown.Item
+            <DropdownItem
               key={item.text}
               wrapText={false}
               value={item.text}
@@ -410,10 +400,10 @@ export const DropdownMenu = () => {
               type={(DropdownItemType as Record<string, any>)['None']}
             >
               {item.text}
-            </Dropdown.Item>
+            </DropdownItem>
           )
         })}
-      </Dropdown.Menu>
+      </DropdownMenu>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -421,7 +411,7 @@ export const DropdownMenu = () => {
   )
 }
 
-DropdownMenu.story = {
+_DropdownMenu.story = {
   name: 'DropdownMenu',
 
   parameters: {
@@ -452,7 +442,7 @@ export const _SelectDropdown = () => {
     'Strawberry',
   ]
 
-  const selectDropdownRef: RefObject<SelectDropdownRef | null> = createRef()
+  const selectDropdownRef = createRef<HTMLDivElement>()
   const [selected, changeSelected] = useState('Celery')
 
   const logRef = (): void => {
@@ -613,8 +603,7 @@ export const _CreatableTypeAheadDropdown = () => {
   ]
   const [selectedColor, changeSelectedColor] = useState(defaultColorOptions[1])
 
-  const creatableTypeAheadDropdownReadmeRef: RefObject<CreatableTypeAheadDropdownReadmeRef | null> =
-    createRef()
+  const creatableTypeAheadDropdownReadmeRef = createRef<HTMLDivElement>()
   const logRef = (): void => {
     /* eslint-disable */
     console.log(creatableTypeAheadDropdownReadmeRef.current)
@@ -651,7 +640,7 @@ export const _CreatableTypeAheadDropdown = () => {
         menuMaxHeight={250}
         customizedDropdownItem={displayText => (
           <FlexBox>
-            <ColorPreview color={displayText} />
+            <ColorPickerPreview color={displayText} />
             <div style={{paddingLeft: '26px'}}>{displayText}</div>
           </FlexBox>
         )}
@@ -685,8 +674,7 @@ export const MultiSelectdropdown = () => {
   ]
   const [selectedOptions, setSelectedOptions] = useState(['Celery', 'Onion'])
 
-  const multiSelectDropdownRef: RefObject<MultiSelectDropdownRef | null> =
-    createRef()
+  const multiSelectDropdownRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -765,20 +753,20 @@ export const Collage = () => {
                 {size: ComponentSize.Large, children: 'Large'},
               ].map((props, i) => (
                 <td key={i}>
-                  <Dropdown.Dropdown
+                  <Dropdown
                     button={(active, onClick) => (
-                      <Dropdown.Button
+                      <DropdownButton
                         active={active}
                         onClick={onClick}
                         {...props}
                       />
                     )}
                     menu={onCollapse => (
-                      <Dropdown.Menu onCollapse={onCollapse}>
+                      <DropdownMenu onCollapse={onCollapse}>
                         <div className="mockComponent dropdownContents">
                           <span>Menu Contents</span>
                         </div>
-                      </Dropdown.Menu>
+                      </DropdownMenu>
                     )}
                   />
                 </td>
@@ -795,22 +783,22 @@ export const Collage = () => {
                 {color: ComponentColor.Danger},
               ].map((props, i) => (
                 <td key={i} style={{width: '200px'}}>
-                  <Dropdown.Dropdown
+                  <Dropdown
                     button={(active, onClick) => (
-                      <Dropdown.Button
+                      <DropdownButton
                         active={active}
                         onClick={onClick}
                         {...props}
                       >
                         {props.color.toString()}
-                      </Dropdown.Button>
+                      </DropdownButton>
                     )}
                     menu={onCollapse => (
-                      <Dropdown.Menu onCollapse={onCollapse}>
+                      <DropdownMenu onCollapse={onCollapse}>
                         <div className="mockComponent dropdownContents">
                           <span>Menu Contents</span>
                         </div>
-                      </Dropdown.Menu>
+                      </DropdownMenu>
                     )}
                     {...props}
                   />
@@ -829,22 +817,22 @@ export const Collage = () => {
                 {status: ComponentStatus.Valid},
               ].map((props, i) => (
                 <td key={i} style={{width: '200px'}}>
-                  <Dropdown.Dropdown
+                  <Dropdown
                     button={(active, onClick) => (
-                      <Dropdown.Button
+                      <DropdownButton
                         active={active}
                         onClick={onClick}
                         {...props}
                       >
                         {props.status.toString()}
-                      </Dropdown.Button>
+                      </DropdownButton>
                     )}
                     menu={onCollapse => (
-                      <Dropdown.Menu onCollapse={onCollapse}>
+                      <DropdownMenu onCollapse={onCollapse}>
                         <div className="mockComponent dropdownContents">
                           <span>Menu Contents</span>
                         </div>
-                      </Dropdown.Menu>
+                      </DropdownMenu>
                     )}
                     {...props}
                   />

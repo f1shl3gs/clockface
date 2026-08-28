@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -16,42 +16,36 @@ export interface TechnoSpinnerProps extends StandardFunctionProps {
   diameterPixels?: number
   /** Width of spinner stroke */
   strokeWidth?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type TechnoSpinnerRef = HTMLDivElement
+export const TechnoSpinner: FunctionComponent<TechnoSpinnerProps> = ({
+  id,
+  style,
+  testID = 'techno-spinner',
+  className,
+  strokeWidth = ComponentSize.Small,
+  diameterPixels = 100,
+  ref,
+}) => {
+  const technoSpinnerClass = classnames('cf-techno-spinner', {
+    [`${className}`]: className,
+  })
 
-export const TechnoSpinner = forwardRef<TechnoSpinnerRef, TechnoSpinnerProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'techno-spinner',
-      className,
-      strokeWidth = ComponentSize.Small,
-      diameterPixels = 100,
-    },
-    ref
-  ) => {
-    const technoSpinnerClass = classnames('cf-techno-spinner', {
-      [`${className}`]: className,
-    })
+  const technoSpinnerStyle = generateTechnoSpinnerStyle(
+    diameterPixels,
+    strokeWidth,
+    style
+  )
 
-    const technoSpinnerStyle = generateTechnoSpinnerStyle(
-      diameterPixels,
-      strokeWidth,
-      style
-    )
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        data-testid={testID}
-        style={technoSpinnerStyle}
-        className={technoSpinnerClass}
-      />
-    )
-  }
-)
-
-TechnoSpinner.displayName = 'TechnoSpinner'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      data-testid={testID}
+      style={technoSpinnerStyle}
+      className={technoSpinnerClass}
+    />
+  )
+}

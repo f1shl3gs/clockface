@@ -9,9 +9,9 @@ import {Panel} from '@influxdata/clockface'
 ```tsx
 <Panel>
   <Panel.Header />
-  <Panel.Body gradient={Gradients.DocScott}>
+  <PanelBody gradient={Gradients.DocScott}>
     // Contents
-  </Panel.Body>
+  </PanelBody>
 </Panel>
 ```
 

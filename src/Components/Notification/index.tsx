@@ -1,20 +1,2 @@
-// Libraries
-import {Component} from 'react'
-
-// Components
-import {NotificationRoot, NotificationProps} from './Notification'
-import {NotificationDialog} from './NotificationDialog'
-
-export class Notification extends Component<NotificationProps> {
-  public static readonly displayName = 'Notification'
-
-  public static Notification = NotificationRoot
-  public static Dialog = NotificationDialog
-
-  render() {
-    return <NotificationRoot {...this.props} />
-  }
-}
-
-export type {NotificationProps, NotificationRef} from './Notification'
+export * from './Notification'
 export * from './NotificationDialog'

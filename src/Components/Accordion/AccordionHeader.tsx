@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -9,14 +9,19 @@ import {Icon} from '../Icon/Base/Icon'
 //Context
 import {useAccordionContext} from './Accordion'
 
-export interface AccordionHeaderProps extends StandardFunctionProps {}
+export interface AccordionHeaderProps extends StandardFunctionProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
+}
 
-export type AccordionHeaderRef = HTMLButtonElement
-
-export const AccordionHeader = forwardRef<
-  AccordionHeaderRef,
-  AccordionHeaderProps
->(({id, style, testID = 'accordion-header', children, className}, ref) => {
+export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
+  id,
+  style,
+  testID = 'accordion-header',
+  children,
+  className,
+  ref,
+}) => {
   const context = useAccordionContext()
 
   const caretIcon = context.isExpanded
@@ -83,6 +88,4 @@ export const AccordionHeader = forwardRef<
       )}
     </button>
   )
-})
-
-AccordionHeader.displayName = 'AccordionHeader'
+}

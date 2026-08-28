@@ -15,8 +15,6 @@ import {
   ValidationFunction,
 } from '../../Types'
 
-export type FormValidationElementRef = HTMLLabelElement
-
 export interface FormValidationElementProps extends Omit<
   StandardFunctionProps,
   'children'
@@ -42,7 +40,7 @@ export interface FormValidationElementProps extends Omit<
   /** Pre-validation mode ( Validation happens ) */
   prevalidate?: boolean
 
-  ref?: Ref<FormValidationElementRef>
+  ref?: Ref<HTMLLabelElement>
 }
 
 export const FormValidationElement: FunctionComponent<

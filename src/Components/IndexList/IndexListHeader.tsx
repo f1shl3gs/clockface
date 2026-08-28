@@ -1,18 +1,23 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
 import {StandardFunctionProps} from '../../Types'
 
-export interface IndexListHeaderProps extends StandardFunctionProps {}
+export interface IndexListHeaderProps extends StandardFunctionProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLTableSectionElement>
+}
 
-export type IndexListHeaderRef = HTMLTableSectionElement
-
-export const IndexListHeader = forwardRef<
-  IndexListHeaderRef,
-  IndexListHeaderProps
->(({className, children, id, style, testID = 'index-list--header'}, ref) => {
+export const IndexListHeader: FunctionComponent<IndexListHeaderProps> = ({
+  className,
+  children,
+  id,
+  style,
+  testID = 'index-list--header',
+  ref,
+}) => {
   const indexListHeaderClass = classnames('cf-index-list--header', {
     [`${className}`]: className,
   })
@@ -28,6 +33,4 @@ export const IndexListHeader = forwardRef<
       <tr>{children}</tr>
     </thead>
   )
-})
-
-IndexListHeader.displayName = 'IndexListHeader'
+}

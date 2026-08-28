@@ -1,15 +1,15 @@
 # Page Contents
 
-Used alongside `<Page.Header />` to layout  page, this component is for containing the body of the page.
+Used alongside `<PageHeader />` to layout  page, this component is for containing the body of the page.
 
 ### Usage
 ```tsx
 import {Page} from '@influxdata/clockface'
 ```
 ```tsx
-<Page.Contents>
+<PageContents>
   // Contents go here
-</Page.Contents>
+</PageContents>
 ```
 
 ### Example

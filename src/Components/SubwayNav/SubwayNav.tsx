@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React, {FunctionComponent} from 'react'
 
 import {IconFont} from '../../Types'
 
@@ -24,48 +24,45 @@ interface OwnProps {
   showCheckmark?: boolean
 }
 
-export class SubwayNav extends PureComponent<OwnProps> {
-  private handleClick = (step: number) => {
-    this.props.onStepClick(step)
-  }
-
-  render() {
-    return (
-      <div className="subway-navigation-container">
-        <div className="subway-navigation-flex-wrapper">
-          <div className="subway-navigation-title">
-            <span className="subway-navigation-title-icon">
-              {this.props.settingUpIcon}
-            </span>
-            <div className="subway-navigation-title-text">
-              <h3>{this.props.settingUpHeader ?? 'Setting Up'}</h3>
-              <h6>{this.props.settingUpText}</h6>
-            </div>
+export const SubwayNav: FunctionComponent<OwnProps> = ({
+  currentStep,
+  navigationSteps,
+  onStepClick,
+  settingUpIcon,
+  settingUpText,
+  setupTime,
+  settingUpHeader,
+  showCheckmark,
+}) => {
+  return (
+    <div className="subway-navigation-container">
+      <div className="subway-navigation-flex-wrapper">
+        <div className="subway-navigation-title">
+          <span className="subway-navigation-title-icon">{settingUpIcon}</span>
+          <div className="subway-navigation-title-text">
+            <h3>{settingUpHeader ?? 'Setting Up'}</h3>
+            <h6>{settingUpText}</h6>
           </div>
-          {this.props.setupTime && (
-            <div className="subway-navigation-time-to-complete">
-              {ClockIcon}
-              <h5>{this.props.setupTime}</h5>
-            </div>
-          )}
-          {this.props.navigationSteps.map((value, index) => (
-            <SubwayNavStep
-              glyph={value.glyph}
-              key={value.name}
-              onClick={() => {
-                this.handleClick(index + 1)
-              }}
-              stepIsActive={index === this.props.currentStep - 1}
-              stepIsComplete={
-                value?.isComplete ?? index < this.props.currentStep - 1
-              }
-              stepIsReached={index <= this.props.currentStep - 1}
-              text={value.name}
-              showCheckmark={this.props.showCheckmark !== false}
-            />
-          ))}
         </div>
+        {setupTime && (
+          <div className="subway-navigation-time-to-complete">
+            {ClockIcon}
+            <h5>{setupTime}</h5>
+          </div>
+        )}
+        {navigationSteps.map((value, index) => (
+          <SubwayNavStep
+            glyph={value.glyph}
+            key={value.name}
+            onClick={() => onStepClick(index + 1)}
+            stepIsActive={index === currentStep - 1}
+            stepIsComplete={value?.isComplete ?? index < currentStep - 1}
+            stepIsReached={index <= currentStep - 1}
+            text={value.name}
+            showCheckmark={showCheckmark !== false}
+          />
+        ))}
       </div>
-    )
-  }
+    </div>
+  )
 }

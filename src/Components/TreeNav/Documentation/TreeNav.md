@@ -13,15 +13,15 @@ import {TreeNav} from '@influxdata/clockface'
   userElement={<></>}
   bannerElement={<></>}
 >
-  <TreeNav.Item id="a" label="A">
-    <TreeNav.SubMenu>
-      <TreeNav.SubItem id="a1" label="A1" />
-      <TreeNav.SubItem id="a2" label="A2" />
-      <TreeNav.SubItem id="a3" label="A3" />
-    </TreeNav.SubMenu>
-  </TreeNav.Item>
-  <TreeNav.Item id="b" label="B" />
-  <TreeNav.Item id="c" label="C" />
+  <TreeNavItem id="a" label="A">
+    <TreeNavSubMenu>
+      <TreeNavSubItem id="a1" label="A1" />
+      <TreeNavSubItem id="a2" label="A2" />
+      <TreeNavSubItem id="a3" label="A3" />
+    </TreeNavSubMenu>
+  </TreeNavItem>
+  <TreeNavItem id="b" label="B" />
+  <TreeNavItem id="c" label="C" />
 </TreeNav>
 ```
 

@@ -1,5 +1,5 @@
 // Libraries
-import {FC, useContext} from 'react'
+import {FunctionComponent, useContext} from 'react'
 import classnames from 'classnames'
 
 // Contexts
@@ -20,7 +20,7 @@ export interface ListItemHighlightProps {
   gradient?: Gradients
 }
 
-export const ListItemHighlight: FC<ListItemHighlightProps> = ({
+export const ListItemHighlight: FunctionComponent<ListItemHighlightProps> = ({
   selected,
   backgroundColor,
   gradient,
@@ -43,5 +43,3 @@ export const ListItemHighlight: FC<ListItemHighlightProps> = ({
 
   return <div className={itemHighlightClassname} style={listStyle} />
 }
-
-ListItemHighlight.displayName = 'ListItemHighlight'

@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -11,43 +11,42 @@ import './ResourceCardDescription.scss'
 export interface ResourceCardDescriptionProps extends StandardFunctionProps {
   /** Text to display in description */
   description: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type ResourceCardDescriptionRef = HTMLDivElement
-
-export const ResourceCardDescription = forwardRef<
-  ResourceCardDescriptionRef,
+export const ResourceCardDescription: FunctionComponent<
   ResourceCardDescriptionProps
->(
-  (
-    {id, style, testID = 'resource-list--description', className, description},
-    ref
-  ) => {
-    const resourceCardDescriptionClass = classnames('cf-resource-description', {
-      [`${className}`]: className,
-    })
+> = ({
+  id,
+  style,
+  testID = 'resource-list--description',
+  className,
+  description,
+  ref,
+}) => {
+  const resourceCardDescriptionClass = classnames('cf-resource-description', {
+    [`${className}`]: className,
+  })
 
-    const resourceCardDescriptionPreviewClass = classnames(
-      'cf-resource-description--preview',
-      {
-        untitled: !description,
-      }
-    )
+  const resourceCardDescriptionPreviewClass = classnames(
+    'cf-resource-description--preview',
+    {
+      untitled: !description,
+    }
+  )
 
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={resourceCardDescriptionClass}
-        data-testid={testID}
-      >
-        <div className={resourceCardDescriptionPreviewClass}>
-          {description || 'No description'}
-        </div>
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={resourceCardDescriptionClass}
+      data-testid={testID}
+    >
+      <div className={resourceCardDescriptionPreviewClass}>
+        {description || 'No description'}
       </div>
-    )
-  }
-)
-
-ResourceCardDescription.displayName = 'ResourceCardDescription'
+    </div>
+  )
+}

@@ -3,16 +3,16 @@ import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {ButtonBase, ButtonBaseRef} from '../Base/ButtonBase'
+import {ButtonBase} from '../Base/ButtonBase'
 import {ButtonBaseContrastTester} from '../Base/ButtonBaseContrastTester'
-import {Button, ButtonRef} from '../Composed/Button'
-import {SquareButton, SquareButtonRef} from '../Composed/SquareButton'
+import {Button} from '../Composed/Button'
+import {SquareButton} from '../Composed/SquareButton'
 import {ConfirmationButton} from '../Composed/ConfirmationButton'
-import {DismissButton, DismissButtonRef} from '../Composed/DismissButton'
-import {CTAButton, CTAButtonRef} from '../Composed/CTAButton'
-import {CTALinkButton, CTALinkButtonRef} from '../Composed/CTALinkButton'
-import {LinkButton, LinkButtonRef} from '../Composed/LinkButton'
-import {ButtonGroup, ButtonGroupRef} from '../Composed/ButtonGroup'
+import {DismissButton} from '../Composed/DismissButton'
+import {CTAButton} from '../Composed/CTAButton'
+import {CTALinkButton} from '../Composed/CTALinkButton'
+import {LinkButton} from '../Composed/LinkButton'
+import {ButtonGroup} from '../Composed/ButtonGroup'
 import {SelectDropdown} from '../../Dropdowns/Composed/SelectDropdown'
 
 // Types
@@ -44,7 +44,7 @@ import ButtonBaseContrastTesterReadme from './ButtonBaseContrastTester.md?raw'
 export default {title: 'Components/Buttons/Base'}
 
 export const StandardButton = () => {
-  const buttonRef = createRef<ButtonRef>()
+  const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -103,7 +103,7 @@ ContrastTester.story = {
 }
 
 export const _SquareButton = () => {
-  const buttonRef = createRef<SquareButtonRef>()
+  const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -193,7 +193,7 @@ _ConfirmationButton.story = {
 }
 
 export const _DismissButton = () => {
-  const buttonRef = createRef<DismissButtonRef>()
+  const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -238,7 +238,7 @@ _DismissButton.story = {
 }
 
 export const CtaButton = () => {
-  const buttonRef = createRef<CTAButtonRef>()
+  const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -277,7 +277,7 @@ CtaButton.story = {
 }
 
 export const BaseButton = () => {
-  const buttonRef = createRef<ButtonBaseRef>()
+  const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -317,7 +317,7 @@ BaseButton.story = {
 }
 
 export const _LinkButton = () => {
-  const buttonRef = createRef<LinkButtonRef>()
+  const buttonRef = createRef<HTMLAnchorElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -360,7 +360,7 @@ _LinkButton.story = {
 }
 
 export const CtaLinkButton = () => {
-  const buttonRef = createRef<CTALinkButtonRef>()
+  const buttonRef = createRef<HTMLAnchorElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -404,7 +404,7 @@ CtaLinkButton.story = {
 export const _ButtonGroup = () => {
   const dropdownItems = ['Crawl', 'Walk', 'Run']
   const [selectedOption, selectOption] = useState<string>(dropdownItems[1])
-  const buttonGroupRef = createRef<ButtonGroupRef>()
+  const buttonGroupRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

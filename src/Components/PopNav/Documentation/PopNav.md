@@ -11,9 +11,9 @@ import {PopNav} from '@influxdata/clockface'
 ```tsx
 <PopNav>
   // Some content
-  <PopNav.Item>item 1</PopNav.Item>
-  <PopNav.Item>item 2</PopNav.Item>
-  <PopNav.Item>item 3</PopNav.Item>
+  <PopNavItem>item 1</PopNavItem>
+  <PopNavItem>item 2</PopNavItem>
+  <PopNavItem>item 3</PopNavItem>
 </PopNav>
 ```
 

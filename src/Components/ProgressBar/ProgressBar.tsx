@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -31,60 +31,54 @@ export interface ProgressBarProps extends StandardFunctionProps {
   valueText?: string
   /** Optional Text for max */
   maxText?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type ProgressBarRef = HTMLDivElement
+export const ProgressBar: FunctionComponent<ProgressBarProps> = ({
+  id,
+  style = {width: '100%'},
+  testID = 'progress-bar',
+  value = 0,
+  max = 100,
+  label,
+  className,
+  color = InfluxColors.White,
+  barGradient,
+  valueText,
+  maxText,
+  ref,
+}) => {
+  const progressBarClass = classnames('cf-progress-bar', {
+    [`${className}`]: className,
+  })
 
-export const ProgressBar = forwardRef<ProgressBarRef, ProgressBarProps>(
-  (
-    {
-      id,
-      style = {width: '100%'},
-      testID = 'progress-bar',
-      value = 0,
-      max = 100,
-      label,
-      className,
-      color = InfluxColors.White,
-      barGradient,
-      valueText,
-      maxText,
-    },
-    ref
-  ) => {
-    const progressBarClass = classnames('cf-progress-bar', {
-      [`${className}`]: className,
-    })
+  const progressBarStyle = {
+    ...generateBackgroundStyle(color, barGradient),
+    width: `${(value / max) * 100}%`,
+    transition: 'all $cf-transition-default 0s',
+  }
 
-    const progressBarStyle = {
-      ...generateBackgroundStyle(color, barGradient),
-      width: `${(value / max) * 100}%`,
-      transition: 'all $cf-transition-default 0s',
-    }
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        className={progressBarClass}
-        data-testid={testID}
-        style={style}
-      >
-        <div className="cf-progress-bar--container">
-          <div className="cf-progress-bar--fill" style={progressBarStyle} />
-        </div>
-        <div className="cf-progress-bar--text">
-          <div className="cf-progress-bar--label">{label}</div>
-          <div>
-            <span className="cf-progress-bar--value" style={{color: color}}>
-              {valueText ?? value}
-            </span>
-            <span className="cf-progress-bar--max">/{maxText ?? max}</span>
-          </div>
+  return (
+    <div
+      id={id}
+      ref={ref}
+      className={progressBarClass}
+      data-testid={testID}
+      style={style}
+    >
+      <div className="cf-progress-bar--container">
+        <div className="cf-progress-bar--fill" style={progressBarStyle} />
+      </div>
+      <div className="cf-progress-bar--text">
+        <div className="cf-progress-bar--label">{label}</div>
+        <div>
+          <span className="cf-progress-bar--value" style={{color: color}}>
+            {valueText ?? value}
+          </span>
+          <span className="cf-progress-bar--max">/{maxText ?? max}</span>
         </div>
       </div>
-    )
-  }
-)
-
-ProgressBar.displayName = 'ProgressBar'
+    </div>
+  )
+}

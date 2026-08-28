@@ -1,9 +1,9 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
-import {ButtonBase, ButtonBaseRef} from '../Base/ButtonBase'
+import {ButtonBase} from '../Base/ButtonBase'
 
 // Styles
 import './DismissButton.scss'
@@ -18,63 +18,58 @@ import {
 } from '../../../Types'
 import {ButtonBaseProps} from '../Base/ButtonBase'
 
-export interface DismissButtonProps extends ButtonBaseProps {}
+export interface DismissButtonProps extends ButtonBaseProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
+}
 
-export type DismissButtonRef = ButtonBaseRef
+export const DismissButton: FunctionComponent<DismissButtonProps> = ({
+  id,
+  style,
+  onClick,
+  tabIndex,
+  titleText,
+  disabledTitleText,
+  className,
+  onMouseOut,
+  onMouseOver,
+  onMouseEnter,
+  onMouseLeave,
+  active = false,
+  type = ButtonType.Button,
+  testID = 'dismiss-button',
+  color = ComponentColor.Primary,
+  size = ComponentSize.ExtraSmall,
+  status = ComponentStatus.Default,
+  ref,
+}) => {
+  const SquareButtonClass = classnames('cf-dismiss-button', {
+    [`${className}`]: className,
+  })
 
-export const DismissButton = forwardRef<DismissButtonRef, DismissButtonProps>(
-  (
-    {
-      id,
-      style,
-      onClick,
-      tabIndex,
-      titleText,
-      disabledTitleText,
-      className,
-      onMouseOut,
-      onMouseOver,
-      onMouseEnter,
-      onMouseLeave,
-      active = false,
-      type = ButtonType.Button,
-      testID = 'dismiss-button',
-      color = ComponentColor.Primary,
-      size = ComponentSize.ExtraSmall,
-      status = ComponentStatus.Default,
-    },
-    ref
-  ) => {
-    const SquareButtonClass = classnames('cf-dismiss-button', {
-      [`${className}`]: className,
-    })
-
-    return (
-      <ButtonBase
-        tabIndex={tabIndex}
-        titleText={titleText}
-        disabledTitleText={disabledTitleText}
-        shape={ButtonShape.Square}
-        color={color}
-        className={SquareButtonClass}
-        testID={testID}
-        id={id}
-        size={size}
-        onClick={onClick}
-        onMouseOut={onMouseOut}
-        onMouseOver={onMouseOver}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        status={status}
-        active={active}
-        type={type}
-        style={style}
-        ref={ref}
-      >
-        <div className="cf-dismiss-button--x" />
-      </ButtonBase>
-    )
-  }
-)
-
-DismissButton.displayName = 'DismissButton'
+  return (
+    <ButtonBase
+      tabIndex={tabIndex}
+      titleText={titleText}
+      disabledTitleText={disabledTitleText}
+      shape={ButtonShape.Square}
+      color={color}
+      className={SquareButtonClass}
+      testID={testID}
+      id={id}
+      size={size}
+      onClick={onClick}
+      onMouseOut={onMouseOut}
+      onMouseOver={onMouseOver}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      status={status}
+      active={active}
+      type={type}
+      style={style}
+      ref={ref}
+    >
+      <div className="cf-dismiss-button--x" />
+    </ButtonBase>
+  )
+}

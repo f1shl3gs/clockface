@@ -1,16 +1,22 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
 import {StandardFunctionProps} from '../../Types'
 
-export type EmptyStateTextRef = HTMLHeadingElement
+export interface EmptyStateTextProps extends StandardFunctionProps {
+  ref?: Ref<HTMLHeadingElement>
+}
 
-export const EmptyStateText = forwardRef<
-  EmptyStateTextRef,
-  StandardFunctionProps
->(({id, style, className, children, testID = 'empty-state--text'}, ref) => {
+export const EmptyStateText: FunctionComponent<EmptyStateTextProps> = ({
+  id,
+  style,
+  className,
+  children,
+  testID = 'empty-state--text',
+  ref,
+}) => {
   const emptyStateTextClass = classnames('cf-empty-state--text', {
     [`${className}`]: className,
   })
@@ -26,6 +32,4 @@ export const EmptyStateText = forwardRef<
       {children}
     </h2>
   )
-})
-
-EmptyStateText.displayName = 'EmptyStateText'
+}

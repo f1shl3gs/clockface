@@ -8,8 +8,8 @@ import {DraggableResizer} from '@influxdata/clockface'
 ```
 ```tsx
 <DraggableResizer>
-  <DraggableResizer.Panel />
-  <DraggableResizer.Panel />
+  <DraggableResizerPanel />
+  <DraggableResizerPanel />
 </DraggableResizer>
 ```
 
@@ -18,7 +18,7 @@ import {DraggableResizer} from '@influxdata/clockface'
 
 ### Implementation
 
-The `handlePositions` prop controls how many as well as the positions of the handles. It is critical that the number of panels passed in is 1 more than the number of handles. While you could pass in a different component as a child, `DraggableResizer` works best when its children are of type `<DraggableResizer.Panel />`. Panels do not have any visible styling other than sizing. They are `position: relative` so to best style their contents we recommend placing `<div style={{position: 'absolute', overflow: 'hidden', width: '100%', height: '100%'}} />` as a child of each panel.
+The `handlePositions` prop controls how many as well as the positions of the handles. It is critical that the number of panels passed in is 1 more than the number of handles. While you could pass in a different component as a child, `DraggableResizer` works best when its children are of type `<DraggableResizerPanel />`. Panels do not have any visible styling other than sizing. They are `position: relative` so to best style their contents we recommend placing `<div style={{position: 'absolute', overflow: 'hidden', width: '100%', height: '100%'}} />` as a child of each panel.
 
 Setting up state:
 
@@ -52,12 +52,12 @@ And putting it all together:
   handlePositions={this.state.handlePositions}
 >
   // You want to have 1 more panel than number of handles
-  <DraggableResizer.Panel>
+  <DraggableResizerPanel>
     // Panels are position:relative to help facilitate styling of children
     <div style={{position: 'absolute', overflow: 'hidden', width: '100%', height: '100%'}} />
-  </DraggableResizer.Panel>
-  <DraggableResizer.Panel />
-  <DraggableResizer.Panel />
+  </DraggableResizerPanel>
+  <DraggableResizerPanel />
+  <DraggableResizerPanel />
 </DraggableResizer>
 ```
 

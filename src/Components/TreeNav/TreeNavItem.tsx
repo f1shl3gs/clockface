@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import React, {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -20,76 +20,70 @@ export interface TreeNavItemProps extends Omit<StandardFunctionProps, 'id'> {
   active?: boolean
   /** Optional link element. Will override onClick prop */
   linkElement?: RenderLinkElement
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
 
-export type TreeNavItemRef = HTMLButtonElement
+export const TreeNavItem: FunctionComponent<TreeNavItemProps> = ({
+  id,
+  icon,
+  style,
+  label,
+  active = false,
+  testID = 'tree-nav--item',
+  onClick,
+  children = null,
+  className,
+  linkElement,
+  ref,
+}) => {
+  const treeNavItemClass = classnames('cf-tree-nav--item', {
+    'cf-tree-nav--item__active': active,
+    [`${className}`]: className,
+  })
 
-export const TreeNavItem = forwardRef<TreeNavItemRef, TreeNavItemProps>(
-  (
-    {
-      id,
-      icon,
-      style,
-      label,
-      active = false,
-      testID = 'tree-nav--item',
-      onClick,
-      children = null,
-      className,
-      linkElement,
-    },
-    ref
-  ) => {
-    const treeNavItemClass = classnames('cf-tree-nav--item', {
-      'cf-tree-nav--item__active': active,
-      [`${className}`]: className,
-    })
-
-    const handleClick = (): void => {
-      if (onClick) {
-        onClick(id)
-      }
+  const handleClick = (): void => {
+    if (onClick) {
+      onClick(id)
     }
+  }
 
-    if (linkElement) {
-      const linkItems = (
-        <>
-          <div className="cf-tree-nav--square">{icon}</div>
-          <div className="cf-tree-nav--label">{label}</div>
-        </>
-      )
-      const link = React.cloneElement(
-        linkElement('cf-tree-nav--item-block'),
-        {'data-testid': testID},
-        linkItems
-      )
-
-      return (
-        <div className={treeNavItemClass}>
-          {link}
-          {children}
-        </div>
-      )
-    }
+  if (linkElement) {
+    const linkItems = (
+      <>
+        <div className="cf-tree-nav--square">{icon}</div>
+        <div className="cf-tree-nav--label">{label}</div>
+      </>
+    )
+    const link = React.cloneElement(
+      linkElement('cf-tree-nav--item-block'),
+      {'data-testid': testID},
+      linkItems
+    )
 
     return (
       <div className={treeNavItemClass}>
-        <button
-          type="button"
-          id={id}
-          ref={ref}
-          style={style}
-          data-testid={testID}
-          onClick={handleClick}
-          className="cf-tree-nav--item-block"
-        >
-          <div className="cf-tree-nav--square">{icon}</div>
-          <div className="cf-tree-nav--label">{label}</div>
-        </button>
+        {link}
         {children}
       </div>
     )
   }
-)
 
-TreeNavItem.displayName = 'TreeNavItem'
+  return (
+    <div className={treeNavItemClass}>
+      <button
+        type="button"
+        id={id}
+        ref={ref}
+        style={style}
+        data-testid={testID}
+        onClick={handleClick}
+        className="cf-tree-nav--item-block"
+      >
+        <div className="cf-tree-nav--square">{icon}</div>
+        <div className="cf-tree-nav--label">{label}</div>
+      </button>
+      {children}
+    </div>
+  )
+}

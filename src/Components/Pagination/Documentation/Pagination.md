@@ -5,11 +5,11 @@ Pagination Nav is used for navigating through data that cannot be encapsulated w
 ### Usage
 
 ```tsx
-import {PaginationNav} from '@influxdata/clockface'
+import {Pagination} from '@influxdata/clockface'
 ```
 
 ```tsx
-<PaginationNav.PaginationNav
+<Pagination
   ref={paginationRef}
   totalPages={10}
   currentPage={1}
@@ -21,7 +21,7 @@ import {PaginationNav} from '@influxdata/clockface'
   enablePageInput={false}
   size={'Medium'}
   enableArrowPaginate={false}
-></PaginationNav.PaginationNav>
+/>
 ```
 
 ### Example

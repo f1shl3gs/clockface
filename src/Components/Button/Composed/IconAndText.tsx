@@ -41,5 +41,3 @@ export const IconAndText: FunctionComponent<IconAndTextProps> = ({
     </>
   )
 }
-
-IconAndText.displayName = 'IconAndText'

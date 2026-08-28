@@ -4,12 +4,33 @@ import {marked} from 'marked'
 
 // Components
 import {Popover} from '../Components/Popover'
-import {Overlay} from '../Components/Overlay'
+import {
+  Overlay,
+  OverlayBody,
+  OverlayContainer,
+  OverlayHeader,
+} from '../Components/Overlay'
 import {Notification} from '../Components/Notification'
-import {RightClick} from '../Components/RightClick'
+import {RightClick, RightClickMenuItem} from '../Components/RightClick'
 import {Icon} from '../Components/Icon'
-import {Page} from '../Components/Page'
-import {TreeNav} from '../Components/TreeNav'
+import {
+  Page,
+  PageContents,
+  PageControlBar,
+  PageControlBarCenter,
+  PageControlBarLeft,
+  PageControlBarRight,
+  PageHeader,
+  PageTitle,
+} from '../Components/Page'
+import {
+  TreeNav,
+  TreeNavHeader,
+  TreeNavItem,
+  TreeNavSubItem,
+  TreeNavSubMenu,
+  TreeNavUser,
+} from '../Components/TreeNav'
 import {InfluxDBCloudLogo} from '../Components/Logo'
 import {AppWrapper} from '../Components/AppWrapper/AppWrapper'
 
@@ -118,7 +139,7 @@ export const InterplayOfAllPortals = () => {
         <AppWrapper presentationMode={false}>
           <TreeNav
             headerElement={
-              <TreeNav.Header
+              <TreeNavHeader
                 id="home"
                 icon={<Icon glyph={IconFont.CuboUniform} />}
                 label={<InfluxDBCloudLogo cloud={true} />}
@@ -132,36 +153,36 @@ export const InterplayOfAllPortals = () => {
             expanded={navState}
             onToggleClick={handleToggleNavState}
             userElement={
-              <TreeNav.User
+              <TreeNavUser
                 id="user"
                 username="john.doe123456@supercool.com"
                 team="USAF 101st Airborne Division"
-              ></TreeNav.User>
+              />
             }
           >
-            <TreeNav.Item
+            <TreeNavItem
               id="data"
               label="Data"
               icon={<Icon glyph={IconFont.Layers} />}
               active={isItemActive('data')}
               onClick={handleNavClick}
             >
-              <TreeNav.SubMenu>
-                <TreeNav.SubItem
+              <TreeNavSubMenu>
+                <TreeNavSubItem
                   id="data-buckets"
                   label="Buckets"
                   active={isItemActive('data-buckets')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="data-sources"
                   label="Sources"
                   active={isItemActive('data-sources')}
                   onClick={handleNavClick}
                 />
-              </TreeNav.SubMenu>
-            </TreeNav.Item>
-            <TreeNav.Item
+              </TreeNavSubMenu>
+            </TreeNavItem>
+            <TreeNavItem
               id="explore"
               label="Data Explorer"
               shortLabel="Explore"
@@ -169,7 +190,7 @@ export const InterplayOfAllPortals = () => {
               active={isItemActive('explore')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="boards"
               label="Dashboards"
               shortLabel="Boards"
@@ -177,7 +198,7 @@ export const InterplayOfAllPortals = () => {
               active={isItemActive('boards')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="org"
               label="Organization"
               shortLabel="Org"
@@ -185,77 +206,77 @@ export const InterplayOfAllPortals = () => {
               active={isItemActive('org')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="tasks"
               label="Tasks"
               icon={<Icon glyph={IconFont.Calendar} />}
               active={isItemActive('tasks')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="alerts"
               label="Alerts"
               icon={<Icon glyph={IconFont.Bell} />}
               active={isItemActive('alerts')}
               onClick={handleNavClick}
             />
-            <TreeNav.Item
+            <TreeNavItem
               id="settings"
               label="Settings"
               icon={<Icon glyph={IconFont.CogOutline_New} />}
               active={isItemActive('settings')}
               onClick={handleNavClick}
             >
-              <TreeNav.SubMenu>
-                <TreeNav.SubItem
+              <TreeNavSubMenu>
+                <TreeNavSubItem
                   id="settings-members"
                   label="Members"
                   active={isItemActive('settings-members')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-variables"
                   label="Variables"
                   active={isItemActive('settings-variables')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-templates"
                   label="Templates"
                   active={isItemActive('settings-templates')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-labels"
                   label="Labels"
                   active={isItemActive('settings-labels')}
                   onClick={handleNavClick}
                 />
-                <TreeNav.SubItem
+                <TreeNavSubItem
                   id="settings-profile"
                   label="Profile"
                   active={isItemActive('settings-profile')}
                   onClick={handleNavClick}
                 />
-              </TreeNav.SubMenu>
-            </TreeNav.Item>
+              </TreeNavSubMenu>
+            </TreeNavItem>
           </TreeNav>
           <Page titleTag="bloop">
-            <Page.Header fullWidth={false} gutters={ComponentSize.Small}>
-              <Page.Title title={lookupPageTitle()} />
-            </Page.Header>
-            <Page.ControlBar fullWidth={false} gutters={ComponentSize.Small}>
-              <Page.ControlBarLeft>
+            <PageHeader fullWidth={false} gutters={ComponentSize.Small}>
+              <PageTitle title={lookupPageTitle()} />
+            </PageHeader>
+            <PageControlBar fullWidth={false} gutters={ComponentSize.Small}>
+              <PageControlBarLeft>
                 <div className="mockComponent mockButton">Left Button</div>
-              </Page.ControlBarLeft>
-              <Page.ControlBarCenter>
+              </PageControlBarLeft>
+              <PageControlBarCenter>
                 <div className="mockComponent mockButton">Center Button</div>
-              </Page.ControlBarCenter>
-              <Page.ControlBarRight>
+              </PageControlBarCenter>
+              <PageControlBarRight>
                 <div className="mockComponent mockButton">Right Button</div>
-              </Page.ControlBarRight>
-            </Page.ControlBar>
-            <Page.Contents
+              </PageControlBarRight>
+            </PageControlBar>
+            <PageContents
               fullWidth={false}
               scrollable={true}
               gutters={ComponentSize.Small}
@@ -287,12 +308,12 @@ export const InterplayOfAllPortals = () => {
                 visible={firstOverlayState}
                 onEscape={handleDismissFirstOverlay}
               >
-                <Overlay.Container maxWidth={500}>
-                  <Overlay.Header
+                <OverlayContainer maxWidth={500}>
+                  <OverlayHeader
                     title="Overlay Example"
                     onDismiss={handleDismissFirstOverlay}
                   />
-                  <Overlay.Body>
+                  <OverlayBody>
                     <p>I should be below the Notification</p>
                     <div className="mockComponent mockButton" ref={triggerRefB}>
                       Another Popover
@@ -307,31 +328,31 @@ export const InterplayOfAllPortals = () => {
                       contents={() => <>I'm a nested popover!</>}
                     />
                     <RightClick triggerRef={triggerRefC}>
-                      <RightClick.MenuItem onClick={handleShowSecondOverlay}>
+                      <RightClickMenuItem onClick={handleShowSecondOverlay}>
                         Show another overlay
-                      </RightClick.MenuItem>
+                      </RightClickMenuItem>
                     </RightClick>
-                  </Overlay.Body>
-                </Overlay.Container>
+                  </OverlayBody>
+                </OverlayContainer>
               </Overlay>
               <Overlay
                 visible={secondOverlayState}
                 onEscape={handleDismissSecondOverlay}
               >
-                <Overlay.Container maxWidth={300}>
-                  <Overlay.Header
+                <OverlayContainer maxWidth={300}>
+                  <OverlayHeader
                     title="Another Overlay"
                     onDismiss={handleDismissSecondOverlay}
                   />
-                  <Overlay.Body>
+                  <OverlayBody>
                     <p>
                       I should be on top of the previous Overlay but still
                       underneath the Notification
                     </p>
-                  </Overlay.Body>
-                </Overlay.Container>
+                  </OverlayBody>
+                </OverlayContainer>
               </Overlay>
-            </Page.Contents>
+            </PageContents>
           </Page>
         </AppWrapper>
       </div>

@@ -66,7 +66,7 @@
 
 ### 6.0.1 (2022-08-04)
 
-- [804](https://github.com/influxdata/clockface/pull/804): Add DoubleCaretVertical icon and trailingIcon prop to Dropdown.Button
+- [804](https://github.com/influxdata/clockface/pull/804): Add DoubleCaretVertical icon and trailingIcon prop to DropdownButton
 
 ### 6.0.0 (2022-08-01)
 
@@ -194,7 +194,7 @@
 
 ### 3.5.0 (2022-03-10)
 
-- [740](https://github.com/influxdata/clockface/pull/740): Added input functionality to the PaginationNav
+- [740](https://github.com/influxdata/clockface/pull/740): Added input functionality to the Pagination
 
 ### 3.4.1 (2022-03-08)
 
@@ -359,7 +359,7 @@
 
 ### 2.11.2 (2021-7-30)
 
-- [#652](https://github.com/influxdata/clockface/pull/652): Fix: Adding paginationNav to the index
+- [#652](https://github.com/influxdata/clockface/pull/652): Fix: Adding Pagination to the index
 
 ### 2.11.1 (2021-7-30)
 
@@ -395,11 +395,11 @@
 
 ### 2.6.9 (2021-3-31)
 
-- [#607](https://github.com/influxdata/clockface/pull/607): Fix: Adding paginationNav to the index
+- [#607](https://github.com/influxdata/clockface/pull/607): Fix: Adding Pagination to the index
 
 ### 2.6.8 (2021-3-30)
 
-- [#569](https://github.com/influxdata/clockface/pull/569): Introduce a paginationNav component family
+- [#569](https://github.com/influxdata/clockface/pull/569): Introduce a Pagination component family
 
 ### 2.6.7 (2021-3-29)
 
@@ -610,7 +610,7 @@
 - [#426](https://github.com/influxdata/clockface/pull/426): Replace `data-testid` with `testID` props in components overriding testID.
 - [#424](https://github.com/influxdata/clockface/pull/424): Introduce `LinkButton` component as a composed variation of `Button`
 - [#424](https://github.com/influxdata/clockface/pull/424): Pass back optional event object to `RightClickMenuItem` click handler
-- [#422](https://github.com/influxdata/clockface/pull/422): Render the empty state when ResourceList.Body receives boolean false as children
+- [#422](https://github.com/influxdata/clockface/pull/422): Render the empty state when ResourceListBody receives boolean false as children
 
 #### 1.1.0
 
@@ -704,7 +704,7 @@
 - [#328](https://github.com/influxdata/clockface/pull/328): Convert `EmptyState` component family to `FunctionComponent` and wrap with `forwardRef`
 - [#328](https://github.com/influxdata/clockface/pull/328): [Breaking] Remove `text` and `highlightedText` props from `EmptyStateText` and `EmptyStateSubtext` components in favor of directly passing children
 - [#328](https://github.com/influxdata/clockface/pull/328): Convert `Page` component family to `FunctionComponent` and wrap with `forwardRef`
-- [#328](https://github.com/influxdata/clockface/pull/328): [Breaking] Export `PageHeaderLeft`, `PageHeaderCenter`, and `PageHeaderRight` directly from `Page` instead of `Page.Header`
+- [#328](https://github.com/influxdata/clockface/pull/328): [Breaking] Export `PageHeaderLeft`, `PageHeaderCenter`, and `PageHeaderRight` directly from `Page` instead of `PageHeader`
 - [#327](https://github.com/influxdata/clockface/pull/327) Fix rendering issue with "always visible" `Popover`s
 - [#324](https://github.com/influxdata/clockface/pull/324): Convert `DraggableResizer` component family to `FunctionComponent` and wrap with `forwardRef`
 - [#323](https://github.com/influxdata/clockface/pull/323): Fix display bug in `ColorPicker` in which the selected color was overlapping the input text
@@ -785,7 +785,7 @@
 - [#243](https://github.com/influxdata/clockface/pull/243): Reduce padding of `PageHeader` and `PageContents` when navigation is above the page
 - [#243](https://github.com/influxdata/clockface/pull/243): Ensure that `TextBlock` can have its text and background color controlled independently
 - [#243](https://github.com/influxdata/clockface/pull/243): Position `ResourceListHeader` contents to the left when no filter is passed in
-- [#243](https://github.com/influxdata/clockface/pull/243): [Breaking] Ensure that `FlexBoxChild` is accessible as `<FlexBox.Child />`
+- [#243](https://github.com/influxdata/clockface/pull/243): [Breaking] Ensure that `FlexBoxChild` is accessible as `<FlexBoxChild />`
 - [#243](https://github.com/influxdata/clockface/pull/243): Expose `pattern` and `required` input attributes as props
 - [#243](https://github.com/influxdata/clockface/pull/243): Make `preventDefault` behavior in `Form` `onSubmit` optional
 - [#243](https://github.com/influxdata/clockface/pull/243): Add `cf-` prefix to classnames in all `ResourceList` and `ResourceCard` components

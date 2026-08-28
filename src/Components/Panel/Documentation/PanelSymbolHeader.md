@@ -9,10 +9,10 @@ import {Panel} from '@influxdata/clockface'
 ```
 
 ```tsx
-<Panel.SymbolHeader symbol={<Bullet />}>
+<PanelSymbolHeader symbol={<Bullet />}>
   <h2>Title!</h2>
   // Additional children such as a button or dropdown
-</Panel.SymbolHeader>
+</PanelSymbolHeader>
 ```
 
 ### Example

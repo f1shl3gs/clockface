@@ -1,13 +1,13 @@
 # Index List Row
 
-IndexListRows are intended to be the children of `<IndexList.Body />` and contain children of type `<IndexList.Cell />`. They can be accessed via the single `IndexList` import as a subclass.
+IndexListRows are intended to be the children of `<IndexListBody />` and contain children of type `<IndexList.Cell />`. They can be accessed via the single `IndexList` import as a subclass.
 
 ### Usage
 ```tsx
 import {IndexList} from '@influxdata/clockface'
 ```
 ```tsx
-<IndexList.Row />
+<IndexListRow />
 ```
 
 ### Gotchas

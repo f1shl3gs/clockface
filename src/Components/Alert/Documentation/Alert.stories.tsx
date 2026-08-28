@@ -3,7 +3,7 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Alert, AlertRef} from '../Alert'
+import {Alert} from '../Alert'
 
 // Types
 import {ComponentColor, IconFont} from '../../../Types'
@@ -14,7 +14,7 @@ import AlertReadme from './Alert.md?raw'
 export default {title: 'Components/Alert'}
 
 export const Example = () => {
-  const alertRef = createRef<AlertRef>()
+  const alertRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */

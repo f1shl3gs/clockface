@@ -12,10 +12,10 @@ In combination with `AppWrapper` and `NavMenu`:
 <AppWrapper>
   <NavMenu />
   <Page>
-    <Page.Header />
-    <Page.Contents>
+    <PageHeader />
+    <PageContents>
       // Contents go here
-    </Page.Contents>
+    </PageContents>
   </Page>
 </AppWrapper>
 ```

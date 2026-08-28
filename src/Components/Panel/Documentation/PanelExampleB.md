@@ -9,9 +9,9 @@ import {Panel, Grid} from '@influxdata/clockface'
 ```tsx
 <Panel>
   <Panel.Header />
-  <Panel.Body>
+  <PanelBody>
     // Contents
-  </Panel.Body>
+  </PanelBody>
 </Panel>
 ```
 

@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, RefObject, KeyboardEvent} from 'react'
+import {RefObject, KeyboardEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -32,97 +32,87 @@ export interface SelectGroupOptionProps extends Omit<
   /** Choose either "SelectGroup" or "Checkbox" */
   type?: InputToggleType
   /** Refers to the visible element rather than the hidden input that ref refers to */
-  containerRef?: RefObject<SelectGroupOptionContainerRef | null>
+  containerRef?: RefObject<HTMLLabelElement | null>
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLInputElement>
 }
 
-export type SelectGroupOptionRef = HTMLInputElement
-export type SelectGroupOptionContainerRef = HTMLLabelElement
+export const SelectGroupOption: FunctionComponent<SelectGroupOptionProps> = ({
+  id,
+  name,
+  type = InputToggleType.Radio,
+  value,
+  style,
+  testID = 'select-group--option',
+  active,
+  onClick,
+  /* eslint-disable */
+  onKeyUp,
+  /* eslint-enable */
+  tabIndex,
+  disabled = false,
+  children,
+  className,
+  titleText,
+  containerRef,
+  disabledTitleText = 'This option is disabled',
+  ref,
+}) => {
+  const radioButtonClass = classnames('cf-select-group--option', {
+    'cf-select-group--option__active': active,
+    'cf-select-group--option__disabled': disabled,
+    [`${className}`]: className,
+  })
 
-export const SelectGroupOption = forwardRef<
-  SelectGroupOptionRef,
-  SelectGroupOptionProps
->(
-  (
-    {
-      id,
-      name,
-      type = InputToggleType.Radio,
-      value,
-      style,
-      testID = 'select-group--option',
-      active,
-      onClick,
-      /* eslint-disable */
-      onKeyUp,
-      /* eslint-enable */
-      tabIndex,
-      disabled = false,
-      children,
-      className,
-      titleText,
-      containerRef,
-      disabledTitleText = 'This option is disabled',
-    },
-    ref
-  ) => {
-    const radioButtonClass = classnames('cf-select-group--option', {
-      'cf-select-group--option__active': active,
-      'cf-select-group--option__disabled': disabled,
-      [`${className}`]: className,
-    })
+  const title = disabled ? disabledTitleText : titleText
 
-    const title = disabled ? disabledTitleText : titleText
-
-    const handleClick = () => {
-      if (disabled) {
-        return
-      }
-
-      onClick(value)
+  const handleClick = () => {
+    if (disabled) {
+      return
     }
 
-    // const handleKeyUp = (
-    //   e: KeyboardEvent<SelectGroupOptionContainerRef>
-    // ): void => {
-    //   console.log(e.key)
-    //   if (e.key === ' ') {
-    //     handleClick()
-    //   }
-
-    //   if (onKeyUp) {
-    //     onKeyUp(e)
-    //   }
-    // }
-
-    return (
-      <>
-        <input
-          id={id}
-          ref={ref}
-          type={type}
-          name={name}
-          value={id}
-          title={title}
-          readOnly={true}
-          defaultChecked={active}
-          disabled={disabled}
-          data-testid={`${testID}--input`}
-        />
-        <label
-          ref={containerRef}
-          title={title}
-          style={style}
-          htmlFor={id}
-          onClick={handleClick}
-          className={radioButtonClass}
-          data-testid={testID}
-          tabIndex={disabled ? -1 : tabIndex}
-        >
-          {children}
-        </label>
-      </>
-    )
+    onClick(value)
   }
-)
 
-SelectGroupOption.displayName = 'SelectGroupOption'
+  // const handleKeyUp = (
+  //   e: KeyboardEvent<SelectGroupOptionContainerRef>
+  // ): void => {
+  //   console.log(e.key)
+  //   if (e.key === ' ') {
+  //     handleClick()
+  //   }
+
+  //   if (onKeyUp) {
+  //     onKeyUp(e)
+  //   }
+  // }
+
+  return (
+    <>
+      <input
+        id={id}
+        ref={ref}
+        type={type}
+        name={name}
+        value={id}
+        title={title}
+        readOnly={true}
+        defaultChecked={active}
+        disabled={disabled}
+        data-testid={`${testID}--input`}
+      />
+      <label
+        ref={containerRef}
+        title={title}
+        style={style}
+        htmlFor={id}
+        onClick={handleClick}
+        className={radioButtonClass}
+        data-testid={testID}
+        tabIndex={disabled ? -1 : tabIndex}
+      >
+        {children}
+      </label>
+    </>
+  )
+}

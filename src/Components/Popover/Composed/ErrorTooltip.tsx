@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, useRef, RefObject, CSSProperties} from 'react'
+import React, {useRef, CSSProperties, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 import {Icon} from '../../Icon/Base/Icon'
 
@@ -28,63 +28,57 @@ export interface ErrorTooltipProps extends StandardFunctionProps {
   tooltipStyle?: CSSProperties
   /** Useful for defining where tooltip should appear relative to the icon */
   position?: PopoverPosition
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLSpanElement>
 }
 
-export type ErrorTooltipRef = HTMLSpanElement
+export const ErrorTooltip: FunctionComponent<ErrorTooltipProps> = ({
+  id,
+  style,
+  className,
+  tooltipStyle,
+  diameter = 17,
+  tooltipContents,
+  position = PopoverPosition.Above,
+  testID = 'error-tooltip',
+  ref,
+}) => {
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const color = ComponentColor.Danger
+  const circleClassName = classnames('cf-error-tooltip', {
+    [`${className}`]: className,
+  })
 
-export const ErrorTooltip = forwardRef<ErrorTooltipRef, ErrorTooltipProps>(
-  (
-    {
-      id,
-      style,
-      className,
-      tooltipStyle,
-      diameter = 17,
-      tooltipContents,
-      position = PopoverPosition.Above,
-      testID = 'error-tooltip',
-    },
-    ref
-  ) => {
-    const triggerRef: RefObject<HTMLDivElement | null> = useRef(null)
-    const color = ComponentColor.Danger
-    const circleClassName = classnames('cf-error-tooltip', {
-      [`${className}`]: className,
-    })
-
-    const iconStyle = {
-      lineHeight: `${diameter}px`,
-      fontSize: `${diameter}px`,
-      ...style,
-    }
-
-    return (
-      <span ref={ref}>
-        <div
-          className={circleClassName}
-          ref={triggerRef}
-          style={iconStyle}
-          data-testid={testID}
-        >
-          <Icon glyph={IconFont.AlertTriangle} />
-        </div>
-        <Popover
-          distanceFromTrigger={8}
-          triggerRef={triggerRef}
-          showEvent={PopoverInteraction.Hover}
-          hideEvent={PopoverInteraction.Hover}
-          contents={() => <>{tooltipContents}</>}
-          testID={`${testID}--tooltip`}
-          style={tooltipStyle}
-          color={color}
-          appearance={Appearance.Outline}
-          id={id}
-          position={position}
-          caretSize={8}
-        />
-      </span>
-    )
+  const iconStyle = {
+    lineHeight: `${diameter}px`,
+    fontSize: `${diameter}px`,
+    ...style,
   }
-)
 
-ErrorTooltip.displayName = 'ErrorTooltip'
+  return (
+    <span ref={ref}>
+      <div
+        className={circleClassName}
+        ref={triggerRef}
+        style={iconStyle}
+        data-testid={testID}
+      >
+        <Icon glyph={IconFont.AlertTriangle} />
+      </div>
+      <Popover
+        distanceFromTrigger={8}
+        triggerRef={triggerRef}
+        showEvent={PopoverInteraction.Hover}
+        hideEvent={PopoverInteraction.Hover}
+        contents={() => <>{tooltipContents}</>}
+        testID={`${testID}--tooltip`}
+        style={tooltipStyle}
+        color={color}
+        appearance={Appearance.Outline}
+        id={id}
+        position={position}
+        caretSize={8}
+      />
+    </span>
+  )
+}

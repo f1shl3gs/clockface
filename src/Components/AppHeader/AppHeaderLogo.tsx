@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -13,41 +13,35 @@ export interface AppHeaderLogoProps extends StandardFunctionProps {
   src?: string
   /** Size of logo */
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type AppHeaderLogoRef = HTMLDivElement
+export const AppHeaderLogo: FunctionComponent<AppHeaderLogoProps> = ({
+  id,
+  src,
+  style,
+  children,
+  className,
+  testID = 'app-header-logo',
+  size = ComponentSize.Small,
+  ref,
+}) => {
+  const appHeaderLogoClass = classnames('cf-app-header--logo', {
+    [`cf-app-header--logo__${size}`]: size,
+    [`${className}`]: className,
+  })
 
-export const AppHeaderLogo = forwardRef<AppHeaderLogoRef, AppHeaderLogoProps>(
-  (
-    {
-      id,
-      src,
-      style,
-      children,
-      className,
-      testID = 'app-header-logo',
-      size = ComponentSize.Small,
-    },
-    ref
-  ) => {
-    const appHeaderLogoClass = classnames('cf-app-header--logo', {
-      [`cf-app-header--logo__${size}`]: size,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        data-testid={testID}
-        className={appHeaderLogoClass}
-      >
-        {src && <img src={src} className="app-header--logo-image" />}
-        {children}
-      </div>
-    )
-  }
-)
-
-AppHeaderLogo.displayName = 'AppHeaderLogo'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={appHeaderLogoClass}
+    >
+      {src && <img src={src} className="app-header--logo-image" />}
+      {children}
+    </div>
+  )
+}

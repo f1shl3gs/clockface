@@ -5,14 +5,15 @@ import {marked} from 'marked'
 // Components
 import {
   Page,
-  PageRef,
-  PageControlBarRef,
-  PageControlBarCenterRef,
-  PageControlBarLeftRef,
-  PageControlBarRightRef,
-  PageContentsRef,
+  PageContents,
+  PageControlBar,
+  PageControlBarCenter,
+  PageControlBarLeft,
+  PageControlBarRight,
+  PageHeader,
+  PageTitle,
 } from '../index'
-import {SelectGroup} from '../../SelectGroup/index'
+import {SelectGroup, SelectGroupOption} from '../../SelectGroup/index'
 import {Button} from '../../Button/Composed/Button'
 import {SquareButton} from '../../Button/Composed/SquareButton'
 import {SelectDropdown} from '../../Dropdowns/Composed/SelectDropdown'
@@ -32,12 +33,11 @@ import PageReadme from './Page.md?raw'
 import PageControlBarReadme from './PageControlBar.md?raw'
 import PageContentsReadme from './PageContents.md?raw'
 import PageTitleReadme from './PageTitle.md?raw'
-import {PageTitleRef} from '../PageTitle'
 
 export default {title: 'Layout/Page/Family'}
 
 export const _Page = () => {
-  const pageRef = createRef<PageRef>()
+  const pageRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -47,7 +47,7 @@ export const _Page = () => {
 
   return (
     <div className="story--example">
-      <Page.Page ref={pageRef} />
+      <Page ref={pageRef} />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -63,11 +63,11 @@ _Page.story = {
   },
 }
 
-export const PageControlBar = () => {
-  const pageControlBarRef = createRef<PageControlBarRef>()
-  const pageControlBarLeftRef = createRef<PageControlBarLeftRef>()
-  const pageControlBarCenterRef = createRef<PageControlBarCenterRef>()
-  const pageControlBarRightRef = createRef<PageControlBarRightRef>()
+export const _PageControlBar = () => {
+  const pageControlBarRef = createRef<HTMLDivElement>()
+  const pageControlBarLeftRef = createRef<HTMLDivElement>()
+  const pageControlBarCenterRef = createRef<HTMLDivElement>()
+  const pageControlBarRightRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -80,27 +80,27 @@ export const PageControlBar = () => {
 
   return (
     <div className="story--example">
-      <Page.ControlBar
+      <PageControlBar
         ref={pageControlBarRef}
         fullWidth={false}
         gutters={(ComponentSize as Record<string, any>)['Small']}
       >
-        <Page.ControlBarLeft ref={pageControlBarLeftRef}>
+        <PageControlBarLeft ref={pageControlBarLeftRef}>
           <div className="mockComponent" style={{width: '100%'}}>
             Left
           </div>
-        </Page.ControlBarLeft>
-        <Page.ControlBarCenter ref={pageControlBarCenterRef}>
+        </PageControlBarLeft>
+        <PageControlBarCenter ref={pageControlBarCenterRef}>
           <div className="mockComponent" style={{width: '100%'}}>
             Center
           </div>
-        </Page.ControlBarCenter>
-        <Page.ControlBarRight ref={pageControlBarRightRef}>
+        </PageControlBarCenter>
+        <PageControlBarRight ref={pageControlBarRightRef}>
           <div className="mockComponent" style={{width: '100%'}}>
             Right
           </div>
-        </Page.ControlBarRight>
-      </Page.ControlBar>
+        </PageControlBarRight>
+      </PageControlBar>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Refs</button>
       </div>
@@ -108,7 +108,7 @@ export const PageControlBar = () => {
   )
 }
 
-PageControlBar.story = {
+_PageControlBar.story = {
   name: 'PageControlBar',
 
   parameters: {
@@ -118,8 +118,8 @@ PageControlBar.story = {
   },
 }
 
-export const PageContents = () => {
-  const pageContentsRef = createRef<PageContentsRef>()
+export const _PageContents = () => {
+  const pageContentsRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -129,7 +129,7 @@ export const PageContents = () => {
 
   return (
     <div className="story--example">
-      <Page.Contents
+      <PageContents
         ref={pageContentsRef}
         fullWidth={false}
         scrollable={false}
@@ -139,7 +139,7 @@ export const PageContents = () => {
           className="mockComponent pageContents"
           style={{height: `${1200}px`}}
         />
-      </Page.Contents>
+      </PageContents>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -147,7 +147,7 @@ export const PageContents = () => {
   )
 }
 
-PageContents.story = {
+_PageContents.story = {
   name: 'PageContents',
 
   parameters: {
@@ -157,8 +157,8 @@ PageContents.story = {
   },
 }
 
-export const PageTitle = () => {
-  const pageTitleRef = createRef<PageTitleRef>()
+export const _PageTitle = () => {
+  const pageTitleRef = createRef<HTMLHeadingElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -168,7 +168,7 @@ export const PageTitle = () => {
 
   return (
     <div className="story--example">
-      <Page.Title ref={pageTitleRef} title={'I am a page title!'} />
+      <PageTitle ref={pageTitleRef} title={'I am a page title!'} />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -176,7 +176,7 @@ export const PageTitle = () => {
   )
 }
 
-PageTitle.story = {
+_PageTitle.story = {
   name: 'PageTitle',
 
   parameters: {
@@ -203,31 +203,31 @@ export const FullPage = () => {
   return (
     <div className="mockPage appWrapper">
       <Page>
-        <Page.Header
+        <PageHeader
           fullWidth={false}
           gutters={(ComponentSize as Record<string, any>)['Small']}
         >
           <h1>Title</h1>
           <div className="mockComponent mockButton">Bloob</div>
-        </Page.Header>
-        <Page.ControlBar
+        </PageHeader>
+        <PageControlBar
           fullWidth={false}
           gutters={(ComponentSize as Record<string, any>)['Small']}
         >
-          <Page.ControlBarLeft>
+          <PageControlBarLeft>
             <SelectDropdown
               options={dummyDropdownOptions}
               selectedOption={dropdownActiveItem}
               onSelect={handleDropdownToggle}
               style={{width: '300px'}}
             />
-          </Page.ControlBarLeft>
-          <Page.ControlBarCenter>
+          </PageControlBarLeft>
+          <PageControlBarCenter>
             <SelectGroup
               shape={ButtonShape.StretchToFit}
               style={{width: '240px'}}
             >
-              <SelectGroup.Option
+              <SelectGroupOption
                 id="mode--write"
                 titleText="Write Mode"
                 active={true}
@@ -237,8 +237,8 @@ export const FullPage = () => {
                 }}
               >
                 Write
-              </SelectGroup.Option>
-              <SelectGroup.Option
+              </SelectGroupOption>
+              <SelectGroupOption
                 id="mode--preview"
                 titleText="Preview Mode"
                 active={false}
@@ -248,10 +248,10 @@ export const FullPage = () => {
                 }}
               >
                 Preview
-              </SelectGroup.Option>
+              </SelectGroupOption>
             </SelectGroup>
-          </Page.ControlBarCenter>
-          <Page.ControlBarRight>
+          </PageControlBarCenter>
+          <PageControlBarRight>
             <QuestionMarkTooltip tooltipContents="Yeehaw I'm a tooltip" />
             <Button text="Export Data" icon={IconFont.Export_New} />
             <SquareButton icon={IconFont.Remove_New} />
@@ -259,9 +259,9 @@ export const FullPage = () => {
               icon={IconFont.CheckMark_New}
               color={ComponentColor.Success}
             />
-          </Page.ControlBarRight>
-        </Page.ControlBar>
-        <Page.Contents
+          </PageControlBarRight>
+        </PageControlBar>
+        <PageContents
           fullWidth={false}
           scrollable={false}
           autoHideScrollbar={false}
@@ -271,7 +271,7 @@ export const FullPage = () => {
             className="mockComponent stretch"
             style={{height: `${'100%'}`}}
           />
-        </Page.Contents>
+        </PageContents>
       </Page>
     </div>
   )

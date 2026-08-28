@@ -8,9 +8,9 @@ Accordions add friction to discovering detailed content (since users have to cli
 ```tsx
 import {Accordion} from '@influxdata/clockface'
 ;<Accordion>
-  <Accordion.AccordionHeader>{headerItem}</Accordion.AccordionHeader>
-  <Accordion.AccordionBodyItem>{bodyItem1}</Accordion.AccordionBodyItem>
-  <Accordion.AccordionBodyItem>{bodyItem2}</Accordion.AccordionBodyItem>
+  <AccordionHeader>{headerItem}</AccordionHeader>
+  <AccordionBodyItem>{bodyItem1}</AccordionBodyItem>
+  <AccordionBodyItem>{bodyItem2}</AccordionBodyItem>
 </Accordion>
 ```
 

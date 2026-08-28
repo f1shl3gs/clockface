@@ -1,17 +1,16 @@
 // Libraries
-import {RefObject, createRef} from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
 import {
   Table,
-  TableRef,
-  TableHeaderRef,
-  TableHeaderCellRef,
-  TableBodyRef,
-  TableRowRef,
-  TableCellRef,
-  TableFooterRef,
+  TableRow,
+  TableFooter,
+  TableCell,
+  TableHeaderCell,
+  TableHeader,
+  TableBody,
 } from '../'
 
 // Types
@@ -28,13 +27,13 @@ import TableReadme from './Table.md?raw'
 export default {title: 'Components/Table/Family'}
 
 export const _Table = () => {
-  const tableRef: RefObject<TableRef | null> = createRef()
-  const tableHeaderRef: RefObject<TableHeaderRef | null> = createRef()
-  const tableHeaderCellRef: RefObject<TableHeaderCellRef | null> = createRef()
-  const tableBodyRef: RefObject<TableBodyRef | null> = createRef()
-  const tableRowRef: RefObject<TableRowRef | null> = createRef()
-  const tableCellRef: RefObject<TableCellRef | null> = createRef()
-  const tableFooterRef: RefObject<TableFooterRef | null> = createRef()
+  const tableRef = createRef<HTMLTableElement>()
+  const tableHeaderRef = createRef<HTMLTableSectionElement>()
+  const tableHeaderCellRef = createRef<HTMLTableCellElement>()
+  const tableBodyRef = createRef<HTMLTableSectionElement>()
+  const tableRowRef = createRef<HTMLTableRowElement>()
+  const tableCellRef = createRef<HTMLTableCellElement>()
+  const tableFooterRef = createRef<HTMLTableSectionElement>()
 
   const logRefs = (): void => {
     /* eslint-disable */
@@ -53,7 +52,7 @@ export const _Table = () => {
       <div className="story--test-buttons">
         <button onClick={logRefs}>Log Ref</button>
       </div>
-      <Table.Table
+      <Table
         ref={tableRef}
         cellPadding={(ComponentSize as Record<string, any>)['Small']}
         fontSize={(ComponentSize as Record<string, any>)['Medium']}
@@ -62,120 +61,120 @@ export const _Table = () => {
         highlight={false}
         style={{width: '100%'}}
       >
-        <Table.Header ref={tableHeaderRef}>
-          <Table.Row ref={tableRowRef}>
-            <Table.HeaderCell
+        <TableHeader ref={tableHeaderRef}>
+          <TableRow ref={tableRowRef}>
+            <TableHeaderCell
               ref={tableHeaderCellRef}
               style={{width: `${'30%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Name
-            </Table.HeaderCell>
-            <Table.HeaderCell
+            </TableHeaderCell>
+            <TableHeaderCell
               style={{width: `${'50%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Description
-            </Table.HeaderCell>
-            <Table.HeaderCell
+            </TableHeaderCell>
+            <TableHeaderCell
               style={{width: `${'20%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               Price
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body ref={tableBodyRef}>
-          <Table.Row color={(ComponentColor as Record<string, any>)['Default']}>
-            <Table.Cell
+            </TableHeaderCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody ref={tableBodyRef}>
+          <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
+            <TableCell
               ref={tableCellRef}
               style={{width: `${'30%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Peach
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'50%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               A sweet fruit that makes a great pie
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'20%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $5.00
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row color={(ComponentColor as Record<string, any>)['Default']}>
-            <Table.Cell
+            </TableCell>
+          </TableRow>
+          <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
+            <TableCell
               style={{width: `${'30%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Pineapple
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'50%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Tropical, highly sought after, and a requirement for a Piña Colada
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'20%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $8.00
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row color={(ComponentColor as Record<string, any>)['Default']}>
-            <Table.Cell
+            </TableCell>
+          </TableRow>
+          <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
+            <TableCell
               style={{width: `${'30%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Yuzu
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'50%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               A golden citrus fruit from Japan & China with a powerful aroma
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'20%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $11.00
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row color={(ComponentColor as Record<string, any>)['Default']}>
-            <Table.Cell
+            </TableCell>
+          </TableRow>
+          <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
+            <TableCell
               style={{width: `${'30%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Lychee
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'50%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               A light and refreshing fruit encased in a spiky shell
-            </Table.Cell>
-            <Table.Cell
+            </TableCell>
+            <TableCell
               style={{width: `${'20%'}`}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $2.00
-            </Table.Cell>
-          </Table.Row>
-        </Table.Body>
-        <Table.Footer ref={tableFooterRef}>
-          <Table.Row>
-            <Table.Cell colSpan={3}>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+        <TableFooter ref={tableFooterRef}>
+          <TableRow>
+            <TableCell colSpan={3}>
               *All fruits are shipped in padded boxes to ensure quality
-            </Table.Cell>
-          </Table.Row>
-        </Table.Footer>
-      </Table.Table>
+            </TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
     </div>
   )
 }

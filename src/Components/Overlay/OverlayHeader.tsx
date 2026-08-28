@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -12,53 +12,47 @@ export interface OverlayHeaderProps extends StandardFunctionProps {
   onDismiss?: () => void
   /** Wrap text */
   wrapText?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type OverlayHeaderRef = HTMLDivElement
+export const OverlayHeader: FunctionComponent<OverlayHeaderProps> = ({
+  id,
+  style,
+  title,
+  testID = 'overlay--header',
+  wrapText = false,
+  children,
+  className,
+  onDismiss,
+  ref,
+}) => {
+  const overlayHeaderClass = classnames('cf-overlay--header', {
+    'cf-overlay--header__wrap': wrapText,
+    'cf-overlay--header__nowrap': !wrapText,
+    'cf-overlay--header__dismissable': onDismiss,
+    [`${className}`]: className,
+  })
 
-export const OverlayHeader = forwardRef<OverlayHeaderRef, OverlayHeaderProps>(
-  (
-    {
-      id,
-      style,
-      title,
-      testID = 'overlay--header',
-      wrapText = false,
-      children,
-      className,
-      onDismiss,
-    },
-    ref
-  ) => {
-    const overlayHeaderClass = classnames('cf-overlay--header', {
-      'cf-overlay--header__wrap': wrapText,
-      'cf-overlay--header__nowrap': !wrapText,
-      'cf-overlay--header__dismissable': onDismiss,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={overlayHeaderClass}
-        data-testid={testID}
-      >
-        <div className="cf-overlay--title" title={title}>
-          {title}
-        </div>
-        {children && children}
-        {onDismiss && (
-          <button
-            className="cf-overlay--dismiss"
-            onClick={onDismiss}
-            type="button"
-          />
-        )}
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={overlayHeaderClass}
+      data-testid={testID}
+    >
+      <div className="cf-overlay--title" title={title}>
+        {title}
       </div>
-    )
-  }
-)
-
-OverlayHeader.displayName = 'OverlayHeader'
+      {children && children}
+      {onDismiss && (
+        <button
+          className="cf-overlay--dismiss"
+          onClick={onDismiss}
+          type="button"
+        />
+      )}
+    </div>
+  )
+}

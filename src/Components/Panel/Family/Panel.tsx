@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -33,62 +33,53 @@ export interface PanelProps extends StandardFunctionProps {
   dismissButtonColor?: ComponentColor
   /** Renders a border based on the background color or gradient */
   border?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type PanelRef = HTMLDivElement
+export const Panel: FunctionComponent<PanelProps> = ({
+  id,
+  style,
+  testID = 'panel',
+  border = false,
+  gradient,
+  children,
+  className,
+  onDismiss,
+  backgroundColor = InfluxColors.Castle,
+  dismissButtonColor = ComponentColor.Primary,
+  ref,
+}) => {
+  const textColor = calculateTextColorFromBackground(backgroundColor, gradient)
 
-export const PanelRoot = forwardRef<PanelRef, PanelProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'panel',
-      border = false,
-      gradient,
-      children,
-      className,
-      onDismiss,
-      backgroundColor = InfluxColors.Castle,
-      dismissButtonColor = ComponentColor.Primary,
-    },
-    ref
-  ) => {
-    const textColor = calculateTextColorFromBackground(
-      backgroundColor,
-      gradient
-    )
+  const panelClass = classnames('cf-panel', {
+    [`${className}`]: className,
+    'cf-panel__gradient': gradient,
+    'cf-panel__bordered': border,
+    [`cf-panel__${textColor}-text`]: textColor,
+  })
 
-    const panelClass = classnames('cf-panel', {
-      [`${className}`]: className,
-      'cf-panel__gradient': gradient,
-      'cf-panel__bordered': border,
-      [`cf-panel__${textColor}-text`]: textColor,
-    })
+  const dismissButton = onDismiss && (
+    <DismissButton onClick={onDismiss} color={dismissButtonColor} />
+  )
 
-    const dismissButton = onDismiss && (
-      <DismissButton onClick={onDismiss} color={dismissButtonColor} />
-    )
+  const panelStyle = generateBackgroundStyle(
+    backgroundColor,
+    gradient,
+    border,
+    style
+  )
 
-    const panelStyle = generateBackgroundStyle(
-      backgroundColor,
-      gradient,
-      border,
-      style
-    )
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={panelStyle}
-        data-testid={testID}
-        className={panelClass}
-      >
-        {dismissButton}
-        {children}
-      </div>
-    )
-  }
-)
-
-PanelRoot.displayName = 'Panel'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={panelStyle}
+      data-testid={testID}
+      className={panelClass}
+    >
+      {dismissButton}
+      {children}
+    </div>
+  )
+}

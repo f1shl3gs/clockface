@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -16,46 +16,40 @@ import {
 
 export interface OverlayFooterProps extends StandardFunctionProps {
   justifyContent?: JustifyContent
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type OverlayFooterRef = HTMLDivElement
+export const OverlayFooter: FunctionComponent<OverlayFooterProps> = ({
+  id,
+  style,
+  testID = 'overlay--footer',
+  children,
+  className,
+  justifyContent = JustifyContent.FlexEnd,
+  ref,
+}) => {
+  const overlayFooterClass = classnames('cf-overlay--footer', {
+    [`${className}`]: className,
+  })
 
-export const OverlayFooter = forwardRef<OverlayFooterRef, OverlayFooterProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'overlay--footer',
-      children,
-      className,
-      justifyContent = JustifyContent.FlexEnd,
-    },
-    ref
-  ) => {
-    const overlayFooterClass = classnames('cf-overlay--footer', {
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={overlayFooterClass}
-        data-testid={testID}
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={overlayFooterClass}
+      data-testid={testID}
+    >
+      <FlexBox
+        margin={ComponentSize.Small}
+        direction={FlexDirection.Row}
+        justifyContent={justifyContent}
+        alignItems={AlignItems.Center}
+        stretchToFitWidth={true}
       >
-        <FlexBox
-          margin={ComponentSize.Small}
-          direction={FlexDirection.Row}
-          justifyContent={justifyContent}
-          alignItems={AlignItems.Center}
-          stretchToFitWidth={true}
-        >
-          {children}
-        </FlexBox>
-      </div>
-    )
-  }
-)
-
-OverlayFooter.displayName = 'OverlayFooter'
+        {children}
+      </FlexBox>
+    </div>
+  )
+}

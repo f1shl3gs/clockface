@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, MouseEvent} from 'react'
+import {MouseEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -31,75 +31,69 @@ export interface DropdownItemProps extends StandardFunctionProps {
   disabled?: boolean
 
   trailingIconOnSelected?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
 
-export type DropdownItemRef = HTMLButtonElement
+export const DropdownItem: FunctionComponent<DropdownItemProps> = ({
+  id,
+  type = DropdownItemType.None,
+  style,
+  value,
+  title,
+  testID = 'dropdown-item',
+  onClick,
+  wrapText = false,
+  selected = false,
+  children,
+  disabled,
+  className,
+  trailingIconOnSelected = false,
+  ref,
+}) => {
+  const dropdownItemClass = classnames('cf-dropdown-item', {
+    [`cf-dropdown-item__${type}`]:
+      type === DropdownItemType.Checkbox || type === DropdownItemType.Dot,
+    active: selected,
+    [`${className}`]: className,
+    'cf-dropdown-item__wrap': wrapText,
+    'cf-dropdown-item__no-wrap': !wrapText,
+    'cf-dropdown-item__disabled': disabled,
+  })
 
-export const DropdownItem = forwardRef<DropdownItemRef, DropdownItemProps>(
-  (
-    {
-      id,
-      type = DropdownItemType.None,
-      style,
-      value,
-      title,
-      testID = 'dropdown-item',
-      onClick,
-      wrapText = false,
-      selected = false,
-      children,
-      disabled,
-      className,
-      trailingIconOnSelected = false,
-    },
-    ref
-  ) => {
-    const dropdownItemClass = classnames('cf-dropdown-item', {
-      [`cf-dropdown-item__${type}`]:
-        type === DropdownItemType.Checkbox || type === DropdownItemType.Dot,
-      active: selected,
-      [`${className}`]: className,
-      'cf-dropdown-item__wrap': wrapText,
-      'cf-dropdown-item__no-wrap': !wrapText,
-      'cf-dropdown-item__disabled': disabled,
-    })
+  const handleClick = (e: MouseEvent<HTMLElement>): void => {
+    e.preventDefault()
 
-    const handleClick = (e: MouseEvent<HTMLElement>): void => {
-      e.preventDefault()
-
-      if (onClick && !disabled) {
-        onClick(value)
-      }
+    if (onClick && !disabled) {
+      onClick(value)
     }
-
-    return (
-      <button
-        type="button"
-        id={id}
-        ref={ref}
-        style={style}
-        title={title}
-        onClick={handleClick}
-        className={dropdownItemClass}
-        data-testid={testID}
-      >
-        <DropdownItemSelectionIndicator type={type} />
-        <div className="cf-dropdown-item--children">
-          {children}
-          {trailingIconOnSelected && selected && (
-            <Icon
-              glyph={IconFont.CheckMark_New}
-              style={{
-                float: 'right',
-                color: InfluxColors.Pool,
-                fontSize: '20px',
-              }}
-            />
-          )}
-        </div>
-      </button>
-    )
   }
-)
 
-DropdownItem.displayName = 'DropdownItem'
+  return (
+    <button
+      type="button"
+      id={id}
+      ref={ref}
+      style={style}
+      title={title}
+      onClick={handleClick}
+      className={dropdownItemClass}
+      data-testid={testID}
+    >
+      <DropdownItemSelectionIndicator type={type} />
+      <div className="cf-dropdown-item--children">
+        {children}
+        {trailingIconOnSelected && selected && (
+          <Icon
+            glyph={IconFont.CheckMark_New}
+            style={{
+              float: 'right',
+              color: InfluxColors.Pool,
+              fontSize: '20px',
+            }}
+          />
+        )}
+      </div>
+    </button>
+  )
+}

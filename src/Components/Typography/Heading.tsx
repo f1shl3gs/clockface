@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, MouseEvent} from 'react'
+import React, {MouseEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -29,57 +29,51 @@ export interface HeadingProps extends StandardFunctionProps {
   onClick?: (e?: MouseEvent<HTMLButtonElement>) => void
   /** Alternate text */
   alt?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLHeadingElement>
 }
 
-export type HeadingRef = HTMLHeadingElement
+export const Heading: FunctionComponent<HeadingProps> = ({
+  id,
+  alt,
+  weight = FontWeight.Medium,
+  type = Typeface.ProximaNova,
+  style,
+  underline,
+  testID = 'heading',
+  element,
+  children,
+  className,
+  selectable = false,
+  appearance,
+  onClick,
+  ref,
+}) => {
+  const visualElement = appearance || element
 
-export const Heading = forwardRef<HeadingRef, HeadingProps>(
-  (
+  const headingClass = classnames('cf-heading', {
+    'cf-heading__standard': type === Typeface.ProximaNova,
+    'cf-heading__monospace': type === Typeface.RobotoMono,
+    [`cf-heading__${weight}`]: weight,
+    'cf-heading__underline': underline,
+    'cf-heading__selectable': selectable,
+    [`cf-heading__${visualElement}`]: visualElement,
+    [`${className}`]: className,
+  })
+
+  const headingElement = `${element}`
+
+  return React.createElement(
+    headingElement,
     {
       id,
+      ref,
       alt,
-      weight = FontWeight.Medium,
-      type = Typeface.ProximaNova,
       style,
-      underline,
-      testID = 'heading',
-      element,
-      children,
-      className,
-      selectable = false,
-      appearance,
+      className: headingClass,
+      'data-testid': testID,
       onClick,
     },
-    ref
-  ) => {
-    const visualElement = appearance || element
-
-    const headingClass = classnames('cf-heading', {
-      'cf-heading__standard': type === Typeface.ProximaNova,
-      'cf-heading__monospace': type === Typeface.RobotoMono,
-      [`cf-heading__${weight}`]: weight,
-      'cf-heading__underline': underline,
-      'cf-heading__selectable': selectable,
-      [`cf-heading__${visualElement}`]: visualElement,
-      [`${className}`]: className,
-    })
-
-    const headingElement = `${element}`
-
-    return React.createElement(
-      headingElement,
-      {
-        id,
-        ref,
-        alt,
-        style,
-        className: headingClass,
-        'data-testid': testID,
-        onClick,
-      },
-      children
-    )
-  }
-)
-
-Heading.displayName = 'Heading'
+    children
+  )
+}

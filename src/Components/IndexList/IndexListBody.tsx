@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import React, {FunctionComponent, Ref} from 'react'
 
 // Types
 import {StandardFunctionProps} from '../../Types'
@@ -10,59 +10,50 @@ export interface IndexListBodyProps extends StandardFunctionProps {
   emptyState: React.ReactElement
   /** Used to ensure the empty state takes up the full width of the table */
   columnCount: number
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLTableSectionElement>
 }
 
-export type IndexListBodyRef = HTMLTableSectionElement
+export const IndexListBody: FunctionComponent<IndexListBodyProps> = ({
+  id,
+  style,
+  children,
+  className,
+  emptyState,
+  columnCount,
+  testID = 'index-list--body',
+  ref,
+}) => {
+  const indexListBodyClass = classnames('cf-index-list--body', {
+    [`${className}`]: className,
+  })
 
-export const IndexListBody = forwardRef<IndexListBodyRef, IndexListBodyProps>(
-  (
-    {
-      id,
-      style,
-      children,
-      className,
-      emptyState,
-      columnCount,
-      testID = 'index-list--body',
-    },
-    ref
-  ) => {
-    const indexListBodyClass = classnames('cf-index-list--body', {
-      [`${className}`]: className,
-    })
-
-    if (React.Children.count(children)) {
-      return (
-        <tbody
-          className={indexListBodyClass}
-          data-testid={testID}
-          id={id}
-          style={style}
-        >
-          {children}
-        </tbody>
-      )
-    }
-
+  if (React.Children.count(children)) {
     return (
       <tbody
-        ref={ref}
-        className="cf-index-list--empty"
-        data-testid={`${testID} empty`}
+        className={indexListBodyClass}
+        data-testid={testID}
+        id={id}
+        style={style}
       >
-        <tr className="cf-index-list--empty-row">
-          <td colSpan={columnCount}>
-            <div
-              className="cf-index-list--empty-cell"
-              data-testid="empty-state"
-            >
-              {emptyState}
-            </div>
-          </td>
-        </tr>
+        {children}
       </tbody>
     )
   }
-)
 
-IndexListBody.displayName = 'IndexListBody'
+  return (
+    <tbody
+      ref={ref}
+      className="cf-index-list--empty"
+      data-testid={`${testID} empty`}
+    >
+      <tr className="cf-index-list--empty-row">
+        <td colSpan={columnCount}>
+          <div className="cf-index-list--empty-cell" data-testid="empty-state">
+            {emptyState}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  )
+}

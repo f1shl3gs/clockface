@@ -7,12 +7,12 @@
 import {ResourceList} from '@influxdata/clockface'
 ```
 ```tsx
-<ResourceList.Header>
+<ResourceListHeader>
   // Children
-</ResourceList.Header>
+</ResourceListHeader>
 ```
 
-We recommend using `ResourceList.Sorter` as the child component type.
+We recommend using `ResourceListSorter` as the child component type.
 
 ### Example
 <!-- STORY -->

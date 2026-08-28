@@ -1,8 +1,14 @@
 // Libraries
-import {forwardRef, MouseEvent} from 'react'
+import {MouseEvent, FunctionComponent, Ref} from 'react'
 
 // Components
-import {Dropdown, DropdownRef} from '../'
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownDivider,
+  DropdownButton,
+} from '../'
 
 // Constants
 import {DROPDOWN_DIVIDER_SHORTCODE} from '../../../Constants'
@@ -41,95 +47,86 @@ export interface SelectDropdownProps extends StandardFunctionProps {
   menuMaxHeight?: number
   /** Renders the menu element above the button instead of below */
   dropUp?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type SelectDropdownRef = DropdownRef
+export const SelectDropdown: FunctionComponent<SelectDropdownProps> = ({
+  id,
+  style = {width: '100%'},
+  testID = 'select-dropdown',
+  dropUp = false,
+  options,
+  onSelect,
+  className,
+  menuTheme = DropdownMenuTheme.Onyx,
+  buttonSize = ComponentSize.Small,
+  buttonIcon,
+  indicator = DropdownItemType.Dot,
+  buttonColor = ComponentColor.Default,
+  buttonStatus = ComponentStatus.Default,
+  menuMaxHeight,
+  selectedOption,
+  ref,
+}) => {
+  const button = (
+    active: boolean,
+    onClick: (e?: MouseEvent<HTMLElement>) => void
+  ) => (
+    <DropdownButton
+      active={active}
+      onClick={onClick}
+      status={buttonStatus}
+      color={buttonColor}
+      size={buttonSize}
+      icon={buttonIcon}
+    >
+      {selectedOption}
+    </DropdownButton>
+  )
 
-export const SelectDropdown = forwardRef<
-  SelectDropdownRef,
-  SelectDropdownProps
->(
-  (
-    {
-      id,
-      style = {width: '100%'},
-      testID = 'select-dropdown',
-      dropUp = false,
-      options,
-      onSelect,
-      className,
-      menuTheme = DropdownMenuTheme.Onyx,
-      buttonSize = ComponentSize.Small,
-      buttonIcon,
-      indicator = DropdownItemType.Dot,
-      buttonColor = ComponentColor.Default,
-      buttonStatus = ComponentStatus.Default,
-      menuMaxHeight,
-      selectedOption,
-    },
-    ref
-  ) => {
-    const button = (
-      active: boolean,
-      onClick: (e?: MouseEvent<HTMLElement>) => void
-    ) => (
-      <Dropdown.Button
-        active={active}
-        onClick={onClick}
-        status={buttonStatus}
-        color={buttonColor}
-        size={buttonSize}
-        icon={buttonIcon}
-      >
-        {selectedOption}
-      </Dropdown.Button>
-    )
+  const menu = (onCollapse?: () => void) => (
+    <DropdownMenu
+      theme={menuTheme}
+      maxHeight={menuMaxHeight}
+      onCollapse={onCollapse}
+    >
+      {options.map(o => {
+        if (o === DROPDOWN_DIVIDER_SHORTCODE) {
+          return <DropdownDivider key={o} />
+        }
 
-    const menu = (onCollapse?: () => void) => (
-      <Dropdown.Menu
-        theme={menuTheme}
-        maxHeight={menuMaxHeight}
-        onCollapse={onCollapse}
-      >
-        {options.map(o => {
-          if (o === DROPDOWN_DIVIDER_SHORTCODE) {
-            return <Dropdown.Divider key={o} />
-          }
+        if (o.includes(DROPDOWN_DIVIDER_SHORTCODE)) {
+          const dividerText = o.replace(DROPDOWN_DIVIDER_SHORTCODE, '')
+          return <DropdownDivider key={o} text={dividerText} />
+        }
 
-          if (o.includes(DROPDOWN_DIVIDER_SHORTCODE)) {
-            const dividerText = o.replace(DROPDOWN_DIVIDER_SHORTCODE, '')
-            return <Dropdown.Divider key={o} text={dividerText} />
-          }
+        return (
+          <DropdownItem
+            key={o}
+            type={indicator}
+            value={o}
+            title={o}
+            selected={o === selectedOption}
+            onClick={onSelect}
+          >
+            {o}
+          </DropdownItem>
+        )
+      })}
+    </DropdownMenu>
+  )
 
-          return (
-            <Dropdown.Item
-              key={o}
-              type={indicator}
-              value={o}
-              title={o}
-              selected={o === selectedOption}
-              onClick={onSelect}
-            >
-              {o}
-            </Dropdown.Item>
-          )
-        })}
-      </Dropdown.Menu>
-    )
-
-    return (
-      <Dropdown.Dropdown
-        id={id}
-        ref={ref}
-        style={style}
-        testID={testID}
-        dropUp={dropUp}
-        className={className}
-        button={button}
-        menu={menu}
-      />
-    )
-  }
-)
-
-SelectDropdown.displayName = 'SelectDropdown'
+  return (
+    <Dropdown
+      id={id}
+      ref={ref}
+      style={style}
+      testID={testID}
+      dropUp={dropUp}
+      className={className}
+      button={button}
+      menu={menu}
+    />
+  )
+}

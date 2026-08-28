@@ -6,7 +6,7 @@ import {
   IconFont,
   StandardFunctionProps,
 } from '../../Types'
-import {FC, MouseEvent} from 'react'
+import {FunctionComponent, MouseEvent} from 'react'
 import classnames from 'classnames'
 
 // Styles
@@ -39,7 +39,7 @@ export interface DropdownHeaderProps extends StandardFunctionProps {
  * This was built because the other header is a button, and the input has a button inside it (the 'x') which makes it clearable,
  * and React DOM does not allow a button to be nested inside another button.
  */
-export const DropdownHeader: FC<DropdownHeaderProps> = ({
+export const DropdownHeader: FunctionComponent<DropdownHeaderProps> = ({
   id,
   style,
   onClick,

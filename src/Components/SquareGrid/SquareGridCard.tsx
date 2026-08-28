@@ -1,18 +1,23 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
 import {StandardFunctionProps} from '../../Types'
 
-export interface SquareGridCardProps extends StandardFunctionProps {}
+export interface SquareGridCardProps extends StandardFunctionProps {
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
+}
 
-export type SquareGridCardRef = HTMLDivElement
-
-export const SquareGridCard = forwardRef<
-  SquareGridCardRef,
-  SquareGridCardProps
->(({id, style, testID = 'square-grid--card', children, className}, ref) => {
+export const SquareGridCard: FunctionComponent<SquareGridCardProps> = ({
+  id,
+  style,
+  testID = 'square-grid--card',
+  children,
+  className,
+  ref,
+}) => {
   const gridRowClass = classnames('cf-square-grid--card', {
     [`${className}`]: className,
   })
@@ -28,6 +33,4 @@ export const SquareGridCard = forwardRef<
       {children}
     </div>
   )
-})
-
-SquareGridCard.displayName = 'SquareGridCard'
+}

@@ -30,5 +30,3 @@ export const NavMenuSubItem: FunctionComponent<NavMenuSubItemProps> = ({
 
   return titleLink(titleClass, testID, style)
 }
-
-NavMenuSubItem.displayName = 'NavMenuSubItem'

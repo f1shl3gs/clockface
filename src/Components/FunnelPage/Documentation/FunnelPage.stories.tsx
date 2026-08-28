@@ -3,13 +3,13 @@ import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {FunnelPage, FunnelPageRef, FunnelPageFooterRef} from '../'
+import {FunnelPage, FunnelPageFooter, FunnelPageFooterSection} from '../'
 import {AppWrapper} from '../../AppWrapper/AppWrapper'
 import {Icon, Bullet} from '../../Icon'
 import {Button} from '../../Button/Composed/Button'
 import {CTAButton} from '../../Button/Composed/CTAButton'
-import {Grid} from '../../Grid'
-import {Panel} from '../../Panel'
+import {Grid, GridColumn, GridRow} from '../../Grid'
+import {Panel, PanelBody, PanelSymbolHeader} from '../../Panel'
 import {FlexBox} from '../../FlexBox'
 import {Heading} from '../../Typography'
 import {Notification} from '../../Notification'
@@ -36,7 +36,7 @@ import ExampleFunnelPageReadme from './ExampleFunnelPage.md?raw'
 export default {title: 'Layout/FunnelPage/Family'}
 
 export const _FunnelPage = () => {
-  const funnelPageRef = createRef<FunnelPageRef>()
+  const funnelPageRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -55,7 +55,7 @@ export const _FunnelPage = () => {
           <button onClick={logRef}>Log Ref</button>
         </div>
         <AppWrapper type="funnel">
-          <FunnelPage.FunnelPage
+          <FunnelPage
             ref={funnelPageRef}
             logo={logo}
             enableGraphic={false}
@@ -113,7 +113,7 @@ export const _FunnelPage = () => {
               readymade 3 wolf moon meditation swag. Selvage irony paleo franzen
               pork belly shoreditch.
             </p>
-          </FunnelPage.FunnelPage>
+          </FunnelPage>
         </AppWrapper>
       </div>
     </div>
@@ -130,8 +130,8 @@ _FunnelPage.story = {
   },
 }
 
-export const FunnelPageFooter = () => {
-  const funnelPageFooterRef = createRef<FunnelPageFooterRef>()
+export const _FunnelPageFooter = () => {
+  const funnelPageFooterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -144,16 +144,16 @@ export const FunnelPageFooter = () => {
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
-      <FunnelPage.Footer>
-        <FunnelPage.FooterSection>
+      <FunnelPageFooter ref={funnelPageFooterRef}>
+        <FunnelPageFooterSection>
           <p>I am a footer!</p>
-        </FunnelPage.FooterSection>
-      </FunnelPage.Footer>
+        </FunnelPageFooterSection>
+      </FunnelPageFooter>
     </div>
   )
 }
 
-FunnelPageFooter.story = {
+_FunnelPageFooter.story = {
   name: 'FunnelPageFooter',
 
   parameters: {
@@ -193,8 +193,8 @@ export const SignUpPage = () => {
               Yeehaw I'm a notification
             </Notification>
             <Grid>
-              <Grid.Row>
-                <Grid.Column widthSM={Columns.Eight} offsetSM={Columns.Two}>
+              <GridRow>
+                <GridColumn widthSM={Columns.Eight} offsetSM={Columns.Two}>
                   <Heading
                     element={HeadingElement.H1}
                     className="cf-funnel-page--title"
@@ -208,7 +208,7 @@ export const SignUpPage = () => {
                     No credit card required
                   </Heading>
                   <Panel>
-                    <Panel.SymbolHeader
+                    <PanelSymbolHeader
                       symbol={<Bullet text="1" />}
                       title={
                         <Heading
@@ -219,16 +219,16 @@ export const SignUpPage = () => {
                         </Heading>
                       }
                     />
-                    <Panel.Body>
+                    <PanelBody>
                       <p style={{textAlign: 'left'}}>
                         Lorem ipsum dolor amet cold-pressed selvage literally
                         humblebrag YOLO, kale chips adaptogen whatever synth
                         deep v letterpress iceland post-ironic.
                       </p>
-                    </Panel.Body>
+                    </PanelBody>
                   </Panel>
                   <Panel>
-                    <Panel.SymbolHeader
+                    <PanelSymbolHeader
                       symbol={<Bullet text="2" />}
                       title={
                         <h3 className="cf-funnel-page--panel-title">
@@ -236,16 +236,16 @@ export const SignUpPage = () => {
                         </h3>
                       }
                     />
-                    <Panel.Body>
+                    <PanelBody>
                       <p style={{textAlign: 'left'}}>
                         Lorem ipsum dolor amet cold-pressed selvage literally
                         humblebrag YOLO, kale chips adaptogen whatever synth
                         deep v letterpress iceland post-ironic.
                       </p>
-                    </Panel.Body>
+                    </PanelBody>
                   </Panel>
                   <Panel>
-                    <Panel.SymbolHeader
+                    <PanelSymbolHeader
                       symbol={<Bullet text="3" />}
                       title={
                         <h3 className="cf-funnel-page--panel-title">
@@ -253,24 +253,24 @@ export const SignUpPage = () => {
                         </h3>
                       }
                     />
-                    <Panel.Body>
+                    <PanelBody>
                       <p style={{textAlign: 'left'}}>
                         Lorem ipsum dolor amet cold-pressed selvage literally
                         humblebrag YOLO, kale chips adaptogen whatever synth
                         deep v letterpress iceland post-ironic.
                       </p>
-                    </Panel.Body>
+                    </PanelBody>
                   </Panel>
                   <p className="cf-funnel-page--subtitle">
                     Next: <strong>Make Some Spaghetti</strong>
                   </p>
                   <CTAButton text="Continue" color={ComponentColor.Primary} />
-                </Grid.Column>
-              </Grid.Row>
+                </GridColumn>
+              </GridRow>
             </Grid>
           </FunnelPage>
-          <FunnelPage.Footer>
-            <FunnelPage.FooterSection
+          <FunnelPageFooter>
+            <FunnelPageFooterSection
               style={{backgroundColor: InfluxColors.Raven}}
             >
               <p style={{margin: '6px 0', fontWeight: 900, fontSize: '14px'}}>
@@ -280,11 +280,11 @@ export const SignUpPage = () => {
                 />{' '}
                 Set budgets and alerts to control costs
               </p>
-            </FunnelPage.FooterSection>
-            <FunnelPage.FooterSection>
+            </FunnelPageFooterSection>
+            <FunnelPageFooterSection>
               <Grid>
-                <Grid.Row>
-                  <Grid.Column widthSM={Columns.Eight} offsetSM={Columns.Two}>
+                <GridRow>
+                  <GridColumn widthSM={Columns.Eight} offsetSM={Columns.Two}>
                     <FlexBox
                       justifyContent={JustifyContent.SpaceBetween}
                       alignItems={AlignItems.Center}
@@ -310,11 +310,11 @@ export const SignUpPage = () => {
                         onClick={handleShowNotification}
                       />
                     </FlexBox>
-                  </Grid.Column>
-                </Grid.Row>
+                  </GridColumn>
+                </GridRow>
               </Grid>
-            </FunnelPage.FooterSection>
-          </FunnelPage.Footer>
+            </FunnelPageFooterSection>
+          </FunnelPageFooter>
         </AppWrapper>
       </div>
     </div>

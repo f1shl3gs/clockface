@@ -7,9 +7,9 @@
 import {ResourceCard} from '@influxdata/clockface'
 ```
 ```tsx
-<ResourceCard.Meta>
+<ResourceCardMeta>
   // Children
-</ResourceCard.Meta>
+</ResourceCardMeta>
 ```
 
 ### Example

@@ -6,7 +6,7 @@ DropdownButton is part of the Dropdown component family and can be accessed from
 ```tsx
 import {Dropdown} from '@influxdata/clockface'
 
-<Dropdown.Button />
+<DropdownButton />
 ```
 
 ### Example

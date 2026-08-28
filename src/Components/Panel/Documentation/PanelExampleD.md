@@ -10,8 +10,8 @@ import {Panel} from '@influxdata/clockface'
 
 ```tsx
 <Panel>
-  <Panel.SymbolHeader />
-  <Panel.Body gradient={Gradients.DocScott}>// Contents</Panel.Body>
+  <PanelSymbolHeader />
+  <PanelBody gradient={Gradients.DocScott}>// Contents</PanelBody>
 </Panel>
 ```
 

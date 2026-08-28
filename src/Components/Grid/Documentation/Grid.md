@@ -7,15 +7,15 @@ This is an implementation of a traditional page layout grid. The reason there ar
 import {Grid} from '@influxdata/clockface'
 // Sub-components
 <Grid />
-<Grid.Row />
-<Grid.Column />
+<GridRow />
+<GridColumn />
 ```
 
 `<Grid />` is intended to contain a grid.
 
-`<Grid.Row />` is intended to contain columns and primarily control how columns wrap.
+`<GridRow />` is intended to contain columns and primarily control how columns wrap.
 
-`<Grid.Column />` is a container for content with a built in margin to separate it from neighboring columns.
+`<GridColumn />` is a container for content with a built in margin to separate it from neighboring columns.
 
 While this component family may seem like the ultimate layout tool, it is also bulkier. For simply aligning elements we recommend using `<FlexBox />` instead.
 

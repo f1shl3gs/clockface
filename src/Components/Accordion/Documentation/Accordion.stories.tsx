@@ -3,30 +3,30 @@ import {createRef, KeyboardEvent, useEffect, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Accordion, AccordionRef} from '../'
+import {Accordion} from '../'
 
 // Types
-
 // Notes
 import AccordionReadme from './Accordion.md?raw'
 import {InputLabel, Toggle} from '../../Inputs'
 import {
   AlignItems,
   ComponentSize,
-  FlexDirection,
   Direction,
+  FlexDirection,
+  HeadingElement,
   InputToggleType,
   JustifyContent,
-  HeadingElement,
 } from '../../../Types'
-import {FlexBox} from '../../FlexBox'
+import {FlexBox, FlexBoxChild} from '../../FlexBox'
 import {AccordionBodyItem} from '../AccordionBodyItem'
 import {Heading} from '../../Typography'
+import {AccordionHeader} from '../AccordionHeader'
 
 export default {title: 'Components / Accordion / Examples'}
 
 export const AccordionWithToggles = () => {
-  const accordionRef = createRef<AccordionRef>()
+  const accordionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -137,8 +137,8 @@ export const AccordionWithToggles = () => {
     Object.keys(object).forEach(element => {
       const newState = {[actionType]: state}
       const value = object[element]
-      const newValue = {...value, ...newState}
-      object[element] = newValue
+
+      object[element] = {...value, ...newState}
     })
     setter(object)
   }
@@ -157,10 +157,10 @@ export const AccordionWithToggles = () => {
       alignItems={AlignItems.Center}
       style={{textAlign: 'start'}}
     >
-      <FlexBox.Child basis={40} grow={8}>
+      <FlexBoxChild basis={40} grow={8}>
         <InputLabel size={ComponentSize.Medium}>{title}</InputLabel>
-      </FlexBox.Child>
-      <FlexBox.Child grow={1}>
+      </FlexBoxChild>
+      <FlexBoxChild grow={1}>
         <Toggle
           id={id}
           type={InputToggleType.Checkbox}
@@ -173,9 +173,9 @@ export const AccordionWithToggles = () => {
             e.stopPropagation()
           }}
           disabled={disabled}
-        ></Toggle>
-      </FlexBox.Child>
-      <FlexBox.Child grow={1}>
+        />
+      </FlexBoxChild>
+      <FlexBoxChild grow={1}>
         <Toggle
           id={id + '1'}
           type={InputToggleType.Checkbox}
@@ -188,8 +188,8 @@ export const AccordionWithToggles = () => {
           style={margin}
           tabIndex={0}
           disabled={disabled}
-        ></Toggle>
-      </FlexBox.Child>
+        />
+      </FlexBoxChild>
     </FlexBox>
   )
   const accordionBody = (
@@ -210,10 +210,10 @@ export const AccordionWithToggles = () => {
       }} */
       style={{textAlign: 'start'}}
     >
-      <FlexBox.Child basis={40} grow={8}>
+      <FlexBoxChild basis={40} grow={8}>
         <InputLabel size={ComponentSize.Medium}>{title}</InputLabel>
-      </FlexBox.Child>
-      <FlexBox.Child grow={1}>
+      </FlexBoxChild>
+      <FlexBoxChild grow={1}>
         <Toggle
           id={id}
           type={InputToggleType.Checkbox}
@@ -233,9 +233,9 @@ export const AccordionWithToggles = () => {
             e.stopPropagation()
           }}
           disabled={disabled}
-        ></Toggle>
-      </FlexBox.Child>
-      <FlexBox.Child grow={1}>
+        />
+      </FlexBoxChild>
+      <FlexBoxChild grow={1}>
         <Toggle
           id={id + '1'}
           type={InputToggleType.Checkbox}
@@ -255,8 +255,8 @@ export const AccordionWithToggles = () => {
           style={margin}
           tabIndex={0}
           disabled={disabled}
-        ></Toggle>
-      </FlexBox.Child>
+        />
+      </FlexBoxChild>
     </FlexBox>
   )
 
@@ -276,20 +276,20 @@ export const AccordionWithToggles = () => {
           /* eslint-disable */
         }}
       >
-        <Accordion.AccordionHeader>
+        <AccordionHeader>
           {accordionHeader(
             '0',
             'Telegraf Configurations',
             [readAccss, writeAccess],
             [setReadAccess, setWriteAccess]
           )}
-        </Accordion.AccordionHeader>
+        </AccordionHeader>
         <AccordionBodyItem>
           <InputLabel size={ComponentSize.Medium}>
             {'Individual Telegraf Configurations'}
           </InputLabel>
         </AccordionBodyItem>
-        <Accordion.AccordionBodyItem>
+        <AccordionBodyItem>
           {accordionBody(
             '1',
             'Telegraf Configuration 1',
@@ -297,8 +297,8 @@ export const AccordionWithToggles = () => {
             setIndividualAccessStates,
             individualAccessStates
           )}
-        </Accordion.AccordionBodyItem>
-        <Accordion.AccordionBodyItem>
+        </AccordionBodyItem>
+        <AccordionBodyItem>
           {accordionBody(
             '2',
             'Telegraf Configuration 2',
@@ -306,7 +306,7 @@ export const AccordionWithToggles = () => {
             setIndividualAccessStates,
             individualAccessStates
           )}
-        </Accordion.AccordionBodyItem>
+        </AccordionBodyItem>
       </Accordion>
       <Accordion
         iconPlacement={(Direction as Record<string, any>)['Left']}
@@ -314,20 +314,20 @@ export const AccordionWithToggles = () => {
         disabled={disabled}
         style={{}}
       >
-        <Accordion.AccordionHeader>
+        <AccordionHeader>
           {accordionHeader(
             '5',
             'Bucket',
             [readAccss2, writeAccess2],
             [setReadAccess2, setWriteAccess2]
           )}
-        </Accordion.AccordionHeader>
+        </AccordionHeader>
         <AccordionBodyItem>
           <InputLabel size={ComponentSize.Medium}>
             {'Individual Telegraf Configurations'}
           </InputLabel>
         </AccordionBodyItem>
-        <Accordion.AccordionBodyItem>
+        <AccordionBodyItem>
           {accordionBody(
             '6',
             'Bucket 1',
@@ -335,8 +335,8 @@ export const AccordionWithToggles = () => {
             setIndividualAccessStates2,
             individualAccessStates2
           )}
-        </Accordion.AccordionBodyItem>
-        <Accordion.AccordionBodyItem>
+        </AccordionBodyItem>
+        <AccordionBodyItem>
           {accordionBody(
             '7',
             'Bucket 2',
@@ -344,7 +344,7 @@ export const AccordionWithToggles = () => {
             setIndividualAccessStates2,
             individualAccessStates2
           )}
-        </Accordion.AccordionBodyItem>
+        </AccordionBodyItem>
       </Accordion>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -364,7 +364,7 @@ AccordionWithToggles.story = {
 }
 
 export const AccordionWithPlainTexts = () => {
-  const accordionRef = createRef<AccordionRef>()
+  const accordionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -384,17 +384,18 @@ export const AccordionWithPlainTexts = () => {
         expanded={false}
         disabled={disabled}
         style={{}}
+        ref={accordionRef}
       >
-        <Accordion.AccordionHeader>
+        <AccordionHeader>
           <span>Cheese Ipsum</span>
-        </Accordion.AccordionHeader>
-        <Accordion.AccordionBodyItem>
+        </AccordionHeader>
+        <AccordionBodyItem>
           <span>
             This is your detailed body. This is your detailed body. This is your
             detailed body. This is your detailed body. This is your detailed
             body. This is your detailed body.
           </span>
-        </Accordion.AccordionBodyItem>
+        </AccordionBodyItem>
       </Accordion>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -414,7 +415,7 @@ AccordionWithPlainTexts.story = {
 }
 
 export const _Accordion = () => {
-  const accordionRef = createRef<AccordionRef>()
+  const accordionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -433,13 +434,14 @@ export const _Accordion = () => {
         expanded={false}
         disabled={disabled}
         style={{}}
+        ref={accordionRef}
       >
-        <Accordion.AccordionHeader>
+        <AccordionHeader>
           <Heading element={HeadingElement.H6} appearance={HeadingElement.Div}>
             Cheese Ipsum
           </Heading>
-        </Accordion.AccordionHeader>
-        <Accordion.AccordionBodyItem>
+        </AccordionHeader>
+        <AccordionBodyItem>
           <span>
             This is your detailed body. This is your detailed body. This is your
             detailed body. This is your detailed body. This is your detailed
@@ -450,14 +452,14 @@ export const _Accordion = () => {
             your detailed body. This is your detailed body. This is your
             detailed body. This is your detailed body.
           </span>
-        </Accordion.AccordionBodyItem>
+        </AccordionBodyItem>
       </Accordion>
       <Accordion disabled={disabled}>
-        <Accordion.AccordionHeader>
+        <AccordionHeader>
           <Heading element={HeadingElement.H6} appearance={HeadingElement.Div}>
             Accordion with No Body Item
           </Heading>
-        </Accordion.AccordionHeader>
+        </AccordionHeader>
       </Accordion>
 
       <div className="story--test-buttons">

@@ -7,9 +7,9 @@ IndexListHeader is intended to be the first child of `IndexList`, similar to `<t
 import {IndexList} from '@influxdata/clockface'
 ```
 ```tsx
-<IndexList.Header>
+<IndexListHeader>
   // List header cells go here
-</IndexList.Header>
+</IndexListHeader>
 ```
 
 ### Example

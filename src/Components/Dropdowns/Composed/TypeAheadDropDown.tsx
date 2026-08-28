@@ -1,15 +1,14 @@
 // Libraries
 import React, {
   ChangeEvent,
-  FC,
+  FunctionComponent,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react'
 import classnames from 'classnames'
-import {Dropdown} from '../.'
-import {MenuStatus} from '../Dropdown'
+import {Dropdown, DropdownMenu, DropdownItem, MenuStatus} from '../.'
 
 import {
   ComponentStatus,
@@ -52,7 +51,7 @@ const enCollator = new Intl.Collator('en-us')
 
 const LIST_ITEM_HEIGHT = 33
 
-export const TypeAheadDropDown: FC<Props> = ({
+export const TypeAheadDropDown: FunctionComponent<Props> = ({
   id,
   style,
   items,
@@ -328,7 +327,7 @@ export const TypeAheadDropDown: FC<Props> = ({
         </DropdownHeader>
       )}
       menu={() => (
-        <Dropdown.Menu testID={`${testID}-dropdown-menu`} theme={menuTheme}>
+        <DropdownMenu testID={`${testID}-dropdown-menu`} theme={menuTheme}>
           {queryResults && queryResults.length > 0 ? (
             <div
               ref={listRef}
@@ -360,7 +359,7 @@ export const TypeAheadDropDown: FC<Props> = ({
                         right: 0,
                       }}
                     >
-                      <Dropdown.Item
+                      <DropdownItem
                         id={value.id.toString()}
                         value={value}
                         onClick={() => selectItem(value)}
@@ -369,14 +368,14 @@ export const TypeAheadDropDown: FC<Props> = ({
                         className={classN}
                       >
                         {value.name || defaultNameText}
-                      </Dropdown.Item>
+                      </DropdownItem>
                     </div>
                   )
                 })}
               </div>
             </div>
           ) : (
-            <Dropdown.Item
+            <DropdownItem
               key="no-values-in-filter"
               testID="nothing-in-filter-typeAhead"
               disabled={true}
@@ -384,9 +383,9 @@ export const TypeAheadDropDown: FC<Props> = ({
               {inputValue.length > 0
                 ? `no matches for ${inputValue}`
                 : 'No results'}
-            </Dropdown.Item>
+            </DropdownItem>
           )}
-        </Dropdown.Menu>
+        </DropdownMenu>
       )}
       menuOpen={menuStatus}
     />

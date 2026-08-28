@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -21,60 +21,51 @@ export interface BannerPanelProps extends PanelProps {
   textColor?: InfluxColors | string
   /** Hides the icon at smallest breakpoint */
   hideMobileIcon?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type BannerPanelRef = HTMLDivElement
+export const BannerPanel: FunctionComponent<BannerPanelProps> = ({
+  id,
+  style,
+  testID = 'banner-panel',
+  children,
+  textColor,
+  className,
+  hideMobileIcon = false,
+  icon,
+  gradient,
+  size = ComponentSize.ExtraSmall,
+  ref,
+}) => {
+  const bannerPanelClassName = classnames('cf-banner-panel', {
+    'cf-banner-panel--has-icon': icon,
+    'cf-banner-panel__hide-icon': hideMobileIcon,
+    [`${className}`]: className,
+  })
 
-export const BannerPanel = forwardRef<BannerPanelRef, BannerPanelProps>(
-  (
-    {
-      id,
-      style,
-      testID = 'banner-panel',
-      children,
-      textColor,
-      className,
-      hideMobileIcon = false,
-      icon,
-      gradient,
-      size = ComponentSize.ExtraSmall,
-    },
-    ref
-  ) => {
-    const bannerPanelClassName = classnames('cf-banner-panel', {
-      'cf-banner-panel--has-icon': icon,
-      'cf-banner-panel__hide-icon': hideMobileIcon,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div ref={ref} className={bannerPanelClassName}>
-        <Panel
-          data-testid={testID}
-          gradient={gradient}
-          style={style}
-          border={true}
-          id={id}
-        >
-          <PanelBody size={size} className="cf-banner-panel--body">
-            {!!icon && (
-              <Icon
-                style={{color: textColor}}
-                glyph={icon}
-                className="cf-banner-panel--icon"
-              />
-            )}
-            <div
+  return (
+    <div ref={ref} className={bannerPanelClassName}>
+      <Panel
+        data-testid={testID}
+        gradient={gradient}
+        style={style}
+        border={true}
+        id={id}
+      >
+        <PanelBody size={size} className="cf-banner-panel--body">
+          {!!icon && (
+            <Icon
               style={{color: textColor}}
-              className="cf-banner-panel--contents"
-            >
-              {children}
-            </div>
-          </PanelBody>
-        </Panel>
-      </div>
-    )
-  }
-)
-
-BannerPanel.displayName = 'BannerPanel'
+              glyph={icon}
+              className="cf-banner-panel--icon"
+            />
+          )}
+          <div style={{color: textColor}} className="cf-banner-panel--contents">
+            {children}
+          </div>
+        </PanelBody>
+      </Panel>
+    </div>
+  )
+}

@@ -9,7 +9,7 @@ import {List, ComponentSize} from '@influxdata/clockface'
 ```
 
 ```tsx
-<List.Divider size={ComponentSize.Small} text="Section Name" />
+<ListDivider size={ComponentSize.Small} text="Section Name" />
 ```
 
 If the `text` prop is left empty the divider will render as a thin horizontal line. Should the specified `text` exceed the width of the `List` the divider will truncate it with ellipsis.

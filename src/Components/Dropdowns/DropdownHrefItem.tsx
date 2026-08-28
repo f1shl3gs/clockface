@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -23,66 +23,54 @@ export interface DropdownHrefItemProps extends StandardFunctionProps {
   href: string | undefined
   /** Prevents any interaction with this element, including the onClick function */
   disabled?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
 
-export type DropdownHrefItemRef = HTMLButtonElement
+export const DropdownHrefItem: FunctionComponent<DropdownHrefItemProps> = ({
+  id,
+  type = DropdownItemType.None,
+  style,
+  title,
+  href,
+  testID = 'dropdown-item',
+  wrapText = false,
+  selected = false,
+  children,
+  disabled,
+  className,
+  ref,
+}) => {
+  const dropdownItemClass = classnames('cf-dropdown-item', {
+    [`cf-dropdown-item__${type}`]:
+      type === DropdownItemType.Checkbox || type === DropdownItemType.Dot,
+    active: selected,
+    [`${className}`]: className,
+    'cf-dropdown-item__wrap': wrapText,
+    'cf-dropdown-item__no-wrap': !wrapText,
+    'cf-dropdown-item__disabled': disabled,
+  })
 
-export const DropdownHrefItem = forwardRef<
-  DropdownHrefItemRef,
-  DropdownHrefItemProps
->(
-  (
-    {
-      id,
-      type = DropdownItemType.None,
-      style,
-      title,
-      href,
-      testID = 'dropdown-item',
-      wrapText = false,
-      selected = false,
-      children,
-      disabled,
-      className,
-    },
-    ref
-  ) => {
-    const dropdownItemClass = classnames('cf-dropdown-item', {
-      [`cf-dropdown-item__${type}`]:
-        type === DropdownItemType.Checkbox || type === DropdownItemType.Dot,
-      active: selected,
-      [`${className}`]: className,
-      'cf-dropdown-item__wrap': wrapText,
-      'cf-dropdown-item__no-wrap': !wrapText,
-      'cf-dropdown-item__disabled': disabled,
-    })
-
-    const styles = {
-      width: '100%',
-      ...style,
-    }
-
-    return (
-      <a
-        href={href}
-        className="cf-dropdown-item--children cf-dropdown-href-text"
-      >
-        <button
-          type="button"
-          id={id}
-          ref={ref}
-          style={styles}
-          title={title}
-          className={dropdownItemClass}
-          data-testid={testID}
-        >
-          <DropdownItemSelectionIndicator type={type} />
-
-          {children}
-        </button>
-      </a>
-    )
+  const styles = {
+    width: '100%',
+    ...style,
   }
-)
 
-DropdownHrefItem.displayName = 'DropdownItem'
+  return (
+    <a href={href} className="cf-dropdown-item--children cf-dropdown-href-text">
+      <button
+        type="button"
+        id={id}
+        ref={ref}
+        style={styles}
+        title={title}
+        className={dropdownItemClass}
+        data-testid={testID}
+      >
+        <DropdownItemSelectionIndicator type={type} />
+
+        {children}
+      </button>
+    </a>
+  )
+}

@@ -5,15 +5,14 @@ import {marked} from 'marked'
 // Components
 import {
   IndexList,
-  IndexListRef,
-  IndexListRowRef,
-  IndexListBodyRef,
-  IndexListHeaderRef,
-  IndexListRowCellRef,
-  IndexListHeaderCellRef,
+  IndexListBody,
+  IndexListHeader,
+  IndexListHeaderCell,
+  IndexListRow,
+  IndexListCell,
 } from '../index'
 import {SquareButton} from '../../Button/Composed/SquareButton'
-import {EmptyState} from '../../EmptyState'
+import {EmptyState, EmptyStateText} from '../../EmptyState'
 
 // Types
 import {
@@ -36,7 +35,7 @@ import IndexListExampleReadme from './IndexListExample.md?raw'
 export default {title: 'Components/IndexList/Family'}
 
 export const _IndexList = () => {
-  const indexListRef = createRef<IndexListRef>()
+  const indexListRef = createRef<HTMLTableElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -46,7 +45,7 @@ export const _IndexList = () => {
 
   return (
     <div className="story--example">
-      <IndexList.IndexList ref={indexListRef} />
+      <IndexList ref={indexListRef} />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -64,8 +63,8 @@ _IndexList.story = {
   },
 }
 
-export const IndexListHeader = () => {
-  const indexListHeaderRef = createRef<IndexListHeaderRef>()
+export const _IndexListHeader = () => {
+  const indexListHeaderRef = createRef<HTMLTableSectionElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -76,7 +75,7 @@ export const IndexListHeader = () => {
   return (
     <div className="story--example">
       <table>
-        <IndexList.Header ref={indexListHeaderRef} />
+        <IndexListHeader ref={indexListHeaderRef} />
       </table>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -85,7 +84,7 @@ export const IndexListHeader = () => {
   )
 }
 
-IndexListHeader.story = {
+_IndexListHeader.story = {
   name: 'IndexListHeader',
 
   parameters: {
@@ -95,8 +94,8 @@ IndexListHeader.story = {
   },
 }
 
-export const IndexListHeaderCell = () => {
-  const indexListHeaderCellRef = createRef<IndexListHeaderCellRef>()
+export const _IndexListHeaderCell = () => {
+  const indexListHeaderCellRef = createRef<HTMLTableCellElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -109,7 +108,7 @@ export const IndexListHeaderCell = () => {
       <table>
         <thead>
           <tr>
-            <IndexList.HeaderCell
+            <IndexListHeaderCell
               ref={indexListHeaderCellRef}
               width={'100px'}
               columnName={'Name'}
@@ -131,7 +130,7 @@ export const IndexListHeaderCell = () => {
   )
 }
 
-IndexListHeaderCell.story = {
+_IndexListHeaderCell.story = {
   name: 'IndexListHeaderCell',
 
   parameters: {
@@ -141,8 +140,8 @@ IndexListHeaderCell.story = {
   },
 }
 
-export const IndexListBody = () => {
-  const indexListBodyRef = createRef<IndexListBodyRef>()
+export const _IndexListBody = () => {
+  const indexListBodyRef = createRef<HTMLTableSectionElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -153,12 +152,12 @@ export const IndexListBody = () => {
   return (
     <div className="story--example">
       <table>
-        <IndexList.Body
+        <IndexListBody
           ref={indexListBodyRef}
           columnCount={1}
           emptyState={
             <EmptyState>
-              <EmptyState.Text>No children present</EmptyState.Text>
+              <EmptyStateText>No children present</EmptyStateText>
             </EmptyState>
           }
         />
@@ -170,7 +169,7 @@ export const IndexListBody = () => {
   )
 }
 
-IndexListBody.story = {
+_IndexListBody.story = {
   name: 'IndexListBody',
 
   parameters: {
@@ -180,8 +179,8 @@ IndexListBody.story = {
   },
 }
 
-export const IndexListRow = () => {
-  const indexListRowRef = createRef<IndexListRowRef>()
+export const _IndexListRow = () => {
+  const indexListRowRef = createRef<HTMLTableRowElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -191,7 +190,7 @@ export const IndexListRow = () => {
 
   return (
     <div className="story--example">
-      <IndexList.Row ref={indexListRowRef} disabled={false} brighten={false} />
+      <IndexListRow ref={indexListRowRef} disabled={false} brighten={false} />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -199,7 +198,7 @@ export const IndexListRow = () => {
   )
 }
 
-IndexListRow.story = {
+_IndexListRow.story = {
   name: 'IndexListRow',
 
   parameters: {
@@ -209,8 +208,8 @@ IndexListRow.story = {
   },
 }
 
-export const IndexListCell = () => {
-  const indexListRowCellRef = createRef<IndexListRowCellRef>()
+export const _IndexListRowCell = () => {
+  const indexListRowCellRef = createRef<HTMLTableCellElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -223,13 +222,13 @@ export const IndexListCell = () => {
       <table>
         <tbody>
           <tr>
-            <IndexList.Cell
+            <IndexListCell
               ref={indexListRowCellRef}
               revealOnHover={false}
               alignment={(Alignment as Record<string, any>)['Left']}
             >
               <span>{'Mitochondria are the powerhouse of the cell'}</span>
-            </IndexList.Cell>
+            </IndexListCell>
           </tr>
         </tbody>
       </table>
@@ -241,8 +240,8 @@ export const IndexListCell = () => {
   )
 }
 
-IndexListCell.story = {
-  name: 'IndexListCell',
+_IndexListRowCell.story = {
+  name: 'IndexListRowCell',
 
   parameters: {
     readme: {
@@ -266,37 +265,37 @@ export const SimpleTable = () => {
   return (
     <div className="story--example">
       <IndexList>
-        <IndexList.Header>
+        <IndexListHeader>
           {exampleHeaders.map((col, i) => (
-            <IndexList.HeaderCell
+            <IndexListHeaderCell
               key={`header--${col}${i}`}
               columnName={col}
               width={columnWidths[i]}
             />
           ))}
-        </IndexList.Header>
-        <IndexList.Body
+        </IndexListHeader>
+        <IndexListBody
           emptyState={<div>Empty</div>}
           columnCount={exampleNames.length}
         >
           {exampleHeaders.map((row, i) => (
-            <IndexList.Row
+            <IndexListRow
               key={`row--${row}${i}`}
               brighten={false}
               disabled={disabledRows.includes(exampleNames[i])}
             >
-              <IndexList.Cell>{exampleNames[i]}</IndexList.Cell>
-              <IndexList.Cell>{exampleDescriptions[i]}</IndexList.Cell>
-              <IndexList.Cell revealOnHover={true} alignment={Alignment.Right}>
+              <IndexListCell>{exampleNames[i]}</IndexListCell>
+              <IndexListCell>{exampleDescriptions[i]}</IndexListCell>
+              <IndexListCell revealOnHover={true} alignment={Alignment.Right}>
                 <SquareButton
                   icon={IconFont.Trash_New}
                   color={ComponentColor.Danger}
                   size={ComponentSize.ExtraSmall}
                 />
-              </IndexList.Cell>
-            </IndexList.Row>
+              </IndexListCell>
+            </IndexListRow>
           ))}
-        </IndexList.Body>
+        </IndexListBody>
       </IndexList>
     </div>
   )

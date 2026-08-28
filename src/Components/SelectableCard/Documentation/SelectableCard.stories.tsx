@@ -1,9 +1,9 @@
 // Libraries
-import {RefObject, createRef, KeyboardEvent, useState} from 'react'
+import {createRef, KeyboardEvent, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {SelectableCard, SelectableCardRef} from '../'
+import {SelectableCard} from '../'
 
 // Types
 import {ComponentColor, ComponentSize, IconFont} from '../../../Types'
@@ -22,11 +22,11 @@ const exampleStyle = {
 }
 
 export const _SelectableCard = () => {
-  const selectableCard1Ref: RefObject<SelectableCardRef | null> = createRef()
-  const selectableCard2Ref: RefObject<SelectableCardRef | null> = createRef()
-  const selectableCard3Ref: RefObject<SelectableCardRef | null> = createRef()
-  const selectableCard4Ref: RefObject<SelectableCardRef | null> = createRef()
-  const selectableCard5Ref: RefObject<SelectableCardRef | null> = createRef()
+  const selectableCard1Ref = createRef<HTMLDivElement>()
+  const selectableCard2Ref = createRef<HTMLDivElement>()
+  const selectableCard3Ref = createRef<HTMLDivElement>()
+  const selectableCard4Ref = createRef<HTMLDivElement>()
+  const selectableCard5Ref = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
     /* eslint-disable */
@@ -189,7 +189,7 @@ export const UsingTabIndex = () => {
 
   const handleCardKeyDown = (
     card?: string,
-    e?: KeyboardEvent<SelectableCardRef>
+    e?: KeyboardEvent<HTMLDivElement>
   ): void => {
     if (card === undefined || e === undefined) {
       return

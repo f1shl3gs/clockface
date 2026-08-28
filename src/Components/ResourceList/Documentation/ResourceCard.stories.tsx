@@ -1,23 +1,14 @@
 // Libraries
-import {createRef, RefObject, useState} from 'react'
+import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {ResourceCard, ResourceCardRef} from '../Card'
-import {ResourceCardName, ResourceCardNameRef} from '../Card/ResourceCardName'
-import {
-  ResourceCardEditableName,
-  ResourceCardEditableNameRef,
-} from '../Card/ResourceCardEditableName'
-import {
-  ResourceCardDescription,
-  ResourceCardDescriptionRef,
-} from '../Card/ResourceCardDescription'
-import {
-  ResourceCardEditableDescription,
-  ResourceCardEditableDescriptionRef,
-} from '../Card/ResourceCardEditableDescription'
-import {ResourceCardMeta, ResourceCardMetaRef} from '../Card/ResourceCardMeta'
+import {ResourceCard} from '../Card'
+import {ResourceCardName} from '../Card/ResourceCardName'
+import {ResourceCardEditableName} from '../Card/ResourceCardEditableName'
+import {ResourceCardDescription} from '../Card/ResourceCardDescription'
+import {ResourceCardEditableDescription} from '../Card/ResourceCardEditableDescription'
+import {ResourceCardMeta} from '../Card/ResourceCardMeta'
 import {SlideToggle} from '../../SlideToggle'
 import {SquareButton} from '../../Button/Composed/SquareButton'
 import {Label} from '../../Label/Label'
@@ -46,7 +37,7 @@ import ResourceCardMetaReadme from './ResourceCardMeta.md?raw'
 import ResourceCardExampleReadme from './ResourceCardExample.md?raw'
 import {InputLabel} from '../../Inputs'
 import {Popover} from '../../Popover'
-import {List} from '../../List'
+import {List, ListIcon, ListItem} from '../../List'
 import {Icon} from '../../Icon'
 
 export default {title: 'Components/Cards/ResourceCard/Family'}
@@ -54,11 +45,10 @@ export default {title: 'Components/Cards/ResourceCard/Family'}
 const resourceCardMeta = ['Created by Bob', 'Updated 25m ago']
 
 export const _ResourceCard = () => {
-  const resourceCardRef: RefObject<ResourceCardRef | null> = createRef()
-  const resourceCardNameRef: RefObject<ResourceCardNameRef | null> = createRef()
-  const resourceCardMetaRef: RefObject<ResourceCardMetaRef | null> = createRef()
-  const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> =
-    createRef()
+  const resourceCardRef = createRef<HTMLDivElement>()
+  const resourceCardNameRef = createRef<HTMLDivElement>()
+  const resourceCardMetaRef = createRef<HTMLDivElement>()
+  const resourceCardEditableDescriptionRef = createRef<HTMLDivElement>()
 
   const [name, setName] = useState<string>('Edit my name!')
   const [description, setDescription] = useState<string>(
@@ -86,7 +76,7 @@ export const _ResourceCard = () => {
       <div className="story--test-buttons">
         <button onClick={logRefs}>Log Refs</button>
       </div>
-      <ResourceCard.ResourceCard
+      <ResourceCard
         ref={resourceCardRef}
         disabled={false}
         contextMenuInteraction={'alwaysVisible'}
@@ -122,24 +112,24 @@ export const _ResourceCard = () => {
         justifyContent={(JustifyContent as Record<string, any>)['FlexStart']}
         margin={(ComponentSize as Record<string, any>)['Small']}
       >
-        <ResourceCard.EditableName
+        <ResourceCardEditableName
           ref={resourceCardNameRef}
           name={name}
           onUpdate={setName}
           onClick={() => alert('<ResourceCardEditableName /> onClick fired!')}
         />
-        <ResourceCard.EditableDescription
+        <ResourceCardEditableDescription
           ref={resourceCardEditableDescriptionRef}
           description={description}
           onUpdate={setDescription}
           placeholder={'Enter a description'}
         />
-        <ResourceCard.Meta ref={resourceCardMetaRef}>
+        <ResourceCardMeta ref={resourceCardMetaRef}>
           {resourceCardMeta.map(meta => (
             <span key={meta}>{meta}</span>
           ))}
-        </ResourceCard.Meta>
-      </ResourceCard.ResourceCard>
+        </ResourceCardMeta>
+      </ResourceCard>
     </div>
   )
 }
@@ -155,8 +145,7 @@ _ResourceCard.story = {
 }
 
 export const _ResourceCardDescription = () => {
-  const resourceCardDescriptionRef: RefObject<ResourceCardDescriptionRef | null> =
-    createRef()
+  const resourceCardDescriptionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -190,8 +179,7 @@ _ResourceCardDescription.story = {
 }
 
 export const _ResourceCardEditableDescription = () => {
-  const resourceCardEditableDescriptionRef: RefObject<ResourceCardEditableDescriptionRef | null> =
-    createRef()
+  const resourceCardEditableDescriptionRef = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
     /* eslint-disable */
@@ -230,10 +218,8 @@ _ResourceCardEditableDescription.story = {
 }
 
 export const _ResourceCardName = () => {
-  const resourceCardNameRef1: RefObject<ResourceCardNameRef | null> =
-    createRef()
-  const resourceCardNameRef2: RefObject<ResourceCardNameRef | null> =
-    createRef()
+  const resourceCardNameRef1 = createRef<HTMLDivElement>()
+  const resourceCardNameRef2 = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
     /* eslint-disable */
@@ -279,10 +265,8 @@ _ResourceCardName.story = {
 }
 
 export const _ResourceCardEditableName = () => {
-  const resourceCardEditableNameRef1: RefObject<ResourceCardEditableNameRef | null> =
-    createRef()
-  const resourceCardEditableNameRef2: RefObject<ResourceCardEditableNameRef | null> =
-    createRef()
+  const resourceCardEditableNameRef1 = createRef<HTMLDivElement>()
+  const resourceCardEditableNameRef2 = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
     /* eslint-disable */
@@ -330,7 +314,7 @@ _ResourceCardEditableName.story = {
 }
 
 export const _ResourceCardMeta = () => {
-  const resourceCardMeta: RefObject<ResourceCardMetaRef | null> = createRef()
+  const resourceCardMeta = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -369,7 +353,7 @@ _ResourceCardMeta.story = {
 }
 
 export const ToggleableCard = () => {
-  const settingsRef: RefObject<HTMLButtonElement | null> = createRef()
+  const settingsRef = createRef<HTMLButtonElement>()
 
   return (
     <div className="story--example">
@@ -405,7 +389,7 @@ export const ToggleableCard = () => {
                 style={{width: '200px'}}
                 contents={() => (
                   <List>
-                    <List.Item
+                    <ListItem
                       value=""
                       selected={false}
                       wrapText={false}
@@ -415,9 +399,9 @@ export const ToggleableCard = () => {
                       backgroundColor={InfluxColors.Pool}
                       size={ComponentSize.Small}
                     >
-                      <List.Icon glyph={IconFont.Cube} />
+                      <ListIcon glyph={IconFont.Cube} />
                       {'Put Turtle in Water'}
-                    </List.Item>
+                    </ListItem>
                   </List>
                 )}
                 triggerRef={settingsRef}
@@ -425,15 +409,15 @@ export const ToggleableCard = () => {
             </FlexBox>
           }
         >
-          <ResourceCard.EditableName
+          <ResourceCardEditableName
             name={'Rolling temperature notebook'}
             onUpdate={name => alert(`onUpate name fired: ${name}`)}
           />
-          <ResourceCard.EditableDescription
+          <ResourceCardEditableDescription
             description={'No description'}
             onUpdate={desc => alert(`onUpate description fired: ${desc}`)}
           />
-          <ResourceCard.Meta>
+          <ResourceCardMeta>
             <FlexBox
               direction={FlexDirection.Row}
               alignItems={AlignItems.Center}
@@ -456,7 +440,7 @@ export const ToggleableCard = () => {
             </span>
             <span>Scheduled to run every 15m</span>
             <span>ID: 07dd331e1c9fc00</span>
-          </ResourceCard.Meta>
+          </ResourceCardMeta>
           <FlexBox direction={FlexDirection.Row} margin={ComponentSize.Small}>
             <Label
               id="CRIT"

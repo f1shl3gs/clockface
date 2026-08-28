@@ -3,7 +3,7 @@ import {createRef, useState} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Tabs, TabsRef, TabRef, TabContentsRef, TabsContainerRef} from '../'
+import {Tabs, Tab, TabContents, TabsContainer} from '../'
 import {Icon} from '../../Icon/Base/Icon'
 
 // Types
@@ -20,7 +20,7 @@ export default {title: 'Components/Tabs/Family'}
 
 export const _Tabs = () => {
   const [activeTab, setActiveTab] = useState<string>('pomelo')
-  const tabsRef = createRef<TabsRef>()
+  const tabsRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -67,7 +67,7 @@ export const _Tabs = () => {
 
   return (
     <div className="story--example">
-      <Tabs.Tabs
+      <Tabs
         ref={tabsRef}
         size={(ComponentSize as Record<string, any>)['Medium']}
         alignment={(Alignment as Record<string, any>)['Left']}
@@ -77,7 +77,7 @@ export const _Tabs = () => {
         dropdownBreakpoint={750}
       >
         {exampleTabs.map(tab => (
-          <Tabs.Tab
+          <Tab
             key={tab.id}
             active={activeTab === tab.id}
             id={tab.id}
@@ -85,7 +85,7 @@ export const _Tabs = () => {
             onClick={handleTabClick}
           />
         ))}
-      </Tabs.Tabs>
+      </Tabs>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -102,7 +102,7 @@ _Tabs.story = {
 }
 
 export const _Tab = () => {
-  const tabRef = createRef<TabRef>()
+  const tabRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -116,7 +116,7 @@ export const _Tab = () => {
         (Orientation as Record<string, any>)['Horizontal']
       }`}
     >
-      <Tabs.Tab
+      <Tab
         ref={tabRef}
         icon={<Icon glyph={(IconFont as Record<string, any>)['Star']} />}
         active={true}
@@ -141,7 +141,7 @@ _Tab.story = {
 }
 
 export const _TabContents = () => {
-  const tabContentsRef = createRef<TabContentsRef>()
+  const tabContentsRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -151,9 +151,9 @@ export const _TabContents = () => {
 
   return (
     <div className="story--example">
-      <Tabs.TabContents ref={tabContentsRef}>
+      <TabContents ref={tabContentsRef}>
         <p>Contents go here</p>
-      </Tabs.TabContents>
+      </TabContents>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -171,8 +171,8 @@ _TabContents.story = {
   },
 }
 
-export const TabsContainer = () => {
-  const tabContainerRef = createRef<TabsContainerRef>()
+export const _TabsContainer = () => {
+  const tabContainerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -182,7 +182,7 @@ export const TabsContainer = () => {
 
   return (
     <div className="story--example">
-      <Tabs.Container
+      <TabsContainer
         ref={tabContainerRef}
         orientation={(Orientation as Record<string, any>)['Horizontal']}
         stretchToFitWidth={false}
@@ -192,27 +192,27 @@ export const TabsContainer = () => {
           size={(ComponentSize as Record<string, any>)['Large']}
           orientation={(Orientation as Record<string, any>)['Horizontal']}
         >
-          <Tabs.Tab
+          <Tab
             active={false}
             id="tab1"
             text={'Fruits'}
             onClick={id => alert(`Tab1 clicked, id: ${id}`)}
           />
-          <Tabs.Tab
+          <Tab
             active={true}
             id="tab2"
             text={'Vegetables'}
             onClick={id => alert(`Tab2 clicked, id: ${id}`)}
           />
-          <Tabs.Tab
+          <Tab
             active={false}
             id="tab3"
             text={'Animals'}
             onClick={id => alert(`Tab3 clicked, id: ${id}`)}
           />
         </Tabs>
-        <Tabs.TabContents>TabContents</Tabs.TabContents>
-      </Tabs.Container>
+        <TabContents>TabContents</TabContents>
+      </TabsContainer>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -220,7 +220,7 @@ export const TabsContainer = () => {
   )
 }
 
-TabsContainer.story = {
+_TabsContainer.story = {
   name: 'TabsContainer',
 
   parameters: {
@@ -232,7 +232,7 @@ TabsContainer.story = {
 
 export const TabsWithLinks = () => {
   const [activeTab, setActiveTab] = useState<string>('triangles')
-  const tabsRef = createRef<TabsRef>()
+  const tabsRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -255,7 +255,7 @@ export const TabsWithLinks = () => {
 
   return (
     <div className="story--example">
-      <Tabs.Tabs
+      <Tabs
         ref={tabsRef}
         size={(ComponentSize as Record<string, any>)['Large']}
         orientation={(Orientation as Record<string, any>)['Horizontal']}
@@ -263,45 +263,45 @@ export const TabsWithLinks = () => {
         dropdownAlignment={(Alignment as Record<string, any>)['Center']}
         dropdownBreakpoint={700}
       >
-        <Tabs.Tab
+        <Tab
           active={activeTab === 'circles'}
           id="circles"
           text="Circles"
           onClick={handleTabClick}
         />
-        <Tabs.Tab
+        <Tab
           active={activeTab === 'triangles'}
           id="triangles"
           text="Triangles"
           onClick={handleTabClick}
         />
-        <Tabs.Tab
+        <Tab
           active={activeTab === 'squares'}
           id="squares"
           text="Squares"
           onClick={handleTabClick}
           onDismiss={handleTabDismiss}
         />
-        <Tabs.Tab
+        <Tab
           active={activeTab === 'pentagons'}
           id="pentagons"
           text="Pentagons"
           onClick={handleTabClick}
         />
-        <Tabs.Tab
+        <Tab
           active={activeTab === 'hexagons'}
           id="hexagons"
           text="Hexagons (Link)"
           linkElement={className => <a href="#" className={className} />}
         />
-        <Tabs.Tab
+        <Tab
           active={activeTab === 'septagons'}
           id="septagons"
           text="Septagons (Link)"
           linkElement={className => <a href="#" className={className} />}
           onDismiss={handleTabDismiss}
         />
-      </Tabs.Tabs>
+      </Tabs>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>

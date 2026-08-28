@@ -11,16 +11,16 @@ IndexList is structured just like a table is:
 
 ```tsx
 <IndexList>
-  <IndexList.Header>
+  <IndexListHeader>
     <IndexList.HeaderCell />
     <IndexList.HeaderCell />
-  </IndexList.Header>
-  <IndexList.Body>
-    <IndexList.Row>
+  </IndexListHeader>
+  <IndexListBody>
+    <IndexListRow>
       <IndexList.Cell />
       <IndexList.Cell />
-    </IndexList.Row>
-  </IndexList.Body>
+    </IndexListRow>
+  </IndexListBody>
 </IndexList>
 ```
 

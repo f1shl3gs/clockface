@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, MouseEvent} from 'react'
+import React, {MouseEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -20,84 +20,78 @@ export interface TabProps extends StandardFunctionProps {
   onDismiss?: (id?: string) => void
   /** Optional link element. Will override onClick prop */
   linkElement?: RenderLinkElement
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
 
-export type TabRef = HTMLButtonElement
-
-export const Tab = forwardRef<TabRef, TabProps>(
-  (
-    {
-      id,
-      icon,
-      text,
-      style,
-      testID = 'tabs--tab',
-      active,
-      onClick,
-      className,
-      onDismiss,
-      linkElement,
-    },
-    ref
-  ) => {
-    const handleClick = (): void => {
-      if (onClick) {
-        onClick(id)
-      }
+export const Tab: FunctionComponent<TabProps> = ({
+  id,
+  icon,
+  text,
+  style,
+  testID = 'tabs--tab',
+  active,
+  onClick,
+  className,
+  onDismiss,
+  linkElement,
+  ref,
+}) => {
+  const handleClick = (): void => {
+    if (onClick) {
+      onClick(id)
     }
+  }
 
-    const handleDismissClick = (e: MouseEvent<HTMLButtonElement>): void => {
-      e.stopPropagation()
-      e.preventDefault()
+  const handleDismissClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    e.stopPropagation()
+    e.preventDefault()
 
-      if (onDismiss) {
-        onDismiss(id)
-      }
+    if (onDismiss) {
+      onDismiss(id)
     }
+  }
 
-    const tabClass = classnames('cf-tabs--tab', {
-      'cf-tabs--tab__active': active,
-      [`${className}`]: className,
-    })
+  const tabClass = classnames('cf-tabs--tab', {
+    'cf-tabs--tab__active': active,
+    [`${className}`]: className,
+  })
 
-    const tabContents = (
-      <>
-        {icon}
-        <span className="cf-tabs--tab-label">{text}</span>
-        {onDismiss && (
-          <button
-            className="cf-tabs--tab-dismiss"
-            onClick={handleDismissClick}
-            type="button"
-            aria-label="Dismiss"
-          ></button>
-        )}
-        <div className="cf-tabs--state-indicator" />
-      </>
-    )
+  const tabContents = (
+    <>
+      {icon}
+      <span className="cf-tabs--tab-label">{text}</span>
+      {onDismiss && (
+        <button
+          className="cf-tabs--tab-dismiss"
+          onClick={handleDismissClick}
+          type="button"
+          aria-label="Dismiss"
+        />
+      )}
+      <div className="cf-tabs--state-indicator" />
+    </>
+  )
 
-    if (linkElement) {
-      return React.cloneElement(
-        linkElement(tabClass),
-        {'data-testid': testID},
-        tabContents
-      )
-    }
-
-    return (
-      <button
-        ref={ref}
-        type="button"
-        className={tabClass}
-        data-testid={testID}
-        id={id}
-        style={style}
-        onClick={handleClick}
-      >
-        {tabContents}
-      </button>
+  if (linkElement) {
+    return React.cloneElement(
+      linkElement(tabClass),
+      {'data-testid': testID},
+      tabContents
     )
   }
-)
 
-Tab.displayName = 'Tab'
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className={tabClass}
+      data-testid={testID}
+      id={id}
+      style={style}
+      onClick={handleClick}
+    >
+      {tabContents}
+    </button>
+  )
+}

@@ -7,9 +7,9 @@ SelectGroupOption is the member of the `SelectGroup` Family; every member of the
 import {SelectGroup} from '@influxdata/clockface'
 ```
 ```tsx
-<SelectGroup.Option>
+<SelectGroupOption>
   // Children
-</SelectGroup.Option>
+</SelectGroupOption>
 ```
 
 ### Example
@@ -43,7 +43,7 @@ const items = [
 ```
 ```tsx
 items.map(item => (
-  <SelectGroup.Option
+  <SelectGroupOption
     id={item.id}
     key={item.id}
     name="fruits"
@@ -53,7 +53,7 @@ items.map(item => (
     active={this.state.activeID === item.id}
   >
     {item.name}
-  </SelectGroup.Option>
+  </SelectGroupOption>
 ))
 ```
 

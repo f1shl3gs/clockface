@@ -7,9 +7,9 @@
 import {ResourceList} from '@influxdata/clockface'
 ```
 ```tsx
-<ResourceList.Body>
+<ResourceListBody>
   // Children
-</ResourceList.Body>
+</ResourceListBody>
 ```
 
 We recommend using `ResourceCard` as the child component type.

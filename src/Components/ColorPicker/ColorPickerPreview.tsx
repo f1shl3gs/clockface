@@ -6,14 +6,14 @@ import classnames from 'classnames'
 import {StandardFunctionProps} from '../../Types'
 
 // Styles
-import './ColorPreview.scss'
+import './ColorPickerPreview.scss'
 
 interface ColorPreviewProps extends StandardFunctionProps {
   /** Any CSS color value is good */
   color: string
 }
 
-export const ColorPreview: FunctionComponent<ColorPreviewProps> = ({
+export const ColorPickerPreview: FunctionComponent<ColorPreviewProps> = ({
   color,
   className,
 }) => {
@@ -23,5 +23,3 @@ export const ColorPreview: FunctionComponent<ColorPreviewProps> = ({
 
   return <div className={colorPreviewClass} style={{backgroundColor: color}} />
 }
-
-ColorPreview.displayName = 'ColorPickerPreview'

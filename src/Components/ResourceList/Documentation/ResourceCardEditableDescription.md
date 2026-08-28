@@ -7,7 +7,7 @@
 import {ResourceCard} from '@influxdata/clockface'
 ```
 ```tsx
-<ResourceCard.EditableDescription />
+<ResourceCardEditableDescription />
 ```
 
 ### Interactions

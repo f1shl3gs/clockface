@@ -7,9 +7,9 @@ Intended for use alongside `<Tabs />` to display the contents of the selected ta
 import {Tabs} from '@influxdata/clockface'
 ```
 ```tsx
-<Tabs.TabContents>
+<TabContents>
   // Contents go here
-</Tabs.TabContents>
+</TabContents>
 ```
 
 ### Example

@@ -30,5 +30,3 @@ function check<P>(permissions: P[] = [], action: P, test: Test) {
 export function RBAC<P>({permissions, perform, test, yes, no}: RBACProps<P>) {
   return <>{check<P | undefined>(permissions, perform, test) ? yes() : no()}</>
 }
-
-RBAC.displayName = 'RBAC'

@@ -3,16 +3,7 @@ import * as React from 'react'
 import {marked} from 'marked'
 
 // Components
-import {
-  SpinnerContainer,
-  SpinnerContainerRef,
-  SparkleSpinner,
-  SparkleSpinnerRef,
-  TechnoSpinner,
-  TechnoSpinnerRef,
-  WaitingText,
-  WaitingTextRef,
-} from '../'
+import {SpinnerContainer, SparkleSpinner, TechnoSpinner, WaitingText} from '../'
 
 // Types
 import {ComponentSize, RemoteDataState} from '../../../Types'
@@ -26,10 +17,8 @@ import WaitingTextReadme from './WaitingText.md?raw'
 export default {title: 'Components/Spinners/Container'}
 
 export const _SpinnerContainer = () => {
-  const technoSpinnerRef: React.RefObject<TechnoSpinnerRef | null> =
-    React.createRef()
-  const spinnerContainerRef: React.RefObject<SpinnerContainerRef | null> =
-    React.createRef()
+  const technoSpinnerRef = React.createRef<HTMLDivElement>()
+  const spinnerContainerRef = React.createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
     /* eslint-disable */
@@ -71,8 +60,7 @@ _SpinnerContainer.story = {
 }
 
 export const _TechnoSpinner = () => {
-  const technoSpinnerRef: React.RefObject<TechnoSpinnerRef | null> =
-    React.createRef()
+  const technoSpinnerRef = React.createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
     /* eslint-disable */
@@ -105,8 +93,7 @@ _TechnoSpinner.story = {
 }
 
 export const _SparkleSpinner = () => {
-  const sparkleSpinnerRef: React.RefObject<SparkleSpinnerRef | null> =
-    React.createRef()
+  const sparkleSpinnerRef = React.createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
     /* eslint-disable */
@@ -139,8 +126,7 @@ _SparkleSpinner.story = {
 }
 
 export const _WaitingText = () => {
-  const waitingTextRef: React.RefObject<WaitingTextRef | null> =
-    React.createRef()
+  const waitingTextRef = React.createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
     /* eslint-disable */

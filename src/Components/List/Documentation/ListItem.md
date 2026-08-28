@@ -9,7 +9,7 @@ import {List} from '@influxdata/clockface'
 ```
 
 ```tsx
-<List.Item
+<ListItem
   selected={true}
   onClick={handleClick}
   value="Banana"
@@ -20,7 +20,7 @@ import {List} from '@influxdata/clockface'
   disabled={false}
 >
   Banana
-</List.Item>
+</ListItem>
 ```
 
 ### Example
@@ -38,20 +38,20 @@ Also includes in the `List` family are a hanful of components to embellish `List
 Example with a checkbox:
 
 ```tsx
-<List.Item>
+<ListItem>
   // Type accepts "checkbox" or "dot"
-  <List.Indicator type="checkbox">
+  <ListIndicator type="checkbox">
   Item text
-</List.Item>
+</ListItem>
 ```
 
 Example with an icon:
 
 ```tsx
-<List.Item>
-  <List.Icon glyph={IconFont.CheckMark_New}>
+<ListItem>
+  <ListIcon glyph={IconFont.CheckMark_New}>
   Item text
-</List.Item>
+</ListItem>
 ```
 
 ### Gotchas

@@ -17,9 +17,9 @@ this.state = {
 }
 ```
 ```tsx
-<Form.ValidationElement value={inputValue} validationFunc={handleValidation}>
+<FormValidationElement value={inputValue} validationFunc={handleValidation}>
   {status => <Input status={status} value={inputValue} onChange={handleChange} />}
-</Form.ValidationElement>
+</FormValidationElement>
 ```
 
 ### Constructing a Validation Function

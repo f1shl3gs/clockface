@@ -6,7 +6,7 @@ import {marked} from 'marked'
 import {Orientation, Gradients} from '../../../Types'
 
 // Components
-import {DraggableResizer, DraggableResizerPanelRef} from '../'
+import {DraggableResizer, DraggableResizerPanel} from '../'
 
 // Notes
 import DraggableResizerReadme from './DraggableResizer.md?raw'
@@ -31,12 +31,12 @@ export const _DraggableResizer = () => (
           console.log(`this.setState({handlePositions: ${handlePositions}})`) // eslint-disable-line
       }
     >
-      <DraggableResizer.Panel>
+      <DraggableResizerPanel>
         <div className="mockCard" />
-      </DraggableResizer.Panel>
-      <DraggableResizer.Panel>
+      </DraggableResizerPanel>
+      <DraggableResizerPanel>
         <div className="mockCard" />
-      </DraggableResizer.Panel>
+      </DraggableResizerPanel>
     </DraggableResizer>
   </div>
 )
@@ -51,8 +51,8 @@ _DraggableResizer.story = {
   },
 }
 
-export const DraggableResizerPanel = () => {
-  const draggableResizerPanelRef = createRef<DraggableResizerPanelRef>()
+export const _DraggableResizerPanel = () => {
+  const draggableResizerPanelRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -62,13 +62,13 @@ export const DraggableResizerPanel = () => {
 
   return (
     <div className="story--example">
-      <DraggableResizer.Panel
+      <DraggableResizerPanel
         ref={draggableResizerPanelRef}
         minSizePixels={50}
         sizePercent={0.5}
       >
         <div className="mockCard" />
-      </DraggableResizer.Panel>
+      </DraggableResizerPanel>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -76,7 +76,7 @@ export const DraggableResizerPanel = () => {
   )
 }
 
-DraggableResizerPanel.story = {
+_DraggableResizerPanel.story = {
   name: 'DraggableResizerPanel',
 
   parameters: {
@@ -88,9 +88,9 @@ DraggableResizerPanel.story = {
 
 export const _3Panels = () => {
   const [position, updatePosition] = useState<number[]>([0.25, 0.5])
-  const draggableResizerPanelRef1 = createRef<DraggableResizerPanelRef>()
-  const draggableResizerPanelRef2 = createRef<DraggableResizerPanelRef>()
-  const draggableResizerPanelRef3 = createRef<DraggableResizerPanelRef>()
+  const draggableResizerPanelRef1 = createRef<HTMLDivElement>()
+  const draggableResizerPanelRef2 = createRef<HTMLDivElement>()
+  const draggableResizerPanelRef3 = createRef<HTMLDivElement>()
   const defaultBackgroundStyle = {backgroundColor: 'transparent'}
   const defaultBarStyle = {backgroundColor: '#ffffff'}
 
@@ -115,30 +115,30 @@ export const _3Panels = () => {
         handlePositions={position}
         onChangePositions={handlePositions => updatePosition(handlePositions)}
       >
-        <DraggableResizer.Panel
+        <DraggableResizerPanel
           ref={draggableResizerPanelRef1}
           isCollapsible={true}
         >
           <div className="mockCard">
             <span>1</span>
           </div>
-        </DraggableResizer.Panel>
-        <DraggableResizer.Panel
+        </DraggableResizerPanel>
+        <DraggableResizerPanel
           ref={draggableResizerPanelRef2}
           isCollapsible={true}
         >
           <div className="mockCard">
             <span>2</span>
           </div>
-        </DraggableResizer.Panel>
-        <DraggableResizer.Panel
+        </DraggableResizerPanel>
+        <DraggableResizerPanel
           ref={draggableResizerPanelRef3}
           isCollapsible={true}
         >
           <div className="mockCard">
             <span>3</span>
           </div>
-        </DraggableResizer.Panel>
+        </DraggableResizerPanel>
       </DraggableResizer>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -158,10 +158,10 @@ _3Panels.story = {
 export const _4Panels = () => {
   const [positions, updatePositions] = useState<number[]>([0.25, 0.5, 0.75])
 
-  const draggableResizerPanelRef1 = createRef<DraggableResizerPanelRef>()
-  const draggableResizerPanelRef2 = createRef<DraggableResizerPanelRef>()
-  const draggableResizerPanelRef3 = createRef<DraggableResizerPanelRef>()
-  const draggableResizerPanelRef4 = createRef<DraggableResizerPanelRef>()
+  const draggableResizerPanelRef1 = createRef<HTMLDivElement>()
+  const draggableResizerPanelRef2 = createRef<HTMLDivElement>()
+  const draggableResizerPanelRef3 = createRef<HTMLDivElement>()
+  const draggableResizerPanelRef4 = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -184,38 +184,38 @@ export const _4Panels = () => {
         handlePositions={positions}
         onChangePositions={handlePositions => updatePositions(handlePositions)}
       >
-        <DraggableResizer.Panel
+        <DraggableResizerPanel
           ref={draggableResizerPanelRef1}
           isCollapsible={true}
         >
           <div className="mockCard">
             <span>1</span>
           </div>
-        </DraggableResizer.Panel>
-        <DraggableResizer.Panel
+        </DraggableResizerPanel>
+        <DraggableResizerPanel
           ref={draggableResizerPanelRef2}
           isCollapsible={true}
         >
           <div className="mockCard">
             <span>2</span>
           </div>
-        </DraggableResizer.Panel>
-        <DraggableResizer.Panel
+        </DraggableResizerPanel>
+        <DraggableResizerPanel
           ref={draggableResizerPanelRef3}
           isCollapsible={true}
         >
           <div className="mockCard">
             <span>3</span>
           </div>
-        </DraggableResizer.Panel>
-        <DraggableResizer.Panel
+        </DraggableResizerPanel>
+        <DraggableResizerPanel
           ref={draggableResizerPanelRef4}
           isCollapsible={true}
         >
           <div className="mockCard">
             <span>4</span>
           </div>
-        </DraggableResizer.Panel>
+        </DraggableResizerPanel>
       </DraggableResizer>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>

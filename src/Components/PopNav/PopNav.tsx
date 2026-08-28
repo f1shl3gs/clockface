@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, useState} from 'react'
+import {useState, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -27,71 +27,65 @@ export interface PopNavProps extends StandardFunctionProps {
   visible?: boolean
   /** Controls the color of the trigger button */
   buttonColor?: ComponentColor
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type PopNavRef = HTMLDivElement
+export const PopNav: FunctionComponent<PopNavProps> = ({
+  id,
+  style,
+  children,
+  className,
+  buttonColor,
+  visible = false,
+  testID = 'pop-nav',
+  align = Alignment.Right,
+  size = ComponentSize.Small,
+  ref,
+}) => {
+  const [menuVisible, setMenuVisible] = useState<boolean>(visible)
 
-export const PopNavRoot = forwardRef<PopNavRef, PopNavProps>(
-  (
-    {
-      id,
-      style,
-      children,
-      className,
-      buttonColor,
-      visible = false,
-      testID = 'pop-nav',
-      align = Alignment.Right,
-      size = ComponentSize.Small,
-    },
-    ref
-  ) => {
-    const [menuVisible, setMenuVisible] = useState<boolean>(visible)
+  const popNavClass = classnames('cf-pop-nav', {
+    [`cf-pop-nav__${size}`]: size,
+    [`cf-pop-nav__${align}`]: align,
+    'cf-nav__expanded': menuVisible,
+    [`${className}`]: className,
+  })
 
-    const popNavClass = classnames('cf-pop-nav', {
-      [`cf-pop-nav__${size}`]: size,
-      [`cf-pop-nav__${align}`]: align,
-      'cf-nav__expanded': menuVisible,
-      [`${className}`]: className,
-    })
-
-    const handleToggleMenu = (): void => {
-      setMenuVisible(!menuVisible)
-    }
-
-    const handleClickOutside = (): void => {
-      if (menuVisible === true) {
-        setMenuVisible(false)
-      }
-    }
-
-    const defaultButtonColor = menuVisible
-      ? ComponentColor.Secondary
-      : ComponentColor.Default
-
-    return (
-      <ClickOutside onClickOutside={handleClickOutside}>
-        <div
-          id={id}
-          ref={ref}
-          style={style}
-          data-testid={testID}
-          className={popNavClass}
-        >
-          <SquareButton
-            size={size}
-            icon={IconFont.User}
-            color={buttonColor || defaultButtonColor}
-            onClick={handleToggleMenu}
-            className="cf-pop-nav--trigger"
-          />
-          <nav className="cf-pop-nav--menu">
-            <div className="cf-pop-nav--contents">{children}</div>
-          </nav>
-        </div>
-      </ClickOutside>
-    )
+  const handleToggleMenu = (): void => {
+    setMenuVisible(!menuVisible)
   }
-)
 
-PopNavRoot.displayName = 'PopNav'
+  const handleClickOutside = (): void => {
+    if (menuVisible) {
+      setMenuVisible(false)
+    }
+  }
+
+  const defaultButtonColor = menuVisible
+    ? ComponentColor.Secondary
+    : ComponentColor.Default
+
+  return (
+    <ClickOutside onClickOutside={handleClickOutside}>
+      <div
+        id={id}
+        ref={ref}
+        style={style}
+        data-testid={testID}
+        className={popNavClass}
+      >
+        <SquareButton
+          size={size}
+          icon={IconFont.User}
+          color={buttonColor || defaultButtonColor}
+          onClick={handleToggleMenu}
+          className="cf-pop-nav--trigger"
+        />
+        <nav className="cf-pop-nav--menu">
+          <div className="cf-pop-nav--contents">{children}</div>
+        </nav>
+      </div>
+    </ClickOutside>
+  )
+}

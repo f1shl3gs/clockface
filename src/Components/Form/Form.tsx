@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import React, {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -29,66 +29,60 @@ export interface FormProps extends StandardFunctionProps {
   target?: string
   /** If true prevents default event during onSubmit */
   preventDefault?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLFormElement>
 }
 
-export type FormRef = HTMLFormElement
+export const Form: FunctionComponent<FormProps> = ({
+  id,
+  name,
+  style,
+  method,
+  target,
+  action,
+  encType,
+  onSubmit,
+  children,
+  className,
+  noValidate,
+  autoComplete,
+  acceptCharset,
+  testID = 'form-container',
+  preventDefault = true,
+  ref,
+}) => {
+  const formWrapperClass = classnames('cf-form--wrapper', {
+    [`${className}`]: className,
+  })
 
-export const FormRoot = forwardRef<FormRef, FormProps>(
-  (
-    {
-      id,
-      name,
-      style,
-      method,
-      target,
-      action,
-      encType,
-      onSubmit,
-      children,
-      className,
-      noValidate,
-      autoComplete,
-      acceptCharset,
-      testID = 'form-container',
-      preventDefault = true,
-    },
-    ref
-  ) => {
-    const formWrapperClass = classnames('cf-form--wrapper', {
-      [`${className}`]: className,
-    })
-
-    const handleSubmit = (e: React.FormEvent): void => {
-      if (preventDefault) {
-        e.preventDefault()
-      }
-
-      if (onSubmit) {
-        onSubmit(e)
-      }
+  const handleSubmit = (e: React.FormEvent): void => {
+    if (preventDefault) {
+      e.preventDefault()
     }
 
-    return (
-      <form
-        id={id}
-        ref={ref}
-        name={name}
-        style={style}
-        method={method}
-        target={target}
-        action={action}
-        encType={encType}
-        data-testid={testID}
-        onSubmit={handleSubmit}
-        noValidate={noValidate}
-        autoComplete={autoComplete}
-        className={formWrapperClass}
-        acceptCharset={acceptCharset}
-      >
-        {children}
-      </form>
-    )
+    if (onSubmit) {
+      onSubmit(e)
+    }
   }
-)
 
-FormRoot.displayName = 'Form'
+  return (
+    <form
+      id={id}
+      ref={ref}
+      name={name}
+      style={style}
+      method={method}
+      target={target}
+      action={action}
+      encType={encType}
+      data-testid={testID}
+      onSubmit={handleSubmit}
+      noValidate={noValidate}
+      autoComplete={autoComplete}
+      className={formWrapperClass}
+      acceptCharset={acceptCharset}
+    >
+      {children}
+    </form>
+  )
+}

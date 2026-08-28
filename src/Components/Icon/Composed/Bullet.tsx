@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Styles
@@ -27,48 +27,42 @@ export interface BulletProps extends StandardFunctionProps {
   color?: InfluxColors | string
   /** Size of bullet */
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLSpanElement>
 }
 
-export type BulletRef = HTMLSpanElement
+export const Bullet: FunctionComponent<BulletProps> = ({
+  id,
+  text,
+  glyph,
+  size = ComponentSize.Small,
+  color,
+  style,
+  testID = 'bullet',
+  className,
+  backgroundColor,
+  ref,
+}) => {
+  const bulletClassName = classnames('cf-bullet', {
+    [`cf-bullet__${size}`]: size,
+    [`${className}`]: className,
+  })
 
-export const Bullet = forwardRef<BulletRef, BulletProps>(
-  (
-    {
-      id,
-      text,
-      glyph,
-      size = ComponentSize.Small,
-      color,
-      style,
-      testID = 'bullet',
-      className,
-      backgroundColor,
-    },
-    ref
-  ) => {
-    const bulletClassName = classnames('cf-bullet', {
-      [`cf-bullet__${size}`]: size,
-      [`${className}`]: className,
-    })
-
-    const bulletStyle = {
-      backgroundColor,
-      color,
-      ...style,
-    }
-
-    return (
-      <span
-        className={bulletClassName}
-        data-testid={testID}
-        style={bulletStyle}
-        ref={ref}
-        id={id}
-      >
-        {glyph ? <Icon glyph={glyph} /> : text}
-      </span>
-    )
+  const bulletStyle = {
+    backgroundColor,
+    color,
+    ...style,
   }
-)
 
-Bullet.displayName = 'Bullet'
+  return (
+    <span
+      className={bulletClassName}
+      data-testid={testID}
+      style={bulletStyle}
+      ref={ref}
+      id={id}
+    >
+      {glyph ? <Icon glyph={glyph} /> : text}
+    </span>
+  )
+}

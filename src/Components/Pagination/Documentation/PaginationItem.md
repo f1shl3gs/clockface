@@ -1,30 +1,30 @@
 # PaginationItem
 
-The individual pages of the PaginationNav component. Clicking on it will navigate you directly to the clicked page.
+The individual pages of the Pagination component. Clicking on it will navigate you directly to the clicked page.
 
 ### Usage
 
 ```tsx
-import {PaginationNav} from '@influxdata/clockface'
+import {Pagination} from '@influxdata/clockface'
 ```
 
 ```tsx
 //If both direction and page provided, it defaults to direction
 //Item with direction
-<PaginationNav.Item
+<Pagination.Item
   direction={Direction.Left}
   size={'Medium'}
   isActive={false}
-></PaginationNav.Item>
+></Pagination.Item>
 ```
 
 ```tsx
 //Item with page
-<PaginationNav.Item
+<Pagination.Item
   page={'10'}
   size={'Medium'}
   isActive={false}
-></PaginationNav.Item>
+></Pagination.Item>
 ```
 
 ### Example

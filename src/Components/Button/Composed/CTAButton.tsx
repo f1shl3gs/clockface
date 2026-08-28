@@ -1,9 +1,9 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
-import {ButtonBase, ButtonBaseRef, ButtonBaseProps} from '../Base/ButtonBase'
+import {ButtonBase, ButtonBaseProps} from '../Base/ButtonBase'
 import {IconAndText} from './IconAndText'
 
 // Styles
@@ -27,75 +27,69 @@ export interface CTAButtonProps extends Omit<ButtonBaseProps, 'size'> {
   icon?: IconFont
   /** Reverse ordering of text and icon */
   placeIconAfterText?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLButtonElement>
 }
 
-export type CTAButtonRef = ButtonBaseRef
+export const CTAButton: FunctionComponent<CTAButtonProps> = ({
+  id,
+  text,
+  icon,
+  style,
+  onClick,
+  tabIndex,
+  titleText,
+  disabledTitleText,
+  className,
+  onMouseOut,
+  onMouseOver,
+  onMouseEnter,
+  onMouseLeave,
+  active = false,
+  testID = 'cta-button',
+  type = ButtonType.Button,
+  shape = ButtonShape.Default,
+  color = ComponentColor.Default,
+  status = ComponentStatus.Default,
+  placeIconAfterText,
+  ref,
+}) => {
+  const CTAButtonClass = classnames(`cf-cta-button`, {
+    [`${className}`]: className,
+  })
 
-export const CTAButton = forwardRef<CTAButtonRef, CTAButtonProps>(
-  (
-    {
-      id,
-      text,
-      icon,
-      style,
-      onClick,
-      tabIndex,
-      titleText,
-      disabledTitleText,
-      className,
-      onMouseOut,
-      onMouseOver,
-      onMouseEnter,
-      onMouseLeave,
-      active = false,
-      testID = 'cta-button',
-      type = ButtonType.Button,
-      shape = ButtonShape.Default,
-      color = ComponentColor.Default,
-      status = ComponentStatus.Default,
-      placeIconAfterText,
-    },
-    ref
-  ) => {
-    const CTAButtonClass = classnames(`cf-cta-button`, {
-      [`${className}`]: className,
-    })
-
-    return (
-      <ButtonBase
-        className={CTAButtonClass}
-        titleText={titleText}
-        disabledTitleText={disabledTitleText}
-        tabIndex={tabIndex}
-        onClick={onClick}
-        onMouseOut={onMouseOut}
-        onMouseOver={onMouseOver}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        status={status}
-        testID={testID}
-        active={active}
-        color={color}
-        style={style}
-        shape={shape}
-        size={ComponentSize.Large}
-        type={type}
-        ref={ref}
-        id={id}
-      >
-        <IconAndText
-          placeIconAfterText={placeIconAfterText}
-          text={text}
-          icon={icon}
+  return (
+    <ButtonBase
+      className={CTAButtonClass}
+      titleText={titleText}
+      disabledTitleText={disabledTitleText}
+      tabIndex={tabIndex}
+      onClick={onClick}
+      onMouseOut={onMouseOut}
+      onMouseOver={onMouseOver}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      status={status}
+      testID={testID}
+      active={active}
+      color={color}
+      style={style}
+      shape={shape}
+      size={ComponentSize.Large}
+      type={type}
+      ref={ref}
+      id={id}
+    >
+      <IconAndText
+        placeIconAfterText={placeIconAfterText}
+        text={text}
+        icon={icon}
+      />
+      {status === ComponentStatus.Loading && (
+        <div
+          className={`cf-button-spinner cf-button-spinner--${ComponentSize.Large}`}
         />
-        {status === ComponentStatus.Loading && (
-          <div
-            className={`cf-button-spinner cf-button-spinner--${ComponentSize.Large}`}
-          />
-        )}
-      </ButtonBase>
-    )
-  }
-)
-
-CTAButton.displayName = 'CTAButton'
+      )}
+    </ButtonBase>
+  )
+}

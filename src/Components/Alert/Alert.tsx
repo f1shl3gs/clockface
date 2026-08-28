@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -16,31 +16,36 @@ interface Props extends StandardFunctionProps {
   color: ComponentColor
   /** Icon to be displayed to the left of text */
   icon?: IconFont
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type AlertRef = HTMLDivElement
+export const Alert: FunctionComponent<Props> = ({
+  id,
+  style,
+  testID = 'alert',
+  children,
+  className,
+  color,
+  icon,
+  ref,
+}) => {
+  const alertClassName = classnames('cf-alert', {
+    [`cf-alert--${color}`]: color,
+    'cf-alert--has-icon': icon,
+    [`${className}`]: className,
+  })
 
-export const Alert = forwardRef<AlertRef, Props>(
-  ({id, style, testID = 'alert', children, className, color, icon}, ref) => {
-    const alertClassName = classnames('cf-alert', {
-      [`cf-alert--${color}`]: color,
-      'cf-alert--has-icon': icon,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        className={alertClassName}
-        data-testid={testID}
-        id={id}
-        style={style}
-        ref={ref}
-      >
-        {!!icon && <Icon glyph={icon} className="cf-alert--icon" />}
-        <div className="cf-alert--contents">{children}</div>
-      </div>
-    )
-  }
-)
-
-Alert.displayName = 'Alert'
+  return (
+    <div
+      className={alertClassName}
+      data-testid={testID}
+      id={id}
+      style={style}
+      ref={ref}
+    >
+      {!!icon && <Icon glyph={icon} className="cf-alert--icon" />}
+      <div className="cf-alert--contents">{children}</div>
+    </div>
+  )
+}

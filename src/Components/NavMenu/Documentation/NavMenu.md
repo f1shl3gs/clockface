@@ -8,10 +8,10 @@ import {NavMenu} from '@influxdata/clockface'
 ```
 ```tsx
 <NavMenu>
-  <NavMenu.Item>
-    <NavMenu.SubItem />
-  </NavMenu.Item>
-  <NavMenu.Item />
+  <NavMenuItem>
+    <NavMenuSubItem />
+  </NavMenuItem>
+  <NavMenuItem />
 </NavMenu>
 ```
 

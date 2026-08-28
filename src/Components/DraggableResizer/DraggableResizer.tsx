@@ -38,7 +38,7 @@ export interface DraggableResizerProps extends StandardFunctionProps {
   handleBarStyle?: CSSProperties
 }
 
-export const DraggableResizerRoot: FunctionComponent<DraggableResizerProps> = ({
+export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
   id,
   style,
   children,
@@ -234,5 +234,3 @@ export const DraggableResizerRoot: FunctionComponent<DraggableResizerProps> = ({
     </div>
   )
 }
-
-DraggableResizerRoot.displayName = 'DraggableResizer'

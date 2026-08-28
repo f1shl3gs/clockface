@@ -3,12 +3,7 @@ import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {
-  EmptyState,
-  EmptyStateRef,
-  EmptyStateTextRef,
-  EmptyStateSubTextRef,
-} from '../'
+import {EmptyState, EmptyStateSubText, EmptyStateText} from '../'
 import {Button} from '../../Button/Composed/Button'
 
 // Types
@@ -24,7 +19,7 @@ import EmptyStateExampleBReadme from './EmptyStateExampleB.md?raw'
 export default {title: 'Components/Empty States/Family'}
 
 export const NoDashboards = () => {
-  const emptyStateRef = createRef<EmptyStateRef>()
+  const emptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -34,16 +29,16 @@ export const NoDashboards = () => {
 
   return (
     <div className="story--example">
-      <EmptyState.EmptyState size={ComponentSize.Medium} ref={emptyStateRef}>
-        <EmptyState.Text>
+      <EmptyState size={ComponentSize.Medium} ref={emptyStateRef}>
+        <EmptyStateText>
           Looks like you don't have any <em>Dashboards</em>, why not create one?
-        </EmptyState.Text>
+        </EmptyStateText>
         <Button
           text="Create Dashboard"
           icon={IconFont.Plus_New}
           color={ComponentColor.Primary}
         />
-      </EmptyState.EmptyState>
+      </EmptyState>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -60,7 +55,7 @@ NoDashboards.story = {
 }
 
 export const NoTagKeysFound = () => {
-  const emptyStateRef = createRef<EmptyStateRef>()
+  const emptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -70,10 +65,10 @@ export const NoTagKeysFound = () => {
 
   return (
     <div className="story--example">
-      <EmptyState.EmptyState size={ComponentSize.Small} ref={emptyStateRef}>
-        <EmptyState.Text>{'No Tag Keys found'}</EmptyState.Text>
-        <EmptyState.SubText>{'Try changing the Time Range'}</EmptyState.SubText>
-      </EmptyState.EmptyState>
+      <EmptyState size={ComponentSize.Small} ref={emptyStateRef}>
+        <EmptyStateText>{'No Tag Keys found'}</EmptyStateText>
+        <EmptyStateSubText>{'Try changing the Time Range'}</EmptyStateSubText>
+      </EmptyState>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -90,7 +85,7 @@ NoTagKeysFound.story = {
 }
 
 export const _EmptyState = () => {
-  const emptyStateRef = createRef<EmptyStateRef>()
+  const emptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -100,7 +95,7 @@ export const _EmptyState = () => {
 
   return (
     <div className="story--example">
-      <EmptyState.EmptyState
+      <EmptyState
         size={(ComponentSize as Record<string, any>)['Small']}
         ref={emptyStateRef}
       />
@@ -121,8 +116,8 @@ _EmptyState.story = {
   },
 }
 
-export const EmptyStateText = () => {
-  const emptyStateTextRef = createRef<EmptyStateTextRef>()
+export const _EmptyStateText = () => {
+  const emptyStateTextRef = createRef<HTMLHeadingElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -132,12 +127,12 @@ export const EmptyStateText = () => {
 
   return (
     <div className="story--example">
-      <EmptyState.Text ref={emptyStateTextRef}>
+      <EmptyStateText ref={emptyStateTextRef}>
         <>
           {'Some words and some '}
           <em>{'highlighted words'}</em>.
         </>
-      </EmptyState.Text>
+      </EmptyStateText>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -145,7 +140,7 @@ export const EmptyStateText = () => {
   )
 }
 
-EmptyStateText.story = {
+_EmptyStateText.story = {
   name: 'EmptyStateText',
 
   parameters: {
@@ -155,8 +150,8 @@ EmptyStateText.story = {
   },
 }
 
-export const EmptyStateSubText = () => {
-  const emptyStateSubTextRef = createRef<EmptyStateSubTextRef>()
+export const _EmptyStateSubText = () => {
+  const emptyStateSubTextRef = createRef<HTMLParagraphElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -166,9 +161,9 @@ export const EmptyStateSubText = () => {
 
   return (
     <div className="story--example">
-      <EmptyState.SubText ref={emptyStateSubTextRef}>
+      <EmptyStateSubText ref={emptyStateSubTextRef}>
         {'Sub Text'}
-      </EmptyState.SubText>
+      </EmptyStateSubText>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -176,7 +171,7 @@ export const EmptyStateSubText = () => {
   )
 }
 
-EmptyStateSubText.story = {
+_EmptyStateSubText.story = {
   name: 'EmptyStateSubText',
 
   parameters: {

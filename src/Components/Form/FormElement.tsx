@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef} from 'react'
+import React, {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -25,77 +25,68 @@ export interface FormElementProps extends StandardFunctionProps {
   htmlFor?: string
   /** ID for Error Message for Integration Tests */
   errorMessageTestId?: string
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLLabelElement & HTMLDivElement>
 }
 
-export type FormElementRef = HTMLLabelElement & HTMLDivElement
+export const FormElement: FunctionComponent<FormElementProps> = ({
+  id,
+  label,
+  style,
+  htmlFor,
+  required,
+  helpText,
+  children,
+  className,
+  labelAddOn,
+  errorMessage,
+  testID = 'form--element',
+  errorMessageTestId,
+  ref,
+}) => {
+  const formElementClass = classnames('cf-form--element', {
+    [`${className}`]: className,
+  })
 
-export const FormElement = forwardRef<FormElementRef, FormElementProps>(
-  (
-    {
-      id,
-      label,
-      style,
-      htmlFor,
-      required,
-      helpText,
-      children,
-      className,
-      labelAddOn,
-      errorMessage,
-      testID = 'form--element',
-      errorMessageTestId,
-    },
-    ref
-  ) => {
-    const formElementClass = classnames('cf-form--element', {
-      [`${className}`]: className,
-    })
+  const formElementElements = (
+    <>
+      {!!label && (
+        <FormLabel label={label} required={required}>
+          {!!labelAddOn && labelAddOn()}
+        </FormLabel>
+      )}
+      {!!helpText && <FormHelpText text={helpText} />}
+      {children}
+      {!!errorMessage && (
+        <FormElementError testID={errorMessageTestId} message={errorMessage} />
+      )}
+    </>
+  )
 
-    const formElementElements = (
-      <>
-        {!!label && (
-          <FormLabel label={label} required={required}>
-            {!!labelAddOn && labelAddOn()}
-          </FormLabel>
-        )}
-        {!!helpText && <FormHelpText text={helpText} />}
-        {children}
-        {!!errorMessage && (
-          <FormElementError
-            testID={errorMessageTestId}
-            message={errorMessage}
-          />
-        )}
-      </>
-    )
-
-    if (htmlFor) {
-      return (
-        <label
-          id={id}
-          ref={ref}
-          style={style}
-          htmlFor={htmlFor}
-          data-testid={testID}
-          className={formElementClass}
-        >
-          {formElementElements}
-        </label>
-      )
-    }
-
+  if (htmlFor) {
     return (
-      <div
+      <label
         id={id}
         ref={ref}
         style={style}
+        htmlFor={htmlFor}
         data-testid={testID}
         className={formElementClass}
       >
         {formElementElements}
-      </div>
+      </label>
     )
   }
-)
 
-FormElement.displayName = 'FormElement'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      data-testid={testID}
+      className={formElementClass}
+    >
+      {formElementElements}
+    </div>
+  )
+}

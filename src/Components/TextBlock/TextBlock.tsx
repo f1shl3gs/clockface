@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -22,49 +22,43 @@ export interface TextBlockProps extends StandardFunctionProps {
   textColor?: InfluxColors | string
   /** Use monospace font instead of default */
   monospace?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type TextBlockRef = HTMLDivElement
+export const TextBlock: FunctionComponent<TextBlockProps> = ({
+  id,
+  text,
+  size = ComponentSize.Small,
+  style,
+  testID = 'text-block',
+  className,
+  monospace = false,
+  textColor,
+  backgroundColor,
+  ref,
+}) => {
+  const textBlockClass = classnames('cf-text-block', {
+    'cf-text-block__monospace': monospace,
+    [`cf-text-block__${size}`]: size,
+    [`${className}`]: className,
+  })
 
-export const TextBlock = forwardRef<TextBlockRef, TextBlockProps>(
-  (
-    {
-      id,
-      text,
-      size = ComponentSize.Small,
-      style,
-      testID = 'text-block',
-      className,
-      monospace = false,
-      textColor,
-      backgroundColor,
-    },
-    ref
-  ) => {
-    const textBlockClass = classnames('cf-text-block', {
-      'cf-text-block__monospace': monospace,
-      [`cf-text-block__${size}`]: size,
-      [`${className}`]: className,
-    })
+  const textBlockStyle = generateTextBlockStyle(
+    backgroundColor,
+    textColor,
+    style
+  )
 
-    const textBlockStyle = generateTextBlockStyle(
-      backgroundColor,
-      textColor,
-      style
-    )
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={textBlockStyle}
-        data-testid={testID}
-        className={textBlockClass}
-      >
-        {text}
-      </div>
-    )
-  }
-)
-
-TextBlock.displayName = 'TextBlock'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={textBlockStyle}
+      data-testid={testID}
+      className={textBlockClass}
+    >
+      {text}
+    </div>
+  )
+}

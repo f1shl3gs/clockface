@@ -3,7 +3,7 @@ import {FunctionComponent, useRef, useEffect, useState} from 'react'
 import {contrastRatio} from '../../../Utils/colord'
 
 // Components
-import {ButtonBase, ButtonBaseRef} from './ButtonBase'
+import {ButtonBase} from './ButtonBase'
 
 // Types
 import {ComponentColor, ComponentStatus} from '../../../Types'
@@ -38,29 +38,29 @@ const initialContrasts: ButtonContrast[] = [
 export const ButtonBaseContrastTester: FunctionComponent<{}> = () => {
   const [contrast, setContrast] = useState<ButtonContrast[]>(initialContrasts)
 
-  const defaultDefaultRef = useRef<ButtonBaseRef>(null)
-  const activeDefaultRef = useRef<ButtonBaseRef>(null)
-  const disabledDefaultRef = useRef<ButtonBaseRef>(null)
+  const defaultDefaultRef = useRef<HTMLButtonElement>(null)
+  const activeDefaultRef = useRef<HTMLButtonElement>(null)
+  const disabledDefaultRef = useRef<HTMLButtonElement>(null)
 
-  const defaultPrimaryRef = useRef<ButtonBaseRef>(null)
-  const activePrimaryRef = useRef<ButtonBaseRef>(null)
-  const disabledPrimaryRef = useRef<ButtonBaseRef>(null)
+  const defaultPrimaryRef = useRef<HTMLButtonElement>(null)
+  const activePrimaryRef = useRef<HTMLButtonElement>(null)
+  const disabledPrimaryRef = useRef<HTMLButtonElement>(null)
 
-  const defaultSecondaryRef = useRef<ButtonBaseRef>(null)
-  const activeSecondaryRef = useRef<ButtonBaseRef>(null)
-  const disabledSecondaryRef = useRef<ButtonBaseRef>(null)
+  const defaultSecondaryRef = useRef<HTMLButtonElement>(null)
+  const activeSecondaryRef = useRef<HTMLButtonElement>(null)
+  const disabledSecondaryRef = useRef<HTMLButtonElement>(null)
 
-  const defaultSuccessRef = useRef<ButtonBaseRef>(null)
-  const activeSuccessRef = useRef<ButtonBaseRef>(null)
-  const disabledSuccessRef = useRef<ButtonBaseRef>(null)
+  const defaultSuccessRef = useRef<HTMLButtonElement>(null)
+  const activeSuccessRef = useRef<HTMLButtonElement>(null)
+  const disabledSuccessRef = useRef<HTMLButtonElement>(null)
 
-  const defaultWarningRef = useRef<ButtonBaseRef>(null)
-  const activeWarningRef = useRef<ButtonBaseRef>(null)
-  const disabledWarningRef = useRef<ButtonBaseRef>(null)
+  const defaultWarningRef = useRef<HTMLButtonElement>(null)
+  const activeWarningRef = useRef<HTMLButtonElement>(null)
+  const disabledWarningRef = useRef<HTMLButtonElement>(null)
 
-  const defaultDangerRef = useRef<ButtonBaseRef>(null)
-  const activeDangerRef = useRef<ButtonBaseRef>(null)
-  const disabledDangerRef = useRef<ButtonBaseRef>(null)
+  const defaultDangerRef = useRef<HTMLButtonElement>(null)
+  const activeDangerRef = useRef<HTMLButtonElement>(null)
+  const disabledDangerRef = useRef<HTMLButtonElement>(null)
 
   const buttons = [
     {

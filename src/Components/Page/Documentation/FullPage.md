@@ -8,10 +8,10 @@ import {Page} from '@influxdata/clockface'
 ```
 ```tsx
 <Page>
-  <Page.Header fullWidth={true} />
-  <Page.Contents fullWidth={true}>
+  <PageHeader fullWidth={true} />
+  <PageContents fullWidth={true}>
     // Contents go here
-  </Page.Contents>
+  </PageContents>
 </Page>
 ```
 

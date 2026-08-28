@@ -12,14 +12,14 @@ All components of the `Form` family can be accessed via sub-class from the singl
 
 ```tsx
 <Form />
-<Form.Box />
-<Form.Divider />
-<Form.Element />
-<Form.ElementError />
-<Form.Footer />
-<Form.HelpText />
-<Form.Label />
-<Form.ValidationElement />
+<FormBox />
+<FormDivider />
+<FormElement />
+<FormElementError />
+<FormFooter />
+<FormHelpText />
+<FormLabel />
+<FormValidationElement />
 ```
 
 ### Example

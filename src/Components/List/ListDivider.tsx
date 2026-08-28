@@ -1,5 +1,5 @@
 // Libraries
-import {forwardRef, useContext} from 'react'
+import {useContext, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Contexts
@@ -13,44 +13,38 @@ export interface ListDividerProps extends StandardFunctionProps {
   text?: string
   /** Size of this component */
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type ListDividerRef = HTMLDivElement
+export const ListDivider: FunctionComponent<ListDividerProps> = ({
+  id,
+  text,
+  size = ComponentSize.Small,
+  style,
+  testID = 'list-divider',
+  className,
+  ref,
+}) => {
+  const {listContrastColor} = useContext(ListContext)
 
-export const ListDivider = forwardRef<ListDividerRef, ListDividerProps>(
-  (
-    {
-      id,
-      text,
-      size = ComponentSize.Small,
-      style,
-      testID = 'list-divider',
-      className,
-    },
-    ref
-  ) => {
-    const {listContrastColor} = useContext(ListContext)
+  const listDividerClass = classnames('', {
+    'cf-list-divider': text,
+    'cf-list-divider__thin': !text,
+    [`cf-list-item__${size}`]: size,
+    [`cf-list-divider__${listContrastColor}`]: true,
+    [`${className}`]: className,
+  })
 
-    const listDividerClass = classnames('', {
-      'cf-list-divider': text,
-      'cf-list-divider__thin': !text,
-      [`cf-list-item__${size}`]: size,
-      [`cf-list-divider__${listContrastColor}`]: true,
-      [`${className}`]: className,
-    })
-
-    return (
-      <div
-        id={id}
-        ref={ref}
-        style={style}
-        className={listDividerClass}
-        data-testid={testID}
-      >
-        {text}
-      </div>
-    )
-  }
-)
-
-ListDivider.displayName = 'ListDivider'
+  return (
+    <div
+      id={id}
+      ref={ref}
+      style={style}
+      className={listDividerClass}
+      data-testid={testID}
+    >
+      {text}
+    </div>
+  )
+}

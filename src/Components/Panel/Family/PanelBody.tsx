@@ -1,9 +1,9 @@
 // Libraries
-import {forwardRef} from 'react'
+import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
-import {FlexBox, FlexBoxProps, FlexBoxRef} from '../../FlexBox'
+import {FlexBox, FlexBoxProps} from '../../FlexBox'
 
 // Types
 import {
@@ -19,48 +19,42 @@ export interface PanelBodyProps extends Omit<
 > {
   /** Controls padding */
   size?: ComponentSize
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type PanelBodyRef = FlexBoxRef
+export const PanelBody: FunctionComponent<PanelBodyProps> = ({
+  id,
+  size = ComponentSize.Small,
+  style,
+  margin,
+  testID = 'panel--body',
+  children,
+  className,
+  direction = FlexDirection.Column,
+  alignItems = AlignItems.Stretch,
+  justifyContent = JustifyContent.FlexStart,
+  ref,
+}) => {
+  const panelBodyClass = classnames('cf-panel--body', {
+    [`cf-panel--body__${size}`]: size,
+    [`${className}`]: className,
+  })
 
-export const PanelBody = forwardRef<PanelBodyRef, PanelBodyProps>(
-  (
-    {
-      id,
-      size = ComponentSize.Small,
-      style,
-      margin,
-      testID = 'panel--body',
-      children,
-      className,
-      direction = FlexDirection.Column,
-      alignItems = AlignItems.Stretch,
-      justifyContent = JustifyContent.FlexStart,
-    },
-    ref
-  ) => {
-    const panelBodyClass = classnames('cf-panel--body', {
-      [`cf-panel--body__${size}`]: size,
-      [`${className}`]: className,
-    })
-
-    return (
-      <FlexBox.FlexBox
-        id={id}
-        ref={ref}
-        style={style}
-        margin={margin}
-        className={panelBodyClass}
-        direction={direction}
-        alignItems={alignItems}
-        testID={testID}
-        justifyContent={justifyContent}
-        stretchToFitWidth={true}
-      >
-        {children}
-      </FlexBox.FlexBox>
-    )
-  }
-)
-
-PanelBody.displayName = 'PanelBody'
+  return (
+    <FlexBox
+      id={id}
+      ref={ref}
+      style={style}
+      margin={margin}
+      className={panelBodyClass}
+      direction={direction}
+      alignItems={alignItems}
+      testID={testID}
+      justifyContent={justifyContent}
+      stretchToFitWidth={true}
+    >
+      {children}
+    </FlexBox>
+  )
+}

@@ -4,28 +4,27 @@ import {marked} from 'marked'
 
 // Components
 import {
-  PaginationNav,
-  PaginationNavRef,
-  PaginationItemRef,
-  PaginationTruncationItemRef,
-  PaginationDirectionItemRef,
-  PaginationInputRef,
-} from '../'
+  Pagination,
+  PaginationTruncationItem,
+  PaginationItem,
+  PaginationInput,
+  PaginationDirectionItem,
+} from '../../../Components/Pagination'
 
 // Types
 import {ComponentSize, Direction} from '../../../Types'
 
 // Notes
-import PaginationReadme from './PaginationNav.md?raw'
-import PaginationItemReadme from './PaginationNavItem.md?raw'
+import PaginationReadme from './Pagination.md?raw'
+import PaginationItemReadme from './PaginationItem.md?raw'
 import PaginationTruncationItemReadme from './PaginationTruncationItem.md?raw'
 import PaginationDirectionItemReadme from './PaginationDirectionItem.md?raw'
 import PaginationInputReadme from './PaginationInput.md?raw'
 
-export default {title: 'Components/Pagination/PaginationNav'}
+export default {title: 'Components/Pagination/Pagination'}
 
-export const _PaginationNav = () => {
-  const paginationRef = createRef<PaginationNavRef>()
+export const _Pagination = () => {
+  const paginationRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -35,7 +34,7 @@ export const _PaginationNav = () => {
 
   return (
     <div className="story--example">
-      <PaginationNav.PaginationNav
+      <Pagination
         ref={paginationRef}
         totalPages={10}
         currentPage={1}
@@ -49,7 +48,7 @@ export const _PaginationNav = () => {
         enablePageInput={false}
         size={(ComponentSize as Record<string, any>)['Medium']}
         enableArrowPaginate={true}
-      ></PaginationNav.PaginationNav>
+      />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
@@ -57,8 +56,8 @@ export const _PaginationNav = () => {
   )
 }
 
-_PaginationNav.story = {
-  name: 'PaginationNav',
+_Pagination.story = {
+  name: 'Pagination',
 
   parameters: {
     readme: {
@@ -67,8 +66,8 @@ _PaginationNav.story = {
   },
 }
 
-export const PaginationNavItem = () => {
-  const paginationItemRef = createRef<PaginationItemRef>()
+export const _PaginationItem = () => {
+  const paginationItemRef = createRef<HTMLLIElement>()
   const logRef = (): void => {
     /* eslint-disable */
     console.log(paginationItemRef.current)
@@ -80,7 +79,7 @@ export const PaginationNavItem = () => {
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
       </div>
-      <PaginationNav.Item
+      <PaginationItem
         ref={paginationItemRef}
         page={(10).toString()}
         isActive={false}
@@ -93,8 +92,8 @@ export const PaginationNavItem = () => {
   )
 }
 
-PaginationNavItem.story = {
-  name: 'PaginationNavItem',
+_PaginationItem.story = {
+  name: 'PaginationItem',
 
   parameters: {
     readme: {
@@ -103,8 +102,8 @@ PaginationNavItem.story = {
   },
 }
 
-export const PaginationDirectionItem = () => {
-  const paginationDirectionItemRef = createRef<PaginationDirectionItemRef>()
+export const _PaginationDirectionItem = () => {
+  const paginationDirectionItemRef = createRef<HTMLLIElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -114,7 +113,7 @@ export const PaginationDirectionItem = () => {
 
   return (
     <div className="story--example">
-      <PaginationNav.DirectionItem
+      <PaginationDirectionItem
         ref={paginationDirectionItemRef}
         direction={(Direction as Record<string, any>)['Left']}
         size={(ComponentSize as Record<string, any>)['Small']}
@@ -127,7 +126,7 @@ export const PaginationDirectionItem = () => {
   )
 }
 
-PaginationDirectionItem.story = {
+_PaginationDirectionItem.story = {
   name: 'PaginationDirectionItem',
 
   parameters: {
@@ -137,8 +136,8 @@ PaginationDirectionItem.story = {
   },
 }
 
-export const PaginationTruncationItem = () => {
-  const paginationTruncationItemRef = createRef<PaginationTruncationItemRef>()
+export const _PaginationTruncationItem = () => {
+  const paginationTruncationItemRef = createRef<HTMLLIElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -147,7 +146,7 @@ export const PaginationTruncationItem = () => {
   }
   return (
     <div className="story--example">
-      <PaginationNav.TruncationItem
+      <PaginationTruncationItem
         ref={paginationTruncationItemRef}
         size={(ComponentSize as Record<string, any>)['Small']}
       />
@@ -158,7 +157,7 @@ export const PaginationTruncationItem = () => {
   )
 }
 
-PaginationTruncationItem.story = {
+_PaginationTruncationItem.story = {
   name: 'PaginationTruncationItem',
 
   parameters: {
@@ -168,8 +167,8 @@ PaginationTruncationItem.story = {
   },
 }
 
-export const PaginationInput = () => {
-  const paginationInputRef = createRef<PaginationInputRef>()
+export const _PaginationInput = () => {
+  const paginationInputRef = createRef<HTMLInputElement>()
 
   const logRef = (): void => {
     /* eslint-disable */
@@ -178,7 +177,7 @@ export const PaginationInput = () => {
   }
   return (
     <div className="story--example">
-      <PaginationNav.Input
+      <PaginationInput
         ref={paginationInputRef}
         currentPage={1}
         size={(ComponentSize as Record<string, any>)['Small']}
@@ -190,7 +189,7 @@ export const PaginationInput = () => {
   )
 }
 
-PaginationInput.story = {
+_PaginationInput.story = {
   name: 'PaginationInput',
 
   parameters: {

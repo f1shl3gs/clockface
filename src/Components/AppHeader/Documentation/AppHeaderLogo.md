@@ -9,7 +9,7 @@ import {AppHeader} from '@influxdata/clockface'
 ```
 
 ```tsx
-<AppHeader.Logo src="path/to/image.png" />
+<AppHeaderLogo src="path/to/image.png" />
 ```
 
 ### Example

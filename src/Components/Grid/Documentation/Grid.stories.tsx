@@ -1,9 +1,9 @@
 // Libraries
-import {RefObject, createRef} from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
-import {Grid, GridRef, GridRowRef, GridColumnRef} from '../'
+import {Grid, GridColumn, GridRow} from '../'
 
 // Types
 import {Columns} from '../../../Types'
@@ -14,9 +14,9 @@ import GridReadme from './Grid.md?raw'
 export default {title: 'Layout/12 Column Grid'}
 
 export const _Grid = () => {
-  const gridRef: RefObject<GridRef | null> = createRef()
-  const gridRowRef: RefObject<GridRowRef | null> = createRef()
-  const gridColumnRef: RefObject<GridColumnRef | null> = createRef()
+  const gridRef = createRef<HTMLDivElement>()
+  const gridRowRef = createRef<HTMLDivElement>()
+  const gridColumnRef = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
     /* eslint-disable */
@@ -28,196 +28,196 @@ export const _Grid = () => {
 
   return (
     <div className="story--example">
-      <Grid.Grid ref={gridRef}>
-        <Grid.Row>
-          <Grid.Column>
+      <Grid ref={gridRef}>
+        <GridRow>
+          <GridColumn>
             <h3 className="text-center">Even Divisions</h3>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Two}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">2/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Two}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">2/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Two}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">2/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Two}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">2/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Two}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">2/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Two}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">2/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Three}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">3/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Three}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">3/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Three}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">3/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Three}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">3/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Four}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Four}>
             <div className="mockComponent stretch grid-example">4/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Four}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Four}>
             <div className="mockComponent stretch grid-example">4/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Four}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Four}>
             <div className="mockComponent stretch grid-example">4/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Six}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Six}>
             <div className="mockComponent stretch grid-example">6/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Six}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Six}>
             <div className="mockComponent stretch grid-example">6/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn>
             <hr />
             <h3 className="text-center">Uneven Divisions</h3>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.One}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.One}>
             <div className="mockComponent stretch grid-example">1/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Eleven}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Eleven}>
             <div className="mockComponent stretch grid-example">11/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Two}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">2/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Ten}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Ten}>
             <div className="mockComponent stretch grid-example">10/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Three}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">3/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Nine}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Nine}>
             <div className="mockComponent stretch grid-example">9/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Four}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Four}>
             <div className="mockComponent stretch grid-example">4/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Eight}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Eight}>
             <div className="mockComponent stretch grid-example">8/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Five}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Five}>
             <div className="mockComponent stretch grid-example">5/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Seven}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Seven}>
             <div className="mockComponent stretch grid-example">7/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn>
             <hr />
             <h3 className="text-center">Offsets</h3>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Four} offsetXS={Columns.Four}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Four} offsetXS={Columns.Four}>
             <div className="mockComponent stretch grid-example">
               4/12 + 4/12
             </div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Four}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Four}>
             <div className="mockComponent stretch grid-example">4/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Three}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">3/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Three} offsetXS={Columns.Three}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Three} offsetXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">
               3/12 + 3/12
             </div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Three}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Three}>
             <div className="mockComponent stretch grid-example">3/12</div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column widthXS={Columns.Eight}>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn widthXS={Columns.Eight}>
             <div className="mockComponent stretch grid-example">8/12</div>
-          </Grid.Column>
-          <Grid.Column widthXS={Columns.Two} offsetXS={Columns.Two}>
+          </GridColumn>
+          <GridColumn widthXS={Columns.Two} offsetXS={Columns.Two}>
             <div className="mockComponent stretch grid-example">
               2/12 + 2/12
             </div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn>
             <hr />
             <h3 className="text-center">Responsive Columns</h3>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn
             widthXS={Columns.Six}
             widthSM={Columns.Four}
             widthMD={Columns.Three}
@@ -232,8 +232,8 @@ export const _Grid = () => {
               <br />
               LG 2/12
             </div>
-          </Grid.Column>
-          <Grid.Column
+          </GridColumn>
+          <GridColumn
             widthXS={Columns.Six}
             widthSM={Columns.Four}
             widthMD={Columns.Three}
@@ -248,8 +248,8 @@ export const _Grid = () => {
               <br />
               LG 2/12
             </div>
-          </Grid.Column>
-          <Grid.Column
+          </GridColumn>
+          <GridColumn
             widthXS={Columns.Six}
             widthSM={Columns.Four}
             widthMD={Columns.Three}
@@ -264,8 +264,8 @@ export const _Grid = () => {
               <br />
               LG 2/12
             </div>
-          </Grid.Column>
-          <Grid.Column
+          </GridColumn>
+          <GridColumn
             widthXS={Columns.Six}
             widthSM={Columns.Four}
             widthMD={Columns.Three}
@@ -280,8 +280,8 @@ export const _Grid = () => {
               <br />
               LG 2/12
             </div>
-          </Grid.Column>
-          <Grid.Column
+          </GridColumn>
+          <GridColumn
             widthXS={Columns.Six}
             widthSM={Columns.Four}
             widthMD={Columns.Three}
@@ -296,8 +296,8 @@ export const _Grid = () => {
               <br />
               LG 2/12
             </div>
-          </Grid.Column>
-          <Grid.Column
+          </GridColumn>
+          <GridColumn
             widthXS={Columns.Six}
             widthSM={Columns.Four}
             widthMD={Columns.Three}
@@ -312,16 +312,16 @@ export const _Grid = () => {
               <br />
               LG 2/12
             </div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn>
             <hr />
             <h3 className="text-center">Playground (Use Knobs)</h3>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row ref={gridRowRef}>
-          <Grid.Column
+          </GridColumn>
+        </GridRow>
+        <GridRow ref={gridRowRef}>
+          <GridColumn
             ref={gridColumnRef}
             widthXS={(Columns as Record<string, any>)['Twelve']}
             widthSM={(Columns as Record<string, any>)['Twelve']}
@@ -341,9 +341,9 @@ export const _Grid = () => {
               <br />
               {`LG ${(Columns as Record<string, any>)['Twelve']}/12`}
             </div>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid.Grid>
+          </GridColumn>
+        </GridRow>
+      </Grid>
       <div className="story--test-buttons">
         <button onClick={logRefs}>Log Refs</button>
       </div>

@@ -1,5 +1,5 @@
 // Libraries
-import React, {forwardRef, CSSProperties} from 'react'
+import React, {CSSProperties, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -28,113 +28,101 @@ export interface FunnelPageProps extends StandardFunctionProps {
   pageStyle?: CSSProperties
   /** Renders a graphic in the funnel page */
   enableGraphic?: boolean
+  /** Ref to the underlying DOM element */
+  ref?: Ref<HTMLDivElement>
 }
 
-export type FunnelPageRef = HTMLDivElement
+export const FunnelPage: FunctionComponent<FunnelPageProps> = ({
+  id,
+  logo,
+  style,
+  testID = 'funnel-page',
+  children,
+  pageStyle,
+  className,
+  accentColorA = InfluxColors.PurpleX,
+  accentColorB = InfluxColors.DogwoodRose,
+  enableGraphic = false,
+  backgroundColor = InfluxColors.CetaceanBlue,
+  ref,
+}) => {
+  const funnelPageClassName = classnames('cf-funnel-page', {
+    [`${className}`]: className,
+  })
 
-export const FunnelPageRoot = forwardRef<FunnelPageRef, FunnelPageProps>(
-  (
+  const backgroundStyle = {backgroundColor, ...pageStyle}
+  const accentGradientAColors = [
     {
-      id,
-      logo,
-      style,
-      testID = 'funnel-page',
-      children,
-      pageStyle,
-      className,
-      accentColorA = InfluxColors.PurpleX,
-      accentColorB = InfluxColors.DogwoodRose,
-      enableGraphic = false,
-      backgroundColor = InfluxColors.CetaceanBlue,
+      position: 0,
+      color: `${colord(accentColorA).alpha(0.6).toRgbString()}`,
     },
-    ref
-  ) => {
-    const funnelPageClassName = classnames('cf-funnel-page', {
-      [`${className}`]: className,
-    })
+    {
+      position: 100,
+      color: `${colord(accentColorA).alpha(0).toRgbString()}`,
+    },
+  ]
+  const accentGradientBColors = [
+    {
+      position: 0,
+      color: `${colord(accentColorB).alpha(0.6).toRgbString()}`,
+    },
+    {
+      position: 100,
+      color: `${colord(accentColorB).alpha(0).toRgbString()}`,
+    },
+  ]
+  const backgroundGradientColors = [
+    {
+      position: 0,
+      color: `${colord(backgroundColor).alpha(0).toRgbString()}`,
+    },
+    {
+      position: 100,
+      color: `${colord(backgroundColor).alpha(0.8).toRgbString()}`,
+    },
+  ]
+  const accentGradientA = generateInlineCSSGradient(250, accentGradientAColors)
+  const accentGradientB = generateInlineCSSGradient(140, accentGradientBColors)
+  const backgroundGradient = generateInlineCSSGradient(
+    180,
+    backgroundGradientColors
+  )
 
-    const backgroundStyle = {backgroundColor, ...pageStyle}
-    const accentGradientAColors = [
-      {
-        position: 0,
-        color: `${colord(accentColorA).alpha(0.6).toRgbString()}`,
-      },
-      {
-        position: 100,
-        color: `${colord(accentColorA).alpha(0).toRgbString()}`,
-      },
-    ]
-    const accentGradientBColors = [
-      {
-        position: 0,
-        color: `${colord(accentColorB).alpha(0.6).toRgbString()}`,
-      },
-      {
-        position: 100,
-        color: `${colord(accentColorB).alpha(0).toRgbString()}`,
-      },
-    ]
-    const backgroundGradientColors = [
-      {
-        position: 0,
-        color: `${colord(backgroundColor).alpha(0).toRgbString()}`,
-      },
-      {
-        position: 100,
-        color: `${colord(backgroundColor).alpha(0.8).toRgbString()}`,
-      },
-    ]
-    const accentGradientA = generateInlineCSSGradient(
-      250,
-      accentGradientAColors
-    )
-    const accentGradientB = generateInlineCSSGradient(
-      140,
-      accentGradientBColors
-    )
-    const backgroundGradient = generateInlineCSSGradient(
-      180,
-      backgroundGradientColors
-    )
+  let backgroundGraphic = <></>
 
-    let backgroundGraphic = <></>
-
-    if (enableGraphic) {
-      backgroundGraphic = <div className="cf-funnel-page--graphic" />
-    }
-
-    return (
-      <div
-        className={funnelPageClassName}
-        data-testid={testID}
-        id={id}
-        style={backgroundStyle}
-        ref={ref}
-      >
-        <DapperScrollbars className="cf-funnel-page--scroll">
-          <div
-            className="cf-funnel-page--content"
-            data-testid={`${testID}--content`}
-            style={style}
-          >
-            {logo ? (
-              <div
-                className="cf-funnel-page--logo"
-                data-testid={`${testID}--logo`}
-              >
-                {logo}
-              </div>
-            ) : null}
-            {children}
-          </div>
-        </DapperScrollbars>
-        {backgroundGraphic}
-        <div className="cf-funnel-page--gradient" style={accentGradientA} />
-        <div className="cf-funnel-page--gradient" style={accentGradientB} />
-        <div className="cf-funnel-page--gradient" style={backgroundGradient} />
-      </div>
-    )
+  if (enableGraphic) {
+    backgroundGraphic = <div className="cf-funnel-page--graphic" />
   }
-)
 
-FunnelPageRoot.displayName = 'FunnelPage'
+  return (
+    <div
+      className={funnelPageClassName}
+      data-testid={testID}
+      id={id}
+      style={backgroundStyle}
+      ref={ref}
+    >
+      <DapperScrollbars className="cf-funnel-page--scroll">
+        <div
+          className="cf-funnel-page--content"
+          data-testid={`${testID}--content`}
+          style={style}
+        >
+          {logo ? (
+            <div
+              className="cf-funnel-page--logo"
+              data-testid={`${testID}--logo`}
+            >
+              {logo}
+            </div>
+          ) : null}
+          {children}
+        </div>
+      </DapperScrollbars>
+      {backgroundGraphic}
+      <div className="cf-funnel-page--gradient" style={accentGradientA} />
+      <div className="cf-funnel-page--gradient" style={accentGradientB} />
+      <div className="cf-funnel-page--gradient" style={backgroundGradient} />
+    </div>
+  )
+}
