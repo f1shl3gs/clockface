@@ -5,7 +5,7 @@ import {marked} from 'marked'
 // Components
 import {SlideToggle} from '../'
 import {FlexBox} from '../../FlexBox'
-import {InputLabel} from '../../Inputs/InputLabel'
+import {InputLabel} from '../../Inputs'
 
 // Types
 import {

@@ -3,7 +3,7 @@ import {Component, ChangeEvent} from 'react'
 // This component only exists to test FormValidationElement with a stateful wrapper
 // Our addon-state storybook plugin is currently broken
 
-import {Input} from '../../Inputs/Input'
+import {Input} from '../../Inputs'
 import {FormValidationElement} from '../FormValidationElement'
 
 interface State {

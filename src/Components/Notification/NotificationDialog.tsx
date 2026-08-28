@@ -3,7 +3,7 @@ import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
-import {Icon} from '../Icon/Base/Icon'
+import {Icon} from '../Icon'
 
 // Types
 import {
@@ -28,8 +28,6 @@ import {SquareButton} from '../Button/Composed/SquareButton'
 export interface NotificationDialogProps extends StandardFunctionProps {
   /** Icon to display before notification content */
   icon?: IconFont
-  /** Controls if the notification is showing or hidden */
-  visible?: boolean
   /** Optional gradient theme of panel, supercedes backgroundColor prop */
   gradient?: Gradients
   /** Notification color */

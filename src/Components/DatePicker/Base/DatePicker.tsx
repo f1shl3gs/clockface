@@ -12,7 +12,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 import classnames from 'classnames'
 
 // Components
-import {Input} from '../../Inputs/Input'
+import {Input} from '../../Inputs'
 import {FormElement} from '../../Form/index'
 
 // Styles

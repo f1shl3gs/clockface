@@ -2,7 +2,7 @@
 import {ChangeEvent, MouseEvent, FunctionComponent, Ref} from 'react'
 
 // Components
-import {Input} from '../Inputs/Input'
+import {Input} from '../Inputs'
 import {Button} from '../Button/Composed/Button'
 
 // Styles

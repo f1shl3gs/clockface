@@ -68,7 +68,7 @@ const selectedOption = {name: 'Lemon', id: '30'}
 And here's rendering the component:
 
 ```tsx
-<TypeAheadDropDown
+<TypeAheadDropdown
     style={{width: '250px', marginRight: '45px'}}
     onSelect={onSelect}
     items={items}

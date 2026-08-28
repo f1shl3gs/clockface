@@ -13,7 +13,7 @@ import {
   TreeNavUser,
   TreeNavUserItem,
 } from '../'
-import {Icon} from '../../Icon/Base/Icon'
+import {Icon} from '../../Icon'
 import {AppWrapper} from '../../AppWrapper/AppWrapper'
 import {Page, PageContents, PageHeader, PageTitle} from '../../Page/index'
 

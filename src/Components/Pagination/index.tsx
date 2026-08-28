@@ -1,5 +1,5 @@
 export * from './Pagination'
 export * from './PaginationItem'
-export * from './paginationTruncationItem'
+export * from './PaginationTruncationItem'
 export * from './PaginationDirectionItem'
 export * from './PaginationInput'

@@ -16,7 +16,7 @@ import {SelectDropdown} from '../Composed/SelectDropdown'
 import {MultiSelectDropdown} from '../Composed/MultiSelectDropdown'
 import {ColorPickerPreview} from '../../ColorPicker/ColorPickerPreview'
 
-import {TypeAheadDropDown, SelectableItem} from '../Composed/TypeAheadDropDown'
+import {TypeAheadDropdown, SelectableItem} from '../Composed/TypeAheadDropdown'
 
 import {CreatableTypeAheadDropdown} from '../Composed/CreatableTypeAheadDropdown'
 
@@ -485,7 +485,7 @@ _SelectDropdown.story = {
   },
 }
 
-export const TypeAheadDropdown = () => {
+export const _TypeAheadDropdown = () => {
   const selectDropdownOptions = [
     {name: 'Apple', id: '0'},
     {name: 'Peach', id: '5'},
@@ -529,7 +529,7 @@ export const TypeAheadDropdown = () => {
   return (
     <div className="story--example">
       <span> with a pre-selected item:</span>
-      <TypeAheadDropDown
+      <TypeAheadDropdown
         style={defaultDropdownStyle}
         onSelect={onSelect}
         testIdSuffix="fooTest"
@@ -544,7 +544,7 @@ export const TypeAheadDropdown = () => {
       />
 
       <span> without a pre-selected item:</span>
-      <TypeAheadDropDown
+      <TypeAheadDropdown
         style={defaultDropdownStyle}
         onSelect={onSelect}
         testIdSuffix="fooTest"
@@ -558,7 +558,7 @@ export const TypeAheadDropdown = () => {
       />
 
       <span> Stress test with 100,000 items:</span>
-      <TypeAheadDropDown
+      <TypeAheadDropdown
         style={defaultDropdownStyle}
         onSelect={onSelect}
         testIdSuffix="fooTest"
@@ -574,7 +574,7 @@ export const TypeAheadDropdown = () => {
   )
 }
 
-TypeAheadDropdown.story = {
+_TypeAheadDropdown.story = {
   name: 'TypeAheadDropdown',
 
   parameters: {

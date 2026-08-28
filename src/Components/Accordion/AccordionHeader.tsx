@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 // Types
 import {IconFont, Direction, StandardFunctionProps} from '../../Types'
-import {Icon} from '../Icon/Base/Icon'
+import {Icon} from '../Icon'
 
 //Context
 import {useAccordionContext} from './Accordion'
@@ -29,18 +29,18 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
     : IconFont.CaretRight_New
   const AccordionHeaderCaretClassName = classnames('cf-accordion--icon', {
     [`cf-accordion--icon-${caretIcon}`]: caretIcon,
-    [`cf-accordion--icon--disabled`]: context.isDisabled,
+    [`cf-accordion--icon--disabled`]: context.disabled,
   })
 
   const AccordionHeaderClassName = classnames(`cf-accordion--header`, {
     [`cf-accordion--header--active`]: context.isExpanded && context.hasBody,
     [`${className}`]: className,
-    [`cf-accordion--header--disabled`]: context.isDisabled,
-    [`cf-accordion--header--clickable`]: context.hasBody && !context.isDisabled,
+    [`cf-accordion--header--disabled`]: context.disabled,
+    [`cf-accordion--header--clickable`]: context.hasBody && !context.disabled,
   })
 
   const toggleExpand = () => {
-    if (!context.isDisabled) {
+    if (!context.disabled) {
       context.setExpanded(!context.isExpanded)
       context.onChange()
     }
@@ -58,7 +58,7 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
       style={style}
       data-testid={testID}
     >
-      {context.iconPlacementPosition === Direction.Left && (
+      {context.iconDirection === Direction.Left && (
         <div
           className={
             'cf-accordion--icon-container cf-accordion--icon-container-left'
@@ -71,7 +71,7 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
         </div>
       )}
       <div className={'cf-accordion--header--content'}>{children}</div>
-      {context.iconPlacementPosition === Direction.Right && (
+      {context.iconDirection === Direction.Right && (
         <div
           onClick={() => {
             context.setExpanded(!context.isExpanded)

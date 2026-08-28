@@ -1,7 +1,7 @@
 // Libraries
 import React, {useRef, CSSProperties, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
-import {Icon} from '../../Icon/Base/Icon'
+import {Icon} from '../../Icon'
 
 // Components
 import {Popover} from '../'

@@ -240,7 +240,6 @@ export const _NotificationDialog = () => {
     <div className="story--example">
       <NotificationDialog
         ref={notificationDialogRef}
-        visible={true}
         size={(ComponentSize as Record<string, any>)['Small']}
         icon={(IconFont as Record<string, any>)['Checkmark_New']}
         gradient={(Gradients as Record<string, any>)['GarageBand']}

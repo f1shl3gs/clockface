@@ -24,6 +24,8 @@ import './Notification.scss'
 const EASE_EXP_IN_OUT = 'cubic-bezier(0.87, 0, 0.13, 1)'
 
 export interface NotificationProps extends NotificationDialogProps {
+  /** Controls if the notification is showing or hidden */
+  visible?: boolean
   /** Positioning the notification left, center, or right on the window */
   horizontalAlignment?: Alignment
   /** Positioning the notification top, middle, or bottom on the window */

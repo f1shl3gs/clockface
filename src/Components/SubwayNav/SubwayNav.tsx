@@ -13,7 +13,7 @@ export interface SubwayNavModel {
   isComplete?: boolean
 }
 
-interface OwnProps {
+interface Props {
   currentStep: number
   navigationSteps: SubwayNavModel[]
   onStepClick: (step: number) => void
@@ -24,7 +24,7 @@ interface OwnProps {
   showCheckmark?: boolean
 }
 
-export const SubwayNav: FunctionComponent<OwnProps> = ({
+export const SubwayNav: FunctionComponent<Props> = ({
   currentStep,
   navigationSteps,
   onStepClick,

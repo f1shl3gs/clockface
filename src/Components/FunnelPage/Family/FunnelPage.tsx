@@ -1,13 +1,13 @@
 // Libraries
 import React, {CSSProperties, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
+import {colord} from 'colord'
 
 // Components
 import {DapperScrollbars} from '../../DapperScrollbars/DapperScrollbars'
 
 // Utilities
 import {generateInlineCSSGradient} from '../../../Utils/colors'
-import {colord} from '../../../Utils/colord'
 
 // Styles
 import './FunnelPage.scss'

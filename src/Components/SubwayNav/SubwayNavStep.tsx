@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 
-import {Icon} from '../Icon/Base/Icon'
+import {Icon} from '../Icon'
 import {IconFont, InfluxColors} from '../../Types'
 
 type OwnProps = {

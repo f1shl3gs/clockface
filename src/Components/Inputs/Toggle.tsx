@@ -10,7 +10,7 @@ import React, {
 import classnames from 'classnames'
 
 // Components
-import {Icon} from '../Icon/Base/Icon'
+import {Icon} from '../Icon'
 
 // Styles
 import './Toggle.scss'

@@ -11,7 +11,7 @@ import React, {
 import classnames from 'classnames'
 
 // Components
-import {Icon} from '../Icon/Base/Icon'
+import {Icon} from '../Icon'
 import {StatusIndicator} from './StatusIndicator'
 import {DismissButton} from '../Button/Composed/DismissButton'
 

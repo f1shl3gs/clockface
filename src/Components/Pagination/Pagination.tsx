@@ -13,7 +13,7 @@ import {PaginationDirectionItem} from './PaginationDirectionItem'
 
 // Components
 import {PaginationItem} from './PaginationItem'
-import {PaginationTruncationItem} from './paginationTruncationItem'
+import {PaginationTruncationItem} from './PaginationTruncationItem'
 import {PaginationInput} from './PaginationInput'
 
 // Styles
@@ -198,11 +198,6 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   }, [totalPages, pageRangeOffset, size, hideDirectionIcon])
 
   useEffect(() => {
-    setActivePage(currentPage)
-  }, [currentPage])
-
-  useEffect(() => {
-    setActivePage(activePage)
     if (activePage > breakpoints.secondBreakpoint) {
       setBreakpoints(
         computePageSpread(

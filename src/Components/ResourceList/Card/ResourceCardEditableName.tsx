@@ -11,8 +11,8 @@ import {
 import classnames from 'classnames'
 
 // Components
-import {Input} from '../../Inputs/Input'
-import {Icon} from '../../Icon/Base/Icon'
+import {Input} from '../../Inputs'
+import {Icon} from '../../Icon'
 import {SpinnerContainer} from '../../Spinners/SpinnerContainer'
 import {TechnoSpinner} from '../../Spinners/TechnoSpinner'
 import {ClickOutside} from '../../ClickOutside/ClickOutside'

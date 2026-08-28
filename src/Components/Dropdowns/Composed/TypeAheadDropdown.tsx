@@ -8,7 +8,11 @@ import React, {
   useState,
 } from 'react'
 import classnames from 'classnames'
+
+// Components
 import {Dropdown, DropdownMenu, DropdownItem, MenuStatus} from '../.'
+import {Input} from '../../Inputs'
+import {DropdownHeader} from '../DropdownHeader'
 
 import {
   ComponentStatus,
@@ -16,10 +20,8 @@ import {
   StandardFunctionProps,
 } from '../../../Types'
 
-import {Input} from '../../Inputs/Input'
-import {DropdownHeader} from '../DropdownHeader'
-import '../ScrollBarStyles.scss'
-import './TypeAheadDropDownStyles.scss'
+import '../ScrollBar.scss'
+import './TypeAheadDropdown.scss'
 
 export interface SelectableItem {
   id: string
@@ -51,7 +53,7 @@ const enCollator = new Intl.Collator('en-us')
 
 const LIST_ITEM_HEIGHT = 33
 
-export const TypeAheadDropDown: FunctionComponent<Props> = ({
+export const TypeAheadDropdown: FunctionComponent<Props> = ({
   id,
   style,
   items,
@@ -65,16 +67,18 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
   defaultNameText = '',
   status = ComponentStatus.Default,
 }) => {
-  if (sortNames) {
-    items.sort((a, b) => {
-      const aname = a?.name || ''
-      const bname = b?.name || ''
-      return enCollator.compare(aname, bname)
-    })
-  }
+  const sortedItems = useMemo(() => {
+    if (sortNames) {
+      return [...items].sort((a, b) => {
+        return enCollator.compare(a?.name || '', b?.name || '')
+      })
+    }
+
+    return items
+  }, [items, sortNames])
 
   const [selectIndex, setSelectIndex] = useState(-1)
-  const [queryResults, setQueryResults] = useState(items)
+  const [queryResults, setQueryResults] = useState(sortedItems)
   const [menuStatus, setMenuStatus] = useState<MenuStatus>(MenuStatus.Closed)
   const [userHasTyped, setUserHasTyped] = useState(false)
   const [selectedItem, setSelectedItem] = useState<SelectableItem | null>(
@@ -97,7 +101,7 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
     // If selectedOption is invalid (not in the list of items), then we want to clear the input value
     if (
       selectedOption &&
-      !items.some(item => item.name === selectedOption.name)
+      !sortedItems.some(item => item.name === selectedOption.name)
     ) {
       setInputValue('')
       return
@@ -109,7 +113,7 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
   useEffect(() => {
     // only filter the list to show the results if the user has typed something
     if (inputValue.length > 0 && userHasTyped) {
-      const result = items.filter(val => {
+      const result = sortedItems.filter(val => {
         const name = val?.name || ''
         return name.toLowerCase().includes(inputValue.toLowerCase())
       })
@@ -120,13 +124,13 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
       setQueryResults(result)
       setSelectIndex(-1)
     } else {
-      setQueryResults(items)
+      setQueryResults(sortedItems)
     }
-  }, [items, inputValue])
+  }, [sortedItems, inputValue])
 
   const itemNames = useMemo(
-    () => items.map(item => item.name?.toLowerCase()),
-    [items.length]
+    () => sortedItems.map(item => item.name?.toLowerCase()),
+    [sortedItems]
   )
 
   // Replicates react-window's initialScrollOffset: scroll to the selected
@@ -141,11 +145,11 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
 
   const filter = (filterStr: string) => {
     if (!filterStr) {
-      setQueryResults(items)
+      setQueryResults(sortedItems)
       setInputValue('')
       setSelectIndex(-1)
     } else {
-      const result = items.filter(val => {
+      const result = sortedItems.filter(val => {
         const name = val?.name || ''
         return name.toLowerCase().includes(filterStr.toLowerCase())
       })
@@ -208,7 +212,7 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
 
         if (foundIndex >= 0) {
           // is a real legal value
-          selectItem(items[foundIndex])
+          selectItem(sortedItems[foundIndex])
         } else {
           setTypedValueToSelectedName()
           setMenuStatus(MenuStatus.Closed)
@@ -247,7 +251,7 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
     //  reset to the selected value; if the user typed in
     //  something not allowed it will go back to the last selected value:
     setTypedValueToSelectedName(backupSelectionValue)
-    setQueryResults(items)
+    setQueryResults(sortedItems)
     setMenuStatus(MenuStatus.Closed)
     setUserHasTyped(false)
     setSelectIndex(-1)
@@ -296,7 +300,7 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
 
   const getSelectedItemIndex = (): number => {
     if (selectedItem) {
-      return items.findIndex(item => item.id === selectedItem.id)
+      return sortedItems.findIndex(item => item.id === selectedItem.id)
     }
     return 0
   }
@@ -360,7 +364,7 @@ export const TypeAheadDropDown: FunctionComponent<Props> = ({
                       }}
                     >
                       <DropdownItem
-                        id={value.id.toString()}
+                        id={value.id}
                         value={value}
                         onClick={() => selectItem(value)}
                         selected={value.id === selectedItem?.id}

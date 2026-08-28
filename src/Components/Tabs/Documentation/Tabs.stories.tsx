@@ -4,7 +4,7 @@ import {marked} from 'marked'
 
 // Components
 import {Tabs, Tab, TabContents, TabsContainer} from '../'
-import {Icon} from '../../Icon/Base/Icon'
+import {Icon} from '../../Icon'
 
 // Types
 import {ComponentSize, Orientation, IconFont, Alignment} from '../../../Types'

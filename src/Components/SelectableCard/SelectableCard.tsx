@@ -3,7 +3,7 @@ import React, {MouseEvent, KeyboardEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
-import {Icon} from '../Icon/Base/Icon'
+import {Icon} from '../Icon'
 
 // Types
 import {

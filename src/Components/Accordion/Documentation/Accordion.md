@@ -6,8 +6,9 @@ Accordions add friction to discovering detailed content (since users have to cli
 ### Usage
 
 ```tsx
-import {Accordion} from '@influxdata/clockface'
-;<Accordion>
+import {Accordion} from '@influxdata/clockface';
+
+<Accordion>
   <AccordionHeader>{headerItem}</AccordionHeader>
   <AccordionBodyItem>{bodyItem1}</AccordionBodyItem>
   <AccordionBodyItem>{bodyItem2}</AccordionBodyItem>

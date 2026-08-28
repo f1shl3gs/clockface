@@ -1,9 +1,8 @@
 //Libraries
 import {CSSProperties} from 'react'
-import {brighten, relativeLuminance} from './colord'
 
 // Constants
-import {getColorsFromGradient} from '../Utils/colors'
+import {getColorsFromGradient, brighten, relativeLuminance} from './colors'
 
 // Types
 import {

@@ -4,7 +4,7 @@ import {marked} from 'marked'
 
 // Components
 import {NavMenu, NavMenuItem, NavMenuSubItem} from '../'
-import {Icon} from '../../Icon/Base/Icon'
+import {Icon} from '../../Icon'
 
 // Types
 import {IconFont} from '../../../Types'

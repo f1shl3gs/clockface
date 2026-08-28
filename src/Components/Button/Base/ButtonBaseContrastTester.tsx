@@ -1,6 +1,5 @@
 // Libraries
 import {FunctionComponent, useRef, useEffect, useState} from 'react'
-import {contrastRatio} from '../../../Utils/colord'
 
 // Components
 import {ButtonBase} from './ButtonBase'
@@ -9,7 +8,7 @@ import {ButtonBase} from './ButtonBase'
 import {ComponentColor, ComponentStatus} from '../../../Types'
 
 // Utils
-import {getAverageColorFromLinearGradient} from '../../../Utils/colors'
+import {getAverageColorFromLinearGradient, contrastRatio} from '../../../Utils/colors'
 
 // Styles
 import './ButtonBaseContrastTester.scss'

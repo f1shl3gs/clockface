@@ -12,7 +12,7 @@ import {
   ResourceCardEditableDescription,
   ResourceCardName,
 } from '../Card'
-import {Input} from '../../Inputs/Input'
+import {Input} from '../../Inputs'
 import {EmptyState, EmptyStateText} from '../../EmptyState'
 
 // Types

@@ -2,7 +2,7 @@
 import {FunctionComponent} from 'react'
 
 // Components
-import {Icon} from '../../Icon/Base/Icon'
+import {Icon} from '../../Icon'
 
 // Types
 import {IconFont} from '../../../Types'

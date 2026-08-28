@@ -3,7 +3,7 @@ import {ChangeEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
-import {Input} from '../Inputs/Input'
+import {Input} from '../Inputs'
 import {Button} from '../Button/Composed/Button'
 import {ColorPickerSwatch} from './ColorPickerSwatch'
 import {ColorPickerPreview} from './ColorPickerPreview'

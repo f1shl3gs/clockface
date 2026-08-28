@@ -11,7 +11,7 @@ import React, {
 // Components
 import {Dropdown, DropdownItem, DropdownMenu} from '../'
 import {DropdownHeader} from '../DropdownHeader'
-import {Input} from '../../Inputs/Input'
+import {Input} from '../../Inputs'
 
 // Types
 import {

@@ -266,7 +266,7 @@ export const AccordionWithToggles = () => {
       style={{justifyContent: 'none', alignItems: 'start', display: 'block'}}
     >
       <Accordion
-        iconPlacement={(Direction as Record<string, any>)['Left']}
+        iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
         style={{}}
@@ -309,7 +309,7 @@ export const AccordionWithToggles = () => {
         </AccordionBodyItem>
       </Accordion>
       <Accordion
-        iconPlacement={(Direction as Record<string, any>)['Left']}
+        iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
         style={{}}
@@ -380,7 +380,7 @@ export const AccordionWithPlainTexts = () => {
     >
       {' '}
       <Accordion
-        iconPlacement={(Direction as Record<string, any>)['Left']}
+        iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
         style={{}}
@@ -430,7 +430,7 @@ export const _Accordion = () => {
       style={{justifyContent: 'none', alignItems: 'start', display: 'block'}}
     >
       <Accordion
-        iconPlacement={(Direction as Record<string, any>)['Left']}
+        iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
         style={{}}

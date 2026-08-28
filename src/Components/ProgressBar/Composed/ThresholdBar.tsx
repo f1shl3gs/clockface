@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import {Gradients, InfluxColors, ComponentSize} from '../../../Types'
 import {ProgressBarProps, ProgressBar} from '../ProgressBar'
 
-export type threshold = {
+export type Threshold = {
   floor: number
   color?: InfluxColors | string
   gradient?: Gradients
@@ -22,10 +22,10 @@ export interface ThresholdBarProps extends Omit<
   max?: number
   /** Controls the size of the bar & text */
   size?: ComponentSize
-  /** Descriptive text for what is being valueed */
+  /** Descriptive text for what is being valued */
   label?: string
   /** An array of thresholds and colors to be used at each */
-  thresholds?: threshold[]
+  thresholds?: Threshold[]
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
 }
@@ -58,7 +58,7 @@ export const ThresholdBar: FunctionComponent<ThresholdBarProps> = ({
   ref,
 }) => {
   const [sortedThresholds, setSortedThresholds] =
-    useState<threshold[]>(thresholds)
+    useState<Threshold[]>(thresholds)
 
   useEffect(() => {
     const sorted = [...thresholds].sort((a, b) => a.floor - b.floor)

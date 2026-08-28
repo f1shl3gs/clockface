@@ -3,7 +3,7 @@ import {FunctionComponent, Ref} from 'react'
 
 // Components
 import {ButtonBase} from '../Base/ButtonBase'
-import {Icon} from '../../Icon/Base/Icon'
+import {Icon} from '../../Icon'
 
 // Types
 import {
@@ -16,7 +16,7 @@ import {
 } from '../../../Types'
 import {ButtonBaseProps} from '../Base/ButtonBase'
 
-export interface SquareButtonProps extends Omit<ButtonBaseProps, 'Shape'> {
+export interface SquareButtonProps extends Omit<ButtonBaseProps, 'shape'> {
   /** Icon to be displayed to the left of text or in place of text */
   icon: IconFont
   /** Ref to the underlying DOM element */

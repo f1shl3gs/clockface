@@ -10,7 +10,7 @@ import './Accordion.scss'
 
 export interface AccordionProps extends StandardFunctionProps {
   /** Determines whether the expand Icon is at the left, right or doesn't exist. If there is no accordionBody, no icons are shown*/
-  iconPlacement?: Direction
+  iconDirection?: Direction
   /** Determines whether the accordion is expanded by default or not */
   expanded?: boolean
   /** Prevents any interaction with this element, including the onClick function */
@@ -25,8 +25,8 @@ export const AccordionContext = React.createContext<
   | {
       isExpanded: boolean
       setExpanded: (param: boolean) => void
-      iconPlacementPosition: Direction
-      isDisabled: boolean
+      iconDirection: Direction
+      disabled: boolean
       onChange: () => void
       hasBody: boolean
     }
@@ -36,7 +36,7 @@ export const AccordionContext = React.createContext<
 export const useAccordionContext = () => {
   const context = React.useContext(AccordionContext)
   if (context === undefined) {
-    throw new Error('useCount must be used within a CountProvider')
+    throw new Error('useAccordionContext must be used within an Accordion')
   }
   return context
 }
@@ -46,7 +46,7 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
   style,
   testID = 'accordion',
   children,
-  iconPlacement = Direction.Left,
+  iconDirection = Direction.Left,
   className,
   expanded = false,
   disabled = false,
@@ -59,27 +59,12 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
 
   const [isExpanded, setExpanded] = useState(expanded)
   const [animation, setAnimation] = useState(false)
-  const [isDisabled, setDisabled] = useState(disabled)
-  const [iconPlacementPosition, setIconPlacementPosition] =
-    useState(iconPlacement)
-
-  useEffect(() => {
-    setExpanded(expanded)
-  }, [expanded])
-
-  useEffect(() => {
-    setDisabled(disabled)
-  }, [disabled])
 
   useEffect(() => {
     if (isExpanded && !animation) {
       setAnimation(true)
     }
   }, [isExpanded])
-
-  useEffect(() => {
-    setIconPlacementPosition(iconPlacement)
-  }, [iconPlacement])
 
   const accordionBodyContainerClassName = classnames(
     'cf-accordion--body-container',
@@ -103,8 +88,8 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
   const contextState = {
     isExpanded,
     setExpanded,
-    iconPlacementPosition: hasBody ? iconPlacementPosition : Direction.None,
-    isDisabled,
+    iconDirection: hasBody ? iconDirection : Direction.None,
+    disabled,
     onChange: onChangeFunction,
     hasBody,
   }

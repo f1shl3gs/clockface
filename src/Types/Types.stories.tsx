@@ -1,12 +1,11 @@
 // Libraries
 import {CSSProperties} from 'react'
 import {marked} from 'marked'
-import {contrastRatio} from '../Utils/colord'
 
 // Components
 import {Button} from '../Components/Button/Composed/Button'
-import {Input} from '../Components/Inputs/Input'
-import {Icon} from '../Components/Icon/Base/Icon'
+import {Input} from '../Components/Inputs'
+import {Icon} from '../Components/Icon'
 import {Panel} from '../Components/Panel'
 
 // Types
@@ -19,8 +18,8 @@ import {
   IconFont,
 } from './'
 
-// Constants
-import {getColorsFromGradient} from '../Utils/colors'
+// Utils
+import {getColorsFromGradient, contrastRatio} from '../Utils/colors'
 
 // Notes
 import TypesReadme from './Types.md?raw'

@@ -19,7 +19,7 @@ import {
   PageHeader,
   PageTitle,
 } from '../../Page/index'
-import {Icon} from '../../Icon/Base/Icon'
+import {Icon} from '../../Icon'
 import {
   TreeNav,
   TreeNavHeader,

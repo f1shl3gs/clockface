@@ -10,8 +10,8 @@ import {
 import classnames from 'classnames'
 
 // Components
-import {Input} from '../../Inputs/Input'
-import {Icon} from '../../Icon/Base/Icon'
+import {Input} from '../../Inputs'
+import {Icon} from '../../Icon'
 import {ClickOutside} from '../../ClickOutside/ClickOutside'
 
 // Types
