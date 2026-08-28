@@ -43,7 +43,6 @@ import {
  *       type={InputToggleType.Radio}
  *       size={ComponentSize.ExtraSmall}
  *       color={ComponentColor.Primary}
- *       appearance={Appearance.Outline}
  *       >
  *       <InputLabel
  *            active={legendOrientation === LEGEND_ORIENTATION_THRESHOLD_VERTICAL}
@@ -98,8 +97,6 @@ export interface ToggleProps extends Omit<StandardFunctionProps, 'id'> {
   containerRef?: RefObject<HTMLDivElement | null>
   /** Controls color of toggle */
   color?: ComponentColor
-  /** Deprecated */
-  appearance?: Appearance
   /** Renders the toggle as "Solid" */
   fill?: Appearance
   /** Ref to the underlying DOM element */
