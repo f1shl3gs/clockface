@@ -1,0 +1,145 @@
+/*
+   Drawers
+   -----------------------------------------------------------------------------
+*/
+
+@use '../../Styles/variables' as *;
+
+// Drawer-specific variables (mirrors Overlay's spacing/title conventions,
+// kept independent so each component can be adjusted on its own)
+$cf-drawer--z: 20;
+$cf-drawer--header-height: 48px;
+
+.cf-drawer--mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($cf-grey-95, 0.5);
+  z-index: 10;
+}
+
+.cf-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: $cf-drawer--z;
+}
+
+.cf-drawer--children {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding: var(--cf-drawer--margin, $cf-page--gutter-md);
+  gap: var(--cf-drawer--margin, $cf-page--gutter-md);
+  background-color: $cf-grey-5;
+  @extend %deep-shadow;
+  border-radius: $cf-radius 0 0 $cf-radius;
+
+  &__xs {
+    --cf-drawer--margin: #{$cf-page--gutter-xs};
+  }
+
+  &__sm {
+    --cf-drawer--margin: #{$cf-page--gutter-sm};
+  }
+
+  &__md {
+    --cf-drawer--margin: #{$cf-page--gutter-md};
+  }
+
+  &__lg {
+    --cf-drawer--margin: #{$cf-page--gutter-lg};
+  }
+}
+
+.cf-drawer--header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @include no-user-select();
+}
+
+.cf-drawer--title {
+  font-family: $cf-page--title-font;
+  font-size: $cf-text-base-3;
+  font-weight: $cf-page--title-weight;
+  color: $cf-page--title-color;
+}
+
+.cf-drawer--header__nowrap {
+  height: $cf-drawer--header-height;
+  padding: 0;
+  align-items: center;
+  flex-shrink: 0;
+
+  .cf-drawer--title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.cf-drawer--header__wrap {
+  min-height: $cf-drawer--header-height;
+  padding: 0;
+  align-items: flex-start;
+  flex-shrink: 0;
+
+  .cf-drawer--title {
+    word-break: break-all;
+  }
+}
+
+.cf-drawer--body {
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  color: $cf-input-text--default;
+  font-size: 0.9em;
+}
+
+.cf-drawer--footer {
+  padding: 0;
+  flex-shrink: 0;
+}
+
+// Enter/exit animations (right side slide-in)
+// easing approximates d3-ease easeExpInOut
+@keyframes cf-drawer-mask-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cf-drawer-mask-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes cf-drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes cf-drawer-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
