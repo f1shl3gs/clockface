@@ -30,5 +30,3 @@ export const PopNavItem: FunctionComponent<PopNavItemProps> = ({
 
   return titleLink(titleClass, testID, style)
 }
-
-PopNavItem.displayName = 'PopNavItem'

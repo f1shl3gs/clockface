@@ -193,5 +193,3 @@ const ConfirmationContents: FunctionComponent<{
     </div>
   )
 }
-
-ConfirmationContents.displayName = 'ConfirmationButtonContents'

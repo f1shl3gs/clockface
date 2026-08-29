@@ -39,5 +39,3 @@ export const ListIndicator: FunctionComponent<ListIndicatorProps> = ({
     </div>
   )
 }
-
-ListIndicator.displayName = 'ListIndicator'

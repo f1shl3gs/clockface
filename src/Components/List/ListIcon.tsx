@@ -17,5 +17,3 @@ export interface ListIconProps {
 export const ListIcon: FunctionComponent<ListIconProps> = ({glyph}) => {
   return <Icon className="cf-list-icon" glyph={glyph} />
 }
-
-ListIcon.displayName = 'ListIcon'
