@@ -85,17 +85,11 @@ export const Tabs: FunctionComponent<TabsProps> = ({
   }
 
   const handleToggleMenu = (): void => {
-    if (state === 'visible') {
-      setState('hidden')
-    } else {
-      setState('visible')
-    }
+    setState(state === 'visible' ? 'hidden' : 'visible')
   }
 
   const handleHideMenu = (): void => {
-    if (state === 'visible') {
-      setState('hidden')
-    }
+    setState('hidden')
   }
 
   if (isDropdownEnabled && screenWidth <= dropdownBreakpoint) {

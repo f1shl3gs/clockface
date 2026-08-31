@@ -9,15 +9,15 @@ import React, {
 } from 'react'
 import classnames from 'classnames'
 
-// Types
-import {Gradients, Orientation, StandardFunctionProps} from '../../Types'
-import {DraggableResizerHandle} from './DraggableResizerHandle'
-
 // Components
 import {
   DraggableResizerPanel,
   DraggableResizerPanelProps,
 } from './DraggableResizerPanel'
+
+// Types
+import {Gradients, Orientation, StandardFunctionProps} from '../../Types'
+import {DraggableResizerHandle} from './DraggableResizerHandle'
 
 // Styles
 import './DraggableResizer.scss'
@@ -51,14 +51,12 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
   backgroundStyle,
   handleBarStyle,
 }) => {
-  const PANEL_COUNT = React.Children.toArray(children).length
+  const panelsCount = React.Children.count(children)
 
-  const [startPosition] = useState<number[]>(handlePositions)
   const [dragIndex, setDragIndex] = useState<number>(NULL_DRAG)
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const panelsCount = React.Children.count(children)
   const childArray = React.Children.toArray(children)
 
   const isDragging = dragIndex !== NULL_DRAG
@@ -137,7 +135,7 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
 
   const calculateCollapsePosition = (direction: number, dragIndex: number) => {
     const totalDrag = handlePositions.length - 1
-    const directionOffset = PANEL_COUNT % 2 === 0 ? 2 : 3
+    const directionOffset = panelsCount % 2 === 0 ? 2 : 3
     const directionIndex =
       direction === 0 ? dragIndex : dragIndex + directionOffset
     const currentPosition = handlePositions[dragIndex]
@@ -155,7 +153,7 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
     }
 
     return currentPosition === collapsedPosition
-      ? startPosition[dragIndex]
+      ? handlePositions[dragIndex]
       : collapsedPosition
   }
 

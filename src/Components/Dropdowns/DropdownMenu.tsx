@@ -11,9 +11,6 @@ import classnames from 'classnames'
 // Components
 import {DapperScrollbars} from '../DapperScrollbars/DapperScrollbars'
 
-// Utils
-// import {getScrollbarColorsFromTheme} from '../../Utils'
-
 // Types
 import {DropdownMenuTheme, StandardFunctionProps} from '../../Types'
 
@@ -61,8 +58,6 @@ export const DropdownMenu: FunctionComponent<DropdownMenuProps> = ({
     [`${className}`]: className,
     [`cf-dropdown__${theme}`]: theme,
   })
-
-  // const {thumbStartColor, thumbStopColor} = getScrollbarColorsFromTheme(theme)
 
   const scrollTop = calculateSelectedPosition(scrollToSelected, children)
 

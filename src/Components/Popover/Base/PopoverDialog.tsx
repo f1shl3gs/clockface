@@ -13,10 +13,6 @@ import classnames from 'classnames'
 // Components
 import {ClickOutside} from '../../ClickOutside/ClickOutside'
 
-// Utilities
-import {convertCSSPropertiesToString} from '../../../Utils/index'
-import {calculatePopoverStyles} from '../../../Utils/popovers'
-
 // Types
 import {
   Appearance,
@@ -24,6 +20,10 @@ import {
   PopoverPosition,
   StandardFunctionProps,
 } from '../../../Types'
+
+// Utilities
+import {convertCSSPropertiesToString} from '../../../Utils'
+import {calculatePopoverStyles} from '../../../Utils/popovers'
 
 export interface PopoverDialogProps extends StandardFunctionProps {
   /** Bounding rectangle of trigger element */
@@ -110,7 +110,7 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
       return
     }
 
-    if (!!entries.length && entries[0].isIntersecting === false) {
+    if (!!entries.length && !entries[0].isIntersecting) {
       onHide()
     }
   }
@@ -137,13 +137,7 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
 
   useLayoutEffect(() => {
     handleUpdateStyles()
-  })
-
-  // Ensure styles are updated when the
-  // enableDefaultStyles prop changes
-  useEffect(() => {
-    handleUpdateStyles()
-  }, [enableDefaultStyles])
+  }, [])
 
   // Ensure dialog element is in focus on mount
   // in order to enable escape key behavior

@@ -19,8 +19,8 @@ const longContent = (
           borderBottom: '1px solid rgba(255,255,255,0.1)',
         }}
       >
-        Item {index + 1} — Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Item {index + 1} — Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </div>
     ))}
   </div>

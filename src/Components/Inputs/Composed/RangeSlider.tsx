@@ -180,15 +180,7 @@ const valueWithBounds = (value: number, min: number, max: number): number => {
   const minVal = Math.min(min, max)
   const maxVal = Math.max(min, max)
 
-  if (value < minVal) {
-    return minVal
-  }
-
-  if (value > maxVal) {
-    return maxVal
-  }
-
-  return value
+  return Math.min(maxVal, Math.max(minVal, value))
 }
 
 interface RangeSliderLabelProps {

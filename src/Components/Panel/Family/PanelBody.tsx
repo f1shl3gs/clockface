@@ -13,10 +13,8 @@ import {
   JustifyContent,
 } from '../../../Types'
 
-export interface PanelBodyProps extends Omit<
-  FlexBoxProps,
-  'stretchToFitWidth' | 'stretchToFitHeight'
-> {
+export interface PanelBodyProps
+  extends Omit<FlexBoxProps, 'stretchToFitWidth' | 'stretchToFitHeight'> {
   /** Controls padding */
   size?: ComponentSize
   /** Ref to the underlying DOM element */

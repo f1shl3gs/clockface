@@ -2,7 +2,6 @@
 import React, {
   useState,
   useEffect,
-  useLayoutEffect,
   ChangeEvent,
   FunctionComponent,
   Ref,
@@ -188,15 +187,6 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
     }
   }, [activePage])
 
-  useLayoutEffect(() => {
-    setBreakpoints(
-      computePageSpread(
-        activePage,
-        resizeBasedOnParentSize(size, pageRangeOffset),
-      ),
-    )
-  }, [totalPages, pageRangeOffset, size, hideDirectionIcon])
-
   useEffect(() => {
     if (activePage > breakpoints.secondBreakpoint) {
       setBreakpoints(
@@ -212,8 +202,15 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
           resizeBasedOnParentSize(size, pageRangeOffset),
         ),
       )
+    } else {
+      setBreakpoints(
+        computePageSpread(
+          activePage,
+          resizeBasedOnParentSize(size, pageRangeOffset),
+        ),
+      )
     }
-  }, [activePage])
+  }, [activePage, totalPages, pageRangeOffset, size, hideDirectionIcon])
 
   const checkActive = (page: number) => {
     return activePage === page

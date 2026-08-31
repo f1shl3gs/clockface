@@ -1,5 +1,5 @@
 // Libraries
-import {RefObject, KeyboardEvent, FunctionComponent, Ref} from 'react'
+import {RefObject, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -19,8 +19,6 @@ export interface SelectGroupOptionProps
   name?: string
   /** Function to be called on radio button click */
   onClick: (value: any) => void
-  /** Function to be called on key up */
-  onKeyUp?: (e: KeyboardEvent<HTMLLabelElement>) => void
   /** Text to be displayed on hover tooltip */
   titleText?: string
   /** Prevents the user from interacting with this component */
@@ -44,7 +42,6 @@ export const SelectGroupOption: FunctionComponent<SelectGroupOptionProps> = ({
   testID = 'select-group--option',
   active,
   onClick,
-  onKeyUp,
   tabIndex,
   disabled = false,
   children,
@@ -69,19 +66,6 @@ export const SelectGroupOption: FunctionComponent<SelectGroupOptionProps> = ({
 
     onClick(value)
   }
-
-  // const handleKeyUp = (
-  //   e: KeyboardEvent<SelectGroupOptionContainerRef>
-  // ): void => {
-  //   console.log(e.key)
-  //   if (e.key === ' ') {
-  //     handleClick()
-  //   }
-
-  //   if (onKeyUp) {
-  //     onKeyUp(e)
-  //   }
-  // }
 
   return (
     <>

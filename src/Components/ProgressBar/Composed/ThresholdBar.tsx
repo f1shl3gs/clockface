@@ -1,5 +1,5 @@
 // Libraries
-import {useEffect, useState, FunctionComponent, Ref} from 'react'
+import {FunctionComponent, Ref, useMemo} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -55,34 +55,14 @@ export const ThresholdBar: FunctionComponent<ThresholdBarProps> = ({
   ],
   ref,
 }) => {
-  const [sortedThresholds, setSortedThresholds] =
-    useState<Threshold[]>(thresholds)
-
-  useEffect(() => {
+  const last = useMemo(() => {
     const sorted = [...thresholds].sort((a, b) => a.floor - b.floor)
-    setSortedThresholds(sorted)
-  }, [])
+    return sorted.findLast(threshold => threshold.floor < value)
+  }, [thresholds])
 
   const thresholdBarClass = classnames('cf-threshold-bar', {
     [`${className}`]: className,
   })
-
-  const thresholdColor = () => {
-    const index = sortedThresholds.findLastIndex(thresh => thresh.floor < value)
-    if (index < 0) {
-      return
-    }
-    return sortedThresholds[index].color
-  }
-
-  const thresholdGradient = () => {
-    const index = sortedThresholds.findLastIndex(thresh => thresh.floor < value)
-    if (index < 0) {
-      return
-    }
-
-    return sortedThresholds[index].gradient
-  }
 
   return (
     <ProgressBar
@@ -91,8 +71,8 @@ export const ThresholdBar: FunctionComponent<ThresholdBarProps> = ({
       className={thresholdBarClass}
       data-testid={testID}
       style={style}
-      color={thresholdColor()}
-      barGradient={thresholdGradient()}
+      color={last?.color}
+      barGradient={last?.gradient}
       value={value}
       max={max}
       label={label}

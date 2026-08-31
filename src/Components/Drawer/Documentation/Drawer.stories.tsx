@@ -18,9 +18,9 @@ const longContent = (
   <div>
     {Array.from({length: 20}, (_, index) => (
       <p key={index} style={{margin: '0 0 12px 0'}}>
-        Drawer content line {index + 1} — Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua.
+        Drawer content line {index + 1} — Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua.
       </p>
     ))}
   </div>

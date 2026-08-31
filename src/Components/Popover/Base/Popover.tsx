@@ -107,7 +107,7 @@ export const Popover: FunctionComponent<PopoverProps> = ({
   useEffect(() => {
     if (visible) {
       handleShowDialog()
-    } else if (!visible) {
+    } else {
       handleHideDialog()
     }
   }, [visible])

@@ -9,8 +9,6 @@ import {
   ComponentColor,
   ComponentSize,
   ComponentStatus,
-  DropdownMenuScrollbarColors,
-  DropdownMenuTheme,
   Gradients,
   IconFont,
   InfluxColors,
@@ -187,34 +185,6 @@ export const generateRangeSliderTrackFillStyle = (
   }
 
   return
-}
-
-export const getScrollbarColorsFromTheme = (
-  theme: DropdownMenuTheme,
-): DropdownMenuScrollbarColors => {
-  switch (theme) {
-    case DropdownMenuTheme.Malachite:
-      return {
-        thumbStartColor: InfluxColors.Wasabi,
-        thumbStopColor: InfluxColors.Neutrino,
-      }
-    case DropdownMenuTheme.Onyx:
-      return {
-        thumbStartColor: InfluxColors.Pearl,
-        thumbStopColor: InfluxColors.Sidewalk,
-      }
-    case DropdownMenuTheme.Amethyst:
-      return {
-        thumbStartColor: InfluxColors.Neutrino,
-        thumbStopColor: InfluxColors.Moonstone,
-      }
-    case DropdownMenuTheme.Sapphire:
-    default:
-      return {
-        thumbStartColor: InfluxColors.Neutrino,
-        thumbStopColor: InfluxColors.Hydrogen,
-      }
-  }
 }
 
 export const getDictionary = (): string[] => {
