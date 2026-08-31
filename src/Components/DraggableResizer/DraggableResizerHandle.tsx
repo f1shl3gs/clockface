@@ -74,35 +74,35 @@ export const DraggableResizerHandle: FunctionComponent<
       [`cf-draggable-resizer-handle--${orientation}`]: orientation,
       'cf-draggable-resizer--handle-dragging': dragging,
       [`${className}`]: className,
-    }
+    },
   )
 
   const DraggableResizerHandlePillOneClass = classnames(
     'cf-draggable-resizer--handle-pill1',
     {
       [`cf-draggable-resizer--handle-pill1--${orientation}`]: orientation,
-    }
+    },
   )
 
   const DraggableResizerHandlePillTwoClass = classnames(
     'cf-draggable-resizer--handle-pill2',
     {
       [`cf-draggable-resizer--handle-pill2--${orientation}`]: orientation,
-    }
+    },
   )
 
   const DraggableResizerGradientPillOneClass = classnames(
     'cf-draggable-resizer--gradient1',
     {
       [`cf-draggable-resizer--gradient1--${orientation}`]: orientation,
-    }
+    },
   )
 
   const DraggableResizerGradientPillTwoClass = classnames(
     'cf-draggable-resizer--gradient2',
     {
       [`cf-draggable-resizer--gradient2--${orientation}`]: orientation,
-    }
+    },
   )
 
   const collapsibleButtonClassNames = classnames(
@@ -110,21 +110,21 @@ export const DraggableResizerHandle: FunctionComponent<
     {
       'cf-draggable-resizer-collapse-icon--horizontal':
         orientation === Orientation.Horizontal,
-    }
+    },
   )
 
   const collapsibleHandleContainerClassNames = classnames(
     'cf-draggable-resizer-handle-container',
     {
       [`cf-draggable-resizer-handle-container--${orientation}`]: orientation,
-    }
+    },
   )
 
   const collapsibleButtonContainerClassNames = classnames(
     'cf-draggable-resizer-button-container',
     {
       [`cf-draggable-resizer-button-container--${orientation}`]: orientation,
-    }
+    },
   )
 
   const gradientStyle = (): CSSProperties | undefined => {
@@ -134,7 +134,7 @@ export const DraggableResizerHandle: FunctionComponent<
 
     const colors = getColorsFromGradient(gradient)
 
-    if (orientation == Orientation.Vertical) {
+    if (orientation === Orientation.Vertical) {
       return {
         background: `linear-gradient(to bottom,  ${colors.start} 0%,${colors.stop} 100%)`,
         backgroundColor: '#FFFFFF',

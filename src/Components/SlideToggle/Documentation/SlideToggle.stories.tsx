@@ -26,9 +26,7 @@ export const _SlideToggle = () => {
   const slideToggleRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(slideToggleRef.current)
-    /* eslint-enable */
   }
 
   return (

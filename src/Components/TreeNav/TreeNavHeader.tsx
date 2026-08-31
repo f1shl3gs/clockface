@@ -64,7 +64,7 @@ export const TreeNavHeader: FunctionComponent<TreeNavHeaderProps> = ({
     const link = React.cloneElement(
       linkElement(navMenuHeaderClass),
       {'data-testid': testID},
-      linkItems
+      linkItems,
     )
 
     return link

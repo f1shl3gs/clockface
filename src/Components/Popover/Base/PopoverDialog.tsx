@@ -84,7 +84,7 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
       triggerRef,
       dialogRef,
       caretSize,
-      distanceFromTrigger
+      distanceFromTrigger,
     )
 
     const dialogStyleString = convertCSSPropertiesToString(dialogStyles)
@@ -104,7 +104,7 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
   })
 
   const hidePopoverWhenOutOfView = (
-    entries: IntersectionObserverEntry[]
+    entries: IntersectionObserverEntry[],
   ): void => {
     if (visible) {
       return

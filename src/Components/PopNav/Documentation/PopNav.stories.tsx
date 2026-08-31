@@ -17,9 +17,7 @@ export const _PopNav = () => {
   const popNavRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(popNavRef.current)
-    /* eslint-enable */
   }
 
   return (

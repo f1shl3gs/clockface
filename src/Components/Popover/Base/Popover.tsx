@@ -93,11 +93,11 @@ export const Popover: FunctionComponent<PopoverProps> = ({
     removeEventListenerFromPortal,
   } = usePortal()
 
-  useEffect((): (() => void) => {
+  useEffect(() => {
     addEventListenerToPortal('keydown', handleEscapeKey)
     handleAddEventListenersToTrigger()
 
-    return (): void => {
+    return () => {
       removeEventListenerFromPortal('keydown', handleEscapeKey)
       handleRemoveEventListenersFromTrigger()
     }
@@ -213,7 +213,7 @@ export const Popover: FunctionComponent<PopoverProps> = ({
     triggerRef.current.removeEventListener('mouseover', handleTriggerMouseOver)
     triggerRef.current.removeEventListener(
       'mouseleave',
-      handleTriggerMouseLeave
+      handleTriggerMouseLeave,
     )
   }
 

@@ -88,7 +88,7 @@ export const MultiSelectDropdown: FunctionComponent<
 
   const button = (
     active: boolean,
-    onClick: (e?: MouseEvent<HTMLElement>) => void
+    onClick: (e?: MouseEvent<HTMLElement>) => void,
   ) => (
     <DropdownButton
       active={active}
@@ -169,7 +169,7 @@ export const MultiSelectDropdown: FunctionComponent<
         })}
 
         {options.filter(option =>
-          option.toUpperCase().includes(filterString.toUpperCase())
+          option.toUpperCase().includes(filterString.toUpperCase()),
         ).length === 0 ? (
           <NoResults />
         ) : null}

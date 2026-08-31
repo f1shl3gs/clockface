@@ -91,7 +91,7 @@ export const ListItem: FunctionComponent<ListItemProps> = ({
   const {listContrastColor} = useContext(ListContext)
   const contrastColor = calculateTextColorFromBackground(
     backgroundColor,
-    gradient
+    gradient,
   )
 
   const listItemClass = classnames('cf-list-item', {
@@ -175,7 +175,7 @@ export const ListItem: FunctionComponent<ListItemProps> = ({
         className: listItemClass,
         'data-testid': testID,
       },
-      listItemChildren
+      listItemChildren,
     )
   }
 

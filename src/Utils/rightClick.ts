@@ -7,7 +7,7 @@ import {Coordinates} from '../Types'
 export const calculateRightClickMenuStyles = (
   mouseOffset: Coordinates,
   triggerRef: RefObject<any | null>,
-  menuRef: RefObject<HTMLDivElement | null>
+  menuRef: RefObject<HTMLDivElement | null>,
 ): CSSProperties => {
   let menuStyles: CSSProperties = {}
 

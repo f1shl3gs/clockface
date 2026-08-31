@@ -31,7 +31,7 @@ export type FusionScrollEvent = FusionScrollValues | UIEvent<HTMLDivElement>
 
 export type FusionScrollHandler = (
   scrollValues: FusionScrollEvent,
-  prevScrollValues?: FusionScrollEvent
+  prevScrollValues?: FusionScrollEvent,
 ) => void
 
 export interface DapperScrollbarsProps extends StandardFunctionProps {
@@ -161,7 +161,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     setOverflow(prev =>
       prev.x === nextOverflow.x && prev.y === nextOverflow.y
         ? prev
-        : nextOverflow
+        : nextOverflow,
     )
 
     const nextTrackLengths = {
@@ -171,7 +171,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     setTrackLengths(prev =>
       prev.x === nextTrackLengths.x && prev.y === nextTrackLengths.y
         ? prev
-        : nextTrackLengths
+        : nextTrackLengths,
     )
 
     if (onUpdateRef.current) {
@@ -246,7 +246,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     overflow.y && metrics.clientHeight > 0
       ? Math.max(
           (metrics.clientHeight * metrics.clientHeight) / metrics.scrollHeight,
-          MIN_THUMB_SIZE
+          MIN_THUMB_SIZE,
         )
       : 0
   const thumbYTravel = Math.max(trackLengths.y - thumbYSize, 0)
@@ -259,7 +259,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
     overflow.x && metrics.clientWidth > 0
       ? Math.max(
           (metrics.clientWidth * metrics.clientWidth) / metrics.scrollWidth,
-          MIN_THUMB_SIZE
+          MIN_THUMB_SIZE,
         )
       : 0
   const thumbXTravel = Math.max(trackLengths.x - thumbXSize, 0)

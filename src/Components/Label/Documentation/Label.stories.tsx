@@ -19,11 +19,9 @@ export const Variants = () => {
   const labelDeletableRef = React.createRef<HTMLDivElement>()
 
   const logLabelRefs = (): void => {
-    /* eslint-disable */
     console.log('Read-Only Label', labelReadOnlyRef.current)
     console.log('Clickable Label', labelClickableRef.current)
     console.log('Deletable Label', labelDeletableRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -112,8 +110,8 @@ export const Collage = () => {
               {size: ComponentSize.Small, text: 'Small'},
               {size: ComponentSize.Medium, text: 'Medium'},
               {size: ComponentSize.Large, text: 'Large'},
-            ].map((props, i) => (
-              <td key={i}>
+            ].map((props, index) => (
+              <td key={index}>
                 <Label
                   id="example-label"
                   name={props.text}

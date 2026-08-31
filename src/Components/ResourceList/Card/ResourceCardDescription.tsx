@@ -33,7 +33,7 @@ export const ResourceCardDescription: FunctionComponent<
     'cf-resource-description--preview',
     {
       untitled: !description,
-    }
+    },
   )
 
   return (

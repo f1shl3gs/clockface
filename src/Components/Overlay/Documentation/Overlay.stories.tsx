@@ -32,7 +32,7 @@ const instructionsElement = (
 )
 
 export const _Overlay = (
-  args: Partial<OverlayProps> & Partial<OverlayContainerProps>
+  args: Partial<OverlayProps> & Partial<OverlayContainerProps>,
 ) => {
   const [visible, setVisible] = useState(false)
 
@@ -98,9 +98,7 @@ export const _OverlayContainer = (args: Partial<OverlayContainerProps>) => {
   const overlayContainerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(overlayContainerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -150,9 +148,7 @@ export const _OverlayMask = (args: Partial<OverlayMaskProps>) => {
   const overlayMaskRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(overlayMaskRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -193,9 +189,7 @@ export const _OverlayHeader = (args: Partial<OverlayHeaderProps>) => {
   const overlayHeaderRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(overlayHeaderRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -240,9 +234,7 @@ export const _OverlayBody = () => {
   const overlayBodyRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(overlayBodyRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -273,9 +265,7 @@ export const _OverlayFooter = (args: Partial<OverlayFooterProps>) => {
   const overlayFooterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(overlayFooterRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -325,7 +315,7 @@ _OverlayFooter.story = {
 }
 
 export const ConfirmationOverlay = (
-  args: Partial<OverlayProps> & Partial<OverlayContainerProps>
+  args: Partial<OverlayProps> & Partial<OverlayContainerProps>,
 ) => {
   const [visible, setVisible] = useState(true)
 

@@ -18,9 +18,7 @@ export const _RightClick = () => {
   const rightClickMenuRef = useRef<HTMLUListElement>(null)
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(rightClickMenuRef.current)
-    /* eslint-enable */
   }
 
   return (

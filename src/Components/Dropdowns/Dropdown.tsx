@@ -27,7 +27,7 @@ export interface DropdownProps extends StandardFunctionProps {
   /** Component to render as the button (use DropdownButton) */
   button: (
     active: boolean,
-    onClick: (e?: MouseEvent<HTMLElement>) => void
+    onClick: (e?: MouseEvent<HTMLElement>) => void,
   ) => React.ReactElement
   /** Component to render as the menu (use DropdownMenu) */
   menu: (onCollapse?: () => void) => React.ReactElement
@@ -124,7 +124,7 @@ export const Dropdown: FunctionComponent<DropdownProps> = ({
          */
         if (typeof internalRef !== 'function' && internalRef.current) {
           const triggerEl = internalRef.current.querySelector(
-            'button[tabindex]'
+            'button[tabindex]',
           ) as HTMLButtonElement
 
           if (didMountRef.current && triggerEl) {

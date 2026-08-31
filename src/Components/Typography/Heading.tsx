@@ -74,6 +74,6 @@ export const Heading: FunctionComponent<HeadingProps> = ({
       'data-testid': testID,
       onClick,
     },
-    children
+    children,
   )
 }

@@ -11,15 +11,15 @@ export default {
 
 const longContent = (
   <div style={{padding: '16px'}}>
-    {Array.from({length: 60}, (_, i) => (
+    {Array.from({length: 60}, (_, index) => (
       <div
-        key={i}
+        key={index}
         style={{
           padding: '12px 0',
           borderBottom: '1px solid rgba(255,255,255,0.1)',
         }}
       >
-        Item {i + 1} — Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        Item {index + 1} — Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </div>
     ))}
@@ -67,9 +67,9 @@ export const AutoSizeHeight = () => (
   >
     <DapperScrollbars autoSizeHeight={true}>
       <div style={{padding: '8px'}}>
-        {Array.from({length: 5}, (_, i) => (
-          <div key={i} style={{padding: '8px 0'}}>
-            Short content item {i + 1} (container grows with content)
+        {Array.from({length: 5}, (_, index) => (
+          <div key={index} style={{padding: '8px 0'}}>
+            Short content item {index + 1} (container grows with content)
           </div>
         ))}
       </div>

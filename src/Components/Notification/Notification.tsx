@@ -99,9 +99,7 @@ export const Notification: FunctionComponent<NotificationProps> = ({
 
   const animationStyle = {
     '--slide-from': translateOrigin(),
-    animation: `cf-notification-${
-      visible ? 'in' : 'out'
-    } 300ms ${EASE_EXP_IN_OUT} both`,
+    animation: `cf-notification-${visible ? 'in' : 'out'} 300ms ${EASE_EXP_IN_OUT} both`,
   } as CSSProperties
 
   const notificationElement = shouldRender && (
@@ -124,6 +122,6 @@ export const Notification: FunctionComponent<NotificationProps> = ({
   return addNotificationToPortal(
     notificationElement,
     horizontalAlignment,
-    verticalAlignment
+    verticalAlignment,
   )
 }

@@ -17,16 +17,17 @@ import {
   Appearance,
 } from '../../../Types'
 
-export interface ConfirmationButtonProps extends Omit<
-  ButtonProps,
-  | 'onClick'
-  | 'active'
-  | 'type'
-  | 'onMouseEnter'
-  | 'onMouseLeave'
-  | 'onMouseOver'
-  | 'onMouseOut'
-> {
+export interface ConfirmationButtonProps
+  extends Omit<
+    ButtonProps,
+    | 'onClick'
+    | 'active'
+    | 'type'
+    | 'onMouseEnter'
+    | 'onMouseLeave'
+    | 'onMouseOver'
+    | 'onMouseOut'
+  > {
   /** Text to appear in confirmation popover */
   confirmationLabel: string
   /** Text to appear in confirmation button */

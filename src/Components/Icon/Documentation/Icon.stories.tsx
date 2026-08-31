@@ -20,9 +20,7 @@ export const BaseIcon = () => {
   const iconRef = createRef<HTMLSpanElement>()
 
   const logIconRef = (): void => {
-    /* eslint-disable */
     console.log(iconRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -51,9 +49,7 @@ export const _Bullet = () => {
   const bulletRef = createRef<HTMLSpanElement>()
 
   const logbulletRef = (): void => {
-    /* eslint-disable */
     console.log(bulletRef.current)
-    /* eslint-enable */
   }
 
   return (

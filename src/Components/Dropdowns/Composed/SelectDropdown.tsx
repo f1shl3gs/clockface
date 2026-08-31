@@ -71,7 +71,7 @@ export const SelectDropdown: FunctionComponent<SelectDropdownProps> = ({
 }) => {
   const button = (
     active: boolean,
-    onClick: (e?: MouseEvent<HTMLElement>) => void
+    onClick: (e?: MouseEvent<HTMLElement>) => void,
   ) => (
     <DropdownButton
       active={active}

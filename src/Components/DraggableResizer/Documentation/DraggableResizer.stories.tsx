@@ -26,9 +26,8 @@ export const _DraggableResizer = () => (
         ]
       }
       handlePositions={[0.5]}
-      onChangePositions={
-        handlePositions =>
-          console.log(`this.setState({handlePositions: ${handlePositions}})`) // eslint-disable-line
+      onChangePositions={handlePositions =>
+        console.log(`this.setState({handlePositions: ${handlePositions}})`)
       }
     >
       <DraggableResizerPanel>
@@ -55,9 +54,7 @@ export const _DraggableResizerPanel = () => {
   const draggableResizerPanelRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(draggableResizerPanelRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -95,10 +92,8 @@ export const _3Panels = () => {
   const defaultBarStyle = {backgroundColor: '#ffffff'}
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(draggableResizerPanelRef1.current)
     console.log(draggableResizerPanelRef2.current)
-    /* eslint-enable */
   }
 
   return (
@@ -164,12 +159,10 @@ export const _4Panels = () => {
   const draggableResizerPanelRef4 = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(draggableResizerPanelRef1.current)
     console.log(draggableResizerPanelRef2.current)
     console.log(draggableResizerPanelRef3.current)
     console.log(draggableResizerPanelRef4.current)
-    /* eslint-enable */
   }
 
   return (

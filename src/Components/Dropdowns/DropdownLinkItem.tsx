@@ -43,7 +43,7 @@ export const DropdownLinkItem: FunctionComponent<DropdownLinkItemProps> = ({
       'cf-dropdown-item__wrap': wrapText,
       'cf-dropdown-item__no-wrap': !wrapText,
       'cf-dropdown-item__disabled': disabled,
-    }
+    },
   )
 
   return (

@@ -39,9 +39,7 @@ export const _FunnelPage = () => {
   const funnelPageRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(funnelPageRef.current)
-    /* eslint-enable */
   }
 
   const logo = (
@@ -134,9 +132,7 @@ export const _FunnelPageFooter = () => {
   const funnelPageFooterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(funnelPageFooterRef.current)
-    /* eslint-enable */
   }
 
   return (

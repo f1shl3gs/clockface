@@ -12,7 +12,7 @@ export interface NavMenuSubItemProps extends StandardFunctionProps {
   titleLink: (
     className: string,
     testID?: string,
-    style?: CSSProperties
+    style?: CSSProperties,
   ) => React.ReactElement
 }
 

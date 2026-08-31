@@ -79,14 +79,14 @@ export const ResourceCardEditableName: FunctionComponent<
       'cf-resource-editable-name__editing': isEditing,
       'untitled-name': name === noNameString,
       [`${className}`]: className,
-    }
+    },
   )
 
   const resourceCardEditableNameLinkClass = classnames(
     'cf-resource-name--text',
     {
       'cf-resource-name--text__link': onClick,
-    }
+    },
   )
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -119,7 +119,7 @@ export const ResourceCardEditableName: FunctionComponent<
   }
 
   const handleKeyDown = async (
-    e: KeyboardEvent<HTMLInputElement>
+    e: KeyboardEvent<HTMLInputElement>,
   ): Promise<void> => {
     if (e.key === 'Enter') {
       e.persist()

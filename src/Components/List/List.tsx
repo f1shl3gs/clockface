@@ -84,7 +84,7 @@ export const List: FunctionComponent<ListProps> = ({
 }) => {
   const contrastColor = calculateTextColorFromBackground(
     backgroundColor,
-    gradient
+    gradient,
   )
 
   const listClass = classnames('cf-list', {
@@ -109,7 +109,7 @@ export const List: FunctionComponent<ListProps> = ({
     gradient,
     false,
     style,
-    90
+    90,
   )
 
   return (
@@ -165,7 +165,7 @@ const LIST_ITEM_HEIGHTS_MAP: Record<string, number> = {
 
 const calculateSelectedPosition = (
   scrollToSelected: boolean,
-  children: ReactNode
+  children: ReactNode,
 ): number => {
   if (!children || !scrollToSelected) {
     return 0

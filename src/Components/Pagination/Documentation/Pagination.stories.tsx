@@ -27,9 +27,7 @@ export const _Pagination = () => {
   const paginationRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(paginationRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -40,9 +38,7 @@ export const _Pagination = () => {
         currentPage={1}
         pageRangeOffset={1}
         onChange={page => {
-          /* eslint-disable */
           console.log(`page selected: ${page}`)
-          /* eslint-enable */
         }}
         hideDirectionIcon={false}
         enablePageInput={false}
@@ -69,9 +65,7 @@ _Pagination.story = {
 export const _PaginationItem = () => {
   const paginationItemRef = createRef<HTMLLIElement>()
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(paginationItemRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -106,9 +100,7 @@ export const _PaginationDirectionItem = () => {
   const paginationDirectionItemRef = createRef<HTMLLIElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(paginationDirectionItemRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -140,9 +132,7 @@ export const _PaginationTruncationItem = () => {
   const paginationTruncationItemRef = createRef<HTMLLIElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(paginationTruncationItemRef.current)
-    /* eslint-enable */
   }
   return (
     <div className="story--example">
@@ -171,9 +161,7 @@ export const _PaginationInput = () => {
   const paginationInputRef = createRef<HTMLInputElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(paginationInputRef.current)
-    /* eslint-enable */
   }
   return (
     <div className="story--example">

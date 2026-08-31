@@ -247,9 +247,7 @@ export const _List = () => {
   const listRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(listRef.current)
-    /* eslint-enable */
   }
 
   const handleItemClick = (item: string): void => {
@@ -315,9 +313,7 @@ export const _ListDivider = () => {
   const dropdownDividerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dropdownDividerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -344,9 +340,7 @@ export const _ListItem = () => {
   const listItemRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(listItemRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -386,9 +380,7 @@ export const _ListEmptyState = () => {
   const listEmptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(listEmptyStateRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -421,9 +413,7 @@ export const UsingLinkElementProp = () => {
   const linkElementRef = createRef<HTMLAnchorElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(linkElementRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -466,9 +456,7 @@ export const IconsIndicators = () => {
   const listItemRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(listItemRef.current)
-    /* eslint-enable */
   }
 
   return (

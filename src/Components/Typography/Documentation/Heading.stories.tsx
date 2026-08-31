@@ -24,9 +24,7 @@ export const Base = () => {
   const headingRef = createRef<HTMLHeadingElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log('Heading', headingRef.current)
-    /* eslint-enable */
   }
 
   return (

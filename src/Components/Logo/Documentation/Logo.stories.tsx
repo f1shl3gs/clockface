@@ -25,9 +25,7 @@ export const _InfluxLogo = () => {
   const logoRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(logoRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -66,9 +64,7 @@ export const _InfluxData = () => {
   const logoRef = createRef<SVGSVGElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(logoRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -99,9 +95,7 @@ export const InfluxDbCloud = () => {
   const logoRef = createRef<SVGSVGElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(logoRef.current)
-    /* eslint-enable */
   }
 
   return (

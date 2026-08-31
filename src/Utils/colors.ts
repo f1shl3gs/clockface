@@ -35,7 +35,7 @@ export const brighten = (color: string): Colord => {
 }
 
 export const getColorsFromGradient = (
-  gradient: Gradients | DropdownMenuTheme | string
+  gradient: Gradients | DropdownMenuTheme | string,
 ): Gradient => {
   const dropdownColors = dropdownScrollColors as Record<string, Gradient>
   const gradients = influxGradients as Record<string, Gradient>
@@ -50,7 +50,7 @@ export interface CSSGradientColor {
 
 export const generateInlineCSSGradient = (
   angle: number,
-  colors: CSSGradientColor[]
+  colors: CSSGradientColor[],
 ): CSSProperties => {
   const angleText = `${angle}deg`
 
@@ -64,10 +64,10 @@ export const generateInlineCSSGradient = (
 }
 
 export const getAverageColorFromLinearGradient = (
-  linearGradient: string
+  linearGradient: string,
 ): string => {
   const rgbColors = linearGradient.match(
-    /[rR][gG][bB][(]\d+[,]\s\d+[,]\s\d+[)]/g
+    /[rR][gG][bB][(]\d+[,]\s\d+[,]\s\d+[)]/g,
   )
 
   // This function could fail if a linear gradient string is passed in using hexcodes

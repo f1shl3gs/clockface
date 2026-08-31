@@ -67,7 +67,7 @@ export const Panel: FunctionComponent<PanelProps> = ({
     backgroundColor,
     gradient,
     border,
-    style
+    style,
   )
 
   return (

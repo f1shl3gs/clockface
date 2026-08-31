@@ -47,9 +47,7 @@ export const StandardButton = () => {
   const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -106,9 +104,7 @@ export const _SquareButton = () => {
   const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -144,15 +140,11 @@ _SquareButton.story = {
 
 export const _ConfirmationButton = () => {
   const onShow = (): void => {
-    /* eslint-disable */
     console.log('calling onShow')
-    /* eslint-enable */
   }
 
   const onHide = (): void => {
-    /* eslint-disable */
     console.log('calling onHide')
-    /* eslint-enable */
   }
 
   return (
@@ -196,9 +188,7 @@ export const _DismissButton = () => {
   const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -241,9 +231,7 @@ export const CtaButton = () => {
   const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -280,9 +268,7 @@ export const BaseButton = () => {
   const buttonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -320,9 +306,7 @@ export const _LinkButton = () => {
   const buttonRef = createRef<HTMLAnchorElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -363,9 +347,7 @@ export const CtaLinkButton = () => {
   const buttonRef = createRef<HTMLAnchorElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -407,9 +389,7 @@ export const _ButtonGroup = () => {
   const buttonGroupRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(buttonGroupRef.current)
-    /* eslint-enable */
   }
 
   const handleSelection = (item: string): void => {
@@ -499,8 +479,8 @@ export const Collage = () => {
               {size: ComponentSize.Small, text: 'Small'},
               {size: ComponentSize.Medium, text: 'Medium'},
               {size: ComponentSize.Large, text: 'Large'},
-            ].map((props, i) => (
-              <td key={i}>
+            ].map((props, index) => (
+              <td key={index}>
                 <Button {...props} />
               </td>
             ))}
@@ -515,8 +495,8 @@ export const Collage = () => {
               {color: ComponentColor.Danger},
               {color: ComponentColor.Tertiary},
               {color: ComponentColor.Colorless},
-            ].map((props, i) => (
-              <td key={i}>
+            ].map((props, index) => (
+              <td key={index}>
                 <Button text={props.color.toString()} {...props} />
               </td>
             ))}
@@ -529,8 +509,8 @@ export const Collage = () => {
               {shape: ButtonShape.Default},
               {shape: ButtonShape.Square, text: ''},
               {shape: ButtonShape.StretchToFit},
-            ].map((props, i) => (
-              <td key={i}>
+            ].map((props, index) => (
+              <td key={index}>
                 <Button
                   icon={IconFont.Zap}
                   text={props.shape.toString()}
@@ -549,8 +529,8 @@ export const Collage = () => {
               {status: ComponentStatus.Loading},
               {status: ComponentStatus.Error},
               {status: ComponentStatus.Valid},
-            ].map((props, i) => (
-              <td key={i}>
+            ].map((props, index) => (
+              <td key={index}>
                 <Button text={props.status.toString()} {...props} />
               </td>
             ))}

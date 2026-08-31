@@ -9,15 +9,15 @@ import React, {
 } from 'react'
 import classnames from 'classnames'
 
+// Types
+import {Gradients, Orientation, StandardFunctionProps} from '../../Types'
+import {DraggableResizerHandle} from './DraggableResizerHandle'
+
 // Components
 import {
   DraggableResizerPanel,
   DraggableResizerPanelProps,
 } from './DraggableResizerPanel'
-import {DraggableResizerHandle} from './DraggableResizerHandle'
-
-// Types
-import {StandardFunctionProps, Orientation, Gradients} from '../../Types'
 
 // Styles
 import './DraggableResizer.scss'
@@ -58,13 +58,6 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (dragIndex > -1) {
-      window.addEventListener('mousemove', handleDrag)
-      window.addEventListener('mouseup', handleStopDrag)
-    }
-  }, [dragIndex])
-
   const panelsCount = React.Children.count(children)
   const childArray = React.Children.toArray(children)
 
@@ -96,12 +89,6 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
     setDragIndex(d)
   }
 
-  const handleStopDrag = (): void => {
-    setDragIndex(NULL_DRAG)
-    window.removeEventListener('mousemove', handleDrag)
-    window.removeEventListener('mouseup', handleStopDrag)
-  }
-
   const handleDrag = (e: MouseEvent): void => {
     if (!containerRef.current) {
       return
@@ -130,10 +117,27 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
     const newPos = mouseRelativePos / containerSize
     createNewPositions(newPos)
   }
+  const handleStopDrag = (): void => {
+    setDragIndex(NULL_DRAG)
+  }
+
+  useEffect(() => {
+    if (dragIndex === NULL_DRAG) {
+      return
+    }
+
+    window.addEventListener('mousemove', handleDrag)
+    window.addEventListener('mouseup', handleStopDrag)
+
+    return () => {
+      window.removeEventListener('mousemove', handleDrag)
+      window.removeEventListener('mouseup', handleStopDrag)
+    }
+  }, [dragIndex])
 
   const calculateCollapsePosition = (direction: number, dragIndex: number) => {
     const totalDrag = handlePositions.length - 1
-    const directionOffset = PANEL_COUNT % 2 == 0 ? 2 : 3
+    const directionOffset = PANEL_COUNT % 2 === 0 ? 2 : 3
     const directionIndex =
       direction === 0 ? dragIndex : dragIndex + directionOffset
     const currentPosition = handlePositions[dragIndex]

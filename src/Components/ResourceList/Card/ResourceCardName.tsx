@@ -67,7 +67,7 @@ export const ResourceCardName: FunctionComponent<ResourceCardNameProps> = ({
         <span className={'cf-resource-name--text-gap'}>{name}</span>
         {isError && (
           <ErrorTooltip
-            tooltipContents={<>{errorMessage}</>}
+            tooltipContents={errorMessage}
             tooltipStyle={tooltipStyle}
             style={{
               //offset for the icon to be aligned to the name text

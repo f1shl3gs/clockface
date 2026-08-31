@@ -22,9 +22,7 @@ export const NoDashboards = () => {
   const emptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(emptyStateRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -58,9 +56,7 @@ export const NoTagKeysFound = () => {
   const emptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(emptyStateRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -88,9 +84,7 @@ export const _EmptyState = () => {
   const emptyStateRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(emptyStateRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -120,18 +114,14 @@ export const _EmptyStateText = () => {
   const emptyStateTextRef = createRef<HTMLHeadingElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(emptyStateTextRef.current)
-    /* eslint-enable */
   }
 
   return (
     <div className="story--example">
       <EmptyStateText ref={emptyStateTextRef}>
-        <>
-          {'Some words and some '}
-          <em>{'highlighted words'}</em>.
-        </>
+        {'Some words and some '}
+        <em>{'highlighted words'}</em>.
       </EmptyStateText>
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>
@@ -154,9 +144,7 @@ export const _EmptyStateSubText = () => {
   const emptyStateSubTextRef = createRef<HTMLParagraphElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(emptyStateSubTextRef.current)
-    /* eslint-enable */
   }
 
   return (

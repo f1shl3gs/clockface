@@ -89,7 +89,7 @@ export const DropdownHeader: FunctionComponent<DropdownHeaderProps> = ({
       'cf-button--disabled': status === ComponentStatus.Disabled,
       active,
       [`${className}`]: className,
-    }
+    },
   )
 
   return (

@@ -2,7 +2,7 @@ import {render} from '@testing-library/react'
 import {RBAC} from './RBAC'
 import {describe, expect, it} from 'vitest'
 
-const setup = (override?: {}) => {
+const setup = (override?: any) => {
   const props = {
     permissions: ['read:db', 'write:db', 'read:users', 'write:users'],
     perform: 'read:users',

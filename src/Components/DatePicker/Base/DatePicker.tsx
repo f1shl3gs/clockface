@@ -60,7 +60,7 @@ export const DatePicker: FunctionComponent<DatePickerProps> = ({
   const [inputValue, setInputValue] = useState('')
   const [inputFormat, setInputFormat] = useState('')
   const [viewMonth, setViewMonth] = useState<Dayjs>(() =>
-    dayjs(dateTime || Date.now()).startOf('month')
+    dayjs(dateTime || Date.now()).startOf('month'),
   )
   const timeListRef = useRef<HTMLUListElement>(null)
 
@@ -112,7 +112,7 @@ export const DatePicker: FunctionComponent<DatePickerProps> = ({
     const list = timeListRef.current
     if (list) {
       const selected = list.querySelector(
-        '[data-selected="true"]'
+        '[data-selected="true"]',
       ) as HTMLElement | null
       if (selected) {
         list.scrollTop =
@@ -168,7 +168,7 @@ export const DatePicker: FunctionComponent<DatePickerProps> = ({
           <div className="cf-date-picker--body">
             <div className="cf-date-picker--day-names">
               {Array.from({length: 7}, (_, i) =>
-                viewMonth.day(i).format('dd')
+                viewMonth.day(i).format('dd'),
               ).map(name => (
                 <span key={name} className="cf-date-picker--day-name">
                   {name}
@@ -187,7 +187,7 @@ export const DatePicker: FunctionComponent<DatePickerProps> = ({
                     {
                       'cf-date-picker--day--selected': c.isSame(date, 'day'),
                       'cf-date-picker--day--today': c.isSame(today, 'day'),
-                    }
+                    },
                   )}
                   onClick={() => handleSelectDate(c)}
                 >

@@ -12,10 +12,8 @@ export type Threshold = {
   gradient?: Gradients
 }
 
-export interface ThresholdBarProps extends Omit<
-  ProgressBarProps,
-  'barGradient' | 'color'
-> {
+export interface ThresholdBarProps
+  extends Omit<ProgressBarProps, 'barGradient' | 'color'> {
   /** The current amount */
   value?: number
   /** The total amount */

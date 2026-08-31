@@ -83,7 +83,7 @@ describe('the Click Outside component', () => {
     const {getByText} = render(
       <ClickOutside onClickOutside={mockClickOutside}>
         <button>Inside button</button>
-      </ClickOutside>
+      </ClickOutside>,
     )
 
     fireEvent.mouseDown(getByText('Inside button'))

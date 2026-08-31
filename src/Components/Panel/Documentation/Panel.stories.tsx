@@ -50,9 +50,7 @@ export const _Panel = () => {
   const panelRef = createRef<HTMLDivElement>()
 
   const logPanelRef = (): void => {
-    /* eslint-disable */
     console.log(panelRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -81,9 +79,7 @@ export const _PanelHeader = () => {
   const panelHeaderRef = createRef<HTMLDivElement>()
 
   const logPanelRefs = (): void => {
-    /* eslint-disable */
     console.log('PanelHeader', panelHeaderRef.current)
-    /* eslint-enable */
   }
 
   const headerTypes = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
@@ -101,7 +97,11 @@ export const _PanelHeader = () => {
         {headerTypes[3] === headerTypes[0] && <h1>{'I am a cool Panel'}</h1>}
         {headerTypes[3] === headerTypes[1] && <h2>{'I am a cool Panel'}</h2>}
         {headerTypes[3] === headerTypes[2] && <h3>{'I am a cool Panel'}</h3>}
-        {headerTypes[3] === headerTypes[3] && <h4>{'I am a cool Panel'}</h4>}
+        {
+          /* headerTypes[3] === headerTypes[3] && */ <h4>
+            {'I am a cool Panel'}
+          </h4>
+        }
         {headerTypes[3] === headerTypes[4] && <h5>{'I am a cool Panel'}</h5>}
         {headerTypes[3] === headerTypes[5] && <h6>{'I am a cool Panel'}</h6>}
       </PanelHeader>
@@ -126,9 +126,7 @@ export const _PanelBody = () => {
   const panelBodyRef = createRef<HTMLDivElement>()
 
   const logPanelRef = (): void => {
-    /* eslint-disable */
     console.log(panelBodyRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -168,9 +166,7 @@ export const _PanelFooter = () => {
   const panelFooterRef = createRef<HTMLDivElement>()
 
   const logPanelRef = (): void => {
-    /* eslint-disable */
     console.log(panelFooterRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -207,9 +203,7 @@ export const _PanelSymbolHeader = () => {
   const panelSymbolHeaderRef = createRef<HTMLDivElement>()
 
   const logPanelSymbolHeaderRef = (): void => {
-    /* eslint-disable */
     console.log(panelSymbolHeaderRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -240,9 +234,7 @@ export const _BannerPanel = () => {
   const bannerPanelRef = createRef<HTMLDivElement>()
 
   const logBannerPanelRef = (): void => {
-    /* eslint-disable */
     console.log(bannerPanelRef.current)
-    /* eslint-enable */
   }
 
   return (

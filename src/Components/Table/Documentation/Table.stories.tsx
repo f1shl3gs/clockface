@@ -36,7 +36,6 @@ export const _Table = () => {
   const tableFooterRef = createRef<HTMLTableSectionElement>()
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log('Table', tableRef.current)
     console.log('TableHeader', tableHeaderRef.current)
     console.log('TableHeaderCell', tableHeaderCellRef.current)
@@ -44,7 +43,6 @@ export const _Table = () => {
     console.log('TableRow', tableRowRef.current)
     console.log('TableCell', tableCellRef.current)
     console.log('TableFooter', tableFooterRef.current)
-    /* eslint-enable */
   }
 
   return (

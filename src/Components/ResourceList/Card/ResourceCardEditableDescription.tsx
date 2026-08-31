@@ -20,7 +20,8 @@ import {StandardFunctionProps, ComponentSize, IconFont} from '../../../Types'
 // Styles
 import './ResourceCardDescription.scss'
 
-export interface ResourceCardEditableDescriptionProps extends StandardFunctionProps {
+export interface ResourceCardEditableDescriptionProps
+  extends StandardFunctionProps {
   /** Called when user hits enter or blurs the input  */
   onUpdate: (description: string) => void
   /** Text to display in description */
@@ -54,14 +55,14 @@ export const ResourceCardEditableDescription: FunctionComponent<
     'cf-resource-description cf-resource-description__editable',
     {
       [`${className}`]: className,
-    }
+    },
   )
 
   const resourceCardEditableDescriptionPreviewClass = classnames(
     'cf-resource-description--preview',
     {
       untitled: !description,
-    }
+    },
   )
 
   const handleStartEditing = (): void => {
@@ -78,7 +79,7 @@ export const ResourceCardEditableDescription: FunctionComponent<
   }
 
   const handleKeyDown = async (
-    e: KeyboardEvent<HTMLInputElement>
+    e: KeyboardEvent<HTMLInputElement>,
   ): Promise<void> => {
     if (e.key === 'Enter') {
       await onUpdate(workingDescription)

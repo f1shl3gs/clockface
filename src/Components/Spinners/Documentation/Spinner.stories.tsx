@@ -21,10 +21,8 @@ export const _SpinnerContainer = () => {
   const spinnerContainerRef = React.createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('TechnoSpinner', technoSpinnerRef.current)
     console.log('SpinnerContainer', spinnerContainerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -63,9 +61,7 @@ export const _TechnoSpinner = () => {
   const technoSpinnerRef = React.createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
-    /* eslint-disable */
     console.log(technoSpinnerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -96,9 +92,7 @@ export const _SparkleSpinner = () => {
   const sparkleSpinnerRef = React.createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
-    /* eslint-disable */
     console.log(sparkleSpinnerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -129,9 +123,7 @@ export const _WaitingText = () => {
   const waitingTextRef = React.createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
-    /* eslint-disable */
     console.log(waitingTextRef.current)
-    /* eslint-enable */
   }
 
   return (

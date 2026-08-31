@@ -18,10 +18,8 @@ export const _SquareGrid = () => {
   const squareGridCardRef = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log('SquareGrid', squareGridRef.current)
     console.log('SquareGridCard', squareGridCardRef.current)
-    /* eslint-enable */
   }
 
   return (

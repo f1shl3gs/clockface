@@ -156,7 +156,7 @@ export const CreatableTypeAheadDropdown: FunctionComponent<
 
   const button = (
     active: boolean,
-    onClick: (e?: MouseEvent<HTMLElement>) => void
+    onClick: (e?: MouseEvent<HTMLElement>) => void,
   ) => (
     <DropdownHeader
       active={active}

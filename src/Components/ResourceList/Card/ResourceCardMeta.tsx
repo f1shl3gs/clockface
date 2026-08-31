@@ -11,10 +11,11 @@ import {FlexDirection, AlignItems} from '../../../Types'
 // Styles
 import './ResourceCardMeta.scss'
 
-export interface ResourceCardMetaProps extends Omit<
-  FlexBoxProps,
-  'stretchToFitWidth' | 'stretchToFitHeight' | 'margin'
-> {
+export interface ResourceCardMetaProps
+  extends Omit<
+    FlexBoxProps,
+    'stretchToFitWidth' | 'stretchToFitHeight' | 'margin'
+  > {
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
 }
@@ -34,15 +35,12 @@ export const ResourceCardMeta: FunctionComponent<ResourceCardMetaProps> = ({
     [`${className}`]: className,
   })
 
-  let wrappedChildren
-
-  if (React.Children.count(children) > 0) {
-    const childArray = React.Children.map(children, child => (
-      <div className="cf-resource-meta--item">{child}</div>
-    ))
-
-    wrappedChildren = <>{childArray}</>
-  }
+  const wrappedChildren =
+    React.Children.count(children) === 0
+      ? children
+      : React.Children.map(children, child => (
+          <div className="cf-resource-meta--item">{child}</div>
+        ))
 
   return (
     <FlexBox

@@ -77,7 +77,7 @@ export const Tab: FunctionComponent<TabProps> = ({
     return React.cloneElement(
       linkElement(tabClass),
       {'data-testid': testID},
-      tabContents
+      tabContents,
     )
   }
 

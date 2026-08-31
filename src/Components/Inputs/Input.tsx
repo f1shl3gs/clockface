@@ -1,19 +1,19 @@
 // Libraries
+import classnames from 'classnames'
 import React, {
-  CSSProperties,
   ChangeEvent,
+  CSSProperties,
+  FunctionComponent,
   KeyboardEvent,
+  Ref,
   RefObject,
   useState,
-  FunctionComponent,
-  Ref,
 } from 'react'
-import classnames from 'classnames'
 
 // Components
+import {DismissButton} from '../Button/Composed/DismissButton'
 import {Icon} from '../Icon'
 import {StatusIndicator} from './StatusIndicator'
-import {DismissButton} from '../Button/Composed/DismissButton'
 
 // Styles
 import './Input.scss'
@@ -139,18 +139,16 @@ export const Input: FunctionComponent<InputProps> = ({
   ref,
 }) => {
   const [isFocused, setFocus] = useState<boolean>(autoFocus)
-  const correctStatus = value === value ? status : ComponentStatus.Error
-
   const inputClass = classnames('cf-input', {
     [`cf-input-${size}`]: size,
     'cf-input__focused': isFocused,
     'cf-input__has-checkbox': type === InputType.Checkbox,
     'cf-input__has-icon': icon || colorPreview,
     'cf-input__has-clear-btn': onClear && value,
-    'cf-input__valid': correctStatus === ComponentStatus.Valid,
-    'cf-input__error': correctStatus === ComponentStatus.Error,
-    'cf-input__loading': correctStatus === ComponentStatus.Loading,
-    'cf-input__disabled': correctStatus === ComponentStatus.Disabled,
+    'cf-input__valid': status === ComponentStatus.Valid,
+    'cf-input__error': status === ComponentStatus.Error,
+    'cf-input__loading': status === ComponentStatus.Loading,
+    'cf-input__disabled': status === ComponentStatus.Disabled,
     'cf-input-monospace': monospace,
     [`${className}`]: className,
   })
@@ -176,11 +174,6 @@ export const Input: FunctionComponent<InputProps> = ({
   }
 
   const inputCheckboxClass = classnames('cf-input--checkbox', {checked})
-
-  const correctlyTypedValue: string | number = value === value ? value : ''
-  const correctType: string = value === value ? type : 'text'
-  const correctlyTypedMin: string | number | undefined = min === min ? min : ''
-  const correctlyTypedMax: string | number | undefined = max === max ? max : ''
 
   /** If both icon and colorPreview are set in props, icon has higher priority */
   let iconElement: React.ReactElement | null = null
@@ -215,7 +208,7 @@ export const Input: FunctionComponent<InputProps> = ({
     <div className={inputClass} style={style} ref={containerRef}>
       {type !== InputType.Checkbox && (
         <StatusIndicator
-          status={correctStatus}
+          status={status}
           shadow={true}
           testID={testID}
           size={size}
@@ -224,15 +217,15 @@ export const Input: FunctionComponent<InputProps> = ({
       <input
         id={id}
         ref={ref}
-        min={correctlyTypedMin}
-        max={correctlyTypedMax}
+        min={min}
+        max={max}
         step={step}
         checked={checked}
         title={title}
         autoComplete={autocomplete}
         name={name}
-        type={correctType}
-        value={correctlyTypedValue}
+        type={type}
+        value={value}
         placeholder={placeholder}
         autoFocus={autoFocus}
         spellCheck={spellCheck}

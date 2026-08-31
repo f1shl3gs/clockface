@@ -47,7 +47,7 @@ export const TextBlock: FunctionComponent<TextBlockProps> = ({
   const textBlockStyle = generateTextBlockStyle(
     backgroundColor,
     textColor,
-    style
+    style,
   )
 
   return (

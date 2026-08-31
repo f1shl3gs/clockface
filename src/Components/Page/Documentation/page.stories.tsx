@@ -40,9 +40,7 @@ export const _Page = () => {
   const pageRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(pageRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -70,12 +68,10 @@ export const _PageControlBar = () => {
   const pageControlBarRightRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(pageControlBarRef.current)
     console.log(pageControlBarLeftRef.current)
     console.log(pageControlBarCenterRef.current)
     console.log(pageControlBarRightRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -122,9 +118,7 @@ export const _PageContents = () => {
   const pageContentsRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(pageContentsRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -161,9 +155,7 @@ export const _PageTitle = () => {
   const pageTitleRef = createRef<HTMLHeadingElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(pageTitleRef.current)
-    /* eslint-enable */
   }
 
   return (

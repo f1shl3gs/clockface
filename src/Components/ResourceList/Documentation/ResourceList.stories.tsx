@@ -31,9 +31,7 @@ export const _ResourceList = () => {
   const resourceListRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(resourceListRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -84,18 +82,16 @@ export const _ResourceListHeader = () => {
   ]
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log('ResourceListHeader', resourceListHeaderRef.current)
     console.log('ResourceListSorter (Name)', resourceListSorterNameRef.current)
     console.log(
       'ResourceListSorter (Created)',
-      resourceListSorterCreatedRef.current
+      resourceListSorterCreatedRef.current,
     )
     console.log(
       'ResourceListSorter (Color)',
-      resourceListSorterColorRef.current
+      resourceListSorterColorRef.current,
     )
-    /* eslint-enable */
   }
 
   return (
@@ -142,9 +138,7 @@ export const _ResourceListBody = () => {
   const resourceListBodyRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(resourceListBodyRef.current)
-    /* eslint-enable */
   }
 
   const children = 'Resource List appears here YAY!'
@@ -179,9 +173,7 @@ export const _ResourceListSorter = () => {
   const resourceListSorterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(resourceListSorterRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -290,10 +282,7 @@ export const DashboardsList = () => (
                 description={dash.description}
                 onUpdate={desc => alert(`onUpdate description fired: ${desc}`)}
               />
-              <>Last updated {dash.updatedAt}</>,
-              <>
-                Created by <b>{dash.createdBy}</b>
-              </>
+              Last updated {dash.updatedAt}, Created by <b>{dash.createdBy}</b>
             </ResourceCard>
           ))}
       </ResourceListBody>

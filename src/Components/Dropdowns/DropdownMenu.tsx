@@ -105,7 +105,7 @@ export const DropdownMenu: FunctionComponent<DropdownMenuProps> = ({
 
 const calculateSelectedPosition = (
   scrollToSelected: boolean,
-  children: ReactNode
+  children: ReactNode,
 ): number => {
   if (!children || !scrollToSelected) {
     return 0

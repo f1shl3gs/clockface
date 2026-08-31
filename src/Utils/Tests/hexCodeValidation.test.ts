@@ -19,11 +19,11 @@ describe('the validateHexCode function', () => {
   it(`requires a length of ${VALID_HEX_LENGTH} (\`$\{VALID_HEX_LENGTH}\`)`, () => {
     expect(
       validateHexCode(
-        '#G0000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1111111111111111111111111'
-      )
+        '#G0000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1111111111111111111111111',
+      ),
     ).toEqual(`Must be ${VALID_HEX_LENGTH} characters`)
     expect(validateHexCode('#AAA')).toEqual(
-      `Must be ${VALID_HEX_LENGTH} characters`
+      `Must be ${VALID_HEX_LENGTH} characters`,
     )
   })
 

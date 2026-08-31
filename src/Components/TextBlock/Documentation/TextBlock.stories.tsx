@@ -26,12 +26,10 @@ export const Example = () => {
   const textBlock4Ref = createRef<HTMLDivElement>()
 
   const logLabelRefs = (): void => {
-    /* eslint-disable */
     console.log('TextBlock 1', textBlock1Ref.current)
     console.log('TextBlock 2', textBlock2Ref.current)
     console.log('TextBlock 3', textBlock3Ref.current)
     console.log('TextBlock 4', textBlock4Ref.current)
-    /* eslint-enable */
   }
 
   return (

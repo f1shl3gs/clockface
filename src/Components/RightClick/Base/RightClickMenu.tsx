@@ -66,9 +66,9 @@ export const RightClickMenu: FunctionComponent<RightClickMenuProps> = ({
   })
 
   const hidePopoverWhenOutOfView = (
-    entries: IntersectionObserverEntry[]
+    entries: IntersectionObserverEntry[],
   ): void => {
-    if (!!entries.length && entries[0].isIntersecting === false) {
+    if (!!entries.length && !entries[0].isIntersecting) {
       onHide()
     }
   }

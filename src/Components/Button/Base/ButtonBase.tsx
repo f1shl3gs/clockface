@@ -82,7 +82,7 @@ export const ButtonBase: FunctionComponent<ButtonBaseProps> = ({
       'cf-button--disabled': status === ComponentStatus.Disabled,
       active,
       [`${className}`]: className,
-    }
+    },
   )
 
   const titleTextToBeUsed =

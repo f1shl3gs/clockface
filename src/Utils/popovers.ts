@@ -15,7 +15,7 @@ const calculateDialogPosition = (
   position: PopoverPosition,
   triggerRef: RefObject<any | null>,
   dialogRef: RefObject<HTMLDivElement | null>,
-  distanceFromTrigger: number
+  distanceFromTrigger: number,
 ): PopoverPosition => {
   const acceptablePopoverPositions: PopoverPosition[] = []
 
@@ -50,7 +50,7 @@ const calculateDialogPosition = (
   if (popoverFitsToTheRight) {
     acceptablePopoverPositions.push(
       PopoverPosition.ToTheRight,
-      PopoverPosition.ToTheRightTop
+      PopoverPosition.ToTheRightTop,
     )
   }
 
@@ -66,7 +66,7 @@ const calculateDialogPosition = (
 const isDialogFlush = (
   position: PopoverPosition,
   triggerRef: RefObject<any | null>,
-  dialogRef: RefObject<any | null>
+  dialogRef: RefObject<any | null>,
 ): PopoverFlush => {
   if (!triggerRef.current || !dialogRef.current) {
     return {
@@ -123,13 +123,13 @@ export const calculatePopoverStyles = (
   triggerRef: RefObject<any | null>,
   dialogRef: RefObject<HTMLDivElement | null>,
   caretSize: number,
-  distanceFromTrigger: number
+  distanceFromTrigger: number,
 ): PopoverStyles => {
   const dialogPosition = calculateDialogPosition(
     position,
     triggerRef,
     dialogRef,
-    distanceFromTrigger
+    distanceFromTrigger,
   )
   let dialogStyles: CSSProperties = {}
   let caretStyles: CSSProperties = {}
@@ -144,7 +144,7 @@ export const calculatePopoverStyles = (
         dialogFlush = isDialogFlush(
           PopoverPosition.Above,
           triggerRef,
-          dialogRef
+          dialogRef,
         )
 
         // Center the dialog horizontally above the trigger by default
@@ -195,7 +195,7 @@ export const calculatePopoverStyles = (
         dialogFlush = isDialogFlush(
           PopoverPosition.Below,
           triggerRef,
-          dialogRef
+          dialogRef,
         )
 
         // Center the dialog horizontally below the trigger by default
@@ -246,7 +246,7 @@ export const calculatePopoverStyles = (
         dialogFlush = isDialogFlush(
           PopoverPosition.ToTheLeft,
           triggerRef,
-          dialogRef
+          dialogRef,
         )
 
         // Center the dialog vertically to the left of the trigger by default
@@ -297,7 +297,7 @@ export const calculatePopoverStyles = (
         dialogFlush = isDialogFlush(
           PopoverPosition.ToTheRightTop,
           triggerRef,
-          dialogRef
+          dialogRef,
         )
 
         // Center the dialog vertically to the right of the trigger by default
@@ -348,7 +348,7 @@ export const calculatePopoverStyles = (
         dialogFlush = isDialogFlush(
           PopoverPosition.ToTheRight,
           triggerRef,
-          dialogRef
+          dialogRef,
         )
 
         // Center the dialog vertically to the right of the trigger by default

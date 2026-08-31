@@ -5,10 +5,8 @@ import classnames from 'classnames'
 // Types
 import {StandardFunctionProps} from '../../Types'
 
-export interface TreeNavSubHeadingProps extends Omit<
-  StandardFunctionProps,
-  'id'
-> {
+export interface TreeNavSubHeadingProps
+  extends Omit<StandardFunctionProps, 'id'> {
   /** Label for heading */
   label: string
   /** Should the heading be rendered in lowercase */

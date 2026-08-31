@@ -18,9 +18,7 @@ export const _ColorPicker = () => {
   const colorPickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(colorPickerRef.current)
-    /* eslint-enable */
   }
 
   const defaultStyle = {width: '400px'}
@@ -124,9 +122,7 @@ export const CustomColorPalette = () => {
   const colorPickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(colorPickerRef.current)
-    /* eslint-enable */
   }
 
   return (

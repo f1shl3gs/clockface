@@ -102,12 +102,13 @@
     animation-duration: 250ms;
   }
 
+  &--disable-animation {
+    animation-duration: 0ms;
+  }
+
   .cf-accordion--body:last-child {
     border-radius: 0px 0px $cf-radius $cf-radius;
   }
-}
-.cf-accordion--body-container--disable-animation {
-  animation-duration: 0ms;
 }
 
 .cf-accordion--body {

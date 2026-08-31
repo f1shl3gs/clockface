@@ -5,10 +5,8 @@ import classnames from 'classnames'
 // Types
 import {StandardFunctionProps, RenderLinkElement} from '../../Types'
 
-export interface TreeNavUserItemProps extends Omit<
-  StandardFunctionProps,
-  'id'
-> {
+export interface TreeNavUserItemProps
+  extends Omit<StandardFunctionProps, 'id'> {
   /** Unique identifier for user item */
   id: string
   /** Controls highlighting of the user item */
@@ -46,7 +44,7 @@ export const TreeNavUserItem: FunctionComponent<TreeNavUserItemProps> = ({
     return React.cloneElement(
       linkElement(treeNavUserItemClass),
       {'data-testid': testID},
-      label
+      label,
     )
   }
 

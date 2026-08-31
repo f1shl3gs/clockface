@@ -53,10 +53,8 @@ export const InputText = () => {
   const inputContainerRef = createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('InputRef', inputRef.current)
     console.log('InputContainerRef', inputContainerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -100,7 +98,7 @@ InputText.story = {
 
 export const InputClearableText = () => {
   const [value, setValue] = useState<string>(
-    'hello world how are you it is me working on this input.....'
+    'hello world how are you it is me working on this input.....',
   )
 
   return (
@@ -284,9 +282,7 @@ export const _InputLabel = () => {
   const inputLabelRef = createRef<HTMLLabelElement>()
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('ToggleRef', inputLabelRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -323,17 +319,13 @@ export const _Toggle = () => {
   const [checked, setChecked] = useState<boolean>(false)
 
   const handleToggleChange = (value?: string): void => {
-    /* eslint-disable */
     console.log('onChange fired!', value)
-    /* eslint-enable */
     setChecked(!checked)
   }
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('ToggleRef', toggleRef.current)
     console.log('ToggleContainerRef', toggleContainerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -380,14 +372,12 @@ export const _TextArea = () => {
   const textAreaContainerRef = createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('TextAreaRef (Default)', textAreaRefDefault.current)
     console.log('TextAreaRef (Disabled)', textAreaRefDisabled.current)
     console.log('TextAreaRef (Valid)', textAreaRefValid.current)
     console.log('TextAreaRef (Error)', textAreaRefError.current)
     console.log('TextAreaRef (Loading)', textAreaRefLoading.current)
     console.log('TextAreaContainerRef (Default)', textAreaContainerRef.current)
-    /* eslint-enable */
   }
 
   const exampleTextAreaStyle = {width: '100%', margin: '0 10px'}
@@ -519,9 +509,7 @@ export const _VisibilityInput = () => {
   const visibilityInputRef = createRef<HTMLInputElement>()
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('VisibilityInputRef', visibilityInputRef.current)
-    /* eslint-enable */
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -567,9 +555,7 @@ export const _TimeInput = () => {
   const timeInputRef = createRef<HTMLInputElement>()
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('ref', timeInputRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -613,18 +599,16 @@ export const _AutoInput = () => {
   const autoInputSelectGroupCustomRef = createRef<HTMLInputElement>()
 
   const handleLogRef = (): void => {
-    /* eslint-disable */
     console.log('AutoInput', autoInputRef.current)
     console.log('AutoInput SelectGroup', autoInputSelectGroupRef.current)
     console.log(
       'AutoInput SelectGroupOption',
-      autoInputSelectGroupAutoRef.current
+      autoInputSelectGroupAutoRef.current,
     )
     console.log(
       'AutoInput SelectGroupOption',
-      autoInputSelectGroupCustomRef.current
+      autoInputSelectGroupCustomRef.current,
     )
-    /* eslint-enable */
   }
 
   const exampleAutoInputStyle = {width: '300px'}
@@ -679,9 +663,7 @@ export const _RangeSlider = () => {
   }
 
   const handleLogRef = (): void => {
-    /* eslint-disable */
     console.log(rangeSliderRef.current)
-    /* eslint-enable */
   }
 
   const exampleRangeSliderStyle = {width: '375px'}
@@ -815,8 +797,8 @@ export const Collage = () => {
               {size: ComponentSize.Small, placeholder: 'Small'},
               {size: ComponentSize.Medium, placeholder: 'Medium'},
               {size: ComponentSize.Large, placeholder: 'Large'},
-            ].map((props, i) => (
-              <td key={i}>
+            ].map((props, index) => (
+              <td key={index}>
                 <Input {...props} />
               </td>
             ))}
@@ -831,8 +813,8 @@ export const Collage = () => {
               {status: ComponentStatus.Loading},
               {status: ComponentStatus.Error},
               {status: ComponentStatus.Valid},
-            ].map((props, i) => (
-              <td key={i}>
+            ].map((props, index) => (
+              <td key={index}>
                 <Input placeholder={props.status.toString()} {...props} />
               </td>
             ))}

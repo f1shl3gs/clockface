@@ -49,9 +49,7 @@ export const _AppWrapper = () => {
   const appWrapperRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(appWrapperRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -434,9 +432,7 @@ export const AppWrapperTreeNav = () => {
   const appWrapperRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(appWrapperRef.current)
-    /* eslint-enable */
   }
 
   const handleToggleNavState = (): void => {

@@ -128,9 +128,7 @@ function CardBucketsFull() {
             name="user:influx"
             color="#9AF445"
             size={ComponentSize.ExtraSmall}
-            /* eslint-disable */
             onDelete={() => {}}
-            /* eslint-enable */
           />
         </FlexBox>
         <FlexBox direction={FlexDirection.Row} margin={ComponentSize.Medium}>
@@ -191,11 +189,9 @@ function CardDisabled() {
           margin={ComponentSize.Medium}
         >
           <SlideToggle
-            /* eslint-disable */
             onChange={() => {
               // Do nothing
             }}
-            /* eslint-enable */
             size={ComponentSize.ExtraSmall}
             active={false}
           />
@@ -292,9 +288,7 @@ function CardAll() {
           name="CRIT"
           color="#da3434"
           size={ComponentSize.ExtraSmall}
-          /* eslint-disable */
           onDelete={() => {}}
-          /* eslint-enable */
         />
         <Label
           id="WARN"
@@ -302,9 +296,7 @@ function CardAll() {
           name="WARN"
           color="#f2b218"
           size={ComponentSize.ExtraSmall}
-          /* eslint-disable */
           onDelete={() => {}}
-          /* eslint-enable */
         />
         <Label
           id="OK"
@@ -312,9 +304,7 @@ function CardAll() {
           name="OK"
           color="#6ac255"
           size={ComponentSize.ExtraSmall}
-          /* eslint-disable */
           onDelete={() => {}}
-          /* eslint-enable */
         />
       </FlexBox>
     </ResourceCard>
@@ -332,11 +322,9 @@ function CardTask() {
           margin={ComponentSize.Medium}
         >
           <SlideToggle
-            /* eslint-disable */
             onChange={() => {
               // Do nothing
             }}
-            /* eslint-enable */
             size={ComponentSize.ExtraSmall}
             active={true}
           />
@@ -403,9 +391,7 @@ function CardLabel() {
           name="Analytics"
           color="#C5F98D"
           size={ComponentSize.Small}
-          /* eslint-disable */
           onDelete={() => {}}
-          /* eslint-enable */
         />
         <span>No description</span>
       </ResourceCardMeta>

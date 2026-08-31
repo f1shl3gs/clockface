@@ -14,10 +14,8 @@ import {
   ValidationFunction,
 } from '../../Types'
 
-export interface FormValidationElementProps extends Omit<
-  StandardFunctionProps,
-  'children'
-> {
+export interface FormValidationElementProps
+  extends Omit<StandardFunctionProps, 'children'> {
   /** Child components */
   children: (status: ComponentStatus) => React.ReactNode
   /** Function used for validation check */

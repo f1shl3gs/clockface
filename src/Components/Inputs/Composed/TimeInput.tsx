@@ -28,19 +28,20 @@ const TIME_INPUT_DROPDOWN_SIZE = {
 
 const TIME_INPUT_DEFAULT_UNITS = ['s', 'm', 'h', 'd', 'w', 'mo']
 
-export interface TimeInputProps extends Omit<
-  InputProps,
-  | 'type'
-  | 'checked'
-  | 'spellCheck'
-  | 'step'
-  | 'min'
-  | 'max'
-  | 'pattern'
-  | 'onChange'
-  | 'autocomplete'
-  | 'monospace'
-> {
+export interface TimeInputProps
+  extends Omit<
+    InputProps,
+    | 'type'
+    | 'checked'
+    | 'spellCheck'
+    | 'step'
+    | 'min'
+    | 'max'
+    | 'pattern'
+    | 'onChange'
+    | 'autocomplete'
+    | 'monospace'
+  > {
   /** Callback for input changes */
   onChange: (value: string, e?: ChangeEvent<HTMLInputElement>) => void
   /** Currently selected unit */

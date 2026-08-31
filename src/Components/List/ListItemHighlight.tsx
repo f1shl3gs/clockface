@@ -36,7 +36,7 @@ export const ListItemHighlight: FunctionComponent<ListItemHighlightProps> = ({
     gradient,
     false,
     {},
-    90
+    90,
   )
 
   const listStyle = selected ? selectedStyle : undefined

@@ -25,13 +25,13 @@ import {AccordionHeader} from '../AccordionHeader'
 
 export default {title: 'Components / Accordion / Examples'}
 
+type Setter = (...args: never) => void
+
 export const AccordionWithToggles = () => {
   const accordionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(accordionRef.current)
-    /* eslint-enable */
   }
 
   const margin = {marginRight: '10px'}
@@ -73,7 +73,7 @@ export const AccordionWithToggles = () => {
       'read',
       readAccss,
       individualAccessStates,
-      setIndividualAccessStates
+      setIndividualAccessStates,
     )
   }, [readAccss])
 
@@ -82,7 +82,7 @@ export const AccordionWithToggles = () => {
       'write',
       writeAccess,
       individualAccessStates,
-      setIndividualAccessStates
+      setIndividualAccessStates,
     )
   }, [writeAccess])
 
@@ -91,7 +91,7 @@ export const AccordionWithToggles = () => {
       'read',
       readAccss2,
       individualAccessStates2,
-      setIndividualAccessStates2
+      setIndividualAccessStates2,
     )
   }, [readAccss2])
 
@@ -100,11 +100,11 @@ export const AccordionWithToggles = () => {
       'write',
       writeAccess2,
       individualAccessStates2,
-      setIndividualAccessStates2
+      setIndividualAccessStates2,
     )
   }, [writeAccess2])
 
-  const handleToggleChange = (checked: boolean, setChecked: Function): void => {
+  const handleToggleChange = (checked: boolean, setChecked: Setter): void => {
     setChecked(!checked)
   }
 
@@ -114,7 +114,7 @@ export const AccordionWithToggles = () => {
     name: string,
     actionType: string,
     stateObject: AccessStates,
-    setter: Function
+    setter: (states: AccessStates) => void,
   ): void => {
     const object = Object.assign({}, stateObject) as AccessStates
     const newState = {
@@ -131,7 +131,7 @@ export const AccordionWithToggles = () => {
     actionType: string,
     state: boolean,
     stateObject: AccessStates,
-    setter: Function
+    setter: (states: AccessStates) => void,
   ): void => {
     const object = Object.assign({}, stateObject) as AccessStates
     Object.keys(object).forEach(element => {
@@ -147,7 +147,7 @@ export const AccordionWithToggles = () => {
     id: string,
     title: string,
     states: boolean[],
-    setters: Function[]
+    setters: Setter[],
   ) => (
     <FlexBox
       margin={ComponentSize.Small}
@@ -196,8 +196,8 @@ export const AccordionWithToggles = () => {
     id: string,
     title: string,
     name: string,
-    setter: Function,
-    stateObject: AccessStates
+    setter: Setter,
+    stateObject: AccessStates,
   ) => (
     <FlexBox
       margin={ComponentSize.Small}
@@ -222,7 +222,7 @@ export const AccordionWithToggles = () => {
               name,
               'read',
               individualAccessStates,
-              setter
+              setter,
             )
           }
           size={ComponentSize.ExtraSmall}
@@ -244,7 +244,7 @@ export const AccordionWithToggles = () => {
               name,
               'write',
               individualAccessStates,
-              setter
+              setter,
             )
           }
           onKeyUp={(e: KeyboardEvent) => {
@@ -271,9 +271,7 @@ export const AccordionWithToggles = () => {
         disabled={disabled}
         style={{}}
         onChange={() => {
-          /* eslint-disable */
           console.log('hello')
-          /* eslint-disable */
         }}
       >
         <AccordionHeader>
@@ -281,7 +279,7 @@ export const AccordionWithToggles = () => {
             '0',
             'Telegraf Configurations',
             [readAccss, writeAccess],
-            [setReadAccess, setWriteAccess]
+            [setReadAccess, setWriteAccess],
           )}
         </AccordionHeader>
         <AccordionBodyItem>
@@ -295,7 +293,7 @@ export const AccordionWithToggles = () => {
             'Telegraf Configuration 1',
             'telegraf1',
             setIndividualAccessStates,
-            individualAccessStates
+            individualAccessStates,
           )}
         </AccordionBodyItem>
         <AccordionBodyItem>
@@ -304,7 +302,7 @@ export const AccordionWithToggles = () => {
             'Telegraf Configuration 2',
             'telegraf2',
             setIndividualAccessStates,
-            individualAccessStates
+            individualAccessStates,
           )}
         </AccordionBodyItem>
       </Accordion>
@@ -319,7 +317,7 @@ export const AccordionWithToggles = () => {
             '5',
             'Bucket',
             [readAccss2, writeAccess2],
-            [setReadAccess2, setWriteAccess2]
+            [setReadAccess2, setWriteAccess2],
           )}
         </AccordionHeader>
         <AccordionBodyItem>
@@ -333,7 +331,7 @@ export const AccordionWithToggles = () => {
             'Bucket 1',
             'bucket1',
             setIndividualAccessStates2,
-            individualAccessStates2
+            individualAccessStates2,
           )}
         </AccordionBodyItem>
         <AccordionBodyItem>
@@ -342,7 +340,7 @@ export const AccordionWithToggles = () => {
             'Bucket 2',
             'bucket2',
             setIndividualAccessStates2,
-            individualAccessStates2
+            individualAccessStates2,
           )}
         </AccordionBodyItem>
       </Accordion>
@@ -367,9 +365,7 @@ export const AccordionWithPlainTexts = () => {
   const accordionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(accordionRef.current)
-    /* eslint-enable */
   }
   const disabled = false
 
@@ -418,9 +414,7 @@ export const _Accordion = () => {
   const accordionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(accordionRef.current)
-    /* eslint-enable */
   }
   const disabled = false
 

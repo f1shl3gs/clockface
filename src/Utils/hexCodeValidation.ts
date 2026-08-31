@@ -3,7 +3,7 @@ import {ValidationFunction} from '../Types'
 export const VALID_HEX_LENGTH = 7
 
 export const validateHexCode: ValidationFunction = (
-  color: string
+  color: string,
 ): string | null => {
   // Cannot be blank
   if (!color || !color.length) {

@@ -20,14 +20,14 @@ export const convertCSSPropertiesToString = (styles: CSSProperties): string =>
   Object.entries(styles).reduce((styleString, [propName, propValue]) => {
     const formattedPropName = propName.replace(
       /([A-Z])/g,
-      matches => `-${matches[0].toLowerCase()}`
+      matches => `-${matches[0].toLowerCase()}`,
     )
     return `${styleString}${formattedPropName}:${propValue};`
   }, '')
 
 export const calculateTextColorFromBackground = (
   backgroundColor?: InfluxColors | string,
-  gradient?: Gradients
+  gradient?: Gradients,
 ): string => {
   const mediumGrey = 0.37
 
@@ -48,7 +48,7 @@ export const generateBackgroundStyle = (
   gradient?: Gradients,
   bordered?: boolean,
   style?: CSSProperties,
-  angle?: number
+  angle?: number,
 ): CSSProperties => {
   if (!backgroundColor && !gradient) {
     return style || {}
@@ -83,7 +83,7 @@ export const generateBackgroundStyle = (
 export const generateTextBlockStyle = (
   backgroundColor?: InfluxColors | string,
   textColor?: InfluxColors | string,
-  style?: CSSProperties
+  style?: CSSProperties,
 ): CSSProperties | undefined => {
   if (!backgroundColor) {
     return {color: `${textColor}`, ...style}
@@ -107,7 +107,7 @@ export const generateLabelStyle = (
   labelColor: InfluxColors | string,
   isClickable: boolean,
   isMouseOver: boolean,
-  style?: CSSProperties
+  style?: CSSProperties,
 ): CSSProperties => {
   let backgroundColor = labelColor
 
@@ -130,7 +130,7 @@ export const generateLabelStyle = (
 export const generateTechnoSpinnerStyle = (
   diameterPixels: number,
   strokeWidth: ComponentSize,
-  style?: CSSProperties
+  style?: CSSProperties,
 ): CSSProperties => {
   let borderWidth
   const width = `${diameterPixels}px`
@@ -160,7 +160,7 @@ export const generateRangeSliderTrackFillStyle = (
   max: number,
   value: number,
   color: ComponentColor,
-  status: ComponentStatus
+  status: ComponentStatus,
 ): CSSProperties | undefined => {
   if (status === ComponentStatus.Disabled) {
     return {background: InfluxColors.Castle}
@@ -190,7 +190,7 @@ export const generateRangeSliderTrackFillStyle = (
 }
 
 export const getScrollbarColorsFromTheme = (
-  theme: DropdownMenuTheme
+  theme: DropdownMenuTheme,
 ): DropdownMenuScrollbarColors => {
   switch (theme) {
     case DropdownMenuTheme.Malachite:
@@ -226,8 +226,8 @@ export const getDictionary = (): string[] => {
 
   return Array.from(
     new Set<string>(
-      cleanedText.split(' ').map(word => word.toLocaleLowerCase())
-    )
+      cleanedText.split(' ').map(word => word.toLocaleLowerCase()),
+    ),
   )
 }
 
@@ -241,7 +241,7 @@ function capitalize(word: string) {
 
 export const generateRandomText = (
   wordCountLower: number,
-  wordCountUpper: number
+  wordCountUpper: number,
 ): string => {
   const dictionary = getDictionary()
   const wordCount = randomNumber(wordCountLower, wordCountUpper)

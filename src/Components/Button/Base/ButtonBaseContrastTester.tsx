@@ -8,7 +8,10 @@ import {ButtonBase} from './ButtonBase'
 import {ComponentColor, ComponentStatus} from '../../../Types'
 
 // Utils
-import {getAverageColorFromLinearGradient, contrastRatio} from '../../../Utils/colors'
+import {
+  getAverageColorFromLinearGradient,
+  contrastRatio,
+} from '../../../Utils/colors'
 
 // Styles
 import './ButtonBaseContrastTester.scss'
@@ -34,7 +37,7 @@ const initialContrasts: ButtonContrast[] = [
   initialContrast,
 ]
 
-export const ButtonBaseContrastTester: FunctionComponent<{}> = () => {
+export const ButtonBaseContrastTester: FunctionComponent = () => {
   const [contrast, setContrast] = useState<ButtonContrast[]>(initialContrasts)
 
   const defaultDefaultRef = useRef<HTMLButtonElement>(null)
@@ -120,21 +123,21 @@ export const ButtonBaseContrastTester: FunctionComponent<{}> = () => {
       const defaultStyle = window.getComputedStyle(button.defaultRef.current)
       const defaultColor = `${defaultStyle.color}`
       const defaultBackground = getAverageColorFromLinearGradient(
-        `${defaultStyle.backgroundImage}`
+        `${defaultStyle.backgroundImage}`,
       )
 
       // Active State
       const activeStyle = window.getComputedStyle(button.activeRef.current)
       const activeColor = `${activeStyle.color}`
       const activeBackground = getAverageColorFromLinearGradient(
-        `${activeStyle.backgroundImage}`
+        `${activeStyle.backgroundImage}`,
       )
 
       // Disabled State
       const disabledStyle = window.getComputedStyle(button.disabledRef.current)
       const disabledColor = `${disabledStyle.color}`
       const disabledBackground = getAverageColorFromLinearGradient(
-        `${disabledStyle.backgroundImage}`
+        `${disabledStyle.backgroundImage}`,
       )
 
       return {
@@ -147,12 +150,8 @@ export const ButtonBaseContrastTester: FunctionComponent<{}> = () => {
     setContrast(updatedContrast)
   }
 
-  useEffect((): (() => void) => {
+  useEffect(() => {
     calculateContrast()
-
-    return (): void => {
-      return
-    }
   }, [])
 
   return (

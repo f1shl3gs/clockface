@@ -62,9 +62,7 @@ export const _Form = () => {
   const formRef = createRef<HTMLFormElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -91,9 +89,7 @@ export const _FormBox = () => {
   const formBoxRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formBoxRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -122,9 +118,7 @@ export const _FormDivider = () => {
   const formDividerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formDividerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -153,9 +147,7 @@ export const _FormElement = () => {
   const formElementRef = createRef<HTMLLabelElement & HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formElementRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -192,9 +184,7 @@ export const _FormElementError = () => {
   const formElementErrorRef = createRef<HTMLSpanElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formElementErrorRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -221,9 +211,7 @@ export const _FormFooter = () => {
   const formFooterRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formFooterRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -253,9 +241,7 @@ export const _FormHelpText = () => {
   const formHelpTextRef = createRef<HTMLSpanElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formHelpTextRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -284,9 +270,7 @@ export const _FormLabel = () => {
   const formLabelRef = createRef<HTMLDivElement & HTMLLabelElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formLabelRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -315,9 +299,7 @@ export const _FormValidationElement = () => {
   const formValidationElementRef = createRef<HTMLLabelElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(formValidationElementRef.current)
-    /* eslint-enable */
   }
 
   return (

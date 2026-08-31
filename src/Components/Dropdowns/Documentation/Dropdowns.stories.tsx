@@ -52,9 +52,7 @@ export const _Dropdown = () => {
   const dropdownRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dropdownRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -99,9 +97,7 @@ export const _DropdownButton = () => {
   const dropdownButtonRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dropdownButtonRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -145,9 +141,7 @@ export const _DropdownDivider = () => {
   const dropdownDividerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dropdownDividerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -174,9 +168,7 @@ export const _DropdownItem = () => {
   const dropdownItemRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dropdownItemRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -215,9 +207,7 @@ export const _DropdownItemEmpty = () => {
   const dropdownItemEmptyRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dropdownItemEmptyRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -246,9 +236,7 @@ export const _DropdownLinkItem = () => {
   const dropdownLinkItemRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dropdownLinkItemRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -291,10 +279,8 @@ export const _DropdownMenu = () => {
   const dropdownMenuContentsRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log('DropdownMenu', dropdownMenuRef.current)
     console.log('DropdownMenuContents', dropdownMenuContentsRef.current)
-    /* eslint-enable */
   }
 
   const exampleItems: ExampleDropdownItem[] = [
@@ -446,9 +432,7 @@ export const _SelectDropdown = () => {
   const [selected, changeSelected] = useState('Celery')
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(selectDropdownRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -516,9 +500,7 @@ export const _TypeAheadDropdown = () => {
   }
 
   const onSelect = (item: SelectableItem | null) => {
-    /* eslint-disable */
     console.log('ooh! selected item: ', item)
-    /* eslint-enable */
   }
 
   const selectedOption = {name: 'Lemon', id: '30'}
@@ -605,9 +587,7 @@ export const _CreatableTypeAheadDropdown = () => {
 
   const creatableTypeAheadDropdownReadmeRef = createRef<HTMLDivElement>()
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(creatableTypeAheadDropdownReadmeRef.current)
-    /* eslint-enable */
   }
   return (
     <div className="story--example">
@@ -677,9 +657,7 @@ export const MultiSelectdropdown = () => {
   const multiSelectDropdownRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(multiSelectDropdownRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -751,8 +729,8 @@ export const Collage = () => {
                 {size: ComponentSize.Small, children: 'Small'},
                 {size: ComponentSize.Medium, children: 'Medium'},
                 {size: ComponentSize.Large, children: 'Large'},
-              ].map((props, i) => (
-                <td key={i}>
+              ].map((props, index) => (
+                <td key={index}>
                   <Dropdown
                     button={(active, onClick) => (
                       <DropdownButton
@@ -781,8 +759,8 @@ export const Collage = () => {
                 {color: ComponentColor.Primary},
                 {color: ComponentColor.Tertiary},
                 {color: ComponentColor.Danger},
-              ].map((props, i) => (
-                <td key={i} style={{width: '200px'}}>
+              ].map((props, index) => (
+                <td key={index} style={{width: '200px'}}>
                   <Dropdown
                     button={(active, onClick) => (
                       <DropdownButton
@@ -815,8 +793,8 @@ export const Collage = () => {
                 {status: ComponentStatus.Loading},
                 {status: ComponentStatus.Error},
                 {status: ComponentStatus.Valid},
-              ].map((props, i) => (
-                <td key={i} style={{width: '200px'}}>
+              ].map((props, index) => (
+                <td key={index} style={{width: '200px'}}>
                   <Dropdown
                     button={(active, onClick) => (
                       <DropdownButton
@@ -849,8 +827,8 @@ export const Collage = () => {
                 {menuTheme: DropdownMenuTheme.Amethyst},
                 {menuTheme: DropdownMenuTheme.Malachite},
                 {menuTheme: DropdownMenuTheme.Sapphire},
-              ].map((props, i) => (
-                <td key={i}>
+              ].map((props, index) => (
+                <td key={index}>
                   <SelectDropdown
                     menuTheme={props.menuTheme}
                     onSelect={option => {

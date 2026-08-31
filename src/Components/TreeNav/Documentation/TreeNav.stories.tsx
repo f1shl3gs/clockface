@@ -33,9 +33,7 @@ export const _TreeNav = () => {
   const navMenuRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(navMenuRef.current)
-    /* eslint-enable */
   }
 
   const handleItemClick = (id: string): void => {
@@ -62,11 +60,7 @@ export const _TreeNav = () => {
               <TreeNavHeader
                 id="home"
                 label={<InfluxDBCloudLogo cloud={true} />}
-                onClick={
-                  /* eslint-disable */
-                  () => {}
-                  /* eslint-enable */
-                }
+                onClick={() => {}}
                 icon={<Icon glyph={IconFont.CuboSolid} />}
               />
             }

@@ -106,7 +106,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
 
   const resizeBasedOnParentSize = (
     size: ComponentSize,
-    pageRangeOffset: number
+    pageRangeOffset: number,
   ) => {
     if (!innerRef.current) {
       return pageRangeOffset
@@ -114,20 +114,20 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
     const {width} = innerRef.current.getBoundingClientRect() as DOMRect
 
     let itemSize = 0
-    if (size == ComponentSize.Medium) {
+    if (size === ComponentSize.Medium) {
       itemSize = 38
-    } else if (size == ComponentSize.ExtraSmall) {
+    } else if (size === ComponentSize.ExtraSmall) {
       itemSize = 22
-    } else if (size == ComponentSize.Small) {
+    } else if (size === ComponentSize.Small) {
       itemSize = 30
-    } else if (size == ComponentSize.Large) {
+    } else if (size === ComponentSize.Large) {
       itemSize = 46
     }
 
     const maxItemCount = Math.floor(width / itemSize)
     const directionButtonCount = hideDirectionIcon ? 0 : 2
     const maxRangeOffset = Math.floor(
-      (maxItemCount - 5 - directionButtonCount) / 2
+      (maxItemCount - 5 - directionButtonCount) / 2,
     )
     if (pageRangeOffset > maxRangeOffset) {
       return maxRangeOffset
@@ -137,7 +137,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   }
 
   const [breakpoints, setBreakpoints] = useState(
-    computePageSpread(activePage, pageRangeOffset)
+    computePageSpread(activePage, pageRangeOffset),
   )
 
   const moveToPage = (page: number) => {
@@ -192,8 +192,8 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
     setBreakpoints(
       computePageSpread(
         activePage,
-        resizeBasedOnParentSize(size, pageRangeOffset)
-      )
+        resizeBasedOnParentSize(size, pageRangeOffset),
+      ),
     )
   }, [totalPages, pageRangeOffset, size, hideDirectionIcon])
 
@@ -202,15 +202,15 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
       setBreakpoints(
         computePageSpread(
           activePage,
-          resizeBasedOnParentSize(size, pageRangeOffset)
-        )
+          resizeBasedOnParentSize(size, pageRangeOffset),
+        ),
       )
     } else if (activePage < breakpoints.firstBreakpoint) {
       setBreakpoints(
         computePageSpread(
           activePage,
-          resizeBasedOnParentSize(size, pageRangeOffset)
-        )
+          resizeBasedOnParentSize(size, pageRangeOffset),
+        ),
       )
     }
   }, [activePage])
@@ -258,7 +258,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
               page={item.toString()}
               isActive={checkActive(item)}
               onClick={() => moveToPage(item)}
-              key={'pagination--item-' + item}
+              key={`pagination--item-${item}`}
               size={size}
             />
           ))}

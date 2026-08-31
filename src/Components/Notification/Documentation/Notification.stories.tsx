@@ -103,7 +103,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Top,
-              Alignment.Left
+              Alignment.Left,
             )}
           >
             Top Left
@@ -112,7 +112,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Top,
-              Alignment.Center
+              Alignment.Center,
             )}
           >
             Top Center
@@ -121,7 +121,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Top,
-              Alignment.Right
+              Alignment.Right,
             )}
           >
             Top Right
@@ -132,7 +132,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Middle,
-              Alignment.Left
+              Alignment.Left,
             )}
           >
             Middle Left
@@ -141,7 +141,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Middle,
-              Alignment.Center
+              Alignment.Center,
             )}
           >
             Middle Center
@@ -150,7 +150,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Middle,
-              Alignment.Right
+              Alignment.Right,
             )}
           >
             Middle Right
@@ -161,7 +161,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Bottom,
-              Alignment.Left
+              Alignment.Left,
             )}
           >
             Bottom Left
@@ -170,7 +170,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Bottom,
-              Alignment.Center
+              Alignment.Center,
             )}
           >
             Bottom Center
@@ -179,7 +179,7 @@ export const _Notification = () => {
             className="story--test-button"
             onClick={handleGenerateNotification(
               VerticalAlignment.Bottom,
-              Alignment.Right
+              Alignment.Right,
             )}
           >
             Bottom Right
@@ -225,15 +225,11 @@ export const _NotificationDialog = () => {
   const notificationDialogRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(notificationDialogRef.current)
-    /* eslint-enable */
   }
 
   const handleClose = (): void => {
-    /* eslint-disable */
     alert('calling onDismiss')
-    /* eslint-enable */
   }
 
   return (

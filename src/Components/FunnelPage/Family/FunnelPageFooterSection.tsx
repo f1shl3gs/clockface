@@ -24,7 +24,7 @@ export const FunnelPageFooterSection: FunctionComponent<
     'cf-funnel-page--footer-section',
     {
       [`${className}`]: className,
-    }
+    },
   )
 
   return (

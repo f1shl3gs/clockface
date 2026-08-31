@@ -69,7 +69,7 @@ export const NotificationDialog: FunctionComponent<NotificationDialogProps> = ({
 
   const textColor = calculateTextColorFromBackground(
     backgroundColor,
-    internalGradient
+    internalGradient,
   )
 
   const notificationDialogClassName = classnames(
@@ -80,14 +80,14 @@ export const NotificationDialog: FunctionComponent<NotificationDialogProps> = ({
       [`cf-notification__${textColor}-text`]: textColor,
       'cf-notification__dismissable': onDismiss,
       [`${className}`]: className,
-    }
+    },
   )
 
   const notificationDialogStyle = generateBackgroundStyle(
     backgroundColor,
     internalGradient,
     false,
-    style
+    style,
   )
 
   const handleDismiss = () => {

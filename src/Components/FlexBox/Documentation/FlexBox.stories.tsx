@@ -23,9 +23,7 @@ export const _FlexBox = () => {
   const flexBoxRef = createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
-    /* eslint-disable */
     console.log(flexBoxRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -85,13 +83,11 @@ export const FlexChild = () => {
   const flexBoxChildDRef = createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
-    /* eslint-disable */
     console.log('FlexBox', flexBoxRef.current)
     console.log('FlexBoxChild A', flexBoxChildARef.current)
     console.log('FlexBoxChild B', flexBoxChildBRef.current)
     console.log('FlexBoxChild C', flexBoxChildCRef.current)
     console.log('FlexBoxChild D', flexBoxChildDRef.current)
-    /* eslint-enable */
   }
 
   return (

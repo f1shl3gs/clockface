@@ -5,10 +5,8 @@ import classnames from 'classnames'
 // Types
 import {StandardFunctionProps, InputToggleType} from '../../Types'
 
-export interface SelectGroupOptionProps extends Omit<
-  StandardFunctionProps,
-  'id'
-> {
+export interface SelectGroupOptionProps
+  extends Omit<StandardFunctionProps, 'id'> {
   /** Unique identifier for this radio button */
   id: string
   /** Toggles radio button active state */
@@ -46,9 +44,7 @@ export const SelectGroupOption: FunctionComponent<SelectGroupOptionProps> = ({
   testID = 'select-group--option',
   active,
   onClick,
-  /* eslint-disable */
   onKeyUp,
-  /* eslint-enable */
   tabIndex,
   disabled = false,
   children,

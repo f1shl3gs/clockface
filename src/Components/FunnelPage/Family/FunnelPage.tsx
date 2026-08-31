@@ -85,7 +85,7 @@ export const FunnelPage: FunctionComponent<FunnelPageProps> = ({
   const accentGradientB = generateInlineCSSGradient(140, accentGradientBColors)
   const backgroundGradient = generateInlineCSSGradient(
     180,
-    backgroundGradientColors
+    backgroundGradientColors,
   )
 
   let backgroundGraphic = <></>

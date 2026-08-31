@@ -1,6 +1,6 @@
 export const mapEnumKeys = (
   elEnum: object,
-  trim?: number
+  trim?: number,
 ): Record<string, any> => {
   let arr = Object.keys(elEnum)
 
@@ -16,7 +16,7 @@ export const mapEnumKeys = (
 
 export const removeUnusedEnumKeyValue = (
   elEnum: object,
-  unusedEnumKeys: string[]
+  unusedEnumKeys: string[],
 ): Record<string, any> => {
   const newObj: Record<string, any> = {}
   const keys = Object.keys(elEnum).filter(key => {

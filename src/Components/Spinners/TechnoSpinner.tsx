@@ -36,7 +36,7 @@ export const TechnoSpinner: FunctionComponent<TechnoSpinnerProps> = ({
   const technoSpinnerStyle = generateTechnoSpinnerStyle(
     diameterPixels,
     strokeWidth,
-    style
+    style,
   )
 
   return (

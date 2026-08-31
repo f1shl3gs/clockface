@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react'
 // giving CSS exit animations time to play before the actual unmount
 export const useDelayedUnmount = (
   visible: boolean,
-  duration: number
+  duration: number,
 ): boolean => {
   const [shouldRender, setShouldRender] = useState(visible)
 

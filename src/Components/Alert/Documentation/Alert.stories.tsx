@@ -17,9 +17,7 @@ export const Example = () => {
   const alertRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(alertRef.current)
-    /* eslint-enable */
   }
 
   return (

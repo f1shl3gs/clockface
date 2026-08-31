@@ -96,7 +96,7 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
         orientation === ComponentOrientation.Horizontal && displayValue,
       [`cf-range-slider--valmax-label`]:
         orientation === ComponentOrientation.Horizontal && !displayValue,
-    }
+    },
   )
 
   const inputStyle = generateRangeSliderTrackFillStyle(
@@ -105,7 +105,7 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
     max,
     value,
     color,
-    status
+    status,
   )
 
   const verticalLabelStyle = {

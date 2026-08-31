@@ -23,9 +23,7 @@ export const _Tabs = () => {
   const tabsRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(tabsRef.current)
-    /* eslint-enable */
   }
 
   const handleTabClick = (id?: string): void => {
@@ -105,9 +103,7 @@ export const _Tab = () => {
   const tabRef = createRef<HTMLButtonElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(tabRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -144,9 +140,7 @@ export const _TabContents = () => {
   const tabContentsRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(tabContentsRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -175,9 +169,7 @@ export const _TabsContainer = () => {
   const tabContainerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(tabContainerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -235,9 +227,7 @@ export const TabsWithLinks = () => {
   const tabsRef = createRef<HTMLElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(tabsRef.current)
-    /* eslint-enable */
   }
 
   const handleTabClick = (id?: string): void => {
@@ -248,9 +238,7 @@ export const TabsWithLinks = () => {
   }
 
   const handleTabDismiss = (id?: string): void => {
-    /* eslint-disable */
     console.log('dismissed tab: ', id)
-    /* eslint-enable */
   }
 
   return (

@@ -19,11 +19,9 @@ export const _Grid = () => {
   const gridColumnRef = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log('Grid', gridRef.current)
     console.log('GridRow', gridRowRef.current)
     console.log('GridColumn', gridColumnRef.current)
-    /* eslint-enable */
   }
 
   return (

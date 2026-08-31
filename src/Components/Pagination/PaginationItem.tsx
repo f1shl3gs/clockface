@@ -36,7 +36,7 @@ export const PaginationItem: FunctionComponent<PaginationItemProps> = ({
     {
       'cf-pagination--item--container__active': isActive && page,
       [`${className}`]: className,
-    }
+    },
   )
 
   return (

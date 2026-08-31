@@ -1,5 +1,5 @@
 // Libraries
-import React, {useState, useEffect, FunctionComponent, Ref} from 'react'
+import React, {useState, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -48,7 +48,7 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
   children,
   iconDirection = Direction.Left,
   className,
-  expanded = false,
+  expanded: defaultExpanded = false,
   disabled = false,
   onChange,
   ref,
@@ -57,36 +57,32 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
     [`${className}`]: className,
   })
 
-  const [isExpanded, setExpanded] = useState(expanded)
+  const [expanded, setExpanded] = useState(defaultExpanded)
+  // no animation when first render
   const [animation, setAnimation] = useState(false)
-
-  useEffect(() => {
-    if (isExpanded && !animation) {
-      setAnimation(true)
-    }
-  }, [isExpanded])
 
   const accordionBodyContainerClassName = classnames(
     'cf-accordion--body-container',
     {
-      [`cf-accordion--body-container--expanded`]: isExpanded,
-      [`cf-accordion--body-container--collapsed`]: !isExpanded,
-      [`cf-accordion--body-container--disable-animation`]: !animation,
-    }
+      ['cf-accordion--body-container--expanded']: expanded,
+      ['cf-accordion--body-container--collapsed']: !expanded,
+      ['cf-accordion--body-container--disable-animation']: !animation,
+    },
   )
 
   const [header, ...body] = React.Children.toArray(children)
   const hasBody = !!body.length
 
-  /* eslint-disable */
   const onChangeFunction = () => {
+    setAnimation(true)
+
     if (onChange) {
       onChange()
     }
   }
 
   const contextState = {
-    isExpanded,
+    isExpanded: expanded,
     setExpanded,
     iconDirection: hasBody ? iconDirection : Direction.None,
     disabled,

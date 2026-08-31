@@ -26,12 +26,12 @@ const getPortalElement = (): HTMLElement => {
 
 const createNotificationContainer = (
   x: Alignment,
-  y: VerticalAlignment
+  y: VerticalAlignment,
 ): HTMLElement => {
   const container = document.createElement('div')
   container.setAttribute(
     'class',
-    `cf-notification-container cf-notification__${x} cf-notification__${y}`
+    `cf-notification-container cf-notification__${x} cf-notification__${y}`,
   )
   container.setAttribute('id', `cf-notification-container-${x}-${y}`)
 
@@ -44,7 +44,7 @@ const createNotificationContainer = (
 
 const getNotificationContainer = (
   x: Alignment,
-  y: VerticalAlignment
+  y: VerticalAlignment,
 ): HTMLElement => {
   let container = document.getElementById(`cf-notification-container-${x}-${y}`)
 
@@ -60,7 +60,7 @@ export const usePortal = () => {
 
   const addElementToPortal = (
     element: ReactNode,
-    forceToTop?: boolean
+    forceToTop?: boolean,
   ): ReactPortal => {
     let registeredElement = element
 
@@ -74,7 +74,7 @@ export const usePortal = () => {
   const addNotificationToPortal = (
     element: ReactNode,
     x: Alignment,
-    y: VerticalAlignment
+    y: VerticalAlignment,
   ): ReactPortal => {
     const container = getNotificationContainer(x, y)
 

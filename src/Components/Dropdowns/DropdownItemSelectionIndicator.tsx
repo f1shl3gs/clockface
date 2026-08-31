@@ -17,6 +17,6 @@ export const DropdownItemSelectionIndicator: FunctionComponent<
       return <div className="cf-dropdown-item--dot" />
     case DropdownItemType.None:
     default:
-      return <></>
+      return null
   }
 }

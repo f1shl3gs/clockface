@@ -19,16 +19,17 @@ import {
 // Styles
 import './LinkButton.scss'
 
-export interface LinkButtonProps extends Omit<
-  ButtonProps,
-  | 'onClick'
-  | 'onMouseOver'
-  | 'onMouseOut'
-  | 'onMouseEnter'
-  | 'onMouseLeave'
-  | 'type'
-  | 'ref'
-> {
+export interface LinkButtonProps
+  extends Omit<
+    ButtonProps,
+    | 'onClick'
+    | 'onMouseOver'
+    | 'onMouseOut'
+    | 'onMouseEnter'
+    | 'onMouseLeave'
+    | 'type'
+    | 'ref'
+  > {
   /** Destination for link button */
   href: string
   /** Where to open to the link */
@@ -70,7 +71,7 @@ export const LinkButton: FunctionComponent<LinkButtonProps> = ({
       'cf-button--disabled': status === ComponentStatus.Disabled,
       active,
       [`${className}`]: className,
-    }
+    },
   )
 
   const titleTextToBeUsed =

@@ -52,19 +52,17 @@ export const _ResourceCard = () => {
 
   const [name, setName] = useState<string>('Edit my name!')
   const [description, setDescription] = useState<string>(
-    'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa.'
+    'Heirloom letterpress shaman, mixtape swag +1 8-bit coloring book ennui fanny pack small batch farm-to-table seitan sriracha austin. 8-bit mustache master cleanse bitters, vinyl shoreditch hot chicken authentic quinoa.',
   )
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log('ResourceCard', resourceCardRef.current)
     console.log('ResourceCardName', resourceCardNameRef.current)
     console.log('ResourceCardMeta', resourceCardMetaRef.current)
     console.log(
       'ResourceCardEditableDescription',
-      resourceCardEditableDescriptionRef.current
+      resourceCardEditableDescriptionRef.current,
     )
-    /* eslint-enable */
   }
 
   const resourceCardExampleStyle = {
@@ -148,9 +146,7 @@ export const _ResourceCardDescription = () => {
   const resourceCardDescriptionRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(resourceCardDescriptionRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -182,12 +178,10 @@ export const _ResourceCardEditableDescription = () => {
   const resourceCardEditableDescriptionRef = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log(
       'ResourceCardEditableDescription',
-      resourceCardEditableDescriptionRef.current
+      resourceCardEditableDescriptionRef.current,
     )
-    /* eslint-enable */
   }
 
   return (
@@ -222,10 +216,8 @@ export const _ResourceCardName = () => {
   const resourceCardNameRef2 = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log(resourceCardNameRef1.current)
     console.log(resourceCardNameRef2.current)
-    /* eslint-enable */
   }
 
   return (
@@ -269,10 +261,8 @@ export const _ResourceCardEditableName = () => {
   const resourceCardEditableNameRef2 = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log(resourceCardEditableNameRef1.current)
     console.log(resourceCardEditableNameRef2.current)
-    /* eslint-enable */
   }
 
   return (
@@ -317,9 +307,7 @@ export const _ResourceCardMeta = () => {
   const resourceCardMeta = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(resourceCardMeta.current)
-    /* eslint-enable */
   }
 
   return (
@@ -393,9 +381,7 @@ export const ToggleableCard = () => {
                       value=""
                       selected={false}
                       wrapText={false}
-                      /* eslint-disable */
                       onClick={() => {}}
-                      /* eslint-enable */
                       backgroundColor={InfluxColors.Pool}
                       size={ComponentSize.Small}
                     >
@@ -448,9 +434,7 @@ export const ToggleableCard = () => {
               name="CRIT"
               color="#da3434"
               size={ComponentSize.ExtraSmall}
-              /* eslint-disable */
               onDelete={() => {}}
-              /* eslint-enable */
             />
             <Label
               id="WARN"
@@ -458,9 +442,7 @@ export const ToggleableCard = () => {
               name="WARN"
               color="#f2b218"
               size={ComponentSize.ExtraSmall}
-              /* eslint-disable */
               onDelete={() => {}}
-              /* eslint-enable*/
             />
             <Label
               id="OK"
@@ -468,9 +450,7 @@ export const ToggleableCard = () => {
               name="OK"
               color="#6ac255"
               size={ComponentSize.ExtraSmall}
-              /* eslint-disable */
               onDelete={() => {}}
-              /* eslint-enable */
             />
           </FlexBox>
         </ResourceCard>

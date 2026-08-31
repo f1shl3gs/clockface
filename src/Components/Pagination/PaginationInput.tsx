@@ -34,7 +34,7 @@ export const PaginationInput: FunctionComponent<PaginationInputProps> = ({
   ref,
 }) => {
   const iconFont = 'CaretRight'
-  const inputStyles = {width: currentPage.toString().length + 6 + 'ch'}
+  const inputStyles = {width: `${currentPage.toString().length + 6}ch`}
 
   return (
     <div className="cf-pagination-input--container">

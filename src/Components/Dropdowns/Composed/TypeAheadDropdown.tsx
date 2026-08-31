@@ -14,12 +14,14 @@ import {Dropdown, DropdownMenu, DropdownItem, MenuStatus} from '../.'
 import {Input} from '../../Inputs'
 import {DropdownHeader} from '../DropdownHeader'
 
+// Types
 import {
   ComponentStatus,
   DropdownMenuTheme,
   StandardFunctionProps,
 } from '../../../Types'
 
+// Styles
 import '../ScrollBar.scss'
 import './TypeAheadDropdown.scss'
 
@@ -82,7 +84,7 @@ export const TypeAheadDropdown: FunctionComponent<Props> = ({
   const [menuStatus, setMenuStatus] = useState<MenuStatus>(MenuStatus.Closed)
   const [userHasTyped, setUserHasTyped] = useState(false)
   const [selectedItem, setSelectedItem] = useState<SelectableItem | null>(
-    selectedOption
+    selectedOption,
   )
   const [scrollTop, setScrollTop] = useState(0)
   const listRef = useRef<HTMLDivElement>(null)
@@ -130,7 +132,7 @@ export const TypeAheadDropdown: FunctionComponent<Props> = ({
 
   const itemNames = useMemo(
     () => sortedItems.map(item => item.name?.toLowerCase()),
-    [sortedItems]
+    [sortedItems],
   )
 
   // Replicates react-window's initialScrollOffset: scroll to the selected
@@ -180,7 +182,7 @@ export const TypeAheadDropdown: FunctionComponent<Props> = ({
   }
 
   const handleKeyboardUpDown = (
-    event: React.KeyboardEvent<HTMLInputElement>
+    event: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     let newIndex = -1
 
@@ -311,7 +313,7 @@ export const TypeAheadDropdown: FunctionComponent<Props> = ({
   const firstVisible = Math.max(0, Math.floor(scrollTop / LIST_ITEM_HEIGHT) - 2)
   const lastVisible = Math.min(
     queryResults.length,
-    firstVisible + Math.ceil(viewportHeight / LIST_ITEM_HEIGHT) + 4
+    firstVisible + Math.ceil(viewportHeight / LIST_ITEM_HEIGHT) + 4,
   )
   const visibleItems = queryResults.slice(firstVisible, lastVisible)
 

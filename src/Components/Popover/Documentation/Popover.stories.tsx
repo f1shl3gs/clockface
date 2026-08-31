@@ -53,27 +53,19 @@ export const _Popover = () => {
   const popover4Ref = useRef<HTMLDivElement>(null)
 
   const log1Ref = (): void => {
-    /* eslint-disable */
     console.log(popover1Ref.current)
-    /* eslint-enable */
   }
 
   const log2Ref = (): void => {
-    /* eslint-disable */
     console.log(popover2Ref.current)
-    /* eslint-enable */
   }
 
   const log3Ref = (): void => {
-    /* eslint-disable */
     console.log(popover3Ref.current)
-    /* eslint-enable */
   }
 
   const log4Ref = (): void => {
-    /* eslint-disable */
     console.log(popover4Ref.current)
-    /* eslint-enable */
   }
 
   return (
@@ -273,9 +265,7 @@ export const _QuestionMarkTooltip = () => {
   const popoverRef = useRef<HTMLSpanElement>(null)
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(popoverRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -310,9 +300,7 @@ export const ErrorToolTip = () => {
   const popoverRef = useRef<HTMLSpanElement>(null)
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(popoverRef.current)
-    /* eslint-enable */
   }
 
   return (

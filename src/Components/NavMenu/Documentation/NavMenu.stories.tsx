@@ -20,9 +20,7 @@ export const _NavMenu = () => {
   const navMenuRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(navMenuRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -114,9 +112,7 @@ export const _NavMenuItem = () => {
   const navMenuRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(navMenuRef.current)
-    /* eslint-enable */
   }
 
   return (

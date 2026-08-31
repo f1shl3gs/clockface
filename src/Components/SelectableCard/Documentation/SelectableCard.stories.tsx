@@ -29,13 +29,11 @@ export const _SelectableCard = () => {
   const selectableCard5Ref = createRef<HTMLDivElement>()
 
   const logRefs = (): void => {
-    /* eslint-disable */
     console.log('SelectableCard 1', selectableCard1Ref.current)
     console.log('SelectableCard 2', selectableCard2Ref.current)
     console.log('SelectableCard 3', selectableCard3Ref.current)
     console.log('SelectableCard 4', selectableCard4Ref.current)
     console.log('SelectableCard 5', selectableCard5Ref.current)
-    /* eslint-enable */
   }
 
   return (
@@ -178,7 +176,7 @@ export const UsingTabIndex = () => {
 
     if (cardCurrentlyActive) {
       updatedActiveCardIDs = updatedActiveCardIDs.filter(
-        cardID => cardID !== card
+        cardID => cardID !== card,
       )
     } else {
       updatedActiveCardIDs = [...updatedActiveCardIDs, card]
@@ -189,7 +187,7 @@ export const UsingTabIndex = () => {
 
   const handleCardKeyDown = (
     card?: string,
-    e?: KeyboardEvent<HTMLDivElement>
+    e?: KeyboardEvent<HTMLDivElement>,
   ): void => {
     if (card === undefined || e === undefined) {
       return
@@ -200,7 +198,7 @@ export const UsingTabIndex = () => {
 
     if (cardCurrentlyActive) {
       updatedActiveCardIDs = updatedActiveCardIDs.filter(
-        cardID => cardID !== card
+        cardID => cardID !== card,
       )
     } else {
       updatedActiveCardIDs = [...updatedActiveCardIDs, card]

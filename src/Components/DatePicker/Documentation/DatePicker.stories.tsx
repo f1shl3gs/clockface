@@ -16,9 +16,7 @@ export const _DateRangePicker = () => {
   const dateRangePickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(dateRangePickerRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -51,9 +49,7 @@ export const _DatePicker = () => {
   const datePickerRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(datePickerRef.current)
-    /* eslint-enable */
   }
 
   return (

@@ -38,9 +38,7 @@ export const _IndexList = () => {
   const indexListRef = createRef<HTMLTableElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(indexListRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -67,9 +65,7 @@ export const _IndexListHeader = () => {
   const indexListHeaderRef = createRef<HTMLTableSectionElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(indexListHeaderRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -98,9 +94,7 @@ export const _IndexListHeaderCell = () => {
   const indexListHeaderCellRef = createRef<HTMLTableCellElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(indexListHeaderCellRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -116,7 +110,7 @@ export const _IndexListHeaderCell = () => {
               sortKey={'name'}
               onClick={(nextSort: string, sortKey?: string) =>
                 alert(
-                  `Header clicked! nextSort: ${nextSort}, sortKey: ${sortKey}`
+                  `Header clicked! nextSort: ${nextSort}, sortKey: ${sortKey}`,
                 )
               }
             />
@@ -144,9 +138,7 @@ export const _IndexListBody = () => {
   const indexListBodyRef = createRef<HTMLTableSectionElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(indexListBodyRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -183,9 +175,7 @@ export const _IndexListRow = () => {
   const indexListRowRef = createRef<HTMLTableRowElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(indexListRowRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -212,9 +202,7 @@ export const _IndexListRowCell = () => {
   const indexListRowCellRef = createRef<HTMLTableCellElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(indexListRowCellRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -266,11 +254,11 @@ export const SimpleTable = () => {
     <div className="story--example">
       <IndexList>
         <IndexListHeader>
-          {exampleHeaders.map((col, i) => (
+          {exampleHeaders.map((col, index) => (
             <IndexListHeaderCell
-              key={`header--${col}${i}`}
+              key={`header--${col}${index}`}
               columnName={col}
-              width={columnWidths[i]}
+              width={columnWidths[index]}
             />
           ))}
         </IndexListHeader>
@@ -278,14 +266,14 @@ export const SimpleTable = () => {
           emptyState={<div>Empty</div>}
           columnCount={exampleNames.length}
         >
-          {exampleHeaders.map((row, i) => (
+          {exampleHeaders.map((row, index) => (
             <IndexListRow
-              key={`row--${row}${i}`}
+              key={`row--${row}${index}`}
               brighten={false}
-              disabled={disabledRows.includes(exampleNames[i])}
+              disabled={disabledRows.includes(exampleNames[index])}
             >
-              <IndexListCell>{exampleNames[i]}</IndexListCell>
-              <IndexListCell>{exampleDescriptions[i]}</IndexListCell>
+              <IndexListCell>{exampleNames[index]}</IndexListCell>
+              <IndexListCell>{exampleDescriptions[index]}</IndexListCell>
               <IndexListCell revealOnHover={true} alignment={Alignment.Right}>
                 <SquareButton
                   icon={IconFont.Trash_New}

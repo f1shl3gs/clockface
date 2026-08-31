@@ -4,7 +4,7 @@ import {marked} from 'marked'
 
 // Components
 import {AppHeader, AppHeaderLogo} from '../index'
-import {PopNav, PopNavItem} from '../../PopNav/index'
+import {PopNav, PopNavItem} from '../../PopNav'
 
 // Types
 import {
@@ -26,9 +26,7 @@ export const _AppHeader = () => {
   const appHeaderRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(appHeaderRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -58,9 +56,7 @@ export const _AppHeaderLogo = () => {
   const appHeaderLogoRef = createRef<HTMLDivElement>()
 
   const logRef = (): void => {
-    /* eslint-disable */
     console.log(appHeaderLogoRef.current)
-    /* eslint-enable */
   }
 
   return (

@@ -24,7 +24,7 @@ export const _SelectGroup = () => {
   const mirepoix = ['Celery', 'Carrot', 'Onion', 'Garlic']
 
   const [selectedSelectGroup, setSelectedSelectGroup] = useState<string>(
-    mirepoix[0]
+    mirepoix[0],
   )
   const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([
     mirepoix[0],
@@ -44,12 +44,10 @@ export const _SelectGroup = () => {
   }
 
   const logSelectGroupRefs = (): void => {
-    /* eslint-disable */
     console.log('SelectGroup', selectGroupRef.current)
     console.log('SelectGroupOption', selectGroupButtonCeleryRef.current)
     console.log('SelectGroupOption', selectGroupButtonCarrotRef.current)
     console.log('SelectGroupOption', selectGroupButtonOnionRef.current)
-    /* eslint-enable */
   }
 
   return (
@@ -62,7 +60,7 @@ export const _SelectGroup = () => {
         shape={(ButtonShape as Record<string, any>)['StretchToFit']}
       >
         {mirepoix.map(btn => {
-          const isSelectGroup = 'SelectGroup' === 'SelectGroup'
+          const isSelectGroup = true
           const active = isSelectGroup
             ? selectedSelectGroup === btn
             : selectedCheckbox.includes(btn)
@@ -122,9 +120,7 @@ export const _SelectGroupOption = () => {
   const selectGroupButtonRef = createRef<HTMLInputElement>()
 
   const logSelectGroupOptionRef = (): void => {
-    /* eslint-disable */
     console.log(selectGroupButtonRef.current)
-    /* eslint-enable */
   }
 
   return (
