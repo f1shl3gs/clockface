@@ -133,7 +133,7 @@ export const DatePicker: FunctionComponent<DatePickerProps> = ({
         errorMessage={
           inputIsInvalid
             ? 'Format must be YYYY-MM-DD [HH:mm:ss.SSS]'
-            : '\u00a0\u00a0'
+            : undefined
         }
       >
         <Input
