@@ -1,9 +1,9 @@
 // Libraries
-import React, {MouseEvent, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
+import React, {FunctionComponent, MouseEvent, Ref} from 'react'
 
 // Types
-import {StandardFunctionProps, RenderLinkElement} from '../../Types'
+import {RenderLinkElement, StandardFunctionProps } from '../../Types'
 
 export interface TabProps extends StandardFunctionProps {
   /** Renders the tab highlighted */
@@ -15,7 +15,7 @@ export interface TabProps extends StandardFunctionProps {
   /** Icon to appear left of the text label */
   icon?: React.ReactElement
   /** Function to call when tab is clicked, id of tab is passed in */
-  onClick?: (id?: string) => void
+  onClick?: (id: string) => void
   /** If a function is passed in a dismiss button is rendered in the right of the tab */
   onDismiss?: (id?: string) => void
   /** Optional link element. Will override onClick prop */
