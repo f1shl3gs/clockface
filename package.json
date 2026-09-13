@@ -54,9 +54,8 @@
   },
   "scripts": {
     "clean": "rm -rf node_modules",
-    "start": "rolldown --watch",
+    "start": "tsdown --watch",
     "build": "tsdown",
-    "build:dev": "tsdown --watch",
     "ci": "yarn test && yarn lint && yarn typecheck",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -71,8 +70,9 @@
     "prepack": "yarn build"
   },
   "dependencies": {
-    "dayjs": "^1.11.23",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "colord": "^2.10.0",
+    "dayjs": "^1.11.23"
   },
   "exports": {
     ".": "./dist/index.js",
@@ -80,8 +80,5 @@
     "./dist/variables.scss": "./dist/variables.scss",
     "./dist/Styles/shared.css": "./dist/Styles/shared.css",
     "./src/Types": "./src/Types/index.js"
-  },
-  "inlinedDependencies": {
-    "colord": "2.10.0"
   }
 }
