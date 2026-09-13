@@ -53,9 +53,7 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
   onChange,
   ref,
 }) => {
-  const accordionClassName = classnames('cf-accordion', {
-    [`${className}`]: className,
-  })
+  const accordionClassName = classnames('cf-accordion', className)
 
   const [expanded, setExpanded] = useState(defaultExpanded)
   // no animation when first render

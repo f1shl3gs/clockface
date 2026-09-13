@@ -30,10 +30,9 @@ export const TreeNavUser: FunctionComponent<TreeNavUserProps> = ({
   const [expandedState, setExpandedState] = useState<boolean>(false)
   const hasChildren = React.Children.count(children) > 0
 
-  const navMenuUserClass = classnames('cf-tree-nav--user', {
+  const navMenuUserClass = classnames('cf-tree-nav--user', className, {
     'cf-tree-nav--user__expandable': hasChildren,
     'cf-tree-nav--user__expanded': expandedState,
-    [`${className}`]: className,
   })
 
   let childWrapper = <></>

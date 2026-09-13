@@ -27,9 +27,8 @@ export const NavMenuItem: FunctionComponent<NavMenuItemProps> = ({
   testID = 'nav-menu--item',
   ref,
 }) => {
-  const navMenuItemClass = classnames('cf-nav--item', {
+  const navMenuItemClass = classnames('cf-nav--item', className, {
     active,
-    [`${className}`]: className,
   })
 
   return (

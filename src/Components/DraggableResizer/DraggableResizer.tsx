@@ -61,13 +61,12 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
 
   const isDragging = dragIndex !== NULL_DRAG
 
-  const DraggableResizerClass = classnames('cf-draggable-resizer', {
+  const DraggableResizerClass = classnames('cf-draggable-resizer', className, {
     'cf-draggable-resizer--vertical':
       handleOrientation === Orientation.Vertical,
     'cf-draggable-resizer--horizontal':
       handleOrientation === Orientation.Horizontal,
     'cf-draggable-resizer--dragging': isDragging,
-    [`${className}`]: className,
   })
 
   const calculatePanelSize = (panelIndex: number): number => {

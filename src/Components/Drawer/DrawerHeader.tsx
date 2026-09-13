@@ -24,10 +24,9 @@ export const DrawerHeader: FunctionComponent<DrawerHeaderProps> = ({
   className,
   ref,
 }) => {
-  const drawerHeaderClass = classnames('cf-drawer--header', {
+  const drawerHeaderClass = classnames('cf-drawer--header', className, {
     'cf-drawer--header__wrap': wrapText,
     'cf-drawer--header__nowrap': !wrapText,
-    [`${className}`]: className,
   })
 
   return (

@@ -2,10 +2,7 @@
 import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
-// Styles
-import './Bullet.scss'
-
-// Composed
+// Components
 import {Icon} from '../Base/Icon'
 
 // Types
@@ -15,6 +12,9 @@ import {
   InfluxColors,
   ComponentSize,
 } from '../../../Types'
+
+// Styles
+import './Bullet.scss'
 
 export interface BulletProps extends StandardFunctionProps {
   /** Icon to display */
@@ -43,9 +43,8 @@ export const Bullet: FunctionComponent<BulletProps> = ({
   backgroundColor,
   ref,
 }) => {
-  const bulletClassName = classnames('cf-bullet', {
+  const bulletClassName = classnames('cf-bullet', className, {
     [`cf-bullet__${size}`]: size,
-    [`${className}`]: className,
   })
 
   const bulletStyle = {

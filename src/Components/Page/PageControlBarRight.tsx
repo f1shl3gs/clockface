@@ -22,10 +22,13 @@ export const PageControlBarRight: FunctionComponent<
 }) => {
   const noChildren = React.Children.count(children) === 0
 
-  const pageControlBarRightClass = classnames('cf-page-control-bar--right', {
-    'cf-page-control-bar__no-children': noChildren,
-    [`${className}`]: className,
-  })
+  const pageControlBarRightClass = classnames(
+    'cf-page-control-bar--right',
+    className,
+    {
+      'cf-page-control-bar__no-children': noChildren,
+    },
+  )
 
   return (
     <div

@@ -29,9 +29,7 @@ export const TechnoSpinner: FunctionComponent<TechnoSpinnerProps> = ({
   diameterPixels = 100,
   ref,
 }) => {
-  const technoSpinnerClass = classnames('cf-techno-spinner', {
-    [`${className}`]: className,
-  })
+  const technoSpinnerClass = classnames('cf-techno-spinner', className)
 
   const technoSpinnerStyle = generateTechnoSpinnerStyle(
     diameterPixels,

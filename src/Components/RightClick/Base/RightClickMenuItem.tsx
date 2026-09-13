@@ -27,10 +27,13 @@ export const RightClickMenuItem: FunctionComponent<RightClickMenuItemProps> = ({
   className,
   ref,
 }) => {
-  const rightClickMenuItemClassName = classnames('cf-right-click--menu-item', {
-    'cf-right-click--menu-item__disabled': disabled,
-    [`${className}`]: className,
-  })
+  const rightClickMenuItemClassName = classnames(
+    'cf-right-click--menu-item',
+    className,
+    {
+      'cf-right-click--menu-item__disabled': disabled,
+    },
+  )
 
   const handleClick = (e: MouseEvent<HTMLLIElement>): void => {
     if (disabled) {

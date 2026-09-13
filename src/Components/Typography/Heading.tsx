@@ -51,14 +51,13 @@ export const Heading: FunctionComponent<HeadingProps> = ({
 }) => {
   const visualElement = appearance || element
 
-  const headingClass = classnames('cf-heading', {
+  const headingClass = classnames('cf-heading', className, {
     'cf-heading__standard': type === Typeface.ProximaNova,
     'cf-heading__monospace': type === Typeface.RobotoMono,
     [`cf-heading__${weight}`]: weight,
     'cf-heading__underline': underline,
     'cf-heading__selectable': selectable,
     [`cf-heading__${visualElement}`]: visualElement,
-    [`${className}`]: className,
   })
 
   const headingElement = `${element}`

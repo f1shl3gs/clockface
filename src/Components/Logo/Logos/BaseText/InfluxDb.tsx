@@ -22,9 +22,7 @@ export const InfluxDb: FunctionComponent<InfluxDbProps> = ({
   testID = 'svg--influxdata',
   ref,
 }) => {
-  const logoClass = classnames('cf-logo', {
-    [`${className}`]: className,
-  })
+  const logoClass = classnames('cf-logo', className)
 
   const logoStyle = {fill, marginTop: '4.5px'}
 

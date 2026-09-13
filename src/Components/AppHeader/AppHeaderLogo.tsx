@@ -27,9 +27,8 @@ export const AppHeaderLogo: FunctionComponent<AppHeaderLogoProps> = ({
   size = ComponentSize.Small,
   ref,
 }) => {
-  const appHeaderLogoClass = classnames('cf-app-header--logo', {
+  const appHeaderLogoClass = classnames('cf-app-header--logo', className, {
     [`cf-app-header--logo__${size}`]: size,
-    [`${className}`]: className,
   })
 
   return (

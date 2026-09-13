@@ -23,9 +23,8 @@ export const NavMenuSubItem: FunctionComponent<NavMenuSubItemProps> = ({
   titleLink,
   testID = 'nav-menu--link-item',
 }) => {
-  const titleClass = classnames('cf-nav--sub-item', {
+  const titleClass = classnames('cf-nav--sub-item', className, {
     active,
-    [`${className}`]: className,
   })
 
   return titleLink(titleClass, testID, style)

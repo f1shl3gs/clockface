@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import React, {FunctionComponent, MouseEvent, Ref} from 'react'
 
 // Types
-import {RenderLinkElement, StandardFunctionProps } from '../../Types'
+import {RenderLinkElement, StandardFunctionProps} from '../../Types'
 
 export interface TabProps extends StandardFunctionProps {
   /** Renders the tab highlighted */
@@ -52,9 +52,8 @@ export const Tab: FunctionComponent<TabProps> = ({
     }
   }
 
-  const tabClass = classnames('cf-tabs--tab', {
+  const tabClass = classnames('cf-tabs--tab', className, {
     'cf-tabs--tab__active': active,
-    [`${className}`]: className,
   })
 
   const tabContents = (

@@ -51,9 +51,7 @@ export const Form: FunctionComponent<FormProps> = ({
   preventDefault = true,
   ref,
 }) => {
-  const formWrapperClass = classnames('cf-form--wrapper', {
-    [`${className}`]: className,
-  })
+  const formWrapperClass = classnames('cf-form--wrapper', className)
 
   const handleSubmit = (e: React.FormEvent): void => {
     if (preventDefault) {

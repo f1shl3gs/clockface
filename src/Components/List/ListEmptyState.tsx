@@ -24,8 +24,7 @@ export const ListEmptyState: FunctionComponent<ListEmptyStateProps> = ({
   className,
   ref,
 }) => {
-  const listEmptyStateClass = classnames('cf-list-empty-state', {
-    [`${className}`]: className,
+  const listEmptyStateClass = classnames('cf-list-empty-state', className, {
     [`cf-list-item__${size}`]: size,
   })
 

@@ -18,9 +18,7 @@ export const GridRow: FunctionComponent<GridRowProps> = ({
   className,
   ref,
 }) => {
-  const gridRowClass = classnames('cf-grid--row', {
-    [`${className}`]: className,
-  })
+  const gridRowClass = classnames('cf-grid--row', className)
 
   return (
     <div

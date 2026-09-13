@@ -34,9 +34,8 @@ export const PanelBody: FunctionComponent<PanelBodyProps> = ({
   justifyContent = JustifyContent.FlexStart,
   ref,
 }) => {
-  const panelBodyClass = classnames('cf-panel--body', {
+  const panelBodyClass = classnames('cf-panel--body', className, {
     [`cf-panel--body__${size}`]: size,
-    [`${className}`]: className,
   })
 
   return (

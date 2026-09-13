@@ -142,8 +142,7 @@ export const Dropdown: FunctionComponent<DropdownProps> = ({
     return
   }, [expanded])
 
-  const dropdownClass = classnames('cf-dropdown', {
-    [`${className}`]: className,
+  const dropdownClass = classnames('cf-dropdown', className, {
     'cf-dropdown__up': dropUp,
     'cf-dropdown__down': !dropUp,
   })

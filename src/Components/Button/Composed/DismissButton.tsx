@@ -43,9 +43,7 @@ export const DismissButton: FunctionComponent<DismissButtonProps> = ({
   status = ComponentStatus.Default,
   ref,
 }) => {
-  const SquareButtonClass = classnames('cf-dismiss-button', {
-    [`${className}`]: className,
-  })
+  const SquareButtonClass = classnames('cf-dismiss-button', className)
 
   return (
     <ButtonBase

@@ -57,9 +57,7 @@ export const InfluxLogo: FunctionComponent<InfluxLogoProps> = ({
   className,
   ref,
 }) => {
-  const logoClass = classnames('cf-logo--influx cf-logo-size', {
-    [`${className}`]: className,
-  })
+  const logoClass = classnames('cf-logo--influx cf-logo-size', className)
 
   const getLogoMark = () => {
     switch (logoMark) {

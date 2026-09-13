@@ -26,9 +26,7 @@ export const InfluxDataLogo: FunctionComponent<InfluxDataLogoProps> = ({
   simplified = false,
   ref,
 }) => {
-  const logoClass = classnames('cf-logo--influxdata', {
-    [`${className}`]: className,
-  })
+  const logoClass = classnames('cf-logo--influxdata', className)
 
   const logoStyle = {fill, ...style}
 

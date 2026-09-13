@@ -21,9 +21,7 @@ export const IndexList: FunctionComponent<IndexListProps> = ({
   testID = 'index-list',
   ref,
 }) => {
-  const indexListClass = classnames('cf-index-list', {
-    [`${className}`]: className,
-  })
+  const indexListClass = classnames('cf-index-list', className)
 
   return (
     <table

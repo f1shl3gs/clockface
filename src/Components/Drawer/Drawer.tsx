@@ -40,9 +40,7 @@ export const Drawer: FunctionComponent<DrawerProps> = ({
 
   const {addElementToPortal} = usePortal()
 
-  const drawerClass = classnames('cf-drawer', {
-    [`${className}`]: className,
-  })
+  const drawerClass = classnames('cf-drawer', className)
 
   if (!shouldRender) {
     return addElementToPortal(null)

@@ -35,11 +35,11 @@ export const DropdownLinkItem: FunctionComponent<DropdownLinkItemProps> = ({
 }) => {
   const dropdownLinkItemClass = classnames(
     'cf-dropdown-item cf-dropdown-link-item',
+    className,
     {
       [`cf-dropdown-item__${type}`]:
         type === DropdownItemType.Checkbox || type === DropdownItemType.Dot,
       active: selected,
-      [`${className}`]: className,
       'cf-dropdown-item__wrap': wrapText,
       'cf-dropdown-item__no-wrap': !wrapText,
       'cf-dropdown-item__disabled': disabled,

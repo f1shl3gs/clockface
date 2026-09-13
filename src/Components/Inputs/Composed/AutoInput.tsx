@@ -53,9 +53,7 @@ export const AutoInput: FunctionComponent<AutoInputProps> = ({
   radioButtonCustomRef,
   ref,
 }) => {
-  const autoInputClass = classnames('cf-auto-input', {
-    [`${className}`]: className,
-  })
+  const autoInputClass = classnames('cf-auto-input', className)
 
   return (
     <div

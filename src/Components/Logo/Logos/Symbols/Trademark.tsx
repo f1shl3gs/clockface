@@ -22,9 +22,7 @@ export const Trademark: FunctionComponent<TrademarkProps> = ({
   testID = 'svg--influxdata',
   ref,
 }) => {
-  const logoClass = classnames('cf-logo', {
-    [`${className}`]: className,
-  })
+  const logoClass = classnames('cf-logo', className)
 
   const logoStyle = {fill, marginBottom: '20px'}
 

@@ -55,18 +55,16 @@ export const Tabs: FunctionComponent<TabsProps> = ({
 
   const isDropdownEnabled = dropdownBreakpoint !== Breakpoint.None
 
-  const tabsClass = classnames('cf-tabs', {
+  const tabsClass = classnames('cf-tabs', className, {
     [`cf-tabs__align-${alignment}`]: alignment,
     [`cf-tabs__${orientation}`]: orientation,
     [`cf-tabs__${size}`]: size,
-    [`${className}`]: className,
   })
 
-  const tabsDropdownClass = classnames('cf-tabs--dropdown', {
+  const tabsDropdownClass = classnames('cf-tabs--dropdown', className, {
     [`cf-tabs--dropdown__${state}`]: state,
     [`cf-tabs--dropdown__align-${dropdownAlignment}`]: dropdownAlignment,
     [`cf-tabs--dropdown__${size}`]: size,
-    [`${className}`]: className,
   })
 
   useEffect((): (() => void) => {

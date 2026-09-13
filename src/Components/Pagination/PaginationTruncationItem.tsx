@@ -35,9 +35,10 @@ export const PaginationTruncationItem: FunctionComponent<
   size = ComponentSize.Medium,
   ref,
 }) => {
-  const paginationClassName = classnames('cf-pagination--item--container', {
-    [`${className}`]: className,
-  })
+  const paginationClassName = classnames(
+    'cf-pagination--item--container',
+    className,
+  )
 
   return (
     <li

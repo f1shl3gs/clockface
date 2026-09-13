@@ -54,11 +54,10 @@ export const ResourceCard: FunctionComponent<ResourceCardProps> = ({
   handleCardSelection = () => null,
   ref,
 }) => {
-  const resourceCardClass = classnames('cf-resource-card', {
+  const resourceCardClass = classnames('cf-resource-card', className, {
     'cf-resource-card__highlight': highlightOnHover,
     'cf-resource-card__disabled': disabled,
     'cf-resource-card__context-hover': contextMenuInteraction === 'showOnHover',
-    [`${className}`]: className,
   })
 
   const contextMenuElement = contextMenu && (

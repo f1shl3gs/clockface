@@ -36,9 +36,7 @@ export const ResourceCardName: FunctionComponent<ResourceCardNameProps> = ({
 }) => {
   const isError = status === ComponentStatus.Error
 
-  const resourceNameClass = classnames('cf-resource-name', {
-    [`${className}`]: className,
-  })
+  const resourceNameClass = classnames('cf-resource-name', className)
 
   const resourceNameLinkClass = classnames('cf-resource-name--text', {
     'cf-resource-name--text__link': onClick,

@@ -23,9 +23,8 @@ export const PopNavItem: FunctionComponent<PopNavItemProps> = ({
   titleLink,
   testID = 'pop-nav--item',
 }) => {
-  const titleClass = classnames('cf-pop-nav--item', {
+  const titleClass = classnames('cf-pop-nav--item', className, {
     active,
-    [`${className}`]: className,
   })
 
   return titleLink(titleClass, testID, style)

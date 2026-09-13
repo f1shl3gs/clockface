@@ -31,9 +31,7 @@ export const ResourceCardMeta: FunctionComponent<ResourceCardMetaProps> = ({
   justifyContent,
   ref,
 }) => {
-  const resourceCardMetaClass = classnames('cf-resource-meta', {
-    [`${className}`]: className,
-  })
+  const resourceCardMetaClass = classnames('cf-resource-meta', className)
 
   const wrappedChildren =
     React.Children.count(children) === 0

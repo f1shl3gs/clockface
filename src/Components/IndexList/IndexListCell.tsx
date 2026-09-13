@@ -24,13 +24,16 @@ export const IndexListCell: FunctionComponent<IndexListRowCellProps> = ({
   testID = 'table-cell',
   ref,
 }) => {
-  const IndexListRowCellClass = classnames('cf-index-list--row-cell', {
-    'cf-index-list--show-hover': revealOnHover,
-    'cf-index-list--align-left': alignment === Alignment.Left,
-    'cf-index-list--align-center': alignment === Alignment.Center,
-    'cf-index-list--align-right': alignment === Alignment.Right,
-    [`${className}`]: className,
-  })
+  const IndexListRowCellClass = classnames(
+    'cf-index-list--row-cell',
+    className,
+    {
+      'cf-index-list--show-hover': revealOnHover,
+      'cf-index-list--align-left': alignment === Alignment.Left,
+      'cf-index-list--align-center': alignment === Alignment.Center,
+      'cf-index-list--align-right': alignment === Alignment.Right,
+    },
+  )
 
   return (
     <td ref={ref} className={IndexListRowCellClass}>

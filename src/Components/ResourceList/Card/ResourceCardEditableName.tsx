@@ -75,10 +75,10 @@ export const ResourceCardEditableName: FunctionComponent<
 
   const resourceCardEditableNameClass = classnames(
     'cf-resource-editable-name',
+    className,
     {
       'cf-resource-editable-name__editing': isEditing,
       'untitled-name': name === noNameString,
-      [`${className}`]: className,
     },
   )
 

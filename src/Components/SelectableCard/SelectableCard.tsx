@@ -61,13 +61,12 @@ export const SelectableCard: FunctionComponent<SelectableCardProps> = ({
   className,
   ref,
 }) => {
-  const selectableCardClass = classnames('cf-selectable-card', {
+  const selectableCardClass = classnames('cf-selectable-card', className, {
     'cf-selectable-card__selected': selected,
     'cf-selectable-card__disabled': disabled,
     'cf-selectable-card__has-icon': icon,
     [`cf-selectable-card__${fontSize}`]: fontSize,
     [`cf-selectable-card__${color}`]: color,
-    [`${className}`]: className,
   })
 
   const handleClick = (e: MouseEvent<HTMLDivElement>): void => {

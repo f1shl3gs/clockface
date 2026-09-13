@@ -18,9 +18,11 @@ export const FormFooter: FunctionComponent<FormFooterProps> = ({
   style,
   ref,
 }) => {
-  const formFooterClass = classnames('cf-form--element cf-form--footer', {
-    [`${className}`]: className,
-  })
+  const formFooterClass = classnames(
+    'cf-form--element cf-form--footer',
+    className,
+  )
+
   return (
     <div
       id={id}

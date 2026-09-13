@@ -45,8 +45,7 @@ export const Label: FunctionComponent<LabelProps> = ({
 }) => {
   const [isMouseOver, setHoverState] = useState(false)
 
-  const labelClass = classnames('cf-label', {
-    [`${className}`]: className,
+  const labelClass = classnames('cf-label', className, {
     [`cf-label--${size}`]: size,
     'cf-label--deletable': onDelete,
     'cf-label--clickable': onClick,

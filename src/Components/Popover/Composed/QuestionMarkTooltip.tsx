@@ -44,8 +44,7 @@ export const QuestionMarkTooltip: FunctionComponent<
 }) => {
   const triggerRef = useRef<HTMLDivElement>(null)
 
-  const circleClassName = classnames('cf-question-mark-tooltip', {
-    [`${className}`]: className,
+  const circleClassName = classnames('cf-question-mark-tooltip', className, {
     [`cf-question-mark-tooltip__${color}`]: color,
   })
 

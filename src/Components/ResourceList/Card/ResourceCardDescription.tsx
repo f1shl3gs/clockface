@@ -25,9 +25,10 @@ export const ResourceCardDescription: FunctionComponent<
   description,
   ref,
 }) => {
-  const resourceCardDescriptionClass = classnames('cf-resource-description', {
-    [`${className}`]: className,
-  })
+  const resourceCardDescriptionClass = classnames(
+    'cf-resource-description',
+    className,
+  )
 
   const resourceCardDescriptionPreviewClass = classnames(
     'cf-resource-description--preview',

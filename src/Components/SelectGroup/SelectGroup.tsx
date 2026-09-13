@@ -35,12 +35,11 @@ export const SelectGroup: FunctionComponent<SelectGroupProps> = ({
   className,
   ref,
 }) => {
-  const radioClassName = classnames('cf-select-group', {
+  const radioClassName = classnames('cf-select-group', className, {
     [`cf-select-group__${color}`]: color,
     [`cf-select-group__${size}`]: size,
     'cf-select-group__square': shape === ButtonShape.Square,
     'cf-select-group__stretch': shape === ButtonShape.StretchToFit,
-    [`${className}`]: className,
   })
 
   return (

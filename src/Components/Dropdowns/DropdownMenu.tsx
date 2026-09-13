@@ -54,8 +54,7 @@ export const DropdownMenu: FunctionComponent<DropdownMenuProps> = ({
   autoHideScrollbars = false,
   ref,
 }) => {
-  const DropdownMenuClass = classnames('cf-dropdown-menu', {
-    [`${className}`]: className,
+  const DropdownMenuClass = classnames('cf-dropdown-menu', className, {
     [`cf-dropdown__${theme}`]: theme,
   })
 

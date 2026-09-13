@@ -20,10 +20,13 @@ export const TreeNavSubHeading: FunctionComponent<TreeNavSubHeadingProps> = ({
   lowercase = false,
   className,
 }) => {
-  const treeNavSubHeadingClass = classnames('cf-tree-nav--sub-heading', {
-    [`${className}`]: className,
-    'cf-tree-nav--sub-heading__lowercase': lowercase,
-  })
+  const treeNavSubHeadingClass = classnames(
+    'cf-tree-nav--sub-heading',
+    className,
+    {
+      'cf-tree-nav--sub-heading__lowercase': lowercase,
+    },
+  )
 
   const labelElement = (
     <div className="cf-tree-nav--sub-heading-label" data-testid={testID}>

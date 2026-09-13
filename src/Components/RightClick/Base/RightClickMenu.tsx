@@ -60,8 +60,7 @@ export const RightClickMenu: FunctionComponent<RightClickMenuProps> = ({
     }
   }
 
-  const rightClickMenuClassName = classnames('cf-right-click', {
-    [`${className}`]: className,
+  const rightClickMenuClassName = classnames('cf-right-click', className, {
     [`cf-right-click__${color}`]: color,
   })
 

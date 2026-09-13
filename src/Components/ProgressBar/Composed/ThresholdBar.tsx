@@ -60,9 +60,7 @@ export const ThresholdBar: FunctionComponent<ThresholdBarProps> = ({
     return sorted.findLast(threshold => threshold.floor < value)
   }, [thresholds])
 
-  const thresholdBarClass = classnames('cf-threshold-bar', {
-    [`${className}`]: className,
-  })
+  const thresholdBarClass = classnames('cf-threshold-bar', className)
 
   return (
     <ProgressBar

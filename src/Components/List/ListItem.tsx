@@ -94,13 +94,12 @@ export const ListItem: FunctionComponent<ListItemProps> = ({
     gradient,
   )
 
-  const listItemClass = classnames('cf-list-item', {
+  const listItemClass = classnames('cf-list-item', className, {
     'cf-list-item__active': selected,
-    [`cf-list-item__${size}`]: size,
-    [`cf-list-item__${listContrastColor || 'light'}`]: true,
-    [`${className}`]: className,
     'cf-list-item__disabled': disabled,
     'cf-list-item__clickable': !!onClick,
+    [`cf-list-item__${size}`]: size,
+    [`cf-list-item__${listContrastColor || 'light'}`]: true,
   })
 
   const listItemTextClass = classnames('cf-list-item--text', {

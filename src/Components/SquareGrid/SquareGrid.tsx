@@ -27,9 +27,8 @@ export const SquareGrid: FunctionComponent<SquareGridProps> = ({
   gutter,
   ref,
 }) => {
-  const gridClass = classnames('cf-square-grid', {
+  const gridClass = classnames('cf-square-grid', className, {
     [`cf-square-grid__gutter-${gutter}`]: gutter,
-    [`${className}`]: className,
   })
 
   const gridStyle: CSSProperties = {

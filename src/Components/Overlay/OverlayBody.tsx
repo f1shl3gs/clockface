@@ -18,9 +18,7 @@ export const OverlayBody: FunctionComponent<OverlayBodyProps> = ({
   className,
   ref,
 }) => {
-  const overlayBodyClass = classnames('cf-overlay--body', {
-    [`${className}`]: className,
-  })
+  const overlayBodyClass = classnames('cf-overlay--body', className)
 
   return (
     <div

@@ -24,9 +24,7 @@ export const IndexListBody: FunctionComponent<IndexListBodyProps> = ({
   testID = 'index-list--body',
   ref,
 }) => {
-  const indexListBodyClass = classnames('cf-index-list--body', {
-    [`${className}`]: className,
-  })
+  const indexListBodyClass = classnames('cf-index-list--body', className)
 
   if (React.Children.count(children)) {
     return (

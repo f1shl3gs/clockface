@@ -48,10 +48,9 @@ export const TreeNav: FunctionComponent<TreeNavProps> = ({
   const [mobileState, setMobileState] =
     useState<TreeNavMobileState>('collapsed')
 
-  const navMenuRootClass = classnames('cf-tree-nav', {
+  const navMenuRootClass = classnames('cf-tree-nav', className, {
     'cf-tree-nav__collapsed': !expanded,
     'cf-tree-nav__mobile-collapsed': mobileState === 'collapsed',
-    [`${className}`]: className,
   })
 
   let banner = <></>

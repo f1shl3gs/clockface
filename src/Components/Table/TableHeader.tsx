@@ -18,9 +18,7 @@ export const TableHeader: FunctionComponent<TableHeaderProps> = ({
   className,
   ref,
 }) => {
-  const tableHeaderClass = classnames('cf-table--header', {
-    [`${className}`]: className,
-  })
+  const tableHeaderClass = classnames('cf-table--header', className)
 
   return (
     <thead

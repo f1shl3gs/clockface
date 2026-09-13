@@ -42,8 +42,7 @@ export const GridColumn: FunctionComponent<GridColumnProps> = ({
   className,
   ref,
 }) => {
-  const gridColumnClass = classnames('cf-grid--column', {
-    [`${className}`]: className,
+  const gridColumnClass = classnames('cf-grid--column', className, {
     [`cf-col-xs-${widthXS}`]: widthXS,
     [`cf-col-sm-${widthSM}`]: widthSM,
     [`cf-col-md-${widthMD}`]: widthMD,

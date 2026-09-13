@@ -42,9 +42,10 @@ export const PaginationDirectionItem: FunctionComponent<
   active,
   ref,
 }) => {
-  const paginationClassName = classnames('cf-pagination--item--container', {
-    [`${className}`]: className,
-  })
+  const paginationClassName = classnames(
+    'cf-pagination--item--container',
+    className,
+  )
 
   const iconFont =
     direction === Direction.Left

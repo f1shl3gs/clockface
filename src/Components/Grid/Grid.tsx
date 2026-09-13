@@ -21,9 +21,7 @@ export const Grid: FunctionComponent<GridProps> = ({
   className,
   ref,
 }) => {
-  const gridClass = classnames('cf-grid--container', {
-    [`${className}`]: className,
-  })
+  const gridClass = classnames('cf-grid--container', className)
 
   return (
     <div

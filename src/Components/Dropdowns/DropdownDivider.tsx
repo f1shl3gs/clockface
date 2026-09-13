@@ -20,9 +20,8 @@ export const DropdownDivider: FunctionComponent<DropdownDividerProps> = ({
   className,
   ref,
 }) => {
-  const dropdownDividerClass = classnames('cf-dropdown-divider', {
+  const dropdownDividerClass = classnames('cf-dropdown-divider', className, {
     line: !text,
-    [`${className}`]: className,
   })
 
   return (

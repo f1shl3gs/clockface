@@ -29,9 +29,7 @@ export const DrawerFooter: FunctionComponent<DrawerFooterProps> = ({
   justifyContent = JustifyContent.FlexEnd,
   ref,
 }) => {
-  const drawerFooterClass = classnames('cf-drawer--footer', {
-    [`${className}`]: className,
-  })
+  const drawerFooterClass = classnames('cf-drawer--footer', className)
 
   return (
     <div

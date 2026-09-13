@@ -55,9 +55,7 @@ export const DropdownHeader: FunctionComponent<DropdownHeaderProps> = ({
   buttonShape = ButtonShape.Default,
   children,
 }) => {
-  const dropdownButtonClass = classnames('cf-dropdown--button', {
-    [`${className}`]: className,
-  })
+  const dropdownButtonClass = classnames('cf-dropdown--button', className)
 
   const disabled =
     status === ComponentStatus.Disabled ||
@@ -82,13 +80,13 @@ export const DropdownHeader: FunctionComponent<DropdownHeaderProps> = ({
   const buttonBaseClass = classnames(
     `cf-button cf-button-${size} cf-button-${color}`,
     'header-container--button',
+    className,
     {
       'cf-button-square': buttonShape === ButtonShape.Square,
       'cf-button-stretch': buttonShape === ButtonShape.StretchToFit,
       'cf-button--loading': status === ComponentStatus.Loading,
       'cf-button--disabled': status === ComponentStatus.Disabled,
       active,
-      [`${className}`]: className,
     },
   )
 

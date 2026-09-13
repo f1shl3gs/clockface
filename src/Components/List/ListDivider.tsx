@@ -28,12 +28,11 @@ export const ListDivider: FunctionComponent<ListDividerProps> = ({
 }) => {
   const {listContrastColor} = useContext(ListContext)
 
-  const listDividerClass = classnames('', {
+  const listDividerClass = classnames(className, {
     'cf-list-divider': text,
     'cf-list-divider__thin': !text,
     [`cf-list-item__${size}`]: size,
     [`cf-list-divider__${listContrastColor}`]: true,
-    [`${className}`]: className,
   })
 
   return (

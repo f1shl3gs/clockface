@@ -87,8 +87,7 @@ export const List: FunctionComponent<ListProps> = ({
     gradient,
   )
 
-  const listClass = classnames('cf-list', {
-    [`${className}`]: className,
+  const listClass = classnames('cf-list', className, {
     [`cf-list__${contrastColor || 'light'}`]: true,
     'cf-list__special-light': backgroundColor === InfluxColors.Obsidian,
   })

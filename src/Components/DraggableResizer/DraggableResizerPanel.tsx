@@ -29,9 +29,10 @@ export const DraggableResizerPanel: FunctionComponent<
   testID = 'draggable-resizer--panel',
   ref,
 }) => {
-  const draggableResizerPanelClass = classnames('cf-draggable-resizer--panel', {
-    [`${className}`]: className,
-  })
+  const draggableResizerPanelClass = classnames(
+    'cf-draggable-resizer--panel',
+    className,
+  )
 
   const draggableResizerPanelStyle = (): CSSProperties | undefined => {
     if (sizePercent) {

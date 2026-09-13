@@ -20,9 +20,7 @@ export const PageSubTitle: FunctionComponent<PageSubTitleProps> = ({
   testID = 'page-sub-title',
   ref,
 }) => {
-  const pageSubTitleClass = classnames('cf-page--sub-title', {
-    [`${className}`]: className,
-  })
+  const pageSubTitleClass = classnames('cf-page--sub-title', className)
 
   return (
     <h2

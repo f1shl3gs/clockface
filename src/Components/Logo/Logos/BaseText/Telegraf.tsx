@@ -22,9 +22,7 @@ export const Telegraf: FunctionComponent<TelegrafProps> = ({
   testID = 'svg--influxdata',
   ref,
 }) => {
-  const logoClass = classnames('cf-logo', {
-    [`${className}`]: className,
-  })
+  const logoClass = classnames('cf-logo', className)
 
   const logoStyle = {fill, marginTop: '2px'}
 

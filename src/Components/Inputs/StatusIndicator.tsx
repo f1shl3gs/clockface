@@ -37,10 +37,9 @@ export const StatusIndicator: FunctionComponent<StatusIndicatorProps> = ({
   className,
   ref,
 }) => {
-  const statusIndicatorClass = classnames('cf-status-indicator', {
+  const statusIndicatorClass = classnames('cf-status-indicator', className, {
     [`cf-status-indicator__${status}`]: status,
     [`cf-status-indicator__${size}`]: size,
-    [`${className}`]: className,
   })
 
   let statusElement: React.ReactElement = <></>

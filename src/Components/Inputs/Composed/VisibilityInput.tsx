@@ -107,9 +107,7 @@ export const VisibilityInput: FunctionComponent<VisibilityInputProps> = ({
   ref,
 }) => {
   const [mode, setMode] = useState<'visible' | 'hidden'>('hidden')
-  const visibilityInputClass = classnames('cf-visibility-input', {
-    [`${className}`]: className,
-  })
+  const visibilityInputClass = classnames('cf-visibility-input', className)
 
   const visibility = visible || mode === 'visible'
   const inputType = visibility ? InputType.Text : InputType.Password

@@ -26,10 +26,9 @@ export const PageControlBar: FunctionComponent<PageControlBarProps> = ({
 }) => {
   const noChildren = React.Children.count(children) === 0
 
-  const pageControlBarClass = classnames('cf-page-control-bar', {
+  const pageControlBarClass = classnames('cf-page-control-bar', className, {
     'cf-page-control-bar__no-children': noChildren,
     [`cf-page__gutter-${gutters}`]: gutters,
-    [`${className}`]: className,
   })
 
   const containerClassName = fullWidth

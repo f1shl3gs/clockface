@@ -53,9 +53,7 @@ export const ResourceCardEditableDescription: FunctionComponent<
 
   const resourceCardEditableDescriptionClass = classnames(
     'cf-resource-description cf-resource-description__editable',
-    {
-      [`${className}`]: className,
-    },
+    className,
   )
 
   const resourceCardEditableDescriptionPreviewClass = classnames(

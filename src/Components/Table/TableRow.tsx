@@ -21,8 +21,7 @@ export const TableRow: FunctionComponent<TableRowProps> = ({
   className,
   ref,
 }) => {
-  const tableRowClass = classnames('cf-table--row', {
-    [`${className}`]: className,
+  const tableRowClass = classnames('cf-table--row', className, {
     [`cf-table--row__${color}`]: color,
   })
 

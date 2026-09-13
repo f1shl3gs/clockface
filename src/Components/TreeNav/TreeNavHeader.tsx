@@ -41,11 +41,10 @@ export const TreeNavHeader: FunctionComponent<TreeNavHeaderProps> = ({
   linkElement,
   ref,
 }) => {
-  const navMenuHeaderClass = classnames('cf-tree-nav--header', {
+  const navMenuHeaderClass = classnames('cf-tree-nav--header', className, {
     'cf-tree-nav--header__clickable': onClick || linkElement,
     'cf-tree-nav--header__active': active,
     [`cf-tree-nav--header__${color}`]: color,
-    [`${className}`]: className,
   })
 
   const handleClick = (): void => {

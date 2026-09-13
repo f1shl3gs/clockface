@@ -20,9 +20,7 @@ export const FormElementError: FunctionComponent<FormElementErrorProps> = ({
   testID = 'form--element-error',
   ref,
 }) => {
-  const formElementErrorClass = classnames('cf-form--element-error', {
-    [`${className}`]: className,
-  })
+  const formElementErrorClass = classnames('cf-form--element-error', className)
 
   return (
     <span

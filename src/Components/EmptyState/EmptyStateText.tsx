@@ -17,9 +17,7 @@ export const EmptyStateText: FunctionComponent<EmptyStateTextProps> = ({
   testID = 'empty-state--text',
   ref,
 }) => {
-  const emptyStateTextClass = classnames('cf-empty-state--text', {
-    [`${className}`]: className,
-  })
+  const emptyStateTextClass = classnames('cf-empty-state--text', className)
 
   return (
     <h2

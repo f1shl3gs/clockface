@@ -27,9 +27,7 @@ export const SpinnerContainer: FunctionComponent<SpinnerContainerProps> = ({
   spinnerComponent,
   ref,
 }) => {
-  const spinnerContainerClass = classnames('cf-spinner-container', {
-    [`${className}`]: className,
-  })
+  const spinnerContainerClass = classnames('cf-spinner-container', className)
 
   if (
     loading === RemoteDataState.Loading ||

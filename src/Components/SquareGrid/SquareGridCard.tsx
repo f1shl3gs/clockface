@@ -18,9 +18,7 @@ export const SquareGridCard: FunctionComponent<SquareGridCardProps> = ({
   className,
   ref,
 }) => {
-  const gridRowClass = classnames('cf-square-grid--card', {
-    [`${className}`]: className,
-  })
+  const gridRowClass = classnames('cf-square-grid--card', className)
 
   return (
     <div

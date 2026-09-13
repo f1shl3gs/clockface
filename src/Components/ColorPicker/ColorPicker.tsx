@@ -67,9 +67,7 @@ export const ColorPicker: FunctionComponent<ColorPickerProps> = ({
 }) => {
   const errorMessage = validationFunc(color)
 
-  const colorPickerClass = classnames('cf-color-picker', {
-    [`${className}`]: className,
-  })
+  const colorPickerClass = classnames('cf-color-picker', className)
 
   const inputStatus = errorMessage
     ? ComponentStatus.Error

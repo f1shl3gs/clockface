@@ -23,9 +23,7 @@ export const WaitingText: FunctionComponent<WaitingTextProps> = ({
   className,
   ref,
 }) => {
-  const waitingTextClass = classnames('cf-waiting-text', {
-    [`${className}`]: className,
-  })
+  const waitingTextClass = classnames('cf-waiting-text', className)
 
   return (
     <div

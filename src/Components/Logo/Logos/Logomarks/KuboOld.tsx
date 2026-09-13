@@ -24,9 +24,7 @@ export const KuboOld: FunctionComponent<KuboOldProps> = ({
   testID = 'svg--influxdata',
   ref,
 }) => {
-  const logoClass = classnames('cf-logo', {
-    [`${className}`]: className,
-  })
+  const logoClass = classnames('cf-logo', className)
 
   const centeredClassName = centered ? 'cf-centered-logomark' : ''
 

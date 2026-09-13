@@ -30,10 +30,9 @@ export const Alert: FunctionComponent<Props> = ({
   icon,
   ref,
 }) => {
-  const alertClassName = classnames('cf-alert', {
+  const alertClassName = classnames('cf-alert', className, {
     [`cf-alert--${color}`]: color,
     'cf-alert--has-icon': icon,
-    [`${className}`]: className,
   })
 
   return (

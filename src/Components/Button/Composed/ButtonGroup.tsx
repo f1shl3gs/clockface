@@ -24,9 +24,8 @@ export const ButtonGroup: FunctionComponent<ButtonGroupProps> = ({
   orientation = Orientation.Horizontal,
   ref,
 }) => {
-  const buttonGroupClass = classnames(`cf-button-group`, {
+  const buttonGroupClass = classnames(`cf-button-group`, className, {
     [`cf-button-group__${orientation}`]: orientation,
-    [`${className}`]: className,
   })
 
   return (

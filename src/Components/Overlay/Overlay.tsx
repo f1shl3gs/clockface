@@ -61,9 +61,7 @@ export const Overlay: FunctionComponent<OverlayProps> = ({
 
   const {addElementToPortal} = usePortal()
 
-  const overlayClass = classnames('cf-overlay', {
-    [`${className}`]: className,
-  })
+  const overlayClass = classnames('cf-overlay', className)
 
   if (!shouldRender) {
     return addElementToPortal(null)

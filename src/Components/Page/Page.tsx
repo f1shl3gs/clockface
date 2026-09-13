@@ -30,9 +30,7 @@ export const Page: FunctionComponent<PageProps> = ({
     }
   }, [titleTag])
 
-  const pageClass = classnames('cf-page', {
-    [`${className}`]: className,
-  })
+  const pageClass = classnames('cf-page', className)
 
   return (
     <div

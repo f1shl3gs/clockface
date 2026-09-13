@@ -36,8 +36,7 @@ export const InputLabel: FunctionComponent<InputLabelProps> = ({
   className,
   ref,
 }) => {
-  const slideToggleLabelClass = classnames('cf-input-label', {
-    [`${className}`]: className,
+  const slideToggleLabelClass = classnames('cf-input-label', className, {
     'cf-input-label__wrap': wrapText,
     [`cf-input-label__${size}`]: size,
     'cf-input-label__active': active,

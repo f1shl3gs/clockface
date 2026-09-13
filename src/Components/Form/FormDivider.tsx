@@ -20,8 +20,7 @@ export const FormDivider: FunctionComponent<FormDividerProps> = ({
   testID = 'form--divider',
   ref,
 }) => {
-  const formDividerClass = classnames('cf-form--divider', {
-    [`${className}`]: className,
+  const formDividerClass = classnames('cf-form--divider', className, {
     'cf-form--divider-line': lineColor,
   })
 

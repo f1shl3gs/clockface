@@ -94,8 +94,7 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
     }
   }
 
-  const popoverDialogClassName = classnames('cf-popover', {
-    [`${className}`]: className,
+  const popoverDialogClassName = classnames('cf-popover', className, {
     [`cf-popover__${color}`]: color,
   })
 

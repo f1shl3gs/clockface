@@ -18,9 +18,7 @@ export const DrawerBody: FunctionComponent<DrawerBodyProps> = ({
   className,
   ref,
 }) => {
-  const drawerBodyClass = classnames('cf-drawer--body', {
-    [`${className}`]: className,
-  })
+  const drawerBodyClass = classnames('cf-drawer--body', className)
 
   return (
     <div

@@ -28,9 +28,8 @@ export const TreeNavSubItem: FunctionComponent<TreeNavSubItemProps> = ({
   className,
   linkElement,
 }) => {
-  const treeNavSubItemClass = classnames('cf-tree-nav--sub-item', {
+  const treeNavSubItemClass = classnames('cf-tree-nav--sub-item', className, {
     'cf-tree-nav--sub-item__active': active,
-    [`${className}`]: className,
   })
 
   const handleClick = (): void => {

@@ -80,9 +80,7 @@ export const FormValidationElement: FunctionComponent<
     onStatusChange(status)
   }
 
-  const formValidationElementClass = classnames('cf-form--element', {
-    [`${className}`]: className,
-  })
+  const formValidationElementClass = classnames('cf-form--element', className)
 
   return (
     <label

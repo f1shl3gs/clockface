@@ -78,11 +78,10 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
   displayValue = false,
   ref,
 }) => {
-  const rangeSliderClass = classnames('cf-range-slider', {
+  const rangeSliderClass = classnames('cf-range-slider', className, {
     [`cf-range-slider__${color}`]: color,
     [`cf-range-slider__${size}`]: size,
     'cf-range-slider__disabled': status === ComponentStatus.Disabled,
-    [`${className}`]: className,
   })
 
   const rangeSliderInputClass = classnames('cf-range-slider--input', {
@@ -205,9 +204,8 @@ const RangeSliderLabel: FunctionComponent<RangeSliderLabelProps> = ({
   if (hidden) {
     return null
   }
-  const labelClass = classnames('cf-range-slider--label', {
-    [`${className}`]: className,
-  })
+  const labelClass = classnames('cf-range-slider--label', className)
+
   return (
     <span className={labelClass} style={style} data-testid={testID}>
       {prefix}

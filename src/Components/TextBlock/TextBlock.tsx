@@ -38,10 +38,9 @@ export const TextBlock: FunctionComponent<TextBlockProps> = ({
   backgroundColor,
   ref,
 }) => {
-  const textBlockClass = classnames('cf-text-block', {
+  const textBlockClass = classnames('cf-text-block', className, {
     'cf-text-block__monospace': monospace,
     [`cf-text-block__${size}`]: size,
-    [`${className}`]: className,
   })
 
   const textBlockStyle = generateTextBlockStyle(

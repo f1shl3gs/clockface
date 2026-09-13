@@ -29,9 +29,7 @@ export const OverlayFooter: FunctionComponent<OverlayFooterProps> = ({
   justifyContent = JustifyContent.FlexEnd,
   ref,
 }) => {
-  const overlayFooterClass = classnames('cf-overlay--footer', {
-    [`${className}`]: className,
-  })
+  const overlayFooterClass = classnames('cf-overlay--footer', className)
 
   return (
     <div

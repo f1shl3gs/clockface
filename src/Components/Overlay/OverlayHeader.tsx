@@ -27,11 +27,10 @@ export const OverlayHeader: FunctionComponent<OverlayHeaderProps> = ({
   onDismiss,
   ref,
 }) => {
-  const overlayHeaderClass = classnames('cf-overlay--header', {
+  const overlayHeaderClass = classnames('cf-overlay--header', className, {
     'cf-overlay--header__wrap': wrapText,
     'cf-overlay--header__nowrap': !wrapText,
     'cf-overlay--header__dismissable': onDismiss,
-    [`${className}`]: className,
   })
 
   return (

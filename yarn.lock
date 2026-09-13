@@ -697,12 +697,11 @@ __metadata:
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/react": "npm:^16.3.0"
     "@tsdown/css": "npm:^0.23.0"
-    "@types/classnames": "npm:^2.2.7"
     "@types/jsdom": "npm:^30"
     "@types/node": "npm:^26.1.1"
     "@types/react": "npm:^19.0.0"
     "@types/react-dom": "npm:^19.0.0"
-    classnames: "npm:^2.2.6"
+    classnames: "github:f1shl3gs/classnames#cd40b43e2ebcb1061400944e57efc2bde14cdba2"
     colord: "npm:^2.10.0"
     dayjs: "npm:^1.11.23"
     jsdom: "npm:^30.0.1"
@@ -1793,15 +1792,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/classnames@npm:^2.2.7":
-  version: 2.3.4
-  resolution: "@types/classnames@npm:2.3.4"
-  dependencies:
-    classnames: "npm:*"
-  checksum: 10c0/25de08662e5c68314d23527671a29c2125e399c015d67ffd4b304aa3330f1aacd452bcc74964e04eaad35999c4d474ded4fbb8c4c920026e43783f76560d6b0c
-  languageName: node
-  linkType: hard
-
 "@types/deep-eql@npm:*":
   version: 4.0.2
   resolution: "@types/deep-eql@npm:4.0.2"
@@ -2539,10 +2529,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:*, classnames@npm:^2.2.6":
-  version: 2.5.1
-  resolution: "classnames@npm:2.5.1"
-  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
+"classnames@github:f1shl3gs/classnames#cd40b43e2ebcb1061400944e57efc2bde14cdba2":
+  version: 0.1.0
+  resolution: "classnames@https://github.com/f1shl3gs/classnames.git#commit=cd40b43e2ebcb1061400944e57efc2bde14cdba2"
+  checksum: 10c0/36c90ba2a2f6538c612b0be281650f1c31e083dd3fb6ad47793fcc5b8915d6e31910facebb6b2de9897d61f40f57173f6701798544e6ffbc58dffec970437399
   languageName: node
   linkType: hard
 

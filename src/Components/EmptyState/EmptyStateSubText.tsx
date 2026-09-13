@@ -17,9 +17,10 @@ export const EmptyStateSubText: FunctionComponent<EmptyStateSubTextProps> = ({
   testID = 'empty-state--sub-text',
   ref,
 }) => {
-  const emptyStateSubTextClass = classnames('cf-empty-state--sub-text', {
-    [`${className}`]: className,
-  })
+  const emptyStateSubTextClass = classnames(
+    'cf-empty-state--sub-text',
+    className,
+  )
 
   return (
     <p

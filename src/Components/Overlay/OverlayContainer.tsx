@@ -26,10 +26,9 @@ export const OverlayContainer: FunctionComponent<OverlayContainerProps> = ({
   fullScreen,
   ref,
 }) => {
-  const overlayContainerClass = classnames('cf-overlay--container', {
+  const overlayContainerClass = classnames('cf-overlay--container', className, {
     [`cf-overlay--container__${margin}`]: margin,
     ['cf-overlay--container__full']: fullScreen,
-    [`${className}`]: className,
   })
 
   const overlayContainerStyle = fullScreen

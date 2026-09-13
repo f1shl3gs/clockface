@@ -19,9 +19,7 @@ export const FormHelpText: FunctionComponent<FormHelpTextProps> = ({
   testID = 'form--help-text',
   ref,
 }) => {
-  const formHelpTextClass = classnames('cf-form--help-text', {
-    [`${className}`]: className,
-  })
+  const formHelpTextClass = classnames('cf-form--help-text', className)
 
   return (
     <span

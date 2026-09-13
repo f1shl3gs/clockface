@@ -27,9 +27,7 @@ export const TableCell: FunctionComponent<TableCellProps> = ({
   horizontalAlignment = Alignment.Left,
   ref,
 }) => {
-  const tableCellClass = classnames('cf-table--cell', {
-    [`${className}`]: className,
-  })
+  const tableCellClass = classnames('cf-table--cell', className)
 
   const tableCellStyle = {
     textAlign: horizontalAlignment,

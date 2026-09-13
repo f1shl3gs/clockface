@@ -18,9 +18,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   className,
   ref,
 }) => {
-  const tableBodyClass = classnames('cf-table--body', {
-    [`${className}`]: className,
-  })
+  const tableBodyClass = classnames('cf-table--body', className)
 
   return (
     <tbody

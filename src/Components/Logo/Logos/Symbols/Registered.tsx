@@ -22,9 +22,7 @@ export const Registered: FunctionComponent<RegisteredProps> = ({
   testID = 'svg--influxdata',
   ref,
 }) => {
-  const logoClass = classnames('cf-logo', {
-    [`${className}`]: className,
-  })
+  const logoClass = classnames('cf-logo', className)
 
   const logoStyle = {fill}
 

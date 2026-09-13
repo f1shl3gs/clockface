@@ -22,9 +22,8 @@ export const NavMenu: FunctionComponent<NavMenuProps> = ({
 }) => {
   const [menuVisible, setMenuVisible] = useState(false)
 
-  const navMenuRootClass = classnames('cf-nav', {
+  const navMenuRootClass = classnames('cf-nav', className, {
     'cf-nav__expanded': menuVisible,
-    [`${className}`]: className,
   })
 
   const toggleClassName = classnames('cf-nav--toggle', {

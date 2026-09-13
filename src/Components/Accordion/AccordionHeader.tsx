@@ -32,12 +32,15 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
     [`cf-accordion--icon--disabled`]: context.disabled,
   })
 
-  const AccordionHeaderClassName = classnames(`cf-accordion--header`, {
-    [`cf-accordion--header--active`]: context.isExpanded && context.hasBody,
-    [`${className}`]: className,
-    [`cf-accordion--header--disabled`]: context.disabled,
-    [`cf-accordion--header--clickable`]: context.hasBody && !context.disabled,
-  })
+  const AccordionHeaderClassName = classnames(
+    `cf-accordion--header`,
+    className,
+    {
+      [`cf-accordion--header--active`]: context.isExpanded && context.hasBody,
+      [`cf-accordion--header--disabled`]: context.disabled,
+      [`cf-accordion--header--clickable`]: context.hasBody && !context.disabled,
+    },
+  )
 
   const toggleExpand = () => {
     if (!context.disabled) {

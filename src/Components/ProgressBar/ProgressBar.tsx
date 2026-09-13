@@ -49,9 +49,7 @@ export const ProgressBar: FunctionComponent<ProgressBarProps> = ({
   maxText,
   ref,
 }) => {
-  const progressBarClass = classnames('cf-progress-bar', {
-    [`${className}`]: className,
-  })
+  const progressBarClass = classnames('cf-progress-bar', className)
 
   const progressBarStyle = {
     ...generateBackgroundStyle(color, barGradient),

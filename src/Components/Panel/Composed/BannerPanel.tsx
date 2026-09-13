@@ -38,10 +38,9 @@ export const BannerPanel: FunctionComponent<BannerPanelProps> = ({
   size = ComponentSize.ExtraSmall,
   ref,
 }) => {
-  const bannerPanelClassName = classnames('cf-banner-panel', {
+  const bannerPanelClassName = classnames('cf-banner-panel', className, {
     'cf-banner-panel--has-icon': icon,
     'cf-banner-panel__hide-icon': hideMobileIcon,
-    [`${className}`]: className,
   })
 
   return (

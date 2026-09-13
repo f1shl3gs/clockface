@@ -26,9 +26,7 @@ export const OverlayMask: FunctionComponent<OverlayMaskProps> = ({
   backgroundColor,
   ref,
 }) => {
-  const overlayMaskClass = classnames('cf-overlay--mask', {
-    [`${className}`]: className,
-  })
+  const overlayMaskClass = classnames('cf-overlay--mask', className)
 
   const overlayMaskStyle = (): CSSProperties => {
     if (backgroundColor) {

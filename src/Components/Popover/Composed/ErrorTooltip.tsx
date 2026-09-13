@@ -45,9 +45,7 @@ export const ErrorTooltip: FunctionComponent<ErrorTooltipProps> = ({
 }) => {
   const triggerRef = useRef<HTMLDivElement>(null)
   const color = ComponentColor.Danger
-  const circleClassName = classnames('cf-error-tooltip', {
-    [`${className}`]: className,
-  })
+  const circleClassName = classnames('cf-error-tooltip', className)
 
   const iconStyle = {
     lineHeight: `${diameter}px`,

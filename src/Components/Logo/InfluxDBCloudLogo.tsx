@@ -26,10 +26,9 @@ export const InfluxDBCloudLogo: FunctionComponent<InfluxDBCloudLogoProps> = ({
   className,
   ref,
 }) => {
-  const logoClass = classnames('', {
+  const logoClass = classnames(className, {
     'cf-logo--influxdb-cloud': cloud,
     'cf-logo--influxdb': !cloud,
-    [`${className}`]: className,
   })
 
   const logoStyle = {fill, ...style}

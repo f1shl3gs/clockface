@@ -24,10 +24,9 @@ export const IndexListRow: FunctionComponent<IndexListRowProps> = ({
   testID = 'table-row',
   ref,
 }) => {
-  const IndexListRowClass = classnames('cf-index-list--row', {
+  const IndexListRowClass = classnames('cf-index-list--row', className, {
     'cf-index-list--row__nested': brighten,
     'cf-index-list--row__disabled': disabled,
-    [`${className}`]: className,
   })
 
   return (

@@ -45,11 +45,10 @@ export const PopNav: FunctionComponent<PopNavProps> = ({
 }) => {
   const [menuVisible, setMenuVisible] = useState<boolean>(visible)
 
-  const popNavClass = classnames('cf-pop-nav', {
+  const popNavClass = classnames('cf-pop-nav', className, {
     [`cf-pop-nav__${size}`]: size,
     [`cf-pop-nav__${align}`]: align,
     'cf-nav__expanded': menuVisible,
-    [`${className}`]: className,
   })
 
   const handleToggleMenu = (): void => {

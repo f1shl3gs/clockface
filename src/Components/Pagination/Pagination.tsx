@@ -58,9 +58,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   ref,
 }) => {
   const innerRef = React.useRef<HTMLUListElement>(null)
-  const PaginationClassName = classnames('cf-pagination', {
-    [`${className}`]: className,
-  })
+  const PaginationClassName = classnames('cf-pagination', className)
   const [activePage, setActivePage] = useState(currentPage)
   const [inputPage, setInputPage] = useState(currentPage)
 

@@ -36,10 +36,9 @@ export const PageContents: FunctionComponent<PageContentsProps> = ({
   scrollbarSize = ComponentSize.Small,
   ref,
 }) => {
-  const pageContentsClass = classnames('cf-page-contents', {
+  const pageContentsClass = classnames('cf-page-contents', className, {
     'cf-page-contents__no-scroll': !scrollable,
     [`cf-page__gutter-${gutters}`]: gutters,
-    [`${className}`]: className,
   })
 
   const widthClass = fullWidth

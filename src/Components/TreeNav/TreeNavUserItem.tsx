@@ -29,9 +29,8 @@ export const TreeNavUserItem: FunctionComponent<TreeNavUserItemProps> = ({
   className,
   linkElement,
 }) => {
-  const treeNavUserItemClass = classnames('cf-tree-nav--user-item', {
+  const treeNavUserItemClass = classnames('cf-tree-nav--user-item', className, {
     'cf-tree-nav--user-item__active': active,
-    [`${className}`]: className,
   })
 
   const handleClick = (): void => {

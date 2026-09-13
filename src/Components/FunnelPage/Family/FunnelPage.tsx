@@ -46,9 +46,7 @@ export const FunnelPage: FunctionComponent<FunnelPageProps> = ({
   backgroundColor = InfluxColors.CetaceanBlue,
   ref,
 }) => {
-  const funnelPageClassName = classnames('cf-funnel-page', {
-    [`${className}`]: className,
-  })
+  const funnelPageClassName = classnames('cf-funnel-page', className)
 
   const backgroundStyle = {backgroundColor, ...pageStyle}
   const accentGradientAColors = [

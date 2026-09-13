@@ -27,9 +27,7 @@ export const TableHeaderCell: FunctionComponent<TableHeaderCellProps> = ({
   horizontalAlignment = Alignment.Left,
   ref,
 }) => {
-  const tableHeaderCellClass = classnames('cf-table--header-cell', {
-    [`${className}`]: className,
-  })
+  const tableHeaderCellClass = classnames('cf-table--header-cell', className)
 
   const tableHeaderCellStyle = {
     textAlign: horizontalAlignment,

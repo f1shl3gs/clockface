@@ -52,8 +52,7 @@ export const Panel: FunctionComponent<PanelProps> = ({
 }) => {
   const textColor = calculateTextColorFromBackground(backgroundColor, gradient)
 
-  const panelClass = classnames('cf-panel', {
-    [`${className}`]: className,
+  const panelClass = classnames('cf-panel', className, {
     'cf-panel__gradient': gradient,
     'cf-panel__bordered': border,
     [`cf-panel__${textColor}-text`]: textColor,

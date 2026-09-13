@@ -31,9 +31,7 @@ export const PageTitle: FunctionComponent<PageTitleProps> = ({
   testID = 'page-title',
   ref,
 }) => {
-  const pageTitleClass = classnames('cf-page--title', {
-    [`${className}`]: className,
-  })
+  const pageTitleClass = classnames('cf-page--title', className)
 
   return (
     <Heading

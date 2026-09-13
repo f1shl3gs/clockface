@@ -51,10 +51,9 @@ export const SelectGroupOption: FunctionComponent<SelectGroupOptionProps> = ({
   disabledTitleText = 'This option is disabled',
   ref,
 }) => {
-  const radioButtonClass = classnames('cf-select-group--option', {
+  const radioButtonClass = classnames('cf-select-group--option', className, {
     'cf-select-group--option__active': active,
     'cf-select-group--option__disabled': disabled,
-    [`${className}`]: className,
   })
 
   const title = disabled ? disabledTitleText : titleText

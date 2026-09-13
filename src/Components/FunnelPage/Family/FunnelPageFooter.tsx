@@ -18,9 +18,10 @@ export const FunnelPageFooter: FunctionComponent<FunnelPageFooterProps> = ({
   className,
   ref,
 }) => {
-  const funnelPageFooterClassName = classnames('cf-funnel-page--footer', {
-    [`${className}`]: className,
-  })
+  const funnelPageFooterClassName = classnames(
+    'cf-funnel-page--footer',
+    className,
+  )
 
   return (
     <div

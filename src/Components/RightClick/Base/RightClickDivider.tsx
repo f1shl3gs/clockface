@@ -18,9 +18,10 @@ export const RightClickDivider: FunctionComponent<RightClickDividerProps> = ({
   className,
   ref,
 }) => {
-  const rightClickDividerClassName = classnames('cf-right-click--divider', {
-    [`${className}`]: className,
-  })
+  const rightClickDividerClassName = classnames(
+    'cf-right-click--divider',
+    className,
+  )
 
   return (
     <li

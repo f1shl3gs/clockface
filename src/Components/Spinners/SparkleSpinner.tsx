@@ -26,9 +26,7 @@ export const SparkleSpinner: FunctionComponent<SparkleSpinnerProps> = ({
   sizePixels = 100,
   ref,
 }) => {
-  const spinnerClass = classnames('cf-sparkle-spinner', {
-    [`${className}`]: className,
-  })
+  const spinnerClass = classnames('cf-sparkle-spinner', className)
 
   const spinnerStyle = {
     ...style,

@@ -133,7 +133,7 @@ export const Toggle: FunctionComponent<ToggleProps> = ({
 }) => {
   const [isFocused, setFocus] = useState<boolean>(autoFocus)
 
-  const toggleClass = classnames('cf-toggle', {
+  const toggleClass = classnames('cf-toggle', className, {
     [`cf-toggle__${size}`]: size,
     [`cf-toggle__${color}`]: color,
     [`cf-toggle__fill-${fill}`]: fill,
@@ -143,7 +143,6 @@ export const Toggle: FunctionComponent<ToggleProps> = ({
     'cf-toggle__radio': type === InputToggleType.Radio,
     'cf-toggle__disabled': disabled,
     'cf-toggle__labelled': children && !!React.Children.count(children),
-    [`${className}`]: className,
   })
 
   const handleClick = (): void => {

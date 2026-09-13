@@ -27,9 +27,7 @@ export const TreeNavSubMenu: FunctionComponent<
   position = PopoverPosition.ToTheRightTop,
   ref,
 }) => {
-  const navMenuHeaderClass = classnames('cf-tree-nav--sub-menu', {
-    [`${className}`]: className,
-  })
+  const navMenuHeaderClass = classnames('cf-tree-nav--sub-menu', className)
 
   const triggerRef = useRef<HTMLButtonElement>(null)
 

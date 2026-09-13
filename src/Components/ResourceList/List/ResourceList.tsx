@@ -21,9 +21,7 @@ export const ResourceList: FunctionComponent<ResourceListProps> = ({
   className,
   ref,
 }) => {
-  const resourceListClass = classnames('cf-resource-list', {
-    [`${className}`]: className,
-  })
+  const resourceListClass = classnames('cf-resource-list', className)
 
   return (
     <div

@@ -44,9 +44,7 @@ export const FormElement: FunctionComponent<FormElementProps> = ({
   errorMessageTestId,
   ref,
 }) => {
-  const formElementClass = classnames('cf-form--element', {
-    [`${className}`]: className,
-  })
+  const formElementClass = classnames('cf-form--element', className)
 
   const formElementElements = (
     <>

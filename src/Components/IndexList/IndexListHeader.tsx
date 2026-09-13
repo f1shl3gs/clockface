@@ -18,9 +18,7 @@ export const IndexListHeader: FunctionComponent<IndexListHeaderProps> = ({
   testID = 'index-list--header',
   ref,
 }) => {
-  const indexListHeaderClass = classnames('cf-index-list--header', {
-    [`${className}`]: className,
-  })
+  const indexListHeaderClass = classnames('cf-index-list--header', className)
 
   return (
     <thead

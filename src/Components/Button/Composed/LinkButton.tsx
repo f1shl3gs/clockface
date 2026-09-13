@@ -64,13 +64,13 @@ export const LinkButton: FunctionComponent<LinkButtonProps> = ({
 }) => {
   const linkButtonClass = classnames(
     `cf-button cf-button-${size} cf-button-${color}`,
+    className,
     {
       'cf-button-square': shape === ButtonShape.Square,
       'cf-button-stretch': shape === ButtonShape.StretchToFit,
       'cf-button--loading': status === ComponentStatus.Loading,
       'cf-button--disabled': status === ComponentStatus.Disabled,
       active,
-      [`${className}`]: className,
     },
   )
 

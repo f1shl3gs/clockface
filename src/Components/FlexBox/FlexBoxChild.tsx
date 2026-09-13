@@ -29,9 +29,7 @@ export const FlexBoxChild: FunctionComponent<FlexBoxChildProps> = ({
   onClick,
   ref,
 }) => {
-  const flexBoxChildClass = classnames('cf-flex-box--child', {
-    [`${className}`]: className,
-  })
+  const flexBoxChildClass = classnames('cf-flex-box--child', className)
 
   const flexBoxChildStyle = {
     flexGrow: grow,

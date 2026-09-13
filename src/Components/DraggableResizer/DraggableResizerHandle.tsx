@@ -70,10 +70,10 @@ export const DraggableResizerHandle: FunctionComponent<
 
   const DraggableResizerHandleClass = classnames(
     'cf-draggable-resizer--handle',
+    className,
     {
       [`cf-draggable-resizer-handle--${orientation}`]: orientation,
       'cf-draggable-resizer--handle-dragging': dragging,
-      [`${className}`]: className,
     },
   )
 

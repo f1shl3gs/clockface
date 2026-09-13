@@ -53,9 +53,7 @@ export const CTAButton: FunctionComponent<CTAButtonProps> = ({
   placeIconAfterText,
   ref,
 }) => {
-  const CTAButtonClass = classnames(`cf-cta-button`, {
-    [`${className}`]: className,
-  })
+  const CTAButtonClass = classnames(`cf-cta-button`, className)
 
   return (
     <ButtonBase

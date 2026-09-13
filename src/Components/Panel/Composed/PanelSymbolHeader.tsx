@@ -40,10 +40,13 @@ export const PanelSymbolHeader: FunctionComponent<PanelSymbolHeaderProps> = ({
   justifyContent = JustifyContent.SpaceBetween,
   ref,
 }) => {
-  const panelSymbolHeaderClassName = classnames('cf-panel--symbol-header', {
-    [`cf-panel--symbol-header__${size}`]: size,
-    [`${className}`]: className,
-  })
+  const panelSymbolHeaderClassName = classnames(
+    'cf-panel--symbol-header',
+    className,
+    {
+      [`cf-panel--symbol-header__${size}`]: size,
+    },
+  )
 
   return (
     <PanelHeader

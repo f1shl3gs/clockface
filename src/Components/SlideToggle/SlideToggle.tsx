@@ -38,10 +38,9 @@ export const SlideToggle: FunctionComponent<SlideToggleProps> = ({
   tooltipText = '',
   ref,
 }) => {
-  const slideToggleClass = classnames('cf-slide-toggle', {
+  const slideToggleClass = classnames('cf-slide-toggle', className, {
     active,
     disabled,
-    [`${className}`]: className,
     [`cf-slide-toggle-${size}`]: size,
     [`cf-slide-toggle-${color}`]: color,
   })

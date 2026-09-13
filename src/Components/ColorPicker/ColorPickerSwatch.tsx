@@ -35,14 +35,17 @@ export const ColorPickerSwatch: FunctionComponent<ColorPickerSwatchProps> = ({
   testID = 'color-picker',
   ref,
 }) => {
-  const colorPickerSwatchClass = classnames('cf-color-picker--swatch', {
-    [`${className}`]: className,
-    'cf-color-picker--swatch__top-left': index === 0,
-    'cf-color-picker--swatch__top-right': index === swatchesPerRow - 1,
-    'cf-color-picker--swatch__bottom-left':
-      index === swatchesCount - swatchesPerRow,
-    'cf-color-picker--swatch__bottom-right': index === swatchesCount - 1,
-  })
+  const colorPickerSwatchClass = classnames(
+    'cf-color-picker--swatch',
+    className,
+    {
+      'cf-color-picker--swatch__top-left': index === 0,
+      'cf-color-picker--swatch__top-right': index === swatchesPerRow - 1,
+      'cf-color-picker--swatch__bottom-left':
+        index === swatchesCount - swatchesPerRow,
+      'cf-color-picker--swatch__bottom-right': index === swatchesCount - 1,
+    },
+  )
 
   const size = `${100 / swatchesPerRow}%`
 

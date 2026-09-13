@@ -47,14 +47,13 @@ export const FlexBox: FunctionComponent<FlexBoxProps> = ({
   onClick,
   ref,
 }) => {
-  const flexBoxClass = classnames('cf-flex-box', {
+  const flexBoxClass = classnames('cf-flex-box', className, {
     [`cf-flex-box__margin-${margin}`]: margin,
     [`cf-flex-box__${direction}`]: direction,
     [`cf-flex-box__justify-${justifyContent}`]: justifyContent,
     [`cf-flex-box__align-${alignItems}`]: alignItems,
     'cf-flex-box__stretch-w': stretchToFitWidth,
     'cf-flex-box__stretch-h': stretchToFitHeight,
-    [`${className}`]: className,
   })
 
   return (

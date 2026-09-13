@@ -22,9 +22,7 @@ export const FunnelPageFooterSection: FunctionComponent<
 }) => {
   const funnelPageFooterSectionClassName = classnames(
     'cf-funnel-page--footer-section',
-    {
-      [`${className}`]: className,
-    },
+    className,
   )
 
   return (

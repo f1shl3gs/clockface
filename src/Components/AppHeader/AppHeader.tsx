@@ -24,9 +24,8 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   size = ComponentSize.Small,
   ref,
 }) => {
-  const appHeaderClass = classnames('cf-app-header', {
+  const appHeaderClass = classnames('cf-app-header', className, {
     [`cf-app-header__${size}`]: size,
-    [`${className}`]: className,
   })
 
   return (

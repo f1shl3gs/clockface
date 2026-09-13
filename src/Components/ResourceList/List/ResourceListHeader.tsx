@@ -21,9 +21,10 @@ export const ResourceListHeader: FunctionComponent<ResourceListHeaderProps> = ({
   filterComponent,
   ref,
 }) => {
-  const resourceListHeaderClass = classnames('cf-resource-list--header', {
-    [`${className}`]: className,
-  })
+  const resourceListHeaderClass = classnames(
+    'cf-resource-list--header',
+    className,
+  )
 
   const filter = filterComponent && (
     <div className="cf-resource-list--filter">{filterComponent}</div>

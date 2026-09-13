@@ -32,11 +32,14 @@ export const ResourceListSorter: FunctionComponent<ResourceListSorterProps> = ({
   sortKey,
   ref,
 }) => {
-  const resourceListSorterClass = classnames('cf-resource-list--sorter', {
-    'cf-resource-list--sort-descending': sort === Sort.Descending,
-    'cf-resource-list--sort-ascending': sort === Sort.Ascending,
-    [`${className}`]: className,
-  })
+  const resourceListSorterClass = classnames(
+    'cf-resource-list--sorter',
+    className,
+    {
+      'cf-resource-list--sort-descending': sort === Sort.Descending,
+      'cf-resource-list--sort-ascending': sort === Sort.Ascending,
+    },
+  )
 
   let title = `Click to sort by "${name}"`
 

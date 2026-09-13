@@ -372,10 +372,9 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
         overflowY: noScrollY ? 'hidden' : 'auto',
       }
 
-  const dapperScrollbars2Class = classnames('cf-dapper-scrollbars', {
+  const dapperScrollbars2Class = classnames('cf-dapper-scrollbars', className, {
     'cf-dapper-scrollbars--autohide': autoHide,
     [`cf-dapper-scrollbars--${size}`]: size,
-    [`${className}`]: className,
   })
 
   const thumbXStyle = {

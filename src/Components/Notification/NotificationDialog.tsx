@@ -74,12 +74,12 @@ export const NotificationDialog: FunctionComponent<NotificationDialogProps> = ({
 
   const notificationDialogClassName = classnames(
     `cf-notification cf-notification__${color || 'default'}`,
+    className,
     {
       'cf-notification__has-icon': icon,
       [`cf-notification__${size}`]: size,
       [`cf-notification__${textColor}-text`]: textColor,
       'cf-notification__dismissable': onDismiss,
-      [`${className}`]: className,
     },
   )
 

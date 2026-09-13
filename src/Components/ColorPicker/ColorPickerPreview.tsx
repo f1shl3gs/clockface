@@ -17,9 +17,7 @@ export const ColorPickerPreview: FunctionComponent<ColorPreviewProps> = ({
   color,
   className,
 }) => {
-  const colorPreviewClass = classnames('cf-color-preview', {
-    [`${className}`]: className,
-  })
+  const colorPreviewClass = classnames('cf-color-preview', className)
 
   return <div className={colorPreviewClass} style={{backgroundColor: color}} />
 }

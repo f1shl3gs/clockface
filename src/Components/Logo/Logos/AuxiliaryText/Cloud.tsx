@@ -22,10 +22,7 @@ export const Cloud: FunctionComponent<CloudProps> = ({
   testID = 'svg--influxdata',
   ref,
 }) => {
-  const logoClass = classnames('cf-logo cf-logo-auxiliary', {
-    [`${className}`]: className,
-  })
-
+  const logoClass = classnames('cf-logo cf-logo-auxiliary', className)
   const logoStyle = {fill, marginTop: '4.5px', marginLeft: '14px'}
 
   return (

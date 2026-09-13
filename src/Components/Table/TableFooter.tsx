@@ -18,9 +18,7 @@ export const TableFooter: FunctionComponent<TableFooterProps> = ({
   className,
   ref,
 }) => {
-  const tableFooterClass = classnames('cf-table--footer', {
-    [`${className}`]: className,
-  })
+  const tableFooterClass = classnames('cf-table--footer', className)
 
   return (
     <tfoot

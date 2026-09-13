@@ -22,10 +22,7 @@ export const OpenSource: FunctionComponent<OpenSourceProps> = ({
   testID = 'svg--influxdata',
   ref,
 }) => {
-  const logoClass = classnames('cf-logo', {
-    [`${className}`]: className,
-  })
-
+  const logoClass = classnames('cf-logo', className)
   const logoStyle = {fill, marginTop: '15.5px', marginLeft: '14px'}
 
   return (

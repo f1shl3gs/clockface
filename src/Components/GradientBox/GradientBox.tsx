@@ -28,9 +28,7 @@ export const GradientBox: FunctionComponent<GradientBoxProps> = ({
   borderGradient,
   ref,
 }) => {
-  const gradientBoxClass = classnames('cf-gradient-box', {
-    [`${className}`]: className,
-  })
+  const gradientBoxClass = classnames('cf-gradient-box', className)
 
   const gradientBoxStyle = {
     ...generateBackgroundStyle(borderColor, borderGradient),

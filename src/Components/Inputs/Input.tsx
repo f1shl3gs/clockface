@@ -139,7 +139,7 @@ export const Input: FunctionComponent<InputProps> = ({
   ref,
 }) => {
   const [isFocused, setFocus] = useState<boolean>(autoFocus)
-  const inputClass = classnames('cf-input', {
+  const inputClass = classnames('cf-input', className, {
     [`cf-input-${size}`]: size,
     'cf-input__focused': isFocused,
     'cf-input__has-checkbox': type === InputType.Checkbox,
@@ -150,7 +150,6 @@ export const Input: FunctionComponent<InputProps> = ({
     'cf-input__loading': status === ComponentStatus.Loading,
     'cf-input__disabled': status === ComponentStatus.Disabled,
     'cf-input-monospace': monospace,
-    [`${className}`]: className,
   })
 
   const inputFieldClass = classnames('cf-input-field', {

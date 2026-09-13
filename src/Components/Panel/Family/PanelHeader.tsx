@@ -34,9 +34,8 @@ export const PanelHeader: FunctionComponent<PanelHeaderProps> = ({
   justifyContent = JustifyContent.SpaceBetween,
   ref,
 }) => {
-  const panelHeaderClass = classnames('cf-panel--header', {
+  const panelHeaderClass = classnames('cf-panel--header', className, {
     [`cf-panel--header__${size}`]: size,
-    [`${className}`]: className,
   })
 
   return (

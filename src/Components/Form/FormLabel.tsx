@@ -27,9 +27,7 @@ export const FormLabel: FunctionComponent<FormLabelProps> = ({
   className,
   ref,
 }) => {
-  const formLabelClass = classnames('cf-form--label', {
-    [`${className}`]: className,
-  })
+  const formLabelClass = classnames('cf-form--label', className)
 
   const labelChildren = (
     <>

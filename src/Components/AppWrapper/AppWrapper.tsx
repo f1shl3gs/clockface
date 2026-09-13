@@ -29,10 +29,9 @@ export const AppWrapper: FunctionComponent<AppWrapperProps> = ({
   presentationMode = false,
   ref,
 }) => {
-  const appWrapperClass = classnames('clockface--app-wrapper', {
+  const appWrapperClass = classnames('clockface--app-wrapper', className, {
     'clockface--app-wrapper__presentation-mode': presentationMode,
     [`clockface--app-wrapper__${type}`]: type,
-    [`${className}`]: className,
   })
 
   return (

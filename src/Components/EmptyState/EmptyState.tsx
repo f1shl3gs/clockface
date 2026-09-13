@@ -24,9 +24,8 @@ export const EmptyState: FunctionComponent<EmptyStateProps> = ({
   size = ComponentSize.Small,
   ref,
 }) => {
-  const emptyStateClass = classnames('cf-empty-state', {
+  const emptyStateClass = classnames('cf-empty-state', className, {
     [`cf-empty-state--${size}`]: size,
-    [`${className}`]: className,
   })
 
   return (

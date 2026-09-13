@@ -20,10 +20,7 @@ export const Icon: FunctionComponent<IconProps> = ({
   className,
   ref,
 }) => {
-  const iconClassName = classnames('cf-icon', {
-    [`${glyph}`]: glyph,
-    [`${className}`]: className,
-  })
+  const iconClassName = classnames('cf-icon', className, glyph as string)
 
   return (
     <span

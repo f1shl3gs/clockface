@@ -20,11 +20,14 @@ export const DropdownItemEmpty: FunctionComponent<DropdownItemEmptyProps> = ({
   ref,
   children,
 }) => {
-  const dropdownItemEmptyClass = classnames('cf-dropdown-item-empty', {
-    [`${className}`]: className,
-    'cf-dropdown-item__wrap': wrapText,
-    'cf-dropdown-item__no-wrap': !wrapText,
-  })
+  const dropdownItemEmptyClass = classnames(
+    'cf-dropdown-item-empty',
+    className,
+    {
+      'cf-dropdown-item__wrap': wrapText,
+      'cf-dropdown-item__no-wrap': !wrapText,
+    },
+  )
 
   return (
     <div

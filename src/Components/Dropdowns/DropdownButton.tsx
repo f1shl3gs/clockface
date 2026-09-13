@@ -60,8 +60,7 @@ export const DropdownButton: FunctionComponent<DropdownButtonProps> = ({
   trailingIcon,
   ref,
 }) => {
-  const dropdownButtonClass = classnames('cf-dropdown--button', {
-    [`${className}`]: className,
+  const dropdownButtonClass = classnames('cf-dropdown--button', className, {
     'cf-dropdown__error': status === ComponentStatus.Error,
     'cf-dropdown__loading': status === ComponentStatus.Loading,
   })

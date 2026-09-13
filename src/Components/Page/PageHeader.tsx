@@ -24,9 +24,8 @@ export const PageHeader: FunctionComponent<PageHeaderProps> = ({
   gutters = ComponentSize.Medium,
   ref,
 }) => {
-  const pageHeaderClass = classnames('cf-page-header', {
+  const pageHeaderClass = classnames('cf-page-header', className, {
     [`cf-page__gutter-${gutters}`]: gutters,
-    [`${className}`]: className,
   })
 
   const containerClassName = fullWidth

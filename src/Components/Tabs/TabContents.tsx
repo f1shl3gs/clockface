@@ -18,9 +18,7 @@ export const TabContents: FunctionComponent<TabContentsProps> = ({
   testID = 'tabs--tab-contents',
   ref,
 }) => {
-  const tabContentsClass = classnames('cf-tabs--tab-contents', {
-    [`${className}`]: className,
-  })
+  const tabContentsClass = classnames('cf-tabs--tab-contents', className)
 
   return (
     <div

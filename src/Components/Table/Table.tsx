@@ -36,13 +36,12 @@ export const Table: FunctionComponent<TableProps> = ({
   cellPadding = ComponentSize.Small,
   ref,
 }) => {
-  const tableClass = classnames('cf-table', {
+  const tableClass = classnames('cf-table', className, {
+    'cf-table__striped': striped,
+    'cf-table__highlight': highlight,
     [`cf-table__padding-${cellPadding}`]: cellPadding,
     [`cf-table__borders-${borders}`]: borders,
     [`cf-table__font-${fontSize}`]: fontSize,
-    'cf-table__striped': striped,
-    'cf-table__highlight': highlight,
-    [`${className}`]: className,
   })
 
   return (

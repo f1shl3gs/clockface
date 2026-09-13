@@ -21,9 +21,7 @@ export const ResourceListBody: FunctionComponent<ResourceListBodyProps> = ({
   emptyState,
   ref,
 }) => {
-  const resourceListBodyClass = classnames('cf-resource-list--body', {
-    [`${className}`]: className,
-  })
+  const resourceListBodyClass = classnames('cf-resource-list--body', className)
 
   let childElement = children
 

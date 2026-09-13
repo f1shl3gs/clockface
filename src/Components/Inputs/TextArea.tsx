@@ -107,12 +107,11 @@ export const TextArea: FunctionComponent<TextAreaProps> = ({
   containerRef,
   ref,
 }) => {
-  const textAreaClass = classnames('cf-text-area', {
+  const textAreaClass = classnames('cf-text-area', className, {
     [`cf-text-area__${size}`]: size,
     [`cf-text-area__${status}`]: status,
     'cf-text-area__monospace-font': monospace,
     'cf-text-area__regular-font': !monospace,
-    [`${className}`]: className,
   })
 
   return (

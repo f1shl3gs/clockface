@@ -29,9 +29,8 @@ export const PanelFooter: FunctionComponent<PanelFooterProps> = ({
   justifyContent = JustifyContent.Center,
   ref,
 }) => {
-  const panelFooterClass = classnames('cf-panel--footer', {
+  const panelFooterClass = classnames('cf-panel--footer', className, {
     [`cf-panel--footer__${size}`]: size,
-    [`${className}`]: className,
   })
 
   return (

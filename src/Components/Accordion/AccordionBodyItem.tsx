@@ -23,12 +23,15 @@ export const AccordionBodyItem: FunctionComponent<AccordionBodyItemProps> = ({
 }) => {
   const context = useAccordionContext()
 
-  const accordionBodyContainerClassName = classnames(`cf-accordion--body`, {
-    [`cf-accordion--body-alignment-${context.iconDirection}`]:
-      context.iconDirection,
-    [`${className}`]: className,
-    [`cf-accordion--body--disabled`]: context.disabled,
-  })
+  const accordionBodyContainerClassName = classnames(
+    `cf-accordion--body`,
+    className,
+    {
+      [`cf-accordion--body-alignment-${context.iconDirection}`]:
+        context.iconDirection,
+      [`cf-accordion--body--disabled`]: context.disabled,
+    },
+  )
 
   return (
     <div
