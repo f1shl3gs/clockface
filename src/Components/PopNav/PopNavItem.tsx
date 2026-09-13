@@ -1,5 +1,5 @@
 // Libraries
-import {FunctionComponent, CSSProperties} from 'react'
+import {FunctionComponent, CSSProperties, ReactElement} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -13,7 +13,7 @@ export interface PopNavItemProps extends StandardFunctionProps {
     className: string,
     testID?: string,
     style?: CSSProperties,
-  ) => React.ReactElement
+  ) => ReactElement
 }
 
 export const PopNavItem: FunctionComponent<PopNavItemProps> = ({

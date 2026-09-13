@@ -1,11 +1,14 @@
-import {CSSProperties, ReactNode} from 'react'
+// Libraries
+import {CSSProperties, ReactNode, ReactElement} from 'react'
+
+// Constants
 import {
   GRID_BREAKPOINT_SM,
   GRID_BREAKPOINT_MD,
   GRID_BREAKPOINT_LG,
 } from '../Constants'
 
-// Standardized prop definitons
+// Standardized prop definitions
 export interface StandardFunctionProps {
   /** Unique identifier for getting an element */
   id?: string
@@ -23,7 +26,7 @@ export interface StandardFunctionProps {
 export type ValidationFunction = (input: string) => string | null
 
 // Passing in link elements
-export type RenderLinkElement = (className: string) => React.ReactElement<any>
+export type RenderLinkElement = (className: string) => ReactElement<any>
 
 // Shared Data Types
 export enum ComponentColor {

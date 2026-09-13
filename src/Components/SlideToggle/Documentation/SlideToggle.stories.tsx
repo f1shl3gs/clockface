@@ -66,7 +66,7 @@ export const SlideToggleWithLabels = () => (
     >
       <InputLabel
         wrapText={true}
-        active={!false}
+        active={true}
         size={(ComponentSize as Record<string, any>)['Small']}
       >
         {'Apples'}

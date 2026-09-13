@@ -4,9 +4,9 @@ import classnames from 'classnames'
 
 // Types
 import {
-  StandardFunctionProps,
   ComponentColor,
   RenderLinkElement,
+  StandardFunctionProps,
 } from '../../Types'
 
 export interface TreeNavHeaderProps extends Omit<StandardFunctionProps, 'id'> {
@@ -60,13 +60,12 @@ export const TreeNavHeader: FunctionComponent<TreeNavHeaderProps> = ({
         <div className="cf-tree-nav--label">{label}</div>
       </>
     )
-    const link = React.cloneElement(
+
+    return React.cloneElement(
       linkElement(navMenuHeaderClass),
       {'data-testid': testID},
       linkItems,
     )
-
-    return link
   }
 
   return (

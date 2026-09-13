@@ -87,13 +87,7 @@ const SortIndicator: FunctionComponent<{sortable: boolean}> = ({sortable}) => {
 }
 
 const isSortable = (sort: Sort | undefined): boolean => {
-  if (
-    sort === Sort.None ||
-    sort === Sort.Ascending ||
-    sort === Sort.Descending
-  ) {
-    return true
-  }
-
-  return false
+  return (
+    sort === Sort.None || sort === Sort.Ascending || sort === Sort.Descending
+  )
 }

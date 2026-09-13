@@ -105,7 +105,7 @@ export const ResourceCardEditableName: FunctionComponent<
 
   const handleStopEditing = async (): Promise<void> => {
     setLoading(RemoteDataState.Loading)
-    await onUpdate(workingName)
+    onUpdate(workingName)
     setLoading(RemoteDataState.Done)
     setEditingState(false)
   }
@@ -131,7 +131,7 @@ export const ResourceCardEditableName: FunctionComponent<
         return
       }
       setLoading(RemoteDataState.Loading)
-      await onUpdate(workingName)
+      onUpdate(workingName)
       setLoading(RemoteDataState.Done)
       setEditingState(false)
     }

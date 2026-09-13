@@ -25,7 +25,7 @@ export const _GradientBox = () => {
             height: '100%',
             borderRadius: '2px',
             padding: '8px',
-            backgroundColor: `${`${InfluxColors.Raven}`}`,
+            backgroundColor: `${InfluxColors.Raven}`,
           }}
         >
           some content

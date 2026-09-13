@@ -63,19 +63,19 @@ export const _Table = () => {
           <TableRow ref={tableRowRef}>
             <TableHeaderCell
               ref={tableHeaderCellRef}
-              style={{width: `${'30%'}`}}
+              style={{width: '30%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Name
             </TableHeaderCell>
             <TableHeaderCell
-              style={{width: `${'50%'}`}}
+              style={{width: '50%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Description
             </TableHeaderCell>
             <TableHeaderCell
-              style={{width: `${'20%'}`}}
+              style={{width: '20%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               Price
@@ -86,19 +86,19 @@ export const _Table = () => {
           <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
             <TableCell
               ref={tableCellRef}
-              style={{width: `${'30%'}`}}
+              style={{width: '30%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Peach
             </TableCell>
             <TableCell
-              style={{width: `${'50%'}`}}
+              style={{width: '50%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               A sweet fruit that makes a great pie
             </TableCell>
             <TableCell
-              style={{width: `${'20%'}`}}
+              style={{width: '20%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $5.00
@@ -106,19 +106,19 @@ export const _Table = () => {
           </TableRow>
           <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
             <TableCell
-              style={{width: `${'30%'}`}}
+              style={{width: '30%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Pineapple
             </TableCell>
             <TableCell
-              style={{width: `${'50%'}`}}
+              style={{width: '50%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Tropical, highly sought after, and a requirement for a Piña Colada
             </TableCell>
             <TableCell
-              style={{width: `${'20%'}`}}
+              style={{width: '20%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $8.00
@@ -126,19 +126,19 @@ export const _Table = () => {
           </TableRow>
           <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
             <TableCell
-              style={{width: `${'30%'}`}}
+              style={{width: '30%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Yuzu
             </TableCell>
             <TableCell
-              style={{width: `${'50%'}`}}
+              style={{width: '50%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               A golden citrus fruit from Japan & China with a powerful aroma
             </TableCell>
             <TableCell
-              style={{width: `${'20%'}`}}
+              style={{width: '20%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $11.00
@@ -146,19 +146,19 @@ export const _Table = () => {
           </TableRow>
           <TableRow color={(ComponentColor as Record<string, any>)['Default']}>
             <TableCell
-              style={{width: `${'30%'}`}}
+              style={{width: '30%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               Lychee
             </TableCell>
             <TableCell
-              style={{width: `${'50%'}`}}
+              style={{width: '50%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Left']}
             >
               A light and refreshing fruit encased in a spiky shell
             </TableCell>
             <TableCell
-              style={{width: `${'20%'}`}}
+              style={{width: '20%'}}
               horizontalAlignment={(Alignment as Record<string, any>)['Right']}
             >
               $2.00

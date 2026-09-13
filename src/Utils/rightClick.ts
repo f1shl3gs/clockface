@@ -14,8 +14,8 @@ export const calculateRightClickMenuStyles = (
   if (triggerRef.current && menuRef.current) {
     const viewportWidth = window.innerWidth
     const viewportHeight = window.innerHeight
-    const menuRect: ClientRect = menuRef.current.getBoundingClientRect()
-    const triggerRect: ClientRect = triggerRef.current.getBoundingClientRect()
+    const menuRect = menuRef.current.getBoundingClientRect()
+    const triggerRect = triggerRef.current.getBoundingClientRect()
 
     const mouseX = triggerRect.left + mouseOffset.x
     const mouseY = triggerRect.top + mouseOffset.y

@@ -414,9 +414,9 @@ export const ToggleableCard = () => {
                   // Do nothing
                 }}
                 size={ComponentSize.ExtraSmall}
-                active={!false}
+                active={true}
               />
-              <InputLabel active={!false}>Active</InputLabel>
+              <InputLabel active={true}>Active</InputLabel>
             </FlexBox>
             <strong>System bucket</strong>
             <a href="#">Setup instructions</a>

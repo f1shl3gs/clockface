@@ -261,7 +261,7 @@ export const FullPage = () => {
         >
           <div
             className="mockComponent stretch"
-            style={{height: `${'100%'}`}}
+            style={{height: '100%'}}
           />
         </PageContents>
       </Page>

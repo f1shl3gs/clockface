@@ -84,11 +84,7 @@ export const InterplayOfAllPortals = () => {
   }
 
   const isItemActive = (id: string): boolean => {
-    if (id === navActiveItem || navActiveItem.startsWith(id)) {
-      return true
-    }
-
-    return false
+    return id === navActiveItem || navActiveItem.startsWith(id)
   }
 
   const navItems = [

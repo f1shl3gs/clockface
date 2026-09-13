@@ -68,7 +68,7 @@ export const ResourceCardEditableDescription: FunctionComponent<
   }
 
   const handleStopEditing = async (): Promise<void> => {
-    await onUpdate(workingDescription)
+    onUpdate(workingDescription)
     setEditingState(false)
   }
 
@@ -80,7 +80,7 @@ export const ResourceCardEditableDescription: FunctionComponent<
     e: KeyboardEvent<HTMLInputElement>,
   ): Promise<void> => {
     if (e.key === 'Enter') {
-      await onUpdate(workingDescription)
+      onUpdate(workingDescription)
       setEditingState(false)
     }
 

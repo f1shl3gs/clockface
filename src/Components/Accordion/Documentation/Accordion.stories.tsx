@@ -4,11 +4,13 @@ import {marked} from 'marked'
 
 // Components
 import {Accordion} from '../'
+import {FlexBox, FlexBoxChild} from '../../FlexBox'
+import {AccordionBodyItem} from '../AccordionBodyItem'
+import {Heading} from '../../Typography'
+import {AccordionHeader} from '../AccordionHeader'
+import {InputLabel, Toggle} from '../../Inputs'
 
 // Types
-// Notes
-import AccordionReadme from './Accordion.md?raw'
-import {InputLabel, Toggle} from '../../Inputs'
 import {
   AlignItems,
   ComponentSize,
@@ -18,10 +20,10 @@ import {
   InputToggleType,
   JustifyContent,
 } from '../../../Types'
-import {FlexBox, FlexBoxChild} from '../../FlexBox'
-import {AccordionBodyItem} from '../AccordionBodyItem'
-import {Heading} from '../../Typography'
-import {AccordionHeader} from '../AccordionHeader'
+
+// Notes
+import AccordionReadme from './Accordion.md?raw'
+
 
 export default {title: 'Components / Accordion / Examples'}
 
