@@ -9,3 +9,6 @@ docs
 package-lock.json
 .npmrc
 /.yarn/
+
+# IDE
+.idea
