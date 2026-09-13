@@ -39,25 +39,23 @@ export const Overlay: FunctionComponent<OverlayProps> = ({
   transitionDuration = 360,
   renderMaskElement = (style: CSSProperties) => <OverlayMask style={style} />,
 }) => {
-  const oldVisibility = useRef<boolean>(visible)
   const shouldRender = useDelayedUnmount(visible, transitionDuration)
-
-  useEffect(() => {
-    if (visible && !oldVisibility.current) {
-      window.addEventListener('keydown', handleEscapeKey)
-    }
-
-    oldVisibility.current = visible
-    return () => {
-      window.removeEventListener('keydown', handleEscapeKey)
-    }
-  }, [visible])
 
   const handleEscapeKey = (e: KeyboardEvent): void => {
     if (e.key === 'Escape' && onEscape) {
       onEscape(false)
     }
   }
+
+  useEffect(() => {
+    if (visible && onEscape) {
+      window.addEventListener('keydown', handleEscapeKey)
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKey)
+    }
+  }, [visible, onEscape])
 
   const {addElementToPortal} = usePortal()
 
