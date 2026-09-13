@@ -40,8 +40,8 @@ const handleKeyDown = (
   id: string,
   e: KeyboardEvent<SelectableCardRef>
 ): void => {
-  // 32 is the keyCode for spacebar
-  if (e.keyCode === 32) {
+  // ' ' is the key for spacebar
+  if (e.key === ' ') {
     addCardIDToSelected(id)
   }
 }

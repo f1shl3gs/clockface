@@ -192,7 +192,7 @@ export const UsingTabIndex = () => {
     if (card === undefined || e === undefined) {
       return
     }
-    const spaceKey = e.keyCode === 32
+
     const cardCurrentlyActive = activeCardIDs.includes(card)
     let updatedActiveCardIDs = activeCardIDs
 
@@ -204,7 +204,7 @@ export const UsingTabIndex = () => {
       updatedActiveCardIDs = [...updatedActiveCardIDs, card]
     }
 
-    if (spaceKey) {
+    if (e.key === ' ') {
       updateActiveCardIDs(updatedActiveCardIDs)
     }
   }
