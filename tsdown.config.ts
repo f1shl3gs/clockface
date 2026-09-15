@@ -9,6 +9,7 @@ export default defineConfig({
   exports: {
     customExports: {
       './dist/variables.scss': './dist/variables.scss',
+      './dist/Styles/*.scss': './dist/Styles/*.scss',
       './dist/Styles/shared.css': './dist/Styles/shared.css',
       './src/Types': './src/Types/index.js'
     }
@@ -29,11 +30,7 @@ export default defineConfig({
   },
   copy: [
     {
-      from: 'src/Styles/variables.scss',
-      to: 'dist',
-    },
-    {
-      from: 'src/Styles/shared.scss',
+      from: 'src/Styles/*.scss',
       to: 'dist/Styles',
     },
     {
