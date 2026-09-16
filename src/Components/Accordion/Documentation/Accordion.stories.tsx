@@ -24,7 +24,6 @@ import {
 // Notes
 import AccordionReadme from './Accordion.md?raw'
 
-
 export default {title: 'Components / Accordion / Examples'}
 
 type Setter = (...args: never) => void

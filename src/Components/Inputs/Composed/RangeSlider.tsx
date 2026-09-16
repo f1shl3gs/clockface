@@ -124,11 +124,7 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
         value={min}
         prefix={labelPrefix}
         suffix={labelSuffix}
-        style={
-          orientation === Orientation.Vertical
-            ? verticalLabelStyle
-            : {}
-        }
+        style={orientation === Orientation.Vertical ? verticalLabelStyle : {}}
         hidden={hideLabels}
         testID={`${testID}--min`}
         className="cf-range-slider--min"

@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, CSSProperties, useEffect, useRef} from 'react'
+import React, {FunctionComponent, CSSProperties, useEffect} from 'react'
 import classnames from 'classnames'
 
 // Components

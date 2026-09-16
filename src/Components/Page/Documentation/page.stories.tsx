@@ -13,7 +13,7 @@ import {
   PageHeader,
   PageTitle,
 } from '../index'
-import {SelectGroup, SelectGroupOption} from '../../SelectGroup/index'
+import {SelectGroup, SelectGroupOption} from '../../SelectGroup'
 import {Button} from '../../Button/Composed/Button'
 import {SquareButton} from '../../Button/Composed/SquareButton'
 import {SelectDropdown} from '../../Dropdowns/Composed/SelectDropdown'
@@ -259,10 +259,7 @@ export const FullPage = () => {
           autoHideScrollbar={false}
           gutters={(ComponentSize as Record<string, any>)['Small']}
         >
-          <div
-            className="mockComponent stretch"
-            style={{height: '100%'}}
-          />
+          <div className="mockComponent stretch" style={{height: '100%'}} />
         </PageContents>
       </Page>
     </div>
