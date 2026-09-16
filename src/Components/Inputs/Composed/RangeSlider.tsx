@@ -18,7 +18,7 @@ import {
   ComponentSize,
   AutoComplete,
   ComponentStatus,
-  ComponentOrientation,
+  Orientation,
 } from '../../../Types'
 
 export interface RangeSliderProps extends StandardFunctionProps {
@@ -49,7 +49,7 @@ export interface RangeSliderProps extends StandardFunctionProps {
   /** Adds a suffix to labels */
   labelSuffix?: string
   /** Determines orientation of range slider */
-  orientation?: ComponentOrientation
+  orientation?: Orientation
   /** Determines whether to display value  */
   displayValue?: boolean
   /** Ref to the underlying DOM element */
@@ -74,7 +74,7 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
   labelPrefix,
   labelSuffix,
   autocomplete,
-  orientation = ComponentOrientation.Horizontal,
+  orientation = Orientation.Horizontal,
   displayValue = false,
   ref,
 }) => {
@@ -92,9 +92,9 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
     'cf-range-slider--label cf-range-slider--max',
     {
       [`cf-range-slider--valmax-label__with-value`]:
-        orientation === ComponentOrientation.Horizontal && displayValue,
+        orientation === Orientation.Horizontal && displayValue,
       [`cf-range-slider--valmax-label`]:
-        orientation === ComponentOrientation.Horizontal && !displayValue,
+        orientation === Orientation.Horizontal && !displayValue,
     },
   )
 
@@ -114,7 +114,7 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
   const cleanedValue = valueWithBounds(value, min, max)
 
   const rangeSliderClassName =
-    orientation === ComponentOrientation.Vertical
+    orientation === Orientation.Vertical
       ? `${rangeSliderClass} cf-range-slider__vertical`
       : rangeSliderClass
 
@@ -125,7 +125,7 @@ export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
         prefix={labelPrefix}
         suffix={labelSuffix}
         style={
-          orientation === ComponentOrientation.Vertical
+          orientation === Orientation.Vertical
             ? verticalLabelStyle
             : {}
         }

@@ -55,10 +55,6 @@ export enum ComponentStatus {
   Disabled = 'disabled',
 }
 
-export enum ComponentOrientation {
-  Horizontal = 'horizontal',
-  Vertical = 'vertical',
-}
 export interface Color {
   hex: string
   name: string
@@ -460,8 +456,8 @@ export enum AutoComplete {
 }
 
 export enum Orientation {
-  Vertical = 'vertical',
   Horizontal = 'horizontal',
+  Vertical = 'vertical',
 }
 
 export enum BorderType {
