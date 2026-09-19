@@ -203,7 +203,6 @@ export const CreatableTypeAheadDropdown: FunctionComponent<
       testID={testID}
       className={className}
       menuOpen={menuOpen}
-      disableAutoFocus={true}
       button={button}
       menu={menu}
     />

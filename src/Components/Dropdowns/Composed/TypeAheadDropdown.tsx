@@ -322,7 +322,7 @@ export const TypeAheadDropdown: FunctionComponent<Props> = ({
       {...props}
       testID={testID}
       onClickAway={onClickOutside}
-      disableAutoFocus
+      autoFocus
       button={active => (
         <DropdownHeader
           active={active}
