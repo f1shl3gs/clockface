@@ -101,45 +101,46 @@ export const Dropdown: FunctionComponent<DropdownProps> = ({
 
   useEffect(() => {
     if (!autoFocus) {
-      if (expanded) {
-        /**
-         * Find the first focusable element from within the dropdown,
-         * starting with the first focusable, active item
-         */
-        const selector = 'button.cf-dropdown-item'
-        const activeEl = document.querySelector(`${selector}.active`)
-        const firstEl = document.querySelector(selector)
-        const element = (activeEl || firstEl) as HTMLButtonElement
+      return
+    }
 
-        if (element) {
-          element.focus()
-        }
+    if (expanded) {
+      /**
+       * Find the first focusable element from within the dropdown,
+       * starting with the first focusable, active item
+       */
+      const selector = 'button.cf-dropdown-item'
+      const activeEl = document.querySelector(`${selector}.active`)
+      const firstEl = document.querySelector(selector)
+      const element = (activeEl || firstEl) as HTMLButtonElement
 
-        window.addEventListener('keydown', handleEscapeKey)
-      } else {
-        window.removeEventListener('keydown', handleEscapeKey)
-
-        /**
-         * When the popover is closed, restore focus to the trigger element
-         */
-        if (typeof internalRef !== 'function' && internalRef.current) {
-          const triggerEl = internalRef.current.querySelector(
-            'button[tabindex]',
-          ) as HTMLButtonElement
-
-          if (didMountRef.current && triggerEl) {
-            triggerEl.focus()
-          }
-        }
+      if (element) {
+        element.focus()
       }
 
-      didMountRef.current = true
+      window.addEventListener('keydown', handleEscapeKey)
+    } else {
+      window.removeEventListener('keydown', handleEscapeKey)
 
-      return () => {
-        window.removeEventListener('keydown', handleEscapeKey)
+      /**
+       * When the popover is closed, restore focus to the trigger element
+       */
+      if (typeof internalRef !== 'function' && internalRef.current) {
+        const triggerEl = internalRef.current.querySelector(
+          'button[tabindex]',
+        ) as HTMLButtonElement
+
+        if (didMountRef.current && triggerEl) {
+          triggerEl.focus()
+        }
       }
     }
-    return
+
+    didMountRef.current = true
+
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKey)
+    }
   }, [expanded])
 
   const dropdownClass = classnames('cf-dropdown', className, {
