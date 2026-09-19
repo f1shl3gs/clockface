@@ -62,7 +62,7 @@ export const SelectDropdown: FunctionComponent<SelectDropdownProps> = ({
   menuTheme = DropdownMenuTheme.Onyx,
   buttonSize = ComponentSize.Small,
   buttonIcon,
-  indicator = DropdownItemType.Dot,
+  indicator = DropdownItemType.None,
   buttonColor = ComponentColor.Default,
   buttonStatus = ComponentStatus.Default,
   menuMaxHeight,
