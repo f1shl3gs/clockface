@@ -535,6 +535,7 @@ $cf-scrollbar-offset: 3px;
     border-bottom-right-radius: $cf-radius;
 
     &-button {
+      display: none;
       background-color: $trackColor;
     }
     &-track {
