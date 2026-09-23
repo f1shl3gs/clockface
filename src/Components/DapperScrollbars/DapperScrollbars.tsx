@@ -354,17 +354,6 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
       }
     }
 
-  // ---- Container styles ----
-  const containerStyle: CSSProperties = {
-    ...style,
-    ...((autoSize || autoSizeWidth) && !style?.width
-      ? {width: 'fit-content'}
-      : {}),
-    ...((autoSize || autoSizeHeight) && !style?.height
-      ? {height: 'fit-content'}
-      : {}),
-  }
-
   const scrollerStyle: CSSProperties = noScroll
     ? {overflow: 'hidden'}
     : {
@@ -372,9 +361,11 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
         overflowY: noScrollY ? 'hidden' : 'auto',
       }
 
-  const dapperScrollbars2Class = classnames('cf-dapper-scrollbars', className, {
+  const dapperScrollbarsClass = classnames('cf-dapper-scrollbars', className, {
     'cf-dapper-scrollbars--autohide': autoHide,
     [`cf-dapper-scrollbars--${size}`]: size,
+    'cf-dapper-scrollbars--auto-size-width': autoSize || autoSizeWidth,
+    'cf-dapper-scrollbars--auto-size-height': autoSize || autoSizeHeight,
   })
 
   const thumbXStyle = {
@@ -388,62 +379,64 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   return (
     <div
       id={id}
-      style={containerStyle}
-      className={dapperScrollbars2Class}
+      style={style}
+      className={dapperScrollbarsClass}
       data-testid={testID}
     >
-      <div
-        ref={scrollerRef}
-        className="cf-dapper-scrollbars--scroller"
-        style={scrollerStyle}
-        onScroll={handleScroll}
-      >
-        <div ref={contentRef} className="cf-dapper-scrollbars--content">
-          {children}
+      <div className="cf-dapper-scrollbars--wrapper">
+        <div
+          ref={scrollerRef}
+          className="cf-dapper-scrollbars--scroller"
+          style={scrollerStyle}
+          onScroll={handleScroll}
+        >
+          <div ref={contentRef} className="cf-dapper-scrollbars--content">
+            {children}
+          </div>
         </div>
+        {showTrackX && (
+          <div
+            ref={trackXRef}
+            className="cf-dapper-scrollbars--track-x"
+            onClick={handleTrackClick('x')}
+          >
+            <div
+              className="cf-dapper-scrollbars--thumb-x"
+              data-testid={`${testID}--thumb-x`}
+              style={{
+                ...thumbXStyle,
+                width: `${thumbXSize}px`,
+                transform: `translateX(${thumbXPos}px)`,
+              }}
+              onPointerDown={beginDrag('x')}
+              onPointerMove={moveDrag('x')}
+              onPointerUp={endDrag}
+              onPointerCancel={endDrag}
+            />
+          </div>
+        )}
+        {showTrackY && (
+          <div
+            ref={trackYRef}
+            className="cf-dapper-scrollbars--track-y"
+            onClick={handleTrackClick('y')}
+          >
+            <div
+              className="cf-dapper-scrollbars--thumb-y"
+              data-testid={`${testID}--thumb-y`}
+              style={{
+                ...thumbYStyle,
+                height: `${thumbYSize}px`,
+                transform: `translateY(${thumbYPos}px)`,
+              }}
+              onPointerDown={beginDrag('y')}
+              onPointerMove={moveDrag('y')}
+              onPointerUp={endDrag}
+              onPointerCancel={endDrag}
+            />
+          </div>
+        )}
       </div>
-      {showTrackX && (
-        <div
-          ref={trackXRef}
-          className="cf-dapper-scrollbars--track-x"
-          onClick={handleTrackClick('x')}
-        >
-          <div
-            className="cf-dapper-scrollbars--thumb-x"
-            data-testid={`${testID}--thumb-x`}
-            style={{
-              ...thumbXStyle,
-              width: `${thumbXSize}px`,
-              transform: `translateX(${thumbXPos}px)`,
-            }}
-            onPointerDown={beginDrag('x')}
-            onPointerMove={moveDrag('x')}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
-          />
-        </div>
-      )}
-      {showTrackY && (
-        <div
-          ref={trackYRef}
-          className="cf-dapper-scrollbars--track-y"
-          onClick={handleTrackClick('y')}
-        >
-          <div
-            className="cf-dapper-scrollbars--thumb-y"
-            data-testid={`${testID}--thumb-y`}
-            style={{
-              ...thumbYStyle,
-              height: `${thumbYSize}px`,
-              transform: `translateY(${thumbYPos}px)`,
-            }}
-            onPointerDown={beginDrag('y')}
-            onPointerMove={moveDrag('y')}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
-          />
-        </div>
-      )}
     </div>
   )
 }
