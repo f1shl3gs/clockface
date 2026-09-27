@@ -25,8 +25,8 @@ export interface OverlayProps extends StandardFunctionProps {
   renderMaskElement?: (style: CSSProperties) => React.ReactElement
   /** Controls the transition timing */
   transitionDuration?: number
-  /** Accepts state handler for visible prop to enable escape press functionality */
-  onEscape?: (visible: boolean) => void
+  /** Function called when the escape key is pressed */
+  onEscape?: () => void
 }
 
 export const Overlay: FunctionComponent<OverlayProps> = ({
@@ -43,7 +43,7 @@ export const Overlay: FunctionComponent<OverlayProps> = ({
 
   const handleEscapeKey = (e: KeyboardEvent): void => {
     if (e.key === 'Escape' && onEscape) {
-      onEscape(false)
+      onEscape()
     }
   }
 
