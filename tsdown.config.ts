@@ -11,7 +11,6 @@ export default defineConfig({
       './dist/variables.scss': './dist/variables.scss',
       './dist/Styles/*.scss': './dist/Styles/*.scss',
       './dist/Styles/shared.css': './dist/Styles/shared.css',
-      './src/Types': './src/Types/index.js'
     }
   },
   clean: true,
