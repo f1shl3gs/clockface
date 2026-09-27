@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {Children, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -34,9 +34,9 @@ export const ResourceCardMeta: FunctionComponent<ResourceCardMetaProps> = ({
   const resourceCardMetaClass = classnames('cf-resource-meta', className)
 
   const wrappedChildren =
-    React.Children.count(children) === 0
+    Children.count(children) === 0
       ? children
-      : React.Children.map(children, child => (
+      : Children.map(children, child => (
           <div className="cf-resource-meta--item">{child}</div>
         ))
 

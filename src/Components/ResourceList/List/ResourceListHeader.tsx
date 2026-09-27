@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -7,7 +7,7 @@ import {StandardFunctionProps} from '../../../Types'
 
 export interface ResourceListHeaderProps extends StandardFunctionProps {
   /** Used for rendering a filter input above the list, opposite the sort headers */
-  filterComponent?: React.ReactElement
+  filterComponent?: ReactElement
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
 }

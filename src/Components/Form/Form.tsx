@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {FunctionComponent, Ref, SubmitEvent} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -24,7 +24,7 @@ export interface FormProps extends StandardFunctionProps {
   /** Enable or disable form validation */
   noValidate?: boolean
   /** Function to be called on form submit */
-  onSubmit?: (e: React.SubmitEvent) => void
+  onSubmit?: (e: SubmitEvent) => void
   /** Context name or keyword */
   target?: string
   /** If true prevents default event during onSubmit */
@@ -53,7 +53,7 @@ export const Form: FunctionComponent<FormProps> = ({
 }) => {
   const formWrapperClass = classnames('cf-form--wrapper', className)
 
-  const handleSubmit = (e: React.SubmitEvent): void => {
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>): void => {
     if (preventDefault) {
       e.preventDefault()
     }

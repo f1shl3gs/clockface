@@ -1,5 +1,5 @@
 // Libraries
-import React, {
+import {
   useRef,
   RefObject,
   MouseEvent,
@@ -7,6 +7,7 @@ import React, {
   useLayoutEffect,
   FunctionComponent,
   Ref,
+  ReactElement,
 } from 'react'
 import classnames from 'classnames'
 
@@ -37,7 +38,7 @@ export interface PopoverDialogProps extends StandardFunctionProps {
   /** Means of applying color to popover */
   appearance?: Appearance
   /** Popover dialog contents */
-  contents: React.ReactElement
+  contents: ReactElement
   /** Handles clicks detected outside the popover dialog element */
   onClickOutside: (e: MouseEvent) => void
   /** Handles mouseleave events */

@@ -1,11 +1,12 @@
 // Libraries
-import React, {
+import {
   useState,
   useEffect,
   RefObject,
   MouseEvent,
   FunctionComponent,
   Ref,
+  ReactElement,
 } from 'react'
 
 // Components
@@ -30,7 +31,7 @@ export interface PopoverProps extends StandardFunctionProps {
   /** Popover dialog color */
   color?: ComponentColor
   /** Popover dialog contents */
-  contents: (onHide?: () => void) => React.ReactElement
+  contents: (onHide?: () => void) => ReactElement
   /** Type of interaction to show the popover dialog */
   showEvent?: PopoverInteraction
   /** Type of interaction to hide the popover dialog */

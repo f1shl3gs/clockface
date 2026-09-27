@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {Children, FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -7,7 +7,7 @@ import {StandardFunctionProps} from '../../../Types'
 
 export interface ResourceListBodyProps extends StandardFunctionProps {
   /** Element to show when no children are passed in, useful for implementing filtering */
-  emptyState: React.ReactElement
+  emptyState: ReactElement
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
 }
@@ -26,7 +26,7 @@ export const ResourceListBody: FunctionComponent<ResourceListBodyProps> = ({
   let childElement = children
 
   if (
-    React.Children.count(children) === 0 ||
+    Children.count(children) === 0 ||
     children === undefined ||
     children === null ||
     children === false

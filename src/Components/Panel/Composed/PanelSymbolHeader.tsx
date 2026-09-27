@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Styles
@@ -18,9 +18,9 @@ import {
 
 export interface PanelSymbolHeaderProps extends PanelHeaderProps {
   /** Element to display before header text (Bullet or Icon) */
-  symbol?: React.ReactElement
+  symbol?: ReactElement
   /** Panel title */
-  title?: React.ReactElement
+  title?: ReactElement
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
 }

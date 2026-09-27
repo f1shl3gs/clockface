@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -22,7 +22,7 @@ export interface ResourceCardProps
   /** Renders the card with disabled styles */
   disabled?: boolean
   /** Renders the context menu component in its designated place */
-  contextMenu?: React.ReactElement
+  contextMenu?: ReactElement
   /** Controls the interaction style for the contextMenu */
   contextMenuInteraction?: 'alwaysVisible' | 'showOnHover'
   /** If true the card will highlight on mouse over */

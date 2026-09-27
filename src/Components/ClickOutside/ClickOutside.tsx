@@ -1,9 +1,9 @@
-import React, {FunctionComponent, useEffect, useRef} from 'react'
+import {FunctionComponent, ReactElement, useEffect, useRef} from 'react'
 
 interface Props {
   /** Function to call when click outside is detected */
   onClickOutside: (ev: any) => void
-  children: React.ReactElement
+  children: ReactElement
 }
 
 export const ClickOutside: FunctionComponent<Props> = ({

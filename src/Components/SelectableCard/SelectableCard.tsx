@@ -1,5 +1,11 @@
 // Libraries
-import React, {MouseEvent, KeyboardEvent, FunctionComponent, Ref} from 'react'
+import {
+  MouseEvent,
+  KeyboardEvent,
+  FunctionComponent,
+  Ref,
+  Children,
+} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -81,7 +87,7 @@ export const SelectableCard: FunctionComponent<SelectableCardProps> = ({
     }
   }
 
-  const childrenExist = React.Children.count(children) > 0
+  const childrenExist = Children.count(children) > 0
 
   return (
     <div

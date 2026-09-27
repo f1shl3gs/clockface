@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, CSSProperties, useEffect} from 'react'
+import {FunctionComponent, CSSProperties, useEffect, ReactElement} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -22,7 +22,7 @@ export interface OverlayProps extends StandardFunctionProps {
   /** Controls visibility of the overlay */
   visible: boolean
   /** Will replace the mask element with a custom element, useful for customizing the mask appearance */
-  renderMaskElement?: (style: CSSProperties) => React.ReactElement
+  renderMaskElement?: (style: CSSProperties) => ReactElement
   /** Controls the transition timing */
   transitionDuration?: number
   /** Function called when the escape key is pressed */

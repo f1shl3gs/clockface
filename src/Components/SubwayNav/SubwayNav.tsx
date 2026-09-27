@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react'
+import {FunctionComponent, ReactElement} from 'react'
 
 import {IconFont} from '../../Types'
 
@@ -17,7 +17,7 @@ interface Props {
   currentStep: number
   navigationSteps: SubwayNavModel[]
   onStepClick: (step: number) => void
-  settingUpIcon: React.ReactElement
+  settingUpIcon: ReactElement
   settingUpText: string
   setupTime?: string
   settingUpHeader?: string

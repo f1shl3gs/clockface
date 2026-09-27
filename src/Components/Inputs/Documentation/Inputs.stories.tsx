@@ -20,7 +20,6 @@ import {
   ComponentStatus,
   ComponentSize,
   ComponentColor,
-  ComponentOrientation,
   IconFont,
   AutoComplete,
   FlexDirection,
@@ -29,6 +28,7 @@ import {
   AutoInputMode,
   InputToggleType,
   Appearance,
+  Orientation,
 } from '../../../Types'
 
 // Notes
@@ -685,9 +685,7 @@ export const _RangeSlider = () => {
         hideLabels={false}
         style={exampleRangeSliderStyle}
         status={(ComponentStatus as Record<string, any>)['Default']}
-        orientation={
-          (ComponentOrientation as Record<string, any>)['Horizontal']
-        }
+        orientation={(Orientation as Record<string, any>)['Horizontal']}
         displayValue={false}
       />
       <div className="story--test-buttons">

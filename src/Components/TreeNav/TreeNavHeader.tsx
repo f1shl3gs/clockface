@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {cloneElement, FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -13,9 +13,9 @@ export interface TreeNavHeaderProps extends Omit<StandardFunctionProps, 'id'> {
   /** Unique identifier for nav item */
   id: string
   /** Icon or Image to appear in the square */
-  icon?: React.ReactElement
+  icon?: ReactElement
   /** Label to appear to the right of the icon, only visible when expanded */
-  label: React.ReactElement
+  label: ReactElement
   /** Coloration of the Header */
   color?: ComponentColor
   /** Controls state of item */
@@ -61,7 +61,7 @@ export const TreeNavHeader: FunctionComponent<TreeNavHeaderProps> = ({
       </>
     )
 
-    return React.cloneElement(
+    return cloneElement(
       linkElement(navMenuHeaderClass),
       {'data-testid': testID},
       linkItems,

@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {cloneElement, FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -9,7 +9,7 @@ export interface TreeNavItemProps extends Omit<StandardFunctionProps, 'id'> {
   /** Unique identifier for nav item */
   id: string
   /** Icon or Image to appear in the square */
-  icon: React.ReactElement
+  icon: ReactElement
   /** Label to appear to the right of the icon, only visible when expanded */
   label: string
   /** Optional label displayed when the TreeNav is collapsed */
@@ -54,7 +54,7 @@ export const TreeNavItem: FunctionComponent<TreeNavItemProps> = ({
         <div className="cf-tree-nav--label">{label}</div>
       </>
     )
-    const link = React.cloneElement(
+    const link = cloneElement(
       linkElement('cf-tree-nav--item-block'),
       {'data-testid': testID},
       linkItems,

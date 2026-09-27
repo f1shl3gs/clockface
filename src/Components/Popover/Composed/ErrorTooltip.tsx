@@ -1,9 +1,15 @@
 // Libraries
-import React, {useRef, CSSProperties, FunctionComponent, Ref} from 'react'
+import {
+  useRef,
+  CSSProperties,
+  FunctionComponent,
+  Ref,
+  ReactElement,
+} from 'react'
 import classnames from 'classnames'
-import {Icon} from '../../Icon'
 
 // Components
+import {Icon} from '../../Icon'
 import {Popover} from '../'
 
 // Types
@@ -23,7 +29,7 @@ export interface ErrorTooltipProps extends StandardFunctionProps {
   /** Controls the size of the question mark circle */
   diameter?: number
   /** Contents to display in tooltip */
-  tooltipContents: React.ReactElement | string
+  tooltipContents: ReactElement | string
   /** Useful for customizing the tooltip itself */
   tooltipStyle?: CSSProperties
   /** Useful for defining where tooltip should appear relative to the icon */

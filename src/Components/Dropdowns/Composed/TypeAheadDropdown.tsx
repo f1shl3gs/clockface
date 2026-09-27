@@ -1,11 +1,12 @@
 // Libraries
-import React, {
+import {
   ChangeEvent,
   FunctionComponent,
   useEffect,
   useMemo,
   useRef,
   useState,
+  KeyboardEvent,
 } from 'react'
 import classnames from 'classnames'
 
@@ -181,9 +182,7 @@ export const TypeAheadDropdown: FunctionComponent<Props> = ({
     setInputValue(selectedName)
   }
 
-  const handleKeyboardUpDown = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
+  const handleKeyboardUpDown = (event: KeyboardEvent<HTMLInputElement>) => {
     let newIndex = -1
 
     if (event.key === 'ArrowDown') {

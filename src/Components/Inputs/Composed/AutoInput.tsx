@@ -1,5 +1,5 @@
 // Libraries
-import React, {RefObject, FunctionComponent, Ref} from 'react'
+import {RefObject, FunctionComponent, Ref, ReactElement} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -19,7 +19,7 @@ import './AutoInput.scss'
 
 export interface AutoInputProps extends StandardFunctionProps {
   /** Pass in a component of type "Input" */
-  inputComponent: React.ReactElement
+  inputComponent: ReactElement
   /** Fires when the radio is toggled and the mode changes */
   onChangeMode: (mode: AutoInputMode) => void
   /** Modality of radio, either "Auto" or "Custom" */

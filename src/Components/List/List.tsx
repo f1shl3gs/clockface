@@ -1,11 +1,13 @@
 // Libraries
-import React, {
+import {
   RefObject,
   CSSProperties,
   ReactNode,
   createContext,
   FunctionComponent,
   Ref,
+  Children,
+  isValidElement,
 } from 'react'
 import classnames from 'classnames'
 
@@ -170,15 +172,15 @@ const calculateSelectedPosition = (
     return 0
   }
 
-  const items = React.Children.map(children, child => {
-    if (React.isValidElement(child)) {
+  const items = Children.map(children, child => {
+    if (isValidElement(child)) {
       return (child.props as any).selected ?? false
     }
     return false
   })
 
-  const sizes = React.Children.map(children, child => {
-    if (React.isValidElement(child)) {
+  const sizes = Children.map(children, child => {
+    if (isValidElement(child)) {
       return (child.props as any).selected ?? 'xs'
     }
     return 'xs'

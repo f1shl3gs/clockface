@@ -1,11 +1,12 @@
 // Libraries
-import React, {
+import {
   ChangeEvent,
   KeyboardEvent,
   RefObject,
   useState,
   FunctionComponent,
   Ref,
+  Children,
 } from 'react'
 import classnames from 'classnames'
 
@@ -142,7 +143,7 @@ export const Toggle: FunctionComponent<ToggleProps> = ({
     'cf-toggle__checkbox': type === InputToggleType.Checkbox,
     'cf-toggle__radio': type === InputToggleType.Radio,
     'cf-toggle__disabled': disabled,
-    'cf-toggle__labelled': children && !!React.Children.count(children),
+    'cf-toggle__labelled': children && !!Children.count(children),
   })
 
   const handleClick = (): void => {

@@ -1,5 +1,5 @@
 // Libraries
-import React, {useState, FunctionComponent, Ref} from 'react'
+import {useState, FunctionComponent, Ref, Children} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -28,7 +28,7 @@ export const TreeNavUser: FunctionComponent<TreeNavUserProps> = ({
   ref,
 }) => {
   const [expandedState, setExpandedState] = useState<boolean>(false)
-  const hasChildren = React.Children.count(children) > 0
+  const hasChildren = Children.count(children) > 0
 
   const navMenuUserClass = classnames('cf-tree-nav--user', className, {
     'cf-tree-nav--user__expandable': hasChildren,

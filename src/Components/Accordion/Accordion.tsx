@@ -1,5 +1,12 @@
 // Libraries
-import React, {useState, FunctionComponent, Ref} from 'react'
+import {
+  useState,
+  FunctionComponent,
+  Ref,
+  createContext,
+  useContext,
+  Children,
+} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -21,7 +28,7 @@ export interface AccordionProps extends StandardFunctionProps {
   ref?: Ref<HTMLDivElement>
 }
 
-export const AccordionContext = React.createContext<
+export const AccordionContext = createContext<
   | {
       isExpanded: boolean
       setExpanded: (param: boolean) => void
@@ -34,7 +41,7 @@ export const AccordionContext = React.createContext<
 >(undefined)
 
 export const useAccordionContext = () => {
-  const context = React.useContext(AccordionContext)
+  const context = useContext(AccordionContext)
   if (context === undefined) {
     throw new Error('useAccordionContext must be used within an Accordion')
   }
@@ -68,7 +75,7 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
     },
   )
 
-  const [header, ...body] = React.Children.toArray(children)
+  const [header, ...body] = Children.toArray(children)
   const hasBody = !!body.length
 
   const onChangeFunction = () => {

@@ -1,11 +1,13 @@
 // Libraries
-import React, {
+import {
   FunctionComponent,
   useState,
   useRef,
   useEffect,
   cloneElement,
   CSSProperties,
+  Children,
+  isValidElement,
 } from 'react'
 import classnames from 'classnames'
 
@@ -51,13 +53,13 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
   backgroundStyle,
   handleBarStyle,
 }) => {
-  const panelsCount = React.Children.count(children)
+  const panelsCount = Children.count(children)
 
   const [dragIndex, setDragIndex] = useState<number>(NULL_DRAG)
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const childArray = React.Children.toArray(children)
+  const childArray = Children.toArray(children)
 
   const isDragging = dragIndex !== NULL_DRAG
 
@@ -194,9 +196,9 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
       id={id}
       style={style}
     >
-      {React.Children.map(children, (child, i: number) => {
+      {Children.map(children, (child, i: number) => {
         if (
-          !React.isValidElement<DraggableResizerPanelProps>(child) ||
+          !isValidElement<DraggableResizerPanelProps>(child) ||
           child.type !== DraggableResizerPanel
         ) {
           return null
@@ -208,7 +210,7 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
         const nextChild = childArray[i + 1]
         const isCollapsibleToUpper =
           !isLastPanel &&
-          React.isValidElement<DraggableResizerPanelProps>(nextChild) &&
+          isValidElement<DraggableResizerPanelProps>(nextChild) &&
           nextChild.props.isCollapsible
 
         return (

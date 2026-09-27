@@ -1,6 +1,12 @@
 // Libraries
 import classnames from 'classnames'
-import React, {FunctionComponent, MouseEvent, Ref} from 'react'
+import {
+  cloneElement,
+  FunctionComponent,
+  MouseEvent,
+  ReactElement,
+  Ref,
+} from 'react'
 
 // Types
 import {RenderLinkElement, StandardFunctionProps} from '../../Types'
@@ -13,7 +19,7 @@ export interface TabProps extends StandardFunctionProps {
   /** Text label of tab */
   text: string
   /** Icon to appear left of the text label */
-  icon?: React.ReactElement
+  icon?: ReactElement
   /** Function to call when tab is clicked, id of tab is passed in */
   onClick?: (id: string) => void
   /** If a function is passed in a dismiss button is rendered in the right of the tab */
@@ -73,7 +79,7 @@ export const Tab: FunctionComponent<TabProps> = ({
   )
 
   if (linkElement) {
-    return React.cloneElement(
+    return cloneElement(
       linkElement(tabClass),
       {'data-testid': testID},
       tabContents,

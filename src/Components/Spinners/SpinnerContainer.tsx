@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -12,7 +12,7 @@ export interface SpinnerContainerProps extends StandardFunctionProps {
   /** Loading state */
   loading: RemoteDataState
   /** Spinner component */
-  spinnerComponent: React.ReactElement
+  spinnerComponent: ReactElement
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
 }

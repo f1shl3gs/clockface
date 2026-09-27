@@ -1,5 +1,5 @@
 // Libraries
-import React, {useState, FunctionComponent, Ref} from 'react'
+import {useState, FunctionComponent, Ref, ReactElement} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -18,11 +18,11 @@ export interface TreeNavProps extends StandardFunctionProps {
   /** Callback for handling toggle clicks */
   onToggleClick?: () => void
   /** Element to appear at the top of the nav menu */
-  headerElement?: React.ReactElement
+  headerElement?: ReactElement
   /** Banner to appear in expanded menu */
-  bannerElement?: React.ReactElement
+  bannerElement?: ReactElement
   /** User widget to appear below the header element */
-  userElement?: React.ReactElement
+  userElement?: ReactElement
   /** Controls how the Banner element renders when in collapsed state */
   hideBannerWhenCollapsed?: boolean
   /** Ref to the underlying DOM element */

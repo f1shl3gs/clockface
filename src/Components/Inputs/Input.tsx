@@ -1,10 +1,11 @@
 // Libraries
 import classnames from 'classnames'
-import React, {
+import {
   ChangeEvent,
   CSSProperties,
   FunctionComponent,
   KeyboardEvent,
+  ReactElement,
   Ref,
   RefObject,
   useState,
@@ -175,7 +176,7 @@ export const Input: FunctionComponent<InputProps> = ({
   const inputCheckboxClass = classnames('cf-input--checkbox', {checked})
 
   /** If both icon and colorPreview are set in props, icon has higher priority */
-  let iconElement: React.ReactElement | null = null
+  let iconElement: ReactElement | null = null
   if (icon) {
     iconElement = <Icon glyph={icon} className="cf-input-icon" />
   } else if (colorPreview) {

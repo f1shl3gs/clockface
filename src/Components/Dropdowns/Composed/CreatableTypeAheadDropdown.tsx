@@ -1,11 +1,13 @@
 // Libraries
-import React, {
+import {
   ChangeEvent,
   MouseEvent,
   useState,
   useEffect,
   FunctionComponent,
   Ref,
+  ReactElement,
+  KeyboardEvent,
 } from 'react'
 
 // Components
@@ -41,7 +43,7 @@ export interface CreatableTypeAheadDropdownProps extends StandardFunctionProps {
   menuTheme?: DropdownMenuTheme
   menuMaxHeight?: number
   /** Customize the layout of dropdown items */
-  customizedDropdownItem?: (displayText: string) => React.ReactElement
+  customizedDropdownItem?: (displayText: string) => ReactElement
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
 }
@@ -125,7 +127,7 @@ export const CreatableTypeAheadDropdown: FunctionComponent<
     }
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       onSelect(typedValue)
       setMenuOpen(MenuStatus.Closed)

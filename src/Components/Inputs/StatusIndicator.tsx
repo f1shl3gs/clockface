@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -42,7 +42,7 @@ export const StatusIndicator: FunctionComponent<StatusIndicatorProps> = ({
     [`cf-status-indicator__${size}`]: size,
   })
 
-  let statusElement: React.ReactElement = <></>
+  let statusElement: ReactElement = <></>
   const shadowElement = shadow && (
     <div className="cf-status-indicator--shadow" />
   )

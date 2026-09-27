@@ -1,5 +1,12 @@
 // Libraries
-import React, {FunctionComponent, useEffect, useRef, Ref} from 'react'
+import {
+  FunctionComponent,
+  useEffect,
+  useRef,
+  Ref,
+  ReactNode,
+  ReactElement,
+} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -17,13 +24,13 @@ import {
 export interface FormValidationElementProps
   extends Omit<StandardFunctionProps, 'children'> {
   /** Child components */
-  children: (status: ComponentStatus) => React.ReactNode
+  children: (status: ComponentStatus) => ReactNode
   /** Function used for validation check */
   validationFunc: ValidationFunction
   /** Function called when validation status */
   onStatusChange?: (newStatus: ComponentStatus) => void
   /** Element to be displayed along with label */
-  labelAddOn?: () => React.ReactElement
+  labelAddOn?: () => ReactElement
   /** Label Text */
   label: string
   /** Field value */

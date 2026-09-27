@@ -1,5 +1,5 @@
 // Libraries
-import React, {CSSProperties, FunctionComponent, Ref} from 'react'
+import {CSSProperties, FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 import {colord} from 'colord'
 
@@ -17,14 +17,14 @@ import {InfluxColors, StandardFunctionProps} from '../../../Types'
 
 export interface FunnelPageProps extends StandardFunctionProps {
   /** Places a logo in the top left corner */
-  logo?: React.ReactElement
+  logo?: ReactElement
   /** Primary page background color */
   backgroundColor?: InfluxColors | string
   /** First background accent color */
   accentColorA?: InfluxColors | string
   /** Second background accent color */
   accentColorB?: InfluxColors | string
-  /** Control inline styles of the outermost elemment */
+  /** Control inline styles of the outermost element */
   pageStyle?: CSSProperties
   /** Renders a graphic in the funnel page */
   enableGraphic?: boolean

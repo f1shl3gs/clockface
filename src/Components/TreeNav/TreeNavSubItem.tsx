@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent} from 'react'
+import {cloneElement, FunctionComponent} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -50,7 +50,7 @@ export const TreeNavSubItem: FunctionComponent<TreeNavSubItemProps> = ({
   )
 
   if (linkElement) {
-    labelElement = React.cloneElement(
+    labelElement = cloneElement(
       linkElement('cf-tree-nav--sub-item-label'),
       {'data-testid': testID},
       label,

@@ -1,11 +1,13 @@
 // Libraries
-import React, {
+import {
   MouseEvent,
   createContext,
   useContext,
   cloneElement,
   FunctionComponent,
   Ref,
+  ReactElement,
+  Children,
 } from 'react'
 import classnames from 'classnames'
 
@@ -53,7 +55,7 @@ export interface ListItemProps extends CombinedListItemProps {
   /** Prevents any interaction with this element, including the onClick function */
   disabled?: boolean
   /** Pass in an <a> or <Link> element as an alternative to onClick */
-  linkElement?: React.ReactElement<any>
+  linkElement?: ReactElement<any>
   /** Colorizes the background of the list item in hover and selected state */
   backgroundColor?: InfluxColors | string
   /** Overrides backgroundColor, fills background with gradient */
@@ -113,7 +115,7 @@ export const ListItem: FunctionComponent<ListItemProps> = ({
     }
   }
 
-  const formattedChildren = React.Children.map(children, child => {
+  const formattedChildren = Children.map(children, child => {
     if (typeof child === 'string') {
       return <div className={listItemTextClass}>{child}</div>
     }

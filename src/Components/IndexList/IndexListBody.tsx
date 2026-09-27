@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {Children, FunctionComponent, ReactElement, Ref} from 'react'
 
 // Types
 import {StandardFunctionProps} from '../../Types'
@@ -7,7 +7,7 @@ import classnames from 'classnames'
 
 export interface IndexListBodyProps extends StandardFunctionProps {
   /** Rendered when no children are passed in */
-  emptyState: React.ReactElement
+  emptyState: ReactElement
   /** Used to ensure the empty state takes up the full width of the table */
   columnCount: number
   /** Ref to the underlying DOM element */
@@ -26,7 +26,7 @@ export const IndexListBody: FunctionComponent<IndexListBodyProps> = ({
 }) => {
   const indexListBodyClass = classnames('cf-index-list--body', className)
 
-  if (React.Children.count(children)) {
+  if (Children.count(children)) {
     return (
       <tbody
         className={indexListBodyClass}

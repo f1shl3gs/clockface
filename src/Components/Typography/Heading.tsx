@@ -1,5 +1,5 @@
 // Libraries
-import React, {MouseEvent, FunctionComponent, Ref} from 'react'
+import {MouseEvent, FunctionComponent, Ref, createElement} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -62,7 +62,7 @@ export const Heading: FunctionComponent<HeadingProps> = ({
 
   const headingElement = `${element}`
 
-  return React.createElement(
+  return createElement(
     headingElement,
     {
       id,

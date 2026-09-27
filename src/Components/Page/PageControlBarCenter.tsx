@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {Children, FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -20,7 +20,7 @@ export const PageControlBarCenter: FunctionComponent<
   testID = 'page-control-bar--center',
   ref,
 }) => {
-  const noChildren = React.Children.count(children) === 0
+  const noChildren = Children.count(children) === 0
 
   const pageControlBarCenterClass = classnames(
     'cf-page-control-bar--center',

@@ -1,11 +1,12 @@
 // Libraries
-import React, {
+import {
   MouseEvent,
   useState,
   useEffect,
   useRef,
   FunctionComponent,
   Ref,
+  ReactElement,
 } from 'react'
 import classnames from 'classnames'
 
@@ -28,9 +29,9 @@ export interface DropdownProps extends StandardFunctionProps {
   button: (
     active: boolean,
     onClick: (e?: MouseEvent<HTMLElement>) => void,
-  ) => React.ReactElement
+  ) => ReactElement
   /** Component to render as the menu (use DropdownMenu) */
-  menu: (onCollapse?: () => void) => React.ReactElement
+  menu: (onCollapse?: () => void) => ReactElement
   /** Renders the menu element above the button instead of below */
   dropUp?: boolean
   /** Disable Dropdown's out of the box focus behavior if you have a custom behavior */

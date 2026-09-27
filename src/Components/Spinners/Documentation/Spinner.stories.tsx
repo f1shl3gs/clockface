@@ -1,5 +1,5 @@
 // Libraries
-import * as React from 'react'
+import {createRef} from 'react'
 import {marked} from 'marked'
 
 // Components
@@ -17,8 +17,8 @@ import WaitingTextReadme from './WaitingText.md?raw'
 export default {title: 'Components/Spinners/Container'}
 
 export const _SpinnerContainer = () => {
-  const technoSpinnerRef = React.createRef<HTMLDivElement>()
-  const spinnerContainerRef = React.createRef<HTMLDivElement>()
+  const technoSpinnerRef = createRef<HTMLDivElement>()
+  const spinnerContainerRef = createRef<HTMLDivElement>()
 
   const handleLogRefs = (): void => {
     console.log('TechnoSpinner', technoSpinnerRef.current)
@@ -58,7 +58,7 @@ _SpinnerContainer.story = {
 }
 
 export const _TechnoSpinner = () => {
-  const technoSpinnerRef = React.createRef<HTMLDivElement>()
+  const technoSpinnerRef = createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
     console.log(technoSpinnerRef.current)
@@ -89,7 +89,7 @@ _TechnoSpinner.story = {
 }
 
 export const _SparkleSpinner = () => {
-  const sparkleSpinnerRef = React.createRef<HTMLDivElement>()
+  const sparkleSpinnerRef = createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
     console.log(sparkleSpinnerRef.current)
@@ -120,7 +120,7 @@ _SparkleSpinner.story = {
 }
 
 export const _WaitingText = () => {
-  const waitingTextRef = React.createRef<HTMLDivElement>()
+  const waitingTextRef = createRef<HTMLDivElement>()
 
   const handleLogRef = (): void => {
     console.log(waitingTextRef.current)

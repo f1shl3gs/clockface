@@ -1,10 +1,11 @@
 // Libraries
-import React, {
-  useState,
-  useEffect,
+import {
   ChangeEvent,
   FunctionComponent,
   Ref,
+  useState,
+  useEffect,
+  useRef,
 } from 'react'
 
 import classnames from 'classnames'
@@ -57,7 +58,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   enablePageInput = false,
   ref,
 }) => {
-  const innerRef = React.useRef<HTMLUListElement>(null)
+  const innerRef = useRef<HTMLUListElement>(null)
   const PaginationClassName = classnames('cf-pagination', className)
   const [activePage, setActivePage] = useState(currentPage)
   const [inputPage, setInputPage] = useState(currentPage)

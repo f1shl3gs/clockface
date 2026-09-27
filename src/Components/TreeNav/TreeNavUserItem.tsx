@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent} from 'react'
+import {cloneElement, FunctionComponent} from 'react'
 import classnames from 'classnames'
 
 // Types
@@ -40,7 +40,7 @@ export const TreeNavUserItem: FunctionComponent<TreeNavUserItemProps> = ({
   }
 
   if (linkElement) {
-    return React.cloneElement(
+    return cloneElement(
       linkElement(treeNavUserItemClass),
       {'data-testid': testID},
       label,

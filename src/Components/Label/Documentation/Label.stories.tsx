@@ -1,6 +1,6 @@
 // Libraries
-import * as React from 'react'
 import {marked} from 'marked'
+import {createRef} from 'react'
 
 // Components
 import {Label} from '../'
@@ -14,9 +14,9 @@ import LabelReadme from './Label.md?raw'
 export default {title: 'Components/Label/Examples'}
 
 export const Variants = () => {
-  const labelReadOnlyRef = React.createRef<HTMLDivElement>()
-  const labelClickableRef = React.createRef<HTMLDivElement>()
-  const labelDeletableRef = React.createRef<HTMLDivElement>()
+  const labelReadOnlyRef = createRef<HTMLDivElement>()
+  const labelClickableRef = createRef<HTMLDivElement>()
+  const labelDeletableRef = createRef<HTMLDivElement>()
 
   const logLabelRefs = (): void => {
     console.log('Read-Only Label', labelReadOnlyRef.current)

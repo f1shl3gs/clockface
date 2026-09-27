@@ -1,5 +1,5 @@
 // Libraries
-import React, {FunctionComponent, Ref} from 'react'
+import {FunctionComponent, ReactElement, Ref} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -18,7 +18,7 @@ export interface FormElementProps extends StandardFunctionProps {
   /** Text to be displayed on error */
   errorMessage?: string
   /** Element to be displayed along with label */
-  labelAddOn?: () => React.ReactElement
+  labelAddOn?: () => ReactElement
   /** Whether this field is required to submit form, adds red required asterisk */
   required?: boolean
   /** Useful for associating a label with an input */

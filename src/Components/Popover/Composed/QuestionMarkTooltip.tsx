@@ -1,5 +1,11 @@
 // Libraries
-import React, {useRef, CSSProperties, FunctionComponent, Ref} from 'react'
+import {
+  useRef,
+  CSSProperties,
+  FunctionComponent,
+  Ref,
+  ReactElement,
+} from 'react'
 import classnames from 'classnames'
 
 // Components
@@ -20,7 +26,7 @@ export interface QuestionMarkTooltipProps extends StandardFunctionProps {
   /** Controls the size of the question mark circle */
   diameter?: number
   /** Contents to display in tooltip */
-  tooltipContents: React.ReactElement | string
+  tooltipContents: ReactElement | string
   /** Coloration of tooltip and question mark circle */
   color?: ComponentColor
   /** Useful for customizing the tooltip itself */
