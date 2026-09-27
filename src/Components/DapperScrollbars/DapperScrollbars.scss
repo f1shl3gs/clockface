@@ -103,20 +103,6 @@
   }
 }
 
-.cf-dapper-scrollbars--auto-size-width {
-  .cf-dapper-scrollbars--scroller {
-    width: auto;
-    align-self: flex-start;
-  }
-}
-
-.cf-dapper-scrollbars--auto-size-height {
-  .cf-dapper-scrollbars--scroller {
-    flex: 0 0 auto;
-    height: auto;
-  }
-}
-
 @mixin cf-dapper-scrollbars-size-modifier($dapper-scrollbars--size) {
   .cf-dapper-scrollbars--track-x {
     height: $dapper-scrollbars--size !important;

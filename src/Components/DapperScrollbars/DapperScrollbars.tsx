@@ -354,6 +354,16 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
       }
     }
 
+  const containerStyle: CSSProperties = {
+    ...style,
+    ...((autoSize || autoSizeWidth) && !style?.width
+      ? {width: metrics.scrollWidth}
+      : {}),
+    ...((autoSize || autoSizeHeight) && !style?.height
+      ? {height: metrics.scrollHeight}
+      : {}),
+  }
+
   const scrollerStyle: CSSProperties = noScroll
     ? {overflow: 'hidden'}
     : {
@@ -364,8 +374,6 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   const dapperScrollbarsClass = classnames('cf-dapper-scrollbars', className, {
     'cf-dapper-scrollbars--autohide': autoHide,
     [`cf-dapper-scrollbars--${size}`]: size,
-    'cf-dapper-scrollbars--auto-size-width': autoSize || autoSizeWidth,
-    'cf-dapper-scrollbars--auto-size-height': autoSize || autoSizeHeight,
   })
 
   const thumbXStyle = {
@@ -379,7 +387,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   return (
     <div
       id={id}
-      style={style}
+      style={containerStyle}
       className={dapperScrollbarsClass}
       data-testid={testID}
     >
