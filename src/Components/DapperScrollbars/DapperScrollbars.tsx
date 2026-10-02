@@ -356,12 +356,8 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
 
   const containerStyle: CSSProperties = {
     ...style,
-    ...((autoSize || autoSizeWidth) && !style?.width
-      ? {width: metrics.scrollWidth}
-      : {}),
-    ...((autoSize || autoSizeHeight) && !style?.height
-      ? {height: metrics.scrollHeight}
-      : {}),
+    ...(autoSize || autoSizeWidth ? {width: metrics.scrollWidth} : {}),
+    ...(autoSize || autoSizeHeight ? {height: metrics.scrollHeight} : {}),
   }
 
   const scrollerStyle: CSSProperties = noScroll
