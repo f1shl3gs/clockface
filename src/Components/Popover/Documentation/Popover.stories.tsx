@@ -130,9 +130,7 @@ export const _Popover = () => {
             </div>
           </>
         )}
-        className={''}
         style={exampleStyle}
-        caretSize={8}
         distanceFromTrigger={16}
         showEvent={PopoverInteraction.Click}
         hideEvent={PopoverInteraction.Click}
@@ -235,10 +233,8 @@ export const _ReflessPopover = () => (
           <DismissButton onClick={onHide} />
         </>
       )}
-      className={''}
       style={exampleStyle}
       triggerStyle={{display: 'inline-block'}}
-      caretSize={8}
       distanceFromTrigger={16}
       showEvent={PopoverInteraction.Click}
       hideEvent={PopoverInteraction.Click}
@@ -274,9 +270,6 @@ export const _QuestionMarkTooltip = () => {
         ref={popoverRef}
         diameter={18}
         tooltipContents={'Hello world!'}
-        className={''}
-        style={{}}
-        tooltipStyle={{}}
         color={(ComponentColor as Record<string, any>)['Primary']}
       />
       <div className="story--test-buttons">
@@ -309,9 +302,6 @@ export const ErrorToolTip = () => {
         ref={popoverRef}
         diameter={17}
         tooltipContents={'Some Error Message'}
-        className={''}
-        style={{}}
-        tooltipStyle={{}}
       />
       <div className="story--test-buttons">
         <button onClick={logRef}>Log Ref</button>

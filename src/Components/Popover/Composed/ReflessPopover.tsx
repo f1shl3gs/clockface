@@ -21,7 +21,6 @@ export const ReflessPopover: FunctionComponent<ReflessPopoverProps> = ({
   children,
   hideEvent,
   showEvent,
-  caretSize,
   appearance,
   triggerStyle,
   distanceFromTrigger,
@@ -44,7 +43,6 @@ export const ReflessPopover: FunctionComponent<ReflessPopoverProps> = ({
         enableDefaultStyles={enableDefaultStyles}
         triggerRef={triggerRef}
         appearance={appearance}
-        caretSize={caretSize}
         showEvent={showEvent}
         hideEvent={hideEvent}
         disabled={disabled}

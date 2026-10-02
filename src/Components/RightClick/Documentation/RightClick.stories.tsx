@@ -30,8 +30,6 @@ export const _RightClick = () => {
         ref={rightClickMenuRef}
         triggerRef={triggerRef}
         disabled={false}
-        className={''}
-        style={{}}
         color={(ComponentColor as Record<string, any>)['Primary']}
       >
         <RightClickMenuItem

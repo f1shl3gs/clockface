@@ -81,7 +81,6 @@ export const ErrorTooltip: FunctionComponent<ErrorTooltipProps> = ({
         appearance={Appearance.Outline}
         id={id}
         position={position}
-        caretSize={8}
       />
     </span>
   )

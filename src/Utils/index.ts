@@ -14,14 +14,16 @@ import {
   InfluxColors,
 } from '../Types'
 
-export const convertCSSPropertiesToString = (styles: CSSProperties): string =>
-  Object.entries(styles).reduce((styleString, [propName, propValue]) => {
-    const formattedPropName = propName.replace(
-      /([A-Z])/g,
-      matches => `-${matches[0].toLowerCase()}`,
+export const areStylesEqual = (a: CSSProperties, b: CSSProperties): boolean => {
+  const keys = Object.keys(b)
+
+  return (
+    Object.keys(a).length === keys.length &&
+    keys.every(
+      key => a[key as keyof CSSProperties] === b[key as keyof CSSProperties],
     )
-    return `${styleString}${formattedPropName}:${propValue};`
-  }, '')
+  )
+}
 
 export const calculateTextColorFromBackground = (
   backgroundColor?: InfluxColors | string,

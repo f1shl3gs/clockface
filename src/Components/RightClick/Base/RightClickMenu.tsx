@@ -1,12 +1,20 @@
 // Libraries
-import {RefObject, useLayoutEffect, useRef, FunctionComponent, Ref} from 'react'
+import {
+  RefObject,
+  useLayoutEffect,
+  useRef,
+  FunctionComponent,
+  Ref,
+  useState,
+  CSSProperties,
+} from 'react'
 import classnames from 'classnames'
 
 // Components
 import {ClickOutside} from '../../ClickOutside/ClickOutside'
 
 // Utilities
-import {convertCSSPropertiesToString} from '../../../Utils/index'
+import {areStylesEqual} from '../../../Utils'
 import {calculateRightClickMenuStyles} from '../../../Utils/rightClick'
 
 // Types
@@ -42,22 +50,24 @@ export const RightClickMenu: FunctionComponent<RightClickMenuProps> = ({
   ref,
 }) => {
   const menuRef = useRef<HTMLDivElement>(null)
+  const [menuStyles, setMenuStyles] = useState<CSSProperties>({})
 
   const handleUpdateStyles = (): void => {
     if (!triggerRef.current || !menuRef.current) {
       return
     }
 
-    const menuStyles = {
-      ...calculateRightClickMenuStyles(mouseOffset, triggerRef, menuRef),
-      ...style,
-    }
+    const nextStyles = calculateRightClickMenuStyles(
+      mouseOffset,
+      triggerRef,
+      menuRef,
+    )
 
-    const menuStyleString = convertCSSPropertiesToString(menuStyles)
-
-    if (menuRef.current) {
-      menuRef.current.setAttribute('style', menuStyleString)
-    }
+    setMenuStyles(prevStyles =>
+      // Bail out of the state update when the geometry is unchanged, so
+      // scrolling does not re-render on every scroll event
+      areStylesEqual(prevStyles, nextStyles) ? prevStyles : nextStyles,
+    )
   }
 
   const rightClickMenuClassName = classnames('cf-right-click', className, {
@@ -74,6 +84,10 @@ export const RightClickMenu: FunctionComponent<RightClickMenuProps> = ({
 
   const observer = new IntersectionObserver(hidePopoverWhenOutOfView)
 
+  // An empty dependency array is safe here only because RightClick returns null
+  // while collapsed, so this component remounts on every open and the listener
+  // always closes over current props. If that ever changes, add the deps here
+  // or the menu will keep using the offset captured on first mount.
   useLayoutEffect((): (() => void) => {
     handleUpdateStyles()
     observer.observe(triggerRef.current)
@@ -90,16 +104,12 @@ export const RightClickMenu: FunctionComponent<RightClickMenuProps> = ({
     }
   }, [])
 
-  useLayoutEffect(() => {
-    handleUpdateStyles()
-  })
-
   return (
     <ClickOutside onClickOutside={onHide}>
       <div
         id={id}
         ref={menuRef}
-        style={style}
+        style={{...menuStyles, ...style}}
         onClick={onHide}
         className={rightClickMenuClassName}
         data-testid={testID}

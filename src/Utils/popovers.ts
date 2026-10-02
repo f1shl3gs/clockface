@@ -1,4 +1,7 @@
-import {RefObject, CSSProperties} from 'react'
+// Libraries
+import {CSSProperties, RefObject} from 'react'
+
+// Types
 import {PopoverPosition} from '../Types'
 
 interface PopoverFlush {
@@ -6,36 +9,40 @@ interface PopoverFlush {
   last: boolean
 }
 
-export interface PopoverStyles {
-  dialogStyles: CSSProperties
-  caretStyles: CSSProperties
+const px = (value: number): string => `${Math.floor(value)}px`
+
+const measureRects = (
+  triggerRef: RefObject<any | null>,
+  dialogRef: RefObject<HTMLDivElement | null>,
+): [DOMRect, DOMRect] | null => {
+  if (!triggerRef.current || !dialogRef.current) {
+    return null
+  }
+
+  return [
+    triggerRef.current.getBoundingClientRect(),
+    dialogRef.current.getBoundingClientRect(),
+  ]
 }
 
 const calculateDialogPosition = (
   position: PopoverPosition,
-  triggerRef: RefObject<any | null>,
-  dialogRef: RefObject<HTMLDivElement | null>,
+  triggerRect: DOMRect,
+  dialogRect: DOMRect,
   distanceFromTrigger: number,
 ): PopoverPosition => {
   const acceptablePopoverPositions: PopoverPosition[] = []
 
-  if (!triggerRef.current || !dialogRef.current) {
-    return position
-  }
-
-  const triggerRect = triggerRef.current.getBoundingClientRect()
-  const popoverRect = dialogRef.current.getBoundingClientRect()
-
   const popoverFitsAbove =
-    triggerRect.top > popoverRect.height + distanceFromTrigger
+    triggerRect.top > dialogRect.height + distanceFromTrigger
   const popoverFitsBelow =
     window.innerHeight - triggerRect.top - triggerRect.height >
-    popoverRect.height + distanceFromTrigger
+    dialogRect.height + distanceFromTrigger
   const popoverFitsToTheLeft =
-    triggerRect.left > popoverRect.width + distanceFromTrigger
+    triggerRect.left > dialogRect.width + distanceFromTrigger
   const popoverFitsToTheRight =
     window.innerWidth - triggerRect.left - triggerRect.width >
-    popoverRect.width + distanceFromTrigger
+    dialogRect.width + distanceFromTrigger
 
   // Check all sides of the trigger element and compile a list of acceptable popover positions
   if (popoverFitsAbove) {
@@ -65,18 +72,9 @@ const calculateDialogPosition = (
 
 const isDialogFlush = (
   position: PopoverPosition,
-  triggerRef: RefObject<any | null>,
-  dialogRef: RefObject<any | null>,
+  triggerRect: DOMRect,
+  dialogRect: DOMRect,
 ): PopoverFlush => {
-  if (!triggerRef.current || !dialogRef.current) {
-    return {
-      first: false,
-      last: false,
-    }
-  }
-
-  const triggerRect = triggerRef.current.getBoundingClientRect()
-  const dialogRect = dialogRef.current.getBoundingClientRect()
   // When the trigger is in a corner of the screen,
   // determine whether to offest it
   let first = false
@@ -118,287 +116,156 @@ const isDialogFlush = (
   }
 }
 
-export const calculatePopoverStyles = (
+export const calculateDialogStyles = (
   position: PopoverPosition,
   triggerRef: RefObject<any | null>,
   dialogRef: RefObject<HTMLDivElement | null>,
-  caretSize: number,
   distanceFromTrigger: number,
-): PopoverStyles => {
+): CSSProperties => {
+  const rects = measureRects(triggerRef, dialogRef)
+
+  if (!rects) {
+    return {}
+  }
+
+  const [triggerRect, dialogRect] = rects
   const dialogPosition = calculateDialogPosition(
     position,
-    triggerRef,
-    dialogRef,
+    triggerRect,
+    dialogRect,
     distanceFromTrigger,
   )
   let dialogStyles: CSSProperties = {}
-  let caretStyles: CSSProperties = {}
 
-  if (triggerRef.current && dialogRef.current) {
-    const triggerRect = triggerRef.current.getBoundingClientRect()
-    const dialogRect = dialogRef.current.getBoundingClientRect()
-    let dialogFlush
+  switch (dialogPosition) {
+    case PopoverPosition.Above: {
+      const dialogFlush = isDialogFlush(dialogPosition, triggerRect, dialogRect)
 
-    switch (dialogPosition) {
-      case PopoverPosition.Above:
-        dialogFlush = isDialogFlush(
-          PopoverPosition.Above,
-          triggerRef,
-          dialogRef,
-        )
+      // Center the dialog horizontally above the trigger by default
+      dialogStyles = {
+        bottom: px(window.innerHeight - triggerRect.top),
+        left: px(triggerRect.left + triggerRect.width / 2),
+        transform: 'translateX(-50%)',
+        paddingBottom: `${distanceFromTrigger}px`,
+      }
 
-        // Center the dialog horizontally above the trigger by default
+      // Reposition dialog if it goes off the viewport
+      // If the dialog goes off the viewport on both left and right edges
+      // Then the right edge will take precedent
+      if (dialogFlush.first) {
+        // Align left edge of dialog to left edge of trigger
         dialogStyles = {
           ...dialogStyles,
-          bottom: `${Math.floor(window.innerHeight - triggerRect.top)}px`,
-          left: `${Math.floor(triggerRect.left + triggerRect.width / 2)}px`,
-          transform: 'translateX(-50%)',
-          paddingBottom: `${distanceFromTrigger}px`,
+          left: px(triggerRect.left),
+          transform: 'translateX(0)',
         }
-        caretStyles = {
-          borderWidth: `${caretSize}px`,
-          bottom: `${distanceFromTrigger - caretSize * 2}px`,
-          left: `${dialogRect.width / 2}px`,
-          transform: 'translateX(-50%) rotate(180deg)',
-        }
-
-        // Reposition dialog if it goes off the viewport
-        // If the dialog goes off the viewport on both left and right edges
-        // Then the right edge will take precedent
-        if (dialogFlush.first) {
-          // Align left edge of dialog to left edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            left: `${Math.floor(triggerRect.left)}px`,
-            transform: 'translateX(0)',
-          }
-          caretStyles = {
-            ...caretStyles,
-            left: `${triggerRect.width / 2}px`,
-          }
-        } else if (dialogFlush.last) {
-          // Align right edge of dialog to right edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            left: `${Math.floor(triggerRect.left + triggerRect.width)}px`,
-            transform: 'translateX(-100%)',
-          }
-          caretStyles = {
-            borderWidth: `${caretSize}px`,
-            bottom: `${distanceFromTrigger - caretSize * 2}px`,
-            right: `${triggerRect.width / 2}px`,
-            transform: 'translateX(50%) rotate(180deg)',
-          }
-        }
-        break
-      case PopoverPosition.Below:
-        dialogFlush = isDialogFlush(
-          PopoverPosition.Below,
-          triggerRef,
-          dialogRef,
-        )
-
-        // Center the dialog horizontally below the trigger by default
+      } else if (dialogFlush.last) {
+        // Align right edge of dialog to right edge of trigger
         dialogStyles = {
           ...dialogStyles,
-          top: `${Math.floor(triggerRect.top + triggerRect.height)}px`,
-          left: `${Math.floor(triggerRect.left + triggerRect.width / 2)}px`,
-          transform: 'translateX(-50%)',
-          paddingTop: `${distanceFromTrigger}px`,
+          left: px(triggerRect.left + triggerRect.width),
+          transform: 'translateX(-100%)',
         }
-        caretStyles = {
-          borderWidth: `${caretSize}px`,
-          top: `${distanceFromTrigger - caretSize * 2}px`,
-          left: `${dialogRect.width / 2}px`,
-          transform: 'translateX(-50%)',
-        }
-
-        // Reposition dialog if it goes off the viewport
-        // If the dialog goes off the viewport on both left and right edges
-        // Then the right edge will take precedent
-        if (dialogFlush.first) {
-          // Align left edge of dialog to left edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            left: `${Math.floor(triggerRect.left)}px`,
-            transform: 'translateX(0)',
-          }
-          caretStyles = {
-            ...caretStyles,
-            left: `${triggerRect.width / 2}px`,
-          }
-        } else if (dialogFlush.last) {
-          // Align right edge of dialog to right edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            left: `${Math.floor(triggerRect.left + triggerRect.width)}px`,
-            transform: 'translateX(-100%)',
-          }
-          caretStyles = {
-            borderWidth: `${caretSize}px`,
-            top: `${distanceFromTrigger - caretSize * 2}px`,
-            right: `${triggerRect.width / 2}px`,
-            transform: 'translateX(50%)',
-          }
-        }
-        break
-      case PopoverPosition.ToTheLeft:
-        dialogFlush = isDialogFlush(
-          PopoverPosition.ToTheLeft,
-          triggerRef,
-          dialogRef,
-        )
-
-        // Center the dialog vertically to the left of the trigger by default
-        dialogStyles = {
-          ...dialogStyles,
-          left: `${Math.floor(triggerRect.left)}px`,
-          top: `${Math.floor(triggerRect.top + triggerRect.height / 2)}px`,
-          transform: 'translate(-100%, -50%)',
-          paddingRight: `${distanceFromTrigger}px`,
-        }
-        caretStyles = {
-          borderWidth: `${caretSize}px`,
-          right: `${distanceFromTrigger - caretSize * 2}px`,
-          top: `${dialogRect.height / 2}px`,
-          transform: `translateY(-50%) rotate(90deg)`,
-        }
-
-        // Reposition dialog if it goes off the viewport
-        // If the dialog goes off the viewport on both top and bottom edges
-        // Then the bottom edge will take precedent
-        if (dialogFlush.first) {
-          // Align left edge of dialog to top edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            top: `${Math.floor(triggerRect.top)}px`,
-            transform: 'translate(-100%, 0)',
-          }
-          caretStyles = {
-            ...caretStyles,
-            top: `${triggerRect.height / 2}px`,
-          }
-        } else if (dialogFlush.last) {
-          // Align right edge of dialog to bottom edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            top: `${Math.floor(triggerRect.top + triggerRect.height)}px`,
-            transform: 'translate(-100%, -100%)',
-          }
-          caretStyles = {
-            borderWidth: `${caretSize}px`,
-            right: `${distanceFromTrigger - caretSize * 2}px`,
-            bottom: `${triggerRect.height / 2}px`,
-            transform: `translateY(50%) rotate(90deg)`,
-          }
-        }
-        break
-      case PopoverPosition.ToTheRightTop:
-        dialogFlush = isDialogFlush(
-          PopoverPosition.ToTheRightTop,
-          triggerRef,
-          dialogRef,
-        )
-
-        // Center the dialog vertically to the right of the trigger by default
-        dialogStyles = {
-          ...dialogStyles,
-          left: `${Math.floor(triggerRect.left + triggerRect.width)}px`,
-          top: `${Math.floor(triggerRect.top + triggerRect.height / 2)}px`,
-          transform: 'translateY(-50%)',
-          paddingLeft: `${distanceFromTrigger}px`,
-        }
-        caretStyles = {
-          borderWidth: `${caretSize}px`,
-          left: `${distanceFromTrigger - caretSize * 2}px`,
-          top: `${dialogRect.height / 2}px`,
-          transform: `translateY(-50%) rotate(-90deg)`,
-        }
-
-        // Reposition dialog if it goes off the viewport
-        // If the dialog goes off the viewport on both top and bottom edges
-        // Then the bottom edge will take precedent
-        if (dialogFlush.first) {
-          // Align left edge of dialog to top edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            top: `${Math.floor(triggerRect.top)}px`,
-            transform: 'translateY(0)',
-          }
-          caretStyles = {
-            ...caretStyles,
-            top: `${triggerRect.height / 2}px`,
-          }
-        } else if (dialogFlush.last) {
-          // Align right edge of dialog to bottom edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            top: `${Math.floor(triggerRect.top + triggerRect.height)}px`,
-            transform: 'translateY(-100%)',
-          }
-          caretStyles = {
-            borderWidth: `${caretSize}px`,
-            left: `${distanceFromTrigger - caretSize * 2}px`,
-            bottom: `${triggerRect.height / 2}px`,
-            transform: `translateY(50%) rotate(-90deg)`,
-          }
-        }
-        break
-      case PopoverPosition.ToTheRight:
-        dialogFlush = isDialogFlush(
-          PopoverPosition.ToTheRight,
-          triggerRef,
-          dialogRef,
-        )
-
-        // Center the dialog vertically to the right of the trigger by default
-        dialogStyles = {
-          ...dialogStyles,
-          left: `${Math.floor(triggerRect.left + triggerRect.width)}px`,
-          top: `${Math.floor(triggerRect.top + triggerRect.height / 2)}px`,
-          transform: 'translateY(-50%)',
-          paddingLeft: `${distanceFromTrigger}px`,
-        }
-        caretStyles = {
-          borderWidth: `${caretSize}px`,
-          left: `${distanceFromTrigger - caretSize * 2}px`,
-          top: `${dialogRect.height / 2}px`,
-          transform: `translateY(-50%) rotate(-90deg)`,
-        }
-
-        // Reposition dialog if it goes off the viewport
-        // If the dialog goes off the viewport on both top and bottom edges
-        // Then the bottom edge will take precedent
-        if (dialogFlush.first) {
-          // Align left edge of dialog to top edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            top: `${Math.floor(triggerRect.top)}px`,
-            transform: 'translateY(0)',
-          }
-          caretStyles = {
-            ...caretStyles,
-            top: `${triggerRect.height / 2}px`,
-          }
-        } else if (dialogFlush.last) {
-          // Align right edge of dialog to bottom edge of trigger
-          dialogStyles = {
-            ...dialogStyles,
-            top: `${Math.floor(triggerRect.top + triggerRect.height)}px`,
-            transform: 'translateY(-100%)',
-          }
-          caretStyles = {
-            borderWidth: `${caretSize}px`,
-            left: `${distanceFromTrigger - caretSize * 2}px`,
-            bottom: `${triggerRect.height / 2}px`,
-            transform: `translateY(50%) rotate(-90deg)`,
-          }
-        }
-        break
-      default:
-        break
+      }
+      break
     }
+    case PopoverPosition.Below: {
+      const dialogFlush = isDialogFlush(dialogPosition, triggerRect, dialogRect)
+
+      // Center the dialog horizontally below the trigger by default
+      dialogStyles = {
+        top: px(triggerRect.top + triggerRect.height),
+        left: px(triggerRect.left + triggerRect.width / 2),
+        transform: 'translateX(-50%)',
+        paddingTop: `${distanceFromTrigger}px`,
+      }
+
+      // Reposition dialog if it goes off the viewport
+      // If the dialog goes off the viewport on both left and right edges
+      // Then the right edge will take precedent
+      if (dialogFlush.first) {
+        // Align left edge of dialog to left edge of trigger
+        dialogStyles = {
+          ...dialogStyles,
+          left: px(triggerRect.left),
+          transform: 'translateX(0)',
+        }
+      } else if (dialogFlush.last) {
+        // Align right edge of dialog to right edge of trigger
+        dialogStyles = {
+          ...dialogStyles,
+          left: px(triggerRect.left + triggerRect.width),
+          transform: 'translateX(-100%)',
+        }
+      }
+      break
+    }
+    case PopoverPosition.ToTheLeft: {
+      const dialogFlush = isDialogFlush(dialogPosition, triggerRect, dialogRect)
+
+      // Center the dialog vertically to the left of the trigger by default
+      dialogStyles = {
+        left: px(triggerRect.left),
+        top: px(triggerRect.top + triggerRect.height / 2),
+        transform: 'translate(-100%, -50%)',
+        paddingRight: `${distanceFromTrigger}px`,
+      }
+
+      // Reposition dialog if it goes off the viewport
+      // If the dialog goes off the viewport on both top and bottom edges
+      // Then the bottom edge will take precedent
+      if (dialogFlush.first) {
+        // Align left edge of dialog to top edge of trigger
+        dialogStyles = {
+          ...dialogStyles,
+          top: px(triggerRect.top),
+          transform: 'translate(-100%, 0)',
+        }
+      } else if (dialogFlush.last) {
+        // Align right edge of dialog to bottom edge of trigger
+        dialogStyles = {
+          ...dialogStyles,
+          top: px(triggerRect.top + triggerRect.height),
+          transform: 'translate(-100%, -100%)',
+        }
+      }
+      break
+    }
+    case PopoverPosition.ToTheRightTop:
+    case PopoverPosition.ToTheRight: {
+      const dialogFlush = isDialogFlush(dialogPosition, triggerRect, dialogRect)
+
+      // Center the dialog vertically to the right of the trigger by default
+      dialogStyles = {
+        left: px(triggerRect.left + triggerRect.width),
+        top: px(triggerRect.top + triggerRect.height / 2),
+        transform: 'translateY(-50%)',
+        paddingLeft: `${distanceFromTrigger}px`,
+      }
+
+      // Reposition dialog if it goes off the viewport
+      // If the dialog goes off the viewport on both top and bottom edges
+      // Then the bottom edge will take precedent
+      if (dialogFlush.first) {
+        // Align left edge of dialog to top edge of trigger
+        dialogStyles = {
+          ...dialogStyles,
+          top: px(triggerRect.top),
+          transform: 'translateY(0)',
+        }
+      } else if (dialogFlush.last) {
+        // Align right edge of dialog to bottom edge of trigger
+        dialogStyles = {
+          ...dialogStyles,
+          top: px(triggerRect.top + triggerRect.height),
+          transform: 'translateY(-100%)',
+        }
+      }
+      break
+    }
+    default:
+      break
   }
 
-  return {dialogStyles, caretStyles}
+  return dialogStyles
 }

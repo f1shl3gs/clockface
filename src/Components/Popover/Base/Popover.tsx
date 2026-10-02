@@ -12,12 +12,6 @@ import {
 // Components
 import {PopoverDialog} from './PopoverDialog'
 
-// Utils
-import {usePortal} from '../../../Utils/portals'
-
-// Styles
-import './Popover.scss'
-
 // Types
 import {
   Appearance,
@@ -26,6 +20,12 @@ import {
   PopoverInteraction,
   StandardFunctionProps,
 } from '../../../Types'
+
+// Utils
+import {usePortal} from '../../../Utils/portals'
+
+// Styles
+import './Popover.scss'
 
 export interface PopoverProps extends StandardFunctionProps {
   /** Popover dialog color */
@@ -42,8 +42,6 @@ export interface PopoverProps extends StandardFunctionProps {
   onHide?: () => void
   /** Pixel distance between trigger and popover dialog */
   distanceFromTrigger?: number
-  /** Size of caret (triangle) that points at the trigger */
-  caretSize?: number
   /** Where to position the popover relative to the trigger (assuming it fits there) */
   position?: PopoverPosition
   /** Means of applying color to popover */
@@ -75,7 +73,6 @@ export const Popover: FunctionComponent<PopoverProps> = ({
   className,
   triggerRef,
   forceToTop = false,
-  caretSize = 8,
   visible,
   disabled = false,
   testID = 'popover',
@@ -229,7 +226,6 @@ export const Popover: FunctionComponent<PopoverProps> = ({
       onClickOutside={handleClickOutside}
       onMouseLeave={handleDialogMouseLeave}
       triggerRef={triggerRef}
-      caretSize={caretSize}
       className={className}
       position={position}
       contents={contents(handleHideDialog)}

@@ -289,7 +289,6 @@ export const _InputLabel = () => {
     <div className="story--example">
       <InputLabel
         ref={inputLabelRef}
-        style={{}}
         active={true}
         size={(ComponentSize as Record<string, any>)['Small']}
       >
@@ -338,7 +337,6 @@ export const _Toggle = () => {
         containerRef={toggleContainerRef}
         id={'example_toggle_id'}
         value={'Value Text'}
-        style={{}}
         tabIndex={1}
         icon={(IconFont as Record<string, any>)['None']}
         disabled={false}

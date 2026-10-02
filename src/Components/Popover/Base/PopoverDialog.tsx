@@ -1,15 +1,17 @@
 // Libraries
+import classnames from 'classnames'
 import {
-  useRef,
-  RefObject,
+  CSSProperties,
+  FunctionComponent,
   MouseEvent,
+  ReactElement,
+  Ref,
+  RefObject,
   useEffect,
   useLayoutEffect,
-  FunctionComponent,
-  Ref,
-  ReactElement,
+  useRef,
+  useState,
 } from 'react'
-import classnames from 'classnames'
 
 // Components
 import {ClickOutside} from '../../ClickOutside/ClickOutside'
@@ -23,8 +25,8 @@ import {
 } from '../../../Types'
 
 // Utilities
-import {convertCSSPropertiesToString} from '../../../Utils'
-import {calculatePopoverStyles} from '../../../Utils/popovers'
+import {areStylesEqual} from '../../../Utils'
+import {calculateDialogStyles} from '../../../Utils/popovers'
 
 export interface PopoverDialogProps extends StandardFunctionProps {
   /** Bounding rectangle of trigger element */
@@ -43,8 +45,6 @@ export interface PopoverDialogProps extends StandardFunctionProps {
   onClickOutside: (e: MouseEvent) => void
   /** Handles mouseleave events */
   onMouseLeave: (e: MouseEvent) => void
-  /** Size of caret (triangle) that points at the trigger */
-  caretSize: number
   /** Adds reasonable styles to popover dialog contents so you do not have to */
   enableDefaultStyles: boolean
   /** Allows the popover to dismiss itself when the trigger is no longer in view */
@@ -65,7 +65,6 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
   contents,
   position,
   className,
-  caretSize,
   triggerRef,
   onMouseLeave,
   onClickOutside,
@@ -74,25 +73,25 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
   ref,
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null)
+  const [dialogStyles, setDialogStyles] = useState<CSSProperties>({})
 
   const handleUpdateStyles = (): void => {
     if (!triggerRef.current || !dialogRef.current) {
       return
     }
 
-    const {dialogStyles} = calculatePopoverStyles(
+    const nextStyles = calculateDialogStyles(
       position,
       triggerRef,
       dialogRef,
-      caretSize,
       distanceFromTrigger,
     )
 
-    const dialogStyleString = convertCSSPropertiesToString(dialogStyles)
-
-    if (dialogRef.current) {
-      dialogRef.current.setAttribute('style', dialogStyleString)
-    }
+    // Bail out of the state update when the geometry is unchanged, so scrolling
+    // inside the popover does not re-render on every scroll event
+    setDialogStyles(prevStyles =>
+      areStylesEqual(prevStyles, nextStyles) ? prevStyles : nextStyles,
+    )
   }
 
   const popoverDialogClassName = classnames('cf-popover', className, {
@@ -117,6 +116,10 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
 
   const observer = new IntersectionObserver(hidePopoverWhenOutOfView)
 
+  // An empty dependency array is safe here only because Popover returns null
+  // while collapsed, so this component remounts on every open and the listener
+  // always closes over current props. If that ever changes, add the deps here
+  // or the dialog will keep using the positions captured on first mount.
   useLayoutEffect((): (() => void) => {
     handleUpdateStyles()
     if (triggerRef.current) {
@@ -135,10 +138,6 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
     }
   }, [])
 
-  useLayoutEffect(() => {
-    handleUpdateStyles()
-  }, [])
-
   // Ensure dialog element is in focus on mount
   // in order to enable escape key behavior
   useEffect(() => {
@@ -155,6 +154,7 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
       <div
         id={id}
         ref={dialogRef}
+        style={dialogStyles}
         className={popoverDialogClassName}
         data-testid={`${testID}--dialog`}
         onMouseLeave={onMouseLeave}

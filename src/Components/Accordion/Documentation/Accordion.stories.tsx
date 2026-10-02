@@ -270,7 +270,6 @@ export const AccordionWithToggles = () => {
         iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
-        style={{}}
         onChange={() => {
           console.log('hello')
         }}
@@ -311,7 +310,6 @@ export const AccordionWithToggles = () => {
         iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
-        style={{}}
       >
         <AccordionHeader>
           {accordionHeader(
@@ -380,7 +378,6 @@ export const AccordionWithPlainTexts = () => {
         iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
-        style={{}}
         ref={accordionRef}
       >
         <AccordionHeader>
@@ -428,7 +425,6 @@ export const _Accordion = () => {
         iconDirection={(Direction as Record<string, any>)['Left']}
         expanded={false}
         disabled={disabled}
-        style={{}}
         ref={accordionRef}
       >
         <AccordionHeader>
