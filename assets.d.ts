@@ -3,11 +3,6 @@ declare module '*.scss' {
   export default styles
 }
 
-declare module '*.md' {
-  const content: string
-  export default content
-}
-
 declare module '*?raw' {
   const content: string
   export default content
