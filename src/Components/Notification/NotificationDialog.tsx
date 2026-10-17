@@ -104,7 +104,7 @@ export const NotificationDialog: FunctionComponent<NotificationDialogProps> = ({
       style={notificationDialogStyle}
       ref={ref}
     >
-      {!!icon && <Icon glyph={icon} className="cf-notification--icon" />}
+      {icon && <Icon glyph={icon} className="cf-notification--icon" />}
       <div className="cf-notification--contents">
         <div
           className="cf-notification--children"

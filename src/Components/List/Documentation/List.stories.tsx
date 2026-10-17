@@ -18,7 +18,6 @@ import {
   ComponentColor,
   ComponentSize,
   IconFont,
-  Appearance,
   InfluxColors,
   Gradients,
 } from '../../../Types'
@@ -534,7 +533,6 @@ export const UsedWithAPopover = () => {
       </div>
       <Popover
         enableDefaultStyles={false}
-        appearance={Appearance.Outline}
         color={ComponentColor.Primary}
         triggerRef={triggerRef}
         contents={onHide => (

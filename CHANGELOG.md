@@ -10,7 +10,7 @@
 
 ### 6.3.9 (2022-11-02)
 
-- [885](https://github.com/influxdata/clockface/pull/885): (MultiSelect): make MultiSelectDropdown optionally searchable through `isSearchable` prop
+- [885](https://github.com/influxdata/clockface/pull/885): (MultiSelect): make MultiSelectDropdown optionally searchable through `searchable` prop
 
 ### 6.3.8 (2022-10-04)
 

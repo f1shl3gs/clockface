@@ -105,7 +105,7 @@ export const DropdownHeader: FunctionComponent<DropdownHeaderProps> = ({
         onClick={onClick}
         data-testid={testID}
       >
-        {!!icon && <Icon glyph={icon} className="cf-dropdown--icon" />}
+        {icon && <Icon glyph={icon} className="cf-dropdown--icon" />}
         <Icon glyph={IconFont.CaretDown_New} className="cf-dropdown--caret" />
       </button>
     </div>

@@ -66,7 +66,7 @@ export const SquareButton: FunctionComponent<SquareButtonProps> = ({
       style={style}
       id={id}
     >
-      {!!icon && <Icon glyph={icon} className="cf-button-icon" />}
+      {icon && <Icon glyph={icon} className="cf-button-icon" />}
       {status === ComponentStatus.Loading && (
         <div className={`cf-button-spinner cf-button-spinner--${size}`} />
       )}

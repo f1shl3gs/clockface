@@ -112,7 +112,7 @@ export const _3Panels = () => {
       >
         <DraggableResizerPanel
           ref={draggableResizerPanelRef1}
-          isCollapsible={true}
+          collapsible={true}
         >
           <div className="mockCard">
             <span>1</span>
@@ -120,7 +120,7 @@ export const _3Panels = () => {
         </DraggableResizerPanel>
         <DraggableResizerPanel
           ref={draggableResizerPanelRef2}
-          isCollapsible={true}
+          collapsible={true}
         >
           <div className="mockCard">
             <span>2</span>
@@ -128,7 +128,7 @@ export const _3Panels = () => {
         </DraggableResizerPanel>
         <DraggableResizerPanel
           ref={draggableResizerPanelRef3}
-          isCollapsible={true}
+          collapsible={true}
         >
           <div className="mockCard">
             <span>3</span>
@@ -179,7 +179,7 @@ export const _4Panels = () => {
       >
         <DraggableResizerPanel
           ref={draggableResizerPanelRef1}
-          isCollapsible={true}
+          collapsible={true}
         >
           <div className="mockCard">
             <span>1</span>
@@ -187,7 +187,7 @@ export const _4Panels = () => {
         </DraggableResizerPanel>
         <DraggableResizerPanel
           ref={draggableResizerPanelRef2}
-          isCollapsible={true}
+          collapsible={true}
         >
           <div className="mockCard">
             <span>2</span>
@@ -195,7 +195,7 @@ export const _4Panels = () => {
         </DraggableResizerPanel>
         <DraggableResizerPanel
           ref={draggableResizerPanelRef3}
-          isCollapsible={true}
+          collapsible={true}
         >
           <div className="mockCard">
             <span>3</span>
@@ -203,7 +203,7 @@ export const _4Panels = () => {
         </DraggableResizerPanel>
         <DraggableResizerPanel
           ref={draggableResizerPanelRef4}
-          isCollapsible={true}
+          collapsible={true}
         >
           <div className="mockCard">
             <span>4</span>

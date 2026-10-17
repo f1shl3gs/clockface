@@ -14,7 +14,6 @@ import {Input} from '../../Inputs'
 
 // Types
 import {
-  Appearance,
   PopoverInteraction,
   PopoverPosition,
   ComponentColor,
@@ -136,7 +135,6 @@ export const _Popover = () => {
         hideEvent={PopoverInteraction.Click}
         position={(PopoverPosition as Record<string, any>)['Below']}
         color={(ComponentColor as Record<string, any>)['Primary']}
-        appearance={(Appearance as Record<string, any>)['Outline']}
       />
       <Popover
         ref={popover2Ref}
@@ -160,7 +158,6 @@ export const _Popover = () => {
         hideEvent={PopoverInteraction.Hover}
         position={PopoverPosition.ToTheRight}
         color={ComponentColor.Secondary}
-        appearance={Appearance.Outline}
       />
       <Popover
         ref={popover3Ref}
@@ -184,7 +181,6 @@ export const _Popover = () => {
         hideEvent={PopoverInteraction.None}
         position={PopoverPosition.Below}
         color={ComponentColor.Success}
-        appearance={Appearance.Outline}
       />
       <Popover
         ref={popover4Ref}
@@ -208,7 +204,6 @@ export const _Popover = () => {
         hideEvent={PopoverInteraction.None}
         position={PopoverPosition.Below}
         color={ComponentColor.Success}
-        appearance={Appearance.Outline}
       />
     </div>
   )
@@ -240,7 +235,6 @@ export const _ReflessPopover = () => (
       hideEvent={PopoverInteraction.Click}
       position={(PopoverPosition as Record<string, any>)['Below']}
       color={(ComponentColor as Record<string, any>)['Primary']}
-      appearance={(Appearance as Record<string, any>)['Outline']}
     >
       <div className="mockComponent mockButton">Popover Trigger Element</div>
     </ReflessPopover>
@@ -342,7 +336,6 @@ export const PopoverTriggerWithinADapperScrollbars = () => {
         hideEvent={PopoverInteraction.Click}
         position={PopoverPosition.Below}
         color={ComponentColor.Success}
-        appearance={Appearance.Outline}
       />
       <DapperScrollbars
         style={{width: '100%', height: '100%', position: 'absolute'}}
@@ -438,7 +431,6 @@ export const PopoverAutofocusChild = () => {
         hideEvent={PopoverInteraction.Click}
         position={PopoverPosition.Above}
         color={ComponentColor.Primary}
-        appearance={Appearance.Outline}
       />
       <div className="mockComponent mockButton" ref={triggerRef}>
         Click Me
@@ -500,7 +492,6 @@ export const _200PopoversFiltering = () => {
                   hideEvent={PopoverInteraction.Click}
                   position={PopoverPosition.Above}
                   color={ComponentColor.Primary}
-                  appearance={Appearance.Outline}
                   distanceFromTrigger={8}
                 />
               </Fragment>
@@ -548,7 +539,6 @@ export const Collage = () => {
                 hideEvent={PopoverInteraction.None}
                 position={PopoverPosition.Above}
                 color={color}
-                appearance={Appearance.Outline}
               />
             </div>
           )

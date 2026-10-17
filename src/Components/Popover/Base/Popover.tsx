@@ -14,7 +14,6 @@ import {PopoverDialog} from './PopoverDialog'
 
 // Types
 import {
-  Appearance,
   ComponentColor,
   PopoverPosition,
   PopoverInteraction,
@@ -44,8 +43,6 @@ export interface PopoverProps extends StandardFunctionProps {
   distanceFromTrigger?: number
   /** Where to position the popover relative to the trigger (assuming it fits there) */
   position?: PopoverPosition
-  /** Means of applying color to popover */
-  appearance?: Appearance
   /** For external control of the popover state, overrides escape key behavior  */
   visible?: boolean
   /** Disables the popover's show interaction */
@@ -73,7 +70,7 @@ export const Popover: FunctionComponent<PopoverProps> = ({
   className,
   triggerRef,
   forceToTop = false,
-  visible,
+  visible = false,
   disabled = false,
   testID = 'popover',
   distanceFromTrigger = 8,
@@ -84,7 +81,7 @@ export const Popover: FunctionComponent<PopoverProps> = ({
   hideEvent = PopoverInteraction.Click,
   ref,
 }) => {
-  const [expanded, setExpanded] = useState<boolean>(!!visible)
+  const [expanded, setExpanded] = useState<boolean>(visible)
   const {
     addElementToPortal,
     addEventListenerToPortal,

@@ -18,7 +18,6 @@ import {ClickOutside} from '../../ClickOutside/ClickOutside'
 
 // Types
 import {
-  Appearance,
   ComponentColor,
   PopoverPosition,
   StandardFunctionProps,
@@ -37,8 +36,6 @@ export interface PopoverDialogProps extends StandardFunctionProps {
   position: PopoverPosition
   /** Popover dialog color */
   color: ComponentColor
-  /** Means of applying color to popover */
-  appearance?: Appearance
   /** Popover dialog contents */
   contents: ReactElement
   /** Handles clicks detected outside the popover dialog element */
@@ -109,7 +106,7 @@ export const PopoverDialog: FunctionComponent<PopoverDialogProps> = ({
       return
     }
 
-    if (!!entries.length && !entries[0].isIntersecting) {
+    if (entries.length > 0 && !entries[0].isIntersecting) {
       onHide()
     }
   }

@@ -98,14 +98,14 @@ export const FormValidationElement: FunctionComponent<
       data-testid={testID}
       className={formValidationElementClass}
     >
-      {!!label && (
+      {label && (
         <FormLabel label={label} required={required}>
           {labelAddOn && labelAddOn()}
         </FormLabel>
       )}
       {children(status)}
-      {!!errorMessage && <FormElementError message={errorMessage} />}
-      {!!helpText && <FormHelpText text={helpText} />}
+      {errorMessage && <FormElementError message={errorMessage} />}
+      {helpText && <FormHelpText text={helpText} />}
     </label>
   )
 }

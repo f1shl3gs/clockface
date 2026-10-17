@@ -1,8 +1,9 @@
-import {useState} from 'react'
 import {fireEvent} from '@testing-library/dom'
 import {cleanup, render} from '@testing-library/react'
-import {ClickOutside} from '../ClickOutside'
+import {useState} from 'react'
+import {createPortal} from 'react-dom'
 import {afterEach, describe, expect, it, vi} from 'vitest'
+import {ClickOutside} from './ClickOutside'
 
 const textInsideOfComponent = "Don't click here, click outside of here, family"
 const siblingTextOfComponent =
@@ -91,5 +92,81 @@ describe('the Click Outside component', () => {
 
     fireEvent.mouseDown(document.body)
     expect(mockClickOutside).toHaveBeenCalledTimes(1)
+  })
+
+  it('treats portalled content as inside, even though it lives outside the child in the DOM', () => {
+    const mockClickOutside = vi.fn()
+    const portalElement = document.createElement('div')
+    document.body.appendChild(portalElement)
+
+    const {getByText} = render(
+      <ClickOutside onClickOutside={mockClickOutside}>
+        <div>
+          {createPortal(<button>Portalled button</button>, portalElement)}
+        </div>
+      </ClickOutside>,
+    )
+
+    fireEvent.mouseDown(getByText('Portalled button'))
+    expect(mockClickOutside).not.toHaveBeenCalled()
+
+    fireEvent.mouseDown(document.body)
+    expect(mockClickOutside).toHaveBeenCalledTimes(1)
+
+    document.body.removeChild(portalElement)
+  })
+
+  it('still fires after an inside click swallowed its own event', () => {
+    const mockClickOutside = vi.fn()
+
+    const StopPropagationChild = () => (
+      <div onMouseDown={e => e.stopPropagation()}>Blocked</div>
+    )
+
+    const {getByText} = render(
+      <ClickOutside onClickOutside={mockClickOutside}>
+        <StopPropagationChild />
+      </ClickOutside>,
+    )
+
+    // The document listener never runs for this click, so the mark is left behind
+    fireEvent.mouseDown(getByText('Blocked'))
+    expect(mockClickOutside).not.toHaveBeenCalled()
+
+    // The next outside click is a different event and must still fire
+    fireEvent.mouseDown(document.body)
+    expect(mockClickOutside).toHaveBeenCalledTimes(1)
+  })
+
+  it('renders no extra DOM around the child', () => {
+    const mockClickOutside = vi.fn()
+
+    const {container} = render(
+      <ClickOutside onClickOutside={mockClickOutside}>
+        <div data-testid="inside">Inside</div>
+      </ClickOutside>,
+    )
+
+    expect(container.children.length).toBe(1)
+
+    const child = container.firstElementChild as HTMLElement
+    expect(child.dataset.testid).toBe('inside')
+    expect(child.style.display).toBe('')
+  })
+
+  it('leaves the child own mouse handlers untouched', () => {
+    const mockClickOutside = vi.fn()
+    const mockChildMouseDown = vi.fn()
+
+    const {getByTestId} = render(
+      <ClickOutside onClickOutside={mockClickOutside}>
+        <div data-testid="inside" onMouseDown={mockChildMouseDown}>
+          Inside
+        </div>
+      </ClickOutside>,
+    )
+
+    fireEvent.mouseDown(getByTestId('inside'))
+    expect(mockChildMouseDown).toHaveBeenCalledTimes(1)
   })
 })

@@ -24,7 +24,7 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
 }) => {
   const context = useAccordionContext()
 
-  const caretIcon = context.isExpanded
+  const caretIcon = context.expanded
     ? IconFont.CaretDown_New
     : IconFont.CaretRight_New
   const AccordionHeaderCaretClassName = classnames('cf-accordion--icon', {
@@ -36,7 +36,7 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
     `cf-accordion--header`,
     className,
     {
-      [`cf-accordion--header--active`]: context.isExpanded && context.hasBody,
+      [`cf-accordion--header--active`]: context.expanded && context.hasBody,
       [`cf-accordion--header--disabled`]: context.disabled,
       [`cf-accordion--header--clickable`]: context.hasBody && !context.disabled,
     },
@@ -44,7 +44,7 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
 
   const toggleExpand = () => {
     if (!context.disabled) {
-      context.setExpanded(!context.isExpanded)
+      context.setExpanded(!context.expanded)
       context.onChange()
     }
   }
@@ -77,7 +77,7 @@ export const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({
       {context.iconDirection === Direction.Right && (
         <div
           onClick={() => {
-            context.setExpanded(!context.isExpanded)
+            context.setExpanded(!context.expanded)
           }}
           className={
             'cf-accordion--icon-container cf-accordion--icon-container-right'

@@ -14,7 +14,6 @@ import {
   ButtonShape,
   ComponentStatus,
   ComponentColor,
-  Appearance,
 } from '../../../Types'
 
 export interface ConfirmationButtonProps
@@ -36,8 +35,6 @@ export interface ConfirmationButtonProps
   confirmationButtonColor?: ComponentColor
   /** Popover dialog color */
   popoverColor?: ComponentColor
-  /** Means of applying color to popover */
-  popoverAppearance?: Appearance
   /** Allows customization of Popover */
   popoverClassName?: string
   /** Allows customization of Popover */
@@ -74,7 +71,6 @@ export const ConfirmationButton: FunctionComponent<ConfirmationButtonProps> = ({
   shape = ButtonShape.Default,
   testID = 'confirmation-button',
   color = ComponentColor.Default,
-  popoverAppearance = Appearance.Outline,
   status = ComponentStatus.Default,
   popoverColor = ComponentColor.Default,
   confirmationButtonColor = ComponentColor.Danger,
@@ -107,7 +103,6 @@ export const ConfirmationButton: FunctionComponent<ConfirmationButtonProps> = ({
         className={popoverClassName}
         style={popoverStyle}
         color={popoverColor}
-        appearance={popoverAppearance}
         enableDefaultStyles={false}
         onShow={handleShow}
         onHide={handleHide}

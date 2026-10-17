@@ -105,13 +105,13 @@ export const generateTextBlockStyle = (
 
 export const generateLabelStyle = (
   labelColor: InfluxColors | string,
-  isClickable: boolean,
+  clickable: boolean,
   isMouseOver: boolean,
   style?: CSSProperties,
 ): CSSProperties => {
   let backgroundColor = labelColor
 
-  if (isMouseOver && isClickable) {
+  if (isMouseOver && clickable) {
     backgroundColor = brighten(labelColor).toRgbString()
   }
 

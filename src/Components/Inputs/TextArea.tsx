@@ -34,8 +34,6 @@ export interface TextAreaProps extends StandardFunctionProps {
   onBlur?: (e?: ChangeEvent<HTMLTextAreaElement>) => void
   /** Function to be called on focus gain */
   onFocus?: (e?: ChangeEvent<HTMLTextAreaElement>) => void
-  /** Function to be called on key press */
-  onKeyPress?: (e: KeyboardEvent<HTMLTextAreaElement>) => void
   /** Function to be called on key up */
   onKeyUp?: (e: KeyboardEvent<HTMLTextAreaElement>) => void
   /** Function to be called on key down */
@@ -101,7 +99,6 @@ export const TextArea: FunctionComponent<TextAreaProps> = ({
   onKeyDown,
   autoFocus = false,
   spellCheck = false,
-  onKeyPress,
   placeholder = '',
   autocomplete = AutoComplete.Off,
   containerRef,
@@ -144,7 +141,6 @@ export const TextArea: FunctionComponent<TextAreaProps> = ({
         onKeyDown={onKeyDown}
         minLength={minLength}
         spellCheck={spellCheck}
-        onKeyPress={onKeyPress}
         placeholder={placeholder}
         data-testid={testID}
         autoComplete={autocomplete}

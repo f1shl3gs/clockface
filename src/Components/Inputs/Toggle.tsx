@@ -70,8 +70,6 @@ export interface ToggleProps extends Omit<StandardFunctionProps, 'id'> {
   onBlur?: (e?: ChangeEvent<HTMLLabelElement>) => void
   /** Function to be called on focus gain */
   onFocus?: (e?: ChangeEvent<HTMLLabelElement>) => void
-  /** Function to be called on key press */
-  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void
   /** Function to be called on key up */
   onKeyUp?: (e: KeyboardEvent<HTMLLabelElement>) => void
   /** Function to be called on key down */
@@ -82,7 +80,7 @@ export interface ToggleProps extends Omit<StandardFunctionProps, 'id'> {
   tabIndex?: number
   /** Used to group toggles together in a form */
   name?: string
-  /** Togle field value to be updated with 'on X' functions */
+  /** Toggle field value to be updated with 'on X' functions */
   value?: string
   /** Text to be displayed on hover tooltip */
   titleText?: string
@@ -127,7 +125,6 @@ export const Toggle: FunctionComponent<ToggleProps> = ({
   className,
   autoFocus = false,
   onKeyDown,
-  onKeyPress,
   containerRef,
   disabledTitleText = 'This input is disabled',
   ref,
@@ -143,7 +140,7 @@ export const Toggle: FunctionComponent<ToggleProps> = ({
     'cf-toggle__checkbox': type === InputToggleType.Checkbox,
     'cf-toggle__radio': type === InputToggleType.Radio,
     'cf-toggle__disabled': disabled,
-    'cf-toggle__labelled': children && !!Children.count(children),
+    'cf-toggle__labelled': Children.count(children) > 0,
   })
 
   const handleClick = (): void => {
@@ -214,7 +211,6 @@ export const Toggle: FunctionComponent<ToggleProps> = ({
         onKeyDown={onKeyDown}
         autoFocus={autoFocus}
         className="cf-toggle--input"
-        onKeyPress={onKeyPress}
         data-testid={`${testID}--input`}
         checked={checked}
       />

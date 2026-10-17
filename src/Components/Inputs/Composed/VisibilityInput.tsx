@@ -33,8 +33,6 @@ export interface VisibilityInputProps extends StandardFunctionProps {
   onBlur?: (e?: ChangeEvent<HTMLInputElement>) => void
   /** Function to be called on focus gain */
   onFocus?: (e?: ChangeEvent<HTMLInputElement>) => void
-  /** Function to be called on key press */
-  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void
   /** Function to be called on key up */
   onKeyUp?: (e: KeyboardEvent<HTMLInputElement>) => void
   /** Function to be called on key down */

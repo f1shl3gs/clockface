@@ -51,7 +51,7 @@ export interface MultiSelectDropdownProps extends StandardFunctionProps {
   /** Renders the menu element above the button instead of below */
   dropUp?: boolean
   /** Enables the search bar in the dropdown menu */
-  isSearchable?: boolean
+  searchable?: boolean
   searchbarInputPlaceholder?: string
   /** Ref to the underlying DOM element */
   ref?: Ref<HTMLDivElement>
@@ -76,7 +76,7 @@ export const MultiSelectDropdown: FunctionComponent<
   buttonStatus = ComponentStatus.Default,
   menuMaxHeight,
   selectedOptions,
-  isSearchable = false,
+  searchable = false,
   searchbarInputPlaceholder = 'Search',
   ref,
 }) => {
@@ -125,7 +125,7 @@ export const MultiSelectDropdown: FunctionComponent<
 
   const menu = () => (
     <>
-      {isSearchable && (
+      {searchable && (
         <DropdownMenu theme={menuTheme} style={{paddingBottom: 0}}>
           <Input
             placeholder={searchbarInputPlaceholder}
@@ -139,7 +139,7 @@ export const MultiSelectDropdown: FunctionComponent<
         {options.map(o => {
           // case-insensitive search
           if (
-            isSearchable &&
+            searchable &&
             !o.toUpperCase().includes(filterString.toUpperCase())
           ) {
             return

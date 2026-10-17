@@ -61,14 +61,12 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
 
   const childArray = Children.toArray(children)
 
-  const isDragging = dragIndex !== NULL_DRAG
-
   const DraggableResizerClass = classnames('cf-draggable-resizer', className, {
     'cf-draggable-resizer--vertical':
       handleOrientation === Orientation.Vertical,
     'cf-draggable-resizer--horizontal':
       handleOrientation === Orientation.Horizontal,
-    'cf-draggable-resizer--dragging': isDragging,
+    'cf-draggable-resizer--dragging': dragIndex !== NULL_DRAG,
   })
 
   const calculatePanelSize = (panelIndex: number): number => {
@@ -172,7 +170,7 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
 
     // If the new position of the handle being dragged is greater than
     // subsequent handles on the right, set them all to the new position to
-    // acheive the collapsing / “accordian” effect
+    // achieve the collapsing / “accordion” effect
     for (let i = di + 1; i < newPositions.length; i++) {
       if (newPos > newPositions[i]) {
         newPositions[i] = newPos
@@ -206,12 +204,12 @@ export const DraggableResizer: FunctionComponent<DraggableResizerProps> = ({
         const isLastPanel = i === panelsCount - 1
         const dragging = i === dragIndex
 
-        const isCollapsibleToLower = child.props.isCollapsible
+        const isCollapsibleToLower = child.props.collapsible
         const nextChild = childArray[i + 1]
         const isCollapsibleToUpper =
           !isLastPanel &&
           isValidElement<DraggableResizerPanelProps>(nextChild) &&
-          nextChild.props.isCollapsible
+          nextChild.props.collapsible
 
         return (
           <>

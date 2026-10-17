@@ -139,12 +139,11 @@ export const TypeAheadDropdown: FunctionComponent<Props> = ({
   // Replicates react-window's initialScrollOffset: scroll to the selected
   // item whenever the list (re)mounts — i.e. when the menu opens or results
   // transition between empty and non-empty
-  const hasResults = !!queryResults && queryResults.length > 0
   useEffect(() => {
     if (listRef.current) {
       listRef.current.scrollTop = getSelectedItemIndex() * LIST_ITEM_HEIGHT
     }
-  }, [menuStatus, hasResults])
+  }, [menuStatus, queryResults.length > 0])
 
   const filter = (filterStr: string) => {
     if (!filterStr) {

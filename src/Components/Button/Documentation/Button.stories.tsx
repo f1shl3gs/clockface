@@ -17,7 +17,6 @@ import {SelectDropdown} from '../../Dropdowns/Composed/SelectDropdown'
 
 // Types
 import {
-  Appearance,
   ComponentColor,
   ComponentSize,
   IconFont,
@@ -158,7 +157,6 @@ export const _ConfirmationButton = () => {
         }
         confirmationLabel={'Really delete your soul?'}
         popoverColor={(ComponentColor as Record<string, any>)['Default']}
-        popoverAppearance={(Appearance as Record<string, any>)['Outline']}
         onConfirm={value => alert(`returnValue: ${value}`)}
         returnValue={''}
         icon={(IconFont as Record<string, any>)['Trash_New']}
@@ -437,7 +435,6 @@ export const _ButtonGroup = () => {
           }
           confirmationLabel={'Really delete your soul?'}
           popoverColor={(ComponentColor as Record<string, any>)['Default']}
-          popoverAppearance={(Appearance as Record<string, any>)['Outline']}
           onConfirm={value => alert(`returnValue: ${value}`)}
           icon={IconFont.Trash_New}
           titleText={'Title Text'}

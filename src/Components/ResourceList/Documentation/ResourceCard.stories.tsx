@@ -23,7 +23,6 @@ import {
   AlignItems,
   JustifyContent,
   ComponentStatus,
-  Appearance,
   InfluxColors,
 } from '../../../Types'
 
@@ -372,7 +371,6 @@ export const ToggleableCard = () => {
                 />
               </span>
               <Popover
-                appearance={Appearance.Outline}
                 enableDefaultStyles={false}
                 style={{width: '200px'}}
                 contents={() => (

@@ -1,6 +1,6 @@
 // Libraries
-import {FunctionComponent, Ref} from 'react'
 import classnames from 'classnames'
+import {FunctionComponent, Ref} from 'react'
 
 // Components
 import {Icon} from '../Icon'
@@ -43,7 +43,7 @@ export const Alert: FunctionComponent<Props> = ({
       style={style}
       ref={ref}
     >
-      {!!icon && <Icon glyph={icon} className="cf-alert--icon" />}
+      {icon && <Icon glyph={icon} className="cf-alert--icon" />}
       <div className="cf-alert--contents">{children}</div>
     </div>
   )

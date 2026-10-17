@@ -48,14 +48,14 @@ export const FormElement: FunctionComponent<FormElementProps> = ({
 
   const formElementElements = (
     <>
-      {!!label && (
+      {label && (
         <FormLabel label={label} required={required}>
-          {!!labelAddOn && labelAddOn()}
+          {labelAddOn && labelAddOn()}
         </FormLabel>
       )}
-      {!!helpText && <FormHelpText text={helpText} />}
+      {helpText && <FormHelpText text={helpText} />}
       {children}
-      {!!errorMessage && (
+      {errorMessage && (
         <FormElementError testID={errorMessageTestId} message={errorMessage} />
       )}
     </>

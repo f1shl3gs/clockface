@@ -71,7 +71,12 @@ export const Label: FunctionComponent<LabelProps> = ({
     }
   }
 
-  const labelStyle = generateLabelStyle(color, !!onClick, isMouseOver, style)
+  const labelStyle = generateLabelStyle(
+    color,
+    onClick !== undefined,
+    isMouseOver,
+    style,
+  )
 
   return (
     <div

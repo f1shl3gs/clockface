@@ -18,13 +18,12 @@ export const IconAndText: FunctionComponent<IconAndTextProps> = ({
   icon,
   placeIconAfterText = false,
 }) => {
-  const iconEl = !!icon && <Icon glyph={icon} className="cf-button-icon" />
-  const textEl = !!text && <span className="cf-button--label">{text}</span>
-
   if (!icon && !text) {
     return null
   }
 
+  const iconEl = icon && <Icon glyph={icon} className="cf-button-icon" />
+  const textEl = text && <span className="cf-button--label">{text}</span>
   if (placeIconAfterText) {
     return (
       <>

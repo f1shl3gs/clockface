@@ -16,7 +16,6 @@ import {
   StandardFunctionProps,
   ComponentColor,
   PopoverInteraction,
-  Appearance,
 } from '../../../Types'
 
 // Styles
@@ -95,7 +94,6 @@ export const QuestionMarkTooltip: FunctionComponent<
         testID={`${testID}--tooltip`}
         style={tooltipStyle}
         color={color}
-        appearance={Appearance.Outline}
         id={id}
       />
     </span>

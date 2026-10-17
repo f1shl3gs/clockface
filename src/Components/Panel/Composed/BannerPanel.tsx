@@ -53,7 +53,7 @@ export const BannerPanel: FunctionComponent<BannerPanelProps> = ({
         id={id}
       >
         <PanelBody size={size} className="cf-banner-panel--body">
-          {!!icon && (
+          {icon && (
             <Icon
               style={{color: textColor}}
               glyph={icon}

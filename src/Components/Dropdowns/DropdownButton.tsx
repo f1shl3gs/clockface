@@ -82,7 +82,7 @@ export const DropdownButton: FunctionComponent<DropdownButtonProps> = ({
       titleText={title}
       disabledTitleText={disabledTitleText}
     >
-      {!!icon && <Icon glyph={icon} className="cf-dropdown--icon" />}
+      {icon && <Icon glyph={icon} className="cf-dropdown--icon" />}
       <span className="cf-dropdown--selected">{children}</span>
       {status === ComponentStatus.Loading ? (
         <TechnoSpinner diameterPixels={20} />

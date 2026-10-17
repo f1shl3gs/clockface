@@ -33,7 +33,7 @@ export const FormLabel: FunctionComponent<FormLabelProps> = ({
     <>
       <div className="cf-form--label-text">
         {label}
-        {!!required && <span className="cf-form--label-required">*</span>}
+        {required && <span className="cf-form--label-required">*</span>}
       </div>
       {children}
     </>

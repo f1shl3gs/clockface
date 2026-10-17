@@ -6,8 +6,8 @@ import {
   useLayoutEffect,
   UIEvent,
   CSSProperties,
-  PointerEvent as ReactPointerEvent,
-  MouseEvent as ReactMouseEvent,
+  PointerEvent,
+  MouseEvent,
 } from 'react'
 import classnames from 'classnames'
 
@@ -271,7 +271,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   // ---- Thumb dragging (pointer events) ----
   const beginDrag =
     (axis: 'x' | 'y') =>
-    (e: ReactPointerEvent<HTMLDivElement>): void => {
+    (e: PointerEvent<HTMLDivElement>): void => {
       const el = scrollerRef.current
       if (!el || e.button !== 0) {
         return
@@ -288,7 +288,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
 
   const moveDrag =
     (axis: 'x' | 'y') =>
-    (e: ReactPointerEvent<HTMLDivElement>): void => {
+    (e: PointerEvent<HTMLDivElement>): void => {
       const drag = dragRef.current
       const el = scrollerRef.current
       if (!drag || drag.axis !== axis || !el) {
@@ -327,7 +327,7 @@ export const DapperScrollbars: FunctionComponent<DapperScrollbarsProps> = ({
   // ---- Track click paging ----
   const handleTrackClick =
     (axis: 'x' | 'y') =>
-    (e: ReactMouseEvent<HTMLDivElement>): void => {
+    (e: MouseEvent<HTMLDivElement>): void => {
       if (e.button !== 0 || e.target !== e.currentTarget) {
         return
       }

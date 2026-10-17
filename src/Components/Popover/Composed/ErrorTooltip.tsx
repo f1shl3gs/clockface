@@ -17,7 +17,6 @@ import {
   StandardFunctionProps,
   ComponentColor,
   PopoverInteraction,
-  Appearance,
   IconFont,
   PopoverPosition,
 } from '../../../Types'
@@ -78,7 +77,6 @@ export const ErrorTooltip: FunctionComponent<ErrorTooltipProps> = ({
         testID={`${testID}--tooltip`}
         style={tooltipStyle}
         color={color}
-        appearance={Appearance.Outline}
         id={id}
         position={position}
       />

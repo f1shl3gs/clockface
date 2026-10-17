@@ -30,7 +30,7 @@ export interface AccordionProps extends StandardFunctionProps {
 
 export const AccordionContext = createContext<
   | {
-      isExpanded: boolean
+      expanded: boolean
       setExpanded: (param: boolean) => void
       iconDirection: Direction
       disabled: boolean
@@ -76,7 +76,6 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
   )
 
   const [header, ...body] = Children.toArray(children)
-  const hasBody = !!body.length
 
   const onChangeFunction = () => {
     setAnimation(true)
@@ -87,12 +86,12 @@ export const Accordion: FunctionComponent<AccordionProps> = ({
   }
 
   const contextState = {
-    isExpanded: expanded,
+    expanded,
     setExpanded,
-    iconDirection: hasBody ? iconDirection : Direction.None,
+    iconDirection: body.length > 0 ? iconDirection : Direction.None,
     disabled,
     onChange: onChangeFunction,
-    hasBody,
+    hasBody: body.length > 0,
   }
 
   return (

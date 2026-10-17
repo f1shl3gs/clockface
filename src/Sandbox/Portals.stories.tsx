@@ -40,7 +40,6 @@ import {
   IconFont,
   ComponentSize,
   Gradients,
-  Appearance,
 } from '../Types'
 
 // Notes
@@ -282,7 +281,6 @@ export const InterplayOfAllPortals = () => {
               </div>
               <Popover
                 triggerRef={triggerRefA}
-                appearance={Appearance.Outline}
                 color={ComponentColor.Primary}
                 contents={() => (
                   <div
@@ -319,7 +317,6 @@ export const InterplayOfAllPortals = () => {
                     </div>
                     <Popover
                       triggerRef={triggerRefB}
-                      appearance={Appearance.Solid}
                       color={ComponentColor.Success}
                       contents={() => <>I'm a nested popover!</>}
                     />

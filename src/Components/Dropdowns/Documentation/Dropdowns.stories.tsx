@@ -683,7 +683,7 @@ export const MultiSelectdropdown = () => {
         emptyText={'None selected'}
         selectedOptions={selectedOptions}
         options={defaultMultiSelectOptions}
-        isSearchable={true}
+        searchable={true}
         searchbarInputPlaceholder={'Search'}
       />
       <div className="story--test-buttons">
