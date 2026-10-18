@@ -96,7 +96,7 @@ export const AutoInput: FunctionComponent<AutoInputProps> = ({
       </div>
       {mode === AutoInputMode.Custom && (
         <div
-          className="auto-input--input"
+          className="cf-auto-input--input"
           data-testid={`${testID}--input`}
           id={`${id}--input`}
         >
